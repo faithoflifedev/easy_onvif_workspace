@@ -20,18 +20,11 @@ build() {
 clean() => defaultClean();
 
 @Task('publish')
-@Depends(version, dartdoc, analyze, dryrun)
+@Depends(dartdoc, analyze, version, dryrun)
 publish() async {
   log('publishing...');
 
   await shell(args: 'pub publish');
-}
-
-@Task('dartdoc')
-dartdoc() async {
-  log('drydoc...');
-
-  await shell(exec: 'dartdoc');
 }
 
 @Task('dart pub publish --dry-run')
@@ -41,24 +34,27 @@ dryrun() async {
   await shell(args: 'pub publish --dry-run');
 }
 
+@Task('dartdoc')
+dartdoc() {
+  log('dartdoc...');
+
+  DartDoc.doc();
+}
+
 @Task('dart analyze')
-analyze() async {
+analyze() {
   log('analyzing...');
 
-  await shell(args: 'analyze --fatal-infos');
+  Analyzer.analyze('.', fatalWarnings: true);
 }
 
 @Task('version bump')
 version() async {
-  // final taskArgs = context.invocation.arguments;
-
   final config = loadYaml(File('tool/config.yaml').readAsStringSync());
 
   if (!config.containsKey('templates') ||
       !config.containsKey('version') ||
       !config.containsKey('change')) throw Exception();
-
-  // final isBump = taskArgs.getFlag('bump');
 
   final newTag = await isNewTag(config['version']);
 
