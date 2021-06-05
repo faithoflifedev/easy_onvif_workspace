@@ -19,10 +19,12 @@ build() {
 @Task()
 clean() => defaultClean();
 
-@Task('deploy')
+@Task('publish')
 @Depends(version, dartdoc, analyze, dryrun)
-deploy() async {
-  log('deploying...');
+publish() async {
+  log('publishing...');
+
+  await shell(args: 'pub publish');
 }
 
 @Task('dartdoc')

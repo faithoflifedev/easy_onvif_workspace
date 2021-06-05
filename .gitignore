@@ -22,3 +22,5 @@ doc/api/
 
 scratch/
 .pubspec.yaml.bak
+
+example/config.yaml
