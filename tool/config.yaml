@@ -1,0 +1,8 @@
+templates:
+  - name: README.md
+    type: overwrite
+  - name: CHANGELOG.md
+    type: prepend
+
+version: 0.0.2
+change: initial release
