@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 0.0.3
+version: 0.0.2
 change: published to pub.dev using custom grinder tasks
