@@ -112,7 +112,7 @@ RemovePreset			| removePreset				|```Future<void>```
 SetPreset				| setPreset					|```Future<String>```
 Stop					| stop						|```Future<void>```
 
-### PTZ Helper Moethods:
+### PTZ Helper Methods:
 
 Onvif Operation			| Dart Method				| Return Type
 ------------------------|---------------------------|------------------------------------
