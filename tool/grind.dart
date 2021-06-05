@@ -50,42 +50,70 @@ analyze() async {
 
 @Task('version bump')
 version() async {
+  // final taskArgs = context.invocation.arguments;
+
   final config = loadYaml(File('tool/config.yaml').readAsStringSync());
 
-  if (!config.containsKey('templates') || !config.containsKey('version'))
-    throw Exception();
+  if (!config.containsKey('templates') ||
+      !config.containsKey('version') ||
+      !config.containsKey('change')) throw Exception();
 
-  updateMarkdown(config);
+  // final isBump = taskArgs.getFlag('bump');
 
-  updatePubspec(config['version']);
+  final newTag = await isNewTag(config['version']);
 
-  commit(config['version']);
+  if (newTag) {
+    updateMarkdown(config);
+
+    updatePubspec(config['version']);
+  }
+
+  commit(version: config['version'], change: config['change'], newTag: newTag);
 }
 
-Future<void> shell({String exec = 'dart', String args = ''}) async {
+Future<String> shell(
+    {String exec = 'dart', String args = '', bool verbose: true}) async {
   final exectutable = whichSync(exec);
 
   if (exectutable == null) throw Exception();
 
-  final shell = Shell(verbose: true);
+  final shell = Shell(verbose: verbose);
 
-  await shell.run('$exectutable $args');
+  final result = await shell.run('$exectutable $args');
+
+  String response = '';
+
+  result.forEach((processResult) => response += processResult.outText);
+
+  return response;
 }
 
-commit(String version) async {
+Future<bool> isNewTag(String version) async {
+  final result =
+      await shell(exec: 'git', args: 'tag -l "v$version"', verbose: false);
+
+  return result.trim() != 'v$version';
+}
+
+commit(
+    {required String version, required String change, required newTag}) async {
   shell(exec: 'git', args: 'add .');
 
-  shell(exec: 'git', args: 'commit -m "release bump to v$version"');
+  shell(exec: 'git', args: 'commit -m "$change"');
 
-  shell(exec: 'git', args: 'push');
+  if (newTag) {
+    shell(exec: 'git', args: 'tag v$version');
+
+    shell(exec: 'git', args: 'push --tags');
+  } else {
+    shell(exec: 'git', args: 'push');
+  }
 }
 
 void updateMarkdown(config) {
   final templates = config['templates'].value;
 
   templates.forEach((templateFilename) {
-    log('template: ' + templateFilename['name']);
-
     final mustacheTpl = File('tool/${templateFilename['name']}');
 
     if (!templateFilename.containsKey('name')) throw Exception();
@@ -134,17 +162,3 @@ void updatePubspec(String version) {
   File('pubspec.yaml').writeAsStringSync(
       pubspecContent.replaceAll(RegExp(r'version:.*'), 'version: $version'));
 }
-
-// @Task()
-// compile() async {
-//   final dartExectutable = whichSync('dart');
-
-//   if (dartExectutable == null) throw Exception();
-
-//   final result = await Process.run(
-//       dartExectutable, ['compile', 'aot-snapshot', 'bin/onvif_cli.dart']);
-
-//   log(result.errText);
-
-//   log('compiling completed');
-// }
