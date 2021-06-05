@@ -28,7 +28,7 @@ var onvif =
 await onvif.initialize();
 ```
 
-##Interacting with the device through Onvif operations
+## Interacting with the device through Onvif operations
 
 Refer to the tables below for the supported operations.
 
@@ -70,9 +70,9 @@ await onvif.ptz.gotoPreset(profileToken, preset);
 
 Be sure to look through the [API Reference](https://pub.dev/documentation/easy_onvif/latest/) for information about the parameters required for the supported Onvif operations.
 
-###Supported Onvif Operations
+## Supported Onvif Operations
 
-###[Device Management](http://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl):
+### [Device Management](http://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl):
 
 Onvif Operation			| Dart Method				| Dart Return Type
 ------------------------|---------------------------|------------------------------------
@@ -86,7 +86,7 @@ GetSystemDateAndTime	| getSystemDateAndTime		|```Future<SystemDateAndTime>```
 GetSystemUris			| getSystemUris				|```Future<GetSystemUrisResponse>```
 GetUsers				| getUsers					|```Future<List<User>>```
 		
-###[Media](http://www.onvif.org/ver10/media/wsdl/media.wsdl):
+### [Media](http://www.onvif.org/ver10/media/wsdl/media.wsdl):
 
 Onvif Operation			| Dart Method				| Return Type
 ------------------------|---------------------------|------------------------------------
@@ -98,7 +98,7 @@ GetVideoSources			| getVideoSources			|```Future<VideoSources>```
 StartMulticastStreaming	| startMulticastStreaming	|```Future<void>```
 StopMulticastStreaming	| stopMulticastStreaming	|```Future<void>```
 
-###[PTZ](https://www.onvif.org/ver20/ptz/wsdl/ptz.wsdl):
+### [PTZ](https://www.onvif.org/ver20/ptz/wsdl/ptz.wsdl):
 
 Onvif Operation			| Dart Method				| Return Type
 ------------------------|---------------------------|------------------------------------
@@ -112,7 +112,7 @@ RemovePreset			| removePreset				|```Future<void>```
 SetPreset				| setPreset					|```Future<String>```
 Stop					| stop						|```Future<void>```
 
-###PTZ Helper Moethods:
+### PTZ Helper Moethods:
 
 Onvif Operation			| Dart Method				| Return Type
 ------------------------|---------------------------|------------------------------------
