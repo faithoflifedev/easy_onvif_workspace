@@ -20,7 +20,7 @@ build() {
 clean() => defaultClean();
 
 @Task('publish')
-@Depends(version, dartdoc, analyze, dryrun)
+@Depends(version, dartdoc, analyze, dryrun, commit)
 publish() async {
   log('publishing...');
 
@@ -58,16 +58,26 @@ version() async {
   updateMarkdown(config);
 
   updatePubspec(config['version']);
+
+  commit(config['version']);
 }
 
 Future<void> shell({String exec = 'dart', String args = ''}) async {
-  final dartExectutable = whichSync(exec);
+  final exectutable = whichSync(exec);
 
-  if (dartExectutable == null) throw Exception();
+  if (exectutable == null) throw Exception();
 
   final shell = Shell(verbose: true);
 
-  await shell.run('$dartExectutable $args');
+  await shell.run('$exectutable $args');
+}
+
+commit(String version) async {
+  shell(exec: 'git', args: 'add README.md CHANGELOG.md pubspec.loadYaml');
+
+  shell(exec: 'git', args: 'commit -m "release bump to v$version"');
+
+  shell(exec: 'git', args: 'push');
 }
 
 void updateMarkdown(config) {
