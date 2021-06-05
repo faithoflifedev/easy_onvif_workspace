@@ -41,7 +41,8 @@ class DeviceManagement {
   }
 
   ///This method has been replaced by the more generic [getServices] method. For
-  ///capabilities of individual services refer to the [getServiceCapabilities] methods.
+  ///capabilities of individual services refer to the [getServiceCapabilities]
+  ///methods.
   Future<Capabilities> getCapabilities({String category = 'All'}) async {
     final envelope = await Soap.retrieveEnvlope(
         uri, SoapRequest.envelope(null, SoapRequest.capabilities(category)));
@@ -98,10 +99,10 @@ class DeviceManagement {
     return envelope.body.ntpResponse!.ntpInformation;
   }
 
-  ///A client can ask for the device service endpoint reference address property
-  ///that can be used to derive the password equivalent for remote user
-  ///operation. The device shall support the [getEndpointReference] command
-  ///returning the address property of the device service endpoint reference.
+  //A client can ask for the device service endpoint reference address property
+  //that can be used to derive the password equivalent for remote user
+  //operation. The device shall support the [getEndpointReference] command
+  //returning the address property of the device service endpoint reference.
   // Future<void> getEndpointReference() async {
   //   // Future<GetEndpointReferenceResponse> getEndpointReference() async {
   //   final envelope = await Soap.retrieveEnvlope(
@@ -125,6 +126,13 @@ class DeviceManagement {
     if (envelope.body.servicesResponse == null) throw Exception();
 
     return envelope.body.servicesResponse!.services;
+  }
+
+  ///Returns the capabilities of the device service. The result is returned in a
+  ///typed answer.
+  Future<void> getServiceCapabilities() async {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 
   ///This operation gets the device system date and time. The device shall
@@ -162,7 +170,6 @@ class DeviceManagement {
   ///system backup data, it should make them available via HTTP GET. If it does,
   ///it shall support the GetSystemUris command.
   Future<GetSystemUrisResponse> getSystemUris() async {
-    // Future<GetEndpointReferenceResponse> getEndpointReference() async {
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.systemUris()));
 
@@ -172,8 +179,9 @@ class DeviceManagement {
   }
 
   ///This operation lists the registered users and corresponding credentials on
-  ///a device. The device shall support retrieval of registered device users and t
-  ///heir credentials for the user token through the [GetUsers] command.
+  ///a device. The device shall support retrieval of registered device users and
+  ///their credentials for the user token through the [getUsers] (GetUsers)
+  ///command.
   Future<List<User>> getUsers() async {
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.users()));
