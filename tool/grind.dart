@@ -20,7 +20,7 @@ build() {
 clean() => defaultClean();
 
 @Task('publish')
-@Depends(version, dartdoc, analyze, dryrun, commit)
+@Depends(version, dartdoc, analyze, dryrun)
 publish() async {
   log('publishing...');
 
@@ -73,7 +73,7 @@ Future<void> shell({String exec = 'dart', String args = ''}) async {
 }
 
 commit(String version) async {
-  shell(exec: 'git', args: 'add README.md CHANGELOG.md pubspec.loadYaml');
+  shell(exec: 'git', args: 'add .');
 
   shell(exec: 'git', args: 'commit -m "release bump to v$version"');
 
