@@ -122,3 +122,6 @@ N/A						| moveRight					|```Future<void>```
 N/A						| moveUp					|```Future<void>```
 N/A						| zoomIn					|```Future<void>```
 N/A						| zoomOut					|```Future<void>```
+
+## What's next
+Device discovery is planned for the 1.x release of the library.
