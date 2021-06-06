@@ -21,7 +21,13 @@ clean() => defaultClean();
 @Task('publish')
 @Depends(dartdoc, analyze, version, dryrun)
 publish() {
-  log('publishing...');
+  // log('publishing...');
+
+  log('''Use the command:
+    dart pub publish
+
+  To publish this package on the pub.dev site.
+  ''');
 
   // await shell(args: 'pub publish');
 }
@@ -126,10 +132,11 @@ void updateMarkdown(config) {
 
     switch (type) {
       case 'prepend':
+        final currentContent = outputFile.readAsStringSync();
+
         outputFile.writeAsStringSync(template.renderString(config));
 
-        outputFile.writeAsStringSync(outputFile.readAsStringSync(),
-            mode: FileMode.append);
+        outputFile.writeAsStringSync(currentContent, mode: FileMode.append);
 
         break;
 

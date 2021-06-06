@@ -4,6 +4,8 @@ import 'package:crypto/crypto.dart';
 
 import '../onvif.dart';
 
+///Implementation of the [Authorization] algorithm required to authenticate to
+///Onvif devices
 class Authorization {
   final Nonce _nonce = Nonce();
 
@@ -12,6 +14,7 @@ class Authorization {
 
   final Duration timeDelta;
 
+  //Calculate the digest used in the SOAP authorization header
   late final String digest = base64.encode(sha1
       .convert([
         ..._nonce.bytes,

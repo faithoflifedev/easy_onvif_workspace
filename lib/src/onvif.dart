@@ -28,6 +28,7 @@ class Onvif {
         DeviceManagement(onvif: this, uri: 'http://$host/onvif/device_service');
   }
 
+  ///Connect to the Onvif device and retrieve its capabilities
   Future<void> initialize() async {
     final datetime = await deviceManagement.getSystemDateAndTime();
 
