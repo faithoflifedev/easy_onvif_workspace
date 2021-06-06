@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 0.0.4
-change: now using universal_io for better platform compatibility
+version: 0.0.5
+change: tweaked the grind workflow
