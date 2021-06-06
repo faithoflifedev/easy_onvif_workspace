@@ -23,7 +23,8 @@ clean() => defaultClean();
 publish() {
   // log('publishing...');
 
-  log('''Use the command:
+  log('''
+  Use the command:
     dart pub publish
 
   To publish this package on the pub.dev site.
