@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:easy_onvif/onvif.dart';
+import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart';
 
 void main(List<String> arguments) async {

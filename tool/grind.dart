@@ -1,8 +1,7 @@
-import 'dart:io';
-
 import 'package:grinder/grinder.dart';
 import 'package:mustache_template/mustache.dart';
 import 'package:process_run/shell.dart';
+import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart';
 
 main(args) => grind(args);
@@ -21,10 +20,10 @@ clean() => defaultClean();
 
 @Task('publish')
 @Depends(dartdoc, analyze, version, dryrun)
-publish() async {
+publish() {
   log('publishing...');
 
-  await shell(args: 'pub publish');
+  // await shell(args: 'pub publish');
 }
 
 @Task('dart pub publish --dry-run')
