@@ -5,18 +5,20 @@ import 'package:xml/xml.dart';
 
 import '../onvif.dart';
 
+///Utility class for interacting through the SOAP protocol
 class Soap {
-  static Future<String> send(String url, String post) async {
+  ///Send the SOAP [requestData] to the given [url] endpoint.
+  static Future<String> send(String url, String requestData) async {
     final dio = Dio();
 
     Response response;
 
     try {
       response = await dio.post(url,
-          data: post,
+          data: requestData,
           options: Options(headers: {
             Headers.contentTypeHeader: 'text/xml; charset=utf-8',
-            Headers.contentLengthHeader: post.length
+            Headers.contentLengthHeader: requestData.length
           }));
     } on DioError catch (error) {
       if (error.response?.statusCode == 500) {
@@ -35,6 +37,7 @@ class Soap {
     return response.data;
   }
 
+  ///Retrieve an onvif SOAP envelope
   static Future<Envelope> retrieveEnvlope(String uri, XmlDocument soapRequest,
       {Function? postProcess}) async {
     final soapResponse = await Soap.send(uri, soapRequest.toString());
@@ -51,8 +54,11 @@ class Soap {
   }
 }
 
+///Helper methods for building the [SoapRequest]
 class SoapRequest {
   static final builder = XmlBuilder();
+
+  ///XML for the SOAP envelope
   static XmlDocument envelope(
       XmlDocumentFragment? header, XmlDocumentFragment body) {
     builder.declaration(encoding: 'UTF-8');
@@ -75,8 +81,10 @@ class SoapRequest {
     return builder.buildDocument();
   }
 
+  ///XML for the SOAP security header
   static XmlDocumentFragment header(XmlDocumentFragment security) => security;
 
+  ///XML for the SOAP [security]
   static XmlDocumentFragment security(
       {required String username,
       required String password,
@@ -113,6 +121,7 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
+  ///XML for the [systemDateAndTime]
   static XmlDocumentFragment systemDateAndTime() {
     builder.element('GetSystemDateAndTime', nest: () {
       builder.namespace('http://www.onvif.org/ver10/device/wsdl');
@@ -121,6 +130,7 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
+  ///XML for the [capabilities]
   static XmlDocumentFragment capabilities(String category) {
     builder.element('GetCapabilities', nest: () {
       builder.namespace('http://www.onvif.org/ver10/device/wsdl');
@@ -132,6 +142,7 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
+  ///XML for the [videoSources]
   static XmlDocumentFragment videoSources() {
     builder.element('GetVideoSources', nest: () {
       builder.namespace('http://www.onvif.org/ver10/device/wsdl');
@@ -140,6 +151,7 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
+  ///XML for the [profiles]
   static XmlDocumentFragment profiles() {
     builder.element('GetProfiles', nest: () {
       builder.namespace('http://www.onvif.org/ver10/device/wsdl');
@@ -148,6 +160,7 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
+  ///XML for the [presets], requires a [profileToken]
   static XmlDocumentFragment presets(String profileToken) {
     builder.element('GetPresets', nest: () {
       builder.namespace('http://www.onvif.org/ver10/device/wsdl');
@@ -159,6 +172,7 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
+  ///XML for the [deviceInformation]
   static XmlDocumentFragment deviceInformation() {
     builder.element('GetDeviceInformation', nest: () {
       builder.namespace('http://www.onvif.org/ver10/device/wsdl');
@@ -167,6 +181,7 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
+  ///XML for the [endpointReference]
   static XmlDocumentFragment endpointReference() {
     builder.element('GetEndpointReference', nest: () {
       builder.namespace('http://www.onvif.org/ver10/device/wsdl');
@@ -175,6 +190,7 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
+  ///XML for the [status], requires a [profileToken]
   static XmlDocumentFragment status(String profileToken) {
     builder.element('GetStatus', nest: () {
       builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
@@ -186,6 +202,7 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
+  ///XML for the [streamUri], requires a [profileToken]
   static XmlDocumentFragment streamUri(String profileToken,
       {String streamType: 'RTP-Unicast', String transportProtocol: 'RTSP'}) {
     builder.element('GetStreamUri', nest: () {
@@ -210,6 +227,7 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
+  ///XML for the [snapshotUri], requires a [profileToken]
   static XmlDocumentFragment snapshotUri(String profileToken) {
     builder.element('GetSnapshotUri', nest: () {
       builder.namespace('http://www.onvif.org/ver10/device/wsdl');
@@ -221,6 +239,7 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
+  ///XML for the [services]
   static XmlDocumentFragment services() {
     builder.element('GetServices', nest: () {
       builder.namespace('http://www.onvif.org/ver10/device/wsdl');
@@ -232,6 +251,7 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
+  ///XML for the [snapshotUri], requires a [profileToken] and [Preset]
   static XmlDocumentFragment gotoPreset(String profileToken, Preset preset) {
     builder.element('GotoPreset', nest: () {
       builder.namespace('http://www.onvif.org/ver10/device/wsdl');
