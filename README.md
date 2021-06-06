@@ -72,7 +72,7 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 
 ## Supported Onvif Operations
 
-### [Device Management](http://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl):
+### [Device Management](https://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl):
 
 Onvif Operation			| Dart Method				| Dart Return Type
 ------------------------|---------------------------|------------------------------------
@@ -86,7 +86,7 @@ GetSystemDateAndTime	| getSystemDateAndTime		|```Future<SystemDateAndTime>```
 GetSystemUris			| getSystemUris				|```Future<GetSystemUrisResponse>```
 GetUsers				| getUsers					|```Future<List<User>>```
 		
-### [Media](http://www.onvif.org/ver10/media/wsdl/media.wsdl):
+### [Media](https://www.onvif.org/ver10/media/wsdl/media.wsdl):
 
 Onvif Operation			| Dart Method				| Return Type
 ------------------------|---------------------------|------------------------------------
