@@ -98,16 +98,16 @@ Future<bool> isNewTag(String version) async {
 
 commit(
     {required String version, required String change, required newTag}) async {
-  shell(exec: 'git', args: 'add .');
+  await shell(exec: 'git', args: 'add .');
 
-  shell(exec: 'git', args: 'commit -m "$change"');
+  await shell(exec: 'git', args: 'commit -m "$change"');
 
   if (newTag) {
-    shell(exec: 'git', args: 'tag v$version');
+    await shell(exec: 'git', args: 'tag v$version');
 
-    shell(exec: 'git', args: 'push --tags');
+    await shell(exec: 'git', args: 'push --tags');
   } else {
-    shell(exec: 'git', args: 'push');
+    await shell(exec: 'git', args: 'push');
   }
 }
 
