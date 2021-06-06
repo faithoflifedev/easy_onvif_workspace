@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 0.0.3
-change: published to pub.dev using custom grinder tasks
+version: 0.0.4
+change: now using universal_io for better platform compatibility

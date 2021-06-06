@@ -1,6 +1,6 @@
-## 0.0.3
+## 0.0.4
 
-- published to pub.dev using custom grinder tasks
-## 0.0.3
+- now using universal_io for better platform compatibility
+## 0.0.4
 
-- published to pub.dev using custom grinder tasks
+- now using universal_io for better platform compatibility
