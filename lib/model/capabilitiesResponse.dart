@@ -4,8 +4,12 @@ import 'capabilities.dart';
 
 part 'capabilitiesResponse.g.dart';
 
+///This method has been replaced by the more generic GetServices method. For
+///capabilities of individual services refer to the [DeviceManagement.getServiceCapabilities]
+///methods.
 @JsonSerializable(explicitToJson: true)
 class GetCapabilitiesResponse {
+  ///Capability information.
   @JsonKey(name: 'Capabilities')
   final Capabilities capabilities;
 

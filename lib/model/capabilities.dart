@@ -9,19 +9,26 @@ import 'ptz.dart';
 part 'capabilities.g.dart';
 
 @JsonSerializable(explicitToJson: true)
+
+///Capability information.
 class Capabilities {
+  ///Analytics capabilities
   @JsonKey(name: 'Analytics')
   final Analytics analytics;
 
+  ///Device capabilities
   @JsonKey(name: 'Device')
   final Device device;
 
+  ///Media capabilities
   @JsonKey(name: 'Media')
   final Media media;
 
+  ///Event capabilities
   @JsonKey(name: 'Events')
   final Events events;
 
+  ///PTZ capabilities
   @JsonKey(name: 'PTZ')
   final Ptz ptz;
 

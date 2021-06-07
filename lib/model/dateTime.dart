@@ -5,6 +5,7 @@ import 'time.dart';
 
 part 'dateTime.g.dart';
 
+///Date and time
 @JsonSerializable(explicitToJson: true)
 class OnvifDateTime {
   @JsonKey(name: 'Time')

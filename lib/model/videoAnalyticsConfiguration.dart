@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'videoAnalyticsConfiguration.g.dart';
 
+///Optional configuration of the video analytics module and rule engine.
 @JsonSerializable()
 class VideoAnalyticsConfiguration {
   @JsonKey(name: 'Name')
@@ -13,8 +14,11 @@ class VideoAnalyticsConfiguration {
   //@JsonKey(name: 'AnalyticsEngineConfiguration')
   //final AnalyticsEngineConfiguration analyticsEngineConfiguration
 
+  ///User readable name. Length up to 64 characters.
   String get name => xmlName['\$'];
 
+  ///Number of internal references currently using this configuration.
+  ///This informational parameter is read-only. Deprecated for Media2 Service.
   int get useCount => int.parse(xmlUseCount['\$']);
 
   VideoAnalyticsConfiguration(this.xmlName, this.xmlUseCount);
