@@ -4,8 +4,10 @@ import 'videoSources.dart';
 
 part 'videoSourcesResponse.g.dart';
 
+///This operation lists all available physical video inputs of the device.
 @JsonSerializable(explicitToJson: true)
 class GetVideoSourcesResponse {
+  ///List of existing Video Sources
   @JsonKey(name: 'VideoSources')
   final VideoSources videoSources;
 

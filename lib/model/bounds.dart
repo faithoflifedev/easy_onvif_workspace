@@ -2,6 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'bounds.g.dart';
 
+///Rectangle specifying the Video capturing area. The capturing area shall not
+///be larger than the whole Video source area.
 @JsonSerializable()
 class Bounds {
   @JsonKey(name: '@x')

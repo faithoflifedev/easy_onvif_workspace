@@ -29,6 +29,8 @@ void main(List<String> arguments) async {
 
   var profileToken = profs[0].token;
 
+  await onvif.ptz.zoomIn(profileToken);
+
   //change camera view through ptz
   await onvif.ptz.absoluteMove(
       profileToken,

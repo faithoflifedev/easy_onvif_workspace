@@ -1,3 +1,6 @@
+## 0.0.6
+
+- improved API docs
 ## 0.0.5
 
 - tweaked the grind workflow

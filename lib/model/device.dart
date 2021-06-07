@@ -4,14 +4,17 @@ import 'system.dart';
 
 part 'device.g.dart';
 
+///Device capabilities
 @JsonSerializable(explicitToJson: true)
 class Device {
   @JsonKey(name: 'XAddr')
   final dynamic xmlXAddr;
 
+  ///System capabilities.
   @JsonKey(name: 'System')
   final System system;
 
+  ///Device service URI.
   String get xAddr => xmlXAddr['\$'];
 
   Device(this.xmlXAddr, this.system);

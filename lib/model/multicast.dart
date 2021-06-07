@@ -36,7 +36,7 @@ class Multicast {
   int get ttl => int.parse(xmlTtl['\$']);
 
   ///Read only property signalling that streaming is persistant. Use the methods
-  ///[startMulticastStreaming] and [stopMulticastStreaming] to switch its state.
+  ///StartMulticastStreaming and StopMulticastStreaming to switch its state.
   bool get autoStart => xmlAutoStart['\$'].toLowerCase() == 'true';
 
   Multicast(this.address, this.xmlPort, this.xmlTtl, this.xmlAutoStart);

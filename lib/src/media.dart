@@ -40,6 +40,12 @@ class Media {
     return envelope.body.profilesResponse!.profiles;
   }
 
+  ///Returns the capabilities of the media service. The result is returned in a
+  ///typed answer.
+  Future<void> getServiceCapabilities() async {
+    throw UnimplementedError();
+  }
+
   ///A client uses the [getSnapshotUri] command to obtain a JPEG snapshot from
   ///the device. The returned URI shall remain valid indefinitely even if the
   ///profile is changed. The [validUntilConnect], [validUntilReboot] and

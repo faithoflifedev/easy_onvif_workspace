@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 0.0.5
-change: tweaked the grind workflow
+version: 0.0.6
+change: improved API docs

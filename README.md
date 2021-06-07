@@ -2,13 +2,16 @@ ONVIF Client protocol Profile S (Live Streaming) Dart implementation.
 
 This is a wrapper to ONVIF protocol which allows you to get information about your NVT (network video transmitter) device, its media sources, control PTZ (pan-tilt-zoom) movements and manage presets.  It will also allow you to get information about your NVR (network video recorder).
 
+[![pub package](https://img.shields.io/pub/v/easy_onvif.svg)](https://pub.dartlang.org/packages/easy_onvif)
+[![Build Status](https://github.com/faithoflifedev/easy_onvif/workflows/Dart/badge.svg)](https://github.com/faithoflifedev/easy_onvif/actions)
+
 ## Getting Started
 In your project add the dependency:
 
 ```yml
 dependencies:
   ...
-  easy_onvif: ^0.0.5
+  easy_onvif: ^0.0.6
 ```
 
 For help getting started with dart, check out these [guides](https://dart.dev/guides).

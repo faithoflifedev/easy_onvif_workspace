@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'analytics.g.dart';
 
+///Analytics capabilities
 @JsonSerializable(explicitToJson: true)
 class Analytics {
   @JsonKey(name: 'XAddr')
@@ -13,10 +14,13 @@ class Analytics {
   @JsonKey(name: 'AnalyticsModuleSupport')
   final dynamic xmlAnalyticsModuleSupport;
 
+  ///Analytics service URI.
   String get xAddr => xmlXAddr['\$'];
 
+  ///Indicates whether or not rules are supported.
   bool get ruleSupport => xmlRuleSupport['\$'].toLowerCase() == 'true';
 
+  ///Indicates whether or not modules are supported.
   bool get analyticsModuleSupport =>
       xmlAnalyticsModuleSupport['\$'].toLowerCase() == 'true';
 

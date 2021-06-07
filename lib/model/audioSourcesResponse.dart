@@ -4,6 +4,7 @@ import 'audioSource.dart';
 
 part 'audioSourcesResponse.g.dart';
 
+///This command lists all available physical audio inputs of the device.
 @JsonSerializable(explicitToJson: true)
 class GetAudioSourcesResponse {
   @JsonKey(name: 'AudioSources')
