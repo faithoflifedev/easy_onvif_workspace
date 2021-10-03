@@ -542,4 +542,60 @@ class SoapRequest {
 
     return builder.buildFragment();
   }
+
+  static XmlDocument probe(String messageId) {
+    builder.declaration(encoding: 'UTF-8');
+
+    builder.element('Envelope', nest: () {
+      builder.namespace('http://www.w3.org/2003/05/soap-envelope', 's');
+      builder.namespace(
+          'http://schemas.xmlsoap.org/ws/2004/08/addressing', 'a');
+      builder.namespace('http://schemas.xmlsoap.org/ws/2005/04/discovery', 'd');
+      builder.namespace('http://www.onvif.org/ver10/device/wsdl', 'dn');
+
+      builder.element('Header',
+          namespace: 'http://www.w3.org/2003/05/soap-envelope', nest: () {
+        builder.element('MessageID',
+            namespace: 'http://schemas.xmlsoap.org/ws/2004/08/addressing',
+            nest: 'uuid:${messageId}');
+        builder.element('To',
+            namespace: 'http://schemas.xmlsoap.org/ws/2004/08/addressing',
+            nest: () {
+          builder.attribute('mustUnderstand', 1,
+              namespace: 'http://www.w3.org/2003/05/soap-envelope');
+          builder.text('urn:schemas-xmlsoap-org:ws:2005:04:discovery');
+        });
+        builder.element('ReplyTo',
+            namespace: 'http://schemas.xmlsoap.org/ws/2004/08/addressing',
+            nest: () {
+          builder.element('Address',
+              namespace: 'http://schemas.xmlsoap.org/ws/2004/08/addressing',
+              nest: () {
+            builder.text(
+                'http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous');
+          });
+        });
+        builder.element('Action',
+            namespace: 'http://schemas.xmlsoap.org/ws/2004/08/addressing',
+            nest: () {
+          builder.attribute('mustUnderstand', 1,
+              namespace: 'http://www.w3.org/2003/05/soap-envelope');
+          builder.text('http://schemas.xmlsoap.org/ws/2005/04/discovery/Probe');
+        });
+      });
+
+      builder.element('Body',
+          namespace: 'http://www.w3.org/2003/05/soap-envelope', nest: () {
+        builder.element('Probe',
+            namespace: 'http://schemas.xmlsoap.org/ws/2005/04/discovery',
+            nest: () {
+          builder.element('Type',
+              namespace: 'http://schemas.xmlsoap.org/ws/2005/04/discovery',
+              nest: 'dn:NetworkVideoTransmitter');
+        });
+      });
+    });
+
+    return builder.buildDocument();
+  }
 }

@@ -14,11 +14,11 @@ part 'capabilities.g.dart';
 class Capabilities {
   ///Analytics capabilities
   @JsonKey(name: 'Analytics')
-  final Analytics analytics;
+  final Analytics? analytics;
 
   ///Device capabilities
   @JsonKey(name: 'Device')
-  final Device device;
+  final Device? device;
 
   ///Media capabilities
   @JsonKey(name: 'Media')
@@ -26,7 +26,7 @@ class Capabilities {
 
   ///Event capabilities
   @JsonKey(name: 'Events')
-  final Events events;
+  final Events? events;
 
   ///PTZ capabilities
   @JsonKey(name: 'PTZ')
