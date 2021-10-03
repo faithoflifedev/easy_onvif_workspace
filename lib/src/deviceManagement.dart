@@ -131,7 +131,7 @@ class DeviceManagement {
   ///Returns the capabilities of the device service. The result is returned in a
   ///typed answer.
   Future<void> getServiceCapabilities() async {
-    // TODO: implement createState
+    // TODO: implement getServiceCapabilities
     throw UnimplementedError();
   }
 

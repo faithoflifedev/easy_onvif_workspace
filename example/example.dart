@@ -27,9 +27,21 @@ void main(List<String> arguments) async {
     print(element.name + ' ' + element.token);
   });
 
+  final uri = await onvif.media.getStreamUri(profs[2].token);
+
+  final rtsp = OnvifUtil.authenticatingUri(
+      uri.uri, config['username'], config['password']);
+
+  print('stream uri: $rtsp');
+
   var profileToken = profs[0].token;
 
+  var preset_list = await onvif.ptz.getPresets(profileToken);
+
   await onvif.ptz.zoomIn(profileToken);
+
+  await onvif.ptz
+      .gotoPreset(profileToken, preset_list[0]); //8 taraweeh //0 announcement
 
   //change camera view through ptz
   await onvif.ptz.absoluteMove(

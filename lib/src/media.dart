@@ -22,7 +22,7 @@ class Media {
   ///This operation lists all existing metadata configurations. The client need
   ///not know anything apriori about the metadata in order to use the command.
   Future<List<MetaDataConfiguration>> getMetadataConfigurations() async {
-    // TODO: implement createState
+    // TODO: implement getMetadataConfigurations
     throw UnimplementedError();
   }
 
