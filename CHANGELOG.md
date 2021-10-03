@@ -1,3 +1,6 @@
+## 0.0.7
+
+- closer match to Onvif spec for Capabilities
 ## 0.0.6
 
 - improved API docs

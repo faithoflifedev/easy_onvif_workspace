@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 0.0.6
-change: improved API docs
+version: 0.0.7
+change: closer match to Onvif spec for Capabilities
