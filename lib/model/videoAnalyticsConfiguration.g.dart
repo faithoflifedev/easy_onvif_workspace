@@ -7,12 +7,11 @@ part of 'videoAnalyticsConfiguration.dart';
 // **************************************************************************
 
 VideoAnalyticsConfiguration _$VideoAnalyticsConfigurationFromJson(
-    Map<String, dynamic> json) {
-  return VideoAnalyticsConfiguration(
-    json['Name'],
-    json['UseCount'],
-  );
-}
+        Map<String, dynamic> json) =>
+    VideoAnalyticsConfiguration(
+      json['Name'],
+      json['UseCount'],
+    );
 
 Map<String, dynamic> _$VideoAnalyticsConfigurationToJson(
         VideoAnalyticsConfiguration instance) =>

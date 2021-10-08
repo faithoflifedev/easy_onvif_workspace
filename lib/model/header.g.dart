@@ -6,15 +6,13 @@ part of 'header.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Header _$HeaderFromJson(Map<String, dynamic> json) {
-  return Header(
-    AppSequence.fromJson(json['AppSequence'] as Map<String, dynamic>),
-    json['MessageID'],
-    json['RelatesTo'],
-    json['To'],
-    json['Action'],
-  );
-}
+Header _$HeaderFromJson(Map<String, dynamic> json) => Header(
+      AppSequence.fromJson(json['AppSequence'] as Map<String, dynamic>),
+      json['MessageID'],
+      json['RelatesTo'],
+      json['To'],
+      json['Action'],
+    );
 
 Map<String, dynamic> _$HeaderToJson(Header instance) => <String, dynamic>{
       'AppSequence': instance.appSequence.toJson(),

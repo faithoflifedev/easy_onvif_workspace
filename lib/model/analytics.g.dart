@@ -6,13 +6,11 @@ part of 'analytics.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Analytics _$AnalyticsFromJson(Map<String, dynamic> json) {
-  return Analytics(
-    json['XAddr'],
-    json['RuleSupport'],
-    json['AnalyticsModuleSupport'],
-  );
-}
+Analytics _$AnalyticsFromJson(Map<String, dynamic> json) => Analytics(
+      json['XAddr'],
+      json['RuleSupport'],
+      json['AnalyticsModuleSupport'],
+    );
 
 Map<String, dynamic> _$AnalyticsToJson(Analytics instance) => <String, dynamic>{
       'XAddr': instance.xmlXAddr,

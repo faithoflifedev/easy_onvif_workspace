@@ -6,12 +6,10 @@ part of 'mpeg4.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Mpeg4 _$Mpeg4FromJson(Map<String, dynamic> json) {
-  return Mpeg4(
-    json['GovLength'],
-    json['Mpeg4Profile'],
-  );
-}
+Mpeg4 _$Mpeg4FromJson(Map<String, dynamic> json) => Mpeg4(
+      json['GovLength'],
+      json['Mpeg4Profile'],
+    );
 
 Map<String, dynamic> _$Mpeg4ToJson(Mpeg4 instance) => <String, dynamic>{
       'GovLength': instance.xmlGovLength,

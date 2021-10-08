@@ -6,13 +6,10 @@ part of 'servicesResponse.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetServicesResponse _$GetServicesResponseFromJson(Map<String, dynamic> json) {
-  return GetServicesResponse(
-    (json['Services'] as List<dynamic>)
-        .map((e) => Service.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+GetServicesResponse _$GetServicesResponseFromJson(Map<String, dynamic> json) =>
+    GetServicesResponse(
+      GetServicesResponse._serviceConverter(json['Services']),
+    );
 
 Map<String, dynamic> _$GetServicesResponseToJson(
         GetServicesResponse instance) =>

@@ -6,16 +6,14 @@ part of 'probeMatch.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ProbeMatch _$ProbeMatchFromJson(Map<String, dynamic> json) {
-  return ProbeMatch(
-    EndpointReference.fromJson(
-        json['EndpointReference'] as Map<String, dynamic>),
-    json['Types'],
-    json['Scopes'] as String,
-    json['XAddrs'],
-    json['MetadataVersion'],
-  );
-}
+ProbeMatch _$ProbeMatchFromJson(Map<String, dynamic> json) => ProbeMatch(
+      EndpointReference.fromJson(
+          json['EndpointReference'] as Map<String, dynamic>),
+      json['Types'],
+      json['Scopes'] as String,
+      json['XAddrs'],
+      json['MetadataVersion'],
+    );
 
 Map<String, dynamic> _$ProbeMatchToJson(ProbeMatch instance) =>
     <String, dynamic>{

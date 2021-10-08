@@ -7,25 +7,25 @@ part of 'videoEncoderConfiguration.dart';
 // **************************************************************************
 
 VideoEncoderConfiguration _$VideoEncoderConfigurationFromJson(
-    Map<String, dynamic> json) {
-  return VideoEncoderConfiguration(
-    xmlName: json['Name'],
-    xmlUseCount: json['UseCount'],
-    xmlEncoding: json['Encoding'],
-    resolution: Resolution.fromJson(json['Resolution'] as Map<String, dynamic>),
-    xmlQuality: json['Quality'],
-    rateControl:
-        RateControl.fromJson(json['RateControl'] as Map<String, dynamic>),
-    mpeg4: json['MPEG4'] == null
-        ? null
-        : Mpeg4.fromJson(json['MPEG4'] as Map<String, dynamic>),
-    h264: json['H264'] == null
-        ? null
-        : H264.fromJson(json['H264'] as Map<String, dynamic>),
-    multiCast: Multicast.fromJson(json['Multicast'] as Map<String, dynamic>),
-    xmlSessionTimeout: json['SessionTimeout'],
-  );
-}
+        Map<String, dynamic> json) =>
+    VideoEncoderConfiguration(
+      xmlName: json['Name'],
+      xmlUseCount: json['UseCount'],
+      xmlEncoding: json['Encoding'],
+      resolution:
+          Resolution.fromJson(json['Resolution'] as Map<String, dynamic>),
+      xmlQuality: json['Quality'],
+      rateControl:
+          RateControl.fromJson(json['RateControl'] as Map<String, dynamic>),
+      mpeg4: json['MPEG4'] == null
+          ? null
+          : Mpeg4.fromJson(json['MPEG4'] as Map<String, dynamic>),
+      h264: json['H264'] == null
+          ? null
+          : H264.fromJson(json['H264'] as Map<String, dynamic>),
+      multiCast: Multicast.fromJson(json['Multicast'] as Map<String, dynamic>),
+      xmlSessionTimeout: json['SessionTimeout'],
+    );
 
 Map<String, dynamic> _$VideoEncoderConfigurationToJson(
         VideoEncoderConfiguration instance) =>

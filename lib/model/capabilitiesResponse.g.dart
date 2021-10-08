@@ -7,11 +7,10 @@ part of 'capabilitiesResponse.dart';
 // **************************************************************************
 
 GetCapabilitiesResponse _$GetCapabilitiesResponseFromJson(
-    Map<String, dynamic> json) {
-  return GetCapabilitiesResponse(
-    Capabilities.fromJson(json['Capabilities'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    GetCapabilitiesResponse(
+      Capabilities.fromJson(json['Capabilities'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$GetCapabilitiesResponseToJson(
         GetCapabilitiesResponse instance) =>

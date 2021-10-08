@@ -7,17 +7,16 @@ part of 'audioEncoderConfiguration.dart';
 // **************************************************************************
 
 AudioEncoderConfiguration _$AudioEncoderConfigurationFromJson(
-    Map<String, dynamic> json) {
-  return AudioEncoderConfiguration(
-    json['Name'],
-    json['UseCount'],
-    json['Encoding'],
-    json['Bitrate'],
-    json['SampleRate'],
-    Multicast.fromJson(json['Multicast'] as Map<String, dynamic>),
-    json['SessionTimeout'],
-  );
-}
+        Map<String, dynamic> json) =>
+    AudioEncoderConfiguration(
+      json['Name'],
+      json['UseCount'],
+      json['Encoding'],
+      json['Bitrate'],
+      json['SampleRate'],
+      Multicast.fromJson(json['Multicast'] as Map<String, dynamic>),
+      json['SessionTimeout'],
+    );
 
 Map<String, dynamic> _$AudioEncoderConfigurationToJson(
         AudioEncoderConfiguration instance) =>

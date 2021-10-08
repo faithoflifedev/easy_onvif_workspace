@@ -6,11 +6,9 @@ part of 'events.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Events _$EventsFromJson(Map<String, dynamic> json) {
-  return Events(
-    json['XAddr'],
-  );
-}
+Events _$EventsFromJson(Map<String, dynamic> json) => Events(
+      json['XAddr'],
+    );
 
 Map<String, dynamic> _$EventsToJson(Events instance) => <String, dynamic>{
       'XAddr': instance.xmlXAddr,

@@ -7,13 +7,11 @@ part of 'networkProtocolsResponse.dart';
 // **************************************************************************
 
 GetNetworkProtocolsResponse _$GetNetworkProtocolsResponseFromJson(
-    Map<String, dynamic> json) {
-  return GetNetworkProtocolsResponse(
-    (json['NetworkProtocols'] as List<dynamic>)
-        .map((e) => NetworkProtocol.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+        Map<String, dynamic> json) =>
+    GetNetworkProtocolsResponse(
+      GetNetworkProtocolsResponse._networkProtocolConverter(
+          json['NetworkProtocols']),
+    );
 
 Map<String, dynamic> _$GetNetworkProtocolsResponseToJson(
         GetNetworkProtocolsResponse instance) =>

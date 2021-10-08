@@ -25,13 +25,11 @@ extension UserLevelTxe on String {
 // JsonSerializableGenerator
 // **************************************************************************
 
-User _$UserFromJson(Map<String, dynamic> json) {
-  return User(
-    mapUsername: json['Username'],
-    mapPassword: json['Password'],
-    mapUserLevel: json['UserLevel'],
-  );
-}
+User _$UserFromJson(Map<String, dynamic> json) => User(
+      mapUsername: json['Username'],
+      mapPassword: json['Password'],
+      mapUserLevel: json['UserLevel'],
+    );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'Username': instance.mapUsername,

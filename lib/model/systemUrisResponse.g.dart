@@ -7,14 +7,13 @@ part of 'systemUrisResponse.dart';
 // **************************************************************************
 
 GetSystemUrisResponse _$GetSystemUrisResponseFromJson(
-    Map<String, dynamic> json) {
-  return GetSystemUrisResponse(
-    systemLogUris:
-        SystemLogUris.fromJson(json['SystemLogUris'] as Map<String, dynamic>),
-    supportInfoUri: json['SupportInfoUri'],
-    systemBackupUri: json['SystemBackupUri'],
-  );
-}
+        Map<String, dynamic> json) =>
+    GetSystemUrisResponse(
+      systemLogUris:
+          SystemLogUris.fromJson(json['SystemLogUris'] as Map<String, dynamic>),
+      supportInfoUri: json['SupportInfoUri'],
+      systemBackupUri: json['SystemBackupUri'],
+    );
 
 Map<String, dynamic> _$GetSystemUrisResponseToJson(
         GetSystemUrisResponse instance) =>

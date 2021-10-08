@@ -1,3 +1,6 @@
+## 0.0.8
+
+- better inpterpretation of parsed XML
 ## 0.0.7
 
 - closer match to Onvif spec for Capabilities

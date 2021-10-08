@@ -7,13 +7,12 @@ part of 'metadataConfiguration.dart';
 // **************************************************************************
 
 MetaDataConfiguration _$MetaDataConfigurationFromJson(
-    Map<String, dynamic> json) {
-  return MetaDataConfiguration(
-    json['@token'] as String,
-    json['Name'],
-    json['UseCount'],
-  );
-}
+        Map<String, dynamic> json) =>
+    MetaDataConfiguration(
+      json['@token'] as String,
+      json['Name'],
+      json['UseCount'],
+    );
 
 Map<String, dynamic> _$MetaDataConfigurationToJson(
         MetaDataConfiguration instance) =>

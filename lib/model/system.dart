@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 import 'supportedVersion.dart';
@@ -24,7 +26,7 @@ class System {
   @JsonKey(name: 'FirmwareUpgrade')
   final dynamic xmlFirmwareUpgrade;
 
-  @JsonKey(name: 'SupportedVersions')
+  @JsonKey(name: 'SupportedVersions', fromJson: _supportedVersionConverter)
   final List<SupportedVersion> supportedVersions;
 
   bool get discoveryResolve =>
@@ -52,4 +54,17 @@ class System {
   factory System.fromJson(Map<String, dynamic> json) => _$SystemFromJson(json);
 
   Map<String, dynamic> toJson() => _$SystemToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
+
+  static List<SupportedVersion> _supportedVersionConverter(dynamic json) {
+    if (json is List) {
+      return json
+          .map((e) => SupportedVersion.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }
+
+    return [SupportedVersion.fromJson(json as Map<String, dynamic>)];
+  }
 }

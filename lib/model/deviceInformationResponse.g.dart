@@ -7,15 +7,14 @@ part of 'deviceInformationResponse.dart';
 // **************************************************************************
 
 GetDeviceInformationResponse _$GetDeviceInformationResponseFromJson(
-    Map<String, dynamic> json) {
-  return GetDeviceInformationResponse(
-    json['Manufacturer'],
-    json['Model'],
-    json['FirmwareVersion'],
-    json['SerialNumber'],
-    json['HardwareId'],
-  );
-}
+        Map<String, dynamic> json) =>
+    GetDeviceInformationResponse(
+      json['Manufacturer'],
+      json['Model'],
+      json['FirmwareVersion'],
+      json['SerialNumber'],
+      json['HardwareId'],
+    );
 
 Map<String, dynamic> _$GetDeviceInformationResponseToJson(
         GetDeviceInformationResponse instance) =>

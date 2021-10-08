@@ -6,12 +6,11 @@ part of 'ntpResponse.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetNTPResponse _$GetNTPResponseFromJson(Map<String, dynamic> json) {
-  return GetNTPResponse(
-    ntpInformation:
-        NtpInformation.fromJson(json['NTPInformation'] as Map<String, dynamic>),
-  );
-}
+GetNTPResponse _$GetNTPResponseFromJson(Map<String, dynamic> json) =>
+    GetNTPResponse(
+      ntpInformation: NtpInformation.fromJson(
+          json['NTPInformation'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$GetNTPResponseToJson(GetNTPResponse instance) =>
     <String, dynamic>{

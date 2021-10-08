@@ -6,13 +6,11 @@ part of 'date.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Date _$DateFromJson(Map<String, dynamic> json) {
-  return Date(
-    json['Year'],
-    json['Month'],
-    json['Day'],
-  );
-}
+Date _$DateFromJson(Map<String, dynamic> json) => Date(
+      json['Year'],
+      json['Month'],
+      json['Day'],
+    );
 
 Map<String, dynamic> _$DateToJson(Date instance) => <String, dynamic>{
       'Year': instance.xmlYear,

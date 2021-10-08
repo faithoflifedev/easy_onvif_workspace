@@ -6,11 +6,9 @@ part of 'ptz.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Ptz _$PtzFromJson(Map<String, dynamic> json) {
-  return Ptz(
-    json['XAddr'],
-  );
-}
+Ptz _$PtzFromJson(Map<String, dynamic> json) => Ptz(
+      json['XAddr'],
+    );
 
 Map<String, dynamic> _$PtzToJson(Ptz instance) => <String, dynamic>{
       'XAddr': instance.xmlXAddr,

@@ -7,13 +7,12 @@ part of 'audioDecoderConfiguration.dart';
 // **************************************************************************
 
 AudioDecoderConfiguration _$AudioDecoderConfigurationFromJson(
-    Map<String, dynamic> json) {
-  return AudioDecoderConfiguration(
-    json['@token'] as String,
-    json['Name'],
-    json['UseCount'],
-  );
-}
+        Map<String, dynamic> json) =>
+    AudioDecoderConfiguration(
+      json['@token'] as String,
+      json['Name'],
+      json['UseCount'],
+    );
 
 Map<String, dynamic> _$AudioDecoderConfigurationToJson(
         AudioDecoderConfiguration instance) =>
