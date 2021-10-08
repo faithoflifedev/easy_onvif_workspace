@@ -6,13 +6,11 @@ part of 'extension.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Extension _$ExtensionFromJson(Map<String, dynamic> json) {
-  return Extension(
-    AudioOutputConfiguration.fromJson(json['Name'] as Map<String, dynamic>),
-    AudioDecoderConfiguration.fromJson(
-        json['UseCount'] as Map<String, dynamic>),
-  );
-}
+Extension _$ExtensionFromJson(Map<String, dynamic> json) => Extension(
+      AudioOutputConfiguration.fromJson(json['Name'] as Map<String, dynamic>),
+      AudioDecoderConfiguration.fromJson(
+          json['UseCount'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$ExtensionToJson(Extension instance) => <String, dynamic>{
       'Name': instance.audioOutputConfiguration.toJson(),

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'networkProtocol.g.dart';
@@ -25,4 +27,7 @@ class NetworkProtocol {
       _$NetworkProtocolFromJson(json);
 
   Map<String, dynamic> toJson() => _$NetworkProtocolToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }

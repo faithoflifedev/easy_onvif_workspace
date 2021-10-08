@@ -7,12 +7,11 @@ part of 'audioSourcesResponse.dart';
 // **************************************************************************
 
 GetAudioSourcesResponse _$GetAudioSourcesResponseFromJson(
-    Map<String, dynamic> json) {
-  return GetAudioSourcesResponse(
-    audioSource:
-        AudioSource.fromJson(json['AudioSources'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    GetAudioSourcesResponse(
+      audioSource:
+          AudioSource.fromJson(json['AudioSources'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$GetAudioSourcesResponseToJson(
         GetAudioSourcesResponse instance) =>

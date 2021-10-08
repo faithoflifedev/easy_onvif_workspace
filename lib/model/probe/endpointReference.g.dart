@@ -6,11 +6,10 @@ part of 'endpointReference.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-EndpointReference _$EndpointReferenceFromJson(Map<String, dynamic> json) {
-  return EndpointReference(
-    json['Address'],
-  );
-}
+EndpointReference _$EndpointReferenceFromJson(Map<String, dynamic> json) =>
+    EndpointReference(
+      json['Address'],
+    );
 
 Map<String, dynamic> _$EndpointReferenceToJson(EndpointReference instance) =>
     <String, dynamic>{

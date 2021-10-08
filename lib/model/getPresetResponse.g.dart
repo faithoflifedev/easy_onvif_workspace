@@ -6,13 +6,12 @@ part of 'getPresetResponse.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetPresetResponse _$GetPresetResponseFromJson(Map<String, dynamic> json) {
-  return GetPresetResponse(
-    presets: (json['Preset'] as List<dynamic>)
-        .map((e) => Preset.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+GetPresetResponse _$GetPresetResponseFromJson(Map<String, dynamic> json) =>
+    GetPresetResponse(
+      presets: (json['Preset'] as List<dynamic>)
+          .map((e) => Preset.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$GetPresetResponseToJson(GetPresetResponse instance) =>
     <String, dynamic>{

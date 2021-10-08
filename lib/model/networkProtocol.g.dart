@@ -6,13 +6,12 @@ part of 'networkProtocol.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NetworkProtocol _$NetworkProtocolFromJson(Map<String, dynamic> json) {
-  return NetworkProtocol(
-    json['Name'],
-    json['Enabled'],
-    json['Port'],
-  );
-}
+NetworkProtocol _$NetworkProtocolFromJson(Map<String, dynamic> json) =>
+    NetworkProtocol(
+      json['Name'],
+      json['Enabled'],
+      json['Port'],
+    );
 
 Map<String, dynamic> _$NetworkProtocolToJson(NetworkProtocol instance) =>
     <String, dynamic>{

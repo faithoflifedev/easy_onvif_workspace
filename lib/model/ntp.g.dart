@@ -6,14 +6,12 @@ part of 'ntp.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Ntp _$NtpFromJson(Map<String, dynamic> json) {
-  return Ntp(
-    type: json['Type'] as String,
-    iPv4Address: json['IPv4Address'] as String?,
-    iPv6Address: json['IPv6Address'] as String?,
-    dnsName: json['DNSname'] as String?,
-  );
-}
+Ntp _$NtpFromJson(Map<String, dynamic> json) => Ntp(
+      type: json['Type'] as String,
+      iPv4Address: json['IPv4Address'] as String?,
+      iPv6Address: json['IPv6Address'] as String?,
+      dnsName: json['DNSname'] as String?,
+    );
 
 Map<String, dynamic> _$NtpToJson(Ntp instance) => <String, dynamic>{
       'Type': instance.type,

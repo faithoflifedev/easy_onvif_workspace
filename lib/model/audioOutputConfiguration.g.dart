@@ -7,16 +7,15 @@ part of 'audioOutputConfiguration.dart';
 // **************************************************************************
 
 AudioOutputConfiguration _$AudioOutputConfigurationFromJson(
-    Map<String, dynamic> json) {
-  return AudioOutputConfiguration(
-    json['@token'] as String,
-    json['Name'],
-    json['UseCount'],
-    json['OutputToken'],
-    json['SendPrimacy'],
-    json['OutputLevel'],
-  );
-}
+        Map<String, dynamic> json) =>
+    AudioOutputConfiguration(
+      json['@token'] as String,
+      json['Name'],
+      json['UseCount'],
+      json['OutputToken'],
+      json['SendPrimacy'],
+      json['OutputLevel'],
+    );
 
 Map<String, dynamic> _$AudioOutputConfigurationToJson(
         AudioOutputConfiguration instance) =>
