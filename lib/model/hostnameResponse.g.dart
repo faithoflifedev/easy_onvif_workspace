@@ -6,12 +6,11 @@ part of 'hostnameResponse.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetHostnameResponse _$GetHostnameResponseFromJson(Map<String, dynamic> json) {
-  return GetHostnameResponse(
-    hostnameInformation: HostnameInformation.fromJson(
-        json['HostnameInformation'] as Map<String, dynamic>),
-  );
-}
+GetHostnameResponse _$GetHostnameResponseFromJson(Map<String, dynamic> json) =>
+    GetHostnameResponse(
+      hostnameInformation: HostnameInformation.fromJson(
+          json['HostnameInformation'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$GetHostnameResponseToJson(
         GetHostnameResponse instance) =>

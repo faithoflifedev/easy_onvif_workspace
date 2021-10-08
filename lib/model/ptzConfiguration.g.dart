@@ -6,13 +6,12 @@ part of 'ptzConfiguration.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PTZConfiguration _$PTZConfigurationFromJson(Map<String, dynamic> json) {
-  return PTZConfiguration(
-    json['Name'],
-    json['UseCount'],
-    json['NodeToken'],
-  );
-}
+PTZConfiguration _$PTZConfigurationFromJson(Map<String, dynamic> json) =>
+    PTZConfiguration(
+      json['Name'],
+      json['UseCount'],
+      json['NodeToken'],
+    );
 
 Map<String, dynamic> _$PTZConfigurationToJson(PTZConfiguration instance) =>
     <String, dynamic>{

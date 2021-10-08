@@ -7,14 +7,13 @@ part of 'videoSourceConfiguration.dart';
 // **************************************************************************
 
 VideoSourceConfiguration _$VideoSourceConfigurationFromJson(
-    Map<String, dynamic> json) {
-  return VideoSourceConfiguration(
-    json['Name'],
-    json['UseCount'],
-    json['SourceToken'],
-    Bounds.fromJson(json['Bounds'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    VideoSourceConfiguration(
+      json['Name'],
+      json['UseCount'],
+      json['SourceToken'],
+      Bounds.fromJson(json['Bounds'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$VideoSourceConfigurationToJson(
         VideoSourceConfiguration instance) =>

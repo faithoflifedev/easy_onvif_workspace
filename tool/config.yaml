@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 0.0.7
-change: closer match to Onvif spec for Capabilities
+version: 0.0.8
+change: better inpterpretation of parsed XML

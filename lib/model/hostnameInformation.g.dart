@@ -6,12 +6,11 @@ part of 'hostnameInformation.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-HostnameInformation _$HostnameInformationFromJson(Map<String, dynamic> json) {
-  return HostnameInformation(
-    xmlFromDhcp: json['FromDHCP'],
-    xmlName: json['Name'],
-  );
-}
+HostnameInformation _$HostnameInformationFromJson(Map<String, dynamic> json) =>
+    HostnameInformation(
+      xmlFromDhcp: json['FromDHCP'],
+      xmlName: json['Name'],
+    );
 
 Map<String, dynamic> _$HostnameInformationToJson(
         HostnameInformation instance) =>

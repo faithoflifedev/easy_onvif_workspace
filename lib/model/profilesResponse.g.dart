@@ -6,13 +6,12 @@ part of 'profilesResponse.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetProfilesResponse _$GetProfilesResponseFromJson(Map<String, dynamic> json) {
-  return GetProfilesResponse(
-    (json['Profiles'] as List<dynamic>)
-        .map((e) => Profile.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+GetProfilesResponse _$GetProfilesResponseFromJson(Map<String, dynamic> json) =>
+    GetProfilesResponse(
+      (json['Profiles'] as List<dynamic>)
+          .map((e) => Profile.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$GetProfilesResponseToJson(
         GetProfilesResponse instance) =>

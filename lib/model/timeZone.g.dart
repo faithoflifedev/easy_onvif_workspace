@@ -6,11 +6,9 @@ part of 'timeZone.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TimeZone _$TimeZoneFromJson(Map<String, dynamic> json) {
-  return TimeZone(
-    json['TZ'],
-  );
-}
+TimeZone _$TimeZoneFromJson(Map<String, dynamic> json) => TimeZone(
+      json['TZ'],
+    );
 
 Map<String, dynamic> _$TimeZoneToJson(TimeZone instance) => <String, dynamic>{
       'TZ': instance.xmlTz,

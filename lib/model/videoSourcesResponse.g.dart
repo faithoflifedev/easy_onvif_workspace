@@ -7,11 +7,10 @@ part of 'videoSourcesResponse.dart';
 // **************************************************************************
 
 GetVideoSourcesResponse _$GetVideoSourcesResponseFromJson(
-    Map<String, dynamic> json) {
-  return GetVideoSourcesResponse(
-    VideoSources.fromJson(json['VideoSources'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    GetVideoSourcesResponse(
+      VideoSources.fromJson(json['VideoSources'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$GetVideoSourcesResponseToJson(
         GetVideoSourcesResponse instance) =>

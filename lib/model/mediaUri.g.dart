@@ -6,14 +6,12 @@ part of 'mediaUri.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MediaUri _$MediaUriFromJson(Map<String, dynamic> json) {
-  return MediaUri(
-    json['Uri'],
-    json['InvalidAfterConnect'],
-    json['InvalidAfterReboot'],
-    json['Timeout'],
-  );
-}
+MediaUri _$MediaUriFromJson(Map<String, dynamic> json) => MediaUri(
+      json['Uri'],
+      json['InvalidAfterConnect'],
+      json['InvalidAfterReboot'],
+      json['Timeout'],
+    );
 
 Map<String, dynamic> _$MediaUriToJson(MediaUri instance) => <String, dynamic>{
       'Uri': instance.xmlUri,

@@ -6,14 +6,12 @@ part of 'bounds.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Bounds _$BoundsFromJson(Map<String, dynamic> json) {
-  return Bounds(
-    json['@x'] as String,
-    json['@y'] as String,
-    json['@width'] as String,
-    json['@height'] as String,
-  );
-}
+Bounds _$BoundsFromJson(Map<String, dynamic> json) => Bounds(
+      json['@x'] as String,
+      json['@y'] as String,
+      json['@width'] as String,
+      json['@height'] as String,
+    );
 
 Map<String, dynamic> _$BoundsToJson(Bounds instance) => <String, dynamic>{
       '@x': instance.xmlX,

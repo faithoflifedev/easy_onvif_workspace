@@ -7,12 +7,11 @@ part of 'systemDateTimeResponse.dart';
 // **************************************************************************
 
 GetSystemDateAndTimeResponse _$GetSystemDateAndTimeResponseFromJson(
-    Map<String, dynamic> json) {
-  return GetSystemDateAndTimeResponse(
-    SystemDateAndTime.fromJson(
-        json['SystemDateAndTime'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    GetSystemDateAndTimeResponse(
+      SystemDateAndTime.fromJson(
+          json['SystemDateAndTime'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$GetSystemDateAndTimeResponseToJson(
         GetSystemDateAndTimeResponse instance) =>

@@ -7,13 +7,12 @@ part of 'audioSourceConfiguration.dart';
 // **************************************************************************
 
 AudioSourceConfiguration _$AudioSourceConfigurationFromJson(
-    Map<String, dynamic> json) {
-  return AudioSourceConfiguration(
-    json['Name'],
-    json['UseCount'],
-    json['SourceToken'],
-  );
-}
+        Map<String, dynamic> json) =>
+    AudioSourceConfiguration(
+      json['Name'],
+      json['UseCount'],
+      json['SourceToken'],
+    );
 
 Map<String, dynamic> _$AudioSourceConfigurationToJson(
         AudioSourceConfiguration instance) =>

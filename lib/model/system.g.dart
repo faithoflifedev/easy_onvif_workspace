@@ -6,19 +6,15 @@ part of 'system.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-System _$SystemFromJson(Map<String, dynamic> json) {
-  return System(
-    json['DiscoveryResolve'],
-    json['DiscoveryBye'],
-    json['RemoteDiscovery'],
-    json['SystemBackup'],
-    json['SystemLogging'],
-    json['FirmwareUpgrade'],
-    (json['SupportedVersions'] as List<dynamic>)
-        .map((e) => SupportedVersion.fromJson(e as Map<String, dynamic>))
-        .toList(),
-  );
-}
+System _$SystemFromJson(Map<String, dynamic> json) => System(
+      json['DiscoveryResolve'],
+      json['DiscoveryBye'],
+      json['RemoteDiscovery'],
+      json['SystemBackup'],
+      json['SystemLogging'],
+      json['FirmwareUpgrade'],
+      System._supportedVersionConverter(json['SupportedVersions']),
+    );
 
 Map<String, dynamic> _$SystemToJson(System instance) => <String, dynamic>{
       'DiscoveryResolve': instance.xmlDiscoveryResolve,
