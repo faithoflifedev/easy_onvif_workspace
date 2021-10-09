@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 0.0.8
-change: better inpterpretation of parsed XML
+version: 0.0.9
+change: Apparently an Onvif device can respond with an empty soap "Header"
