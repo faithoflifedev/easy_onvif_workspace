@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 import 'probe/appSequence.dart';
@@ -8,7 +10,7 @@ part 'header.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Header {
   @JsonKey(name: 'AppSequence')
-  final AppSequence appSequence;
+  final AppSequence? appSequence;
 
   @JsonKey(name: 'MessageID')
   final dynamic xmlMessageID;
@@ -30,10 +32,17 @@ class Header {
 
   String get action => xmlAction['\$'];
 
-  Header(this.appSequence, this.xmlMessageID, this.xmlRelatesTo, this.xmlTo,
-      this.xmlAction);
+  Header(
+      {this.appSequence,
+      this.xmlMessageID,
+      this.xmlRelatesTo,
+      this.xmlTo,
+      this.xmlAction});
 
   factory Header.fromJson(Map<String, dynamic> json) => _$HeaderFromJson(json);
 
   Map<String, dynamic> toJson() => _$HeaderToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }
