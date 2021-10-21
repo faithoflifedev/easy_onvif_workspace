@@ -1,3 +1,6 @@
+## 0.0.9
+
+- Apparently an Onvif device can respond with an empty soap &quot;Header&quot;
 ## 0.0.8
 
 - better inpterpretation of parsed XML

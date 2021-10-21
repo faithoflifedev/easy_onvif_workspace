@@ -8,11 +8,11 @@ class Code {
   final dynamic xmlValue;
 
   @JsonKey(name: 'Subcode')
-  final Code code;
+  final Code? code;
 
   String get value => xmlValue['\$'];
 
-  Code(this.xmlValue, this.code);
+  Code({required this.xmlValue, this.code});
 
   factory Code.fromJson(Map<String, dynamic> json) => _$CodeFromJson(json);
 
