@@ -7,11 +7,13 @@ part of 'code.dart';
 // **************************************************************************
 
 Code _$CodeFromJson(Map<String, dynamic> json) => Code(
-      json['Value'],
-      Code.fromJson(json['Subcode'] as Map<String, dynamic>),
+      xmlValue: json['Value'],
+      code: json['Subcode'] == null
+          ? null
+          : Code.fromJson(json['Subcode'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$CodeToJson(Code instance) => <String, dynamic>{
       'Value': instance.xmlValue,
-      'Subcode': instance.code.toJson(),
+      'Subcode': instance.code?.toJson(),
     };
