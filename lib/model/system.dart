@@ -43,13 +43,13 @@ class System {
   bool get firmwareUpgrade => xmlFirmwareUpgrade['\$'].toLowerCase() == 'true';
 
   System(
-      this.xmlDiscoveryResolve,
+      {this.xmlDiscoveryResolve,
       this.xmlDiscoveryBye,
       this.xmlRemoteDiscovery,
       this.xmlSystemBackup,
       this.xmlSystemLogging,
       this.xmlFirmwareUpgrade,
-      this.supportedVersions);
+      required this.supportedVersions});
 
   factory System.fromJson(Map<String, dynamic> json) => _$SystemFromJson(json);
 

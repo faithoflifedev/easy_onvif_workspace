@@ -24,11 +24,11 @@ class Profile {
 
   ///Optional configuration of the Video input.
   @JsonKey(name: 'VideoSourceConfiguration')
-  final VideoSourceConfiguration videoSourceConfiguration;
+  final VideoSourceConfiguration? videoSourceConfiguration;
 
   ///Optional configuration of the Audio input.
   @JsonKey(name: 'AudioSourceConfiguration')
-  final AudioSourceConfiguration audioSourceConfiguration;
+  final AudioSourceConfiguration? audioSourceConfiguration;
 
   ///Optional configuration of the Video encoder.
   @JsonKey(name: 'VideoEncoderConfiguration')
@@ -36,15 +36,15 @@ class Profile {
 
   ///Optional configuration of the Audio encoder.
   @JsonKey(name: 'AudioEncoderConfiguration')
-  final AudioEncoderConfiguration audioEncoderConfiguration;
+  final AudioEncoderConfiguration? audioEncoderConfiguration;
 
   ///Optional configuration of the video analytics module and rule engine.\
   @JsonKey(name: 'VideoAnalyticsConfiguration')
-  final VideoAnalyticsConfiguration videoAnalyticsConfiguration;
+  final VideoAnalyticsConfiguration? videoAnalyticsConfiguration;
 
   ///Optional configuration of the pan tilt zoom unit.
   @JsonKey(name: 'PTZConfiguration')
-  final PTZConfiguration ptzConfiguration;
+  final PTZConfiguration? ptzConfiguration;
 
   ///A value of true signals that the profile cannot be deleted. Default is
   ///false.
@@ -57,12 +57,12 @@ class Profile {
       {required this.token,
       this.xmlFixed,
       this.xmlName,
-      required this.videoSourceConfiguration,
-      required this.audioSourceConfiguration,
+      this.videoSourceConfiguration,
+      this.audioSourceConfiguration,
       this.videoEncoderConfiguration,
-      required this.audioEncoderConfiguration,
-      required this.videoAnalyticsConfiguration,
-      required this.ptzConfiguration});
+      this.audioEncoderConfiguration,
+      this.videoAnalyticsConfiguration,
+      this.ptzConfiguration});
 
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);

@@ -7,13 +7,14 @@ part of 'system.dart';
 // **************************************************************************
 
 System _$SystemFromJson(Map<String, dynamic> json) => System(
-      json['DiscoveryResolve'],
-      json['DiscoveryBye'],
-      json['RemoteDiscovery'],
-      json['SystemBackup'],
-      json['SystemLogging'],
-      json['FirmwareUpgrade'],
-      System._supportedVersionConverter(json['SupportedVersions']),
+      xmlDiscoveryResolve: json['DiscoveryResolve'],
+      xmlDiscoveryBye: json['DiscoveryBye'],
+      xmlRemoteDiscovery: json['RemoteDiscovery'],
+      xmlSystemBackup: json['SystemBackup'],
+      xmlSystemLogging: json['SystemLogging'],
+      xmlFirmwareUpgrade: json['FirmwareUpgrade'],
+      supportedVersions:
+          System._supportedVersionConverter(json['SupportedVersions']),
     );
 
 Map<String, dynamic> _$SystemToJson(System instance) => <String, dynamic>{
