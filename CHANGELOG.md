@@ -1,3 +1,6 @@
+## 0.0.10
+
+- GetProfile from media.wdsl has optional fields that were required in code
 ## 0.0.9
 
 - Apparently an Onvif device can respond with an empty soap &quot;Header&quot;
