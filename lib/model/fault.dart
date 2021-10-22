@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 import 'code.dart';
@@ -12,7 +14,7 @@ class Fault {
   final Code code;
 
   @JsonKey(name: 'Reason')
-  final Reason reason;
+  final Reason? reason;
 
   @JsonKey(name: 'Node')
   final dynamic xmlNode;
@@ -21,15 +23,23 @@ class Fault {
   final dynamic xmlRole;
 
   @JsonKey(name: 'Detail')
-  final Detail detail;
+  final Detail? detail;
 
   String get node => xmlNode['\$'];
 
   String get role => xmlRole['\$'];
 
-  Fault(this.code, this.reason, this.xmlNode, this.xmlRole, this.detail);
+  Fault(
+      {required this.code,
+      this.reason,
+      this.xmlNode,
+      this.xmlRole,
+      this.detail});
 
   factory Fault.fromJson(Map<String, dynamic> json) => _$FaultFromJson(json);
 
   Map<String, dynamic> toJson() => _$FaultToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }
