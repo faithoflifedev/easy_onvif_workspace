@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'code.g.dart';
@@ -17,4 +19,7 @@ class Code {
   factory Code.fromJson(Map<String, dynamic> json) => _$CodeFromJson(json);
 
   Map<String, dynamic> toJson() => _$CodeToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }
