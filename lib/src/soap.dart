@@ -7,11 +7,11 @@ import '../onvif.dart';
 
 ///Utility class for interacting through the SOAP protocol
 class Soap {
+  static final dio = Dio();
+
   ///Send the SOAP [requestData] to the given [url] endpoint.
   static Future<String> send(String url, String requestData) async {
-    final dio = Dio();
-
-    Response response;
+    Response? response = null;
 
     try {
       response = await dio.post(url,
@@ -27,7 +27,7 @@ class Soap {
         final envelope = Envelope.fromJson(jsonMap);
 
         if (envelope.body.hasFault) {
-          throw Exception(envelope.body.fault!.reason.why);
+          throw Exception("Error code: ${envelope.body.fault?.code}");
         }
       }
 

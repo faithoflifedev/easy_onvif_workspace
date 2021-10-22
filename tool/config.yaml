@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 0.0.10
-change: GetProfile from media.wdsl has optional fields that were required in code
+version: 0.0.11
+change: ONVIF SOAP faults do not match the spec they refer to on some devices, and now a static instance of Dio.

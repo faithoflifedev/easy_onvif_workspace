@@ -7,9 +7,9 @@ part of 'detail.dart';
 // **************************************************************************
 
 Detail _$DetailFromJson(Map<String, dynamic> json) => Detail(
-      I8nText.fromJson(json['Text'] as Map<String, dynamic>),
+      i8nText: json['Text'],
     );
 
 Map<String, dynamic> _$DetailToJson(Detail instance) => <String, dynamic>{
-      'Text': instance.i8nText.toJson(),
+      'Text': instance.i8nText,
     };
