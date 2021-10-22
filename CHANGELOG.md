@@ -1,3 +1,6 @@
+## 0.0.11
+
+- ONVIF SOAP faults do not match the spec they refer to on some devices, and now a static instance of Dio.
 ## 0.0.10
 
 - GetProfile from media.wdsl has optional fields that were required in code
