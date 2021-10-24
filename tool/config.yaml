@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 0.0.11
-change: ONVIF SOAP faults do not match the spec they refer to on some devices, and now a static instance of Dio.
+version: 0.0.12
+change: ONVIF SOAP faults are no longer dart objects since the XML response does not match the documented spec.  Additional support for optional elements in the spec

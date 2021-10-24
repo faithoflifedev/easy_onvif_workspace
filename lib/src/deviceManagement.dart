@@ -1,4 +1,4 @@
-import 'package:easy_onvif/model/envelope.dart';
+// import 'package:easy_onvif/model/envelope.dart';
 import 'package:easy_onvif/onvif.dart';
 
 class DeviceManagement {
@@ -18,27 +18,27 @@ class DeviceManagement {
   ///which results in 'password equivalent' of length 28 bytes, as described in
   ///section 3.1.2 of the ONVIF security white paper.
   //Future<CreateUsersResponse> createUsers(List<User> users) async {
-  Future<void> createUsers(List<User> users) async {
-    // final envelope = await Soap.retrieveEnvlope(
+  // Future<void> createUsers(List<User> users) async {
+  //   // final envelope = await Soap.retrieveEnvlope(
 
-    print(uri);
+  //   print(uri);
 
-    print(onvif
-        .secureRequest(SoapRequest.createUsers(users))
-        .toXmlString(pretty: true));
+  //   print(onvif
+  //       .secureRequest(SoapRequest.createUsers(users))
+  //       .toXmlString(pretty: true));
 
-    await Soap.retrieveEnvlope(
-        uri, onvif.secureRequest(SoapRequest.createUsers(users)),
-        postProcess: (String xmlBody, dynamic jsonMap, Envelope envelope) {
-      print(xmlBody);
-      print('\n\n');
-      print(jsonMap);
-    });
+  //   await Soap.retrieveEnvlope(
+  //       uri, onvif.secureRequest(SoapRequest.createUsers(users)),
+  //       postProcess: (String xmlBody, dynamic jsonMap, Envelope envelope) {
+  //     print(xmlBody);
+  //     print('\n\n');
+  //     print(jsonMap);
+  //   });
 
-    // if (envelope.body.usersResponse == null) throw Exception();
+  //   // if (envelope.body.usersResponse == null) throw Exception();
 
-    // return envelope.body.usersResponse!;
-  }
+  //   // return envelope.body.usersResponse!;
+  // }
 
   ///This method has been replaced by the more generic [getServices] method. For
   ///capabilities of individual services refer to the [getServiceCapabilities]

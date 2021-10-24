@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'audioSourcesResponse.dart';
 import 'capabilitiesResponse.dart';
 import 'deviceInformationResponse.dart';
-import 'fault.dart';
+// import 'fault.dart';
 import 'hostnameResponse.dart';
 import 'networkProtocolsResponse.dart';
 import 'ntpResponse.dart';
@@ -95,7 +95,7 @@ class Body {
   final GetUsersResponse? usersResponse;
 
   @JsonKey(name: 'Fault')
-  final Fault? fault;
+  final dynamic fault;
 
   Body(
       {this.fault,

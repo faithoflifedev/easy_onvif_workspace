@@ -13,18 +13,22 @@ Capabilities _$CapabilitiesFromJson(Map<String, dynamic> json) => Capabilities(
       json['Device'] == null
           ? null
           : Device.fromJson(json['Device'] as Map<String, dynamic>),
-      Media.fromJson(json['Media'] as Map<String, dynamic>),
+      json['Media'] == null
+          ? null
+          : Media.fromJson(json['Media'] as Map<String, dynamic>),
       json['Events'] == null
           ? null
           : Events.fromJson(json['Events'] as Map<String, dynamic>),
-      Ptz.fromJson(json['PTZ'] as Map<String, dynamic>),
+      json['PTZ'] == null
+          ? null
+          : Ptz.fromJson(json['PTZ'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$CapabilitiesToJson(Capabilities instance) =>
     <String, dynamic>{
       'Analytics': instance.analytics?.toJson(),
       'Device': instance.device?.toJson(),
-      'Media': instance.media.toJson(),
+      'Media': instance.media?.toJson(),
       'Events': instance.events?.toJson(),
-      'PTZ': instance.ptz.toJson(),
+      'PTZ': instance.ptz?.toJson(),
     };
