@@ -1,3 +1,6 @@
+## 0.0.12
+
+- ONVIF SOAP faults are no longer dart objects since the XML response does not match the documented spec.  Additional support for optional elements in the spec
 ## 0.0.11
 
 - ONVIF SOAP faults do not match the spec they refer to on some devices, and now a static instance of Dio.

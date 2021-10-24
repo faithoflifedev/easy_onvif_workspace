@@ -36,9 +36,13 @@ class Onvif {
 
     timeDelta = datetime.utcDateTime.difference(DateTime.now().toUtc());
 
-    _media = Media(onvif: this, uri: capabilities.media.xaddr);
+    if (capabilities.media != null) {
+      _media = Media(onvif: this, uri: capabilities.media!.xaddr);
+    }
 
-    _ptz = Ptz(onvif: this, uri: capabilities.ptz.xaddr);
+    if (capabilities.ptz != null) {
+      _ptz = Ptz(onvif: this, uri: capabilities.ptz!.xaddr);
+    }
   }
 
   XmlDocument secureRequest(XmlDocumentFragment content) =>
