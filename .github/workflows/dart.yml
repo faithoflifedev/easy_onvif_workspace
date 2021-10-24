@@ -28,7 +28,7 @@ jobs:
         run: dart pub get
         
       - name: Install dependencies (flutter example)
-        run: dart pub get example/flutter_model
+        run: flutter pub get example/flutter_model
 
       # Uncomment this step to verify the use of 'dart format' on each commit.
       # - name: Verify formatting
