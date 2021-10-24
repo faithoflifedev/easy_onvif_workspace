@@ -7,9 +7,7 @@ part of 'body.dart';
 // **************************************************************************
 
 Body _$BodyFromJson(Map<String, dynamic> json) => Body(
-      fault: json['Fault'] == null
-          ? null
-          : Fault.fromJson(json['Fault'] as Map<String, dynamic>),
+      fault: json['Fault'],
       dateTimeResponse: json['GetSystemDateAndTimeResponse'] == null
           ? null
           : GetSystemDateAndTimeResponse.fromJson(
@@ -104,5 +102,5 @@ Map<String, dynamic> _$BodyToJson(Body instance) => <String, dynamic>{
       'ProbeMatches': instance.probeMatches?.toJson(),
       'GetSystemUrisResponse': instance.systemUrisResponse?.toJson(),
       'GetUsersResponse': instance.usersResponse?.toJson(),
-      'Fault': instance.fault?.toJson(),
+      'Fault': instance.fault,
     };

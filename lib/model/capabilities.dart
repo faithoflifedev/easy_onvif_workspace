@@ -22,7 +22,7 @@ class Capabilities {
 
   ///Media capabilities
   @JsonKey(name: 'Media')
-  final Media media;
+  final Media? media;
 
   ///Event capabilities
   @JsonKey(name: 'Events')
@@ -30,7 +30,7 @@ class Capabilities {
 
   ///PTZ capabilities
   @JsonKey(name: 'PTZ')
-  final Ptz ptz;
+  final Ptz? ptz;
 
   Capabilities(this.analytics, this.device, this.media, this.events, this.ptz);
 

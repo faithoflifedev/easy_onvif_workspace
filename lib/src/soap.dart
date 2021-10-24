@@ -27,7 +27,7 @@ class Soap {
         final envelope = Envelope.fromJson(jsonMap);
 
         if (envelope.body.hasFault) {
-          throw Exception("Error code: ${envelope.body.fault?.code}");
+          throw Exception("Error code: ${envelope.body.fault}");
         }
       }
 
@@ -64,7 +64,7 @@ class SoapRequest {
     builder.declaration(encoding: 'UTF-8');
 
     builder.element('Envelope', nest: () {
-      builder.namespace('http://www.w3.org/2003/05/soap-envelope', 's');
+      builder.namespace('http://www.w3.org/2003/05/soap-envelope');
 
       builder.element('Header',
           namespace: 'http://www.w3.org/2003/05/soap-envelope', nest: header);
