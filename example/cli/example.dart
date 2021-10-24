@@ -4,7 +4,8 @@ import 'package:yaml/yaml.dart';
 
 void main(List<String> arguments) async {
   //get connection infomration from the config.yaml file
-  final config = loadYaml(File('example/config.yaml').readAsStringSync());
+  final config =
+      loadYaml(File('example/config.sample.yaml').readAsStringSync());
 
   //configure device connection
   var onvif = Onvif(
