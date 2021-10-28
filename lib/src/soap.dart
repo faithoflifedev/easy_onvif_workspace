@@ -134,7 +134,7 @@ class SoapRequest {
   static XmlDocumentFragment capabilities(String category) {
     builder.element('GetCapabilities', nest: () {
       builder.namespace('http://www.onvif.org/ver10/device/wsdl');
-      builder.element('Cagtegory', nest: () {
+      builder.element('Category', nest: () {
         builder.text(category);
       });
     });

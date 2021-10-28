@@ -4,8 +4,7 @@ import 'package:yaml/yaml.dart';
 
 void main(List<String> arguments) async {
   //get connection infomration from the config.yaml file
-  final config =
-      loadYaml(File('example/config.sample.yaml').readAsStringSync());
+  final config = loadYaml(File('example/cli/config.yaml').readAsStringSync());
 
   //configure device connection
   var onvif = Onvif(
@@ -19,7 +18,7 @@ void main(List<String> arguments) async {
   //get device info
   var deviceInfo = await onvif.deviceManagement.getDeviceInformation();
 
-  print(deviceInfo.model);
+  print('Model: ${deviceInfo.model}');
 
   //get device profiles
   var profs = await onvif.media.getProfiles();

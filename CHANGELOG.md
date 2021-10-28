@@ -1,3 +1,6 @@
+## 0.0.13
+
+- The &quot;GetSystemDateAndTimeResponse&quot; now better matches the spec and a typo fix for the &quot;GetCapabilities&quot; request.
 ## 0.0.12
 
 - ONVIF SOAP faults are no longer dart objects since the XML response does not match the documented spec.  Additional support for optional elements in the spec

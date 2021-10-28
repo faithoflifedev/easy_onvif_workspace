@@ -24,8 +24,8 @@ class Onvif {
   }
 
   Onvif({required host, required this.username, required this.password}) {
-    deviceManagement =
-        DeviceManagement(onvif: this, uri: 'http://$host/onvif/device_service');
+    deviceManagement = DeviceManagement(
+        onvif: this, uri: 'http://${host}/onvif/device_service');
   }
 
   ///Connect to the Onvif device and retrieve its capabilities
@@ -34,7 +34,9 @@ class Onvif {
 
     final capabilities = await deviceManagement.getCapabilities();
 
-    timeDelta = datetime.utcDateTime.difference(DateTime.now().toUtc());
+    timeDelta = datetime.utcDateTime != null
+        ? datetime.utcDateTime!.difference(DateTime.now().toUtc())
+        : const Duration(seconds: 0);
 
     if (capabilities.media != null) {
       _media = Media(onvif: this, uri: capabilities.media!.xaddr);

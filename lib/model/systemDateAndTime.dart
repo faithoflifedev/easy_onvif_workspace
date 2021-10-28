@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 import 'dateTime.dart';
@@ -18,16 +20,16 @@ class SystemDateAndTime {
 
   ///Timezone information in Posix format.
   @JsonKey(name: 'TimeZone')
-  final TimeZone timeZone;
+  final TimeZone? timeZone;
 
   ///Current system date and time in UTC format. This field is mandatory since
   ///version 2.0.
   @JsonKey(name: 'UTCDateTime')
-  final OnvifDateTime utc;
+  final OnvifDateTime? utc;
 
   ///Date and time in local format.
   @JsonKey(name: 'LocalDateTime')
-  final OnvifDateTime local;
+  final OnvifDateTime? local;
 
   ///Indicates if the time is set manully or through NTP.
   ///- enum { 'Manual', 'NTP' }
@@ -36,15 +38,22 @@ class SystemDateAndTime {
   ///Informative indicator whether daylight savings is currently on/off.
   String get daylightSavings => xmlDaylightSavings['\$'];
 
-  SystemDateAndTime(this.xmlDateTimeType, this.xmlDaylightSavings,
-      this.timeZone, this.utc, this.local);
+  SystemDateAndTime(
+      {required this.xmlDateTimeType,
+      required this.xmlDaylightSavings,
+      this.timeZone,
+      this.utc,
+      this.local});
 
   factory SystemDateAndTime.fromJson(Map<String, dynamic> json) =>
       _$SystemDateAndTimeFromJson(json);
 
   Map<String, dynamic> toJson() => _$SystemDateAndTimeToJson(this);
 
-  DateTime get utcDateTime => utc.dateTime;
+  DateTime? get utcDateTime => utc?.dateTime;
 
-  DateTime get localDateTime => utc.dateTime;
+  DateTime? get localDateTime => local?.dateTime;
+
+  @override
+  String toString() => json.encode(toJson());
 }
