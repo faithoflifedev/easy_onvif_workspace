@@ -27,7 +27,7 @@ class Ptz {
   ///The speed argument is optional. If an x/y speed value is given it is up to
   ///the device to either use the x value as absolute resoluting speed vector or
   ///to map x and y to the component speed. If the speed argument is omitted,
-  ///the default speed set by the [PTZConfiguration] will be used.
+  ///the default speed set by the [PtzConfiguration] will be used.
   Future<void> absoluteMove(String profileToken, PtzPosition place,
       [PtzPosition? speed]) async {
     await Soap.retrieveEnvlope(
@@ -39,7 +39,7 @@ class Ptz {
   ///Operation for continuous Pan/Tilt and Zoom movements. The operation is
   ///supported if the PTZNode supports at least one continuous Pan/Tilt or Zoom
   ///space. If the space argument is omitted, the default space set by the
-  ///[PTZConfiguration] will be used.
+  ///[PtzConfiguration] will be used.
   Future<void> continuousMove(String profileToken, PtzPosition velocity,
       [int? timeout]) async {
     await Soap.retrieveEnvlope(
@@ -226,7 +226,7 @@ class Ptz {
   ///The speed argument is optional. If an x/y speed value is given it is up to
   ///the device to either use the x value as absolute resoluting speed vector or
   ///to map x and y to the component speed. If the speed argument is omitted,
-  ///the default speed set by the [PTZConfiguration] will be used.
+  ///the default speed set by the [PtzConfiguration] will be used.
   Future<void> relativeMove(String profileToken, PtzPosition move) async {
     await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.relativeMove(profileToken, move)));

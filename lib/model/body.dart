@@ -1,5 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../src/media.dart';
+import '../src/deviceManagement.dart';
+
 import 'audioSourcesResponse.dart';
 import 'capabilitiesResponse.dart';
 import 'configurationResponse.dart';
@@ -36,7 +39,7 @@ class Body {
 
   ///This operation has been replaced by the more generic GetServices method.
   ///For capabilities of individual services refer to the
-  ///[Media.getServiceCapabilities] methods.
+  ///[DeviceManagement.getServiceCapabilities] methods.
   @JsonKey(name: 'GetCapabilitiesResponse')
   final GetCapabilitiesResponse? capabilitiesResponse;
 

@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../src/media.dart';
 import 'profile.dart';
 
 part 'profilesResponse.g.dart';
