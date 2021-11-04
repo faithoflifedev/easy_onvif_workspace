@@ -7,19 +7,19 @@ part of 'capabilities.dart';
 // **************************************************************************
 
 Capabilities _$CapabilitiesFromJson(Map<String, dynamic> json) => Capabilities(
-      json['Analytics'] == null
+      analytics: json['Analytics'] == null
           ? null
           : Analytics.fromJson(json['Analytics'] as Map<String, dynamic>),
-      json['Device'] == null
+      device: json['Device'] == null
           ? null
           : Device.fromJson(json['Device'] as Map<String, dynamic>),
-      json['Media'] == null
+      media: json['Media'] == null
           ? null
           : Media.fromJson(json['Media'] as Map<String, dynamic>),
-      json['Events'] == null
+      events: json['Events'] == null
           ? null
           : Events.fromJson(json['Events'] as Map<String, dynamic>),
-      json['PTZ'] == null
+      ptz: json['PTZ'] == null
           ? null
           : Ptz.fromJson(json['PTZ'] as Map<String, dynamic>),
     );

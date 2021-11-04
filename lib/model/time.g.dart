@@ -7,9 +7,9 @@ part of 'time.dart';
 // **************************************************************************
 
 Time _$TimeFromJson(Map<String, dynamic> json) => Time(
-      json['Hour'],
-      json['Minute'],
-      json['Second'],
+      xmlHour: json['Hour'],
+      xmlMinute: json['Minute'],
+      xmlSecond: json['Second'],
     );
 
 Map<String, dynamic> _$TimeToJson(Time instance) => <String, dynamic>{

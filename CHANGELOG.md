@@ -1,3 +1,6 @@
+## 0.0.14
+
+- Added &quot;GetConfiguration&quot; and &quot;GetConfigurations&quot; the PTZ move helper functions move based on device defaults.
 ## 0.0.13
 
 - The &quot;GetSystemDateAndTimeResponse&quot; now better matches the spec and a typo fix for the &quot;GetCapabilities&quot; request.

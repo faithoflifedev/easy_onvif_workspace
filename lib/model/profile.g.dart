@@ -32,7 +32,7 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
               json['VideoAnalyticsConfiguration'] as Map<String, dynamic>),
       ptzConfiguration: json['PTZConfiguration'] == null
           ? null
-          : PTZConfiguration.fromJson(
+          : PtzConfiguration.fromJson(
               json['PTZConfiguration'] as Map<String, dynamic>),
     );
 

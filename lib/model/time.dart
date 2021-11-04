@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'time.g.dart';
@@ -19,9 +21,12 @@ class Time {
 
   int get second => int.parse(xmlSecond['\$']);
 
-  Time(this.xmlHour, this.xmlMinute, this.xmlSecond);
+  Time({this.xmlHour, this.xmlMinute, this.xmlSecond});
 
   factory Time.fromJson(Map<String, dynamic> json) => _$TimeFromJson(json);
 
   Map<String, dynamic> toJson() => _$TimeToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }

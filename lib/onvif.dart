@@ -3,6 +3,7 @@ library new_onvif;
 
 export 'model/audioSource.dart';
 export 'model/capabilities.dart';
+export 'model/configurationsResponse.dart';
 export 'model/deviceInformationResponse.dart';
 export 'model/hostnameInformation.dart';
 export 'model/mediaUri.dart';

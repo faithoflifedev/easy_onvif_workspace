@@ -1,9 +1,24 @@
 import 'package:easy_onvif/model/envelope.dart';
+import 'package:easy_onvif/model/panTiltLimits.dart';
+import 'package:easy_onvif/model/ptzConfiguration.dart';
+import 'package:easy_onvif/model/ptzSpeed.dart';
+import 'package:easy_onvif/model/zoomLimits.dart';
 import 'package:easy_onvif/onvif.dart';
 
 class Ptz {
   final Onvif onvif;
+
   final String uri;
+
+  final configurationCache = <String, PtzConfiguration>{};
+
+  bool _hasDefault = false;
+
+  PtzSpeed? defaultSpeed;
+
+  PanTiltLimits? defaultPanTiltLimits;
+
+  ZoomLimits? defaultZoomLimits;
 
   Ptz({required this.onvif, required this.uri});
 
@@ -53,19 +68,64 @@ class Ptz {
   ///relative or continuous movements is specified, which would leave the
   ///specified limits, the PTZ unit has to move along the specified limits. The
   ///Zoom Limits have to be interpreted accordingly.
-  // Future<List<PtzConfiguration>> getConfigurations() async {
-  Future<void> getConfigurations() async {
-    await Soap.retrieveEnvlope(
-        uri, onvif.secureRequest(SoapRequest.getPtzConfigurations()),
-        postProcess: (String xmlBody, dynamic jsonMap, Envelope envelope) {
-      print(xmlBody);
-      print('\n\n');
-      print(jsonMap);
+  Future<List<PtzConfiguration>> getConfigurations() async {
+    final envelope = await Soap.retrieveEnvlope(
+        uri, onvif.secureRequest(SoapRequest.getPtzConfigurations()));
+
+    if (envelope.body.configurationsResponse == null) throw Exception();
+
+    final ptzConfigs = envelope.body.configurationsResponse!.ptzConfigurations;
+
+    _clearDefaults();
+
+    ptzConfigs.forEach((element) {
+      defaultSpeed ??= element.defaultPTZSpeed;
+
+      defaultPanTiltLimits ??= element.panTiltLimits;
+
+      defaultZoomLimits ??= element.zoomLimits;
+
+      configurationCache[element.token] = element;
     });
 
-    // if (envelope.body.getConfigurationsResponse == null) throw Exception();
+    _hasDefault = true;
 
-    // return envelope.body.getConfigurationsResponse!.ptzConfigurations;
+    return ptzConfigs;
+  }
+
+  ///Get a specific PTZconfiguration from the device, identified by its
+  ///reference token or name.
+  ///
+  ///The default Position/Translation/Velocity Spaces are introduced to allow
+  ///NVCs sending move requests without the need to specify a certain coordinate
+  ///system. The default Speeds are introduced to control the speed of move
+  ///requests (absolute, relative, preset), where no explicit speed has been
+  ///set.
+  ///
+  ///The allowed pan and tilt range for Pan/Tilt Limits is defined by a
+  ///two-dimensional space range that is mapped to a specific Absolute Pan/Tilt
+  ///Position Space. At least one Pan/Tilt Position Space is required by the
+  ///PTZNode to support Pan/Tilt limits. The limits apply to all supported
+  ///absolute, relative and continuous Pan/Tilt movements. The limits shall be
+  ///checked within the coordinate system for which the limits have been
+  ///specified. That means that even if movements are specified in a different
+  ///coordinate system, the requested movements shall be transformed to the
+  ///coordinate system of the limits where the limits can be checked. When a
+  ///relative or continuous movements is specified, which would leave the
+  ///specified limits, the PTZ unit has to move along the specified limits. The
+  ///Zoom Limits have to be interpreted accordingly.
+  Future<PtzConfiguration> getConfiguration(String profileToken) async {
+    final envelope = await Soap.retrieveEnvlope(uri,
+        onvif.secureRequest(SoapRequest.getPtzConfiguration(profileToken)));
+
+    if (envelope.body.configurationResponse == null) throw Exception();
+
+    final ptzConfiguration =
+        envelope.body.configurationResponse!.ptzConfiguration;
+
+    configurationCache[profileToken] = ptzConfiguration;
+
+    return ptzConfiguration;
   }
 
   ///Operation to request all PTZ presets for the [Preset] in the selected
@@ -98,7 +158,7 @@ class Ptz {
     return envelope.body.statusResponse!.ptzStatus;
   }
 
-  Future<void> _move(String profileToken, PanTilt direction,
+  Future<void> move(String profileToken, PanTilt direction,
       [int step = 50]) async {
     await continuousMove(profileToken,
         PtzPosition(panTilt: direction, zoom: Zoom.fromDouble(0)));
@@ -111,25 +171,53 @@ class Ptz {
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///negative y axis (down)
   Future<void> moveDown(String profileToken, [int step = 50]) async {
-    await _move(profileToken, PanTilt.fromDouble(y: -0.5, x: 0), step);
+    if (!_hasDefault) {
+      getConfigurations();
+    }
+
+    await move(
+        profileToken,
+        PanTilt.fromDouble(y: defaultPanTiltLimits!.range.yRange.min, x: 0.0),
+        step);
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///negative x axis (left)
   Future<void> moveLeft(String profileToken, [int step = 50]) async {
-    await _move(profileToken, PanTilt.fromDouble(x: -0.5, y: 0), step);
+    if (!_hasDefault) {
+      getConfigurations();
+    }
+
+    await move(
+        profileToken,
+        PanTilt.fromDouble(x: defaultPanTiltLimits!.range.xRange.min, y: 0.0),
+        step);
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///positive x axis (right)
   Future<void> moveRight(String profileToken, [int step = 50]) async {
-    await _move(profileToken, PanTilt.fromDouble(x: 0.5, y: 0), step);
+    if (!_hasDefault) {
+      getConfigurations();
+    }
+
+    await move(
+        profileToken,
+        PanTilt.fromDouble(x: defaultPanTiltLimits!.range.xRange.max, y: 0.0),
+        step);
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///positive y axis (up)
   Future<void> moveUp(String profileToken, [int step = 50]) async {
-    await _move(profileToken, PanTilt.fromDouble(y: 0.5, x: 0), step);
+    if (!_hasDefault) {
+      getConfigurations();
+    }
+
+    await move(
+        profileToken,
+        PanTilt.fromDouble(y: defaultPanTiltLimits!.range.yRange.max, x: 0.0),
+        step);
   }
 
   ///Operation for Relative Pan/Tilt and Zoom Move. The operation is supported
@@ -207,5 +295,13 @@ class Ptz {
   ///negative y axis (farther)
   Future<void> zoomOut(String profileToken, [int step = 100]) async {
     await _zoom(profileToken, Zoom.fromDouble(-0.5), step);
+  }
+
+  void _clearDefaults() {
+    defaultSpeed = null;
+
+    defaultPanTiltLimits = null;
+
+    defaultZoomLimits = null;
   }
 }

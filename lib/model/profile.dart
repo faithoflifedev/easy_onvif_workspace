@@ -44,7 +44,7 @@ class Profile {
 
   ///Optional configuration of the pan tilt zoom unit.
   @JsonKey(name: 'PTZConfiguration')
-  final PTZConfiguration? ptzConfiguration;
+  final PtzConfiguration? ptzConfiguration;
 
   ///A value of true signals that the profile cannot be deleted. Default is
   ///false.

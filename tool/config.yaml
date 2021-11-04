@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 0.0.13
-change: The "GetSystemDateAndTimeResponse" now better matches the spec and a typo fix for the "GetCapabilities" request.
+version: 0.0.14
+change: Added "GetConfiguration" and "GetConfigurations" the PTZ move helper functions move based on device defaults.

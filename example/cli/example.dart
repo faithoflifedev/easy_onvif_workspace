@@ -20,6 +20,17 @@ void main(List<String> arguments) async {
 
   print('Model: ${deviceInfo.model}');
 
+  var ptzConfigs = await onvif.ptz.getConfigurations();
+
+  ptzConfigs.forEach((element) {
+    print(element.name + ' ' + element.token);
+  });
+
+  print('xMax: ${ptzConfigs[0].panTiltLimits!.range.xRange.max}');
+  print('xMin: ${ptzConfigs[0].panTiltLimits!.range.xRange.min}');
+  print('yMax: ${ptzConfigs[0].panTiltLimits!.range.yRange.max}');
+  print('yMin: ${ptzConfigs[0].panTiltLimits!.range.yRange.min}');
+
   //get device profiles
   var profs = await onvif.media.getProfiles();
 
@@ -38,7 +49,7 @@ void main(List<String> arguments) async {
 
   var preset_list = await onvif.ptz.getPresets(profileToken);
 
-  await onvif.ptz.zoomIn(profileToken);
+  // await onvif.ptz.zoomIn(profileToken);
 
   await onvif.ptz
       .gotoPreset(profileToken, preset_list[0]); //8 taraweeh //0 announcement

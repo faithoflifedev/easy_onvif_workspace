@@ -485,10 +485,12 @@ class SoapRequest {
       String profileToken, PtzPosition velocity, int? timeout) {
     builder.element('ContinuousMove', nest: () {
       builder.namespace('http://www.onvif.org/ver20/ptz/wsdl'); //tptz
+
       builder.element('ProfileToken', nest: () {
         builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
         builder.text(profileToken);
       });
+
       builder.element('Velocity', nest: () {
         builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
 
@@ -497,11 +499,13 @@ class SoapRequest {
           builder.attribute('x', velocity.panTilt!.x);
           builder.attribute('y', velocity.panTilt!.y);
         });
+
         builder.element('Zoom', nest: () {
           builder.namespace('http://www.onvif.org/ver10/schema');
           builder.attribute('x', velocity.zoom!.x);
         });
       });
+
       builder.element('Timeout', nest: () {
         builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
         builder.text('PT${timeout}S');
@@ -514,6 +518,19 @@ class SoapRequest {
   static XmlDocumentFragment getPtzConfigurations() {
     builder.element('GetConfigurations', nest: () {
       builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+    });
+
+    return builder.buildFragment();
+  }
+
+  static XmlDocumentFragment getPtzConfiguration(String profileToken) {
+    builder.element('GetConfiguration', nest: () {
+      builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+
+      builder.element('tptz:PTZConfigurationToken', nest: () {
+        builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+        builder.text(profileToken);
+      });
     });
 
     return builder.buildFragment();

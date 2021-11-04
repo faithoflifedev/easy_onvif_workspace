@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'panTilt.g.dart';
@@ -27,4 +29,7 @@ class PanTilt {
       _$PanTiltFromJson(json);
 
   Map<String, dynamic> toJson() => _$PanTiltToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }

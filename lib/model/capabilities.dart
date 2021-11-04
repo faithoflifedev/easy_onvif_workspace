@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 import 'analytics.dart';
@@ -32,10 +34,14 @@ class Capabilities {
   @JsonKey(name: 'PTZ')
   final Ptz? ptz;
 
-  Capabilities(this.analytics, this.device, this.media, this.events, this.ptz);
+  Capabilities(
+      {this.analytics, this.device, this.media, this.events, this.ptz});
 
   factory Capabilities.fromJson(Map<String, dynamic> json) =>
       _$CapabilitiesFromJson(json);
 
   Map<String, dynamic> toJson() => _$CapabilitiesToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }
