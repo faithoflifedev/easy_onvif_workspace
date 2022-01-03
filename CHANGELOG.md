@@ -1,3 +1,6 @@
+## 0.0.15
+
+- Improvements to PTZ move helpers, so now the motion makes a little more sense.
 ## 0.0.14
 
 - Added &quot;GetConfiguration&quot; and &quot;GetConfigurations&quot; the PTZ move helper functions move based on device defaults.

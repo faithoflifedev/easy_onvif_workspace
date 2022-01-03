@@ -12,7 +12,7 @@ In your project add the dependency:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^0.0.14
+  easy_onvif: ^0.0.15
 ```
 
 For help getting started with dart, check out these [guides](https://dart.dev/guides).

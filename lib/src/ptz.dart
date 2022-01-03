@@ -12,8 +12,6 @@ class Ptz {
 
   final configurationCache = <String, PtzConfiguration>{};
 
-  bool _hasDefault = false;
-
   PtzSpeed? defaultSpeed;
 
   PanTiltLimits? defaultPanTiltLimits;
@@ -88,8 +86,6 @@ class Ptz {
       configurationCache[element.token] = element;
     });
 
-    _hasDefault = true;
-
     return ptzConfigs;
   }
 
@@ -158,66 +154,33 @@ class Ptz {
     return envelope.body.statusResponse!.ptzStatus;
   }
 
-  Future<void> move(String profileToken, PanTilt direction,
-      [int step = 50]) async {
-    await continuousMove(profileToken,
+  Future<void> move(String profileToken, PanTilt direction) async {
+    await relativeMove(profileToken,
         PtzPosition(panTilt: direction, zoom: Zoom.fromDouble(0)));
-
-    await Future.delayed(Duration(milliseconds: step));
-
-    await stop(profileToken);
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///negative y axis (down)
-  Future<void> moveDown(String profileToken, [int step = 50]) async {
-    if (!_hasDefault) {
-      getConfigurations();
-    }
-
-    await move(
-        profileToken,
-        PanTilt.fromDouble(y: defaultPanTiltLimits!.range.yRange.min, x: 0.0),
-        step);
+  Future<void> moveDown(String profileToken, [int step = 25]) async {
+    await move(profileToken, PanTilt.fromInt(y: 0 - step, x: 0));
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///negative x axis (left)
-  Future<void> moveLeft(String profileToken, [int step = 50]) async {
-    if (!_hasDefault) {
-      getConfigurations();
-    }
-
-    await move(
-        profileToken,
-        PanTilt.fromDouble(x: defaultPanTiltLimits!.range.xRange.min, y: 0.0),
-        step);
+  Future<void> moveLeft(String profileToken, [int step = 25]) async {
+    await move(profileToken, PanTilt.fromInt(x: 0 - step, y: 0));
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///positive x axis (right)
-  Future<void> moveRight(String profileToken, [int step = 50]) async {
-    if (!_hasDefault) {
-      getConfigurations();
-    }
-
-    await move(
-        profileToken,
-        PanTilt.fromDouble(x: defaultPanTiltLimits!.range.xRange.max, y: 0.0),
-        step);
+  Future<void> moveRight(String profileToken, [int step = 25]) async {
+    await move(profileToken, PanTilt.fromInt(x: step, y: 0));
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///positive y axis (up)
-  Future<void> moveUp(String profileToken, [int step = 50]) async {
-    if (!_hasDefault) {
-      getConfigurations();
-    }
-
-    await move(
-        profileToken,
-        PanTilt.fromDouble(y: defaultPanTiltLimits!.range.yRange.max, x: 0.0),
-        step);
+  Future<void> moveUp(String profileToken, [int step = 25]) async {
+    await move(profileToken, PanTilt.fromInt(y: step, x: 0));
   }
 
   ///Operation for Relative Pan/Tilt and Zoom Move. The operation is supported
@@ -276,25 +239,27 @@ class Ptz {
             SoapRequest.stop(profileToken, panTilt: panTilt, zoom: zoom)));
   }
 
-  Future<void> _zoom(String profileToken, Zoom zoom, [int step = 100]) async {
-    await continuousMove(profileToken,
+  //   Future<void> move(String profileToken, PanTilt direction,
+  //     [double step = 0.01]) async {
+  //   await relativeMove(profileToken,
+  //       PtzPosition(panTilt: direction, zoom: Zoom.fromDouble(0)));
+  // }
+
+  Future<void> zoom(String profileToken, Zoom zoom) async {
+    await relativeMove(profileToken,
         PtzPosition(panTilt: PanTilt.fromDouble(y: 0, x: 0), zoom: zoom));
-
-    await Future.delayed(Duration(milliseconds: step));
-
-    await stop(profileToken);
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///positive z axis (closer)
-  Future<void> zoomIn(String profileToken, [int step = 100]) async {
-    await _zoom(profileToken, Zoom.fromDouble(0.5), step);
+  Future<void> zoomIn(String profileToken, [int step = 25]) async {
+    await zoom(profileToken, Zoom.fromInt(step));
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///negative y axis (farther)
-  Future<void> zoomOut(String profileToken, [int step = 100]) async {
-    await _zoom(profileToken, Zoom.fromDouble(-0.5), step);
+  Future<void> zoomOut(String profileToken, [int step = 25]) async {
+    await zoom(profileToken, Zoom.fromInt(0 - step));
   }
 
   void _clearDefaults() {

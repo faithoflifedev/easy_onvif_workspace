@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:easy_onvif/model/envelope.dart';
-import 'package:easy_onvif/model/ptzPosition.dart';
 import 'package:xml/xml.dart';
 
 import '../onvif.dart';

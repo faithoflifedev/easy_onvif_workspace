@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 0.0.14
-change: Added "GetConfiguration" and "GetConfigurations" the PTZ move helper functions move based on device defaults.
+version: 0.0.15
+change: Improvements to PTZ move helpers, so now the motion makes a little more sense.

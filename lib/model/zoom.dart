@@ -13,7 +13,10 @@ class Zoom {
 
   Zoom({required this.rawX, this.space});
 
-  factory Zoom.fromDouble(double x) => Zoom(rawX: x.toString());
+  factory Zoom.fromDouble(double amnt) => Zoom(rawX: amnt.toString());
+
+  factory Zoom.fromInt(int amnt) =>
+      Zoom(rawX: (amnt == 0 ? 0 : (amnt / 10000)).toString());
 
   factory Zoom.fromJson(Map<String, dynamic> json) => _$ZoomFromJson(json);
 
