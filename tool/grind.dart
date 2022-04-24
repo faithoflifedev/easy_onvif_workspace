@@ -7,7 +7,7 @@ import 'package:yaml/yaml.dart';
 main(args) => grind(args);
 
 @Task()
-test() => new TestRunner().testAsync();
+test() => TestRunner().testAsync();
 
 @DefaultTask()
 @Depends(test)
@@ -74,7 +74,7 @@ version() async {
 }
 
 Future<String> shell(
-    {String exec = 'dart', String args = '', bool verbose: true}) async {
+    {String exec = 'dart', String args = '', bool verbose = true}) async {
   final exectutable = whichSync(exec);
 
   if (exectutable == null) throw Exception();
@@ -85,7 +85,9 @@ Future<String> shell(
 
   String response = '';
 
-  result.forEach((processResult) => response += processResult.outText);
+  for (var processResult in result) {
+    response += processResult.outText;
+  }
 
   return response;
 }
@@ -129,7 +131,7 @@ void updateMarkdown(config) {
     final outputFile = File(templateFileName);
 
     final template =
-        new Template(mustacheTpl.readAsStringSync(), name: templateFileName);
+        Template(mustacheTpl.readAsStringSync(), name: templateFileName);
 
     switch (type) {
       case 'prepend':

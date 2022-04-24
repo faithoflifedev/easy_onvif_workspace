@@ -1,5 +1,5 @@
 // import 'package:easy_onvif/model/envelope.dart';
-import 'package:easy_onvif/model/metadataConfiguration.dart';
+import 'package:easy_onvif/model/metadata_configuration.dart';
 import 'package:easy_onvif/onvif.dart';
 
 class Media {
@@ -88,8 +88,8 @@ class Media {
   ///For full compatibility with other ONVIF services a device should not
   ///generate Uris longer than 128 octets.
   Future<MediaUri> getStreamUri(String profileToken,
-      {String streamType: 'RTP_unicast',
-      String transportProtocol: 'RTSP',
+      {String streamType = 'RTP_unicast',
+      String transportProtocol = 'RTSP',
       bool validUntilConnect = false,
       bool validUntilReboot = false,
       String timeout = 'PT0S'}) async {

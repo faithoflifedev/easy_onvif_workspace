@@ -1,8 +1,8 @@
 import 'package:easy_onvif/model/envelope.dart';
-import 'package:easy_onvif/model/panTiltLimits.dart';
-import 'package:easy_onvif/model/ptzConfiguration.dart';
-import 'package:easy_onvif/model/ptzSpeed.dart';
-import 'package:easy_onvif/model/zoomLimits.dart';
+import 'package:easy_onvif/model/pan_tilt_limits.dart';
+import 'package:easy_onvif/model/ptz_configuration.dart';
+import 'package:easy_onvif/model/ptz_speed.dart';
+import 'package:easy_onvif/model/zoom_limits.dart';
 import 'package:easy_onvif/onvif.dart';
 
 class Ptz {
@@ -76,15 +76,15 @@ class Ptz {
 
     _clearDefaults();
 
-    ptzConfigs.forEach((element) {
-      defaultSpeed ??= element.defaultPTZSpeed;
+    for (var ptzConfiguration in ptzConfigs) {
+      defaultSpeed ??= ptzConfiguration.defaultPTZSpeed;
 
-      defaultPanTiltLimits ??= element.panTiltLimits;
+      defaultPanTiltLimits ??= ptzConfiguration.panTiltLimits;
 
-      defaultZoomLimits ??= element.zoomLimits;
+      defaultZoomLimits ??= ptzConfiguration.zoomLimits;
 
-      configurationCache[element.token] = element;
-    });
+      configurationCache[ptzConfiguration.token] = ptzConfiguration;
+    }
 
     return ptzConfigs;
   }

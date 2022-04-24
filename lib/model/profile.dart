@@ -1,11 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'videoSourceConfiguration.dart';
-import 'audioSourceConfiguration.dart';
-import 'videoEncoderConfiguration.dart';
-import 'audioEncoderConfiguration.dart';
-import 'videoAnalyticsConfiguration.dart';
-import 'ptzConfiguration.dart';
+import 'video_source_configuration.dart';
+import 'audio_source_configuration.dart';
+import 'video_encoder_configuration.dart';
+import 'audio_encoder_configuration.dart';
+import 'video_analytics_configuration.dart';
+import 'ptz_configuration.dart';
 
 part 'profile.g.dart';
 

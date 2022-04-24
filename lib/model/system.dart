@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'supportedVersion.dart';
+import 'supported_version.dart';
 
 part 'system.g.dart';
 

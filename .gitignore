@@ -26,7 +26,7 @@ doc/api/
 scratch/
 .pubspec.yaml.bak
 
-example/cli/config.yaml
+example/config.yaml
 example/flutter_model/assets/config.yaml
 
 bin/

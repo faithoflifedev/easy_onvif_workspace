@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'audioOutputConfiguration.dart';
-import 'audioDecoderConfiguration.dart';
+import 'audio_output_configuration.dart';
+import 'audio_decoder_configuration.dart';
 
 part 'extension.g.dart';
 

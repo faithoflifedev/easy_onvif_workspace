@@ -15,11 +15,14 @@ class Service {
   @JsonKey(name: 'Version')
   final Version version;
 
-  int get nameSpace => xmlNameSpace['\$'];
+  @JsonKey(name: 'Capabilities')
+  final Map<String, dynamic>? capabilites;
 
-  int get xAddr => xmlXAddr['\$'];
+  String get nameSpace => xmlNameSpace['\$'];
 
-  Service(this.xmlNameSpace, this.xmlXAddr, this.version);
+  String get xAddr => xmlXAddr['\$'];
+
+  Service(this.xmlNameSpace, this.xmlXAddr, this.version, this.capabilites);
 
   factory Service.fromJson(Map<String, dynamic> json) =>
       _$ServiceFromJson(json);

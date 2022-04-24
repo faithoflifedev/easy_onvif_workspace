@@ -1,4 +1,4 @@
-ONVIF Client protocol Profile S (Live Streaming) Dart implementation.
+# ONVIF Client protocol Profile S (Live Streaming) Dart implementation
 
 This is a wrapper to ONVIF protocol which allows you to get information about your NVT (network video transmitter) device, its media sources, control PTZ (pan-tilt-zoom) movements and manage presets. It will also allow you to get information about your NVR (network video recorder).
 
@@ -28,10 +28,10 @@ import 'package:easy_onvif/onvif.dart';
 ## Connecting to an Onvif device
 
 ```dart
-var onvif =
-	Onvif(host: '[your onvif device ip]', username: '[theUser]', password: '[thePassword]');
-
-await onvif.initialize();
+final onvif = await Onvif.connect(
+ host: config['host'],
+ username: config['username'],
+ password: config['password']);
 ```
 
 ## Interacting with the device through Onvif operations
@@ -52,7 +52,7 @@ Many operations require you to supply a `profileToken` which can be retrieved th
 var profiles = await onvif.media.getProfiles();
 
 profiles.forEach((element) {
-	print(element.name + ' ' + element.token);
+ print(element.name + ' ' + element.token);
 });
 
 var profileToken = profiles[0].token;
@@ -68,7 +68,7 @@ var preset = presets[11];
 
 //print the preset values
 print(
-	'preset: ${preset.position.panTilt?.x}  ${preset.position.panTilt?.y}  ${preset.position.zoom?.x}');
+ 'preset: ${preset.position.panTilt?.x}  ${preset.position.panTilt?.y}  ${preset.position.zoom?.x}');
 
 //use the GotoPreset operation to point the camera to the given preset
 await onvif.ptz.gotoPreset(profileToken, preset);
@@ -78,7 +78,7 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 
 ## Supported Onvif Operations
 
-### [Device Management](https://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl):
+### [Device Management](https://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl)
 
 | Onvif Operation      | Dart Method          | Dart Return Type                       |
 | -------------------- | -------------------- | -------------------------------------- |
@@ -86,13 +86,13 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 | GetDeviceInformation | getDeviceInformation | `Future<GetDeviceInformationResponse>` |
 | GetHostname          | getHostname          | `Future<HostnameInformation>`          |
 | GetNetworkProtocols  | getNetworkProtocols  | `Future<List<NetworkProtocol>>`        |
-| GetNtpResponse       | getNtpResponse       | `Future<NtpInformation>`               |
+| GetNTP               | getNtp               | `Future<NtpInformation>`               |
 | GetServices          | getServices          | `Future<List<Service>>`                |
 | GetSystemDateAndTime | getSystemDateAndTime | `Future<SystemDateAndTime>`            |
 | GetSystemUris        | getSystemUris        | `Future<GetSystemUrisResponse>`        |
 | GetUsers             | getUsers             | `Future<List<User>>`                   |
 
-### [Media](https://www.onvif.org/ver10/media/wsdl/media.wsdl):
+### [Media](https://www.onvif.org/ver10/media/wsdl/media.wsdl)
 
 | Onvif Operation         | Dart Method             | Return Type             |
 | ----------------------- | ----------------------- | ----------------------- |
@@ -104,7 +104,7 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 | StartMulticastStreaming | startMulticastStreaming | `Future<void>`          |
 | StopMulticastStreaming  | stopMulticastStreaming  | `Future<void>`          |
 
-### [PTZ](https://www.onvif.org/ver20/ptz/wsdl/ptz.wsdl):
+### [PTZ](https://www.onvif.org/ver20/ptz/wsdl/ptz.wsdl)
 
 | Onvif Operation   | Dart Method       | Return Type                      |
 | ----------------- | ----------------- | -------------------------------- |
@@ -120,7 +120,7 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 | SetPreset         | setPreset         | `Future<String>`                 |
 | Stop              | stop              | `Future<void>`                   |
 
-### PTZ Helper Methods:
+### PTZ Helper Methods
 
 | Onvif Operation | Dart Method | Return Type    |
 | --------------- | ----------- | -------------- |

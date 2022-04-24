@@ -5,12 +5,18 @@ part 'version.g.dart';
 @JsonSerializable()
 class Version {
   @JsonKey(name: 'Major')
-  final String major;
+  final dynamic xmlMajor;
+  // final String major;
 
   @JsonKey(name: 'Minor')
-  final String minor;
+  final dynamic xmlMinor;
+  // final String minor;
 
-  Version(this.major, this.minor);
+  int get major => int.parse(xmlMajor['\$']);
+
+  int get minor => int.parse(xmlMinor['\$']);
+
+  Version(this.xmlMajor, this.xmlMinor);
 
   factory Version.fromJson(Map<String, dynamic> json) =>
       _$VersionFromJson(json);

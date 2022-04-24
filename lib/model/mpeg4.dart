@@ -21,7 +21,7 @@ class Mpeg4 {
   ///the Mpeg4 profile, either simple profile (SP) or advanced simple profile
   ///(ASP)
   ///- enum { 'SP', 'ASP' }
-  String get Mpeg4Profile => xmlMpeg4Profile['\$'];
+  String get mpeg4Profile => xmlMpeg4Profile['\$'];
 
   Mpeg4(this.xmlGovLength, this.xmlMpeg4Profile);
 

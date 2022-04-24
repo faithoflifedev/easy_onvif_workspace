@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'i8nText.dart';
+import 'i8n_text.dart';
 
 part 'reason.g.dart';
 

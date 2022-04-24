@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'probe/appSequence.dart';
+import 'probe/app_sequence.dart';
 //import 'header.dart';
 
 part 'header.g.dart';
