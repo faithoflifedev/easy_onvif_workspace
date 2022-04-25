@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 import 'ptz_position.dart';
@@ -29,4 +31,7 @@ class PtzStatus {
       _$PtzStatusFromJson(json);
 
   Map<String, dynamic> toJson() => _$PtzStatusToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }

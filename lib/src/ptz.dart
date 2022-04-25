@@ -110,16 +110,19 @@ class Ptz {
   ///relative or continuous movements is specified, which would leave the
   ///specified limits, the PTZ unit has to move along the specified limits. The
   ///Zoom Limits have to be interpreted accordingly.
-  Future<PtzConfiguration> getConfiguration(String profileToken) async {
-    final envelope = await Soap.retrieveEnvlope(uri,
-        onvif.secureRequest(SoapRequest.getPtzConfiguration(profileToken)));
+  Future<PtzConfiguration> getConfiguration(
+      String ptzConfigurationToken) async {
+    final envelope = await Soap.retrieveEnvlope(
+        uri,
+        onvif.secureRequest(
+            SoapRequest.getPtzConfiguration(ptzConfigurationToken)));
 
     if (envelope.body.configurationResponse == null) throw Exception();
 
     final ptzConfiguration =
         envelope.body.configurationResponse!.ptzConfiguration;
 
-    configurationCache[profileToken] = ptzConfiguration;
+    configurationCache[ptzConfigurationToken] = ptzConfiguration;
 
     return ptzConfiguration;
   }
@@ -134,6 +137,12 @@ class Ptz {
     if (envelope.body.getPresetResponse == null) throw Exception();
 
     return envelope.body.getPresetResponse!.presets;
+  }
+
+  Future<Map<String, Preset>> getPresetsMap(String profileToken) async {
+    return {
+      for (var preset in await getPresets(profileToken)) preset.token: preset
+    };
   }
 
   ///Operation to go to a saved preset position for the [Preset] in the selected
