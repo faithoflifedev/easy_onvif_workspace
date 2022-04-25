@@ -78,12 +78,12 @@ class OnvifAbsoluteMovePtzCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final place = PtzPosition(
+      final _place = PtzPosition(
           panTilt: PanTilt(
               rawX: argResults!['pan-tilt-x'], rawY: argResults!['pan-tilt-y']),
           zoom: Zoom(rawX: argResults!['pan-tilt-zoom']));
 
-      await ptz.absoluteMove(argResults!['profile-token'], place);
+      await ptz.absoluteMove(argResults!['profile-token'], _place);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -132,12 +132,12 @@ class OnvifContinuousMovePtzCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final velocity = PtzPosition(
+      final _velocity = PtzPosition(
           panTilt: PanTilt(
               rawX: argResults!['pan-tilt-x'], rawY: argResults!['pan-tilt-y']),
           zoom: Zoom(rawX: argResults!['pan-tilt-zoom']));
 
-      await ptz.continuousMove(argResults!['profile-token'], velocity);
+      await ptz.continuousMove(argResults!['profile-token'], _velocity);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -257,7 +257,6 @@ class OnvifGetPresetsPtzCommand extends OnvifHelperCommand {
               'A reference to the MediaProfile where the operation should take place.')
       ..addOption('limit',
           valueHelp: 'int', help: 'Limit the number of presets returned');
-    ;
   }
 
   @override
@@ -337,13 +336,13 @@ class OnvifGotoPresetPtzCommand extends OnvifHelperCommand {
   void run() async {
     await initializeOnvif();
 
-    final profileToken = argResults!['profile-token'];
-
     try {
-      final presetMap = await ptz.getPresetsMap(profileToken);
+      final _profileToken = argResults!['profile-token'];
+
+      final _presetMap = await ptz.getPresetsMap(_profileToken);
 
       await ptz.gotoPreset(
-          profileToken, presetMap[argResults!['preset-token']]!);
+          _profileToken, _presetMap[argResults!['preset-token']]!);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -391,13 +390,13 @@ class OnvifRelativeMovePtzCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      var translation = PtzPosition(
+      var _translation = PtzPosition(
           panTilt: PanTilt(
               rawX: argResults!['translation-x'],
               rawY: argResults!['translation-y']),
           zoom: Zoom(rawX: argResults!['translation-zoom']));
 
-      await ptz.relativeMove(argResults!['profile-token'], translation);
+      await ptz.relativeMove(argResults!['profile-token'], _translation);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -433,17 +432,9 @@ class OnvifRemovePresetPtzCommand extends OnvifHelperCommand {
   void run() async {
     await initializeOnvif();
 
-    final _preset = Preset(
-        token: '1',
-        xmlName: {
-          'Name': {'\$': 'MIMBER'}
-        },
-        position: PtzPosition(
-            panTilt: PanTilt(rawX: '-0.198778', rawY: '-0.982444'),
-            zoom: Zoom(rawX: '0.053750')));
-
     try {
-      await ptz.removePreset(argResults!['profile-token'], _preset);
+      await ptz.removePreset(
+          argResults!['profile-token'], argResults!['preset-token']);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -479,26 +470,30 @@ class OnvifSetPresetPtzCommand extends OnvifHelperCommand {
       ..addOption('preset-token',
           valueHelp: 'preset-token',
           mandatory: true,
-          help: 'A requested preset token.');
+          help: 'A requested preset token.')
+      ..addOption('preset-name',
+          valueHelp: 'name',
+          mandatory: true,
+          help: 'The name of the new preset.');
   }
 
   @override
   void run() async {
     await initializeOnvif();
 
-    //TODO:  getStatus and turn into Preset
+    final _profileToken = argResults!['profile-token'];
+
+    final _ptzStatus = await ptz.getStatus(_profileToken);
 
     final _preset = Preset(
         token: '1',
         xmlName: {
           'Name': {'\$': 'MIMBER'}
         },
-        position: PtzPosition(
-            panTilt: PanTilt(rawX: '-0.198778', rawY: '-0.982444'),
-            zoom: Zoom(rawX: '0.053750')));
+        position: _ptzStatus.position);
 
     try {
-      await ptz.setPreset(argResults!['profile-token'], _preset);
+      await ptz.setPreset(_profileToken, _preset);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
