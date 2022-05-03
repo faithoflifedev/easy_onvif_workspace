@@ -16,6 +16,11 @@ Body _$BodyFromJson(Map<String, dynamic> json) => Body(
           ? null
           : GetCapabilitiesResponse.fromJson(
               json['GetCapabilitiesResponse'] as Map<String, dynamic>),
+      serviceCapabilitiesResponse: json['GetServiceCapabilitiesResponse'] ==
+              null
+          ? null
+          : GetServiceCapabilitiesResponse.fromJson(
+              json['GetServiceCapabilitiesResponse'] as Map<String, dynamic>),
       configurationResponse: json['GetConfigurationResponse'] == null
           ? null
           : GetConfigurationResponse.fromJson(
@@ -100,6 +105,8 @@ Map<String, dynamic> _$BodyToJson(Body instance) => <String, dynamic>{
       'GetVideoSourcesResponse': instance.videoSourcesResponse?.toJson(),
       'GetProfilesResponse': instance.profilesResponse?.toJson(),
       'GetServicesResponse': instance.servicesResponse?.toJson(),
+      'GetServiceCapabilitiesResponse':
+          instance.serviceCapabilitiesResponse?.toJson(),
       'GetPresetsResponse': instance.getPresetResponse?.toJson(),
       'SetPresetsResponse': instance.setPresetResponse?.toJson(),
       'GetSnapshotUriResponse': instance.snapshotUriResponse?.toJson(),

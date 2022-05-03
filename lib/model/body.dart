@@ -14,6 +14,7 @@ import 'network_protocols_response.dart';
 import 'ntp_response.dart';
 import 'get_preset_response.dart';
 import 'profiles_response.dart';
+import 'service_capabilities_response.dart';
 import 'services_response.dart';
 import 'set_preset_response.dart';
 import 'status_response.dart';
@@ -111,6 +112,9 @@ class Body {
   @JsonKey(name: 'GetServicesResponse')
   final GetServicesResponse? servicesResponse;
 
+  @JsonKey(name: 'GetServiceCapabilitiesResponse')
+  final GetServiceCapabilitiesResponse? serviceCapabilitiesResponse;
+
   @JsonKey(name: 'GetPresetsResponse')
   final GetPresetResponse? getPresetResponse;
 
@@ -151,6 +155,7 @@ class Body {
       {this.fault,
       this.dateTimeResponse,
       this.capabilitiesResponse,
+      this.serviceCapabilitiesResponse,
       this.configurationResponse,
       this.configurationsResponse,
       this.deviceInformationResponse,

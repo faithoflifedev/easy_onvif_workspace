@@ -17,7 +17,8 @@ class OnvifDeviceManagementCommand extends Command {
     addSubcommand(OnvifGetDeviceInformationResponseDeviceManagementCommand());
     addSubcommand(OnvifGetHostnameDeviceManagementCommand());
     addSubcommand(OnvifGetNetworkProtocolsDeviceManagementCommand());
-    // addSubcommand(OnvifGetNtpDeviceManagementCommand());
+    addSubcommand(OnvifGetNtpDeviceManagementCommand());
+    addSubcommand(OnvifGetServiceCapabilitiesDeviceManagementCommand());
     addSubcommand(OnvifGetServicesDeviceManagementCommand());
     addSubcommand(OnvifGetSystemDateAndTimeDeviceManagementCommand());
     addSubcommand(OnvifGetSystemUrisDeviceManagementCommand());
@@ -55,7 +56,7 @@ class OnvifGetDeviceInformationResponseDeviceManagementCommand
     extends OnvifHelperCommand {
   @override
   String get description =>
-      'This method has been replaced by the more generic GetServices method.This operation gets basic device information from the device.';
+      'This operation gets basic device information from the device.';
 
   @override
   String get name => 'get-device-information';
@@ -128,8 +129,7 @@ class OnvifGetNetworkProtocolsDeviceManagementCommand
 ///This operation gets the NTP settings from a device. If the device supports
 ///NTP, it shall be possible to get the NTP server settings through the GetNTP
 ///command.
-//TODO: broken and needs fixing
-class OnvifGetNtpManagementCommand extends OnvifHelperCommand {
+class OnvifGetNtpDeviceManagementCommand extends OnvifHelperCommand {
   @override
   String get description =>
       'This operation gets defined network protocols from a device. The device shall support This operation gets the NTP settings from a device. If the device supports NTP, it shall be possible to get the NTP server settings through the GetNTP command.';
@@ -145,6 +145,31 @@ class OnvifGetNtpManagementCommand extends OnvifHelperCommand {
       final ntpInformation = await deviceManagement.getNtp();
 
       print(ntpInformation);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+///Returns the capabilities of the device service. The result is returned in a typed answer.
+class OnvifGetServiceCapabilitiesDeviceManagementCommand
+    extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'Returns the capabilities of the device service. The result is returned in a typed answer.';
+
+  @override
+  String get name => 'get-service-capabilities';
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final deviceServiceCapabilities =
+          await deviceManagement.getServiceCapabilities();
+
+      print(json.encode(deviceServiceCapabilities));
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

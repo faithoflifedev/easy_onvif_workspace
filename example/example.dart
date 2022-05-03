@@ -4,13 +4,20 @@ import 'package:yaml/yaml.dart';
 
 void main(List<String> arguments) async {
   //get connection infomration from the config.yaml file
-  final config = loadYaml(File('example/cli/config.yaml').readAsStringSync());
+  final config = loadYaml(File('example/config.yaml').readAsStringSync());
 
   //configure device connection
   final onvif = await Onvif.connect(
       host: config['host'],
       username: config['username'],
       password: config['password']);
+
+  //get service capabilities
+  var deviceServiceCapabilities =
+      await onvif.deviceManagement.getServiceCapabilities();
+
+  print(
+      'max password length: ${deviceServiceCapabilities.security.maxPasswordLength}');
 
   //get service addresses
   var serviceList = await onvif.deviceManagement.getServices();
@@ -48,4 +55,8 @@ void main(List<String> arguments) async {
       uri.uri, config['username'], config['password']);
 
   print('stream uri: $rtsp');
+
+  var ntpInformation = await onvif.deviceManagement.getNtp();
+
+  print(ntpInformation);
 }

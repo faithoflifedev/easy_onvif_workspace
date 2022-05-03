@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'audio_output_configuration.g.dart';
@@ -39,4 +41,7 @@ class AudioOutputConfiguration {
       _$AudioOutputConfigurationFromJson(json);
 
   Map<String, dynamic> toJson() => _$AudioOutputConfigurationToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }

@@ -5,9 +5,21 @@ This is a wrapper to ONVIF protocol which allows you to get information about yo
 [![pub package](https://img.shields.io/pub/v/easy_onvif.svg)](https://pub.dartlang.org/packages/easy_onvif)
 [![Build Status](https://github.com/faithoflifedev/easy_onvif/workflows/Dart/badge.svg)](https://github.com/faithoflifedev/easy_onvif/actions)
 
+## New for version 1.0.0
+
+As of the 1.0.0 release of this package, there is a cli utility included that can be used to return data for any API call currently supported by the package. If you want to get started quicky with the cli utility run these commands in a termainal session:
+
+```sh
+pub global activate easy_onvif --executable onvif --overwrite
+
+onvif --help
+```
+
+Please see the cli documentation [README.md](/bin/README.md) for more detailed usage information.
+
 ## Getting Started
 
-In your project add the dependency:
+To use this package in your code, first add the dependency to your project:
 
 ```yml
 dependencies:
@@ -15,7 +27,7 @@ dependencies:
   easy_onvif: ^{{ version }}
 ```
 
-For help getting started with dart, check out these [guides](https://dart.dev/guides).
+If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
 
 ## Usage Example
 
@@ -29,9 +41,9 @@ import 'package:easy_onvif/onvif.dart';
 
 ```dart
 final onvif = await Onvif.connect(
- host: config['host'],
- username: config['username'],
- password: config['password']);
+ host: [hostname or ipaddress],
+ username: [username],
+ password: [password]);
 ```
 
 ## Interacting with the device through Onvif operations
@@ -80,17 +92,18 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 
 ### [Device Management](https://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl)
 
-| Onvif Operation      | Dart Method          | Dart Return Type                       |
-| -------------------- | -------------------- | -------------------------------------- |
-| GetCapabilities      | getCapabilities      | `Future<Capabilities>`                 |
-| GetDeviceInformation | getDeviceInformation | `Future<GetDeviceInformationResponse>` |
-| GetHostname          | getHostname          | `Future<HostnameInformation>`          |
-| GetNetworkProtocols  | getNetworkProtocols  | `Future<List<NetworkProtocol>>`        |
-| GetNTP               | getNtp               | `Future<NtpInformation>`               |
-| GetServices          | getServices          | `Future<List<Service>>`                |
-| GetSystemDateAndTime | getSystemDateAndTime | `Future<SystemDateAndTime>`            |
-| GetSystemUris        | getSystemUris        | `Future<GetSystemUrisResponse>`        |
-| GetUsers             | getUsers             | `Future<List<User>>`                   |
+| Onvif Operation        | Dart Method            | Dart Return Type                       |
+| ---------------------- | ---------------------- | -------------------------------------- |
+| GetCapabilities        | getCapabilities        | `Future<Capabilities>`                 |
+| GetDeviceInformation   | getDeviceInformation   | `Future<GetDeviceInformationResponse>` |
+| GetHostname            | getHostname            | `Future<HostnameInformation>`          |
+| GetNetworkProtocols    | getNetworkProtocols    | `Future<List<NetworkProtocol>>`        |
+| GetNTP                 | getNtp                 | `Future<NtpInformation>`               |
+| GetServiceCapabilities | getServiceCapabilities | `Future<DeviceServiceCapabilities>`    |
+| GetServices            | getServices            | `Future<List<Service>>`                |
+| GetSystemDateAndTime   | getSystemDateAndTime   | `Future<SystemDateAndTime>`            |
+| GetSystemUris          | getSystemUris          | `Future<GetSystemUrisResponse>`        |
+| GetUsers               | getUsers               | `Future<List<User>>`                   |
 
 ### [Media](https://www.onvif.org/ver10/media/wsdl/media.wsdl)
 
@@ -122,16 +135,19 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 
 ### PTZ Helper Methods
 
-| Onvif Operation | Dart Method | Return Type    |
-| --------------- | ----------- | -------------- |
-| N/A             | move        | `Future<void>` |
-| N/A             | moveDown    | `Future<void>` |
-| N/A             | moveLeft    | `Future<void>` |
-| N/A             | moveRight   | `Future<void>` |
-| N/A             | moveUp      | `Future<void>` |
-| N/A             | zoomIn      | `Future<void>` |
-| N/A             | zoomOut     | `Future<void>` |
+| Onvif Operation | Dart Method      | Return Type       |
+| --------------- | ---------------- | ----------------- |
+| N/A             | move             | `Future<void>`    |
+| N/A             | moveDown         | `Future<void>`    |
+| N/A             | moveLeft         | `Future<void>`    |
+| N/A             | moveRight        | `Future<void>`    |
+| N/A             | moveUp           | `Future<void>`    |
+| N/A             | zoomIn           | `Future<void>`    |
+| N/A             | zoomOut          | `Future<void>`    |
+| N/A             | getCurrentPreset | `Future<Preset?>` |
 
 ## What's next
 
-Device discovery is planned for the 1.x release of the library.
+Device discovery is planned for the 1.1.x release of the library.
+
+[![A test image](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/faithoflif2)

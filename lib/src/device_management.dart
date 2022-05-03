@@ -1,5 +1,11 @@
-// import 'package:easy_onvif/model/envelope.dart';
+import 'package:easy_enum/easy_enum.dart';
 import 'package:easy_onvif/onvif.dart';
+
+part 'device_management.g.dart';
+
+@EasyEnum()
+// ignore: constant_identifier_names
+enum CapabilityCategory { All, Analytics, Device, Events, Imaging, Media, PTZ }
 
 class DeviceManagement {
   final Onvif onvif;
@@ -43,9 +49,14 @@ class DeviceManagement {
   ///This method has been replaced by the more generic [getServices] method. For
   ///capabilities of individual services refer to the [getServiceCapabilities]
   ///methods.
-  Future<Capabilities> getCapabilities({String category = 'All'}) async {
+  Future<Capabilities> getCapabilities(
+      {CapabilityCategory? capabilityCategory}) async {
+    capabilityCategory ??= CapabilityCategory.All;
+
     final envelope = await Soap.retrieveEnvlope(
-        uri, SoapRequest.envelope(null, SoapRequest.capabilities(category)));
+        uri,
+        SoapRequest.envelope(
+            null, SoapRequest.capabilities(capabilityCategory.value)));
 
     if (envelope.body.capabilitiesResponse == null) throw Exception();
 
@@ -132,9 +143,18 @@ class DeviceManagement {
 
   ///Returns the capabilities of the device service. The result is returned in a
   ///typed answer.
-  Future<void> getServiceCapabilities() async {
-    // TODO: implement getServiceCapabilities
-    throw UnimplementedError();
+  Future<DeviceServiceCapabilities> getServiceCapabilities() async {
+    final envelope = await Soap.retrieveEnvlope(
+        uri, onvif.secureRequest(SoapRequest.serviceCapabilities()),
+        postProcess: (String xmlBody, dynamic jsonMap, Envelope envelope) {
+      print(xmlBody);
+      print('\n\n');
+      print(jsonMap);
+    });
+
+    if (envelope.body.serviceCapabilitiesResponse == null) throw Exception();
+
+    return envelope.body.serviceCapabilitiesResponse!.capabilities;
   }
 
   ///This operation gets the device system date and time. The device shall

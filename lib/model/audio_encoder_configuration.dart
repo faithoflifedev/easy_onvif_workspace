@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 import 'multicast.dart';
@@ -62,4 +64,7 @@ class AudioEncoderConfiguration {
       _$AudioEncoderConfigurationFromJson(json);
 
   Map<String, dynamic> toJson() => _$AudioEncoderConfigurationToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }

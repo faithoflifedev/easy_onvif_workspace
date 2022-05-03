@@ -1,35 +1,29 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pan_tilt.g.dart';
 
 @JsonSerializable()
 class PanTilt {
-  @JsonKey(name: '@x')
-  final String rawX;
+  @JsonKey(name: '@x', fromJson: stringToDouble)
+  final double x;
 
-  @JsonKey(name: '@y')
-  final String rawY;
+  @JsonKey(name: '@y', fromJson: stringToDouble)
+  final double y;
 
   @JsonKey(name: '@space')
   final String? space;
 
-  double get x => double.parse(rawX);
+  PanTilt({required this.x, required this.y, this.space});
 
-  double get y => double.parse(rawY);
-
-  PanTilt({required this.rawX, required this.rawY, this.space});
-
-  ///assumes can tilt between values 0 and 1 (can be confirmed through the
-  ///config)
-  factory PanTilt.fromDouble({double x = 0.1, double y = 0.1}) =>
-      PanTilt(rawX: x.toString(), rawY: y.toString());
+  factory PanTilt.fromString({required String x, required String y}) =>
+      PanTilt(x: double.parse(x), y: double.parse(y));
 
   ///helper to allow an int for 1 - 10000 in place of the double
-  factory PanTilt.fromInt({int x = 1000, int y = 1000}) => PanTilt(
-      rawX: (x == 0 ? 0 : (x / 10000)).toString(),
-      rawY: (y == 0 ? 0 : (y / 10000)).toString());
+  factory PanTilt.fromInt({required int x, required int y}) =>
+      PanTilt(x: x == 0 ? 0 : (x / 10000.0), y: y == 0 ? 0 : (y / 10000.0));
 
   factory PanTilt.fromJson(Map<String, dynamic> json) =>
       _$PanTiltFromJson(json);

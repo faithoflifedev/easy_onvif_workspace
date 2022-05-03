@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:easy_onvif/model/envelope.dart';
 import 'package:xml/xml.dart';
 
 import '../onvif.dart';
@@ -245,6 +244,15 @@ class SoapRequest {
       builder.element('IncludeCapability', nest: () {
         builder.text('$includeCapability');
       });
+    });
+
+    return builder.buildFragment();
+  }
+
+  ///XML for the [services]
+  static XmlDocumentFragment serviceCapabilities({bool? includeCapability}) {
+    builder.element('GetServiceCapabilities', nest: () {
+      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
     });
 
     return builder.buildFragment();

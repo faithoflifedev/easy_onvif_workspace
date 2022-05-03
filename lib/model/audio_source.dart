@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'audio_source.g.dart';
@@ -21,4 +23,7 @@ class AudioSource {
       _$AudioSourceFromJson(json);
 
   Map<String, dynamic> toJson() => _$AudioSourceToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }

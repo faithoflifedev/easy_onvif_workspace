@@ -7,13 +7,13 @@ part of 'pan_tilt.dart';
 // **************************************************************************
 
 PanTilt _$PanTiltFromJson(Map<String, dynamic> json) => PanTilt(
-      rawX: json['@x'] as String,
-      rawY: json['@y'] as String,
+      x: stringToDouble(json['@x'] as String),
+      y: stringToDouble(json['@y'] as String),
       space: json['@space'] as String?,
     );
 
 Map<String, dynamic> _$PanTiltToJson(PanTilt instance) => <String, dynamic>{
-      '@x': instance.rawX,
-      '@y': instance.rawY,
+      '@x': instance.x,
+      '@y': instance.y,
       '@space': instance.space,
     };

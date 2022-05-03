@@ -8,14 +8,14 @@ part of 'ntp_information.dart';
 
 NtpInformation _$NtpInformationFromJson(Map<String, dynamic> json) =>
     NtpInformation(
-      xmlFromDhcp: json['FromDHCP'] as String,
-      ntpManual: NtpInformation._ntpConverter(json['NTPManual']),
-      ntpFromDhcp: NtpInformation._ntpConverter(json['NTPFromDHCP']),
+      fromDhcp: mappedStringToBool(json['FromDHCP'] as Map<String, dynamic>),
+      ntpManual: NtpInformation._nullableNtpConverter(json['NTPManual']),
+      ntpFromDhcp: NtpInformation._nullableNtpConverter(json['NTPFromDHCP']),
     );
 
 Map<String, dynamic> _$NtpInformationToJson(NtpInformation instance) =>
     <String, dynamic>{
-      'FromDHCP': instance.xmlFromDhcp,
+      'FromDHCP': instance.fromDhcp,
       'NTPManual': instance.ntpManual?.map((e) => e.toJson()).toList(),
       'NTPFromDHCP': instance.ntpFromDhcp?.map((e) => e.toJson()).toList(),
     };

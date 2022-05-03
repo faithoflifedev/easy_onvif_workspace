@@ -1,22 +1,21 @@
+import 'package:easy_onvif/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'zoom.g.dart';
 
 @JsonSerializable()
 class Zoom {
-  @JsonKey(name: '@x')
-  final String rawX;
+  @JsonKey(name: '@x', fromJson: stringToDouble)
+  final double x;
 
   @JsonKey(name: '@space')
   final String? space;
-  double get x => double.parse(rawX);
 
-  Zoom({required this.rawX, this.space});
+  Zoom({required this.x, this.space});
 
-  factory Zoom.fromDouble(double amnt) => Zoom(rawX: amnt.toString());
+  factory Zoom.fromString({required String x}) => Zoom(x: double.parse(x));
 
-  factory Zoom.fromInt(int amnt) =>
-      Zoom(rawX: (amnt == 0 ? 0 : (amnt / 10000)).toString());
+  factory Zoom.fromInt({required int x}) => Zoom(x: x == 0 ? 0 : (x / 10000.0));
 
   factory Zoom.fromJson(Map<String, dynamic> json) => _$ZoomFromJson(json);
 

@@ -1,25 +1,28 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'ntp.dart';
 
 part 'ntp_information.g.dart';
 
+///NTP information.
 @JsonSerializable(explicitToJson: true)
 class NtpInformation {
-  @JsonKey(name: 'FromDHCP')
-  final String xmlFromDhcp;
+  ///Indicates if NTP information is to be retrieved by using DHCP.
+  @JsonKey(name: 'FromDHCP', fromJson: mappedStringToBool)
+  final bool fromDhcp;
 
-  @JsonKey(name: 'NTPManual', fromJson: _ntpConverter)
+  ///List of manually entered NTP addresses.
+  @JsonKey(name: 'NTPManual', fromJson: _nullableNtpConverter)
   final List<Ntp>? ntpManual;
 
-  @JsonKey(name: 'NTPFromDHCP', fromJson: _ntpConverter)
+  ///List of NTP addresses retrieved by using DHCP.
+  @JsonKey(name: 'NTPFromDHCP', fromJson: _nullableNtpConverter)
   final List<Ntp>? ntpFromDhcp;
 
-  bool get fromDHCP => xmlFromDhcp.toLowerCase() == 'true';
-
-  NtpInformation({required this.xmlFromDhcp, this.ntpManual, this.ntpFromDhcp});
+  NtpInformation({required this.fromDhcp, this.ntpManual, this.ntpFromDhcp});
 
   factory NtpInformation.fromJson(Map<String, dynamic> json) =>
       _$NtpInformationFromJson(json);
@@ -35,5 +38,11 @@ class NtpInformation {
     }
 
     return [Ntp.fromJson(json as Map<String, dynamic>)];
+  }
+
+  static List<Ntp>? _nullableNtpConverter(dynamic json) {
+    if (json == null) return null;
+
+    return _ntpConverter(json);
   }
 }

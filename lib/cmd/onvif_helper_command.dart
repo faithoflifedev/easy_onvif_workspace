@@ -19,7 +19,7 @@ abstract class OnvifHelperCommand extends Command {
     final authFile = File(globalResults?['config-file']);
 
     if (!authFile.existsSync()) {
-      throw Exception('Authentication file not found');
+      throw UsageException('Authentication file not found', usage);
     }
 
     final auth = json.decode(authFile.readAsStringSync());

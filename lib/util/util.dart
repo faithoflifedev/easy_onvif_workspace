@@ -78,3 +78,43 @@ class OnvifUtil {
   static String? get userHome =>
       Platform.environment['HOME'] ?? Platform.environment['USERPROFILE'];
 }
+
+bool stringToBool(String value) {
+  return value.toLowerCase() == 'true';
+}
+
+int stringToInt(String value) {
+  return int.parse(value);
+}
+
+double stringToDouble(String value) {
+  return double.parse(value);
+}
+
+int? nullableStringToInt(String? value) {
+  return value != null ? stringToInt(value) : null;
+}
+
+bool? nullableStringToBool(String? value) {
+  return value != null ? stringToBool(value) : null;
+}
+
+bool mappedStringToBool(Map<String, dynamic> value) {
+  return value.containsKey('\$') ? stringToBool(value['\$']) : false;
+}
+
+String mappedToString(Map<String, dynamic> value) {
+  return value.containsKey('\$') ? value['\$']! : '';
+}
+
+String? nullableMappedToString(Map<String, dynamic>? value) {
+  return value != null ? mappedToString(value) : null;
+}
+
+double mappedToDouble(Map<String, dynamic> value) {
+  if (value.containsKey('\$')) {
+    return double.parse(value['\$']!);
+  } else {
+    throw Exception('Problem parsing double');
+  }
+}

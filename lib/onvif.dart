@@ -10,6 +10,8 @@ export 'model/audio_source.dart';
 export 'model/capabilities.dart';
 export 'model/configurations_response.dart';
 export 'model/device_information_response.dart';
+export 'model/device_service_capabilities.dart';
+export 'model/envelope.dart';
 export 'model/hostname_information.dart';
 export 'model/media_uri.dart';
 export 'model/network_protocol.dart';

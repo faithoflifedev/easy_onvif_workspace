@@ -68,8 +68,6 @@ class Onvif {
     serviceMap.addAll(
         {for (var service in _serviceList) service.nameSpace: service.xAddr});
 
-    // final capabilities = await deviceManagement.getCapabilities();
-
     if (serviceMap.containsKey('http://www.onvif.org/ver10/media/wsdl')) {
       _media = Media(
           onvif: this,
