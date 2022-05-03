@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 1.0.0-dev.1
-change: getServiceCapabilities, getServices and fromJson parsing to simplify models
+version: 1.0.0-dev.2
+change: include the bin folder since it's important

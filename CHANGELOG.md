@@ -1,3 +1,6 @@
+## 1.0.0-dev.2
+
+- include the bin folder since it&#x27;s important
 ## 1.0.0-dev.1
 
 - getServiceCapabilities, getServices and fromJson parsing to simplify models
