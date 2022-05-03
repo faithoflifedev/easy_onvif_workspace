@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 0.1.0
-change: updated dependencies, one step connect
+version: 1.0.0-dev.1
+change: getServiceCapabilities, getServices and fromJson parsing to simplify models

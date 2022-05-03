@@ -1,3 +1,6 @@
+## 1.0.0-dev.1
+
+- getServiceCapabilities, getServices and fromJson parsing to simplify models
 ## 0.0.15
 
 - Improvements to PTZ move helpers, so now the motion makes a little more sense.

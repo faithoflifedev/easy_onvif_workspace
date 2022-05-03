@@ -10,7 +10,7 @@ This is a wrapper to ONVIF protocol which allows you to get information about yo
 As of the 1.0.0 release of this package, there is a cli utility included that can be used to return data for any API call currently supported by the package. If you want to get started quicky with the cli utility run these commands in a termainal session:
 
 ```sh
-pub global activate easy_onvif --executable onvif --overwrite
+pub global activate easy_onvif
 
 onvif --help
 ```
