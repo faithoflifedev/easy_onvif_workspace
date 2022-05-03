@@ -64,7 +64,7 @@ class SecurityCapabilities {
   @JsonKey(name: '@RELToken', fromJson: stringToBool)
   final bool relToken;
 
-  ///EAP Methods supported by the device. The int values refer to the (IANA EAP Registry)[http://www.iana.org/assignments/eap-numbers/eap-numbers.xhtml].
+  ///EAP Methods supported by the device. The int values refer to the [IANA EAP Registry](http://www.iana.org/assignments/eap-numbers/eap-numbers.xhtml).
   @JsonKey(name: '@SupportedEAPMethods', fromJson: stringToInt)
   final int supportedEAPMethods;
 

@@ -82,8 +82,8 @@ class Media {
   /// "RTP_unicast", TransportProtocol = "RTSP"
   ///
   ///If a multicast stream is requested at least one of
-  ///[videoEncoderConfiguration], [audioEncoderConfiguration] and
-  ///[metadataConfiguration] shall have a valid multicast setting.
+  ///videoEncoderConfiguration, audioEncoderConfiguration and
+  ///metadataConfiguration shall have a valid multicast setting.
   ///
   ///For full compatibility with other ONVIF services a device should not
   ///generate Uris longer than 128 octets.

@@ -1,5 +1,5 @@
 ///ONVIF Client Implementation in Dart
-library new_onvif;
+library easy_onvif;
 
 export 'cmd/onvif_authorize_command.dart';
 export 'cmd/onvif_device_management_command.dart';
