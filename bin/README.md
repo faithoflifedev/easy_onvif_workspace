@@ -36,8 +36,16 @@ Available commands:
 
 Just like the main library, any responses provided by the above commands will be given in the JSON format.  So ideally, you will want to use a command line json parser to interpret the results.  The recommended json parser for this purpose is [_jq_](https://stedolan.github.io/jq/).  With _jq_ you can process the results of a command as follows:
 
+## Quick start
+
 ```sh
-onvif ptz get-presets --limit 3 --profile-token Profile_1 | jq -r '.[] | ."@token" + "\t" + .Name."$"'
+#step 1
+onvif authorize
+#follow prompts
+
+#step 2
+onvif ptz get-presets --limit 3 --profile-token Profile_1 | jq -r '.[] | ."@token" + "\t" + .Name'
+#output would be
 1       Preset 1
 2       Preset 2
 3       Preset 3
@@ -54,7 +62,7 @@ Usage: yt authorize [arguments]
 -h, --help    Print this usage information.
 ```
 
-The authroize command is iused to create the default "--config-file" that can be used as the default for all future commands.  In general this command will only needs be run if you want to connect to another onvif device, or if the settigns (host, username, password) have changed for the current device.  The file contents are as follows:
+The authroize command is used to create the default "--config-file" that can be used as the default for all future commands.  In general this command will only need to be run if you want to connect to another onvif device or if the settigns (host, username, password) have changed for the current device.  The file contents are as follows:
 
 ```json
 {"host":"[host name or ip addess of device]","username":"[device username]","password":"[device password]"}
