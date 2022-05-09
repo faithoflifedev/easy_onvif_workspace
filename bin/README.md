@@ -5,7 +5,7 @@ A command line interface for controlling an Onvif device with cli commands
 To install:
 
 ```sh
-pub global activate easy_onvif -x onvif
+pub global activate easy_onvif
 ```
 
 Usage:
