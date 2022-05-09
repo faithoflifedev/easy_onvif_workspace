@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 1.0.1
-change: include the bin folder since it's important
+version: 1.0.2
+change: resolves the -not supported- error for getProfiles
