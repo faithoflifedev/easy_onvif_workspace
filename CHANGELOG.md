@@ -1,12 +1,6 @@
 ## 1.0.2
 
 - resolves the -not supported- error for getProfiles
-## 1.0.2
-
-- resolves the &quot;not supported&quot; error for getProfiles
-## 1.0.2
-
-- resolves the &quot;not supportesd&quot; error for getProfiles
 ## 1.0.1
 
 - include the bin folder since it&#x27;s important
