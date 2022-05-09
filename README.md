@@ -15,7 +15,7 @@ pub global activate easy_onvif
 onvif --help
 ```
 
-Please see the cli documentation [README.md](https://github.com/faithoflifedev/easy_onvif/tree/1.0.0.dev.1/bin) for more detailed usage information.
+Please see the cli documentation [README.md](https://github.com/faithoflifedev/easy_onvif/tree/1.0.1/bin) for more detailed usage information.
 
 ## Getting Started
 
