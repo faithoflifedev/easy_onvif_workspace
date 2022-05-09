@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:easy_onvif/model/envelope.dart';
 import 'package:xml/xml.dart';
 
 import '../onvif.dart';
@@ -10,7 +9,7 @@ class Soap {
 
   ///Send the SOAP [requestData] to the given [url] endpoint.
   static Future<String> send(String url, String requestData) async {
-    Response? response = null;
+    Response? response;
 
     try {
       response = await dio.post(url,
@@ -144,7 +143,7 @@ class SoapRequest {
   ///XML for the [videoSources]
   static XmlDocumentFragment videoSources() {
     builder.element('GetVideoSources', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace('http://www.onvif.org/ver10/media/wsdl');
     });
 
     return builder.buildFragment();
@@ -153,7 +152,7 @@ class SoapRequest {
   ///XML for the [profiles]
   static XmlDocumentFragment profiles() {
     builder.element('GetProfiles', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace('http://www.onvif.org/ver10/media/wsdl');
     });
 
     return builder.buildFragment();
@@ -203,9 +202,9 @@ class SoapRequest {
 
   ///XML for the [streamUri], requires a [profileToken]
   static XmlDocumentFragment streamUri(String profileToken,
-      {String streamType: 'RTP-Unicast', String transportProtocol: 'RTSP'}) {
+      {String streamType = 'RTP-Unicast', String transportProtocol = 'RTSP'}) {
     builder.element('GetStreamUri', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace('http://www.onvif.org/ver10/media/wsdl');
       builder.element('StreamSetup', nest: () {
         builder.element('Stream', nest: () {
           builder.namespace('http://www.onvif.org/ver10/schema');
@@ -229,7 +228,7 @@ class SoapRequest {
   ///XML for the [snapshotUri], requires a [profileToken]
   static XmlDocumentFragment snapshotUri(String profileToken) {
     builder.element('GetSnapshotUri', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace('http://www.onvif.org/ver10/media/wsdl');
       builder.element('ProfileToken', nest: () {
         builder.text(profileToken);
       });
@@ -239,12 +238,21 @@ class SoapRequest {
   }
 
   ///XML for the [services]
-  static XmlDocumentFragment services() {
+  static XmlDocumentFragment services({bool? includeCapability}) {
     builder.element('GetServices', nest: () {
       builder.namespace('http://www.onvif.org/ver10/device/wsdl');
       builder.element('IncludeCapability', nest: () {
-        builder.text('false');
+        builder.text('$includeCapability');
       });
+    });
+
+    return builder.buildFragment();
+  }
+
+  ///XML for the [services]
+  static XmlDocumentFragment serviceCapabilities({bool? includeCapability}) {
+    builder.element('GetServiceCapabilities', nest: () {
+      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
     });
 
     return builder.buildFragment();
@@ -293,21 +301,24 @@ class SoapRequest {
   static XmlDocumentFragment createUsers(List<User> users) {
     builder.element('CreateUsers', nest: () {
       builder.namespace('http://www.onvif.org/ver10/device/wsdl');
-      users.forEach((user) => builder.element('User', nest: () {
-            builder.namespace('http://www.onvif.org/ver10/device/wsdl');
-            builder.element('Username', nest: () {
-              builder.namespace('http://www.onvif.org/ver10/schema');
-              builder.text(user.username);
-            });
-            builder.element('Password', nest: () {
-              builder.namespace('http://www.onvif.org/ver10/schema');
-              builder.text(user.password);
-            });
-            builder.element('UserLevel', nest: () {
-              builder.namespace('http://www.onvif.org/ver10/schema');
-              builder.text(user.userLevel);
-            });
-          }));
+
+      for (var user in users) {
+        builder.element('User', nest: () {
+          builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+          builder.element('Username', nest: () {
+            builder.namespace('http://www.onvif.org/ver10/schema');
+            builder.text(user.username);
+          });
+          builder.element('Password', nest: () {
+            builder.namespace('http://www.onvif.org/ver10/schema');
+            builder.text(user.password);
+          });
+          builder.element('UserLevel', nest: () {
+            builder.namespace('http://www.onvif.org/ver10/schema');
+            builder.text(user.userLevel);
+          });
+        });
+      }
     });
 
     return builder.buildFragment();
@@ -573,7 +584,7 @@ class SoapRequest {
           namespace: 'http://www.w3.org/2003/05/soap-envelope', nest: () {
         builder.element('MessageID',
             namespace: 'http://schemas.xmlsoap.org/ws/2004/08/addressing',
-            nest: 'uuid:${messageId}');
+            nest: 'uuid:$messageId');
         builder.element('To',
             namespace: 'http://schemas.xmlsoap.org/ws/2004/08/addressing',
             nest: () {

@@ -8,13 +8,13 @@ part of 'preset.dart';
 
 Preset _$PresetFromJson(Map<String, dynamic> json) => Preset(
       token: json['@token'] as String,
-      xmlName: json['Name'],
+      name: mappedToString(json['Name'] as Map<String, dynamic>),
       position:
           PtzPosition.fromJson(json['PTZPosition'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$PresetToJson(Preset instance) => <String, dynamic>{
       '@token': instance.token,
-      'Name': instance.xmlName,
+      'Name': instance.name,
       'PTZPosition': instance.position.toJson(),
     };

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 import 'system.dart';
@@ -17,9 +19,12 @@ class Device {
   ///Device service URI.
   String get xAddr => xmlXAddr['\$'];
 
-  Device(this.xmlXAddr, this.system);
+  Device({required this.xmlXAddr, required this.system});
 
   factory Device.fromJson(Map<String, dynamic> json) => _$DeviceFromJson(json);
 
   Map<String, dynamic> toJson() => _$DeviceToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }

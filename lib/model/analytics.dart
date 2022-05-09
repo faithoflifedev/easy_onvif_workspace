@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'analytics.g.dart';
@@ -30,4 +32,7 @@ class Analytics {
       _$AnalyticsFromJson(json);
 
   Map<String, dynamic> toJson() => _$AnalyticsToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }

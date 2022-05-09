@@ -7,8 +7,8 @@ part of 'device.dart';
 // **************************************************************************
 
 Device _$DeviceFromJson(Map<String, dynamic> json) => Device(
-      json['XAddr'],
-      System.fromJson(json['System'] as Map<String, dynamic>),
+      xmlXAddr: json['XAddr'],
+      system: System.fromJson(json['System'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$DeviceToJson(Device instance) => <String, dynamic>{

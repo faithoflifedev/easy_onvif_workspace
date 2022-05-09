@@ -1,3 +1,15 @@
+## 1.0.2
+
+- resolves the -not supported- error for getProfiles
+## 1.0.1
+
+- include the bin folder since it&#x27;s important
+## 1.0.0-dev.2
+
+- include the bin folder since it&#x27;s important
+## 1.0.0-dev.1
+
+- getServiceCapabilities, getServices and fromJson parsing to simplify models
 ## 0.0.15
 
 - Improvements to PTZ move helpers, so now the motion makes a little more sense.

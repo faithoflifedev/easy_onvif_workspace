@@ -1,8 +1,7 @@
-import 'package:easy_onvif/model/envelope.dart';
-import 'package:easy_onvif/model/panTiltLimits.dart';
-import 'package:easy_onvif/model/ptzConfiguration.dart';
-import 'package:easy_onvif/model/ptzSpeed.dart';
-import 'package:easy_onvif/model/zoomLimits.dart';
+import 'package:easy_onvif/model/pan_tilt_limits.dart';
+import 'package:easy_onvif/model/ptz_configuration.dart';
+import 'package:easy_onvif/model/ptz_speed.dart';
+import 'package:easy_onvif/model/zoom_limits.dart';
 import 'package:easy_onvif/onvif.dart';
 
 class Ptz {
@@ -76,15 +75,15 @@ class Ptz {
 
     _clearDefaults();
 
-    ptzConfigs.forEach((element) {
-      defaultSpeed ??= element.defaultPTZSpeed;
+    for (var ptzConfiguration in ptzConfigs) {
+      defaultSpeed ??= ptzConfiguration.defaultPTZSpeed;
 
-      defaultPanTiltLimits ??= element.panTiltLimits;
+      defaultPanTiltLimits ??= ptzConfiguration.panTiltLimits;
 
-      defaultZoomLimits ??= element.zoomLimits;
+      defaultZoomLimits ??= ptzConfiguration.zoomLimits;
 
-      configurationCache[element.token] = element;
-    });
+      configurationCache[ptzConfiguration.token] = ptzConfiguration;
+    }
 
     return ptzConfigs;
   }
@@ -110,16 +109,19 @@ class Ptz {
   ///relative or continuous movements is specified, which would leave the
   ///specified limits, the PTZ unit has to move along the specified limits. The
   ///Zoom Limits have to be interpreted accordingly.
-  Future<PtzConfiguration> getConfiguration(String profileToken) async {
-    final envelope = await Soap.retrieveEnvlope(uri,
-        onvif.secureRequest(SoapRequest.getPtzConfiguration(profileToken)));
+  Future<PtzConfiguration> getConfiguration(
+      String ptzConfigurationToken) async {
+    final envelope = await Soap.retrieveEnvlope(
+        uri,
+        onvif.secureRequest(
+            SoapRequest.getPtzConfiguration(ptzConfigurationToken)));
 
     if (envelope.body.configurationResponse == null) throw Exception();
 
     final ptzConfiguration =
         envelope.body.configurationResponse!.ptzConfiguration;
 
-    configurationCache[profileToken] = ptzConfiguration;
+    configurationCache[ptzConfigurationToken] = ptzConfiguration;
 
     return ptzConfiguration;
   }
@@ -134,6 +136,12 @@ class Ptz {
     if (envelope.body.getPresetResponse == null) throw Exception();
 
     return envelope.body.getPresetResponse!.presets;
+  }
+
+  Future<Map<String, Preset>> getPresetsMap(String profileToken) async {
+    return {
+      for (var preset in await getPresets(profileToken)) preset.token: preset
+    };
   }
 
   ///Operation to go to a saved preset position for the [Preset] in the selected
@@ -155,8 +163,8 @@ class Ptz {
   }
 
   Future<void> move(String profileToken, PanTilt direction) async {
-    await relativeMove(profileToken,
-        PtzPosition(panTilt: direction, zoom: Zoom.fromDouble(0)));
+    await relativeMove(
+        profileToken, PtzPosition(panTilt: direction, zoom: Zoom(x: 0)));
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
@@ -246,20 +254,20 @@ class Ptz {
   // }
 
   Future<void> zoom(String profileToken, Zoom zoom) async {
-    await relativeMove(profileToken,
-        PtzPosition(panTilt: PanTilt.fromDouble(y: 0, x: 0), zoom: zoom));
+    await relativeMove(
+        profileToken, PtzPosition(panTilt: PanTilt(y: 0, x: 0), zoom: zoom));
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///positive z axis (closer)
   Future<void> zoomIn(String profileToken, [int step = 25]) async {
-    await zoom(profileToken, Zoom.fromInt(step));
+    await zoom(profileToken, Zoom.fromInt(x: step));
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///negative y axis (farther)
   Future<void> zoomOut(String profileToken, [int step = 25]) async {
-    await zoom(profileToken, Zoom.fromInt(0 - step));
+    await zoom(profileToken, Zoom.fromInt(x: 0 - step));
   }
 
   void _clearDefaults() {
@@ -268,5 +276,41 @@ class Ptz {
     defaultPanTiltLimits = null;
 
     defaultZoomLimits = null;
+  }
+
+  Future<Preset?> getCurrentPreset(String profileToken) async {
+    Preset? matchedPreset;
+
+    final _ptzStatus = await getStatus(profileToken);
+
+    final _presets = await getPresets(profileToken);
+
+    for (var preset in _presets) {
+      if (_matchPositionSettings(preset, _ptzStatus)) {
+        matchedPreset = preset;
+
+        break;
+      }
+    }
+
+    return matchedPreset;
+  }
+
+  bool _matchValue(double right, double left) {
+    return (right - left).abs() < 0.005 ||
+        (right - (left > 0 ? left - 1 : left)).abs() < 0.0005;
+  }
+
+  bool _matchPositionSettings(Preset preset, PtzStatus ptzStatus) {
+    bool _matchX =
+        _matchValue(preset.position.panTilt!.x, ptzStatus.position.panTilt!.x);
+
+    bool _matchY =
+        _matchValue(preset.position.panTilt!.y, ptzStatus.position.panTilt!.y);
+
+    bool _matchZ =
+        _matchValue(preset.position.zoom!.x, ptzStatus.position.zoom!.x);
+
+    return _matchX && _matchY && _matchZ;
   }
 }

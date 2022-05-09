@@ -7,10 +7,12 @@ part of 'ntp.dart';
 // **************************************************************************
 
 Ntp _$NtpFromJson(Map<String, dynamic> json) => Ntp(
-      type: json['Type'] as String,
-      iPv4Address: json['IPv4Address'] as String?,
-      iPv6Address: json['IPv6Address'] as String?,
-      dnsName: json['DNSname'] as String?,
+      type: mappedToString(json['Type'] as Map<String, dynamic>),
+      iPv4Address:
+          nullableMappedToString(json['IPv4Address'] as Map<String, dynamic>?),
+      iPv6Address:
+          nullableMappedToString(json['IPv6Address'] as Map<String, dynamic>?),
+      dnsName: nullableMappedToString(json['DNSname'] as Map<String, dynamic>?),
     );
 
 Map<String, dynamic> _$NtpToJson(Ntp instance) => <String, dynamic>{

@@ -7,11 +7,11 @@ part of 'version.dart';
 // **************************************************************************
 
 Version _$VersionFromJson(Map<String, dynamic> json) => Version(
-      json['Major'] as String,
-      json['Minor'] as String,
+      json['Major'],
+      json['Minor'],
     );
 
 Map<String, dynamic> _$VersionToJson(Version instance) => <String, dynamic>{
-      'Major': instance.major,
-      'Minor': instance.minor,
+      'Major': instance.xmlMajor,
+      'Minor': instance.xmlMinor,
     };

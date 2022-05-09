@@ -1,28 +1,29 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../src/media.dart';
-import '../src/deviceManagement.dart';
+import '../src/device_management.dart';
 
-import 'audioSourcesResponse.dart';
-import 'capabilitiesResponse.dart';
-import 'configurationResponse.dart';
-import 'configurationsResponse.dart';
-import 'deviceInformationResponse.dart';
+import 'audio_sources_response.dart';
+import 'capabilities_response.dart';
+import 'configuration_response.dart';
+import 'configurations_response.dart';
+import 'device_information_response.dart';
 // import 'fault.dart';
-import 'hostnameResponse.dart';
-import 'networkProtocolsResponse.dart';
-import 'ntpResponse.dart';
-import 'getPresetResponse.dart';
-import 'profilesResponse.dart';
-import 'servicesResponse.dart';
-import 'setPresetResponse.dart';
-import 'statusResponse.dart';
-import 'systemDateTimeResponse.dart';
-import 'systemUrisResponse.dart';
-import 'usersResponse.dart';
-import 'videoSourcesResponse.dart';
-import 'uriResponse.dart';
-import 'probe/probeMatches.dart';
+import 'hostname_response.dart';
+import 'network_protocols_response.dart';
+import 'ntp_response.dart';
+import 'get_preset_response.dart';
+import 'profiles_response.dart';
+import 'service_capabilities_response.dart';
+import 'services_response.dart';
+import 'set_preset_response.dart';
+import 'status_response.dart';
+import 'system_date_time_response.dart';
+import 'system_uris_response.dart';
+import 'users_response.dart';
+import 'video_sources_response.dart';
+import 'uri_response.dart';
+import 'probe/probe_matches.dart';
 
 part 'body.g.dart';
 
@@ -111,6 +112,9 @@ class Body {
   @JsonKey(name: 'GetServicesResponse')
   final GetServicesResponse? servicesResponse;
 
+  @JsonKey(name: 'GetServiceCapabilitiesResponse')
+  final GetServiceCapabilitiesResponse? serviceCapabilitiesResponse;
+
   @JsonKey(name: 'GetPresetsResponse')
   final GetPresetResponse? getPresetResponse;
 
@@ -151,6 +155,7 @@ class Body {
       {this.fault,
       this.dateTimeResponse,
       this.capabilitiesResponse,
+      this.serviceCapabilitiesResponse,
       this.configurationResponse,
       this.configurationsResponse,
       this.deviceInformationResponse,

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'bounds.g.dart';
@@ -31,4 +33,7 @@ class Bounds {
   factory Bounds.fromJson(Map<String, dynamic> json) => _$BoundsFromJson(json);
 
   Map<String, dynamic> toJson() => _$BoundsToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }

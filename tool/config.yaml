@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 0.0.15
-change: Improvements to PTZ move helpers, so now the motion makes a little more sense.
+version: 1.0.2
+change: resolves the -not supported- error for getProfiles
