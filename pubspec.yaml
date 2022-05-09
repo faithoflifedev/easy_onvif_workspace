@@ -1,6 +1,6 @@
 name: easy_onvif
 description: A pure Dart library designed primarily for command line automation of Onvif compatible devices, but can be used anywhere Dart is used.
-version: 1.0.0-dev.2
+version: 1.0.1
 repository: https://github.com/faithoflifedev/easy_onvif
 homepage: https://github.com/faithoflifedev/easy_onvif
 
@@ -12,7 +12,7 @@ dependencies:
   crypto: ^3.0.2
   dio: ^4.0.6
   easy_enum: ^1.0.0
-  json_annotation: ^4.4.0
+  json_annotation: ^4.5.0
   loggy: ^2.0.1+1
   universal_io: ^2.0.4
   uuid: ^3.0.6
@@ -24,7 +24,7 @@ dev_dependencies:
   build_runner: ^2.1.10
   easy_enum_generator: ^2.0.2
   grinder: ^0.9.1
-  json_serializable: ^6.1.6
+  json_serializable: ^6.2.0
   lints: ^1.0.1
   mustache_template: ^2.0.0
   process_run: ^0.12.3+2

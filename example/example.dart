@@ -6,11 +6,16 @@ void main(List<String> arguments) async {
   //get connection infomration from the config.yaml file
   final config = loadYaml(File('example/config.yaml').readAsStringSync());
 
-  //configure device connection
+  // configure device connection
   final onvif = await Onvif.connect(
       host: config['host'],
       username: config['username'],
       password: config['password']);
+
+  // final onvif = await Onvif.connect(
+  //     host: 'thoainguyentek.gvdip.com:24',
+  //     username: 'admin',
+  //     password: 'admin123456');
 
   //get service capabilities
   var deviceServiceCapabilities =
@@ -49,7 +54,7 @@ void main(List<String> arguments) async {
     print('name: ${profile.name}, token: ${profile.token}');
   }
 
-  final uri = await onvif.media.getStreamUri(profs[2].token);
+  final uri = await onvif.media.getStreamUri(profs[0].token);
 
   final rtsp = OnvifUtil.authenticatingUri(
       uri.uri, config['username'], config['password']);

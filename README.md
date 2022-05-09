@@ -15,7 +15,7 @@ pub global activate easy_onvif
 onvif --help
 ```
 
-Please see the cli documentation [README.md](/bin/README.md) for more detailed usage information.
+Please see the cli documentation [README.md](https://github.com/faithoflifedev/easy_onvif/tree/1.0.0.dev.1/bin) for more detailed usage information.
 
 ## Getting Started
 
@@ -24,7 +24,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^1.0.0-dev.2
+  easy_onvif: ^1.0.1
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).

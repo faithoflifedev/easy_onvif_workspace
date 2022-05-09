@@ -76,10 +76,10 @@ class Media {
   ///
   ///The correct syntax for the StreamSetup element for these media stream
   ///setups defined in 5.1.1 of the streaming specification are as follows:
-  ///  RTP unicast over UDP: StreamType = "RTP_unicast", TransportProtocol =
-  /// "UDP"   ///  RTP over RTSP over HTTP over TCP: StreamType = "RTP_unicast",
+  ///  RTP unicast over UDP: StreamType = "RTP-Unicast", TransportProtocol =
+  /// "UDP"   ///  RTP over RTSP over HTTP over TCP: StreamType = "RTP-Unicast",
   /// TransportProtocol = "HTTP"   ///  RTP over RTSP over TCP: StreamType =
-  /// "RTP_unicast", TransportProtocol = "RTSP"
+  /// "RTP-Unicast", TransportProtocol = "RTSP"
   ///
   ///If a multicast stream is requested at least one of
   ///videoEncoderConfiguration, audioEncoderConfiguration and
@@ -88,7 +88,7 @@ class Media {
   ///For full compatibility with other ONVIF services a device should not
   ///generate Uris longer than 128 octets.
   Future<MediaUri> getStreamUri(String profileToken,
-      {String streamType = 'RTP_unicast',
+      {String streamType = 'RTP-Unicast',
       String transportProtocol = 'RTSP',
       bool validUntilConnect = false,
       bool validUntilReboot = false,

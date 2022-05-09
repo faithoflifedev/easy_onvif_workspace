@@ -143,7 +143,7 @@ class SoapRequest {
   ///XML for the [videoSources]
   static XmlDocumentFragment videoSources() {
     builder.element('GetVideoSources', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace('http://www.onvif.org/ver10/media/wsdl');
     });
 
     return builder.buildFragment();
@@ -152,7 +152,7 @@ class SoapRequest {
   ///XML for the [profiles]
   static XmlDocumentFragment profiles() {
     builder.element('GetProfiles', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace('http://www.onvif.org/ver10/media/wsdl');
     });
 
     return builder.buildFragment();
@@ -204,7 +204,7 @@ class SoapRequest {
   static XmlDocumentFragment streamUri(String profileToken,
       {String streamType = 'RTP-Unicast', String transportProtocol = 'RTSP'}) {
     builder.element('GetStreamUri', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace('http://www.onvif.org/ver10/media/wsdl');
       builder.element('StreamSetup', nest: () {
         builder.element('Stream', nest: () {
           builder.namespace('http://www.onvif.org/ver10/schema');
@@ -228,7 +228,7 @@ class SoapRequest {
   ///XML for the [snapshotUri], requires a [profileToken]
   static XmlDocumentFragment snapshotUri(String profileToken) {
     builder.element('GetSnapshotUri', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace('http://www.onvif.org/ver10/media/wsdl');
       builder.element('ProfileToken', nest: () {
         builder.text(profileToken);
       });
