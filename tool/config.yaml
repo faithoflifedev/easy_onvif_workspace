@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 1.0.2
-change: resolves the -not supported- error for getProfiles
+version: 1.0.3
+change: added quickstart to bin/README.md
