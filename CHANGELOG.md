@@ -1,3 +1,6 @@
+## 1.0.3
+
+- added quickstart to bin&#x2F;README.md
 ## 1.0.2
 
 - resolves the -not supported- error for getProfiles
