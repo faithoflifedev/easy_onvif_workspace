@@ -5,4 +5,4 @@ templates:
     type: prepend
 
 version: 1.0.4
-change: cleanup
+change: cleanup the package
