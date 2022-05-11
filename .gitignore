@@ -23,10 +23,13 @@ doc/api/
 *.js.deps
 *.js.map
 
-scratch/
 .pubspec.yaml.bak
+
+scratch/
+ios/
+android/
+
+bin/config.yaml
 
 example/cli/config.yaml
 example/flutter_model/assets/config.yaml
-
-bin/config.yaml

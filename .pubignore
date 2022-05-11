@@ -1,0 +1,9 @@
+example/config.yaml
+example/flutter_model/assets/config.yaml
+
+build/
+ios/
+android/
+scratch/
+tool/
+test/
