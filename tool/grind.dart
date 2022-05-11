@@ -137,9 +137,12 @@ void updateMarkdown(config) {
       case 'prepend':
         final currentContent = outputFile.readAsStringSync();
 
-        outputFile.writeAsStringSync(template.renderString(config));
+        outputFile.writeAsStringSync(template.renderString(config),
+            mode: FileMode.append);
 
         outputFile.writeAsStringSync(currentContent, mode: FileMode.append);
+
+        outputFile.writeAsStringSync('\n', mode: FileMode.append);
 
         break;
 
