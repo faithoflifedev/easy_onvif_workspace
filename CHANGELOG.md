@@ -1,3 +1,6 @@
+## 1.0.4
+
+- fix dependencies for the flutter_model example
 ## 1.0.3
 
 - added quickstart to bin&#x2F;README.md

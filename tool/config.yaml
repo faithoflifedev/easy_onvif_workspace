@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 1.0.3
-change: added quickstart to bin/README.md
+version: 1.0.4
+change: fix dependencies for the flutter_model example

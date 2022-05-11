@@ -5,7 +5,7 @@ A command line interface for controlling an Onvif device with cli commands
 To install:
 
 ```sh
-pub global activate easy_onvif -x onvif
+pub global activate easy_onvif
 ```
 
 Usage:
@@ -55,14 +55,13 @@ onvif ptz get-presets --limit 3 --profile-token Profile_1 | jq -r '.[] | ."@toke
 
 ```sh
 prompt>onvif authorize --help
-
 Generate a refresh token used to authenticate the command line API requests
 
-Usage: yt authorize [arguments]
+Usage: onvif authorize [arguments]
 -h, --help    Print this usage information.
 ```
 
-The authroize command is used to create the default "--config-file" that can be used as the default for all future commands.  In general this command will only need to be run if you want to connect to another onvif device or if the settigns (host, username, password) have changed for the current device.  The file contents are as follows:
+The authorize command is used to create the default "--config-file" that can be used for all future commands.  In general this command will only need to be run if you want to connect to another onvif device or if the settings (host, username, password) have changed for the current device.  The file contents are as follows:
 
 ```json
 {"host":"[host name or ip addess of device]","username":"[device username]","password":"[device password]"}
