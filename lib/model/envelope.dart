@@ -1,3 +1,4 @@
+import 'package:easy_onvif/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'body.dart';
@@ -17,6 +18,9 @@ class Envelope {
 
   factory Envelope.fromJson(Map<String, dynamic> json) =>
       _$EnvelopeFromJson(json);
+
+  factory Envelope.fromXml(String xml) =>
+      Envelope.fromJson(OnvifUtil.xmlToMap(xml));
 
   Map<String, dynamic> toJson() => _$EnvelopeToJson(this);
 }

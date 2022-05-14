@@ -38,7 +38,7 @@ class Profile {
   @JsonKey(name: 'AudioEncoderConfiguration')
   final AudioEncoderConfiguration? audioEncoderConfiguration;
 
-  ///Optional configuration of the video analytics module and rule engine.\
+  ///Optional configuration of the video analytics module and rule engine.
   @JsonKey(name: 'VideoAnalyticsConfiguration')
   final VideoAnalyticsConfiguration? videoAnalyticsConfiguration;
 

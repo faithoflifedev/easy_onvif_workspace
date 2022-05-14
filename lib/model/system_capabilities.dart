@@ -57,7 +57,7 @@ class SystemCapabilities {
   final int maxStorageConfigurations;
 
   ///If present signals support for geo location. The value signals the supported number of entries.
-  @JsonKey(name: '@GeoLocationEntries', fromJson: nullableStringToInt)
+  @JsonKey(name: '@GeoLocationEntries', fromJson: nullableToInt)
   final int? geoLocationEntries;
 
   ///List of supported automatic GeoLocation adjustment supported by the device. Valid items are defined by tds:AutoGeoMode.
@@ -69,15 +69,15 @@ class SystemCapabilities {
   final String? storageTypesSupported;
 
   ///Indicates no support for network discovery.
-  @JsonKey(name: '@DiscoveryNotSupported', fromJson: nullableStringToBool)
+  @JsonKey(name: '@DiscoveryNotSupported', fromJson: nullableToBool)
   final bool? discoveryNotSupported;
 
   ///Indicates no support for network configuration.
-  @JsonKey(name: '@NetworkConfigNotSupported', fromJson: nullableStringToBool)
+  @JsonKey(name: '@NetworkConfigNotSupported', fromJson: nullableToBool)
   final bool? networkConfigNotSupported;
 
   ///Indicates no support for user configuration.
-  @JsonKey(name: '@UserConfigNotSupported', fromJson: nullableStringToBool)
+  @JsonKey(name: '@UserConfigNotSupported', fromJson: nullableToBool)
   final bool? userConfigNotSupported;
 
   SystemCapabilities(

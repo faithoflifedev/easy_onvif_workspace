@@ -22,6 +22,7 @@ import 'system_date_time_response.dart';
 import 'system_uris_response.dart';
 import 'users_response.dart';
 import 'video_sources_response.dart';
+import 'get_metadata_configurations_response.dart';
 import 'uri_response.dart';
 import 'probe/probe_matches.dart';
 
@@ -118,7 +119,7 @@ class Body {
   @JsonKey(name: 'GetPresetsResponse')
   final GetPresetResponse? getPresetResponse;
 
-  @JsonKey(name: 'SetPresetsResponse')
+  @JsonKey(name: 'SetPresetResponse')
   final SetPresetResponse? setPresetResponse;
 
   @JsonKey(name: 'GetSnapshotUriResponse')
@@ -148,6 +149,9 @@ class Body {
   @JsonKey(name: 'GetUsersResponse')
   final GetUsersResponse? usersResponse;
 
+  @JsonKey(name: 'GetMetadataConfigurationsResponse')
+  final GetMetadataConfigurationsResponse? metadataConfigurationsResponse;
+
   @JsonKey(name: 'Fault')
   final dynamic fault;
 
@@ -173,7 +177,8 @@ class Body {
       this.ntpResponse,
       this.systemUrisResponse,
       this.usersResponse,
-      this.probeMatches});
+      this.probeMatches,
+      this.metadataConfigurationsResponse});
 
   factory Body.fromJson(Map<String, dynamic> json) => _$BodyFromJson(json);
 

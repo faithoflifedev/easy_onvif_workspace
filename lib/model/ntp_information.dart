@@ -11,7 +11,7 @@ part 'ntp_information.g.dart';
 @JsonSerializable(explicitToJson: true)
 class NtpInformation {
   ///Indicates if NTP information is to be retrieved by using DHCP.
-  @JsonKey(name: 'FromDHCP', fromJson: mappedStringToBool)
+  @JsonKey(name: 'FromDHCP', fromJson: mappedToBool)
   final bool fromDhcp;
 
   ///List of manually entered NTP addresses.

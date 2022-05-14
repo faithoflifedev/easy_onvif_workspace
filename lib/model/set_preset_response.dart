@@ -1,12 +1,13 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'set_preset_response.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class SetPresetResponse {
-  @JsonKey(name: 'PresetToken')
+  @JsonKey(name: 'PresetToken', fromJson: mappedToString)
   final String presetToken;
 
   SetPresetResponse({required this.presetToken});

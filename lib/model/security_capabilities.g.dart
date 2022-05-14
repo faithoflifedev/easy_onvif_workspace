@@ -29,8 +29,7 @@ SecurityCapabilities _$SecurityCapabilitiesFromJson(
       maxUserNameLength: stringToInt(json['@MaxUserNameLength'] as String),
       maxPasswordLength: stringToInt(json['@MaxPasswordLength'] as String),
       securityPolicies: json['@SecurityPolicies'] as String?,
-      maxPasswordHistory:
-          nullableStringToInt(json['@MaxPasswordHistory'] as String?),
+      maxPasswordHistory: nullableToInt(json['@MaxPasswordHistory'] as String?),
     );
 
 Map<String, dynamic> _$SecurityCapabilitiesToJson(

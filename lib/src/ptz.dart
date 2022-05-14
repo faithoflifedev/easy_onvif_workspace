@@ -225,10 +225,10 @@ class Ptz {
   Future<String> setPreset(String profileToken, Preset preset) async {
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.setPreset(profileToken, preset)),
-        postProcess: (String xmlBody, dynamic jsonMap, Envelope envelope) {
+        postProcess: (String xmlBody, Envelope envelope) {
       print(xmlBody);
       print('\n\n');
-      print(jsonMap);
+      print(envelope.toJson());
     });
 
     if (envelope.body.setPresetResponse == null) throw Exception();

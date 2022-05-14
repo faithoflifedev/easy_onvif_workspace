@@ -85,7 +85,7 @@ class SecurityCapabilities {
   final String? securityPolicies;
 
   ///Maximum number of passwords that the device can remember for each user
-  @JsonKey(name: '@MaxPasswordHistory', fromJson: nullableStringToInt)
+  @JsonKey(name: '@MaxPasswordHistory', fromJson: nullableToInt)
   final int? maxPasswordHistory;
 
   SecurityCapabilities(

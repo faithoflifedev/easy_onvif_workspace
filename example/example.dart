@@ -64,4 +64,10 @@ void main(List<String> arguments) async {
   var ntpInformation = await onvif.deviceManagement.getNtp();
 
   print(ntpInformation);
+
+  var configurations = await onvif.media.getMetadataConfigurations();
+
+  for (var configuration in configurations) {
+    print(configuration.name + ' ' + configuration.token);
+  }
 }
