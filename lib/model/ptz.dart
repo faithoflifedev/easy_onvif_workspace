@@ -1,3 +1,4 @@
+import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'ptz.g.dart';
@@ -5,13 +6,11 @@ part 'ptz.g.dart';
 ///PTZ capabilities
 @JsonSerializable(explicitToJson: true)
 class Ptz {
-  @JsonKey(name: 'XAddr')
-  final dynamic xmlXAddr;
-
   ///PTZ service URI.
-  String get xaddr => xmlXAddr['\$'];
+  @JsonKey(name: 'XAddr', fromJson: OnvifUtil.mappedToString)
+  final String xAddr;
 
-  Ptz(this.xmlXAddr);
+  Ptz({required this.xAddr});
 
   factory Ptz.fromJson(Map<String, dynamic> json) => _$PtzFromJson(json);
 

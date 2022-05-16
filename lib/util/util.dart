@@ -77,52 +77,47 @@ class OnvifUtil {
 
   static String? get userHome =>
       Platform.environment['HOME'] ?? Platform.environment['USERPROFILE'];
-}
 
-bool stringToBool(String value) {
-  return value.toLowerCase() == 'true';
-}
+  static bool stringToBool(String value) => value.toLowerCase() == 'true';
 
-int stringToInt(String value) {
-  return int.parse(value);
-}
+  static bool? optionalBool(String? value) =>
+      value != null ? stringToBool(value) : null;
 
-double stringToDouble(String value) {
-  return double.parse(value);
-}
+  static int? optionalInt(String? value) =>
+      value != null ? int.parse(value) : null;
 
-int? nullableToInt(String? value) {
-  return value != null ? stringToInt(value) : null;
-}
+  static double? optionalDouble(String? value) =>
+      value != null ? double.parse(value) : null;
 
-bool? nullableToBool(String? value) {
-  return value != null ? stringToBool(value) : null;
-}
+  static bool mappedToBool(Map<String, dynamic> value) =>
+      value.containsKey('\$') ? stringToBool(value['\$']) : false;
 
-bool mappedToBool(Map<String, dynamic> value) {
-  return value.containsKey('\$') ? stringToBool(value['\$']) : false;
-}
+  static bool? nullableMappedToBool(Map<String, dynamic>? value) =>
+      value != null ? mappedToBool(value) : null;
 
-String mappedToString(Map<String, dynamic> value) {
-  return value.containsKey('\$') ? value['\$']! : '';
-}
+  static int mappedToInt(Map<String, dynamic> value) => int.parse(value['\$']!);
 
-String? nullableMappedToString(Map<String, dynamic>? value) {
-  return value != null ? mappedToString(value) : null;
-}
+  static int? nullableMappedToInt(Map<String, dynamic>? value) =>
+      value != null ? mappedToInt(value) : null;
 
-double mappedToDouble(Map<String, dynamic> value) {
-  if (value.containsKey('\$')) {
-    return double.parse(value['\$']!);
-  } else {
-    throw Exception('Problem parsing double');
-  }
-}
+  static double mappedToDouble(Map<String, dynamic> value) =>
+      double.parse(value['\$']);
 
-int mappedToInt(Map<String, dynamic> value) {
-  if (value.containsKey('\$')) {
-    return int.parse(value['\$']!);
-  } else {
-    throw Exception('Problem parsing double');
+  static double? nullableMappedToDouble(Map<String, dynamic>? value) =>
+      value != null ? mappedToDouble(value) : null;
+
+  static String mappedToString(Map<String, dynamic> value) => value['\$'];
+
+  static String? nullableMappedToString(Map<String, dynamic>? value) =>
+      value != null && value.containsKey('\$') ? mappedToString(value) : null;
+
+  static DateTime mappedToDateTime(Map<String, dynamic> value) =>
+      DateTime.parse(value['\$']);
+
+  static DateTime? nullableMappedToDateTime(Map<String, dynamic>? value) =>
+      value != null ? mappedToDateTime(value) : null;
+
+  static List<T> unbound<T>(Map<String, dynamic> value) {
+    return <T>[];
   }
 }

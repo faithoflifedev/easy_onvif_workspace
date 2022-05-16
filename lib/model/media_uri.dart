@@ -1,31 +1,27 @@
+import 'package:easy_onvif/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'media_uri.g.dart';
 
 @JsonSerializable()
 class MediaUri {
-  @JsonKey(name: 'Uri')
-  final dynamic xmlUri;
+  @JsonKey(name: 'Uri', fromJson: OnvifUtil.mappedToString)
+  final String uri;
 
-  @JsonKey(name: 'InvalidAfterConnect')
-  final dynamic xmlInvalidAfterConnect;
+  @JsonKey(name: 'InvalidAfterConnect', fromJson: OnvifUtil.mappedToBool)
+  final bool invalidAfterConnect;
 
-  @JsonKey(name: 'InvalidAfterReboot')
-  final dynamic xmlInvalidAfterReboot;
+  @JsonKey(name: 'InvalidAfterReboot', fromJson: OnvifUtil.mappedToBool)
+  final bool invalidAfterReboot;
 
-  @JsonKey(name: 'Timeout')
-  final dynamic xmltimeout;
+  @JsonKey(name: 'Timeout', fromJson: OnvifUtil.mappedToString)
+  final String timeout;
 
-  String get uri => xmlUri['\$'];
-
-  bool get invalidAfterConnect =>
-      xmlInvalidAfterConnect['\$'].toLowerCase() == 'true';
-
-  bool get invalidAfterReboot =>
-      xmlInvalidAfterReboot['\$'].toLowerCase() == 'true';
-
-  MediaUri(this.xmlUri, this.xmlInvalidAfterConnect, this.xmlInvalidAfterReboot,
-      this.xmltimeout);
+  MediaUri(
+      {required this.uri,
+      required this.invalidAfterConnect,
+      required this.invalidAfterReboot,
+      required this.timeout});
 
   factory MediaUri.fromJson(Map<String, dynamic> json) =>
       _$MediaUriFromJson(json);

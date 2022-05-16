@@ -1,25 +1,25 @@
+import 'dart:convert';
+
+import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'version.g.dart';
 
 @JsonSerializable()
 class Version {
-  @JsonKey(name: 'Major')
-  final dynamic xmlMajor;
-  // final String major;
+  @JsonKey(name: 'Major', fromJson: OnvifUtil.mappedToInt)
+  final int major;
 
-  @JsonKey(name: 'Minor')
-  final dynamic xmlMinor;
-  // final String minor;
+  @JsonKey(name: 'Minor', fromJson: OnvifUtil.mappedToInt)
+  final int minor;
 
-  int get major => int.parse(xmlMajor['\$']);
-
-  int get minor => int.parse(xmlMinor['\$']);
-
-  Version(this.xmlMajor, this.xmlMinor);
+  Version({required this.major, required this.minor});
 
   factory Version.fromJson(Map<String, dynamic> json) =>
       _$VersionFromJson(json);
 
   Map<String, dynamic> toJson() => _$VersionToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }

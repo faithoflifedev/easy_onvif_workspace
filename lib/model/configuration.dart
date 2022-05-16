@@ -16,13 +16,12 @@ class Configuration {
   final String token;
 
   ///User readable name. Length up to 64 characters.
-  @JsonKey(name: 'Name', fromJson: mappedToString)
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
   final String name;
 
   ///Number of internal references currently using this configuration.
   ///This informational parameter is read-only. Deprecated for Media2 Service.
-  @JsonKey(name: 'UseCount', fromJson: mappedToInt)
-  @Deprecated('Deprecated for Media2 Service')
+  @JsonKey(name: 'UseCount', fromJson: OnvifUtil.mappedToInt)
   final int? useCount;
 
   ///Optional parameter to configure compression type of Metadata payload. Use
@@ -58,7 +57,7 @@ class Configuration {
 
   ///Defines whether the streamed metadata will include metadata from the
   ///analytics engines (video, cell motion, audio etc.)
-  @JsonKey(name: 'Analytics', fromJson: mappedToBool)
+  @JsonKey(name: 'Analytics', fromJson: OnvifUtil.mappedToBool)
   final bool? analytics;
 
   ///Defines the multicast settings that could be used for video streaming.
@@ -67,8 +66,7 @@ class Configuration {
 
   ///The rtsp session timeout for the related audio stream (when using Media2
   ///Service, this value is deprecated and ignored)
-  @JsonKey(name: 'SessionTimeout', fromJson: mappedToString)
-  @Deprecated('Deprecated for Media2 Service')
+  @JsonKey(name: 'SessionTimeout', fromJson: OnvifUtil.mappedToString)
   final String? sessionTimeout;
 
   ///Indication which AnalyticsModules shall output metadata. Note that the

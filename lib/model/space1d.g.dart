@@ -7,11 +7,11 @@ part of 'space1d.dart';
 // **************************************************************************
 
 Space1D _$Space1DFromJson(Map<String, dynamic> json) => Space1D(
-      xmlUri: json['Capabilities'],
+      uri: OnvifUtil.mappedToString(json['URI'] as Map<String, dynamic>),
       xRange: Space.fromJson(json['XRange'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$Space1DToJson(Space1D instance) => <String, dynamic>{
-      'Capabilities': instance.xmlUri,
+      'URI': instance.uri,
       'XRange': instance.xRange,
     };

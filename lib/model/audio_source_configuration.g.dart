@@ -9,15 +9,16 @@ part of 'audio_source_configuration.dart';
 AudioSourceConfiguration _$AudioSourceConfigurationFromJson(
         Map<String, dynamic> json) =>
     AudioSourceConfiguration(
-      json['Name'],
-      json['UseCount'],
-      json['SourceToken'],
+      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      useCount: OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
+      sourceToken:
+          OnvifUtil.mappedToString(json['SourceToken'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AudioSourceConfigurationToJson(
         AudioSourceConfiguration instance) =>
     <String, dynamic>{
-      'Name': instance.xmlName,
-      'UseCount': instance.xmlUseCount,
+      'Name': instance.name,
+      'UseCount': instance.useCount,
       'SourceToken': instance.sourceToken,
     };

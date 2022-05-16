@@ -1,17 +1,16 @@
+import 'package:easy_onvif/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'media.g.dart';
 
 ///Media capabilities
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class Media {
-  @JsonKey(name: 'XAddr')
-  final dynamic xmlXaddr;
-
   ///Media service URI.
-  String get xaddr => xmlXaddr['\$'];
+  @JsonKey(name: 'XAddr', fromJson: OnvifUtil.mappedToString)
+  final String xaddr;
 
-  Media(this.xmlXaddr);
+  Media({required this.xaddr});
 
   factory Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
 

@@ -7,9 +7,9 @@ part of 'events.dart';
 // **************************************************************************
 
 Events _$EventsFromJson(Map<String, dynamic> json) => Events(
-      json['XAddr'],
+      OnvifUtil.mappedToString(json['XAddr'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$EventsToJson(Events instance) => <String, dynamic>{
-      'XAddr': instance.xmlXAddr,
+      'XAddr': instance.xAddr,
     };

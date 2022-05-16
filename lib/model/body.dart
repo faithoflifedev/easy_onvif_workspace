@@ -1,29 +1,8 @@
+import 'dart:convert';
+
+import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../src/media.dart';
-import '../src/device_management.dart';
-
-import 'audio_sources_response.dart';
-import 'capabilities_response.dart';
-import 'configuration_response.dart';
-import 'configurations_response.dart';
-import 'device_information_response.dart';
-// import 'fault.dart';
-import 'hostname_response.dart';
-import 'network_protocols_response.dart';
-import 'ntp_response.dart';
-import 'get_preset_response.dart';
-import 'profiles_response.dart';
-import 'service_capabilities_response.dart';
-import 'services_response.dart';
-import 'set_preset_response.dart';
-import 'status_response.dart';
-import 'system_date_time_response.dart';
-import 'system_uris_response.dart';
-import 'users_response.dart';
-import 'video_sources_response.dart';
-import 'get_metadata_configurations_response.dart';
-import 'uri_response.dart';
 import 'probe/probe_matches.dart';
 
 part 'body.g.dart';
@@ -152,6 +131,9 @@ class Body {
   @JsonKey(name: 'GetMetadataConfigurationsResponse')
   final GetMetadataConfigurationsResponse? metadataConfigurationsResponse;
 
+  @JsonKey(name: 'GetCompatibleConfigurationsResponse')
+  final GetCompatibleConfigurationsResponse? compatibleConfigurationsResponse;
+
   @JsonKey(name: 'Fault')
   final dynamic fault;
 
@@ -178,11 +160,15 @@ class Body {
       this.systemUrisResponse,
       this.usersResponse,
       this.probeMatches,
-      this.metadataConfigurationsResponse});
+      this.metadataConfigurationsResponse,
+      this.compatibleConfigurationsResponse});
 
   factory Body.fromJson(Map<String, dynamic> json) => _$BodyFromJson(json);
 
   Map<String, dynamic> toJson() => _$BodyToJson(this);
 
   bool get hasFault => fault != null;
+
+  @override
+  String toString() => json.encode(toJson());
 }

@@ -7,13 +7,14 @@ part of 'analytics.dart';
 // **************************************************************************
 
 Analytics _$AnalyticsFromJson(Map<String, dynamic> json) => Analytics(
-      json['XAddr'],
-      json['RuleSupport'],
-      json['AnalyticsModuleSupport'],
+      OnvifUtil.mappedToString(json['XAddr'] as Map<String, dynamic>),
+      OnvifUtil.mappedToBool(json['RuleSupport'] as Map<String, dynamic>),
+      OnvifUtil.mappedToBool(
+          json['AnalyticsModuleSupport'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AnalyticsToJson(Analytics instance) => <String, dynamic>{
-      'XAddr': instance.xmlXAddr,
-      'RuleSupport': instance.xmlRuleSupport,
-      'AnalyticsModuleSupport': instance.xmlAnalyticsModuleSupport,
+      'XAddr': instance.xAddr,
+      'RuleSupport': instance.ruleSupport,
+      'AnalyticsModuleSupport': instance.analyticsModuleSupport,
     };

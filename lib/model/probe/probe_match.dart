@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'endpoint_reference.dart';
@@ -9,43 +12,41 @@ class ProbeMatch {
   @JsonKey(name: 'EndpointReference')
   final EndpointReference endpointReference;
 
-  @JsonKey(name: 'Types')
-  final dynamic xmlTypes;
+  @JsonKey(name: 'Types', fromJson: _typeList)
+  final List<String> types;
 
-  @JsonKey(name: 'Scopes')
-  final String xmlScopes;
+  @JsonKey(name: 'Scopes', fromJson: _scopeMap)
+  final Map<String, String> scopes;
 
-  @JsonKey(name: 'XAddrs')
-  final dynamic xmlXaddrs;
+  @JsonKey(name: 'XAddrs', fromJson: OnvifUtil.mappedToString)
+  final String xaddrs;
 
-  @JsonKey(name: 'MetadataVersion')
-  final dynamic xmlMetadataVersion;
+  @JsonKey(name: 'MetadataVersion', fromJson: OnvifUtil.mappedToString)
+  final String metadataVersion;
 
-  Map<String, String> _scopeMap = {};
-
-  set xmlScopes(String scopes) {
-    _scopeMap = {
-      for (var scope in scopes.split(','))
-        scope.replaceAll('onvif://www.onvif.org/', '').replaceAll(
-            RegExp('/([^/]+)/?\$'), ''): scope.replaceAll(RegExp('.*/'), '')
-    };
-  }
-
-  Map<String, String> get scopeMap => _scopeMap;
-
-  List<String> get types => xmlTypes['\$'].toString().split(' ');
-
-  // List<String> get scopes => xmlScopes['\$'].toString().split(' ');
-
-  String get xAddrs => xmlXaddrs['\$'];
-
-  String get metadataVersion => xmlMetadataVersion['\$'];
-
-  ProbeMatch(this.endpointReference, this.xmlTypes, this.xmlScopes,
-      this.xmlXaddrs, this.xmlMetadataVersion);
+  ProbeMatch(
+      {required this.endpointReference,
+      required this.types,
+      required this.scopes,
+      required this.xaddrs,
+      required this.metadataVersion});
 
   factory ProbeMatch.fromJson(Map<String, dynamic> json) =>
       _$ProbeMatchFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProbeMatchToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
+
+  static List<String> _typeList(Map<String, dynamic> value) =>
+      value['\$'].toString().split(' ');
+
+  static Map<String, String> _scopeMap(value) {
+    return {
+      for (var scope in value.split(','))
+        scope.replaceAll('onvif://www.onvif.org/', '').replaceAll(
+            RegExp('/([^/]+)/?\$'), ''): scope.replaceAll(RegExp('.*/'), '')
+    };
+  }
 }

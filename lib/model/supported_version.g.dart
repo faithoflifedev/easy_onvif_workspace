@@ -8,12 +8,12 @@ part of 'supported_version.dart';
 
 SupportedVersion _$SupportedVersionFromJson(Map<String, dynamic> json) =>
     SupportedVersion(
-      json['Major'],
-      json['Minor'],
+      OnvifUtil.mappedToString(json['Major'] as Map<String, dynamic>),
+      OnvifUtil.mappedToString(json['Minor'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SupportedVersionToJson(SupportedVersion instance) =>
     <String, dynamic>{
-      'Major': instance.xmlMajor,
-      'Minor': instance.xmlMinor,
+      'Major': instance.major,
+      'Minor': instance.minor,
     };

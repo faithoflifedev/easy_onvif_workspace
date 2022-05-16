@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'space.g.dart';
@@ -8,17 +9,13 @@ part 'space.g.dart';
 @JsonSerializable()
 class Space {
   ///Capability information.
-  @JsonKey(name: 'Min')
-  final dynamic xmlMin;
+  @JsonKey(name: 'Min', fromJson: OnvifUtil.mappedToDouble)
+  final double min;
 
-  @JsonKey(name: 'Max')
-  final dynamic xmlMax;
+  @JsonKey(name: 'Max', fromJson: OnvifUtil.mappedToDouble)
+  final double max;
 
-  Space({required this.xmlMin, required this.xmlMax});
-
-  double get min => double.parse(xmlMin['\$']);
-
-  double get max => double.parse(xmlMax['\$']);
+  Space({required this.min, required this.max});
 
   factory Space.fromJson(Map<String, dynamic> json) => _$SpaceFromJson(json);
 

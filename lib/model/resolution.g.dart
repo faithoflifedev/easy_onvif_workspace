@@ -7,12 +7,12 @@ part of 'resolution.dart';
 // **************************************************************************
 
 Resolution _$ResolutionFromJson(Map<String, dynamic> json) => Resolution(
-      json['Width'],
-      json['Height'],
+      width: OnvifUtil.mappedToInt(json['Width'] as Map<String, dynamic>),
+      height: OnvifUtil.mappedToInt(json['Height'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ResolutionToJson(Resolution instance) =>
     <String, dynamic>{
-      'Width': instance.xmlWidth,
-      'Height': instance.xmlHeight,
+      'Width': instance.width,
+      'Height': instance.height,
     };

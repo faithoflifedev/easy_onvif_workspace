@@ -12,7 +12,7 @@ class Preset {
   @JsonKey(name: '@token')
   final String token;
 
-  @JsonKey(name: 'Name', fromJson: mappedToString)
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
   final String name;
 
   @JsonKey(name: 'PTZPosition')

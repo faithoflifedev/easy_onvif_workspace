@@ -9,75 +9,75 @@ part 'security_capabilities.g.dart';
 @JsonSerializable()
 class SecurityCapabilities {
   ///Indicates support for TLS 1.0.
-  @JsonKey(name: '@TLS1.0', fromJson: stringToBool)
+  @JsonKey(name: '@TLS1.0', fromJson: OnvifUtil.stringToBool)
   final bool tls1_0;
 
   ///Indicates support for TLS 1.1.
-  @JsonKey(name: '@TLS1.1', fromJson: stringToBool)
+  @JsonKey(name: '@TLS1.1', fromJson: OnvifUtil.stringToBool)
   final bool tls1_1;
 
   ///Indicates support for TLS 1.2.
-  @JsonKey(name: '@TLS1.2', fromJson: stringToBool)
+  @JsonKey(name: '@TLS1.2', fromJson: OnvifUtil.stringToBool)
   final bool tls1_2;
 
   ///Indicates support for onboard key generation.
-  @JsonKey(name: '@OnboardKeyGeneration', fromJson: stringToBool)
+  @JsonKey(name: '@OnboardKeyGeneration', fromJson: OnvifUtil.stringToBool)
   final bool onboardKeyGeneration;
 
   ///Indicates support for access policy configuration.
-  @JsonKey(name: '@AccessPolicyConfig', fromJson: stringToBool)
+  @JsonKey(name: '@AccessPolicyConfig', fromJson: OnvifUtil.stringToBool)
   final bool accessPolicyConfig;
 
   ///Indicates support for the ONVIF default access policy.
-  @JsonKey(name: '@DefaultAccessPolicy', fromJson: stringToBool)
+  @JsonKey(name: '@DefaultAccessPolicy', fromJson: OnvifUtil.stringToBool)
   final bool defaultAccessPolicy;
 
   ///Indicates support for IEEE 802.1X configuration.
-  @JsonKey(name: '@Dot1X', fromJson: stringToBool)
+  @JsonKey(name: '@Dot1X', fromJson: OnvifUtil.stringToBool)
   final bool dot1X;
 
   ///Indicates support for remote user configuration. Used when accessing another device.
-  @JsonKey(name: '@RemoteUserHandling', fromJson: stringToBool)
+  @JsonKey(name: '@RemoteUserHandling', fromJson: OnvifUtil.stringToBool)
   final bool remoteUserHandling;
 
   ///Indicates support for WS-Security X.509 token.
-  @JsonKey(name: '@X.509Token', fromJson: stringToBool)
+  @JsonKey(name: '@X.509Token', fromJson: OnvifUtil.stringToBool)
   final bool x509Token;
 
   ///Indicates support for WS-Security SAML token.
-  @JsonKey(name: '@SAMLToken', fromJson: stringToBool)
+  @JsonKey(name: '@SAMLToken', fromJson: OnvifUtil.stringToBool)
   final bool samlToken;
 
   ///Indicates support for WS-Security Kerberos token.
-  @JsonKey(name: '@KerberosToken', fromJson: stringToBool)
+  @JsonKey(name: '@KerberosToken', fromJson: OnvifUtil.stringToBool)
   final bool kerberosToken;
 
   ///Indicates support for WS-Security Username token.
-  @JsonKey(name: '@UsernameToken', fromJson: stringToBool)
+  @JsonKey(name: '@UsernameToken', fromJson: OnvifUtil.stringToBool)
   final bool usernameToken;
 
   ///Indicates support for WS over HTTP digest authenticated communication layer.
-  @JsonKey(name: '@HttpDigest', fromJson: stringToBool)
+  @JsonKey(name: '@HttpDigest', fromJson: OnvifUtil.stringToBool)
   final bool httpDigest;
 
   ///Indicates support for WS-Security REL token.
-  @JsonKey(name: '@RELToken', fromJson: stringToBool)
+  @JsonKey(name: '@RELToken', fromJson: OnvifUtil.stringToBool)
   final bool relToken;
 
   ///EAP Methods supported by the device. The int values refer to the [IANA EAP Registry](http://www.iana.org/assignments/eap-numbers/eap-numbers.xhtml).
-  @JsonKey(name: '@SupportedEAPMethods', fromJson: stringToInt)
+  @JsonKey(name: '@SupportedEAPMethods', fromJson: int.parse)
   final int supportedEAPMethods;
 
   ///The maximum number of users that the device supports.
-  @JsonKey(name: '@MaxUsers', fromJson: stringToInt)
+  @JsonKey(name: '@MaxUsers', fromJson: int.parse)
   final int maxUsers;
 
   ///Maximum number of characters supported for the username by CreateUsers.
-  @JsonKey(name: '@MaxUserNameLength', fromJson: stringToInt)
+  @JsonKey(name: '@MaxUserNameLength', fromJson: int.parse)
   final int maxUserNameLength;
 
   ///Maximum number of characters supported for the password by CreateUsers and SetUser.
-  @JsonKey(name: '@MaxPasswordLength', fromJson: stringToInt)
+  @JsonKey(name: '@MaxPasswordLength', fromJson: int.parse)
   final int maxPasswordLength;
 
   ///Indicates which security policies are supported. Options are: ModifyPassword, PasswordComplexity, AuthFailureWarnings
@@ -85,7 +85,7 @@ class SecurityCapabilities {
   final String? securityPolicies;
 
   ///Maximum number of passwords that the device can remember for each user
-  @JsonKey(name: '@MaxPasswordHistory', fromJson: nullableToInt)
+  @JsonKey(name: '@MaxPasswordHistory')
   final int? maxPasswordHistory;
 
   SecurityCapabilities(

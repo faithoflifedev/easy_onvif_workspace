@@ -7,15 +7,16 @@ part of 'multicast.dart';
 // **************************************************************************
 
 Multicast _$MulticastFromJson(Map<String, dynamic> json) => Multicast(
-      Address.fromJson(json['Address'] as Map<String, dynamic>),
-      json['Port'],
-      json['TTL'],
-      json['AutoStart'],
+      address: Address.fromJson(json['Address'] as Map<String, dynamic>),
+      port: OnvifUtil.mappedToInt(json['Port'] as Map<String, dynamic>),
+      ttl: OnvifUtil.mappedToInt(json['TTL'] as Map<String, dynamic>),
+      autoStart:
+          OnvifUtil.mappedToBool(json['AutoStart'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$MulticastToJson(Multicast instance) => <String, dynamic>{
       'Address': instance.address,
-      'Port': instance.xmlPort,
-      'TTL': instance.xmlTtl,
-      'AutoStart': instance.xmlAutoStart,
+      'Port': instance.port,
+      'TTL': instance.ttl,
+      'AutoStart': instance.autoStart,
     };

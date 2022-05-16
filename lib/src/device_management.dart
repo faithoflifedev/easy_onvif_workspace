@@ -207,4 +207,29 @@ class DeviceManagement {
 
     return envelope.body.usersResponse!.users;
   }
+
+  ///This operation creates new device users and corresponding credentials on a
+  ///device for authentication purposes. The device shall support creation of
+  ///device users and their credentials through the CreateUsers command. Either
+  ///all users are created successfully or a fault message shall be returned
+  ///without creating any user.
+  ///
+  ///ONVIF compliant devices are recommended to support password length of at
+  ///least 28 bytes, as clients may follow the password derivation mechanism
+  ///which results in 'password equivalent' of length 28 bytes, as described in
+  ///section 3.1.2 of the ONVIF security white paper.
+  Future<void> createUsers(List<User> users) async {
+    await Soap.retrieveEnvlope(
+        uri, onvif.secureRequest(SoapRequest.createUsers(users)));
+  }
+
+  ///This operation deletes users on a device. The device shall support deletion
+  ///of device users and their credentials through the DeleteUsers command. A
+  ///device may have one or more fixed users that cannot be deleted to ensure
+  ///access to the unit. Either all users are deleted successfully or a fault
+  ///message shall be returned and no users be deleted.
+  Future<void> deleteUsers(List<String> users) async {
+    await Soap.retrieveEnvlope(
+        uri, onvif.secureRequest(SoapRequest.deleteUsers(users)));
+  }
 }

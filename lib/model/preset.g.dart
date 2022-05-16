@@ -8,7 +8,7 @@ part of 'preset.dart';
 
 Preset _$PresetFromJson(Map<String, dynamic> json) => Preset(
       token: json['@token'] as String,
-      name: mappedToString(json['Name'] as Map<String, dynamic>),
+      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
       position:
           PtzPosition.fromJson(json['PTZPosition'] as Map<String, dynamic>),
     );

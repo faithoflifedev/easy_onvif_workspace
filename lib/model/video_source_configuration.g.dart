@@ -9,17 +9,19 @@ part of 'video_source_configuration.dart';
 VideoSourceConfiguration _$VideoSourceConfigurationFromJson(
         Map<String, dynamic> json) =>
     VideoSourceConfiguration(
-      json['Name'],
-      json['UseCount'],
-      json['SourceToken'],
+      OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
+      OnvifUtil.mappedToString(json['SourceToken'] as Map<String, dynamic>),
       Bounds.fromJson(json['Bounds'] as Map<String, dynamic>),
+      json['Extension'],
     );
 
 Map<String, dynamic> _$VideoSourceConfigurationToJson(
         VideoSourceConfiguration instance) =>
     <String, dynamic>{
-      'Name': instance.xmlName,
-      'UseCount': instance.xmlUseCount,
+      'Name': instance.name,
+      'UseCount': instance.useCount,
       'SourceToken': instance.sourceToken,
       'Bounds': instance.bounds.toJson(),
+      'Extension': instance.extension,
     };

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'supported_version.dart';
@@ -8,47 +9,34 @@ part 'system.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class System {
-  @JsonKey(name: 'DiscoveryResolve')
-  final dynamic xmlDiscoveryResolve;
+  @JsonKey(name: 'DiscoveryResolve', fromJson: OnvifUtil.nullableMappedToBool)
+  final bool? discoveryResolve;
 
-  @JsonKey(name: 'DiscoveryBye')
-  final dynamic xmlDiscoveryBye;
+  @JsonKey(name: 'DiscoveryBye', fromJson: OnvifUtil.nullableMappedToBool)
+  final bool? discoveryBye;
 
-  @JsonKey(name: 'RemoteDiscovery')
-  final dynamic xmlRemoteDiscovery;
+  @JsonKey(name: 'RemoteDiscovery', fromJson: OnvifUtil.nullableMappedToBool)
+  final bool? remoteDiscovery;
 
-  @JsonKey(name: 'SystemBackup')
-  final dynamic xmlSystemBackup;
+  @JsonKey(name: 'SystemBackup', fromJson: OnvifUtil.nullableMappedToBool)
+  final bool? systemBackup;
 
-  @JsonKey(name: 'SystemLogging')
-  final dynamic xmlSystemLogging;
+  @JsonKey(name: 'SystemLogging', fromJson: OnvifUtil.nullableMappedToBool)
+  final bool? systemLogging;
 
-  @JsonKey(name: 'FirmwareUpgrade')
-  final dynamic xmlFirmwareUpgrade;
+  @JsonKey(name: 'FirmwareUpgrade', fromJson: OnvifUtil.nullableMappedToBool)
+  final bool? firmwareUpgrade;
 
   @JsonKey(name: 'SupportedVersions', fromJson: _supportedVersionConverter)
   final List<SupportedVersion> supportedVersions;
 
-  bool get discoveryResolve =>
-      xmlDiscoveryResolve['\$'].toLowerCase() == 'true';
-
-  bool get discoveryBye => xmlDiscoveryBye['\$'].toLowerCase() == 'true';
-
-  bool get remoteDiscovery => xmlRemoteDiscovery['\$'].toLowerCase() == 'true';
-
-  bool get systemBackup => xmlSystemBackup['\$'].toLowerCase() == 'true';
-
-  bool get systemLogging => xmlSystemLogging['\$'].toLowerCase() == 'true';
-
-  bool get firmwareUpgrade => xmlFirmwareUpgrade['\$'].toLowerCase() == 'true';
-
   System(
-      {this.xmlDiscoveryResolve,
-      this.xmlDiscoveryBye,
-      this.xmlRemoteDiscovery,
-      this.xmlSystemBackup,
-      this.xmlSystemLogging,
-      this.xmlFirmwareUpgrade,
+      {this.discoveryResolve,
+      this.discoveryBye,
+      this.remoteDiscovery,
+      this.systemBackup,
+      this.systemLogging,
+      this.firmwareUpgrade,
       required this.supportedVersions});
 
   factory System.fromJson(Map<String, dynamic> json) => _$SystemFromJson(json);

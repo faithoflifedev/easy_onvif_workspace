@@ -7,11 +7,13 @@ part of 'mpeg4.dart';
 // **************************************************************************
 
 Mpeg4 _$Mpeg4FromJson(Map<String, dynamic> json) => Mpeg4(
-      json['GovLength'],
-      json['Mpeg4Profile'],
+      govLength:
+          OnvifUtil.mappedToInt(json['GovLength'] as Map<String, dynamic>),
+      mpeg4Profile: OnvifUtil.mappedToString(
+          json['Mpeg4Profile'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$Mpeg4ToJson(Mpeg4 instance) => <String, dynamic>{
-      'GovLength': instance.xmlGovLength,
-      'Mpeg4Profile': instance.xmlMpeg4Profile,
+      'GovLength': instance.govLength,
+      'Mpeg4Profile': instance.mpeg4Profile,
     };

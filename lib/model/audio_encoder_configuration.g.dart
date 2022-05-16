@@ -9,23 +9,23 @@ part of 'audio_encoder_configuration.dart';
 AudioEncoderConfiguration _$AudioEncoderConfigurationFromJson(
         Map<String, dynamic> json) =>
     AudioEncoderConfiguration(
-      json['Name'],
-      json['UseCount'],
-      json['Encoding'],
-      json['Bitrate'],
-      json['SampleRate'],
+      OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
+      OnvifUtil.mappedToString(json['Encoding'] as Map<String, dynamic>),
+      OnvifUtil.mappedToInt(json['Bitrate'] as Map<String, dynamic>),
+      OnvifUtil.mappedToInt(json['SampleRate'] as Map<String, dynamic>),
       Multicast.fromJson(json['Multicast'] as Map<String, dynamic>),
-      json['SessionTimeout'],
+      OnvifUtil.mappedToString(json['SessionTimeout'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AudioEncoderConfigurationToJson(
         AudioEncoderConfiguration instance) =>
     <String, dynamic>{
-      'Name': instance.xmlName,
-      'UseCount': instance.xmlUseCount,
-      'Encoding': instance.xmlEncoding,
-      'Bitrate': instance.xmlBitRate,
-      'SampleRate': instance.xmlSampleRate,
+      'Name': instance.name,
+      'UseCount': instance.useCount,
+      'Encoding': instance.encodingType,
+      'Bitrate': instance.bitRate,
+      'SampleRate': instance.sampleRate,
       'Multicast': instance.multiCast.toJson(),
-      'SessionTimeout': instance.xmlSessionTimeout,
+      'SessionTimeout': instance.sessionTimeout,
     };

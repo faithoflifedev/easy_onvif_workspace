@@ -7,23 +7,29 @@ part of 'system.dart';
 // **************************************************************************
 
 System _$SystemFromJson(Map<String, dynamic> json) => System(
-      xmlDiscoveryResolve: json['DiscoveryResolve'],
-      xmlDiscoveryBye: json['DiscoveryBye'],
-      xmlRemoteDiscovery: json['RemoteDiscovery'],
-      xmlSystemBackup: json['SystemBackup'],
-      xmlSystemLogging: json['SystemLogging'],
-      xmlFirmwareUpgrade: json['FirmwareUpgrade'],
+      discoveryResolve: OnvifUtil.nullableMappedToBool(
+          json['DiscoveryResolve'] as Map<String, dynamic>?),
+      discoveryBye: OnvifUtil.nullableMappedToBool(
+          json['DiscoveryBye'] as Map<String, dynamic>?),
+      remoteDiscovery: OnvifUtil.nullableMappedToBool(
+          json['RemoteDiscovery'] as Map<String, dynamic>?),
+      systemBackup: OnvifUtil.nullableMappedToBool(
+          json['SystemBackup'] as Map<String, dynamic>?),
+      systemLogging: OnvifUtil.nullableMappedToBool(
+          json['SystemLogging'] as Map<String, dynamic>?),
+      firmwareUpgrade: OnvifUtil.nullableMappedToBool(
+          json['FirmwareUpgrade'] as Map<String, dynamic>?),
       supportedVersions:
           System._supportedVersionConverter(json['SupportedVersions']),
     );
 
 Map<String, dynamic> _$SystemToJson(System instance) => <String, dynamic>{
-      'DiscoveryResolve': instance.xmlDiscoveryResolve,
-      'DiscoveryBye': instance.xmlDiscoveryBye,
-      'RemoteDiscovery': instance.xmlRemoteDiscovery,
-      'SystemBackup': instance.xmlSystemBackup,
-      'SystemLogging': instance.xmlSystemLogging,
-      'FirmwareUpgrade': instance.xmlFirmwareUpgrade,
+      'DiscoveryResolve': instance.discoveryResolve,
+      'DiscoveryBye': instance.discoveryBye,
+      'RemoteDiscovery': instance.remoteDiscovery,
+      'SystemBackup': instance.systemBackup,
+      'SystemLogging': instance.systemLogging,
+      'FirmwareUpgrade': instance.firmwareUpgrade,
       'SupportedVersions':
           instance.supportedVersions.map((e) => e.toJson()).toList(),
     };

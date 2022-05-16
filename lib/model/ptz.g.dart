@@ -7,9 +7,9 @@ part of 'ptz.dart';
 // **************************************************************************
 
 Ptz _$PtzFromJson(Map<String, dynamic> json) => Ptz(
-      json['XAddr'],
+      xAddr: OnvifUtil.mappedToString(json['XAddr'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$PtzToJson(Ptz instance) => <String, dynamic>{
-      'XAddr': instance.xmlXAddr,
+      'XAddr': instance.xAddr,
     };

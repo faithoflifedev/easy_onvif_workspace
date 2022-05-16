@@ -8,27 +8,23 @@ part 'bounds.g.dart';
 ///be larger than the whole Video source area.
 @JsonSerializable()
 class Bounds {
-  @JsonKey(name: '@x')
-  final String xmlX;
+  @JsonKey(name: '@x', fromJson: int.parse)
+  final int x;
 
-  @JsonKey(name: '@y')
-  final String xmlY;
+  @JsonKey(name: '@y', fromJson: int.parse)
+  final int y;
 
-  @JsonKey(name: '@width')
-  final String xmlWidth;
+  @JsonKey(name: '@width', fromJson: int.parse)
+  final int width;
 
-  @JsonKey(name: '@height')
-  final String xmlHeight;
+  @JsonKey(name: '@height', fromJson: int.parse)
+  final int height;
 
-  int get x => int.parse(xmlX);
-
-  int get y => int.parse(xmlY);
-
-  int get width => int.parse(xmlWidth);
-
-  int get height => int.parse(xmlHeight);
-
-  Bounds(this.xmlX, this.xmlY, this.xmlWidth, this.xmlHeight);
+  Bounds(
+      {required this.x,
+      required this.y,
+      required this.width,
+      required this.height});
 
   factory Bounds.fromJson(Map<String, dynamic> json) => _$BoundsFromJson(json);
 

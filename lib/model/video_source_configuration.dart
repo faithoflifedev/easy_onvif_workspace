@@ -1,3 +1,4 @@
+import 'package:easy_onvif/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'bounds.dart';
@@ -7,29 +8,28 @@ part 'video_source_configuration.g.dart';
 ///Optional configuration of the Video input.
 @JsonSerializable(explicitToJson: true)
 class VideoSourceConfiguration {
-  @JsonKey(name: 'Name')
-  final dynamic xmlName;
+  ///User readable name. Length up to 64 characters.
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  final String name;
 
-  @JsonKey(name: 'UseCount')
-  final dynamic xmlUseCount;
+  ///Number of internal references currently using this configuration.
+  @JsonKey(name: 'UseCount', fromJson: OnvifUtil.mappedToInt)
+  final int useCount;
 
   ///Reference to the physical input.
-  @JsonKey(name: 'SourceToken')
-  final dynamic sourceToken;
+  @JsonKey(name: 'SourceToken', fromJson: OnvifUtil.mappedToString)
+  final String sourceToken;
 
   ///Rectangle specifying the Video capturing area. The capturing area shall not
   ///be larger than the whole Video source area.
   @JsonKey(name: 'Bounds')
   final Bounds bounds;
 
-  ///User readable name. Length up to 64 characters.
-  String get name => xmlName['\$'];
-
-  ///Number of internal references currently using this configuration.
-  int get useCount => int.parse(xmlUseCount['\$']);
+  @JsonKey(name: 'Extension')
+  final dynamic extension;
 
   VideoSourceConfiguration(
-      this.xmlName, this.xmlUseCount, this.sourceToken, this.bounds);
+      this.name, this.useCount, this.sourceToken, this.bounds, this.extension);
 
   factory VideoSourceConfiguration.fromJson(Map<String, dynamic> json) =>
       _$VideoSourceConfigurationFromJson(json);

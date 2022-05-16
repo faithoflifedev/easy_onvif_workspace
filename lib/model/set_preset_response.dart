@@ -7,7 +7,7 @@ part 'set_preset_response.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class SetPresetResponse {
-  @JsonKey(name: 'PresetToken', fromJson: mappedToString)
+  @JsonKey(name: 'PresetToken', fromJson: OnvifUtil.mappedToString)
   final String presetToken;
 
   SetPresetResponse({required this.presetToken});

@@ -7,19 +7,20 @@ part of 'probe_match.dart';
 // **************************************************************************
 
 ProbeMatch _$ProbeMatchFromJson(Map<String, dynamic> json) => ProbeMatch(
-      EndpointReference.fromJson(
+      endpointReference: EndpointReference.fromJson(
           json['EndpointReference'] as Map<String, dynamic>),
-      json['Types'],
-      json['Scopes'] as String,
-      json['XAddrs'],
-      json['MetadataVersion'],
+      types: ProbeMatch._typeList(json['Types'] as Map<String, dynamic>),
+      scopes: ProbeMatch._scopeMap(json['Scopes']),
+      xaddrs: OnvifUtil.mappedToString(json['XAddrs'] as Map<String, dynamic>),
+      metadataVersion: OnvifUtil.mappedToString(
+          json['MetadataVersion'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ProbeMatchToJson(ProbeMatch instance) =>
     <String, dynamic>{
       'EndpointReference': instance.endpointReference.toJson(),
-      'Types': instance.xmlTypes,
-      'Scopes': instance.xmlScopes,
-      'XAddrs': instance.xmlXaddrs,
-      'MetadataVersion': instance.xmlMetadataVersion,
+      'Types': instance.types,
+      'Scopes': instance.scopes,
+      'XAddrs': instance.xaddrs,
+      'MetadataVersion': instance.metadataVersion,
     };

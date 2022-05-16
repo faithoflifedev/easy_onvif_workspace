@@ -24,7 +24,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^1.0.5
+  easy_onvif: ^1.0.6
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -92,46 +92,49 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 
 ### [Device Management](https://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl)
 
-| Onvif Operation        | Dart Method            | Dart Return Type                       |
-| ---------------------- | ---------------------- | -------------------------------------- |
-| GetCapabilities        | getCapabilities        | `Future<Capabilities>`                 |
-| GetDeviceInformation   | getDeviceInformation   | `Future<GetDeviceInformationResponse>` |
-| GetHostname            | getHostname            | `Future<HostnameInformation>`          |
-| GetNetworkProtocols    | getNetworkProtocols    | `Future<List<NetworkProtocol>>`        |
-| GetNTP                 | getNtp                 | `Future<NtpInformation>`               |
-| GetServiceCapabilities | getServiceCapabilities | `Future<DeviceServiceCapabilities>`    |
-| GetServices            | getServices            | `Future<List<Service>>`                |
-| GetSystemDateAndTime   | getSystemDateAndTime   | `Future<SystemDateAndTime>`            |
-| GetSystemUris          | getSystemUris          | `Future<GetSystemUrisResponse>`        |
-| GetUsers               | getUsers               | `Future<List<User>>`                   |
+| Onvif Operation        | Dart Method            | Dart Return Type                       | Test |
+| ---------------------- | ---------------------- | -------------------------------------- | ---- |
+| CreateUsers            | createUsers            | `Future<void>`                         | [ ]  |
+| DeleteUsers            | deleteUsers            | `Future<void>`                         | [ ]  |
+| GetCapabilities        | getCapabilities        | `Future<Capabilities>`                 | [x]  |
+| GetDeviceInformation   | getDeviceInformation   | `Future<GetDeviceInformationResponse>` | [x]  |
+| GetHostname            | getHostname            | `Future<HostnameInformation>`          | [x]  |
+| GetNetworkProtocols    | getNetworkProtocols    | `Future<List<NetworkProtocol>>`        | [X]  |
+| GetNTP                 | getNtp                 | `Future<NtpInformation>`               | [x]  |
+| GetServiceCapabilities | getServiceCapabilities | `Future<DeviceServiceCapabilities>`    | [x]  |
+| GetServices            | getServices            | `Future<List<Service>>`                | [x]  |
+| GetSystemDateAndTime   | getSystemDateAndTime   | `Future<SystemDateAndTime>`            | [x]  |
+| GetSystemUris          | getSystemUris          | `Future<GetSystemUrisResponse>`        | [x]  |
+| GetUsers               | getUsers               | `Future<List<User>>`                   | [x]  |
 
 ### [Media](https://www.onvif.org/ver10/media/wsdl/media.wsdl)
 
-| Onvif Operation         | Dart Method             | Return Type             |
-| ----------------------- | ----------------------- | ----------------------- |
-| GetAudioSources         | getAudioSources         | `Future<AudioSource>`   |
-| GetProfiles             | getProfiles             | `Future<List<Profile>>` |
-| GetSnapshotUri          | getSnapshotUri          | `Future<MediaUri>`      |
-| GetStreamUri            | getStreamUri            | `Future<MediaUri>`      |
-| GetVideoSources         | getVideoSources         | `Future<VideoSources>`  |
-| StartMulticastStreaming | startMulticastStreaming | `Future<void>`          |
-| StopMulticastStreaming  | stopMulticastStreaming  | `Future<void>`          |
+| Onvif Operation         | Dart Method             | Dart Return Type        | Test |
+| ----------------------- | ----------------------- | ----------------------- | ---- |
+| GetAudioSources         | getAudioSources         | `Future<AudioSource>`   | [x]  |
+| GetProfiles             | getProfiles             | `Future<List<Profile>>` | [x]  |
+| GetSnapshotUri          | getSnapshotUri          | `Future<MediaUri>`      | [x]  |
+| GetStreamUri            | getStreamUri            | `Future<MediaUri>`      | [x]  |
+| GetVideoSources         | getVideoSources         | `Future<VideoSources>`  | [x]  |
+| StartMulticastStreaming | startMulticastStreaming | `Future<void>`          | [ ]  |
+| StopMulticastStreaming  | stopMulticastStreaming  | `Future<void>`          | [ ]  |
 
 ### [PTZ](https://www.onvif.org/ver20/ptz/wsdl/ptz.wsdl)
 
-| Onvif Operation   | Dart Method       | Return Type                      |
-| ----------------- | ----------------- | -------------------------------- |
-| AbsoluteMove      | absoluteMove      | `Future<void>`                   |
-| ContinuousMove    | continuousMove    | `Future<void>`                   |
-| GetConfiguration  | getConfiguration  | `Future<PtzConfiguration>`       |
-| GetConfigurations | getConfigurations | `Future<List<PtzConfiguration>>` |
-| GetPresets        | getPresets        | `Future<List<Preset>>`           |
-| GetStatus         | getStatus         | `Future<PtzStatus>`              |
-| GotoPreset        | gotoPreset        | `Future<void>`                   |
-| RelativeMove      | relativeMove      | `Future<void>`                   |
-| RemovePreset      | removePreset      | `Future<void>`                   |
-| SetPreset         | setPreset         | `Future<String>`                 |
-| Stop              | stop              | `Future<void>`                   |
+| Onvif Operation             | Dart Method                 | Dart Return Type                 | Test |
+| --------------------------- | --------------------------- | -------------------------------- | ---- |
+| AbsoluteMove                | absoluteMove                | `Future<void>`                   | [ ]  |
+| ContinuousMove              | continuousMove              | `Future<void>`                   | [ ]  |
+| GetCompatibleConfigurations | getCompatibleConfigurations | `Future<List<PtzConfiguration>>` | [x]  |
+| GetConfiguration            | getConfiguration            | `Future<PtzConfiguration>`       | [x]  |
+| GetConfigurations           | getConfigurations           | `Future<List<PtzConfiguration>>` | [x]  |
+| GetPresets                  | getPresets                  | `Future<List<Preset>>`           | [x]  |
+| GetStatus                   | getStatus                   | `Future<PtzStatus>`              | [x]  |
+| GotoPreset                  | gotoPreset                  | `Future<void>`                   | [ ]  |
+| RelativeMove                | relativeMove                | `Future<void>`                   | [ ]  |
+| RemovePreset                | removePreset                | `Future<void>`                   | [ ]  |
+| SetPreset                   | setPreset                   | `Future<String>`                 | [x]  |
+| Stop                        | stop                        | `Future<void>`                   | [ ]  |
 
 ### PTZ Helper Methods
 

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'ptz_speed.dart';
@@ -28,108 +29,125 @@ part 'ptz_configuration.g.dart';
 ///specified limits, the PTZ unit has to move along the specified limits.
 @JsonSerializable(explicitToJson: true)
 class PtzConfiguration {
-  ///Capability information.
+  ///Token that uniquely references this configuration. Length up to 64
+  ///characters.
   @JsonKey(name: '@token')
   final String token;
 
-  @JsonKey(name: 'Name')
-  final dynamic xmlName;
+  ///User readable name. Length up to 64 characters.
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  final String name;
 
-  @JsonKey(name: 'UseCount')
-  final dynamic xmlUseCount;
+  ///Number of internal references currently using this configuration.
+  ///This informational parameter is read-only. Deprecated for Media2 Service.
+  @JsonKey(name: 'UseCount', fromJson: OnvifUtil.mappedToInt)
+  final int useCount;
 
-  @JsonKey(name: 'MoveRamp')
-  final dynamic xmlMoveRamp;
+  ///The optional acceleration ramp used by the device when moving.
+  @JsonKey(name: 'MoveRamp', fromJson: OnvifUtil.nullableMappedToInt)
+  final int? moveRamp;
 
-  @JsonKey(name: 'PresetRamp')
-  final dynamic xmlPresetRamp;
+  ///The optional acceleration ramp used by the device when recalling presets.
+  @JsonKey(name: 'PresetRamp', fromJson: OnvifUtil.nullableMappedToInt)
+  final int? presetRamp;
 
-  @JsonKey(name: 'PresetTourRamp')
-  final dynamic xmlPresetTourRamp;
+  ///The optional acceleration ramp used by the device when executing
+  ///PresetTours.
+  @JsonKey(name: 'PresetTourRamp', fromJson: OnvifUtil.nullableMappedToInt)
+  final int? presetTourRamp;
 
-  @JsonKey(name: 'NodeToken')
-  final dynamic xmlNodeToken;
+  ///A mandatory reference to the PTZ Node that the PTZ Configuration belongs
+  ///to.
+  @JsonKey(name: 'NodeToken', fromJson: OnvifUtil.mappedToString)
+  final String nodeToken;
 
-  @JsonKey(name: 'DefaultAbsolutePantTiltPositionSpace')
-  final dynamic xmlDefaultAbsolutePantTiltPositionSpace;
+  ///If the PTZ Node supports absolute Pan/Tilt movements, it shall specify one
+  ///Absolute Pan/Tilt Position Space as default.
+  @JsonKey(
+      name: 'DefaultAbsolutePantTiltPositionSpace',
+      fromJson: OnvifUtil.nullableMappedToString)
+  final String? defaultAbsolutePantTiltPositionSpace;
 
-  @JsonKey(name: 'DefaultAbsoluteZoomPositionSpace')
-  final dynamic xmlDefaultAbsoluteZoomPositionSpace;
+  ///If the PTZ Node supports absolute zoom movements, it shall specify one
+  ///Absolute Zoom Position Space as default.
+  @JsonKey(
+      name: 'DefaultAbsoluteZoomPositionSpace',
+      fromJson: OnvifUtil.nullableMappedToString)
+  final String? defaultAbsoluteZoomPositionSpace;
 
-  @JsonKey(name: 'DefaultRelativePanTiltTranslationSpace')
-  final dynamic xmlDefaultRelativePanTiltTranslationSpace;
+  ///If the PTZ Node supports relative Pan/Tilt movements, it shall specify one
+  ///RelativePan/Tilt Translation Space as default.
+  @JsonKey(
+      name: 'DefaultRelativePanTiltTranslationSpace',
+      fromJson: OnvifUtil.nullableMappedToString)
+  final String? defaultRelativePanTiltTranslationSpace;
 
-  @JsonKey(name: 'DefaultRelativeZoomTranslationSpace')
-  final dynamic xmlDefaultRelativeZoomTranslationSpace;
+  ///If the PTZ Node supports relative zoom movements, it shall specify one
+  ///Relative Zoom Translation Space as default.
+  @JsonKey(
+      name: 'DefaultRelativeZoomTranslationSpace',
+      fromJson: OnvifUtil.nullableMappedToString)
+  final String? defaultRelativeZoomTranslationSpace;
 
-  @JsonKey(name: 'DefaultContinuousPanTiltVelocitySpace')
-  final dynamic xmlDefaultContinuousPanTiltVelocitySpace;
+  ///If the PTZ Node supports continuous Pan/Tilt movements, it shall specify
+  ///one Continuous Pan/Tilt Velocity Space as default.
+  @JsonKey(
+      name: 'DefaultContinuousPanTiltVelocitySpace',
+      fromJson: OnvifUtil.nullableMappedToString)
+  final String? defaultContinuousPanTiltVelocitySpace;
 
-  @JsonKey(name: 'DefaultContinuousZoomVelocitySpace')
-  final dynamic xmlDefaultContinuousZoomVelocitySpace;
+  ///If the PTZ Node supports continuous zoom movements, it shall specify one
+  ///Continuous Zoom Velocity Space as default.
+  @JsonKey(
+      name: 'DefaultContinuousZoomVelocitySpace',
+      fromJson: OnvifUtil.nullableMappedToString)
+  final String? defaultContinuousZoomVelocitySpace;
 
+  ///If the PTZ Node supports absolute or relative PTZ movements, it shall
+  ///specify corresponding default Pan/Tilt and Zoom speeds.
   @JsonKey(name: 'PtzSpeed')
-  final PtzSpeed? defaultPTZSpeed;
+  final PtzSpeed? defaultPtzSpeed;
 
-  @JsonKey(name: 'DefaultPTZTimeout')
-  final dynamic xmlDefaultPTZTimeout;
+  ///If the PTZ Node supports continuous movements, it shall specify a default
+  ///timeout, after which the movement stops.
+  @JsonKey(
+      name: 'DefaultPTZTimeout', fromJson: OnvifUtil.nullableMappedToString)
+  final String? defaultPtzTimeout;
 
+  ///The Pan/Tilt limits element should be present for a PTZ Node that supports
+  ///an absolute Pan/Tilt. If the element is present it signals the support for
+  ///configurable Pan/Tilt limits. If limits are enabled, the Pan/Tilt movements
+  ///shall always stay within the specified range. The Pan/Tilt limits are
+  ///disabled by setting the limits to –INF or +INF.
   @JsonKey(name: 'PanTiltLimits')
   final PanTiltLimits? panTiltLimits;
 
+  ///The Zoom limits element should be present for a PTZ Node that supports
+  ///absolute zoom. If the element is present it signals the supports for
+  ///configurable Zoom limits. If limits are enabled the zoom movements shall
+  ///always stay within the specified range. The Zoom limits are disabled by
+  ///settings the limits to -INF and +INF.
   @JsonKey(name: 'ZoomLimits')
   final ZoomLimits? zoomLimits;
 
   PtzConfiguration(
       {required this.token,
-      required this.xmlName,
-      required this.xmlUseCount,
-      this.xmlMoveRamp,
-      this.xmlPresetRamp,
-      this.xmlPresetTourRamp,
-      required this.xmlNodeToken,
-      this.xmlDefaultAbsolutePantTiltPositionSpace,
-      this.xmlDefaultAbsoluteZoomPositionSpace,
-      this.xmlDefaultRelativePanTiltTranslationSpace,
-      this.xmlDefaultRelativeZoomTranslationSpace,
-      this.xmlDefaultContinuousPanTiltVelocitySpace,
-      this.xmlDefaultContinuousZoomVelocitySpace,
-      this.defaultPTZSpeed,
-      this.xmlDefaultPTZTimeout,
+      required this.name,
+      required this.useCount,
+      this.moveRamp,
+      this.presetRamp,
+      this.presetTourRamp,
+      required this.nodeToken,
+      this.defaultAbsolutePantTiltPositionSpace,
+      this.defaultAbsoluteZoomPositionSpace,
+      this.defaultRelativePanTiltTranslationSpace,
+      this.defaultRelativeZoomTranslationSpace,
+      this.defaultContinuousPanTiltVelocitySpace,
+      this.defaultContinuousZoomVelocitySpace,
+      this.defaultPtzSpeed,
+      this.defaultPtzTimeout,
       this.panTiltLimits,
       this.zoomLimits});
-
-  String get name => xmlName['\$'];
-
-  int get useCount => int.parse(xmlUseCount['\$']);
-
-  String get moveRamp => xmlMoveRamp['\$'];
-
-  int get presetRamp => int.parse(xmlPresetRamp['\$']);
-
-  int get presetTourRamp => int.parse(xmlPresetTourRamp['\$']);
-
-  String get nodeToken => xmlNodeToken['\$'];
-
-  String get defaultAbsolutePantTiltPositionSpace =>
-      xmlDefaultAbsolutePantTiltPositionSpace['\$'];
-
-  String get defaultAbsoluteZoomPositionSpace =>
-      xmlDefaultAbsoluteZoomPositionSpace['\$'];
-
-  String get defaultRelativePanTiltTranslationSpace =>
-      xmlDefaultRelativePanTiltTranslationSpace['\$'];
-
-  String get defaultRelativeZoomTranslationSpace =>
-      xmlDefaultRelativeZoomTranslationSpace['\$'];
-
-  String get defaultContinuousPanTiltVelocitySpace =>
-      xmlDefaultContinuousPanTiltVelocitySpace['\$'];
-
-  String get defaultContinuousZoomVelocitySpace =>
-      xmlDefaultContinuousZoomVelocitySpace['\$'];
-
-  String get defaultPTZTimeout => xmlDefaultPTZTimeout['\$'];
 
   factory PtzConfiguration.fromJson(Map<String, dynamic> json) =>
       _$PtzConfigurationFromJson(json);

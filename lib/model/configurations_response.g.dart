@@ -9,8 +9,8 @@ part of 'configurations_response.dart';
 GetConfigurationsResponse _$GetConfigurationsResponseFromJson(
         Map<String, dynamic> json) =>
     GetConfigurationsResponse(
-      ptzConfigurations: GetConfigurationsResponse._ptzConfigurationConverter(
-          json['PTZConfiguration']),
+      ptzConfigurations:
+          Ptz.ptzConfigurationConverter(json['PTZConfiguration']),
     );
 
 Map<String, dynamic> _$GetConfigurationsResponseToJson(

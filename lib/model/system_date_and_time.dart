@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'date_time.dart';
@@ -12,11 +13,14 @@ part 'system_date_and_time.g.dart';
 ///date and time in UTC and also local system date and time.
 @JsonSerializable(explicitToJson: true)
 class SystemDateAndTime {
-  @JsonKey(name: 'DateTimeType')
-  final dynamic xmlDateTimeType;
+  ///Indicates if the time is set manully or through NTP.
+  ///- enum { 'Manual', 'NTP' }
+  @JsonKey(name: 'DateTimeType', fromJson: OnvifUtil.mappedToString)
+  final String dateTimeType;
 
-  @JsonKey(name: 'DaylightSavings')
-  final dynamic xmlDaylightSavings;
+  ///Informative indicator whether daylight savings is currently on/off.
+  @JsonKey(name: 'DaylightSavings', fromJson: OnvifUtil.mappedToString)
+  final String daylightSavings;
 
   ///Timezone information in Posix format.
   @JsonKey(name: 'TimeZone')
@@ -31,16 +35,9 @@ class SystemDateAndTime {
   @JsonKey(name: 'LocalDateTime')
   final OnvifDateTime? local;
 
-  ///Indicates if the time is set manully or through NTP.
-  ///- enum { 'Manual', 'NTP' }
-  String get dateTimeType => xmlDateTimeType['\$'];
-
-  ///Informative indicator whether daylight savings is currently on/off.
-  String get daylightSavings => xmlDaylightSavings['\$'];
-
   SystemDateAndTime(
-      {required this.xmlDateTimeType,
-      required this.xmlDaylightSavings,
+      {required this.dateTimeType,
+      required this.daylightSavings,
       this.timeZone,
       this.utc,
       this.local});

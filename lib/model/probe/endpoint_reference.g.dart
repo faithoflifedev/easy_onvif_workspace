@@ -8,10 +8,11 @@ part of 'endpoint_reference.dart';
 
 EndpointReference _$EndpointReferenceFromJson(Map<String, dynamic> json) =>
     EndpointReference(
-      json['Address'],
+      address:
+          OnvifUtil.mappedToString(json['Address'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$EndpointReferenceToJson(EndpointReference instance) =>
     <String, dynamic>{
-      'Address': instance.xmlAddress,
+      'Address': instance.address,
     };

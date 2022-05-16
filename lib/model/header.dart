@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'probe/app_sequence.dart';
@@ -12,32 +13,24 @@ class Header {
   @JsonKey(name: 'AppSequence')
   final AppSequence? appSequence;
 
-  @JsonKey(name: 'MessageID')
-  final dynamic xmlMessageID;
+  @JsonKey(name: 'MessageID', fromJson: OnvifUtil.mappedToInt)
+  final int messageID;
 
-  @JsonKey(name: 'RelatesTo')
-  final dynamic xmlRelatesTo;
+  @JsonKey(name: 'RelatesTo', fromJson: OnvifUtil.mappedToString)
+  final String relatesTo;
 
-  @JsonKey(name: 'To')
-  final dynamic xmlTo;
+  @JsonKey(name: 'To', fromJson: OnvifUtil.mappedToString)
+  final String to;
 
-  @JsonKey(name: 'Action')
-  final dynamic xmlAction;
-
-  int get messageID => int.parse(xmlMessageID['\$']);
-
-  String get relatesTo => xmlRelatesTo['\$'];
-
-  String get to => xmlTo['\$'];
-
-  String get action => xmlAction['\$'];
+  @JsonKey(name: 'Action', fromJson: OnvifUtil.mappedToString)
+  final String action;
 
   Header(
       {this.appSequence,
-      this.xmlMessageID,
-      this.xmlRelatesTo,
-      this.xmlTo,
-      this.xmlAction});
+      required this.messageID,
+      required this.relatesTo,
+      required this.to,
+      required this.action});
 
   factory Header.fromJson(Map<String, dynamic> json) => _$HeaderFromJson(json);
 

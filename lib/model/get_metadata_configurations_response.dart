@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 import 'configuration.dart';
@@ -9,7 +11,7 @@ part 'get_metadata_configurations_response.g.dart';
 @JsonSerializable(explicitToJson: true)
 class GetMetadataConfigurationsResponse {
   ///This element contains a list of metadata configurations
-  @JsonKey(name: 'Configurations', fromJson: _configurationConverter)
+  @JsonKey(name: 'Configurations', fromJson: _configurationsConverter)
   final List<Configuration> configurations;
 
   GetMetadataConfigurationsResponse(this.configurations);
@@ -21,7 +23,7 @@ class GetMetadataConfigurationsResponse {
   Map<String, dynamic> toJson() =>
       _$GetMetadataConfigurationsResponseToJson(this);
 
-  static List<Configuration> _configurationConverter(dynamic json) {
+  static List<Configuration> _configurationsConverter(dynamic json) {
     if (json is List) {
       return json
           .map((e) => Configuration.fromJson(e as Map<String, dynamic>))
@@ -30,4 +32,7 @@ class GetMetadataConfigurationsResponse {
 
     return [Configuration.fromJson(json as Map<String, dynamic>)];
   }
+
+  @override
+  String toString() => json.encode(toJson());
 }
