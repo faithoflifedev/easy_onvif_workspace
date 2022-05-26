@@ -6,3 +6,5 @@ ios/
 android/
 scratch/
 tool/
+
+*.log
