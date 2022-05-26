@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.8
+
+- fixed a test
+
 ## 1.0.7
 
 - addition of logging functionality
