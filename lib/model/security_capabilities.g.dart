@@ -27,10 +27,13 @@ SecurityCapabilities _$SecurityCapabilitiesFromJson(
       usernameToken: OnvifUtil.stringToBool(json['@UsernameToken'] as String),
       httpDigest: OnvifUtil.stringToBool(json['@HttpDigest'] as String),
       relToken: OnvifUtil.stringToBool(json['@RELToken'] as String),
-      supportedEAPMethods: int.parse(json['@SupportedEAPMethods'] as String),
+      supportedEAPMethods:
+          OnvifUtil.optionalInt(json['@SupportedEAPMethods'] as String?),
       maxUsers: int.parse(json['@MaxUsers'] as String),
-      maxUserNameLength: int.parse(json['@MaxUserNameLength'] as String),
-      maxPasswordLength: int.parse(json['@MaxPasswordLength'] as String),
+      maxUserNameLength:
+          OnvifUtil.optionalInt(json['@MaxUserNameLength'] as String?),
+      maxPasswordLength:
+          OnvifUtil.optionalInt(json['@MaxPasswordLength'] as String?),
       securityPolicies: json['@SecurityPolicies'] as String?,
       maxPasswordHistory: json['@MaxPasswordHistory'] as int?,
     );

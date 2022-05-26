@@ -13,24 +13,20 @@ class Header {
   @JsonKey(name: 'AppSequence')
   final AppSequence? appSequence;
 
-  @JsonKey(name: 'MessageID', fromJson: OnvifUtil.mappedToInt)
-  final int messageID;
+  @JsonKey(name: 'MessageID', fromJson: OnvifUtil.nullableMappedToInt)
+  final int? messageID;
 
-  @JsonKey(name: 'RelatesTo', fromJson: OnvifUtil.mappedToString)
-  final String relatesTo;
+  @JsonKey(name: 'RelatesTo', fromJson: OnvifUtil.nullableMappedToString)
+  final String? relatesTo;
 
-  @JsonKey(name: 'To', fromJson: OnvifUtil.mappedToString)
-  final String to;
+  @JsonKey(name: 'To', fromJson: OnvifUtil.nullableMappedToString)
+  final String? to;
 
-  @JsonKey(name: 'Action', fromJson: OnvifUtil.mappedToString)
-  final String action;
+  @JsonKey(name: 'Action', fromJson: OnvifUtil.nullableMappedToString)
+  final String? action;
 
   Header(
-      {this.appSequence,
-      required this.messageID,
-      required this.relatesTo,
-      required this.to,
-      required this.action});
+      {this.appSequence, this.messageID, this.relatesTo, this.to, this.action});
 
   factory Header.fromJson(Map<String, dynamic> json) => _$HeaderFromJson(json);
 

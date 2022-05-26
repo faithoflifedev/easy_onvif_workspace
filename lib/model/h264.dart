@@ -11,7 +11,8 @@ class H264 {
   ///the I-Frames will be coded. An entry of 1 indicates I-Frames are
   ///continuously generated. An entry of 2 indicates that every 2nd image is an
   ///I-Frame, and 3 only every 3rd frame, etc. The frames in between are coded
-  ///as P or B Frames.  @JsonKey(name: 'GovLength', fromJson: OnvifUtil.mappedToInt)
+  ///as P or B Frames.
+  @JsonKey(name: 'GovLength', fromJson: OnvifUtil.mappedToInt)
   final int govLength;
 
   ///the H.264 profile, either baseline, main, extended or high

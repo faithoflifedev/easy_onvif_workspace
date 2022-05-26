@@ -26,9 +26,9 @@ SystemCapabilities _$SystemCapabilitiesFromJson(Map<String, dynamic> json) =>
       httpSupportInformation:
           OnvifUtil.stringToBool(json['@HttpSupportInformation'] as String),
       storageConfiguration:
-          OnvifUtil.stringToBool(json['@StorageConfiguration'] as String),
+          OnvifUtil.optionalBool(json['@StorageConfiguration'] as String?),
       maxStorageConfigurations:
-          int.parse(json['@MaxStorageConfigurations'] as String),
+          OnvifUtil.optionalInt(json['@MaxStorageConfigurations'] as String?),
       geoLocationEntries:
           OnvifUtil.optionalInt(json['@GeoLocationEntries'] as String?),
       autoGeo: json['@AutoGeo'] as String?,

@@ -49,12 +49,12 @@ class SystemCapabilities {
   final bool httpSupportInformation;
 
   ///Indicates support for storage configuration interfaces.
-  @JsonKey(name: '@StorageConfiguration', fromJson: OnvifUtil.stringToBool)
-  final bool storageConfiguration;
+  @JsonKey(name: '@StorageConfiguration', fromJson: OnvifUtil.optionalBool)
+  final bool? storageConfiguration;
 
   ///Indicates maximum number of storage configurations supported.
-  @JsonKey(name: '@MaxStorageConfigurations', fromJson: int.parse)
-  final int maxStorageConfigurations;
+  @JsonKey(name: '@MaxStorageConfigurations', fromJson: OnvifUtil.optionalInt)
+  final int? maxStorageConfigurations;
 
   ///If present signals support for geo location. The value signals the supported number of entries.
   @JsonKey(name: '@GeoLocationEntries', fromJson: OnvifUtil.optionalInt)

@@ -65,20 +65,20 @@ class SecurityCapabilities {
   final bool relToken;
 
   ///EAP Methods supported by the device. The int values refer to the [IANA EAP Registry](http://www.iana.org/assignments/eap-numbers/eap-numbers.xhtml).
-  @JsonKey(name: '@SupportedEAPMethods', fromJson: int.parse)
-  final int supportedEAPMethods;
+  @JsonKey(name: '@SupportedEAPMethods', fromJson: OnvifUtil.optionalInt)
+  final int? supportedEAPMethods;
 
   ///The maximum number of users that the device supports.
   @JsonKey(name: '@MaxUsers', fromJson: int.parse)
   final int maxUsers;
 
   ///Maximum number of characters supported for the username by CreateUsers.
-  @JsonKey(name: '@MaxUserNameLength', fromJson: int.parse)
-  final int maxUserNameLength;
+  @JsonKey(name: '@MaxUserNameLength', fromJson: OnvifUtil.optionalInt)
+  final int? maxUserNameLength;
 
   ///Maximum number of characters supported for the password by CreateUsers and SetUser.
-  @JsonKey(name: '@MaxPasswordLength', fromJson: int.parse)
-  final int maxPasswordLength;
+  @JsonKey(name: '@MaxPasswordLength', fromJson: OnvifUtil.optionalInt)
+  final int? maxPasswordLength;
 
   ///Indicates which security policies are supported. Options are: ModifyPassword, PasswordComplexity, AuthFailureWarnings
   @JsonKey(name: '@SecurityPolicies')
@@ -103,7 +103,7 @@ class SecurityCapabilities {
       required this.usernameToken,
       required this.httpDigest,
       required this.relToken,
-      required this.supportedEAPMethods,
+      this.supportedEAPMethods,
       required this.maxUsers,
       required this.maxUserNameLength,
       required this.maxPasswordLength,

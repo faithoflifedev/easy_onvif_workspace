@@ -21,34 +21,35 @@ void main(List<String> arguments) async {
       ));
 
   //get service capabilities
-  var deviceServiceCapabilities =
-      await onvif.deviceManagement.getServiceCapabilities();
+  // var deviceServiceCapabilities =
+  //     await onvif.deviceManagement.getServiceCapabilities();
 
-  print(
-      'max password length: ${deviceServiceCapabilities.security.maxPasswordLength}');
+  // print(
+  //     'max password length: ${deviceServiceCapabilities.security.maxPasswordLength}');
 
   //get service addresses
-  var serviceList = await onvif.deviceManagement.getServices();
+  // var serviceList = await onvif.deviceManagement.getServices();
 
-  for (Service service in serviceList) {
-    print('${service.nameSpace} ${service.xAddr}');
-  }
+  // for (Service service in serviceList) {
+  //   print('${service.nameSpace} ${service.xAddr}');
+  // }
 
   //get device info
   var deviceInfo = await onvif.deviceManagement.getDeviceInformation();
 
+  print('Manufacturer: ${deviceInfo.manufacturer}');
   print('Model: ${deviceInfo.model}');
 
-  var ptzConfigs = await onvif.ptz.getConfigurations();
+  // var ptzConfigs = await onvif.ptz.getConfigurations();
 
-  for (var ptzConfiguration in ptzConfigs) {
-    print('${ptzConfiguration.name}  ${ptzConfiguration.token}');
-  }
+  // for (var ptzConfiguration in ptzConfigs) {
+  //   print('${ptzConfiguration.name}  ${ptzConfiguration.token}');
+  // }
 
-  print('xMax: ${ptzConfigs[0].panTiltLimits!.range.xRange.max}');
-  print('xMin: ${ptzConfigs[0].panTiltLimits!.range.xRange.min}');
-  print('yMax: ${ptzConfigs[0].panTiltLimits!.range.yRange.max}');
-  print('yMin: ${ptzConfigs[0].panTiltLimits!.range.yRange.min}');
+  // print('xMax: ${ptzConfigs[0].panTiltLimits!.range.xRange.max}');
+  // print('xMin: ${ptzConfigs[0].panTiltLimits!.range.xRange.min}');
+  // print('yMax: ${ptzConfigs[0].panTiltLimits!.range.yRange.max}');
+  // print('yMin: ${ptzConfigs[0].panTiltLimits!.range.yRange.min}');
 
   // get device profiles
   var profs = await onvif.media.getProfiles();
@@ -75,12 +76,12 @@ void main(List<String> arguments) async {
   }
 
   // get compatible configurations
-  var compatibleConfigurations =
-      await onvif.ptz.getCompatibleConfigurations(profs[0].token);
+  // var compatibleConfigurations =
+  //     await onvif.ptz.getCompatibleConfigurations(profs[0].token);
 
-  for (var configuration in compatibleConfigurations) {
-    print('${configuration.name} ${configuration.token}');
-  }
+  // for (var configuration in compatibleConfigurations) {
+  //   print('${configuration.name} ${configuration.token}');
+  // }
 
   //get capabilities
   var capabilities = await onvif.deviceManagement.getCapabilities();
@@ -99,17 +100,10 @@ void main(List<String> arguments) async {
     print('${networkProtocol.name} ${networkProtocol.port}');
   }
 
-  //get Services
-  var services = await onvif.deviceManagement.getServices();
-
-  for (var service in services) {
-    print('${service.nameSpace} ${service.version}');
-  }
-
   //get system uris
-  var systemUris = await onvif.deviceManagement.getSystemUris();
+  // var systemUris = await onvif.deviceManagement.getSystemUris();
 
-  print(systemUris);
+  // print(systemUris);
 
   //create users
   var newUsers = <User>[
@@ -163,9 +157,9 @@ void main(List<String> arguments) async {
   print(streamUri.uri);
 
   //get get configuration
-  var ptzConfig = await onvif.ptz.getConfiguration(ptzConfigs[0].token);
+  // var ptzConfig = await onvif.ptz.getConfiguration(ptzConfigs[0].token);
 
-  print(ptzConfig);
+  // print(ptzConfig);
 
   //get get presets
   var presets = await onvif.ptz.getPresets(profs[0].token, limit: 5);

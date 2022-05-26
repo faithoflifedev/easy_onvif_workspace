@@ -19,6 +19,10 @@ class GetAudioSourcesResponse {
   Map<String, dynamic> toJson() => _$GetAudioSourcesResponseToJson(this);
 
   static List<AudioSource> _audioSourcesConvertor(dynamic json) {
+    if (json == null) {
+      return [];
+    }
+
     if (json is List) {
       return json
           .map((e) => AudioSource.fromJson(e as Map<String, dynamic>))

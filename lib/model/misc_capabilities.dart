@@ -6,7 +6,7 @@ part 'misc_capabilities.g.dart';
 
 @JsonSerializable()
 class MiscCapabilities {
-  @JsonKey(name: 'AuxiliaryCommands')
+  @JsonKey(name: '@AuxiliaryCommands', fromJson: _auxiliaryCommandsConverter)
   final List<dynamic> auxiliaryCommands;
 
   MiscCapabilities({required this.auxiliaryCommands});
@@ -15,6 +15,14 @@ class MiscCapabilities {
       _$MiscCapabilitiesFromJson(json);
 
   Map<String, dynamic> toJson() => _$MiscCapabilitiesToJson(this);
+
+  static List<dynamic> _auxiliaryCommandsConverter(dynamic json) {
+    if (json is List) {
+      return json.map((e) => json).toList();
+    }
+
+    return [json];
+  }
 
   @override
   String toString() => json.encode(toJson());

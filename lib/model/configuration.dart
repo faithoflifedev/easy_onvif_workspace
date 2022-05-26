@@ -57,7 +57,7 @@ class Configuration {
 
   ///Defines whether the streamed metadata will include metadata from the
   ///analytics engines (video, cell motion, audio etc.)
-  @JsonKey(name: 'Analytics', fromJson: OnvifUtil.mappedToBool)
+  @JsonKey(name: 'Analytics', fromJson: OnvifUtil.nullableMappedToBool)
   final bool? analytics;
 
   ///Defines the multicast settings that could be used for video streaming.

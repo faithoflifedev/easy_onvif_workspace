@@ -20,8 +20,8 @@ Configuration _$ConfigurationFromJson(Map<String, dynamic> json) =>
       events: (json['Events'] as List<dynamic>?)
           ?.map((e) => Event.fromJson(e as Map<String, dynamic>))
           .toList(),
-      analytics:
-          OnvifUtil.mappedToBool(json['Analytics'] as Map<String, dynamic>),
+      analytics: OnvifUtil.nullableMappedToBool(
+          json['Analytics'] as Map<String, dynamic>?),
       multicast: json['Multicast'] == null
           ? null
           : Multicast.fromJson(json['Multicast'] as Map<String, dynamic>),

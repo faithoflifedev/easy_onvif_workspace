@@ -8,10 +8,11 @@ part of 'misc_capabilities.dart';
 
 MiscCapabilities _$MiscCapabilitiesFromJson(Map<String, dynamic> json) =>
     MiscCapabilities(
-      auxiliaryCommands: json['AuxiliaryCommands'] as List<dynamic>,
+      auxiliaryCommands: MiscCapabilities._auxiliaryCommandsConverter(
+          json['@AuxiliaryCommands']),
     );
 
 Map<String, dynamic> _$MiscCapabilitiesToJson(MiscCapabilities instance) =>
     <String, dynamic>{
-      'AuxiliaryCommands': instance.auxiliaryCommands,
+      '@AuxiliaryCommands': instance.auxiliaryCommands,
     };

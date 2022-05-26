@@ -1,10 +1,8 @@
 import 'package:easy_onvif/onvif.dart';
 import 'package:loggy/loggy.dart';
 
-part 'device_management.g.dart';
-
 // ignore: constant_identifier_names
-enum CapabilityCategory { All, Analytics, Device, Events, Imaging, Media, PTZ }
+// enum CapabilityCategory { All, Analytics, Device, Events, Imaging, Media, PTZ }
 
 class DeviceManagement with UiLoggy {
   final Onvif onvif;
@@ -26,16 +24,15 @@ class DeviceManagement with UiLoggy {
   ///This method has been replaced by the more generic [getServices] method. For
   ///capabilities of individual services refer to the [getServiceCapabilities]
   ///methods.
-  Future<Capabilities> getCapabilities(
-      {CapabilityCategory? capabilityCategory}) async {
+  Future<Capabilities> getCapabilities({String? capabilityCategory}) async {
     loggy.debug('getCapabilities');
 
-    capabilityCategory ??= CapabilityCategory.All;
+    capabilityCategory ??= 'All';
 
     final envelope = await Soap.retrieveEnvlope(
         uri,
         SoapRequest.envelope(
-            null, SoapRequest.capabilities(capabilityCategory.value)));
+            null, SoapRequest.capabilities(capabilityCategory)));
 
     if (envelope.body.capabilitiesResponse == null) throw Exception();
 

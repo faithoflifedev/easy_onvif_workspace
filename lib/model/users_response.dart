@@ -8,7 +8,7 @@ part 'users_response.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class GetUsersResponse {
-  @JsonKey(name: 'User')
+  @JsonKey(name: 'User', fromJson: _userConvertor)
   final List<User> users;
 
   GetUsersResponse({required this.users});
@@ -17,6 +17,14 @@ class GetUsersResponse {
       _$GetUsersResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$GetUsersResponseToJson(this);
+
+  static List<User> _userConvertor(dynamic json) {
+    if (json is List) {
+      return json.map((e) => User.fromJson(e as Map<String, dynamic>)).toList();
+    }
+
+    return [User.fromJson(json as Map<String, dynamic>)];
+  }
 
   @override
   String toString() => json.encode(toJson());

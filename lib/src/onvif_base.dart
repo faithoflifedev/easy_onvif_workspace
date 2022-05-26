@@ -18,13 +18,13 @@ class Onvif with UiLoggy {
   Duration get timeDelta => _timeDelta!;
 
   Media get media {
-    if (_media == null) throw Exception();
+    if (_media == null) throw Exception('Media services not available');
 
     return _media!;
   }
 
   Ptz get ptz {
-    if (_ptz == null) throw Exception();
+    if (_ptz == null) throw Exception('PTZ services not available');
 
     return _ptz!;
   }
@@ -98,20 +98,35 @@ class Onvif with UiLoggy {
         ? datetime.utcDateTime!.difference(DateTime.now().toUtc())
         : const Duration(seconds: 0);
 
-    final serviceList = await deviceManagement.getServices();
+    try {
+      final serviceList = await deviceManagement.getServices();
 
-    serviceMap.addAll(
-        {for (var service in serviceList) service.nameSpace: service.xAddr});
+      serviceMap.addAll(
+          {for (var service in serviceList) service.nameSpace: service.xAddr});
 
-    if (serviceMap.containsKey('http://www.onvif.org/ver10/media/wsdl')) {
-      _media = Media(
-          onvif: this,
-          uri: serviceMap['http://www.onvif.org/ver10/media/wsdl']!);
-    }
+      if (serviceMap.containsKey('http://www.onvif.org/ver10/media/wsdl')) {
+        _media = Media(
+            onvif: this,
+            uri: serviceMap['http://www.onvif.org/ver10/media/wsdl']!);
+      }
 
-    if (serviceMap.containsKey('http://www.onvif.org/ver20/ptz/wsdl')) {
-      _ptz = Ptz(
-          onvif: this, uri: serviceMap['http://www.onvif.org/ver20/ptz/wsdl']!);
+      if (serviceMap.containsKey('http://www.onvif.org/ver20/ptz/wsdl')) {
+        _ptz = Ptz(
+            onvif: this,
+            uri: serviceMap['http://www.onvif.org/ver20/ptz/wsdl']!);
+      }
+    } catch (error) {
+      loggy.warning('GetServices command not supported');
+    } finally {
+      final capabilities = await deviceManagement.getCapabilities();
+
+      if (capabilities.media?.xaddr != null) {
+        _media = Media(onvif: this, uri: capabilities.media!.xaddr);
+      }
+
+      if (capabilities.ptz?.xAddr != null) {
+        _ptz = Ptz(onvif: this, uri: capabilities.ptz!.xAddr);
+      }
     }
 
     loggy.info('initialization complete');

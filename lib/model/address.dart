@@ -16,8 +16,8 @@ class Address {
   final String type;
 
   ///IPv4 address.
-  @JsonKey(name: 'IPv4Address', fromJson: OnvifUtil.mappedToString)
-  final String ip4Address;
+  @JsonKey(name: 'IPv4Address', fromJson: OnvifUtil.nullableMappedToString)
+  final String? ip4Address;
 
   Address(this.type, this.ip4Address);
 
