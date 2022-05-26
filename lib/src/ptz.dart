@@ -281,12 +281,12 @@ class Ptz {
   Future<Preset?> getCurrentPreset(String profileToken) async {
     Preset? matchedPreset;
 
-    final _ptzStatus = await getStatus(profileToken);
+    final ptzStatus = await getStatus(profileToken);
 
-    final _presets = await getPresets(profileToken);
+    final presets = await getPresets(profileToken);
 
-    for (var preset in _presets) {
-      if (_matchPositionSettings(preset, _ptzStatus)) {
+    for (var preset in presets) {
+      if (_matchPositionSettings(preset, ptzStatus)) {
         matchedPreset = preset;
 
         break;
@@ -302,15 +302,15 @@ class Ptz {
   }
 
   bool _matchPositionSettings(Preset preset, PtzStatus ptzStatus) {
-    bool _matchX =
+    bool matchX =
         _matchValue(preset.position.panTilt!.x, ptzStatus.position.panTilt!.x);
 
-    bool _matchY =
+    bool matchY =
         _matchValue(preset.position.panTilt!.y, ptzStatus.position.panTilt!.y);
 
-    bool _matchZ =
+    bool matchZ =
         _matchValue(preset.position.zoom!.x, ptzStatus.position.zoom!.x);
 
-    return _matchX && _matchY && _matchZ;
+    return matchX && matchY && matchZ;
   }
 }

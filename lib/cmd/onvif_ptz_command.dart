@@ -79,12 +79,12 @@ class OnvifAbsoluteMovePtzCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final _place = PtzPosition(
+      final place = PtzPosition(
           panTilt: PanTilt.fromString(
               x: argResults!['pan-tilt-x'], y: argResults!['pan-tilt-y']),
           zoom: Zoom.fromString(x: argResults!['pan-tilt-zoom']));
 
-      await ptz.absoluteMove(argResults!['profile-token'], _place);
+      await ptz.absoluteMove(argResults!['profile-token'], place);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -133,12 +133,12 @@ class OnvifContinuousMovePtzCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final _velocity = PtzPosition(
+      final velocity = PtzPosition(
           panTilt: PanTilt.fromString(
               x: argResults!['pan-tilt-x'], y: argResults!['pan-tilt-y']),
           zoom: Zoom.fromString(x: argResults!['pan-tilt-zoom']));
 
-      await ptz.continuousMove(argResults!['profile-token'], _velocity);
+      await ptz.continuousMove(argResults!['profile-token'], velocity);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -338,12 +338,12 @@ class OnvifGotoPresetPtzCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final _profileToken = argResults!['profile-token'];
+      final profileToken = argResults!['profile-token'];
 
-      final _presetMap = await ptz.getPresetsMap(_profileToken);
+      final presetMap = await ptz.getPresetsMap(profileToken);
 
       await ptz.gotoPreset(
-          _profileToken, _presetMap[argResults!['preset-token']]!);
+          profileToken, presetMap[argResults!['preset-token']]!);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -391,12 +391,12 @@ class OnvifRelativeMovePtzCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      var _translation = PtzPosition(
+      var translation = PtzPosition(
           panTilt: PanTilt.fromString(
               x: argResults!['translation-x'], y: argResults!['translation-y']),
           zoom: Zoom.fromString(x: argResults!['translation-zoom']));
 
-      await ptz.relativeMove(argResults!['profile-token'], _translation);
+      await ptz.relativeMove(argResults!['profile-token'], translation);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -481,17 +481,17 @@ class OnvifSetPresetPtzCommand extends OnvifHelperCommand {
   void run() async {
     await initializeOnvif();
 
-    final _profileToken = argResults!['profile-token'];
+    final profileToken = argResults!['profile-token'];
 
-    final _ptzStatus = await ptz.getStatus(_profileToken);
+    final ptzStatus = await ptz.getStatus(profileToken);
 
-    final _preset = Preset(
+    final preset = Preset(
         token: argResults!['preset-token'],
         name: argResults!['preset-name'],
-        position: _ptzStatus.position);
+        position: ptzStatus.position);
 
     try {
-      await ptz.setPreset(_profileToken, _preset);
+      await ptz.setPreset(profileToken, preset);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -609,14 +609,14 @@ class OnvifMoveDownPtzCommand extends OnvifHelperCommand {
   void run() async {
     await initializeOnvif();
 
-    int? _step;
+    int? step;
 
     if (argResults?['step'] != null) {
-      _step = int.parse(argResults!['step']);
+      step = int.parse(argResults!['step']);
     }
 
     try {
-      await ptz.moveDown(argResults!['profile-token'], _step!);
+      await ptz.moveDown(argResults!['profile-token'], step!);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -649,14 +649,14 @@ class OnvifMoveLeftPtzCommand extends OnvifHelperCommand {
   void run() async {
     await initializeOnvif();
 
-    int? _step;
+    int? step;
 
     if (argResults?['step'] != null) {
-      _step = int.parse(argResults!['step']);
+      step = int.parse(argResults!['step']);
     }
 
     try {
-      await ptz.moveLeft(argResults!['profile-token'], _step!);
+      await ptz.moveLeft(argResults!['profile-token'], step!);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -689,14 +689,14 @@ class OnvifMoveRightPtzCommand extends OnvifHelperCommand {
   void run() async {
     await initializeOnvif();
 
-    int? _step;
+    int? step;
 
     if (argResults?['step'] != null) {
-      _step = int.parse(argResults!['step']);
+      step = int.parse(argResults!['step']);
     }
 
     try {
-      await ptz.moveRight(argResults!['profile-token'], _step!);
+      await ptz.moveRight(argResults!['profile-token'], step!);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -730,14 +730,14 @@ class OnvifMoveUpPtzCommand extends OnvifHelperCommand {
   void run() async {
     await initializeOnvif();
 
-    int? _step;
+    int? step;
 
     if (argResults?['step'] != null) {
-      _step = int.parse(argResults!['step']);
+      step = int.parse(argResults!['step']);
     }
 
     try {
-      await ptz.moveUp(argResults!['profile-token'], _step!);
+      await ptz.moveUp(argResults!['profile-token'], step!);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -805,14 +805,14 @@ class OnvifZoomInPtzCommand extends OnvifHelperCommand {
   void run() async {
     await initializeOnvif();
 
-    int? _step;
+    int? step;
 
     if (argResults?['step'] != null) {
-      _step = int.parse(argResults!['step']);
+      step = int.parse(argResults!['step']);
     }
 
     try {
-      await ptz.zoomIn(argResults!['profile-token'], _step!);
+      await ptz.zoomIn(argResults!['profile-token'], step!);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -845,14 +845,14 @@ class OnvifZoomOutPtzCommand extends OnvifHelperCommand {
   void run() async {
     await initializeOnvif();
 
-    int? _step;
+    int? step;
 
     if (argResults?['step'] != null) {
-      _step = int.parse(argResults!['step']);
+      step = int.parse(argResults!['step']);
     }
 
     try {
-      await ptz.zoomOut(argResults!['profile-token'], _step!);
+      await ptz.zoomOut(argResults!['profile-token'], step!);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

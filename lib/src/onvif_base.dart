@@ -57,16 +57,16 @@ class Onvif {
   Future<void> initialize() async {
     if (debug) logDebug('initializing...');
 
-    final _datetime = await deviceManagement.getSystemDateAndTime();
+    final datetime = await deviceManagement.getSystemDateAndTime();
 
-    _timeDelta = _datetime.utcDateTime != null
-        ? _datetime.utcDateTime!.difference(DateTime.now().toUtc())
+    _timeDelta = datetime.utcDateTime != null
+        ? datetime.utcDateTime!.difference(DateTime.now().toUtc())
         : const Duration(seconds: 0);
 
-    final _serviceList = await deviceManagement.getServices();
+    final serviceList = await deviceManagement.getServices();
 
     serviceMap.addAll(
-        {for (var service in _serviceList) service.nameSpace: service.xAddr});
+        {for (var service in serviceList) service.nameSpace: service.xAddr});
 
     if (serviceMap.containsKey('http://www.onvif.org/ver10/media/wsdl')) {
       _media = Media(

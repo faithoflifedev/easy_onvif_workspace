@@ -39,7 +39,7 @@ void main(List<String> arguments) async {
   var ptzConfigs = await onvif.ptz.getConfigurations();
 
   for (var ptzConfiguration in ptzConfigs) {
-    print(ptzConfiguration.name + ' ' + ptzConfiguration.token);
+    print('${ptzConfiguration.name} ${ptzConfiguration.token}');
   }
 
   print('xMax: ${ptzConfigs[0].panTiltLimits!.range.xRange.max}');
@@ -68,6 +68,6 @@ void main(List<String> arguments) async {
   var configurations = await onvif.media.getMetadataConfigurations();
 
   for (var configuration in configurations) {
-    print(configuration.name + ' ' + configuration.token);
+    print('${configuration.name} ${configuration.token}');
   }
 }
