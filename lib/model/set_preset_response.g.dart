@@ -8,7 +8,7 @@ part of 'set_preset_response.dart';
 
 SetPresetResponse _$SetPresetResponseFromJson(Map<String, dynamic> json) =>
     SetPresetResponse(
-      presetToken: json['PresetToken'] as String,
+      presetToken: mappedToString(json['PresetToken'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SetPresetResponseToJson(SetPresetResponse instance) =>

@@ -23,16 +23,15 @@ SystemCapabilities _$SystemCapabilitiesFromJson(Map<String, dynamic> json) =>
           stringToBool(json['@StorageConfiguration'] as String),
       maxStorageConfigurations:
           stringToInt(json['@MaxStorageConfigurations'] as String),
-      geoLocationEntries:
-          nullableStringToInt(json['@GeoLocationEntries'] as String?),
+      geoLocationEntries: nullableToInt(json['@GeoLocationEntries'] as String?),
       autoGeo: json['@AutoGeo'] as String?,
       storageTypesSupported: json['@StorageTypesSupported'] as String?,
       discoveryNotSupported:
-          nullableStringToBool(json['@DiscoveryNotSupported'] as String?),
+          nullableToBool(json['@DiscoveryNotSupported'] as String?),
       networkConfigNotSupported:
-          nullableStringToBool(json['@NetworkConfigNotSupported'] as String?),
+          nullableToBool(json['@NetworkConfigNotSupported'] as String?),
       userConfigNotSupported:
-          nullableStringToBool(json['@UserConfigNotSupported'] as String?),
+          nullableToBool(json['@UserConfigNotSupported'] as String?),
     );
 
 Map<String, dynamic> _$SystemCapabilitiesToJson(SystemCapabilities instance) =>

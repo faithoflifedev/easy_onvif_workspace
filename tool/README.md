@@ -148,6 +148,7 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 
 ## What's next
 
-Device discovery is planned for the 1.1.x release of the library.
+- More comprehensive unit tests
+- Device discovery is planned for the 1.1.x release of the library.
 
 [![A test image](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/faithoflif2)

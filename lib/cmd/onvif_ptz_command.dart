@@ -485,8 +485,6 @@ class OnvifSetPresetPtzCommand extends OnvifHelperCommand {
 
     final _ptzStatus = await ptz.getStatus(_profileToken);
 
-    //TODO:  test me
-
     final _preset = Preset(
         token: argResults!['preset-token'],
         name: argResults!['preset-name'],

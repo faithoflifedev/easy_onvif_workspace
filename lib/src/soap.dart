@@ -40,12 +40,12 @@ class Soap {
       {Function? postProcess}) async {
     final soapResponse = await Soap.send(uri, soapRequest.toString());
 
-    final jsonMap = OnvifUtil.xmlToMap(soapResponse);
+    // final jsonMap = OnvifUtil.xmlToMap(soapResponse);
 
-    final envelope = Envelope.fromJson(jsonMap);
+    final envelope = Envelope.fromXml(soapResponse);
 
     if (postProcess != null) {
-      postProcess(soapResponse, jsonMap, envelope);
+      postProcess(soapResponse, envelope);
     }
 
     return envelope;
@@ -143,6 +143,15 @@ class SoapRequest {
   ///XML for the [videoSources]
   static XmlDocumentFragment videoSources() {
     builder.element('GetVideoSources', nest: () {
+      builder.namespace('http://www.onvif.org/ver10/media/wsdl');
+    });
+
+    return builder.buildFragment();
+  }
+
+  ///XML for the [videoSources]
+  static XmlDocumentFragment metadataConfigurations() {
+    builder.element('GetMetadataConfigurations', nest: () {
       builder.namespace('http://www.onvif.org/ver10/media/wsdl');
     });
 

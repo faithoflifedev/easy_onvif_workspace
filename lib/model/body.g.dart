@@ -53,10 +53,10 @@ Body _$BodyFromJson(Map<String, dynamic> json) => Body(
           ? null
           : GetPresetResponse.fromJson(
               json['GetPresetsResponse'] as Map<String, dynamic>),
-      setPresetResponse: json['SetPresetsResponse'] == null
+      setPresetResponse: json['SetPresetResponse'] == null
           ? null
           : SetPresetResponse.fromJson(
-              json['SetPresetsResponse'] as Map<String, dynamic>),
+              json['SetPresetResponse'] as Map<String, dynamic>),
       snapshotUriResponse: json['GetSnapshotUriResponse'] == null
           ? null
           : GetUriResponse.fromJson(
@@ -92,6 +92,12 @@ Body _$BodyFromJson(Map<String, dynamic> json) => Body(
       probeMatches: json['ProbeMatches'] == null
           ? null
           : ProbeMatches.fromJson(json['ProbeMatches'] as Map<String, dynamic>),
+      metadataConfigurationsResponse:
+          json['GetMetadataConfigurationsResponse'] == null
+              ? null
+              : GetMetadataConfigurationsResponse.fromJson(
+                  json['GetMetadataConfigurationsResponse']
+                      as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$BodyToJson(Body instance) => <String, dynamic>{
@@ -108,7 +114,7 @@ Map<String, dynamic> _$BodyToJson(Body instance) => <String, dynamic>{
       'GetServiceCapabilitiesResponse':
           instance.serviceCapabilitiesResponse?.toJson(),
       'GetPresetsResponse': instance.getPresetResponse?.toJson(),
-      'SetPresetsResponse': instance.setPresetResponse?.toJson(),
+      'SetPresetResponse': instance.setPresetResponse?.toJson(),
       'GetSnapshotUriResponse': instance.snapshotUriResponse?.toJson(),
       'GetStreamUriResponse': instance.streamUriResponse?.toJson(),
       'GetNetworkProtocolsResponse':
@@ -119,5 +125,7 @@ Map<String, dynamic> _$BodyToJson(Body instance) => <String, dynamic>{
       'ProbeMatches': instance.probeMatches?.toJson(),
       'GetSystemUrisResponse': instance.systemUrisResponse?.toJson(),
       'GetUsersResponse': instance.usersResponse?.toJson(),
+      'GetMetadataConfigurationsResponse':
+          instance.metadataConfigurationsResponse?.toJson(),
       'Fault': instance.fault,
     };

@@ -1,5 +1,5 @@
 // import 'package:easy_onvif/model/envelope.dart';
-import 'package:easy_onvif/model/metadata_configuration.dart';
+import 'package:easy_onvif/model/configuration.dart';
 import 'package:easy_onvif/onvif.dart';
 
 class Media {
@@ -21,9 +21,13 @@ class Media {
 
   ///This operation lists all existing metadata configurations. The client need
   ///not know anything apriori about the metadata in order to use the command.
-  Future<List<MetaDataConfiguration>> getMetadataConfigurations() async {
-    // TODO: implement getMetadataConfigurations
-    throw UnimplementedError();
+  Future<List<Configuration>> getMetadataConfigurations() async {
+    final envelope = await Soap.retrieveEnvlope(
+        uri, onvif.secureRequest(SoapRequest.metadataConfigurations()));
+
+    if (envelope.body.metadataConfigurationsResponse == null) throw Exception();
+
+    return envelope.body.metadataConfigurationsResponse!.configurations;
   }
 
   ///Any endpoint can ask for the existing media profiles of a device using the

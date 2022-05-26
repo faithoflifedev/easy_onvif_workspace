@@ -145,12 +145,7 @@ class DeviceManagement {
   ///typed answer.
   Future<DeviceServiceCapabilities> getServiceCapabilities() async {
     final envelope = await Soap.retrieveEnvlope(
-        uri, onvif.secureRequest(SoapRequest.serviceCapabilities()),
-        postProcess: (String xmlBody, dynamic jsonMap, Envelope envelope) {
-      print(xmlBody);
-      print('\n\n');
-      print(jsonMap);
-    });
+        uri, onvif.secureRequest(SoapRequest.serviceCapabilities()));
 
     if (envelope.body.serviceCapabilitiesResponse == null) throw Exception();
 

@@ -24,7 +24,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^1.0.4
+  easy_onvif: ^1.0.7
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -148,6 +148,7 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 
 ## What's next
 
-Device discovery is planned for the 1.1.x release of the library.
+- More comprehensive unit tests
+- Device discovery is planned for the 1.1.x release of the library.
 
 [![A test image](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/faithoflif2)

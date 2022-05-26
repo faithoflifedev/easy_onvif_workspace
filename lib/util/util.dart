@@ -91,15 +91,15 @@ double stringToDouble(String value) {
   return double.parse(value);
 }
 
-int? nullableStringToInt(String? value) {
+int? nullableToInt(String? value) {
   return value != null ? stringToInt(value) : null;
 }
 
-bool? nullableStringToBool(String? value) {
+bool? nullableToBool(String? value) {
   return value != null ? stringToBool(value) : null;
 }
 
-bool mappedStringToBool(Map<String, dynamic> value) {
+bool mappedToBool(Map<String, dynamic> value) {
   return value.containsKey('\$') ? stringToBool(value['\$']) : false;
 }
 
@@ -114,6 +114,14 @@ String? nullableMappedToString(Map<String, dynamic>? value) {
 double mappedToDouble(Map<String, dynamic> value) {
   if (value.containsKey('\$')) {
     return double.parse(value['\$']!);
+  } else {
+    throw Exception('Problem parsing double');
+  }
+}
+
+int mappedToInt(Map<String, dynamic> value) {
+  if (value.containsKey('\$')) {
+    return int.parse(value['\$']!);
   } else {
     throw Exception('Problem parsing double');
   }
