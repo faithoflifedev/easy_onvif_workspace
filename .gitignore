@@ -23,7 +23,7 @@ doc/api/
 *.js.deps
 *.js.map
 
-.pubspec.yaml.bak
+onvif.log
 
 scratch/
 ios/

@@ -480,7 +480,12 @@ class OnvifSetPresetPtzCommand extends OnvifHelperCommand {
     final profileToken = argResults!['profile-token'];
 
     try {
+<<<<<<< HEAD
       await ptz.setPreset(profileToken, argResults!['preset-name']);
+=======
+      await ptz.setPreset(profileToken, argResults?['preset-name'],
+          argResults?['preset-token']);
+>>>>>>> 501be26 (addition of logging functionality)
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

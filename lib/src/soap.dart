@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
+import 'package:easy_onvif/onvif.dart';
 import 'package:xml/xml.dart';
-
-import '../onvif.dart';
 
 class Xmlns {
   static final ter = 'http://www.onvif.org/ver10/error';
@@ -14,14 +13,18 @@ class Xmlns {
 
 ///Utility class for interacting through the SOAP protocol
 class Soap {
-  static final dio = Dio();
+  static Dio? dio;
+
+  static Dio get _http => dio != null
+      ? dio!
+      : throw Exception('dio needs to be configured and set');
 
   ///Send the SOAP [requestData] to the given [url] endpoint.
   static Future<String> send(String url, String requestData) async {
     Response? response;
 
     try {
-      response = await dio.post(url,
+      response = await _http.post(url,
           data: requestData,
           options: Options(headers: {
             Headers.contentTypeHeader: 'text/xml; charset=utf-8',
@@ -34,28 +37,31 @@ class Soap {
         final envelope = Envelope.fromJson(jsonMap);
 
         if (envelope.body.hasFault) {
-          throw Exception("Error code: ${envelope.body.fault}");
+          throw Exception('Error code: ${envelope.body.fault}');
         }
       }
 
-      throw Exception(error.toString());
+      throw Exception(error);
     }
 
     return response.data;
   }
 
   ///Retrieve an onvif SOAP envelope
-  static Future<Envelope> retrieveEnvlope(String uri, XmlDocument soapRequest,
-      {Function? postProcess}) async {
+  static Future<Envelope> retrieveEnvlope(
+    String uri,
+    XmlDocument soapRequest,
+    // {Function? postProcess}
+  ) async {
     final soapResponse = await Soap.send(uri, soapRequest.toString());
 
-    final envelope = Envelope.fromXml(soapResponse);
+    // final envelope = Envelope.fromXml(soapResponse);
 
-    if (postProcess != null) {
-      postProcess(soapResponse, envelope);
-    }
+    // if (postProcess != null) {
+    //   postProcess(soapResponse, envelope);
+    // }
 
-    return envelope;
+    return Envelope.fromXml(soapResponse);
   }
 }
 

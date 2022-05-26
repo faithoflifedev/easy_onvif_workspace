@@ -1,4 +1,5 @@
 import 'package:easy_onvif/onvif.dart';
+import 'package:loggy/loggy.dart';
 import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart';
 
@@ -10,7 +11,14 @@ void main(List<String> arguments) async {
   final onvif = await Onvif.connect(
       host: config['host'],
       username: config['username'],
-      password: config['password']);
+      password: config['password'],
+      logOptions: const LogOptions(
+        LogLevel.all,
+        stackTraceLevel: LogLevel.off,
+      ),
+      printer: const PrettyPrinter(
+        showColors: true,
+      ));
 
   //get service capabilities
   var deviceServiceCapabilities =
@@ -34,7 +42,11 @@ void main(List<String> arguments) async {
   var ptzConfigs = await onvif.ptz.getConfigurations();
 
   for (var ptzConfiguration in ptzConfigs) {
+<<<<<<< HEAD
     print('${ptzConfiguration.name} ${ptzConfiguration.token}');
+=======
+    print('${ptzConfiguration.name}  ${ptzConfiguration.token}');
+>>>>>>> 501be26 (addition of logging functionality)
   }
 
   print('xMax: ${ptzConfigs[0].panTiltLimits!.range.xRange.max}');
@@ -71,7 +83,7 @@ void main(List<String> arguments) async {
       await onvif.ptz.getCompatibleConfigurations(profs[0].token);
 
   for (var configuration in compatibleConfigurations) {
-    print(configuration.name + ' ' + configuration.token);
+    print('${configuration.name} ${configuration.token}');
   }
 
   //get capabilities
@@ -172,7 +184,6 @@ void main(List<String> arguments) async {
   print(status);
 
   //set preset
-
   var res = await onvif.ptz.setPreset(profs[0].token, 'new test', '20');
 
   print(res);
