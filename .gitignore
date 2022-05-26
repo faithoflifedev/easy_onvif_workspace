@@ -23,7 +23,7 @@ doc/api/
 *.js.deps
 *.js.map
 
-onvif.log
+*.log
 
 scratch/
 ios/
