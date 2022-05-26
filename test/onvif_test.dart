@@ -81,7 +81,7 @@ void main() {
 
   test('GetDeviceInformationResponse is not null when doc parsed', () {
     final response =
-        File('test/xml/GetCapabilitiesResponse.xml').readAsStringSync();
+        File('test/xml/GetDeviceInformationResponse.xml').readAsStringSync();
 
     final envelope = Envelope.fromXml(response);
 

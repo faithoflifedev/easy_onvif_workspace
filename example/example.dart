@@ -13,8 +13,8 @@ void main(List<String> arguments) async {
       username: config['username'],
       password: config['password'],
       logOptions: const LogOptions(
-        LogLevel.all,
-        stackTraceLevel: LogLevel.off,
+        LogLevel.debug,
+        stackTraceLevel: LogLevel.error,
       ),
       printer: const PrettyPrinter(
         showColors: true,
