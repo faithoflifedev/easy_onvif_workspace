@@ -479,21 +479,8 @@ class OnvifSetPresetPtzCommand extends OnvifHelperCommand {
 
     final profileToken = argResults!['profile-token'];
 
-<<<<<<< HEAD
-    final ptzStatus = await ptz.getStatus(profileToken);
-
-    final preset = Preset(
-        token: argResults!['preset-token'],
-        name: argResults!['preset-name'],
-        position: ptzStatus.position);
-
     try {
-      await ptz.setPreset(profileToken, preset);
-=======
-    try {
-      await ptz.setPreset(_profileToken, argResults?['preset-name'],
-          argResults?['preset-token']);
->>>>>>> dc3d70f (unit tests and additional API functionality)
+      await ptz.setPreset(profileToken, argResults!['preset-name']);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
