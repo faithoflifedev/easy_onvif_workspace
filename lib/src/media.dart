@@ -16,7 +16,7 @@ class Media {
 
     if (envelope.body.audioSourcesResponse == null) throw Exception();
 
-    return [envelope.body.audioSourcesResponse!.audioSource];
+    return envelope.body.audioSourcesResponse!.audioSources;
   }
 
   ///This operation lists all existing metadata configurations. The client need
@@ -108,7 +108,7 @@ class Media {
   }
 
   ///This command lists all available physical video inputs of the device.
-  Future<VideoSources> getVideoSources() async {
+  Future<List<VideoSource>> getVideoSources() async {
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.videoSources()));
 

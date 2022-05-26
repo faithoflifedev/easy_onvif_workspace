@@ -9,19 +9,19 @@ part of 'device_information_response.dart';
 GetDeviceInformationResponse _$GetDeviceInformationResponseFromJson(
         Map<String, dynamic> json) =>
     GetDeviceInformationResponse(
-      json['Manufacturer'],
-      json['Model'],
-      json['FirmwareVersion'],
-      json['SerialNumber'],
-      json['HardwareId'],
+      OnvifUtil.mappedToString(json['Manufacturer'] as Map<String, dynamic>),
+      OnvifUtil.mappedToString(json['Model'] as Map<String, dynamic>),
+      OnvifUtil.mappedToString(json['FirmwareVersion'] as Map<String, dynamic>),
+      OnvifUtil.mappedToString(json['SerialNumber'] as Map<String, dynamic>),
+      OnvifUtil.mappedToString(json['HardwareId'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$GetDeviceInformationResponseToJson(
         GetDeviceInformationResponse instance) =>
     <String, dynamic>{
-      'Manufacturer': instance.xmlManufacturer,
-      'Model': instance.xmlModel,
-      'FirmwareVersion': instance.xmlFirmwareVersion,
-      'SerialNumber': instance.xmlSerialNumber,
-      'HardwareId': instance.xmlHardwareId,
+      'Manufacturer': instance.manufacturer,
+      'Model': instance.model,
+      'FirmwareVersion': instance.firmwareVersion,
+      'SerialNumber': instance.serialNumber,
+      'HardwareId': instance.hardwareId,
     };

@@ -98,6 +98,12 @@ Body _$BodyFromJson(Map<String, dynamic> json) => Body(
               : GetMetadataConfigurationsResponse.fromJson(
                   json['GetMetadataConfigurationsResponse']
                       as Map<String, dynamic>),
+      compatibleConfigurationsResponse:
+          json['GetCompatibleConfigurationsResponse'] == null
+              ? null
+              : GetCompatibleConfigurationsResponse.fromJson(
+                  json['GetCompatibleConfigurationsResponse']
+                      as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$BodyToJson(Body instance) => <String, dynamic>{
@@ -127,5 +133,7 @@ Map<String, dynamic> _$BodyToJson(Body instance) => <String, dynamic>{
       'GetUsersResponse': instance.usersResponse?.toJson(),
       'GetMetadataConfigurationsResponse':
           instance.metadataConfigurationsResponse?.toJson(),
+      'GetCompatibleConfigurationsResponse':
+          instance.compatibleConfigurationsResponse?.toJson(),
       'Fault': instance.fault,
     };

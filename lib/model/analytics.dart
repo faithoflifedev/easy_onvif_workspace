@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'analytics.g.dart';
@@ -7,26 +8,19 @@ part 'analytics.g.dart';
 ///Analytics capabilities
 @JsonSerializable(explicitToJson: true)
 class Analytics {
-  @JsonKey(name: 'XAddr')
-  final dynamic xmlXAddr;
-
-  @JsonKey(name: 'RuleSupport')
-  final dynamic xmlRuleSupport;
-
-  @JsonKey(name: 'AnalyticsModuleSupport')
-  final dynamic xmlAnalyticsModuleSupport;
-
   ///Analytics service URI.
-  String get xAddr => xmlXAddr['\$'];
+  @JsonKey(name: 'XAddr', fromJson: OnvifUtil.mappedToString)
+  final String xAddr;
 
   ///Indicates whether or not rules are supported.
-  bool get ruleSupport => xmlRuleSupport['\$'].toLowerCase() == 'true';
+  @JsonKey(name: 'RuleSupport', fromJson: OnvifUtil.mappedToBool)
+  final bool ruleSupport;
 
   ///Indicates whether or not modules are supported.
-  bool get analyticsModuleSupport =>
-      xmlAnalyticsModuleSupport['\$'].toLowerCase() == 'true';
+  @JsonKey(name: 'AnalyticsModuleSupport', fromJson: OnvifUtil.mappedToBool)
+  final bool analyticsModuleSupport;
 
-  Analytics(this.xmlXAddr, this.xmlRuleSupport, this.xmlAnalyticsModuleSupport);
+  Analytics(this.xAddr, this.ruleSupport, this.analyticsModuleSupport);
 
   factory Analytics.fromJson(Map<String, dynamic> json) =>
       _$AnalyticsFromJson(json);

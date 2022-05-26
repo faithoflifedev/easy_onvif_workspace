@@ -7,9 +7,9 @@ part of 'media.dart';
 // **************************************************************************
 
 Media _$MediaFromJson(Map<String, dynamic> json) => Media(
-      json['XAddr'],
+      xaddr: OnvifUtil.mappedToString(json['XAddr'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$MediaToJson(Media instance) => <String, dynamic>{
-      'XAddr': instance.xmlXaddr,
+      'XAddr': instance.xaddr,
     };

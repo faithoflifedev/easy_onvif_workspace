@@ -7,7 +7,7 @@ part of 'zoom.dart';
 // **************************************************************************
 
 Zoom _$ZoomFromJson(Map<String, dynamic> json) => Zoom(
-      x: stringToDouble(json['@x'] as String),
+      x: double.parse(json['@x'] as String),
       space: json['@space'] as String?,
     );
 

@@ -1,22 +1,19 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'hostname_information.g.dart';
 
 @JsonSerializable()
 class HostnameInformation {
-  @JsonKey(name: 'FromDHCP')
-  final dynamic xmlFromDhcp;
+  @JsonKey(name: 'FromDHCP', fromJson: OnvifUtil.mappedToString)
+  final String fromDhcp;
 
-  @JsonKey(name: 'Name')
-  final dynamic xmlName;
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  final String name;
 
-  bool get fromDHCP => xmlFromDhcp['\$'];
-
-  String get h264Profile => xmlName['\$'];
-
-  HostnameInformation({required this.xmlFromDhcp, this.xmlName});
+  HostnameInformation({required this.fromDhcp, required this.name});
 
   factory HostnameInformation.fromJson(Map<String, dynamic> json) =>
       _$HostnameInformationFromJson(json);

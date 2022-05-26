@@ -1,3 +1,4 @@
+import 'package:easy_onvif/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'video_source_configuration.dart';
@@ -16,11 +17,14 @@ class Profile {
   @JsonKey(name: '@token')
   final String token;
 
-  @JsonKey(name: '@fixed')
-  final dynamic xmlFixed;
+  ///A value of true signals that the profile cannot be deleted. Default is
+  ///false.
+  @JsonKey(name: '@fixed', fromJson: OnvifUtil.stringToBool)
+  final bool fixed;
 
-  @JsonKey(name: 'Name')
-  final dynamic xmlName;
+  ///User readable name of the profile.
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  final String name;
 
   ///Optional configuration of the Video input.
   @JsonKey(name: 'VideoSourceConfiguration')
@@ -46,17 +50,10 @@ class Profile {
   @JsonKey(name: 'PTZConfiguration')
   final PtzConfiguration? ptzConfiguration;
 
-  ///A value of true signals that the profile cannot be deleted. Default is
-  ///false.
-  bool get fixed => xmlFixed['\$'].toLowerCase() == 'true';
-
-  ///User readable name of the profile.
-  String get name => xmlName['\$'];
-
   Profile(
       {required this.token,
-      this.xmlFixed,
-      this.xmlName,
+      required this.fixed,
+      required this.name,
       this.videoSourceConfiguration,
       this.audioSourceConfiguration,
       this.videoEncoderConfiguration,

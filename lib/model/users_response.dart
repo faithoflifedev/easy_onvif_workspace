@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 import 'user.dart';
@@ -15,4 +17,7 @@ class GetUsersResponse {
       _$GetUsersResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$GetUsersResponseToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }

@@ -9,11 +9,11 @@ part of 'video_sources_response.dart';
 GetVideoSourcesResponse _$GetVideoSourcesResponseFromJson(
         Map<String, dynamic> json) =>
     GetVideoSourcesResponse(
-      VideoSources.fromJson(json['VideoSources'] as Map<String, dynamic>),
+      GetVideoSourcesResponse._videoSourcesConvertor(json['VideoSources']),
     );
 
 Map<String, dynamic> _$GetVideoSourcesResponseToJson(
         GetVideoSourcesResponse instance) =>
     <String, dynamic>{
-      'VideoSources': instance.videoSources.toJson(),
+      'VideoSources': instance.videoSources.map((e) => e.toJson()).toList(),
     };

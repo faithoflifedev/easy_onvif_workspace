@@ -1,27 +1,23 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'network_protocol.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class NetworkProtocol {
-  @JsonKey(name: 'Name')
-  final dynamic xmlName;
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  final String name;
 
-  @JsonKey(name: 'Enabled')
-  final dynamic xmlEnabled;
+  @JsonKey(name: 'Enabled', fromJson: OnvifUtil.mappedToBool)
+  final bool enabled;
 
-  @JsonKey(name: 'Port')
-  final dynamic xmlPort;
+  @JsonKey(name: 'Port', fromJson: OnvifUtil.mappedToInt)
+  final int port;
 
-  String get name => xmlName['\$'];
-
-  bool get enabled => xmlEnabled['\$'].toLowerCase() == 'true';
-
-  int get port => int.parse(xmlName['\$']);
-
-  NetworkProtocol(this.xmlName, this.xmlEnabled, this.xmlPort);
+  NetworkProtocol(
+      {required this.name, required this.enabled, required this.port});
 
   factory NetworkProtocol.fromJson(Map<String, dynamic> json) =>
       _$NetworkProtocolFromJson(json);

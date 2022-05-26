@@ -1,16 +1,15 @@
 import 'dart:convert';
 
-import 'package:easy_onvif/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pan_tilt.g.dart';
 
 @JsonSerializable()
 class PanTilt {
-  @JsonKey(name: '@x', fromJson: stringToDouble)
+  @JsonKey(name: '@x', fromJson: double.parse)
   final double x;
 
-  @JsonKey(name: '@y', fromJson: stringToDouble)
+  @JsonKey(name: '@y', fromJson: double.parse)
   final double y;
 
   @JsonKey(name: '@space')

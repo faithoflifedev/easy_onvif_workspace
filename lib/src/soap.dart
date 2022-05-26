@@ -3,6 +3,15 @@ import 'package:xml/xml.dart';
 
 import '../onvif.dart';
 
+class Xmlns {
+  static final ter = 'http://www.onvif.org/ver10/error';
+  static final xsd = 'http://www.w3.org/2001/XMLSchema';
+  static final tt = 'http://www.onvif.org/ver10/schema';
+  static final tptz = 'http://www.onvif.org/ver20/ptz/wsdl';
+  static final tds = 'http://www.onvif.org/ver10/device/wsdl';
+  static final trt = 'http://www.onvif.org/ver10/media/wsdl';
+}
+
 ///Utility class for interacting through the SOAP protocol
 class Soap {
   static final dio = Dio();
@@ -40,8 +49,6 @@ class Soap {
       {Function? postProcess}) async {
     final soapResponse = await Soap.send(uri, soapRequest.toString());
 
-    // final jsonMap = OnvifUtil.xmlToMap(soapResponse);
-
     final envelope = Envelope.fromXml(soapResponse);
 
     if (postProcess != null) {
@@ -71,7 +78,7 @@ class SoapRequest {
           namespace: 'http://www.w3.org/2003/05/soap-envelope',
           namespaces: {
             'http://www.w3.org/2001/XMLSchema-instance': 'xsi',
-            'http://www.w3.org/2001/XMLSchema': 'xsd'
+            Xmlns.xsd: 'xsd'
           },
           nest: body);
     });
@@ -122,7 +129,7 @@ class SoapRequest {
   ///XML for the [systemDateAndTime]
   static XmlDocumentFragment systemDateAndTime() {
     builder.element('GetSystemDateAndTime', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace(Xmlns.tds);
     });
 
     return builder.buildFragment();
@@ -131,7 +138,7 @@ class SoapRequest {
   ///XML for the [capabilities]
   static XmlDocumentFragment capabilities(String category) {
     builder.element('GetCapabilities', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace(Xmlns.tds);
       builder.element('Category', nest: () {
         builder.text(category);
       });
@@ -143,7 +150,7 @@ class SoapRequest {
   ///XML for the [videoSources]
   static XmlDocumentFragment videoSources() {
     builder.element('GetVideoSources', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/media/wsdl');
+      builder.namespace(Xmlns.trt);
     });
 
     return builder.buildFragment();
@@ -152,7 +159,7 @@ class SoapRequest {
   ///XML for the [videoSources]
   static XmlDocumentFragment metadataConfigurations() {
     builder.element('GetMetadataConfigurations', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/media/wsdl');
+      builder.namespace(Xmlns.trt);
     });
 
     return builder.buildFragment();
@@ -161,7 +168,7 @@ class SoapRequest {
   ///XML for the [profiles]
   static XmlDocumentFragment profiles() {
     builder.element('GetProfiles', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/media/wsdl');
+      builder.namespace(Xmlns.trt);
     });
 
     return builder.buildFragment();
@@ -170,7 +177,7 @@ class SoapRequest {
   ///XML for the [presets], requires a [profileToken]
   static XmlDocumentFragment presets(String profileToken) {
     builder.element('GetPresets', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace(Xmlns.tds);
       builder.element('ProfileToken', nest: () {
         builder.text(profileToken);
       });
@@ -182,7 +189,7 @@ class SoapRequest {
   ///XML for the [deviceInformation]
   static XmlDocumentFragment deviceInformation() {
     builder.element('GetDeviceInformation', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace(Xmlns.tds);
     });
 
     return builder.buildFragment();
@@ -191,7 +198,7 @@ class SoapRequest {
   ///XML for the [endpointReference]
   static XmlDocumentFragment endpointReference() {
     builder.element('GetEndpointReference', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace(Xmlns.tds);
     });
 
     return builder.buildFragment();
@@ -200,7 +207,7 @@ class SoapRequest {
   ///XML for the [status], requires a [profileToken]
   static XmlDocumentFragment status(String profileToken) {
     builder.element('GetStatus', nest: () {
-      builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+      builder.namespace(Xmlns.tptz);
       builder.element('ProfileToken', nest: () {
         builder.text(profileToken);
       });
@@ -213,14 +220,14 @@ class SoapRequest {
   static XmlDocumentFragment streamUri(String profileToken,
       {String streamType = 'RTP-Unicast', String transportProtocol = 'RTSP'}) {
     builder.element('GetStreamUri', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/media/wsdl');
+      builder.namespace(Xmlns.trt);
       builder.element('StreamSetup', nest: () {
         builder.element('Stream', nest: () {
-          builder.namespace('http://www.onvif.org/ver10/schema');
+          builder.namespace(Xmlns.tt);
           builder.text(streamType);
         });
         builder.element('Transport', nest: () {
-          builder.namespace('http://www.onvif.org/ver10/schema');
+          builder.namespace(Xmlns.tt);
           builder.element('Protocol', nest: () {
             builder.text(transportProtocol);
           });
@@ -237,7 +244,7 @@ class SoapRequest {
   ///XML for the [snapshotUri], requires a [profileToken]
   static XmlDocumentFragment snapshotUri(String profileToken) {
     builder.element('GetSnapshotUri', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/media/wsdl');
+      builder.namespace(Xmlns.trt);
       builder.element('ProfileToken', nest: () {
         builder.text(profileToken);
       });
@@ -249,7 +256,7 @@ class SoapRequest {
   ///XML for the [services]
   static XmlDocumentFragment services({bool? includeCapability}) {
     builder.element('GetServices', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace(Xmlns.tds);
       builder.element('IncludeCapability', nest: () {
         builder.text('$includeCapability');
       });
@@ -261,7 +268,7 @@ class SoapRequest {
   ///XML for the [services]
   static XmlDocumentFragment serviceCapabilities({bool? includeCapability}) {
     builder.element('GetServiceCapabilities', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace(Xmlns.tds);
     });
 
     return builder.buildFragment();
@@ -270,26 +277,26 @@ class SoapRequest {
   ///XML for the [snapshotUri], requires a [profileToken] and [Preset]
   static XmlDocumentFragment gotoPreset(String profileToken, Preset preset) {
     builder.element('GotoPreset', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace(Xmlns.tds);
       builder.element('ProfileToken', nest: () {
-        builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+        builder.namespace(Xmlns.tptz);
         builder.text(profileToken);
       });
       builder.element('PresetToken', nest: () {
-        builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+        builder.namespace(Xmlns.tptz);
         builder.text(preset.token);
       });
       builder.element('Speed', nest: () {
         if (preset.position.panTilt != null) {
           builder.element('PanTilt', nest: () {
-            builder.namespace('http://www.onvif.org/ver10/schema');
+            builder.namespace(Xmlns.tt);
             builder.attribute('x', preset.position.panTilt!.x);
             builder.attribute('y', preset.position.panTilt!.y);
           });
         }
         if (preset.position.zoom != null) {
           builder.element('Zoom', nest: () {
-            builder.namespace('http://www.onvif.org/ver10/schema');
+            builder.namespace(Xmlns.tt);
             builder.attribute('x', preset.position.zoom!.x);
           });
         }
@@ -301,7 +308,7 @@ class SoapRequest {
 
   static XmlDocumentFragment networkProtocols() {
     builder.element('GetNetworkProtocols', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace(Xmlns.tds);
     });
 
     return builder.buildFragment();
@@ -309,21 +316,25 @@ class SoapRequest {
 
   static XmlDocumentFragment createUsers(List<User> users) {
     builder.element('CreateUsers', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace(Xmlns.tds);
 
       for (var user in users) {
         builder.element('User', nest: () {
-          builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+          builder.namespace(Xmlns.tds);
           builder.element('Username', nest: () {
-            builder.namespace('http://www.onvif.org/ver10/schema');
+            builder.namespace(Xmlns.tt);
             builder.text(user.username);
           });
-          builder.element('Password', nest: () {
-            builder.namespace('http://www.onvif.org/ver10/schema');
-            builder.text(user.password);
-          });
+
+          if (user.password != null) {
+            builder.element('Password', nest: () {
+              builder.namespace(Xmlns.tt);
+              builder.text(user.password!);
+            });
+          }
+
           builder.element('UserLevel', nest: () {
-            builder.namespace('http://www.onvif.org/ver10/schema');
+            builder.namespace(Xmlns.tt);
             builder.text(user.userLevel);
           });
         });
@@ -333,9 +344,21 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
+  static XmlDocumentFragment deleteUsers(List<String> userNames) {
+    builder.element('DeleteUsers', nest: () {
+      builder.namespace(Xmlns.tds);
+
+      for (var userName in userNames) {
+        builder.element('Username', nest: userName);
+      }
+    });
+
+    return builder.buildFragment();
+  }
+
   static XmlDocumentFragment hostname() {
     builder.element('GetHostname', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace(Xmlns.tds);
     });
 
     return builder.buildFragment();
@@ -343,7 +366,7 @@ class SoapRequest {
 
   static XmlDocumentFragment ntp() {
     builder.element('GetNTP', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace(Xmlns.tds);
     });
 
     return builder.buildFragment();
@@ -351,7 +374,7 @@ class SoapRequest {
 
   static XmlDocumentFragment systemUris() {
     builder.element('GetSystemUris', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace(Xmlns.tds);
     });
 
     return builder.buildFragment();
@@ -359,7 +382,7 @@ class SoapRequest {
 
   static XmlDocumentFragment users() {
     builder.element('GetUsers', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl');
+      builder.namespace(Xmlns.tds);
     });
 
     return builder.buildFragment();
@@ -368,36 +391,36 @@ class SoapRequest {
   static XmlDocumentFragment absoluteMove(
       String profileToken, PtzPosition place, PtzPosition? speed) {
     builder.element('AbsoluteMove', nest: () {
-      builder.namespace('http://www.onvif.org/ver20/ptz/wsdl'); //tptz
+      builder.namespace(Xmlns.tptz); //tptz
       builder.element('ProfileToken', nest: () {
-        builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+        builder.namespace(Xmlns.tptz);
         builder.text(profileToken);
       });
       builder.element('Position', nest: () {
-        builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+        builder.namespace(Xmlns.tptz);
         builder.element('PanTilt', nest: () {
-          builder.namespace('http://www.onvif.org/ver10/schema');
+          builder.namespace(Xmlns.tt);
           builder.attribute('x', place.panTilt!.x);
           builder.attribute('y', place.panTilt!.y);
         });
         builder.element('Zoom', nest: () {
-          builder.namespace('http://www.onvif.org/ver10/schema');
+          builder.namespace(Xmlns.tt);
           builder.attribute('x', place.zoom!.x);
         });
       });
       if (speed != null) {
         builder.element('Speed', nest: () {
-          builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+          builder.namespace(Xmlns.tptz);
           if (speed.panTilt != null) {
             builder.element('PanTilt', nest: () {
-              builder.namespace('http://www.onvif.org/ver10/schema');
+              builder.namespace(Xmlns.tt);
               builder.attribute('x', speed.panTilt!.x);
               builder.attribute('y', speed.panTilt!.y);
             });
           }
           if (speed.zoom != null) {
             builder.element('Zoom', nest: () {
-              builder.namespace('http://www.onvif.org/ver10/schema');
+              builder.namespace(Xmlns.tt);
               builder.attribute('x', speed.zoom!.x);
             });
           }
@@ -411,23 +434,23 @@ class SoapRequest {
   static XmlDocumentFragment relativeMove(
       String profileToken, PtzPosition move) {
     builder.element('RelativeMove', nest: () {
-      builder.namespace('http://www.onvif.org/ver20/ptz/wsdl'); //tptz
+      builder.namespace(Xmlns.tptz); //tptz
       builder.element('ProfileToken', nest: () {
-        builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+        builder.namespace(Xmlns.tptz);
         builder.text(profileToken);
       });
       builder.element('Translation', nest: () {
-        builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+        builder.namespace(Xmlns.tptz);
         if (move.panTilt != null) {
           builder.element('PanTilt', nest: () {
-            builder.namespace('http://www.onvif.org/ver10/schema');
+            builder.namespace(Xmlns.tt);
             builder.attribute('x', move.panTilt!.x);
             builder.attribute('y', move.panTilt!.y);
           });
         }
         if (move.zoom != null) {
           builder.element('Zoom', nest: () {
-            builder.namespace('http://www.onvif.org/ver10/schema');
+            builder.namespace(Xmlns.tt);
             builder.attribute('x', move.zoom!.x);
           });
         }
@@ -439,13 +462,13 @@ class SoapRequest {
 
   static XmlDocumentFragment removePreset(String profileToken, Preset preset) {
     builder.element('RemovePreset', nest: () {
-      builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+      builder.namespace(Xmlns.tptz);
       builder.element('ProfileToken', nest: () {
-        builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+        builder.namespace(Xmlns.tptz);
         builder.text(profileToken);
       });
       builder.element('PresetToken', nest: () {
-        builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+        builder.namespace(Xmlns.tptz);
         builder.text(preset.token);
       });
     });
@@ -453,23 +476,26 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
-  static XmlDocumentFragment setPreset(String profileToken, Preset preset) {
+  static XmlDocumentFragment setPreset(String profileToken,
+      [String? name, String? token]) {
     builder.element('SetPreset', nest: () {
-      builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+      builder.namespace(Xmlns.tptz);
       builder.element('ProfileToken', nest: () {
-        builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+        builder.namespace(Xmlns.tptz);
         builder.text(profileToken);
       });
-      if (preset.name != '') {
+
+      if (name != null) {
         builder.element('PresetName', nest: () {
-          builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
-          builder.text(preset.name);
+          builder.namespace(Xmlns.tptz);
+          builder.text(name);
         });
       }
-      if (preset.token != '') {
+
+      if (token != null) {
         builder.element('PresetToken', nest: () {
-          builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
-          builder.text(preset.token);
+          builder.namespace(Xmlns.tptz);
+          builder.text(token);
         });
       }
     });
@@ -480,19 +506,19 @@ class SoapRequest {
   static XmlDocumentFragment stop(String profileToken,
       {bool panTilt = false, bool zoom = false}) {
     builder.element('Stop', nest: () {
-      builder.namespace('http://www.onvif.org/ver20/ptz/wsdl'); //tptz
+      builder.namespace(Xmlns.tptz); //tptz
       builder.element('ProfileToken', nest: () {
-        builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+        builder.namespace(Xmlns.tptz);
         builder.text(profileToken);
       });
 
       builder.element('PanTilt', nest: () {
-        builder.namespace('http://www.onvif.org/ver10/schema');
+        builder.namespace(Xmlns.tt);
         builder.text('$panTilt');
       });
 
       builder.element('Zoom', nest: () {
-        builder.namespace('http://www.onvif.org/ver10/schema');
+        builder.namespace(Xmlns.tt);
         builder.text('$zoom');
       });
     });
@@ -503,31 +529,44 @@ class SoapRequest {
   static XmlDocumentFragment continuousMove(
       String profileToken, PtzPosition velocity, int? timeout) {
     builder.element('ContinuousMove', nest: () {
-      builder.namespace('http://www.onvif.org/ver20/ptz/wsdl'); //tptz
+      builder.namespace(Xmlns.tptz); //tptz
 
       builder.element('ProfileToken', nest: () {
-        builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+        builder.namespace(Xmlns.tptz);
         builder.text(profileToken);
       });
 
       builder.element('Velocity', nest: () {
-        builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+        builder.namespace(Xmlns.tptz);
 
         builder.element('PanTilt', nest: () {
-          builder.namespace('http://www.onvif.org/ver10/schema');
+          builder.namespace(Xmlns.tt);
           builder.attribute('x', velocity.panTilt!.x);
           builder.attribute('y', velocity.panTilt!.y);
         });
 
         builder.element('Zoom', nest: () {
-          builder.namespace('http://www.onvif.org/ver10/schema');
+          builder.namespace(Xmlns.tt);
           builder.attribute('x', velocity.zoom!.x);
         });
       });
 
       builder.element('Timeout', nest: () {
-        builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+        builder.namespace(Xmlns.tptz);
         builder.text('PT${timeout}S');
+      });
+    });
+
+    return builder.buildFragment();
+  }
+
+  static XmlDocumentFragment getCompatibleConfigurations(String profileToken) {
+    builder.element('GetCompatibleConfigurations', nest: () {
+      builder.namespace(Xmlns.tptz);
+
+      builder.element('ProfileToken', nest: () {
+        builder.namespace(Xmlns.tptz);
+        builder.text(profileToken);
       });
     });
 
@@ -536,7 +575,7 @@ class SoapRequest {
 
   static XmlDocumentFragment getPtzConfigurations() {
     builder.element('GetConfigurations', nest: () {
-      builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+      builder.namespace(Xmlns.tptz);
     });
 
     return builder.buildFragment();
@@ -544,10 +583,10 @@ class SoapRequest {
 
   static XmlDocumentFragment getPtzConfiguration(String profileToken) {
     builder.element('GetConfiguration', nest: () {
-      builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+      builder.namespace(Xmlns.tptz);
 
-      builder.element('tptz:PTZConfigurationToken', nest: () {
-        builder.namespace('http://www.onvif.org/ver20/ptz/wsdl');
+      builder.element('PTZConfigurationToken', nest: () {
+        builder.namespace(Xmlns.tptz);
         builder.text(profileToken);
       });
     });
@@ -557,7 +596,7 @@ class SoapRequest {
 
   static XmlDocumentFragment audioSources() {
     builder.element('GetAudioSources', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/media/wsdl');
+      builder.namespace(Xmlns.trt);
     });
 
     return builder.buildFragment();
@@ -565,7 +604,7 @@ class SoapRequest {
 
   static XmlDocumentFragment startMulticastStreaming() {
     builder.element('StartMulticastStreaming', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/media/wsdl');
+      builder.namespace(Xmlns.trt);
     });
 
     return builder.buildFragment();
@@ -573,7 +612,7 @@ class SoapRequest {
 
   static XmlDocumentFragment stopMulticastStreaming() {
     builder.element('StopMulticastStreaming', nest: () {
-      builder.namespace('http://www.onvif.org/ver10/media/wsdl');
+      builder.namespace(Xmlns.trt);
     });
 
     return builder.buildFragment();
@@ -587,7 +626,7 @@ class SoapRequest {
       builder.namespace(
           'http://schemas.xmlsoap.org/ws/2004/08/addressing', 'a');
       builder.namespace('http://schemas.xmlsoap.org/ws/2005/04/discovery', 'd');
-      builder.namespace('http://www.onvif.org/ver10/device/wsdl', 'dn');
+      builder.namespace(Xmlns.tds, 'dn');
 
       builder.element('Header',
           namespace: 'http://www.w3.org/2003/05/soap-envelope', nest: () {

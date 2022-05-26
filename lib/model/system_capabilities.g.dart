@@ -8,30 +8,37 @@ part of 'system_capabilities.dart';
 
 SystemCapabilities _$SystemCapabilitiesFromJson(Map<String, dynamic> json) =>
     SystemCapabilities(
-      discoveryResolve: stringToBool(json['@DiscoveryResolve'] as String),
-      discoveryBye: stringToBool(json['@DiscoveryBye'] as String),
-      remoteDiscovery: stringToBool(json['@RemoteDiscovery'] as String),
-      systemBackup: stringToBool(json['@SystemBackup'] as String),
-      systemLogging: stringToBool(json['@SystemLogging'] as String),
-      firmwareUpgrade: stringToBool(json['@FirmwareUpgrade'] as String),
-      httpFirmwareUpgrade: stringToBool(json['@HttpFirmwareUpgrade'] as String),
-      httpSystemBackup: stringToBool(json['@HttpSystemBackup'] as String),
-      httpSystemLogging: stringToBool(json['@HttpSystemLogging'] as String),
+      discoveryResolve:
+          OnvifUtil.stringToBool(json['@DiscoveryResolve'] as String),
+      discoveryBye: OnvifUtil.stringToBool(json['@DiscoveryBye'] as String),
+      remoteDiscovery:
+          OnvifUtil.stringToBool(json['@RemoteDiscovery'] as String),
+      systemBackup: OnvifUtil.stringToBool(json['@SystemBackup'] as String),
+      systemLogging: OnvifUtil.stringToBool(json['@SystemLogging'] as String),
+      firmwareUpgrade:
+          OnvifUtil.stringToBool(json['@FirmwareUpgrade'] as String),
+      httpFirmwareUpgrade:
+          OnvifUtil.stringToBool(json['@HttpFirmwareUpgrade'] as String),
+      httpSystemBackup:
+          OnvifUtil.stringToBool(json['@HttpSystemBackup'] as String),
+      httpSystemLogging:
+          OnvifUtil.stringToBool(json['@HttpSystemLogging'] as String),
       httpSupportInformation:
-          stringToBool(json['@HttpSupportInformation'] as String),
+          OnvifUtil.stringToBool(json['@HttpSupportInformation'] as String),
       storageConfiguration:
-          stringToBool(json['@StorageConfiguration'] as String),
+          OnvifUtil.stringToBool(json['@StorageConfiguration'] as String),
       maxStorageConfigurations:
-          stringToInt(json['@MaxStorageConfigurations'] as String),
-      geoLocationEntries: nullableToInt(json['@GeoLocationEntries'] as String?),
+          int.parse(json['@MaxStorageConfigurations'] as String),
+      geoLocationEntries:
+          OnvifUtil.optionalInt(json['@GeoLocationEntries'] as String?),
       autoGeo: json['@AutoGeo'] as String?,
       storageTypesSupported: json['@StorageTypesSupported'] as String?,
       discoveryNotSupported:
-          nullableToBool(json['@DiscoveryNotSupported'] as String?),
+          OnvifUtil.optionalBool(json['@DiscoveryNotSupported'] as String?),
       networkConfigNotSupported:
-          nullableToBool(json['@NetworkConfigNotSupported'] as String?),
+          OnvifUtil.optionalBool(json['@NetworkConfigNotSupported'] as String?),
       userConfigNotSupported:
-          nullableToBool(json['@UserConfigNotSupported'] as String?),
+          OnvifUtil.optionalBool(json['@UserConfigNotSupported'] as String?),
     );
 
 Map<String, dynamic> _$SystemCapabilitiesToJson(SystemCapabilities instance) =>

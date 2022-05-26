@@ -8,12 +8,10 @@ part of 'system_log_uris.dart';
 
 SystemLogUris _$SystemLogUrisFromJson(Map<String, dynamic> json) =>
     SystemLogUris(
-      xmlType: json['Type'],
-      xmlUri: json['Uri'],
+      systemLog: SystemLog.fromJson(json['SystemLog'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SystemLogUrisToJson(SystemLogUris instance) =>
     <String, dynamic>{
-      'Type': instance.xmlType,
-      'Uri': instance.xmlUri,
+      'SystemLog': instance.systemLog.toJson(),
     };

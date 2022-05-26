@@ -8,11 +8,11 @@ part 'ptz_filter.g.dart';
 class PtzFilter {
   ///True if the metadata stream shall contain the PTZ status (IDLE, MOVING or
   ///UNKNOWN)
-  @JsonKey(name: 'Status', fromJson: mappedToBool)
+  @JsonKey(name: 'Status', fromJson: OnvifUtil.mappedToBool)
   final bool status;
 
   ///True if the metadata stream shall contain the PTZ position
-  @JsonKey(name: 'Position', fromJson: mappedToBool)
+  @JsonKey(name: 'Position', fromJson: OnvifUtil.mappedToBool)
   final bool position;
 
   PtzFilter({required this.status, required this.position});

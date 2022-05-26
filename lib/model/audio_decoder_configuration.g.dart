@@ -10,14 +10,14 @@ AudioDecoderConfiguration _$AudioDecoderConfigurationFromJson(
         Map<String, dynamic> json) =>
     AudioDecoderConfiguration(
       json['@token'] as String,
-      json['Name'],
-      json['UseCount'],
+      OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AudioDecoderConfigurationToJson(
         AudioDecoderConfiguration instance) =>
     <String, dynamic>{
       '@token': instance.token,
-      'Name': instance.xmlName,
-      'UseCount': instance.xmlUseCount,
+      'Name': instance.name,
+      'UseCount': instance.useCount,
     };

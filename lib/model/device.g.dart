@@ -7,11 +7,11 @@ part of 'device.dart';
 // **************************************************************************
 
 Device _$DeviceFromJson(Map<String, dynamic> json) => Device(
-      xmlXAddr: json['XAddr'],
+      xAddr: OnvifUtil.mappedToString(json['XAddr'] as Map<String, dynamic>),
       system: System.fromJson(json['System'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$DeviceToJson(Device instance) => <String, dynamic>{
-      'XAddr': instance.xmlXAddr,
+      'XAddr': instance.xAddr,
       'System': instance.system.toJson(),
     };

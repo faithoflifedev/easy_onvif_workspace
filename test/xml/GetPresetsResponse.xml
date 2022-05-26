@@ -1,0 +1,2144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:env="http://www.w3.org/2003/05/soap-envelope"
+	xmlns:soapenc="http://www.w3.org/2003/05/soap-encoding"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tt="http://www.onvif.org/ver10/schema"
+	xmlns:tds="http://www.onvif.org/ver10/device/wsdl"
+	xmlns:trt="http://www.onvif.org/ver10/media/wsdl"
+	xmlns:timg="http://www.onvif.org/ver20/imaging/wsdl"
+	xmlns:tev="http://www.onvif.org/ver10/events/wsdl"
+	xmlns:tptz="http://www.onvif.org/ver20/ptz/wsdl"
+	xmlns:tan="http://www.onvif.org/ver20/analytics/wsdl"
+	xmlns:tst="http://www.onvif.org/ver10/storage/wsdl"
+	xmlns:ter="http://www.onvif.org/ver10/error"
+	xmlns:dn="http://www.onvif.org/ver10/network/wsdl"
+	xmlns:tns1="http://www.onvif.org/ver10/topics"
+	xmlns:tmd="http://www.onvif.org/ver10/deviceIO/wsdl"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl"
+	xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http"
+	xmlns:d="http://schemas.xmlsoap.org/ws/2005/04/discovery"
+	xmlns:wsadis="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+	xmlns:wsnt="http://docs.oasis-open.org/wsn/b-2"
+	xmlns:wsa="http://www.w3.org/2005/08/addressing"
+	xmlns:wstop="http://docs.oasis-open.org/wsn/t-1"
+	xmlns:wsrf-bf="http://docs.oasis-open.org/wsrf/bf-2"
+	xmlns:wsntw="http://docs.oasis-open.org/wsn/bw-2"
+	xmlns:wsrf-rw="http://docs.oasis-open.org/wsrf/rw-2"
+	xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+	xmlns:wsrf-r="http://docs.oasis-open.org/wsrf/r-2"
+	xmlns:trc="http://www.onvif.org/ver10/recording/wsdl"
+	xmlns:tse="http://www.onvif.org/ver10/search/wsdl"
+	xmlns:trp="http://www.onvif.org/ver10/replay/wsdl"
+	xmlns:tnsn="http://www.eventextension.com/2011/event/topics"
+	xmlns:extwsd="http://www.onvifext.com/onvif/ext/ver10/wsdl"
+	xmlns:extxsd="http://www.onvifext.com/onvif/ext/ver10/schema"
+	xmlns:tas="http://www.onvif.org/ver10/advancedsecurity/wsdl"
+	xmlns:tr2="http://www.onvif.org/ver20/media/wsdl"
+	xmlns:axt="http://www.onvif.org/ver20/analytics">
+	<env:Body>
+		<tptz:GetPresetsResponse>
+			<tptz:Preset token="1">
+				<tt:Name>MIMBER</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-0.198778" y="-0.982444"/>
+					<tt:Zoom x="0.053750"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="2">
+				<tt:Name>Preset 2</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-0.000222" y="-1.000000"/>
+					<tt:Zoom x="0.029167"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="3">
+				<tt:Name>Preset 3</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-0.000222" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="4">
+				<tt:Name>PreIftar</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-0.187222" y="-0.890000"/>
+					<tt:Zoom x="0.258333"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="5">
+				<tt:Name>Preset 5</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.259056" y="-0.680222"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="6">
+				<tt:Name>Preset 6</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-0.937056" y="0.960000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="7">
+				<tt:Name>Preset 7</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-0.482778" y="-0.386444"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="8">
+				<tt:Name>Preset  Fullview</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-0.249722" y="-0.982444"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="9">
+				<tt:Name>Preset mihrab</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-0.230722" y="-0.929556"/>
+					<tt:Zoom x="0.037500"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="10">
+				<tt:Name>Bayan</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-0.213222" y="-0.890000"/>
+					<tt:Zoom x="0.258333"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="11">
+				<tt:Name>Preset Khutbah</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-0.156611" y="-0.997778"/>
+					<tt:Zoom x="0.204167"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="12">
+				<tt:Name>PreIftar</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-0.213222" y="-0.890000"/>
+					<tt:Zoom x="0.270833"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="13">
+				<tt:Name>iftar talk</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-0.187222" y="-0.890000"/>
+					<tt:Zoom x="0.258333"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="14">
+				<tt:Name>halaqah</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-0.229667" y="-0.812000"/>
+					<tt:Zoom x="0.187500"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="15">
+				<tt:Name>Conference</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-0.204611" y="-0.851333"/>
+					<tt:Zoom x="0.200000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="16">
+				<tt:Name>mawlid</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-0.225667" y="-0.791556"/>
+					<tt:Zoom x="0.041667"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="17">
+				<tt:Name>Preset 17</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="18">
+				<tt:Name>Preset 18</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="19">
+				<tt:Name>Preset 19</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="20">
+				<tt:Name>my test</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-0.198778" y="-0.982444"/>
+					<tt:Zoom x="0.053750"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="21">
+				<tt:Name>Preset 21</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="22">
+				<tt:Name>Preset 22</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="23">
+				<tt:Name>Preset 23</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="24">
+				<tt:Name>Preset 24</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="25">
+				<tt:Name>Preset 25</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="26">
+				<tt:Name>Preset 26</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="27">
+				<tt:Name>Preset 27</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="28">
+				<tt:Name>Preset 28</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="29">
+				<tt:Name>Preset 29</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="30">
+				<tt:Name>Preset 30</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="31">
+				<tt:Name>Preset 31</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="32">
+				<tt:Name>Preset 32</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="33">
+				<tt:Name>Auto-flip</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="34">
+				<tt:Name>Back to origin</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="35">
+				<tt:Name>Call patrol 1</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="36">
+				<tt:Name>Call patrol 2</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="37">
+				<tt:Name>Call patrol 3</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="38">
+				<tt:Name>Call patrol 4</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="39">
+				<tt:Name>Day mode</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="40">
+				<tt:Name>Night mode</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="41">
+				<tt:Name>Call pattern 1</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="42">
+				<tt:Name>Call pattern 2</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="43">
+				<tt:Name>Call pattern 3</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="44">
+				<tt:Name>Call pattern 4</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="45">
+				<tt:Name>One-touch patrol</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="46">
+				<tt:Name>Day/Night Auto Mode</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="47">
+				<tt:Name>Preset 47</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="48">
+				<tt:Name>Preset 48</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="49">
+				<tt:Name>Preset 49</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="50">
+				<tt:Name>Preset 50</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="51">
+				<tt:Name>Preset 51</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="52">
+				<tt:Name>Preset 52</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="53">
+				<tt:Name>Preset 53</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="54">
+				<tt:Name>Preset 54</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="55">
+				<tt:Name>Preset 55</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="56">
+				<tt:Name>Preset 56</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="57">
+				<tt:Name>Preset 57</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="58">
+				<tt:Name>Preset 58</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="59">
+				<tt:Name>Preset 59</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="60">
+				<tt:Name>Preset 60</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="61">
+				<tt:Name>Preset 61</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="62">
+				<tt:Name>Preset 62</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="63">
+				<tt:Name>Preset 63</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="64">
+				<tt:Name>Preset 64</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="65">
+				<tt:Name>Preset 65</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="66">
+				<tt:Name>Preset 66</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="67">
+				<tt:Name>Preset 67</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="68">
+				<tt:Name>Preset 68</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="69">
+				<tt:Name>Preset 69</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="70">
+				<tt:Name>Preset 70</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="71">
+				<tt:Name>Preset 71</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="72">
+				<tt:Name>Preset 72</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="73">
+				<tt:Name>Preset 73</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="74">
+				<tt:Name>Preset 74</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="75">
+				<tt:Name>Preset 75</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="76">
+				<tt:Name>Preset 76</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="77">
+				<tt:Name>Preset 77</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="78">
+				<tt:Name>Preset 78</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="79">
+				<tt:Name>Preset 79</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="80">
+				<tt:Name>Preset 80</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="81">
+				<tt:Name>Preset 81</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="82">
+				<tt:Name>Preset 82</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="83">
+				<tt:Name>Preset 83</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="84">
+				<tt:Name>Preset 84</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="85">
+				<tt:Name>Preset 85</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="86">
+				<tt:Name>Preset 86</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="87">
+				<tt:Name>Preset 87</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="88">
+				<tt:Name>Preset 88</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="89">
+				<tt:Name>Preset 89</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="90">
+				<tt:Name>Preset 90</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="91">
+				<tt:Name>Preset 91</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="92">
+				<tt:Name>Set manual limits</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="93">
+				<tt:Name>Save manual limits</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="94">
+				<tt:Name>Remote reboot</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="95">
+				<tt:Name>Call OSD menu</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="96">
+				<tt:Name>Stop a scan</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="97">
+				<tt:Name>Start random scan</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="98">
+				<tt:Name>Start frame scan</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="99">
+				<tt:Name>Start auto scan</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="100">
+				<tt:Name>Start tilt scan</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="101">
+				<tt:Name>Start panorama scan</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="102">
+				<tt:Name>Call patrol 5</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="103">
+				<tt:Name>Call patrol 6</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="104">
+				<tt:Name>Call patrol 7</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="105">
+				<tt:Name>Call patrol 8</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="106">
+				<tt:Name>Preset 106</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="107">
+				<tt:Name>Preset 107</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="108">
+				<tt:Name>Preset 108</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="109">
+				<tt:Name>Preset 109</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="110">
+				<tt:Name>Preset 110</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="111">
+				<tt:Name>Preset 111</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="112">
+				<tt:Name>Preset 112</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="113">
+				<tt:Name>Preset 113</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="114">
+				<tt:Name>Preset 114</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="115">
+				<tt:Name>Preset 115</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="116">
+				<tt:Name>Preset 116</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="117">
+				<tt:Name>Preset 117</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="118">
+				<tt:Name>Preset 118</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="119">
+				<tt:Name>Preset 119</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="120">
+				<tt:Name>Preset 120</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="121">
+				<tt:Name>Preset 121</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="122">
+				<tt:Name>Preset 122</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="123">
+				<tt:Name>Preset 123</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="124">
+				<tt:Name>Preset 124</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="125">
+				<tt:Name>Preset 125</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="126">
+				<tt:Name>Preset 126</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="127">
+				<tt:Name>Preset 127</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="128">
+				<tt:Name>Preset 128</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="129">
+				<tt:Name>Preset 129</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="130">
+				<tt:Name>Preset 130</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="131">
+				<tt:Name>Preset 131</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="132">
+				<tt:Name>Preset 132</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="133">
+				<tt:Name>Preset 133</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="134">
+				<tt:Name>Preset 134</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="135">
+				<tt:Name>Preset 135</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="136">
+				<tt:Name>Preset 136</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="137">
+				<tt:Name>Preset 137</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="138">
+				<tt:Name>Preset 138</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="139">
+				<tt:Name>Preset 139</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="140">
+				<tt:Name>Preset 140</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="141">
+				<tt:Name>Preset 141</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="142">
+				<tt:Name>Preset 142</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="143">
+				<tt:Name>Preset 143</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="144">
+				<tt:Name>Preset 144</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="145">
+				<tt:Name>Preset 145</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="146">
+				<tt:Name>Preset 146</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="147">
+				<tt:Name>Preset 147</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="148">
+				<tt:Name>Preset 148</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="149">
+				<tt:Name>Preset 149</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="150">
+				<tt:Name>Preset 150</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="151">
+				<tt:Name>Preset 151</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="152">
+				<tt:Name>Preset 152</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="153">
+				<tt:Name>Preset 153</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="154">
+				<tt:Name>Preset 154</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="155">
+				<tt:Name>Preset 155</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="156">
+				<tt:Name>Preset 156</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="157">
+				<tt:Name>Preset 157</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="158">
+				<tt:Name>Preset 158</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="159">
+				<tt:Name>Preset 159</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="160">
+				<tt:Name>Preset 160</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="161">
+				<tt:Name>Preset 161</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="162">
+				<tt:Name>Preset 162</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="163">
+				<tt:Name>Preset 163</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="164">
+				<tt:Name>Preset 164</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="165">
+				<tt:Name>Preset 165</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="166">
+				<tt:Name>Preset 166</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="167">
+				<tt:Name>Preset 167</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="168">
+				<tt:Name>Preset 168</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="169">
+				<tt:Name>Preset 169</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="170">
+				<tt:Name>Preset 170</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="171">
+				<tt:Name>Preset 171</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="172">
+				<tt:Name>Preset 172</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="173">
+				<tt:Name>Preset 173</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="174">
+				<tt:Name>Preset 174</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="175">
+				<tt:Name>Preset 175</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="176">
+				<tt:Name>Preset 176</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="177">
+				<tt:Name>Preset 177</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="178">
+				<tt:Name>Preset 178</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="179">
+				<tt:Name>Preset 179</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="180">
+				<tt:Name>Preset 180</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="181">
+				<tt:Name>Preset 181</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="182">
+				<tt:Name>Preset 182</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="183">
+				<tt:Name>Preset 183</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="184">
+				<tt:Name>Preset 184</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="185">
+				<tt:Name>Preset 185</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="186">
+				<tt:Name>Preset 186</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="187">
+				<tt:Name>Preset 187</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="188">
+				<tt:Name>Preset 188</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="189">
+				<tt:Name>Preset 189</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="190">
+				<tt:Name>Preset 190</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="191">
+				<tt:Name>Preset 191</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="192">
+				<tt:Name>Preset 192</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="193">
+				<tt:Name>Preset 193</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="194">
+				<tt:Name>Preset 194</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="195">
+				<tt:Name>Preset 195</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="196">
+				<tt:Name>Preset 196</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="197">
+				<tt:Name>Preset 197</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="198">
+				<tt:Name>Preset 198</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="199">
+				<tt:Name>Preset 199</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="200">
+				<tt:Name>Preset 200</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="201">
+				<tt:Name>Preset 201</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="202">
+				<tt:Name>Preset 202</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="203">
+				<tt:Name>Preset 203</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="204">
+				<tt:Name>Preset 204</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="205">
+				<tt:Name>Preset 205</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="206">
+				<tt:Name>Preset 206</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="207">
+				<tt:Name>Preset 207</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="208">
+				<tt:Name>Preset 208</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="209">
+				<tt:Name>Preset 209</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="210">
+				<tt:Name>Preset 210</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="211">
+				<tt:Name>Preset 211</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="212">
+				<tt:Name>Preset 212</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="213">
+				<tt:Name>Preset 213</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="214">
+				<tt:Name>Preset 214</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="215">
+				<tt:Name>Preset 215</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="216">
+				<tt:Name>Preset 216</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="217">
+				<tt:Name>Preset 217</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="218">
+				<tt:Name>Preset 218</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="219">
+				<tt:Name>Preset 219</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="220">
+				<tt:Name>Preset 220</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="221">
+				<tt:Name>Preset 221</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="222">
+				<tt:Name>Preset 222</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="223">
+				<tt:Name>Preset 223</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="224">
+				<tt:Name>Preset 224</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="225">
+				<tt:Name>Preset 225</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="226">
+				<tt:Name>Preset 226</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="227">
+				<tt:Name>Preset 227</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="228">
+				<tt:Name>Preset 228</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="229">
+				<tt:Name>Preset 229</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="230">
+				<tt:Name>Preset 230</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="231">
+				<tt:Name>Preset 231</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="232">
+				<tt:Name>Preset 232</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="233">
+				<tt:Name>Preset 233</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="234">
+				<tt:Name>Preset 234</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="235">
+				<tt:Name>Preset 235</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="236">
+				<tt:Name>Preset 236</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="237">
+				<tt:Name>Preset 237</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="238">
+				<tt:Name>Preset 238</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="239">
+				<tt:Name>Preset 239</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="240">
+				<tt:Name>Preset 240</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="241">
+				<tt:Name>Preset 241</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="242">
+				<tt:Name>Preset 242</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="243">
+				<tt:Name>Preset 243</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="244">
+				<tt:Name>Preset 244</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="245">
+				<tt:Name>Preset 245</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="246">
+				<tt:Name>Preset 246</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="247">
+				<tt:Name>Preset 247</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="248">
+				<tt:Name>Preset 248</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="249">
+				<tt:Name>Preset 249</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="250">
+				<tt:Name>Preset 250</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="251">
+				<tt:Name>Preset 251</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="252">
+				<tt:Name>Preset 252</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="253">
+				<tt:Name>Preset 253</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="254">
+				<tt:Name>Preset 254</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="255">
+				<tt:Name>Preset 255</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="256">
+				<tt:Name>Preset 256</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="257">
+				<tt:Name>Preset 257</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="258">
+				<tt:Name>Preset 258</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="259">
+				<tt:Name>Preset 259</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="260">
+				<tt:Name>Preset 260</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="261">
+				<tt:Name>Preset 261</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="262">
+				<tt:Name>Preset 262</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="263">
+				<tt:Name>Preset 263</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="264">
+				<tt:Name>Preset 264</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="265">
+				<tt:Name>Preset 265</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="266">
+				<tt:Name>Preset 266</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="267">
+				<tt:Name>Preset 267</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="268">
+				<tt:Name>Preset 268</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="269">
+				<tt:Name>Preset 269</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="270">
+				<tt:Name>Preset 270</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="271">
+				<tt:Name>Preset 271</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="272">
+				<tt:Name>Preset 272</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="273">
+				<tt:Name>Preset 273</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="274">
+				<tt:Name>Preset 274</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="275">
+				<tt:Name>Preset 275</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="276">
+				<tt:Name>Preset 276</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="277">
+				<tt:Name>Preset 277</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="278">
+				<tt:Name>Preset 278</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="279">
+				<tt:Name>Preset 279</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="280">
+				<tt:Name>Preset 280</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="281">
+				<tt:Name>Preset 281</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="282">
+				<tt:Name>Preset 282</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="283">
+				<tt:Name>Preset 283</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="284">
+				<tt:Name>Preset 284</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="285">
+				<tt:Name>Preset 285</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="286">
+				<tt:Name>Preset 286</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="287">
+				<tt:Name>Preset 287</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="288">
+				<tt:Name>Preset 288</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="289">
+				<tt:Name>Preset 289</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="290">
+				<tt:Name>Preset 290</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="291">
+				<tt:Name>Preset 291</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="292">
+				<tt:Name>Preset 292</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="293">
+				<tt:Name>Preset 293</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="294">
+				<tt:Name>Preset 294</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="295">
+				<tt:Name>Preset 295</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="296">
+				<tt:Name>Preset 296</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="297">
+				<tt:Name>Preset 297</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="298">
+				<tt:Name>Preset 298</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="299">
+				<tt:Name>Preset 299</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="300">
+				<tt:Name>Preset 300</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="-1.000000" y="-1.000000"/>
+					<tt:Zoom x="0.000000"/>
+				</tt:PTZPosition>
+			</tptz:Preset>
+		</tptz:GetPresetsResponse>
+	</env:Body>
+</env:Envelope>

@@ -468,13 +468,9 @@ class OnvifSetPresetPtzCommand extends OnvifHelperCommand {
           help:
               'A reference to the MediaProfile where the operation should take place.')
       ..addOption('preset-token',
-          valueHelp: 'preset-token',
-          mandatory: true,
-          help: 'A requested preset token.')
+          valueHelp: 'preset-token', help: 'A requested preset token.')
       ..addOption('preset-name',
-          valueHelp: 'name',
-          mandatory: true,
-          help: 'The name of the new preset.');
+          valueHelp: 'name', help: 'The name of the new preset.');
   }
 
   @override
@@ -483,6 +479,7 @@ class OnvifSetPresetPtzCommand extends OnvifHelperCommand {
 
     final profileToken = argResults!['profile-token'];
 
+<<<<<<< HEAD
     final ptzStatus = await ptz.getStatus(profileToken);
 
     final preset = Preset(
@@ -492,6 +489,11 @@ class OnvifSetPresetPtzCommand extends OnvifHelperCommand {
 
     try {
       await ptz.setPreset(profileToken, preset);
+=======
+    try {
+      await ptz.setPreset(_profileToken, argResults?['preset-name'],
+          argResults?['preset-token']);
+>>>>>>> dc3d70f (unit tests and additional API functionality)
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

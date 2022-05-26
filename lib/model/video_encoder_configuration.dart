@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'resolution.dart';
@@ -14,22 +17,28 @@ part 'video_encoder_configuration.g.dart';
 ///configuration can be fetched through the GetVideoEncoderConfiguration
 ///command.
 class VideoEncoderConfiguration {
-  @JsonKey(name: 'Name')
-  final dynamic xmlName;
+  ///User readable name. Length up to 64 characters.
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  final String name;
 
-  @JsonKey(name: 'UseCount')
-  final dynamic xmlUseCount;
+  ///Number of internal references currently using this configuration.
+  ///This informational parameter is read-only. Deprecated for Media2 Service.
+  @JsonKey(name: 'UseCount', fromJson: OnvifUtil.mappedToInt)
+  final int useCount;
 
-  @JsonKey(name: 'Encoding')
-  final dynamic xmlEncoding;
-
-  @JsonKey(name: 'Resolution')
+  ///Used video codec, either Jpeg, H.264 or Mpeg4
+  ///- enum { 'JPEG', 'MPEG4', 'H264' }
+  @JsonKey(name: 'Encoding', fromJson: OnvifUtil.mappedToString)
+  final String encoding;
 
   ///Configured video resolution
+  @JsonKey(name: 'Resolution')
   final Resolution resolution;
 
-  @JsonKey(name: 'Quality')
-  final dynamic xmlQuality;
+  ///Relative value for the video quantizers and the quality of the video. A
+  ///high value within supported quality range means higher quality
+  @JsonKey(name: 'Quality', fromJson: OnvifUtil.mappedToDouble)
+  final dynamic quality;
 
   ///Optional element to configure rate control related parameters.
   @JsonKey(name: 'RateControl')
@@ -43,46 +52,31 @@ class VideoEncoderConfiguration {
   @JsonKey(name: 'H264')
   final H264? h264;
 
-  @JsonKey(name: 'Multicast')
-
   ///Defines the multicast settings that could be used for video streaming.
+  @JsonKey(name: 'Multicast')
   final Multicast multiCast;
 
-  @JsonKey(name: 'SessionTimeout')
-  final dynamic xmlSessionTimeout;
-
-  ///User readable name. Length up to 64 characters.
-  String get name => xmlName['\$'];
-
-  ///Used video codec, either Jpeg, H.264 or Mpeg4
-  ///- enum { 'JPEG', 'MPEG4', 'H264' }
-  String get encoding => xmlEncoding['\$'];
-
-  ///Number of internal references currently using this configuration.
-  ///This informational parameter is read-only. Deprecated for Media2 Service.
-  int get useCount => int.parse(xmlUseCount['\$']);
-
-  ///Relative value for the video quantizers and the quality of the video. A
-  ///high value within supported quality range means higher quality
-  double get quality => double.parse(xmlQuality['\$']);
-
   ///The rtsp session timeout for the related video stream
-  String get sessionTimeout => xmlSessionTimeout['\$'];
+  @JsonKey(name: 'SessionTimeout', fromJson: OnvifUtil.mappedToString)
+  final dynamic sessionTimeout;
 
   VideoEncoderConfiguration(
-      {required this.xmlName,
-      required this.xmlUseCount,
-      required this.xmlEncoding,
+      {required this.name,
+      required this.useCount,
+      required this.encoding,
       required this.resolution,
-      required this.xmlQuality,
+      required this.quality,
       required this.rateControl,
       this.mpeg4,
       this.h264,
       required this.multiCast,
-      required this.xmlSessionTimeout});
+      required this.sessionTimeout});
 
   factory VideoEncoderConfiguration.fromJson(Map<String, dynamic> json) =>
       _$VideoEncoderConfigurationFromJson(json);
 
   Map<String, dynamic> toJson() => _$VideoEncoderConfigurationToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }

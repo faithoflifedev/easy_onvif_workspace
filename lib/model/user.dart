@@ -1,41 +1,27 @@
-import 'package:easy_enum/easy_enum.dart';
+import 'dart:convert';
+
+import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user.g.dart';
 
 @JsonSerializable()
 class User {
-  @JsonKey(name: 'Username')
-  final dynamic mapUsername;
+  @JsonKey(name: 'Username', fromJson: OnvifUtil.mappedToString)
+  final String username;
 
-  @JsonKey(name: 'Password')
-  final dynamic mapPassword;
+  @JsonKey(name: 'Password', fromJson: OnvifUtil.nullableMappedToString)
+  final String? password;
 
-  @JsonKey(name: 'UserLevel')
-  final dynamic mapUserLevel;
+  @JsonKey(name: 'UserLevel', fromJson: OnvifUtil.mappedToString)
+  final String userLevel;
 
-  String get username => mapUsername['\$'];
-
-  String get password => mapPassword['\$'];
-
-  UserLevel get userLevel => mapUserLevel['\$'].userLevel;
-
-  User(
-      {required this.mapUsername,
-      required this.mapPassword,
-      required this.mapUserLevel});
-
-  factory User.fromStrings(
-          String username, String password, UserLevel userLevel) =>
-      User(
-          mapUsername: {'\$': username},
-          mapPassword: {'\$': username},
-          mapUserLevel: {'\$': userLevel.value});
+  User({required this.username, this.password, required this.userLevel});
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
-}
 
-@EasyEnum()
-enum UserLevel { administrator, operator, user, anonymous, extended }
+  @override
+  String toString() => json.encode(toJson());
+}

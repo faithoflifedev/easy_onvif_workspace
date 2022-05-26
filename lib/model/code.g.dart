@@ -7,13 +7,13 @@ part of 'code.dart';
 // **************************************************************************
 
 Code _$CodeFromJson(Map<String, dynamic> json) => Code(
-      xmlValue: json['Value'],
+      value: OnvifUtil.mappedToString(json['Value'] as Map<String, dynamic>),
       code: json['Subcode'] == null
           ? null
           : Code.fromJson(json['Subcode'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$CodeToJson(Code instance) => <String, dynamic>{
-      'Value': instance.xmlValue,
+      'Value': instance.value,
       'Subcode': instance.code?.toJson(),
     };

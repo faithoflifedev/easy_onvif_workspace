@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'audio_decoder_configuration.g.dart';
@@ -9,17 +10,13 @@ class AudioDecoderConfiguration {
   @JsonKey(name: '@token')
   final String token;
 
-  @JsonKey(name: 'Name')
-  final dynamic xmlName;
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  final String name;
 
-  @JsonKey(name: 'UseCount')
-  final dynamic xmlUseCount;
+  @JsonKey(name: 'UseCount', fromJson: OnvifUtil.mappedToInt)
+  final int useCount;
 
-  String get name => xmlName['\$'];
-
-  int get useCount => int.parse(xmlUseCount['\$']);
-
-  AudioDecoderConfiguration(this.token, this.xmlName, this.xmlUseCount);
+  AudioDecoderConfiguration(this.token, this.name, this.useCount);
 
   factory AudioDecoderConfiguration.fromJson(Map<String, dynamic> json) =>
       _$AudioDecoderConfigurationFromJson(json);

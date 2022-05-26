@@ -7,12 +7,14 @@ part of 'app_sequence.dart';
 // **************************************************************************
 
 AppSequence _$AppSequenceFromJson(Map<String, dynamic> json) => AppSequence(
-      json['@MessageNumber'],
-      json['@InstanceId'],
+      messageNumber:
+          OnvifUtil.mappedToInt(json['@MessageNumber'] as Map<String, dynamic>),
+      instanceId:
+          OnvifUtil.mappedToInt(json['@InstanceId'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AppSequenceToJson(AppSequence instance) =>
     <String, dynamic>{
-      '@MessageNumber': instance.xmlMessageNumber,
-      '@InstanceId': instance.xmlInstanceId,
+      '@MessageNumber': instance.messageNumber,
+      '@InstanceId': instance.instanceId,
     };

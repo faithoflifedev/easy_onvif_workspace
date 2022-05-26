@@ -45,6 +45,20 @@ class Ptz {
             SoapRequest.continuousMove(profileToken, velocity, timeout)));
   }
 
+  Future<List<PtzConfiguration>> getCompatibleConfigurations(
+      String profileToken) async {
+    final envelope = await Soap.retrieveEnvlope(
+        uri,
+        onvif.secureRequest(
+            SoapRequest.getCompatibleConfigurations(profileToken)));
+
+    if (envelope.body.compatibleConfigurationsResponse == null) {
+      throw Exception();
+    }
+
+    return envelope.body.compatibleConfigurationsResponse!.ptzConfigurations;
+  }
+
   ///Get all the existing PTZConfigurations from the device.
   ///
   ///The default Position/Translation/Velocity Spaces are introduced to allow
@@ -76,7 +90,7 @@ class Ptz {
     _clearDefaults();
 
     for (var ptzConfiguration in ptzConfigs) {
-      defaultSpeed ??= ptzConfiguration.defaultPTZSpeed;
+      defaultSpeed ??= ptzConfiguration.defaultPtzSpeed;
 
       defaultPanTiltLimits ??= ptzConfiguration.panTiltLimits;
 
@@ -129,13 +143,14 @@ class Ptz {
   ///Operation to request all PTZ presets for the [Preset] in the selected
   ///profile. The operation is supported if there is support for at least one
   ///PTZ preset by the [Preset].
-  Future<List<Preset>> getPresets(String profileToken) async {
+  Future<List<Preset>> getPresets(String profileToken,
+      {int limit = 100}) async {
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.presets(profileToken)));
 
     if (envelope.body.getPresetResponse == null) throw Exception();
 
-    return envelope.body.getPresetResponse!.presets;
+    return envelope.body.getPresetResponse!.presets.sublist(0, limit);
   }
 
   Future<Map<String, Preset>> getPresetsMap(String profileToken) async {
@@ -222,14 +237,12 @@ class Ptz {
   ///moving during the [setPreset] operation. The device may internally save
   ///additional states such as imaging properties in the PTZ Preset which then
   ///should be recalled in the [gotoPreset] operation.
-  Future<String> setPreset(String profileToken, Preset preset) async {
+  Future<String> setPreset(String profileToken,
+      [String? name, String? token]) async {
     final envelope = await Soap.retrieveEnvlope(
-        uri, onvif.secureRequest(SoapRequest.setPreset(profileToken, preset)),
-        postProcess: (String xmlBody, Envelope envelope) {
-      print(xmlBody);
-      print('\n\n');
-      print(envelope.toJson());
-    });
+      uri,
+      onvif.secureRequest(SoapRequest.setPreset(profileToken, name, token)),
+    );
 
     if (envelope.body.setPresetResponse == null) throw Exception();
 
@@ -312,5 +325,15 @@ class Ptz {
         _matchValue(preset.position.zoom!.x, ptzStatus.position.zoom!.x);
 
     return matchX && matchY && matchZ;
+  }
+
+  static List<PtzConfiguration> ptzConfigurationConverter(dynamic json) {
+    if (json is List) {
+      return json
+          .map((e) => PtzConfiguration.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }
+
+    return [PtzConfiguration.fromJson(json as Map<String, dynamic>)];
   }
 }

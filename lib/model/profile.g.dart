@@ -8,8 +8,8 @@ part of 'profile.dart';
 
 Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       token: json['@token'] as String,
-      xmlFixed: json['@fixed'],
-      xmlName: json['Name'],
+      fixed: OnvifUtil.stringToBool(json['@fixed'] as String),
+      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
       videoSourceConfiguration: json['VideoSourceConfiguration'] == null
           ? null
           : VideoSourceConfiguration.fromJson(
@@ -38,8 +38,8 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
 
 Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       '@token': instance.token,
-      '@fixed': instance.xmlFixed,
-      'Name': instance.xmlName,
+      '@fixed': instance.fixed,
+      'Name': instance.name,
       'VideoSourceConfiguration': instance.videoSourceConfiguration?.toJson(),
       'AudioSourceConfiguration': instance.audioSourceConfiguration?.toJson(),
       'VideoEncoderConfiguration': instance.videoEncoderConfiguration?.toJson(),

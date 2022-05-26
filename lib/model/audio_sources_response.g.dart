@@ -9,12 +9,12 @@ part of 'audio_sources_response.dart';
 GetAudioSourcesResponse _$GetAudioSourcesResponseFromJson(
         Map<String, dynamic> json) =>
     GetAudioSourcesResponse(
-      audioSource:
-          AudioSource.fromJson(json['AudioSources'] as Map<String, dynamic>),
+      audioSources:
+          GetAudioSourcesResponse._audioSourcesConvertor(json['AudioSources']),
     );
 
 Map<String, dynamic> _$GetAudioSourcesResponseToJson(
         GetAudioSourcesResponse instance) =>
     <String, dynamic>{
-      'AudioSources': instance.audioSource.toJson(),
+      'AudioSources': instance.audioSources.map((e) => e.toJson()).toList(),
     };

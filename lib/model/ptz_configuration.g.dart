@@ -9,28 +9,36 @@ part of 'ptz_configuration.dart';
 PtzConfiguration _$PtzConfigurationFromJson(Map<String, dynamic> json) =>
     PtzConfiguration(
       token: json['@token'] as String,
-      xmlName: json['Name'],
-      xmlUseCount: json['UseCount'],
-      xmlMoveRamp: json['MoveRamp'],
-      xmlPresetRamp: json['PresetRamp'],
-      xmlPresetTourRamp: json['PresetTourRamp'],
-      xmlNodeToken: json['NodeToken'],
-      xmlDefaultAbsolutePantTiltPositionSpace:
-          json['DefaultAbsolutePantTiltPositionSpace'],
-      xmlDefaultAbsoluteZoomPositionSpace:
-          json['DefaultAbsoluteZoomPositionSpace'],
-      xmlDefaultRelativePanTiltTranslationSpace:
-          json['DefaultRelativePanTiltTranslationSpace'],
-      xmlDefaultRelativeZoomTranslationSpace:
-          json['DefaultRelativeZoomTranslationSpace'],
-      xmlDefaultContinuousPanTiltVelocitySpace:
-          json['DefaultContinuousPanTiltVelocitySpace'],
-      xmlDefaultContinuousZoomVelocitySpace:
-          json['DefaultContinuousZoomVelocitySpace'],
-      defaultPTZSpeed: json['PtzSpeed'] == null
+      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      useCount: OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
+      moveRamp: OnvifUtil.nullableMappedToInt(
+          json['MoveRamp'] as Map<String, dynamic>?),
+      presetRamp: OnvifUtil.nullableMappedToInt(
+          json['PresetRamp'] as Map<String, dynamic>?),
+      presetTourRamp: OnvifUtil.nullableMappedToInt(
+          json['PresetTourRamp'] as Map<String, dynamic>?),
+      nodeToken:
+          OnvifUtil.mappedToString(json['NodeToken'] as Map<String, dynamic>),
+      defaultAbsolutePantTiltPositionSpace: OnvifUtil.nullableMappedToString(
+          json['DefaultAbsolutePantTiltPositionSpace']
+              as Map<String, dynamic>?),
+      defaultAbsoluteZoomPositionSpace: OnvifUtil.nullableMappedToString(
+          json['DefaultAbsoluteZoomPositionSpace'] as Map<String, dynamic>?),
+      defaultRelativePanTiltTranslationSpace: OnvifUtil.nullableMappedToString(
+          json['DefaultRelativePanTiltTranslationSpace']
+              as Map<String, dynamic>?),
+      defaultRelativeZoomTranslationSpace: OnvifUtil.nullableMappedToString(
+          json['DefaultRelativeZoomTranslationSpace'] as Map<String, dynamic>?),
+      defaultContinuousPanTiltVelocitySpace: OnvifUtil.nullableMappedToString(
+          json['DefaultContinuousPanTiltVelocitySpace']
+              as Map<String, dynamic>?),
+      defaultContinuousZoomVelocitySpace: OnvifUtil.nullableMappedToString(
+          json['DefaultContinuousZoomVelocitySpace'] as Map<String, dynamic>?),
+      defaultPtzSpeed: json['PtzSpeed'] == null
           ? null
           : PtzSpeed.fromJson(json['PtzSpeed'] as Map<String, dynamic>),
-      xmlDefaultPTZTimeout: json['DefaultPTZTimeout'],
+      defaultPtzTimeout: OnvifUtil.nullableMappedToString(
+          json['DefaultPTZTimeout'] as Map<String, dynamic>?),
       panTiltLimits: json['PanTiltLimits'] == null
           ? null
           : PanTiltLimits.fromJson(
@@ -43,26 +51,26 @@ PtzConfiguration _$PtzConfigurationFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$PtzConfigurationToJson(PtzConfiguration instance) =>
     <String, dynamic>{
       '@token': instance.token,
-      'Name': instance.xmlName,
-      'UseCount': instance.xmlUseCount,
-      'MoveRamp': instance.xmlMoveRamp,
-      'PresetRamp': instance.xmlPresetRamp,
-      'PresetTourRamp': instance.xmlPresetTourRamp,
-      'NodeToken': instance.xmlNodeToken,
+      'Name': instance.name,
+      'UseCount': instance.useCount,
+      'MoveRamp': instance.moveRamp,
+      'PresetRamp': instance.presetRamp,
+      'PresetTourRamp': instance.presetTourRamp,
+      'NodeToken': instance.nodeToken,
       'DefaultAbsolutePantTiltPositionSpace':
-          instance.xmlDefaultAbsolutePantTiltPositionSpace,
+          instance.defaultAbsolutePantTiltPositionSpace,
       'DefaultAbsoluteZoomPositionSpace':
-          instance.xmlDefaultAbsoluteZoomPositionSpace,
+          instance.defaultAbsoluteZoomPositionSpace,
       'DefaultRelativePanTiltTranslationSpace':
-          instance.xmlDefaultRelativePanTiltTranslationSpace,
+          instance.defaultRelativePanTiltTranslationSpace,
       'DefaultRelativeZoomTranslationSpace':
-          instance.xmlDefaultRelativeZoomTranslationSpace,
+          instance.defaultRelativeZoomTranslationSpace,
       'DefaultContinuousPanTiltVelocitySpace':
-          instance.xmlDefaultContinuousPanTiltVelocitySpace,
+          instance.defaultContinuousPanTiltVelocitySpace,
       'DefaultContinuousZoomVelocitySpace':
-          instance.xmlDefaultContinuousZoomVelocitySpace,
-      'PtzSpeed': instance.defaultPTZSpeed?.toJson(),
-      'DefaultPTZTimeout': instance.xmlDefaultPTZTimeout,
+          instance.defaultContinuousZoomVelocitySpace,
+      'PtzSpeed': instance.defaultPtzSpeed?.toJson(),
+      'DefaultPTZTimeout': instance.defaultPtzTimeout,
       'PanTiltLimits': instance.panTiltLimits?.toJson(),
       'ZoomLimits': instance.zoomLimits?.toJson(),
     };

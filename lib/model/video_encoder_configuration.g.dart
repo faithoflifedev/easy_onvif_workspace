@@ -9,12 +9,14 @@ part of 'video_encoder_configuration.dart';
 VideoEncoderConfiguration _$VideoEncoderConfigurationFromJson(
         Map<String, dynamic> json) =>
     VideoEncoderConfiguration(
-      xmlName: json['Name'],
-      xmlUseCount: json['UseCount'],
-      xmlEncoding: json['Encoding'],
+      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      useCount: OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
+      encoding:
+          OnvifUtil.mappedToString(json['Encoding'] as Map<String, dynamic>),
       resolution:
           Resolution.fromJson(json['Resolution'] as Map<String, dynamic>),
-      xmlQuality: json['Quality'],
+      quality:
+          OnvifUtil.mappedToDouble(json['Quality'] as Map<String, dynamic>),
       rateControl:
           RateControl.fromJson(json['RateControl'] as Map<String, dynamic>),
       mpeg4: json['MPEG4'] == null
@@ -24,20 +26,21 @@ VideoEncoderConfiguration _$VideoEncoderConfigurationFromJson(
           ? null
           : H264.fromJson(json['H264'] as Map<String, dynamic>),
       multiCast: Multicast.fromJson(json['Multicast'] as Map<String, dynamic>),
-      xmlSessionTimeout: json['SessionTimeout'],
+      sessionTimeout: OnvifUtil.mappedToString(
+          json['SessionTimeout'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$VideoEncoderConfigurationToJson(
         VideoEncoderConfiguration instance) =>
     <String, dynamic>{
-      'Name': instance.xmlName,
-      'UseCount': instance.xmlUseCount,
-      'Encoding': instance.xmlEncoding,
+      'Name': instance.name,
+      'UseCount': instance.useCount,
+      'Encoding': instance.encoding,
       'Resolution': instance.resolution.toJson(),
-      'Quality': instance.xmlQuality,
+      'Quality': instance.quality,
       'RateControl': instance.rateControl.toJson(),
       'MPEG4': instance.mpeg4?.toJson(),
       'H264': instance.h264?.toJson(),
       'Multicast': instance.multiCast.toJson(),
-      'SessionTimeout': instance.xmlSessionTimeout,
+      'SessionTimeout': instance.sessionTimeout,
     };

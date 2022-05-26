@@ -1,6 +1,7 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'dart:convert';
 
-import 'video_sources.dart';
+import 'package:easy_onvif/onvif.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'video_sources_response.g.dart';
 
@@ -8,8 +9,8 @@ part 'video_sources_response.g.dart';
 @JsonSerializable(explicitToJson: true)
 class GetVideoSourcesResponse {
   ///List of existing Video Sources
-  @JsonKey(name: 'VideoSources')
-  final VideoSources videoSources;
+  @JsonKey(name: 'VideoSources', fromJson: _videoSourcesConvertor)
+  final List<VideoSource> videoSources;
 
   GetVideoSourcesResponse(this.videoSources);
 
@@ -17,4 +18,17 @@ class GetVideoSourcesResponse {
       _$GetVideoSourcesResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$GetVideoSourcesResponseToJson(this);
+
+  static List<VideoSource> _videoSourcesConvertor(dynamic json) {
+    if (json is List) {
+      return json
+          .map((e) => VideoSource.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }
+
+    return [VideoSource.fromJson(json as Map<String, dynamic>)];
+  }
+
+  @override
+  String toString() => json.encode(toJson());
 }

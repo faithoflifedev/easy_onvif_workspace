@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'space.dart';
@@ -14,15 +15,13 @@ part 'space1d.g.dart';
 @JsonSerializable()
 class Space1D {
   ///Capability information.
-  @JsonKey(name: 'Capabilities')
-  final dynamic xmlUri;
+  @JsonKey(name: 'URI', fromJson: OnvifUtil.mappedToString)
+  final String uri;
 
   @JsonKey(name: 'XRange')
   final Space xRange;
 
-  Space1D({required this.xmlUri, required this.xRange});
-
-  String get uri => xmlUri['\$'];
+  Space1D({required this.uri, required this.xRange});
 
   factory Space1D.fromJson(Map<String, dynamic> json) =>
       _$Space1DFromJson(json);

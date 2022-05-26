@@ -9,27 +9,30 @@ part of 'security_capabilities.dart';
 SecurityCapabilities _$SecurityCapabilitiesFromJson(
         Map<String, dynamic> json) =>
     SecurityCapabilities(
-      tls1_0: stringToBool(json['@TLS1.0'] as String),
-      tls1_1: stringToBool(json['@TLS1.1'] as String),
-      tls1_2: stringToBool(json['@TLS1.2'] as String),
+      tls1_0: OnvifUtil.stringToBool(json['@TLS1.0'] as String),
+      tls1_1: OnvifUtil.stringToBool(json['@TLS1.1'] as String),
+      tls1_2: OnvifUtil.stringToBool(json['@TLS1.2'] as String),
       onboardKeyGeneration:
-          stringToBool(json['@OnboardKeyGeneration'] as String),
-      accessPolicyConfig: stringToBool(json['@AccessPolicyConfig'] as String),
-      defaultAccessPolicy: stringToBool(json['@DefaultAccessPolicy'] as String),
-      dot1X: stringToBool(json['@Dot1X'] as String),
-      remoteUserHandling: stringToBool(json['@RemoteUserHandling'] as String),
-      x509Token: stringToBool(json['@X.509Token'] as String),
-      samlToken: stringToBool(json['@SAMLToken'] as String),
-      kerberosToken: stringToBool(json['@KerberosToken'] as String),
-      usernameToken: stringToBool(json['@UsernameToken'] as String),
-      httpDigest: stringToBool(json['@HttpDigest'] as String),
-      relToken: stringToBool(json['@RELToken'] as String),
-      supportedEAPMethods: stringToInt(json['@SupportedEAPMethods'] as String),
-      maxUsers: stringToInt(json['@MaxUsers'] as String),
-      maxUserNameLength: stringToInt(json['@MaxUserNameLength'] as String),
-      maxPasswordLength: stringToInt(json['@MaxPasswordLength'] as String),
+          OnvifUtil.stringToBool(json['@OnboardKeyGeneration'] as String),
+      accessPolicyConfig:
+          OnvifUtil.stringToBool(json['@AccessPolicyConfig'] as String),
+      defaultAccessPolicy:
+          OnvifUtil.stringToBool(json['@DefaultAccessPolicy'] as String),
+      dot1X: OnvifUtil.stringToBool(json['@Dot1X'] as String),
+      remoteUserHandling:
+          OnvifUtil.stringToBool(json['@RemoteUserHandling'] as String),
+      x509Token: OnvifUtil.stringToBool(json['@X.509Token'] as String),
+      samlToken: OnvifUtil.stringToBool(json['@SAMLToken'] as String),
+      kerberosToken: OnvifUtil.stringToBool(json['@KerberosToken'] as String),
+      usernameToken: OnvifUtil.stringToBool(json['@UsernameToken'] as String),
+      httpDigest: OnvifUtil.stringToBool(json['@HttpDigest'] as String),
+      relToken: OnvifUtil.stringToBool(json['@RELToken'] as String),
+      supportedEAPMethods: int.parse(json['@SupportedEAPMethods'] as String),
+      maxUsers: int.parse(json['@MaxUsers'] as String),
+      maxUserNameLength: int.parse(json['@MaxUserNameLength'] as String),
+      maxPasswordLength: int.parse(json['@MaxPasswordLength'] as String),
       securityPolicies: json['@SecurityPolicies'] as String?,
-      maxPasswordHistory: nullableToInt(json['@MaxPasswordHistory'] as String?),
+      maxPasswordHistory: json['@MaxPasswordHistory'] as int?,
     );
 
 Map<String, dynamic> _$SecurityCapabilitiesToJson(

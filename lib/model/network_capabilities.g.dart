@@ -8,15 +8,18 @@ part of 'network_capabilities.dart';
 
 NetworkCapabilities _$NetworkCapabilitiesFromJson(Map<String, dynamic> json) =>
     NetworkCapabilities(
-      ipFilter: stringToBool(json['@IPFilter'] as String),
-      zeroConfiguration: stringToBool(json['@ZeroConfiguration'] as String),
-      ipVersion6: stringToBool(json['@IPVersion6'] as String),
-      dynDNS: stringToBool(json['@DynDNS'] as String),
-      dot11Configuration: stringToBool(json['@Dot11Configuration'] as String),
-      dot1xConfiguration: stringToInt(json['@Dot1XConfigurations'] as String),
-      hostnameFromDHCP: stringToBool(json['@HostnameFromDHCP'] as String),
-      ntp: stringToInt(json['@NTP'] as String),
-      dhcpv6: stringToBool(json['@DHCPv6'] as String),
+      ipFilter: OnvifUtil.stringToBool(json['@IPFilter'] as String),
+      zeroConfiguration:
+          OnvifUtil.stringToBool(json['@ZeroConfiguration'] as String),
+      ipVersion6: OnvifUtil.stringToBool(json['@IPVersion6'] as String),
+      dynDNS: OnvifUtil.stringToBool(json['@DynDNS'] as String),
+      dot11Configuration:
+          OnvifUtil.stringToBool(json['@Dot11Configuration'] as String),
+      dot1xConfiguration: int.parse(json['@Dot1XConfigurations'] as String),
+      hostnameFromDHCP:
+          OnvifUtil.stringToBool(json['@HostnameFromDHCP'] as String),
+      ntp: int.parse(json['@NTP'] as String),
+      dhcpv6: OnvifUtil.stringToBool(json['@DHCPv6'] as String),
     );
 
 Map<String, dynamic> _$NetworkCapabilitiesToJson(

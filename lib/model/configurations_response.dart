@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'ptz_configuration.dart';
@@ -26,7 +27,7 @@ part 'configurations_response.g.dart';
 ///specified limits, the PTZ unit has to move along the specified limits.
 @JsonSerializable(explicitToJson: true)
 class GetConfigurationsResponse {
-  @JsonKey(name: 'PTZConfiguration', fromJson: _ptzConfigurationConverter)
+  @JsonKey(name: 'PTZConfiguration', fromJson: Ptz.ptzConfigurationConverter)
   final List<PtzConfiguration> ptzConfigurations;
 
   GetConfigurationsResponse({required this.ptzConfigurations});
@@ -38,14 +39,4 @@ class GetConfigurationsResponse {
 
   @override
   String toString() => json.encode(toJson());
-
-  static List<PtzConfiguration> _ptzConfigurationConverter(dynamic json) {
-    if (json is List) {
-      return json
-          .map((e) => PtzConfiguration.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [PtzConfiguration.fromJson(json as Map<String, dynamic>)];
-  }
 }

@@ -1,11 +1,10 @@
-import 'package:easy_onvif/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'zoom.g.dart';
 
 @JsonSerializable()
 class Zoom {
-  @JsonKey(name: '@x', fromJson: stringToDouble)
+  @JsonKey(name: '@x', fromJson: double.parse)
   final double x;
 
   @JsonKey(name: '@space')

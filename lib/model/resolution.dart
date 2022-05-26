@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'resolution.g.dart';
@@ -6,22 +9,21 @@ part 'resolution.g.dart';
 
 ///Configured video resolution
 class Resolution {
-  @JsonKey(name: 'Width')
-  final dynamic xmlWidth;
-
-  @JsonKey(name: 'Height')
-  final dynamic xmlHeight;
-
   ///Number of the columns of the Video image.
-  int get width => int.parse(xmlWidth['\$']);
+  @JsonKey(name: 'Width', fromJson: OnvifUtil.mappedToInt)
+  final int width;
 
   ///Number of the lines of the Video image.
-  int get height => int.parse(xmlHeight['\$']);
+  @JsonKey(name: 'Height', fromJson: OnvifUtil.mappedToInt)
+  final int height;
 
-  Resolution(this.xmlWidth, this.xmlHeight);
+  Resolution({required this.width, required this.height});
 
   factory Resolution.fromJson(Map<String, dynamic> json) =>
       _$ResolutionFromJson(json);
 
   Map<String, dynamic> toJson() => _$ResolutionToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }

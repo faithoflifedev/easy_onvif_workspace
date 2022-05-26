@@ -1,20 +1,24 @@
+import 'dart:convert';
+
+import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'time_zone.g.dart';
 
 ///Timezone information in Posix format.
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class TimeZone {
-  @JsonKey(name: 'TZ')
-  final dynamic xmlTz;
-
   ///Posix timezone string.
-  String get tz => xmlTz['\$'];
+  @JsonKey(name: 'TZ', fromJson: OnvifUtil.mappedToString)
+  final String tz;
 
-  TimeZone(this.xmlTz);
+  TimeZone({required this.tz});
 
   factory TimeZone.fromJson(Map<String, dynamic> json) =>
       _$TimeZoneFromJson(json);
 
   Map<String, dynamic> toJson() => _$TimeZoneToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }

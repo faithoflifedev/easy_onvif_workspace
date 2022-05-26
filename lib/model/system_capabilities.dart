@@ -9,55 +9,55 @@ part 'system_capabilities.g.dart';
 @JsonSerializable()
 class SystemCapabilities {
   ///Indicates support for WS Discovery resolve requests.
-  @JsonKey(name: '@DiscoveryResolve', fromJson: stringToBool)
+  @JsonKey(name: '@DiscoveryResolve', fromJson: OnvifUtil.stringToBool)
   final bool discoveryResolve;
 
   ///Indicates support for WS-Discovery Bye.
-  @JsonKey(name: '@DiscoveryBye', fromJson: stringToBool)
+  @JsonKey(name: '@DiscoveryBye', fromJson: OnvifUtil.stringToBool)
   final bool discoveryBye;
 
   ///Indicates support for remote discovery.
-  @JsonKey(name: '@RemoteDiscovery', fromJson: stringToBool)
+  @JsonKey(name: '@RemoteDiscovery', fromJson: OnvifUtil.stringToBool)
   final bool remoteDiscovery;
 
   ///Indicates support for system backup through MTOM.
-  @JsonKey(name: '@SystemBackup', fromJson: stringToBool)
+  @JsonKey(name: '@SystemBackup', fromJson: OnvifUtil.stringToBool)
   final bool systemBackup;
 
   ///Indicates support for retrieval of system logging through MTOM.
-  @JsonKey(name: '@SystemLogging', fromJson: stringToBool)
+  @JsonKey(name: '@SystemLogging', fromJson: OnvifUtil.stringToBool)
   final bool systemLogging;
 
   ///Indicates support for firmware upgrade through MTOM.
-  @JsonKey(name: '@FirmwareUpgrade', fromJson: stringToBool)
+  @JsonKey(name: '@FirmwareUpgrade', fromJson: OnvifUtil.stringToBool)
   final bool firmwareUpgrade;
 
   ///Indicates support for firmware upgrade through HTTP.
-  @JsonKey(name: '@HttpFirmwareUpgrade', fromJson: stringToBool)
+  @JsonKey(name: '@HttpFirmwareUpgrade', fromJson: OnvifUtil.stringToBool)
   final bool httpFirmwareUpgrade;
 
   ///Indicates support for system backup through HTTP.
-  @JsonKey(name: '@HttpSystemBackup', fromJson: stringToBool)
+  @JsonKey(name: '@HttpSystemBackup', fromJson: OnvifUtil.stringToBool)
   final bool httpSystemBackup;
 
   ///Indicates support for retrieval of system logging through HTTP.
-  @JsonKey(name: '@HttpSystemLogging', fromJson: stringToBool)
+  @JsonKey(name: '@HttpSystemLogging', fromJson: OnvifUtil.stringToBool)
   final bool httpSystemLogging;
 
   ///Indicates support for retrieving support information through HTTP.
-  @JsonKey(name: '@HttpSupportInformation', fromJson: stringToBool)
+  @JsonKey(name: '@HttpSupportInformation', fromJson: OnvifUtil.stringToBool)
   final bool httpSupportInformation;
 
   ///Indicates support for storage configuration interfaces.
-  @JsonKey(name: '@StorageConfiguration', fromJson: stringToBool)
+  @JsonKey(name: '@StorageConfiguration', fromJson: OnvifUtil.stringToBool)
   final bool storageConfiguration;
 
   ///Indicates maximum number of storage configurations supported.
-  @JsonKey(name: '@MaxStorageConfigurations', fromJson: stringToInt)
+  @JsonKey(name: '@MaxStorageConfigurations', fromJson: int.parse)
   final int maxStorageConfigurations;
 
   ///If present signals support for geo location. The value signals the supported number of entries.
-  @JsonKey(name: '@GeoLocationEntries', fromJson: nullableToInt)
+  @JsonKey(name: '@GeoLocationEntries', fromJson: OnvifUtil.optionalInt)
   final int? geoLocationEntries;
 
   ///List of supported automatic GeoLocation adjustment supported by the device. Valid items are defined by tds:AutoGeoMode.
@@ -69,15 +69,15 @@ class SystemCapabilities {
   final String? storageTypesSupported;
 
   ///Indicates no support for network discovery.
-  @JsonKey(name: '@DiscoveryNotSupported', fromJson: nullableToBool)
+  @JsonKey(name: '@DiscoveryNotSupported', fromJson: OnvifUtil.optionalBool)
   final bool? discoveryNotSupported;
 
   ///Indicates no support for network configuration.
-  @JsonKey(name: '@NetworkConfigNotSupported', fromJson: nullableToBool)
+  @JsonKey(name: '@NetworkConfigNotSupported', fromJson: OnvifUtil.optionalBool)
   final bool? networkConfigNotSupported;
 
   ///Indicates no support for user configuration.
-  @JsonKey(name: '@UserConfigNotSupported', fromJson: nullableToBool)
+  @JsonKey(name: '@UserConfigNotSupported', fromJson: OnvifUtil.optionalBool)
   final bool? userConfigNotSupported;
 
   SystemCapabilities(

@@ -1,27 +1,22 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'time.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Time {
-  @JsonKey(name: 'Hour')
-  final dynamic xmlHour;
+  @JsonKey(name: 'Hour', fromJson: OnvifUtil.mappedToInt)
+  final dynamic hour;
 
-  @JsonKey(name: 'Minute')
-  final dynamic xmlMinute;
+  @JsonKey(name: 'Minute', fromJson: OnvifUtil.mappedToInt)
+  final dynamic minute;
 
-  @JsonKey(name: 'Second')
-  final dynamic xmlSecond;
+  @JsonKey(name: 'Second', fromJson: OnvifUtil.mappedToInt)
+  final dynamic second;
 
-  int get hour => int.parse(xmlHour['\$']);
-
-  int get minute => int.parse(xmlMinute['\$']);
-
-  int get second => int.parse(xmlSecond['\$']);
-
-  Time({this.xmlHour, this.xmlMinute, this.xmlSecond});
+  Time({required this.hour, required this.minute, required this.second});
 
   factory Time.fromJson(Map<String, dynamic> json) => _$TimeFromJson(json);
 

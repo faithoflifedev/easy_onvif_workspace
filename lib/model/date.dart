@@ -1,27 +1,27 @@
+import 'dart:convert';
+
+import 'package:easy_onvif/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'date.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Date {
-  @JsonKey(name: 'Year')
-  final dynamic xmlYear;
+  @JsonKey(name: 'Year', fromJson: OnvifUtil.mappedToInt)
+  final int year;
 
-  @JsonKey(name: 'Month')
-  final dynamic xmlMonth;
+  @JsonKey(name: 'Month', fromJson: OnvifUtil.mappedToInt)
+  final int month;
 
-  @JsonKey(name: 'Day')
-  final dynamic xmlDay;
+  @JsonKey(name: 'Day', fromJson: OnvifUtil.mappedToInt)
+  final int day;
 
-  int get year => int.parse(xmlYear['\$']);
-
-  int get month => int.parse(xmlMonth['\$']);
-
-  int get day => int.parse(xmlDay['\$']);
-
-  Date(this.xmlYear, this.xmlMonth, this.xmlDay);
+  Date(this.year, this.month, this.day);
 
   factory Date.fromJson(Map<String, dynamic> json) => _$DateFromJson(json);
 
   Map<String, dynamic> toJson() => _$DateToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }

@@ -7,11 +7,11 @@ part of 'space.dart';
 // **************************************************************************
 
 Space _$SpaceFromJson(Map<String, dynamic> json) => Space(
-      xmlMin: json['Min'],
-      xmlMax: json['Max'],
+      min: OnvifUtil.mappedToDouble(json['Min'] as Map<String, dynamic>),
+      max: OnvifUtil.mappedToDouble(json['Max'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SpaceToJson(Space instance) => <String, dynamic>{
-      'Min': instance.xmlMin,
-      'Max': instance.xmlMax,
+      'Min': instance.min,
+      'Max': instance.max,
     };

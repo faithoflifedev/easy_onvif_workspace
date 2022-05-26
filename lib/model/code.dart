@@ -1,20 +1,19 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'code.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Code {
-  @JsonKey(name: 'Value')
-  final dynamic xmlValue;
+  @JsonKey(name: 'Value', fromJson: OnvifUtil.mappedToString)
+  final String value;
 
   @JsonKey(name: 'Subcode')
   final Code? code;
 
-  String get value => xmlValue['\$'];
-
-  Code({required this.xmlValue, this.code});
+  Code({required this.value, this.code});
 
   factory Code.fromJson(Map<String, dynamic> json) => _$CodeFromJson(json);
 

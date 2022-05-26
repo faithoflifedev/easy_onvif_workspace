@@ -10,16 +10,18 @@ Header _$HeaderFromJson(Map<String, dynamic> json) => Header(
       appSequence: json['AppSequence'] == null
           ? null
           : AppSequence.fromJson(json['AppSequence'] as Map<String, dynamic>),
-      xmlMessageID: json['MessageID'],
-      xmlRelatesTo: json['RelatesTo'],
-      xmlTo: json['To'],
-      xmlAction: json['Action'],
+      messageID:
+          OnvifUtil.mappedToInt(json['MessageID'] as Map<String, dynamic>),
+      relatesTo:
+          OnvifUtil.mappedToString(json['RelatesTo'] as Map<String, dynamic>),
+      to: OnvifUtil.mappedToString(json['To'] as Map<String, dynamic>),
+      action: OnvifUtil.mappedToString(json['Action'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$HeaderToJson(Header instance) => <String, dynamic>{
       'AppSequence': instance.appSequence?.toJson(),
-      'MessageID': instance.xmlMessageID,
-      'RelatesTo': instance.xmlRelatesTo,
-      'To': instance.xmlTo,
-      'Action': instance.xmlAction,
+      'MessageID': instance.messageID,
+      'RelatesTo': instance.relatesTo,
+      'To': instance.to,
+      'Action': instance.action,
     };

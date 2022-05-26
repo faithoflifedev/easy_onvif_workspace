@@ -1,21 +1,23 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
+
+import 'system_log.dart';
 
 part 'system_log_uris.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class SystemLogUris {
-  @JsonKey(name: 'Type')
-  final dynamic xmlType;
+  @JsonKey(name: 'SystemLog')
+  final SystemLog systemLog;
 
-  @JsonKey(name: 'Uri')
-  final dynamic xmlUri;
-
-  String get type => xmlType['\$'];
-
-  SystemLogUris({required this.xmlType, this.xmlUri});
+  SystemLogUris({required this.systemLog});
 
   factory SystemLogUris.fromJson(Map<String, dynamic> json) =>
       _$SystemLogUrisFromJson(json);
 
   Map<String, dynamic> toJson() => _$SystemLogUrisToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
 }
