@@ -42,11 +42,7 @@ void main(List<String> arguments) async {
   var ptzConfigs = await onvif.ptz.getConfigurations();
 
   for (var ptzConfiguration in ptzConfigs) {
-<<<<<<< HEAD
-    print('${ptzConfiguration.name} ${ptzConfiguration.token}');
-=======
     print('${ptzConfiguration.name}  ${ptzConfiguration.token}');
->>>>>>> 501be26 (addition of logging functionality)
   }
 
   print('xMax: ${ptzConfigs[0].panTiltLimits!.range.xRange.max}');
