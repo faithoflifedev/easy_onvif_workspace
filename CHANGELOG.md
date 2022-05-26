@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.9
+
+- additional onvif device support
+
 ## 1.0.8
 
 - fixed a test

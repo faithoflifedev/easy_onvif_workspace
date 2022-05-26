@@ -149,16 +149,6 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 | N/A             | zoomOut          | `Future<void>`    |
 | N/A             | getCurrentPreset | `Future<Preset?>` |
 
-## Tested Onvif Devices
-
-| Manufacturer       | Model          |
-| ------------------ | -------------- |
-| D-Link Corporation | DCS-6511       |
-| ONVIF              | ENP1A14-IR/25X |
-| Unknown            | GX728MF-IR28   |
-
-The values returned by the Onvif API `GetDeviceInformation` call.
-
 ## What's next
 
 - More comprehensive unit tests
