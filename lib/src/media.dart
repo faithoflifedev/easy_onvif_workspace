@@ -1,8 +1,8 @@
-// import 'package:easy_onvif/model/envelope.dart';
 import 'package:easy_onvif/model/configuration.dart';
 import 'package:easy_onvif/onvif.dart';
+import 'package:loggy/loggy.dart';
 
-class Media {
+class Media with UiLoggy {
   final Onvif onvif;
   final String uri;
 
@@ -10,6 +10,8 @@ class Media {
 
   ///This command lists all available physical audio inputs of the device.
   Future<List<AudioSource>> getAudioSources() async {
+    loggy.debug('getAudioSources');
+
     // Future<void> getAudioSources() async {
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.audioSources()));
@@ -22,6 +24,8 @@ class Media {
   ///This operation lists all existing metadata configurations. The client need
   ///not know anything apriori about the metadata in order to use the command.
   Future<List<Configuration>> getMetadataConfigurations() async {
+    loggy.debug('getMetadataConfigurations');
+
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.metadataConfigurations()));
 
@@ -36,6 +40,8 @@ class Media {
   ///profiles in a device. The client does not need to know the media profile in
   ///order to use the command.
   Future<List<Profile>> getProfiles() async {
+    loggy.debug('getProfiles');
+
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.profiles()));
 
@@ -47,6 +53,9 @@ class Media {
   ///Returns the capabilities of the media service. The result is returned in a
   ///typed answer.
   Future<void> getServiceCapabilities() async {
+    loggy.debug('getServiceCapabilities');
+
+    //TODO: implement me
     throw UnimplementedError();
   }
 
@@ -64,6 +73,8 @@ class Media {
       {bool validUntilConnect = false,
       bool validUntilReboot = false,
       String timeout = 'PT0S'}) async {
+    loggy.debug('getSnapshotUri');
+
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.snapshotUri(profileToken)));
 
@@ -97,6 +108,8 @@ class Media {
       bool validUntilConnect = false,
       bool validUntilReboot = false,
       String timeout = 'PT0S'}) async {
+    loggy.debug('getStreamUri');
+
     final envelope = await Soap.retrieveEnvlope(
         uri,
         onvif.secureRequest(SoapRequest.streamUri(profileToken,
@@ -109,6 +122,8 @@ class Media {
 
   ///This command lists all available physical video inputs of the device.
   Future<List<VideoSource>> getVideoSources() async {
+    loggy.debug('getVideoSources');
+
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.videoSources()));
 
@@ -124,6 +139,8 @@ class Media {
   ///port and TTL are configured in the VideoEncoderConfiguration,
   ///AudioEncoderConfiguration and MetadataConfiguration respectively.
   Future<void> startMulticastStreaming() async {
+    loggy.debug('startMulticastStreaming');
+
     await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.startMulticastStreaming()));
   }
@@ -131,6 +148,8 @@ class Media {
   ///This command stop multicast streaming using a specified media profile of a
   ///device
   Future<void> stopMulticastStreaming() async {
+    loggy.debug('stopMulticastStreaming');
+
     await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.stopMulticastStreaming()));
   }

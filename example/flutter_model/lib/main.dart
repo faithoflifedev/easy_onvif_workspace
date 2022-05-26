@@ -1,6 +1,8 @@
 import 'package:easy_onvif/onvif.dart';
 import 'package:flutter/material.dart';
-import "package:flutter/services.dart" as services;
+import 'package:flutter/services.dart' as services;
+import 'package:flutter_loggy/flutter_loggy.dart';
+import 'package:loggy/loggy.dart';
 import 'package:yaml/yaml.dart';
 
 void main() {
@@ -46,13 +48,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final config = loadYaml(yamlData);
 
-    //configure device connection
-    var onvif = Onvif(
+    // configure device connection
+    final onvif = await Onvif.connect(
         host: config['host'],
         username: config['username'],
-        password: config['password']);
-
-    await onvif.initialize();
+        password: config['password'],
+        logOptions: const LogOptions(
+          LogLevel.debug,
+          stackTraceLevel: LogLevel.error,
+        ),
+        printer: const PrettyDeveloperPrinter());
 
     deviceInfo = await onvif.deviceManagement.getDeviceInformation();
   }

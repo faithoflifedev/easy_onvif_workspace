@@ -1,3 +1,9 @@
+# Changelog
+
+## 1.0.7
+
+- addition of logging functionality
+
 ## 1.0.4
 
 - cleanup the package

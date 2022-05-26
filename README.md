@@ -5,6 +5,10 @@ This is a wrapper to ONVIF protocol which allows you to get information about yo
 [![pub package](https://img.shields.io/pub/v/easy_onvif.svg)](https://pub.dartlang.org/packages/easy_onvif)
 [![Build Status](https://github.com/faithoflifedev/easy_onvif/workflows/Dart/badge.svg)](https://github.com/faithoflifedev/easy_onvif/actions)
 
+## New for version 1.0.7
+
+This release has logging capabilities through use of the [loggy](https://pub.dev/packages/loggy) package for Dart code and the [flutter_loggy](https://pub.dev/packages/flutter_loggy) package for Flutter code. The code includes both a [Dart example](https://pub.dev/packages/easy_onvif/example) and a [Flutter example](https://github.com/faithoflifedev/easy_onvif/tree/main/example/flutter_model) that demonstreate usage.  By default the logging level is set to `LogLevel.error`, which only logs exceptions.
+
 ## New for version 1.0.0
 
 As of the 1.0.0 release of this package, there is a cli utility included that can be used to return data for any API call currently supported by the package. If you want to get started quicky with the cli utility run these commands in a termainal session:
@@ -24,7 +28,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^1.0.6
+  easy_onvif: ^1.0.7
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).

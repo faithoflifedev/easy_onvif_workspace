@@ -11,14 +11,17 @@ environment:
 dependencies:
   easy_onvif:
     path: ../../
-  yaml: ^3.1.0
+  flutter_loggy: ^2.0.1
+  loggy: ^2.0.1+1
+  yaml: ^3.1.1
+
   flutter:
     sdk: flutter
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true

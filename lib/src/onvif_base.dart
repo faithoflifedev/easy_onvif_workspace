@@ -1,13 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:easy_onvif/onvif.dart';
 import 'package:loggy/loggy.dart';
 import 'package:xml/xml.dart';
 
-class Onvif {
+class Onvif with UiLoggy {
+  late final DeviceManagement deviceManagement;
+
   final String username;
   final String password;
-  final bool debug;
-
-  late final DeviceManagement deviceManagement;
 
   final serviceMap = <String, String>{};
 
@@ -33,9 +33,19 @@ class Onvif {
       {required host,
       required username,
       required password,
-      debug = false}) async {
-    var onvif =
-        Onvif(host: host, username: username, password: password, debug: debug);
+      LogOptions logOptions = const LogOptions(
+        LogLevel.error,
+        stackTraceLevel: LogLevel.error,
+      ),
+      LoggyPrinter printer = const PrettyPrinter(
+        showColors: false,
+      )}) async {
+    var onvif = Onvif(
+        host: host,
+        username: username,
+        password: password,
+        logOptions: logOptions,
+        printer: printer);
 
     await onvif.initialize();
 
@@ -46,8 +56,33 @@ class Onvif {
       {required host,
       required this.username,
       required this.password,
-      this.debug = false}) {
-    Loggy.initLoggy();
+      required LogOptions logOptions,
+      required LoggyPrinter printer}) {
+    Loggy.initLoggy(logPrinter: printer, logOptions: logOptions);
+
+    final dio = Dio();
+
+    dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
+      loggy.debug('URI: ${options.uri}');
+
+      loggy.debug('REQUEST:\n${options.data}');
+
+      return handler.next(options); //continue
+    }, onResponse: (response, handler) {
+      loggy.debug('RESPONSE:\n${response.data}');
+
+      return handler.next(response); // continue
+    }, onError: (DioError e, handler) {
+      loggy.error('ERROR:\n$e');
+
+      return handler.next(e); //continue
+    }));
+
+    Soap.dio = dio;
+
+    // Logger.root.onRecord.listen((LogRecord record) => logOutput!.write(sprintf(
+    //     '%26s %7s - %5s - %s\n',
+    //     [record.time, record.level, record.loggerName, record.message])));
 
     deviceManagement =
         DeviceManagement(onvif: this, uri: 'http://$host/onvif/device_service');
@@ -55,18 +90,18 @@ class Onvif {
 
   ///Connect to the Onvif device and retrieve its capabilities
   Future<void> initialize() async {
-    if (debug) logDebug('initializing...');
+    loggy.info('initializing ...');
 
-    final _datetime = await deviceManagement.getSystemDateAndTime();
+    final datetime = await deviceManagement.getSystemDateAndTime();
 
-    _timeDelta = _datetime.utcDateTime != null
-        ? _datetime.utcDateTime!.difference(DateTime.now().toUtc())
+    _timeDelta = datetime.utcDateTime != null
+        ? datetime.utcDateTime!.difference(DateTime.now().toUtc())
         : const Duration(seconds: 0);
 
-    final _serviceList = await deviceManagement.getServices();
+    final serviceList = await deviceManagement.getServices();
 
     serviceMap.addAll(
-        {for (var service in _serviceList) service.nameSpace: service.xAddr});
+        {for (var service in serviceList) service.nameSpace: service.xAddr});
 
     if (serviceMap.containsKey('http://www.onvif.org/ver10/media/wsdl')) {
       _media = Media(
@@ -79,7 +114,7 @@ class Onvif {
           onvif: this, uri: serviceMap['http://www.onvif.org/ver20/ptz/wsdl']!);
     }
 
-    if (debug) logDebug('initialization complete');
+    loggy.info('initialization complete');
   }
 
   XmlDocument secureRequest(XmlDocumentFragment content) =>
@@ -104,4 +139,11 @@ class Onvif {
       print('\n\n');
       print(jsonMap);
     } */
+}
+
+class MyPrinter extends DefaultPrinter {
+  const MyPrinter();
+
+  @override
+  void onLog(LogRecord record) {}
 }

@@ -3,8 +3,9 @@ import 'package:easy_onvif/model/ptz_configuration.dart';
 import 'package:easy_onvif/model/ptz_speed.dart';
 import 'package:easy_onvif/model/zoom_limits.dart';
 import 'package:easy_onvif/onvif.dart';
+import 'package:loggy/loggy.dart';
 
-class Ptz {
+class Ptz with UiLoggy {
   final Onvif onvif;
 
   final String uri;
@@ -27,6 +28,8 @@ class Ptz {
   ///the default speed set by the [PtzConfiguration] will be used.
   Future<void> absoluteMove(String profileToken, PtzPosition place,
       [PtzPosition? speed]) async {
+    loggy.debug('absoluteMove');
+
     await Soap.retrieveEnvlope(
         uri,
         onvif.secureRequest(
@@ -39,6 +42,8 @@ class Ptz {
   ///[PtzConfiguration] will be used.
   Future<void> continuousMove(String profileToken, PtzPosition velocity,
       [int? timeout]) async {
+    loggy.debug('continuousMove');
+
     await Soap.retrieveEnvlope(
         uri,
         onvif.secureRequest(
@@ -47,6 +52,8 @@ class Ptz {
 
   Future<List<PtzConfiguration>> getCompatibleConfigurations(
       String profileToken) async {
+    loggy.debug('getCompatibleConfigurations');
+
     final envelope = await Soap.retrieveEnvlope(
         uri,
         onvif.secureRequest(
@@ -80,6 +87,8 @@ class Ptz {
   ///specified limits, the PTZ unit has to move along the specified limits. The
   ///Zoom Limits have to be interpreted accordingly.
   Future<List<PtzConfiguration>> getConfigurations() async {
+    loggy.debug('getConfigurations');
+
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.getPtzConfigurations()));
 
@@ -125,6 +134,8 @@ class Ptz {
   ///Zoom Limits have to be interpreted accordingly.
   Future<PtzConfiguration> getConfiguration(
       String ptzConfigurationToken) async {
+    loggy.debug('ptzConfigurationToken');
+
     final envelope = await Soap.retrieveEnvlope(
         uri,
         onvif.secureRequest(
@@ -145,6 +156,8 @@ class Ptz {
   ///PTZ preset by the [Preset].
   Future<List<Preset>> getPresets(String profileToken,
       {int limit = 100}) async {
+    loggy.debug('getPresets');
+
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.presets(profileToken)));
 
@@ -154,6 +167,8 @@ class Ptz {
   }
 
   Future<Map<String, Preset>> getPresetsMap(String profileToken) async {
+    loggy.debug('getPresetsMap');
+
     return {
       for (var preset in await getPresets(profileToken)) preset.token: preset
     };
@@ -163,12 +178,16 @@ class Ptz {
   ///profile. The operation is supported if there is support for at least on PTZ
   ///preset by the [Preset].
   Future<void> gotoPreset(String profileToken, Preset preset) async {
+    loggy.debug('gotoPreset');
+
     await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.gotoPreset(profileToken, preset)));
   }
 
   ///Operation to request PTZ status for the Node in the selected profile.
   Future<PtzStatus> getStatus(String profileToken) async {
+    loggy.debug('getStatus');
+
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.status(profileToken)));
 
@@ -178,6 +197,8 @@ class Ptz {
   }
 
   Future<void> move(String profileToken, PanTilt direction) async {
+    loggy.debug('move');
+
     await relativeMove(
         profileToken, PtzPosition(panTilt: direction, zoom: Zoom(x: 0)));
   }
@@ -185,24 +206,32 @@ class Ptz {
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///negative y axis (down)
   Future<void> moveDown(String profileToken, [int step = 25]) async {
+    loggy.debug('moveDown');
+
     await move(profileToken, PanTilt.fromInt(y: 0 - step, x: 0));
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///negative x axis (left)
   Future<void> moveLeft(String profileToken, [int step = 25]) async {
+    loggy.debug('moveLeft');
+
     await move(profileToken, PanTilt.fromInt(x: 0 - step, y: 0));
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///positive x axis (right)
   Future<void> moveRight(String profileToken, [int step = 25]) async {
+    loggy.debug('moveRight');
+
     await move(profileToken, PanTilt.fromInt(x: step, y: 0));
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///positive y axis (up)
   Future<void> moveUp(String profileToken, [int step = 25]) async {
+    loggy.debug('moveUp');
+
     await move(profileToken, PanTilt.fromInt(y: step, x: 0));
   }
 
@@ -214,6 +243,8 @@ class Ptz {
   ///to map x and y to the component speed. If the speed argument is omitted,
   ///the default speed set by the [PtzConfiguration] will be used.
   Future<void> relativeMove(String profileToken, PtzPosition move) async {
+    loggy.debug('relativeMove');
+
     await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.relativeMove(profileToken, move)));
   }
@@ -222,6 +253,8 @@ class Ptz {
   ///operation is supported if the PresetPosition capability exists for the Node
   ///in the selected profile.
   Future<void> removePreset(String profileToken, Preset preset) async {
+    loggy.debug('removePreset');
+
     await Soap.retrieveEnvlope(uri,
         onvif.secureRequest(SoapRequest.removePreset(profileToken, preset)));
   }
@@ -239,6 +272,8 @@ class Ptz {
   ///should be recalled in the [gotoPreset] operation.
   Future<String> setPreset(String profileToken,
       [String? name, String? token]) async {
+    loggy.debug('setPreset');
+
     final envelope = await Soap.retrieveEnvlope(
       uri,
       onvif.secureRequest(SoapRequest.setPreset(profileToken, name, token)),
@@ -254,6 +289,8 @@ class Ptz {
   ///device will stop all ongoing pan, tilt and zoom movements.
   Future<void> stop(String profileToken,
       {bool panTilt = true, bool zoom = true}) async {
+    loggy.debug('stop');
+
     await Soap.retrieveEnvlope(
         uri,
         onvif.secureRequest(
@@ -267,6 +304,8 @@ class Ptz {
   // }
 
   Future<void> zoom(String profileToken, Zoom zoom) async {
+    loggy.debug('zoom');
+
     await relativeMove(
         profileToken, PtzPosition(panTilt: PanTilt(y: 0, x: 0), zoom: zoom));
   }
@@ -274,12 +313,16 @@ class Ptz {
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///positive z axis (closer)
   Future<void> zoomIn(String profileToken, [int step = 25]) async {
+    loggy.debug('zoomIn');
+
     await zoom(profileToken, Zoom.fromInt(x: step));
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
   ///negative y axis (farther)
   Future<void> zoomOut(String profileToken, [int step = 25]) async {
+    loggy.debug('zoomOut');
+
     await zoom(profileToken, Zoom.fromInt(x: 0 - step));
   }
 
@@ -292,14 +335,16 @@ class Ptz {
   }
 
   Future<Preset?> getCurrentPreset(String profileToken) async {
+    loggy.debug('getCurrentPreset');
+
     Preset? matchedPreset;
 
-    final _ptzStatus = await getStatus(profileToken);
+    final ptzStatus = await getStatus(profileToken);
 
-    final _presets = await getPresets(profileToken);
+    final presets = await getPresets(profileToken);
 
-    for (var preset in _presets) {
-      if (_matchPositionSettings(preset, _ptzStatus)) {
+    for (var preset in presets) {
+      if (_matchPositionSettings(preset, ptzStatus)) {
         matchedPreset = preset;
 
         break;
@@ -315,16 +360,16 @@ class Ptz {
   }
 
   bool _matchPositionSettings(Preset preset, PtzStatus ptzStatus) {
-    bool _matchX =
+    bool matchX =
         _matchValue(preset.position.panTilt!.x, ptzStatus.position.panTilt!.x);
 
-    bool _matchY =
+    bool matchY =
         _matchValue(preset.position.panTilt!.y, ptzStatus.position.panTilt!.y);
 
-    bool _matchZ =
+    bool matchZ =
         _matchValue(preset.position.zoom!.x, ptzStatus.position.zoom!.x);
 
-    return _matchX && _matchY && _matchZ;
+    return matchX && matchY && matchZ;
   }
 
   static List<PtzConfiguration> ptzConfigurationConverter(dynamic json) {

@@ -1,13 +1,12 @@
-import 'package:easy_enum/easy_enum.dart';
 import 'package:easy_onvif/onvif.dart';
+import 'package:loggy/loggy.dart';
 
 part 'device_management.g.dart';
 
-@EasyEnum()
 // ignore: constant_identifier_names
 enum CapabilityCategory { All, Analytics, Device, Events, Imaging, Media, PTZ }
 
-class DeviceManagement {
+class DeviceManagement with UiLoggy {
   final Onvif onvif;
   final String uri;
 
@@ -23,34 +22,14 @@ class DeviceManagement {
   ///least 28 bytes, as clients may follow the password derivation mechanism
   ///which results in 'password equivalent' of length 28 bytes, as described in
   ///section 3.1.2 of the ONVIF security white paper.
-  //Future<CreateUsersResponse> createUsers(List<User> users) async {
-  // Future<void> createUsers(List<User> users) async {
-  //   // final envelope = await Soap.retrieveEnvlope(
-
-  //   print(uri);
-
-  //   print(onvif
-  //       .secureRequest(SoapRequest.createUsers(users))
-  //       .toXmlString(pretty: true));
-
-  //   await Soap.retrieveEnvlope(
-  //       uri, onvif.secureRequest(SoapRequest.createUsers(users)),
-  //       postProcess: (String xmlBody, dynamic jsonMap, Envelope envelope) {
-  //     print(xmlBody);
-  //     print('\n\n');
-  //     print(jsonMap);
-  //   });
-
-  //   // if (envelope.body.usersResponse == null) throw Exception();
-
-  //   // return envelope.body.usersResponse!;
-  // }
 
   ///This method has been replaced by the more generic [getServices] method. For
   ///capabilities of individual services refer to the [getServiceCapabilities]
   ///methods.
   Future<Capabilities> getCapabilities(
       {CapabilityCategory? capabilityCategory}) async {
+    loggy.debug('getCapabilities');
+
     capabilityCategory ??= CapabilityCategory.All;
 
     final envelope = await Soap.retrieveEnvlope(
@@ -65,6 +44,8 @@ class DeviceManagement {
 
   ///This operation gets basic device information from the device.
   Future<GetDeviceInformationResponse> getDeviceInformation() async {
+    loggy.debug('getDeviceInformation');
+
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.deviceInformation()));
 
@@ -76,6 +57,8 @@ class DeviceManagement {
   //This operation is used by an endpoint to get the hostname from a device. The
   //device shall return its hostname configurations through the [getHostname]
   Future<HostnameInformation> getHostname() async {
+    loggy.debug('getHostname');
+
     final envelope = await Soap.retrieveEnvlope(
       uri,
       SoapRequest.envelope(null, SoapRequest.hostname()),
@@ -90,6 +73,8 @@ class DeviceManagement {
   ///shall support the [getNetworkProtocols] command returning configured
   ///network protocols.
   Future<List<NetworkProtocol>> getNetworkProtocols() async {
+    loggy.debug('getNetworkProtocols');
+
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.networkProtocols()));
 
@@ -102,6 +87,8 @@ class DeviceManagement {
   ///NTP, it shall be possible to get the NTP server settings through the
   ///[getNtp] command.
   Future<NtpInformation> getNtp() async {
+    loggy.debug('getNtp');
+
     final envelope =
         await Soap.retrieveEnvlope(uri, onvif.secureRequest(SoapRequest.ntp()));
 
@@ -131,6 +118,8 @@ class DeviceManagement {
 
   ///Returns information about services on the device.
   Future<List<Service>> getServices({bool? includeCapability = false}) async {
+    loggy.debug('getServices');
+
     final envelope = await Soap.retrieveEnvlope(
         uri,
         onvif.secureRequest(
@@ -144,6 +133,8 @@ class DeviceManagement {
   ///Returns the capabilities of the device service. The result is returned in a
   ///typed answer.
   Future<DeviceServiceCapabilities> getServiceCapabilities() async {
+    loggy.debug('getServiceCapabilities');
+
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.serviceCapabilities()));
 
@@ -159,6 +150,8 @@ class DeviceManagement {
   ///
   ///A device shall provide the UTC [DateTime] information.
   Future<SystemDateAndTime> getSystemDateAndTime() async {
+    loggy.debug('getSystemDateAndTime');
+
     final envelope = await Soap.retrieveEnvlope(
         uri, SoapRequest.envelope(null, SoapRequest.systemDateAndTime()));
 
@@ -187,6 +180,8 @@ class DeviceManagement {
   ///system backup data, it should make them available via HTTP GET. If it does,
   ///it shall support the GetSystemUris command.
   Future<GetSystemUrisResponse> getSystemUris() async {
+    loggy.debug('getSystemUris');
+
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.systemUris()));
 
@@ -200,6 +195,8 @@ class DeviceManagement {
   ///their credentials for the user token through the [getUsers] (GetUsers)
   ///command.
   Future<List<User>> getUsers() async {
+    loggy.debug('getUsers');
+
     final envelope = await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.users()));
 
@@ -219,6 +216,8 @@ class DeviceManagement {
   ///which results in 'password equivalent' of length 28 bytes, as described in
   ///section 3.1.2 of the ONVIF security white paper.
   Future<void> createUsers(List<User> users) async {
+    loggy.debug('createUsers');
+
     await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.createUsers(users)));
   }
@@ -229,6 +228,8 @@ class DeviceManagement {
   ///access to the unit. Either all users are deleted successfully or a fault
   ///message shall be returned and no users be deleted.
   Future<void> deleteUsers(List<String> users) async {
+    loggy.debug('deleteUsers');
+
     await Soap.retrieveEnvlope(
         uri, onvif.secureRequest(SoapRequest.deleteUsers(users)));
   }
