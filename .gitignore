@@ -31,5 +31,4 @@ android/
 
 bin/config.yaml
 
-example/config.yaml
 example/flutter_model/assets/config.yaml
