@@ -19,7 +19,8 @@ build() {
 clean() => defaultClean();
 
 @Task('publish')
-@Depends(dartdoc, analyze, version, dryrun)
+@Depends(analyze, version, dryrun)
+// @Depends(dartdoc, analyze, version, dryrun)
 publish() {
   // log('publishing...');
 
@@ -135,14 +136,13 @@ void updateMarkdown(config) {
 
     switch (type) {
       case 'prepend':
-        final currentContent = outputFile.readAsStringSync();
+        final currentContent =
+            outputFile.readAsStringSync().replaceFirst('# Changelog\n', '');
 
         outputFile.writeAsStringSync(template.renderString(config),
-            mode: FileMode.append);
+            mode: FileMode.write);
 
         outputFile.writeAsStringSync(currentContent, mode: FileMode.append);
-
-        outputFile.writeAsStringSync('\n', mode: FileMode.append);
 
         break;
 

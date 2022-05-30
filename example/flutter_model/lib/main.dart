@@ -17,9 +17,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Onvif Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
       ),
-      home: const MyHomePage(title: 'Onvif Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Onvif Flutter Demo'),
     );
   }
 }
@@ -33,20 +33,39 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  GetDeviceInformationResponse? deviceInfo;
+  late final List<Profile> profiles;
 
-  String model = "";
+  late final GetDeviceInformationResponse deviceInfo;
+
+  late final MediaUri snapshotUri;
+
+  late final YamlMap config;
+
+  bool connecting = false;
+
+  String model = '';
+
+  String manufacturer = '';
+
+  String firmwareVersion = '';
+
+  String url = '';
 
   @override
   void initState() {
-    super.initState();
     _initialize();
+
+    super.initState();
   }
 
   _initialize() async {
     final yamlData = await services.rootBundle.loadString('assets/config.yaml');
 
-    final config = loadYaml(yamlData);
+    config = loadYaml(yamlData);
+
+    setState(() {
+      connecting = true;
+    });
 
     // configure device connection
     final onvif = await Onvif.connect(
@@ -55,18 +74,31 @@ class _MyHomePageState extends State<MyHomePage> {
         password: config['password'],
         logOptions: const LogOptions(
           LogLevel.debug,
-          stackTraceLevel: LogLevel.error,
+          stackTraceLevel: LogLevel.off,
         ),
         printer: const PrettyDeveloperPrinter());
 
+    setState(() {
+      connecting = false;
+    });
+
     deviceInfo = await onvif.deviceManagement.getDeviceInformation();
+
+    profiles = await onvif.media.getProfiles();
+
+    snapshotUri = await onvif.media.getSnapshotUri(profiles[0].token);
   }
 
-  void _showModel() {
+  void _update() {
     setState(() {
-      if (deviceInfo != null) {
-        model = deviceInfo!.model;
-      }
+      model = deviceInfo.model;
+
+      manufacturer = deviceInfo.manufacturer;
+
+      firmwareVersion = deviceInfo.firmwareVersion;
+
+      url = OnvifUtil.authenticatingUri(
+          snapshotUri.uri, config['username']!, config['password']!);
     });
   }
 
@@ -76,24 +108,72 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Device Model:',
-            ),
-            Text(
-              model,
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      body: SafeArea(
+        child: Center(
+          child: connecting
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                      Text('Connecting to camera'),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: CircularProgressIndicator(),
+                      )
+                    ])
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Device Manufacturer:',
+                      ),
+                    ),
+                    Text(
+                      manufacturer,
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Model:',
+                      ),
+                    ),
+                    Text(
+                      model,
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Firmware Version:',
+                      ),
+                    ),
+                    Text(
+                      firmwareVersion,
+                      style: Theme.of(context).textTheme.headline5,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        'Snapshot:',
+                      ),
+                    ),
+                    url != ''
+                        ? Padding(
+                            padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
+                            child: Image.network(url,
+                                height: 240.0, fit: BoxFit.fill),
+                          )
+                        : Container(),
+                  ],
+                ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _showModel,
-        tooltip: 'Show Model',
-        child: const Text('Model'),
+        onPressed: _update,
+        tooltip: 'Update',
+        child: const Text('Get'),
       ),
     );
   }

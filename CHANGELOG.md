@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.0
+
+- works with Happytimesoft reference server
+
 ## 1.0.9
 
 - additional onvif device support

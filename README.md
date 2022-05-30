@@ -28,7 +28,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^1.0.9
+  easy_onvif: ^1.1.0
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -158,6 +158,7 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 | Manufacturer       | Model          |
 | ------------------ | -------------- |
 | D-Link Corporation | DCS-6511       |
+| Happytimesoft      | IPCamera       |
 | ONVIF              | ENP1A14-IR/25X |
 | Unknown            | GX728MF-IR28   |
 

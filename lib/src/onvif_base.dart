@@ -155,10 +155,3 @@ class Onvif with UiLoggy {
       print(jsonMap);
     } */
 }
-
-class MyPrinter extends DefaultPrinter {
-  const MyPrinter();
-
-  @override
-  void onLog(LogRecord record) {}
-}

@@ -27,7 +27,7 @@ class Soap {
       response = await _http.post(url,
           data: requestData,
           options: Options(headers: {
-            Headers.contentTypeHeader: 'text/xml; charset=utf-8',
+            Headers.contentTypeHeader: 'application/soap+xml; charset=utf-8',
             Headers.contentLengthHeader: requestData.length
           }));
     } on DioError catch (error) {

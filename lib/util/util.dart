@@ -37,7 +37,9 @@ class OnvifUtil {
             host: parsedUri.host,
             port: parsedUri.port,
             pathSegments: parsedUri.pathSegments,
-            queryParameters: parsedUri.queryParameters)
+            queryParameters: parsedUri.queryParameters.isNotEmpty
+                ? parsedUri.queryParameters
+                : null)
         .toString();
   }
 
@@ -107,6 +109,9 @@ class OnvifUtil {
       value != null ? mappedToDouble(value) : null;
 
   static String mappedToString(Map<String, dynamic> value) => value['\$'];
+
+  static Uri mappedToUri(Map<String, dynamic> value) =>
+      Uri.parse(mappedToString(value));
 
   static String? nullableMappedToString(Map<String, dynamic>? value) =>
       value != null && value.containsKey('\$') ? mappedToString(value) : null;
