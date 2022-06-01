@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.0
+
+- initial support for device discovery
+
 ## 1.1.0
 
 - works with Happytimesoft reference server

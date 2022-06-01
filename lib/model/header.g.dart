@@ -10,7 +10,7 @@ Header _$HeaderFromJson(Map<String, dynamic> json) => Header(
       appSequence: json['AppSequence'] == null
           ? null
           : AppSequence.fromJson(json['AppSequence'] as Map<String, dynamic>),
-      messageID: OnvifUtil.nullableMappedToInt(
+      messageID: OnvifUtil.nullableMappedToString(
           json['MessageID'] as Map<String, dynamic>?),
       relatesTo: OnvifUtil.nullableMappedToString(
           json['RelatesTo'] as Map<String, dynamic>?),

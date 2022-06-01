@@ -7,10 +7,10 @@ part of 'probe_matches.dart';
 // **************************************************************************
 
 ProbeMatches _$ProbeMatchesFromJson(Map<String, dynamic> json) => ProbeMatches(
-      ProbeMatch.fromJson(json['ProbeMatch'] as Map<String, dynamic>),
+      probeMatches: ProbeMatches._probeMatchConverter(json['ProbeMatch']),
     );
 
 Map<String, dynamic> _$ProbeMatchesToJson(ProbeMatches instance) =>
     <String, dynamic>{
-      'ProbeMatch': instance.probeMatch.toJson(),
+      'ProbeMatch': instance.probeMatches,
     };

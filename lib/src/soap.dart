@@ -8,6 +8,7 @@ class Xmlns {
   static final tt = 'http://www.onvif.org/ver10/schema';
   static final tptz = 'http://www.onvif.org/ver20/ptz/wsdl';
   static final tds = 'http://www.onvif.org/ver10/device/wsdl';
+  static final dn = 'http://www.onvif.org/ver10/network/wsdl';
   static final trt = 'http://www.onvif.org/ver10/media/wsdl';
 }
 
@@ -272,7 +273,7 @@ class SoapRequest {
   }
 
   ///XML for the [services]
-  static XmlDocumentFragment serviceCapabilities({bool? includeCapability}) {
+  static XmlDocumentFragment serviceCapabilities() {
     builder.element('GetServiceCapabilities', nest: () {
       builder.namespace(Xmlns.tds);
     });
@@ -632,7 +633,6 @@ class SoapRequest {
       builder.namespace(
           'http://schemas.xmlsoap.org/ws/2004/08/addressing', 'a');
       builder.namespace('http://schemas.xmlsoap.org/ws/2005/04/discovery', 'd');
-      builder.namespace(Xmlns.tds, 'dn');
 
       builder.element('Header',
           namespace: 'http://www.w3.org/2003/05/soap-envelope', nest: () {
@@ -642,7 +642,7 @@ class SoapRequest {
         builder.element('To',
             namespace: 'http://schemas.xmlsoap.org/ws/2004/08/addressing',
             nest: () {
-          builder.attribute('mustUnderstand', 1,
+          builder.attribute('mustUnderstand', 'true',
               namespace: 'http://www.w3.org/2003/05/soap-envelope');
           builder.text('urn:schemas-xmlsoap-org:ws:2005:04:discovery');
         });
@@ -659,7 +659,7 @@ class SoapRequest {
         builder.element('Action',
             namespace: 'http://schemas.xmlsoap.org/ws/2004/08/addressing',
             nest: () {
-          builder.attribute('mustUnderstand', 1,
+          builder.attribute('mustUnderstand', 'true',
               namespace: 'http://www.w3.org/2003/05/soap-envelope');
           builder.text('http://schemas.xmlsoap.org/ws/2005/04/discovery/Probe');
         });
@@ -670,9 +670,14 @@ class SoapRequest {
         builder.element('Probe',
             namespace: 'http://schemas.xmlsoap.org/ws/2005/04/discovery',
             nest: () {
-          builder.element('Type',
+          builder.element('Types',
               namespace: 'http://schemas.xmlsoap.org/ws/2005/04/discovery',
-              nest: 'dn:NetworkVideoTransmitter');
+              nest: () {
+            builder.namespace(Xmlns.dn, 'dn');
+            builder.namespace(Xmlns.tds, 'tds');
+
+            builder.text('dn:NetworkVideoTransmitter  tds:Device');
+          });
         });
       });
     });

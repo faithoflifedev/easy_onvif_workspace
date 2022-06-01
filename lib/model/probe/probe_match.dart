@@ -12,11 +12,11 @@ class ProbeMatch {
   @JsonKey(name: 'EndpointReference')
   final EndpointReference endpointReference;
 
-  @JsonKey(name: 'Types', fromJson: _typeList)
+  @JsonKey(name: 'Types', fromJson: _toList)
   final List<String> types;
 
-  @JsonKey(name: 'Scopes', fromJson: _scopeMap)
-  final Map<String, String> scopes;
+  @JsonKey(name: 'Scopes', fromJson: _toList)
+  final List<String> scopes;
 
   @JsonKey(name: 'XAddrs', fromJson: OnvifUtil.mappedToString)
   final String xaddrs;
@@ -39,14 +39,6 @@ class ProbeMatch {
   @override
   String toString() => json.encode(toJson());
 
-  static List<String> _typeList(Map<String, dynamic> value) =>
-      value['\$'].toString().split(' ');
-
-  static Map<String, String> _scopeMap(value) {
-    return {
-      for (var scope in value.split(','))
-        scope.replaceAll('onvif://www.onvif.org/', '').replaceAll(
-            RegExp('/([^/]+)/?\$'), ''): scope.replaceAll(RegExp('.*/'), '')
-    };
-  }
+  static List<String> _toList(Map<String, dynamic> value) =>
+      OnvifUtil.mappedToString(value).toString().split(RegExp('[ |,]'));
 }

@@ -52,11 +52,15 @@ class Media with UiLoggy {
 
   ///Returns the capabilities of the media service. The result is returned in a
   ///typed answer.
-  Future<void> getServiceCapabilities() async {
+  Future<DeviceServiceCapabilities> getServiceCapabilities() async {
     loggy.debug('getServiceCapabilities');
 
-    //TODO: implement me
-    throw UnimplementedError();
+    final envelope = await Soap.retrieveEnvlope(
+        uri, onvif.secureRequest(SoapRequest.serviceCapabilities()));
+
+    if (envelope.body.serviceCapabilitiesResponse == null) throw Exception();
+
+    return envelope.body.serviceCapabilitiesResponse!.capabilities;
   }
 
   ///A client uses the [getSnapshotUri] command to obtain a JPEG snapshot from

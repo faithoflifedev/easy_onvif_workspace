@@ -24,6 +24,7 @@ Available commands:
   authorize           Generate an authentication file for an Onvif device
   device-management   Device management commands.
   media               Media commands.
+  probe               Probe command.
   ptz                 PTZ commands.
 ```
 
@@ -294,6 +295,18 @@ This command stop multicast streaming using a specified media profile of a devic
 
 Usage: onvif media stop-multicast-streaming [arguments]
 -h, --help    Print this usage information.
+```
+
+## probe
+
+```sh
+Usage: onvif probe --help
+Probe command.
+
+Usage: onvif probe [arguments]
+-h, --help                Print this usage information.
+-t, --timeout=<number>    The number of seconds to accept probe responses.  Use -1 for "no timeout"
+                          (defaults to "5")
 ```
 
 ## ptz

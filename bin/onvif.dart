@@ -11,6 +11,7 @@ void main(List<String> arguments) async {
     ..addCommand(OnvifDeviceManagementCommand())
     ..addCommand(OnvifMediaCommand())
     ..addCommand(OnvifPtzCommand())
+    ..addCommand(OnvifProbeCommand())
     ..run(arguments).catchError((error) {
       if (error is! UsageException) throw error;
 

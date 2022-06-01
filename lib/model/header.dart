@@ -13,8 +13,8 @@ class Header {
   @JsonKey(name: 'AppSequence')
   final AppSequence? appSequence;
 
-  @JsonKey(name: 'MessageID', fromJson: OnvifUtil.nullableMappedToInt)
-  final int? messageID;
+  @JsonKey(name: 'MessageID', fromJson: OnvifUtil.nullableMappedToString)
+  final String? messageID;
 
   @JsonKey(name: 'RelatesTo', fromJson: OnvifUtil.nullableMappedToString)
   final String? relatesTo;
