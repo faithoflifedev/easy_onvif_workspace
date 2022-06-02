@@ -110,9 +110,9 @@ commit(
     await shell(exec: 'git', args: 'tag v$version');
 
     await shell(exec: 'git', args: 'push --tags');
-  } else {
-    await shell(exec: 'git', args: 'push');
   }
+
+  await shell(exec: 'git', args: 'push');
 }
 
 void updateMarkdown(config) {

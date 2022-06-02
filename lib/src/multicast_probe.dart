@@ -42,10 +42,6 @@ class MulticastProbe with UiLoggy {
 
       var envelope = Envelope.fromXml(messageRecived);
 
-      if (envelope.body.hasFault) {
-        return;
-      }
-
       if (envelope.body.probeMatches == null) return;
 
       onReceive(envelope.body.probeMatches!.probeMatches);
