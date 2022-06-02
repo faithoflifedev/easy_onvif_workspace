@@ -8,6 +8,8 @@ class MulticastProbe with UiLoggy {
 
   static final broadcastPort = 3702;
 
+  static final defaultTimeout = 2;
+
   ///timeout of 0 or less means no timeout
   Future<void> send(
       {required Function(List<ProbeMatch>) onReceive, int? timeout}) async {
@@ -40,15 +42,17 @@ class MulticastProbe with UiLoggy {
 
       var envelope = Envelope.fromXml(messageRecived);
 
+      if (envelope.body.hasFault) {
+        return;
+      }
+
       if (envelope.body.probeMatches == null) return;
 
       onReceive(envelope.body.probeMatches!.probeMatches);
     });
 
-    if (timeout != null && timeout > 0) {
-      await Future.delayed(Duration(seconds: timeout));
+    await Future.delayed(Duration(seconds: timeout ?? defaultTimeout));
 
-      rawDatagramSocket.close();
-    }
+    rawDatagramSocket.close();
   }
 }

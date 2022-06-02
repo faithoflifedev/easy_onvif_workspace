@@ -13,9 +13,8 @@ class OnvifProbeCommand extends Command {
     argParser.addOption('timeout',
         abbr: 't',
         valueHelp: 'number',
-        defaultsTo: '5',
-        help:
-            'The number of seconds to accept probe responses.  Use -1 for "no timeout"');
+        defaultsTo: '${MulticastProbe.defaultTimeout}',
+        help: 'The number of seconds to accept probe responses.');
   }
 
   @override
@@ -26,13 +25,20 @@ class OnvifProbeCommand extends Command {
         ),
         logOptions: OnvifUtil.convertToLogOptions(globalResults!['log-level']));
 
+    final timeout = int.parse(argResults!['timeout']);
+
+    if (timeout < 1) {
+      throw UsageException(
+          'API usage error:', 'timeout must be greater than zero');
+    }
+
     final onvifDevices = <ProbeMatch>[];
 
     final multicastProbe = MulticastProbe();
 
     await multicastProbe.send(
         onReceive: (probeMatches) => onvifDevices.addAll(probeMatches),
-        timeout: int.parse(argResults!['timeout']));
+        timeout: timeout);
 
     print(onvifDevices);
   }

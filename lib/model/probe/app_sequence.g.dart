@@ -7,10 +7,8 @@ part of 'app_sequence.dart';
 // **************************************************************************
 
 AppSequence _$AppSequenceFromJson(Map<String, dynamic> json) => AppSequence(
-      messageNumber:
-          OnvifUtil.mappedToInt(json['@MessageNumber'] as Map<String, dynamic>),
-      instanceId:
-          OnvifUtil.mappedToInt(json['@InstanceId'] as Map<String, dynamic>),
+      messageNumber: int.parse(json['@MessageNumber'] as String),
+      instanceId: int.parse(json['@InstanceId'] as String),
     );
 
 Map<String, dynamic> _$AppSequenceToJson(AppSequence instance) =>

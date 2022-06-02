@@ -3,6 +3,18 @@ import 'package:test/test.dart';
 import 'package:universal_io/io.dart';
 
 void main() {
+  test('discovery probe well-formedness fault', () {
+    final response = File('test/xml/Fault.xml').readAsStringSync();
+
+    final envelope = Envelope.fromXml(response);
+
+    var body = envelope.body;
+
+    expect(
+        body.hasFault &&
+            body.fault['faultstring']['\$'] == 'Well-formedness violation',
+        true);
+  });
   test('metadataConfigurationsResponse is not null when doc parsed', () {
     final response = File('test/xml/GetMetadataConfigurationsResponse.xml')
         .readAsStringSync();
@@ -272,6 +284,36 @@ void main() {
 
     expect(
         statusResponse != null && statusResponse.ptzStatus.error == 'NO error',
+        true);
+  });
+
+  test('NVR8432-P16 probe response', () {
+    final response = File('test/xml/MulticastProbeSample_NVR8432-P16.xml')
+        .readAsStringSync();
+
+    final envelope = Envelope.fromXml(response);
+
+    var probeMatches = envelope.body.probeMatches;
+
+    expect(
+        probeMatches != null &&
+            probeMatches.probeMatches.first.xaddrs ==
+                'http://192.168.1.40:85/onvif/device_service',
+        true);
+  });
+
+  test('HI3518C probe response', () {
+    final response =
+        File('test/xml/MulticastProbeSample_HI3518C.xml').readAsStringSync();
+
+    final envelope = Envelope.fromXml(response);
+
+    var probeMatches = envelope.body.probeMatches;
+
+    expect(
+        probeMatches != null &&
+            probeMatches.probeMatches.first.xaddrs ==
+                'http://192.168.2.177:8000/onvif/device_service',
         true);
   });
 }

@@ -7,10 +7,10 @@ part 'app_sequence.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class AppSequence {
-  @JsonKey(name: '@MessageNumber', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: '@MessageNumber', fromJson: int.parse)
   final int messageNumber;
 
-  @JsonKey(name: '@InstanceId', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: '@InstanceId', fromJson: int.parse)
   final int instanceId;
 
   AppSequence({required this.messageNumber, required this.instanceId});

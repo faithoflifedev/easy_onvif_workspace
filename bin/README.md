@@ -306,7 +306,7 @@ Probe command.
 Usage: onvif probe [arguments]
 -h, --help                Print this usage information.
 -t, --timeout=<number>    The number of seconds to accept probe responses.  Use -1 for "no timeout"
-                          (defaults to "5")
+                          (defaults to "2")
 ```
 
 ## ptz
