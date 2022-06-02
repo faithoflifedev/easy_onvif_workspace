@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.3
+
+- adjust README
+
 ## 2.0.2
 
 - bugfix for Onvif discovery and associated unit tests

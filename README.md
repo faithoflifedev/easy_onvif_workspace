@@ -34,7 +34,7 @@ This release has logging capabilities through use of the [loggy](https://pub.dev
 As of the 1.0.0 release of this package, there is a cli utility included that can be used to return data for any API call currently supported by the package. If you want to get started quicky with the cli utility run these commands in a termainal session:
 
 ```sh
-pub global activate easy_onvif
+dart pub global activate easy_onvif
 
 onvif --help
 ```
@@ -48,7 +48,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^2.0.2
+  easy_onvif: ^2.0.3
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).

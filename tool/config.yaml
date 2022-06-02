@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 2.0.2
-change: "bugfix for Onvif discovery and associated unit tests"
+version: 2.0.3
+change: "adjust README"
