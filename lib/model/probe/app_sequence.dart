@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:easy_onvif/onvif.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'app_sequence.g.dart';
