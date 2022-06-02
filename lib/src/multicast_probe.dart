@@ -1,16 +1,24 @@
 import 'package:easy_onvif/onvif.dart';
+import 'package:loggy/loggy.dart';
 import 'package:universal_io/io.dart';
 import 'package:uuid/uuid.dart';
 
-class MulticastProbe {
+class MulticastProbe with UiLoggy {
   static final broadcastAddress = InternetAddress('239.255.255.250');
 
   static final broadcastPort = 3702;
 
   ///timeout of 0 or less means no timeout
-  static Future<void> send(
+  Future<void> send(
       {required Function(List<ProbeMatch>) onReceive, int? timeout}) async {
+    loggy.debug('send');
+
+    loggy.debug(
+        'BROADCAST ADDRESS: ${broadcastAddress.address}, PORT: $broadcastPort');
+
     final messageBodyXml = SoapRequest.probe(Uuid().v4());
+
+    loggy.debug('REQUEST:\n$messageBodyXml');
 
     await RawDatagramSocket.bind(broadcastAddress, broadcastPort);
 
@@ -27,6 +35,8 @@ class MulticastProbe {
       if (datagram == null) return;
 
       String messageRecived = String.fromCharCodes(datagram.data);
+
+      loggy.debug('RESPONSE:\n$messageRecived');
 
       var envelope = Envelope.fromXml(messageRecived);
 

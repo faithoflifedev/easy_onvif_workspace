@@ -16,7 +16,7 @@ abstract class OnvifHelperCommand extends Command {
   Media get media => onvif.media;
 
   Future<void> initializeOnvif() async {
-    final authFile = File(globalResults?['config-file']);
+    final authFile = File(globalResults!['config-file']);
 
     if (!authFile.existsSync()) {
       throw UsageException('Authentication file not found', usage);
@@ -28,6 +28,7 @@ abstract class OnvifHelperCommand extends Command {
     _onvif = await Onvif.connect(
         host: auth['host'],
         username: auth['username'],
-        password: auth['password']);
+        password: auth['password'],
+        logOptions: OnvifUtil.convertToLogOptions(globalResults!['log-level']));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:args/command_runner.dart';
 import 'package:easy_onvif/onvif.dart';
+import 'package:loggy/loggy.dart';
 
 class OnvifProbeCommand extends Command {
   @override
@@ -19,9 +20,17 @@ class OnvifProbeCommand extends Command {
 
   @override
   void run() async {
+    Loggy.initLoggy(
+        logPrinter: const PrettyPrinter(
+          showColors: false,
+        ),
+        logOptions: OnvifUtil.convertToLogOptions(globalResults!['log-level']));
+
     final onvifDevices = <ProbeMatch>[];
 
-    await MulticastProbe.send(
+    final multicastProbe = MulticastProbe();
+
+    await multicastProbe.send(
         onReceive: (probeMatches) => onvifDevices.addAll(probeMatches),
         timeout: int.parse(argResults!['timeout']));
 

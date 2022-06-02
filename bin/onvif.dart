@@ -7,6 +7,8 @@ void main(List<String> arguments) async {
       'A command line interface for controlling Onvif compliant devices')
     ..argParser.addOption('config-file',
         defaultsTo: '${OnvifUtil.userHome}/.onvif/credentials.json')
+    ..argParser.addOption('log-level',
+        allowed: ['debug', 'info', 'warning', 'error'], defaultsTo: 'info')
     ..addCommand(OnvifAuthorizeCommand())
     ..addCommand(OnvifDeviceManagementCommand())
     ..addCommand(OnvifMediaCommand())

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+
+- logging for Onvif discovert
+
 ## 2.0.0
 
 - initial support for device discovery

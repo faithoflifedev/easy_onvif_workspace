@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 2.0.0
-change: "initial support for device discovery"
+version: 2.0.1
+change: "logging for Onvif discovert"

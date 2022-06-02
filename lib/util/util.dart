@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:easy_onvif/model/media_uri.dart';
+import 'package:loggy/loggy.dart';
 import 'package:universal_io/io.dart';
 import 'package:xml/xml.dart';
 import 'package:xml2json/xml2json.dart';
@@ -75,6 +76,26 @@ class OnvifUtil {
         snapshotUri: snapshotUri);
 
     await fileStore.writeAsBytes(bytes);
+  }
+
+  static LogOptions convertToLogOptions(String logLevel) {
+    var logOptions = const LogOptions(LogLevel.info);
+
+    switch (logLevel) {
+      case 'debug':
+        logOptions = const LogOptions(LogLevel.debug);
+        break;
+
+      case 'warning':
+        logOptions = const LogOptions(LogLevel.warning);
+        break;
+
+      case 'error':
+        logOptions = const LogOptions(LogLevel.error);
+        break;
+    }
+
+    return logOptions;
   }
 
   static String? get userHome =>
