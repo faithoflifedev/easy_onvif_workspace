@@ -19,12 +19,13 @@ Usage: onvif <command> [arguments]
 Global options:
 -h, --help           Print this usage information.
     --config-file    (defaults to "$HOME/.onvif/credentials.json")
+    --log-level      [all, debug, info, warning, error, off (default)]
 
 Available commands:
   authorize           Generate an authentication file for an Onvif device
   device-management   Device management commands.
   media               Media commands.
-  probe               Probe command.
+  probe               Probe/device discovery command.
   ptz                 PTZ commands.
 ```
 
@@ -301,11 +302,11 @@ Usage: onvif media stop-multicast-streaming [arguments]
 
 ```sh
 Usage: onvif probe --help
-Probe command.
+Probe/device discovery command.
 
 Usage: onvif probe [arguments]
 -h, --help                Print this usage information.
--t, --timeout=<number>    The number of seconds to accept probe responses.  Use -1 for "no timeout"
+-t, --timeout=<number>    The number of seconds to accept probe responses from devices.
                           (defaults to "2")
 ```
 

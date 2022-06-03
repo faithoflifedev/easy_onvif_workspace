@@ -10,26 +10,20 @@ class MulticastProbe with UiLoggy {
 
   static final defaultTimeout = 2;
 
-  ///timeout of 0 or less means no timeout
-  Future<void> send(
-      {required Function(List<ProbeMatch>) onReceive, int? timeout}) async {
-    loggy.debug('send');
+  final int? timeout;
 
-    loggy.debug(
-        'BROADCAST ADDRESS: ${broadcastAddress.address}, PORT: $broadcastPort');
+  final onvifDevices = <ProbeMatch>[];
 
-    final messageBodyXml = SoapRequest.probe(Uuid().v4());
+  MulticastProbe({this.timeout});
 
-    loggy.debug('REQUEST:\n$messageBodyXml');
+  Future<void> probe() async {
+    loggy.debug('init');
 
     await RawDatagramSocket.bind(broadcastAddress, broadcastPort);
 
     final rawDatagramSocket = await RawDatagramSocket.bind(
         InternetAddress.anyIPv4, 0,
         reuseAddress: false, reusePort: false);
-
-    rawDatagramSocket.send(
-        messageBodyXml.outerXml.codeUnits, broadcastAddress, broadcastPort);
 
     rawDatagramSocket.listen((RawSocketEvent rawSocketEvent) {
       var datagram = rawDatagramSocket.receive();
@@ -44,9 +38,33 @@ class MulticastProbe with UiLoggy {
 
       if (envelope.body.probeMatches == null) return;
 
-      onReceive(envelope.body.probeMatches!.probeMatches);
+      onvifDevices.addAll(envelope.body.probeMatches!.probeMatches);
     });
 
+    start(rawDatagramSocket);
+
+    await finish(rawDatagramSocket);
+  }
+
+  ///timeout of 0 or less means no timeout
+  void start(RawDatagramSocket rawDatagramSocket) {
+    loggy.debug('send');
+
+    loggy.debug(
+        'BROADCAST ADDRESS: ${broadcastAddress.address}, PORT: $broadcastPort');
+
+    final messageBodyXml = SoapRequest.probe(Uuid().v4());
+
+    loggy.debug('REQUEST:\n$messageBodyXml');
+
+    rawDatagramSocket.send(
+        messageBodyXml.outerXml.codeUnits, broadcastAddress, broadcastPort);
+
+    // rawDatagramSocket.close();
+  }
+
+  Future<void> finish(RawDatagramSocket rawDatagramSocket,
+      [int? timeout]) async {
     await Future.delayed(Duration(seconds: timeout ?? defaultTimeout));
 
     rawDatagramSocket.close();

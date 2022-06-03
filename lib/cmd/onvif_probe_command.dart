@@ -4,7 +4,7 @@ import 'package:loggy/loggy.dart';
 
 class OnvifProbeCommand extends Command {
   @override
-  String get description => 'Probe command.';
+  String get description => 'Probe/device discovery command.';
 
   @override
   String get name => 'probe';
@@ -14,7 +14,7 @@ class OnvifProbeCommand extends Command {
         abbr: 't',
         valueHelp: 'number',
         defaultsTo: '${MulticastProbe.defaultTimeout}',
-        help: 'The number of seconds to accept probe responses.');
+        help: 'The number of seconds to accept probe responses from devices.');
   }
 
   @override
@@ -32,14 +32,10 @@ class OnvifProbeCommand extends Command {
           'API usage error:', 'timeout must be greater than zero');
     }
 
-    final onvifDevices = <ProbeMatch>[];
-
     final multicastProbe = MulticastProbe();
 
-    await multicastProbe.send(
-        onReceive: (probeMatches) => onvifDevices.addAll(probeMatches),
-        timeout: timeout);
+    await multicastProbe.probe();
 
-    print(onvifDevices);
+    print(multicastProbe.onvifDevices);
   }
 }

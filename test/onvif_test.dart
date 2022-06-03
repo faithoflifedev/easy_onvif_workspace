@@ -297,7 +297,7 @@ void main() {
 
     expect(
         probeMatches != null &&
-            probeMatches.probeMatches.first.xaddrs ==
+            probeMatches.probeMatches.first.xaddr ==
                 'http://192.168.1.40:85/onvif/device_service',
         true);
   });
@@ -312,7 +312,7 @@ void main() {
 
     expect(
         probeMatches != null &&
-            probeMatches.probeMatches.first.xaddrs ==
+            probeMatches.probeMatches.first.xaddr ==
                 'http://192.168.2.177:8000/onvif/device_service',
         true);
   });

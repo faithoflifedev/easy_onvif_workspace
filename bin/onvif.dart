@@ -8,7 +8,8 @@ void main(List<String> arguments) async {
     ..argParser.addOption('config-file',
         defaultsTo: '${OnvifUtil.userHome}/.onvif/credentials.json')
     ..argParser.addOption('log-level',
-        allowed: ['debug', 'info', 'warning', 'error'], defaultsTo: 'info')
+        allowed: ['all', 'debug', 'info', 'warning', 'error', 'off'],
+        defaultsTo: 'off')
     ..addCommand(OnvifAuthorizeCommand())
     ..addCommand(OnvifDeviceManagementCommand())
     ..addCommand(OnvifMediaCommand())

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.4
+
+- default logging messed up piping to `jq` for cli actions
+
 ## 2.0.3
 
 - adjust README

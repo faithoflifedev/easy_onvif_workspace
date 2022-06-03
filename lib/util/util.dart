@@ -82,8 +82,16 @@ class OnvifUtil {
     var logOptions = const LogOptions(LogLevel.info);
 
     switch (logLevel) {
+      case 'all':
+        logOptions = const LogOptions(LogLevel.all);
+        break;
+
       case 'debug':
         logOptions = const LogOptions(LogLevel.debug);
+        break;
+
+      case 'info':
+        logOptions = const LogOptions(LogLevel.info);
         break;
 
       case 'warning':

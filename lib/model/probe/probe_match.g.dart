@@ -11,7 +11,7 @@ ProbeMatch _$ProbeMatchFromJson(Map<String, dynamic> json) => ProbeMatch(
           json['EndpointReference'] as Map<String, dynamic>),
       types: ProbeMatch._toList(json['Types'] as Map<String, dynamic>),
       scopes: ProbeMatch._toList(json['Scopes'] as Map<String, dynamic>),
-      xaddrs: OnvifUtil.mappedToString(json['XAddrs'] as Map<String, dynamic>),
+      xaddrs: ProbeMatch._toList(json['XAddrs'] as Map<String, dynamic>),
       metadataVersion: OnvifUtil.mappedToString(
           json['MetadataVersion'] as Map<String, dynamic>),
     );

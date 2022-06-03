@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 2.0.3
-change: "adjust README"
+version: 2.0.4
+change: "default logging messed up piping to `jq` for cli actions"
