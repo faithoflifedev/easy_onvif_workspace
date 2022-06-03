@@ -16,13 +16,14 @@ onvif probe
 Or, in dart code:
 
 ```dart
-    final onvifDevices = <ProbeMatch>[];
+final multicastProbe = MulticastProbe();
 
-    await MulticastProbe.send(
-        onReceive: (probeMatches) => onvifDevices.addAll(probeMatches),
-        timeout: 3);
+await multicastProbe.probe();
 
-    print(onvifDevices);
+for (var device in multicastProbe.onvifDevices) {
+  print(
+      '${device.name} ${device.location} ${device.hardware} ${device.xaddr}');
+}
 ```
 
 ## New for version 1.0.7

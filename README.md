@@ -16,13 +16,14 @@ onvif probe
 Or, in dart code:
 
 ```dart
-    final onvifDevices = <ProbeMatch>[];
+final multicastProbe = MulticastProbe();
 
-    await MulticastProbe.send(
-        onReceive: (probeMatches) => onvifDevices.addAll(probeMatches),
-        timeout: 3);
+await multicastProbe.probe();
 
-    print(onvifDevices);
+for (var device in multicastProbe.onvifDevices) {
+  print(
+      '${device.name} ${device.location} ${device.hardware} ${device.xaddr}');
+}
 ```
 
 ## New for version 1.0.7
@@ -48,7 +49,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^2.0.4
+  easy_onvif: ^2.0.5
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
