@@ -146,6 +146,8 @@ class OnvifUtil {
   static String? nullableMappedToString(Map<String, dynamic>? value) =>
       value != null && value.containsKey('\$') ? mappedToString(value) : null;
 
+  // The tryParse is used to work-around the non-compliant date returned by the
+  // TL-IPC43AN-4 device
   static DateTime mappedToDateTime(Map<String, dynamic> value) {
     final rawDt = value['\$'];
 
