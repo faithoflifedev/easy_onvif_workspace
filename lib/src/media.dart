@@ -4,7 +4,7 @@ import 'package:loggy/loggy.dart';
 
 class Media with UiLoggy {
   final Onvif onvif;
-  final String uri;
+  final Uri uri;
 
   Media({required this.onvif, required this.uri});
 

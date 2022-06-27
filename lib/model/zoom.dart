@@ -4,8 +4,8 @@ part 'zoom.g.dart';
 
 @JsonSerializable()
 class Zoom {
-  @JsonKey(name: '@x', fromJson: double.parse)
-  final double x;
+  @JsonKey(name: '@x', fromJson: num.parse)
+  final num x;
 
   @JsonKey(name: '@space')
   final String? space;

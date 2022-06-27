@@ -1,3 +1,7 @@
-host: "127.0.0.1:8000"
-username: "admin"
-password: "admin"
+# host: "127.0.0.1:8000"
+# username: "admin"
+# password: "admin"
+
+host: http://150.117.210.44:2020
+username: admin
+password: aa888888

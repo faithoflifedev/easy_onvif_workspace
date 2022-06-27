@@ -6,11 +6,11 @@ part 'pan_tilt.g.dart';
 
 @JsonSerializable()
 class PanTilt {
-  @JsonKey(name: '@x', fromJson: double.parse)
-  final double x;
+  @JsonKey(name: '@x', fromJson: num.parse)
+  final num x;
 
-  @JsonKey(name: '@y', fromJson: double.parse)
-  final double y;
+  @JsonKey(name: '@y', fromJson: num.parse)
+  final num y;
 
   @JsonKey(name: '@space')
   final String? space;

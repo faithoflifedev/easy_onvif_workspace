@@ -64,10 +64,10 @@ Usage: yt authorize [arguments]
 -h, --help    Print this usage information.
 ```
 
-The authroize command is used to create the default "--config-file" that can be used as the default for all future commands.  In general this command will only need to be run if you want to connect to another onvif device or if the settigns (host, username, password) have changed for the current device.  The file contents are as follows:
+The authorize command is used to create the default "--config-file" that can be used as the default for all future commands.  In general this command will only need to be run if you want to connect to another onvif device or if the settings (host, username, password) have changed for the current device.  The file contents are as follows:
 
 ```json
-{"host":"[host name or ip addess of device]","username":"[device username]","password":"[device password]"}
+{"host":"[host name or ip address of device]","username":"[device username]","password":"[device password]"}
 ```
 
 ## device-management

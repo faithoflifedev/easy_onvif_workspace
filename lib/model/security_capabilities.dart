@@ -69,8 +69,8 @@ class SecurityCapabilities {
   final int? supportedEAPMethods;
 
   ///The maximum number of users that the device supports.
-  @JsonKey(name: '@MaxUsers', fromJson: int.parse)
-  final int maxUsers;
+  @JsonKey(name: '@MaxUsers', fromJson: OnvifUtil.optionalInt)
+  final int? maxUsers;
 
   ///Maximum number of characters supported for the username by CreateUsers.
   @JsonKey(name: '@MaxUserNameLength', fromJson: OnvifUtil.optionalInt)
@@ -104,7 +104,7 @@ class SecurityCapabilities {
       required this.httpDigest,
       required this.relToken,
       this.supportedEAPMethods,
-      required this.maxUsers,
+      this.maxUsers,
       required this.maxUserNameLength,
       required this.maxPasswordLength,
       this.securityPolicies,

@@ -178,12 +178,13 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 
 The values returned by the Onvif API `GetDeviceInformation` call.
 
-| Manufacturer       | Model          |
-| ------------------ | -------------- |
-| D-Link Corporation | DCS-6511       |
-| Happytimesoft      | IPCamera       |
-| ONVIF              | ENP1A14-IR/25X |
-| Unknown            | GX728MF-IR28   |
+| Manufacturer       | Model          | Known Issue               |
+| ------------------ | -------------- | ------------------------- |
+| D-Link Corporation | DCS-6511       |                           |
+| Happytimesoft      | IPCamera       |                           |
+| ONVIF              | ENP1A14-IR/25X |                           |
+| TP-Link            | TL-IPC43AN-4   | RelativeMove doesn't work |
+| Unknown            | GX728MF-IR28   |                           |
 
 ## What's next
 

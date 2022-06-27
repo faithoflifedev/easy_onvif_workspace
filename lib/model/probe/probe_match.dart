@@ -56,7 +56,7 @@ class ProbeMatch with UiLoggy {
   void _setCommonScopes() {
     for (var scope in scopes) {
       try {
-        final scopeAsUri = Uri.parse(scope);
+        final scopeAsUri = scope.parseUri;
 
         var pathSegments = List<String>.from(scopeAsUri.pathSegments);
 

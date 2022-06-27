@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:easy_onvif/model/media_uri.dart';
+import 'package:intl/intl.dart';
 import 'package:loggy/loggy.dart';
 import 'package:universal_io/io.dart';
 import 'package:xml/xml.dart';
@@ -145,8 +146,13 @@ class OnvifUtil {
   static String? nullableMappedToString(Map<String, dynamic>? value) =>
       value != null && value.containsKey('\$') ? mappedToString(value) : null;
 
-  static DateTime mappedToDateTime(Map<String, dynamic> value) =>
-      DateTime.parse(value['\$']);
+  static DateTime mappedToDateTime(Map<String, dynamic> value) {
+    final rawDt = value['\$'];
+
+    final formatter = DateFormat(r'E MMM  d HH:mm:ss yyyy');
+
+    return DateTime.tryParse(rawDt) ?? formatter.parse(rawDt);
+  }
 
   static DateTime? nullableMappedToDateTime(Map<String, dynamic>? value) =>
       value != null ? mappedToDateTime(value) : null;

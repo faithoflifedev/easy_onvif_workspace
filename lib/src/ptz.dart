@@ -8,7 +8,7 @@ import 'package:loggy/loggy.dart';
 class Ptz with UiLoggy {
   final Onvif onvif;
 
-  final String uri;
+  final Uri uri;
 
   final configurationCache = <String, PtzConfiguration>{};
 
@@ -199,8 +199,37 @@ class Ptz with UiLoggy {
   Future<void> move(String profileToken, PanTilt direction) async {
     loggy.debug('move');
 
-    await relativeMove(
-        profileToken, PtzPosition(panTilt: direction, zoom: Zoom(x: 0)));
+    try {
+      await relativeMove(
+          profileToken, PtzPosition(panTilt: direction, zoom: Zoom(x: 0)));
+    } catch (err) {
+      PanTilt? panTilt;
+
+      Zoom? zoom;
+
+      loggy.error('Relative move failed');
+
+      loggy.error(err);
+
+      loggy.error('Attempting workaround with AbsoluteMove');
+
+      final ptzStatus = await onvif.ptz.getStatus(profileToken);
+
+      if (ptzStatus.position.panTilt != null) {
+        panTilt = PanTilt(
+            x: ptzStatus.position.panTilt!.x + direction.x,
+            y: ptzStatus.position.panTilt!.y + direction.y);
+      } else {
+        panTilt = PanTilt(x: 0, y: 0);
+      }
+
+      if (ptzStatus.position.zoom != null) {
+        zoom = Zoom(x: ptzStatus.position.zoom!.x);
+      }
+
+      await absoluteMove(
+          profileToken, PtzPosition(panTilt: panTilt, zoom: zoom));
+    }
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
@@ -354,7 +383,7 @@ class Ptz with UiLoggy {
     return matchedPreset;
   }
 
-  bool _matchValue(double right, double left) {
+  bool _matchValue(num right, num left) {
     return (right - left).abs() < 0.005 ||
         (right - (left > 0 ? left - 1 : left)).abs() < 0.0005;
   }
@@ -373,7 +402,9 @@ class Ptz with UiLoggy {
   }
 
   static List<PtzConfiguration> ptzConfigurationConverter(dynamic json) {
-    if (json is List) {
+    if (json == null) {
+      return <PtzConfiguration>[];
+    } else if (json is List) {
       return json
           .map((e) => PtzConfiguration.fromJson(e as Map<String, dynamic>))
           .toList();

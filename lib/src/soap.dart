@@ -3,6 +3,7 @@ import 'package:easy_onvif/onvif.dart';
 import 'package:xml/xml.dart';
 
 class Xmlns {
+  static final s = 'http://www.w3.org/2003/05/soap-envelope';
   static final ter = 'http://www.onvif.org/ver10/error';
   static final xsd = 'http://www.w3.org/2001/XMLSchema';
   static final tt = 'http://www.onvif.org/ver10/schema';
@@ -21,18 +22,19 @@ class Soap {
       : throw Exception('dio needs to be configured and set');
 
   ///Send the SOAP [requestData] to the given [url] endpoint.
-  static Future<String> send(String url, String requestData) async {
+  static Future<String> send(Uri uri, String requestData) async {
     Response? response;
 
     try {
-      response = await _http.post(url,
+      response = await _http.post(uri.toString(),
           data: requestData,
           options: Options(headers: {
             Headers.contentTypeHeader: 'application/soap+xml; charset=utf-8',
             Headers.contentLengthHeader: requestData.length
           }));
     } on DioError catch (error) {
-      if (error.response?.statusCode == 500) {
+      if (error.response?.statusCode == 500 ||
+          error.response?.statusCode == 400) {
         final jsonMap = OnvifUtil.xmlToMap(error.response?.data);
 
         final envelope = Envelope.fromJson(jsonMap);
@@ -50,7 +52,7 @@ class Soap {
 
   ///Retrieve an onvif SOAP envelope
   static Future<Envelope> retrieveEnvlope(
-    String uri,
+    Uri uri,
     XmlDocument soapRequest,
     // {Function? postProcess}
   ) async {
@@ -75,14 +77,14 @@ class SoapRequest {
       XmlDocumentFragment? header, XmlDocumentFragment body) {
     builder.declaration(encoding: 'UTF-8');
 
-    builder.element('Envelope', nest: () {
-      builder.namespace('http://www.w3.org/2003/05/soap-envelope');
-
-      builder.element('Header',
-          namespace: 'http://www.w3.org/2003/05/soap-envelope', nest: header);
+    builder.element('Envelope',
+        namespace: Xmlns.s,
+        namespaces: {Xmlns.s: 's', 'http://www.w3.org/2005/08/addressing': 'a'},
+        nest: () {
+      builder.element('Header', namespace: Xmlns.s, nest: header);
 
       builder.element('Body',
-          namespace: 'http://www.w3.org/2003/05/soap-envelope',
+          namespace: Xmlns.s,
           namespaces: {
             'http://www.w3.org/2001/XMLSchema-instance': 'xsi',
             Xmlns.xsd: 'xsd'
@@ -102,12 +104,10 @@ class SoapRequest {
       required String password,
       required String nonce,
       required String created}) {
-    builder.element('Security', nest: () {
-      builder.namespace('http://www.w3.org/2003/05/soap-envelope', 's');
+    builder.element('Security', namespaces: {Xmlns.s: 's'}, nest: () {
       builder.namespace(
           'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd');
-      builder.attribute('mustUnderstand', 1,
-          namespace: 'http://www.w3.org/2003/05/soap-envelope');
+      builder.attribute('mustUnderstand', 1, namespace: Xmlns.s);
       builder.element('UsernameToken', nest: () {
         builder.element('Username', nest: username);
         builder.element('Password',
@@ -148,6 +148,19 @@ class SoapRequest {
       builder.namespace(Xmlns.tds);
       builder.element('Category', nest: () {
         builder.text(category);
+      });
+    });
+
+    return builder.buildFragment();
+  }
+
+  ///XML for the [services]
+  static XmlDocumentFragment services([includeCapability = false]) {
+    builder.element('GetServices', nest: () {
+      builder.namespace(Xmlns.tds);
+
+      builder.element('IncludeCapability', nest: () {
+        builder.text(includeCapability ? 'true' : false);
       });
     });
 
@@ -260,19 +273,7 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
-  ///XML for the [services]
-  static XmlDocumentFragment services({bool? includeCapability}) {
-    builder.element('GetServices', nest: () {
-      builder.namespace(Xmlns.tds);
-      builder.element('IncludeCapability', nest: () {
-        builder.text('$includeCapability');
-      });
-    });
-
-    return builder.buildFragment();
-  }
-
-  ///XML for the [services]
+  ///XML for the [serviceCapabilities]
   static XmlDocumentFragment serviceCapabilities() {
     builder.element('GetServiceCapabilities', nest: () {
       builder.namespace(Xmlns.tds);
@@ -410,10 +411,12 @@ class SoapRequest {
           builder.attribute('x', place.panTilt!.x);
           builder.attribute('y', place.panTilt!.y);
         });
-        builder.element('Zoom', nest: () {
-          builder.namespace(Xmlns.tt);
-          builder.attribute('x', place.zoom!.x);
-        });
+        if (place.zoom != null) {
+          builder.element('Zoom', nest: () {
+            builder.namespace(Xmlns.tt);
+            builder.attribute('x', place.zoom!.x);
+          });
+        }
       });
       if (speed != null) {
         builder.element('Speed', nest: () {
@@ -442,12 +445,8 @@ class SoapRequest {
       String profileToken, PtzPosition move) {
     builder.element('RelativeMove', nest: () {
       builder.namespace(Xmlns.tptz); //tptz
-      builder.element('ProfileToken', nest: () {
-        builder.namespace(Xmlns.tptz);
-        builder.text(profileToken);
-      });
+      builder.element('ProfileToken', nest: () => builder.text(profileToken));
       builder.element('Translation', nest: () {
-        builder.namespace(Xmlns.tptz);
         if (move.panTilt != null) {
           builder.element('PanTilt', nest: () {
             builder.namespace(Xmlns.tt);
@@ -455,6 +454,7 @@ class SoapRequest {
             builder.attribute('y', move.panTilt!.y);
           });
         }
+
         if (move.zoom != null) {
           builder.element('Zoom', nest: () {
             builder.namespace(Xmlns.tt);

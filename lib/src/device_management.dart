@@ -6,7 +6,7 @@ import 'package:loggy/loggy.dart';
 
 class DeviceManagement with UiLoggy {
   final Onvif onvif;
-  final String uri;
+  final Uri uri;
 
   DeviceManagement({required this.onvif, required this.uri});
 
@@ -37,6 +37,18 @@ class DeviceManagement with UiLoggy {
     if (envelope.body.capabilitiesResponse == null) throw Exception();
 
     return envelope.body.capabilitiesResponse!.capabilities;
+  }
+
+  ///Returns information about services on the device.
+  Future<List<Service>> getServices([includeCapability = false]) async {
+    loggy.debug('getServices');
+
+    final envelope = await Soap.retrieveEnvlope(
+        uri, onvif.secureRequest(SoapRequest.services(includeCapability)));
+
+    if (envelope.body.servicesResponse == null) throw Exception();
+
+    return envelope.body.servicesResponse!.services;
   }
 
   ///This operation gets basic device information from the device.
@@ -112,20 +124,6 @@ class DeviceManagement with UiLoggy {
 
   //   // return envelope.body.deviceInformationResponse!;
   // }
-
-  ///Returns information about services on the device.
-  Future<List<Service>> getServices({bool? includeCapability = false}) async {
-    loggy.debug('getServices');
-
-    final envelope = await Soap.retrieveEnvlope(
-        uri,
-        onvif.secureRequest(
-            SoapRequest.services(includeCapability: includeCapability)));
-
-    if (envelope.body.servicesResponse == null) throw Exception();
-
-    return envelope.body.servicesResponse!.services;
-  }
 
   ///Returns the capabilities of the device service. The result is returned in a
   ///typed answer.

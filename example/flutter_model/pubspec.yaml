@@ -12,7 +12,17 @@ dependencies:
   easy_onvif:
     path: ../../
   flutter_loggy: ^2.0.1
+  # flutter_loggy:
+  #   git:
+  #     url: https://github.com/faithoflifedev/floggy.git
+  #     ref: stderr_loggy
+  #     path: flutter_loggy
   loggy: ^2.0.1+1
+  # loggy:
+  #   git:
+  #     url: https://github.com/faithoflifedev/floggy.git
+  #     ref: stderr_loggy
+  #     path: loggy
   yaml: ^3.1.1
 
   flutter:

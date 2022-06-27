@@ -7,3 +7,9 @@ extension UsageExtension on DioError {
         : response!.data['error']['errors'].toString();
   }
 }
+
+extension UriExtension on String {
+  Uri get parseUri {
+    return Uri.parse(this);
+  }
+}

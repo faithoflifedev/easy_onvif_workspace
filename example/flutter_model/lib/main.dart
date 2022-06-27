@@ -32,16 +32,16 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with UiLoggy {
   late final List<Profile> profiles;
 
   late final GetDeviceInformationResponse deviceInfo;
 
-  late final MediaUri snapshotUri;
-
   late final YamlMap config;
 
-  bool connecting = false;
+  MediaUri? snapshotUri;
+
+  bool connecting = true;
 
   String model = '';
 
@@ -63,10 +63,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
     config = loadYaml(yamlData);
 
-    setState(() {
-      connecting = true;
-    });
-
     // configure device connection
     final onvif = await Onvif.connect(
         host: config['host'],
@@ -86,7 +82,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
     profiles = await onvif.media.getProfiles();
 
-    snapshotUri = await onvif.media.getSnapshotUri(profiles[0].token);
+    try {
+      snapshotUri = await onvif.media.getSnapshotUri(profiles[0].token);
+    } catch (err) {
+      loggy.error(err.toString());
+    }
   }
 
   void _update() {
@@ -97,8 +97,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
       firmwareVersion = deviceInfo.firmwareVersion;
 
-      url = OnvifUtil.authenticatingUri(
-          snapshotUri.uri, config['username']!, config['password']!);
+      if (snapshotUri != null) {
+        url = OnvifUtil.authenticatingUri(
+            snapshotUri!.uri, config['username']!, config['password']!);
+      }
     });
   }
 

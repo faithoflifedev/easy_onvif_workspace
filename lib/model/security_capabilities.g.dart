@@ -29,7 +29,7 @@ SecurityCapabilities _$SecurityCapabilitiesFromJson(
       relToken: OnvifUtil.stringToBool(json['@RELToken'] as String),
       supportedEAPMethods:
           OnvifUtil.optionalInt(json['@SupportedEAPMethods'] as String?),
-      maxUsers: int.parse(json['@MaxUsers'] as String),
+      maxUsers: OnvifUtil.optionalInt(json['@MaxUsers'] as String?),
       maxUserNameLength:
           OnvifUtil.optionalInt(json['@MaxUserNameLength'] as String?),
       maxPasswordLength:

@@ -197,8 +197,8 @@ class OnvifGetServicesDeviceManagementCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final services = await deviceManagement.getServices(
-          includeCapability: argResults!['include-capability']);
+      final services =
+          await deviceManagement.getServices(argResults!['include-capability']);
 
       print(json.encode(services));
     } on DioError catch (err) {

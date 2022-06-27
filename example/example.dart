@@ -58,6 +58,19 @@ void main(List<String> arguments) async {
     print('name: ${profile.name}, token: ${profile.token}');
   }
 
+  await onvif.ptz.moveLeft(profs[0].token);
+
+  // var status = await onvif.ptz.getStatus(profs[0].token);
+
+  // print(status);
+
+  // await onvif.ptz.absoluteMove(
+  //     profs[0].token,
+  //     PtzPosition(
+  //         panTilt: PanTilt(
+  //             x: status.position.panTilt!.x - 0.025,
+  //             y: status.position.panTilt!.y)));
+
   final uri = await onvif.media.getStreamUri(profs[0].token);
 
   final rtsp = OnvifUtil.authenticatingUri(
@@ -169,9 +182,9 @@ void main(List<String> arguments) async {
   }
 
   //get ptz status
-  var status = await onvif.ptz.getStatus(profs[0].token);
+  // var status = await onvif.ptz.getStatus(profs[0].token);
 
-  print(status);
+  // print(status);
 
   //set preset
   var res = await onvif.ptz.setPreset(profs[0].token, 'new test', '20');
