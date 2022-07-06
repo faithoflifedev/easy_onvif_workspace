@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.6
+
+- improved logging and support for non-compliant TL-IPC43AN-4 with simulated RelativeMove and DateTime.tryParse
+
 ## 2.0.5
 
 - update to the README

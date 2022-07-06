@@ -28,11 +28,11 @@ for (var device in multicastProbe.onvifDevices) {
 
 ## New for version 1.0.7
 
-This release has logging capabilities through use of the [loggy](https://pub.dev/packages/loggy) package for Dart code and the [flutter_loggy](https://pub.dev/packages/flutter_loggy) package for Flutter code. The code includes both a [Dart example](https://pub.dev/packages/easy_onvif/example) and a [Flutter example](https://github.com/faithoflifedev/easy_onvif/tree/main/example/flutter_model) that demonstrate usage.  By default the logging level is set to `LogLevel.error`, which only logs exceptions.
+This release has logging capabilities through use of the [loggy](https://pub.dev/packages/loggy) package for Dart code and the [flutter_loggy](https://pub.dev/packages/flutter_loggy) package for Flutter code. The code includes both a [Dart example](https://pub.dev/packages/easy_onvif/example) and a [Flutter example](https://github.com/faithoflifedev/easy_onvif/tree/main/example/flutter_model) that demonstreate usage.  By default the logging level is set to `LogLevel.error`, which only logs exceptions.
 
 ## New for version 1.0.0
 
-As of the 1.0.0 release of this package, there is a cli utility included that can be used to return data for any API call currently supported by the package. If you want to get started quickly with the cli utility run these commands in a terminal session:
+As of the 1.0.0 release of this package, there is a cli utility included that can be used to return data for any API call currently supported by the package. If you want to get started quicky with the cli utility run these commands in a termainal session:
 
 ```sh
 dart pub global activate easy_onvif
@@ -49,7 +49,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^2.0.5
+  easy_onvif: ^2.0.6
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -124,7 +124,7 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 | GetCapabilities        | getCapabilities        | `Future<Capabilities>`                 | [x]  |
 | GetDeviceInformation   | getDeviceInformation   | `Future<GetDeviceInformationResponse>` | [x]  |
 | GetHostname            | getHostname            | `Future<HostnameInformation>`          | [x]  |
-| GetNetworkProtocols    | getNetworkProtocols    | `Future<List<NetworkProtocol>>`        | [X]  |
+| GetNetworkProtocols    | getNetworkProtocols    | `Future<List<NetworkProtocol>>`        | [x]  |
 | GetNTP                 | getNtp                 | `Future<NtpInformation>`               | [x]  |
 | GetServiceCapabilities | getServiceCapabilities | `Future<DeviceServiceCapabilities>`    | [x]  |
 | GetServices            | getServices            | `Future<List<Service>>`                | [x]  |
@@ -178,13 +178,13 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 
 The values returned by the Onvif API `GetDeviceInformation` call.
 
-| Manufacturer       | Model          | Notes / Known Issues |
-| ------------------ | -------------- | -------------------- |
-| D-Link Corporation | DCS-6511       | |
-| Happytimesoft      | IPCamera       | [Happytimesoft](https://www.happytimesoft.com/products/onvif-server/index.html) Onvif Server software (Windows) |
-| ONVIF              | ENP1A14-IR/25X | |
-| Unknown            | GX728MF-IR28   | |
-| TP-Link            | TL-IPC43AN-4   | Responds with non-compliant date, does not support `RelativeMove` so easy_onvif performs an `AbsoluteMove` that simulates a `RelativeMove` |
+| Manufacturer       | Model          | Known Issue               |
+| ------------------ | -------------- | ------------------------- |
+| D-Link Corporation | DCS-6511       |                           |
+| Happytimesoft      | IPCamera       |                           |
+| ONVIF              | ENP1A14-IR/25X |                           |
+| TP-Link            | TL-IPC43AN-4   | RelativeMove doesn't work |
+| Unknown            | GX728MF-IR28   |                           |
 
 ## What's next
 
