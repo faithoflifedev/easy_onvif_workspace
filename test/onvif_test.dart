@@ -287,9 +287,9 @@ void main() {
         true);
   });
 
-  test('NVR8432-P16 probe response', () {
-    final response = File('test/xml/MulticastProbeSample_NVR8432-P16.xml')
-        .readAsStringSync();
+  test('NVR8432P16 probe response', () {
+    final response =
+        File('test/xml/MuticastProbeSample_NVR8432P16.xml').readAsStringSync();
 
     final envelope = Envelope.fromXml(response);
 
