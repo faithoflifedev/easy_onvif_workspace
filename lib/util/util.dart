@@ -9,6 +9,7 @@ import 'package:universal_io/io.dart';
 import 'package:xml/xml.dart';
 import 'package:xml2json/xml2json.dart';
 
+/// Helper functions for Onvif related operations
 class OnvifUtil {
   static Map<String, dynamic> xmlToMap(String soapResponse) {
     final transformer = Xml2Json();

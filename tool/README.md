@@ -124,7 +124,7 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 | GetCapabilities        | getCapabilities        | `Future<Capabilities>`                 | [x]  |
 | GetDeviceInformation   | getDeviceInformation   | `Future<GetDeviceInformationResponse>` | [x]  |
 | GetHostname            | getHostname            | `Future<HostnameInformation>`          | [x]  |
-| GetNetworkProtocols    | getNetworkProtocols    | `Future<List<NetworkProtocol>>`        | [X]  |
+| GetNetworkProtocols    | getNetworkProtocols    | `Future<List<NetworkProtocol>>`        | [x]  |
 | GetNTP                 | getNtp                 | `Future<NtpInformation>`               | [x]  |
 | GetServiceCapabilities | getServiceCapabilities | `Future<DeviceServiceCapabilities>`    | [x]  |
 | GetServices            | getServices            | `Future<List<Service>>`                | [x]  |
