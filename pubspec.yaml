@@ -4,8 +4,6 @@ version: 2.0.6
 repository: https://github.com/faithoflifedev/easy_onvif
 homepage: https://github.com/faithoflifedev/easy_onvif
 
-publish_to: none
-
 environment:
   sdk: ">=2.17.0 <3.0.0"
 
@@ -16,11 +14,6 @@ dependencies:
   intl: ^0.17.0
   json_annotation: ^4.5.0
   loggy: ^2.0.1+1
-  # loggy:
-  #   git:
-  #     url: https://github.com/faithoflifedev/floggy.git
-  #     ref: stderr_loggy
-  #     path: loggy
 
   sprintf: ^6.0.0
   universal_io: ^2.0.4
