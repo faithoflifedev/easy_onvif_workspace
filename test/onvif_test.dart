@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 import 'package:universal_io/io.dart';
 
 void main() {
-  test('discovery probe well-formedness fault', () {
+  test('discovery probe well-formed fault', () {
     final response = File('test/xml/Fault.xml').readAsStringSync();
 
     final envelope = Envelope.fromXml(response);
@@ -12,7 +12,7 @@ void main() {
 
     expect(
         body.hasFault &&
-            body.fault['faultstring']['\$'] == 'Well-formedness violation',
+            body.fault['faultstring']['\$'] == 'Well-formed violation',
         true);
   });
   test('metadataConfigurationsResponse is not null when doc parsed', () {
@@ -289,7 +289,7 @@ void main() {
 
   test('NVR8432P16 probe response', () {
     final response =
-        File('test/xml/MuticastProbeSample_NVR8432P16.xml').readAsStringSync();
+        File('test/xml/MulticastProbeSample_NVR8432P16.xml').readAsStringSync();
 
     final envelope = Envelope.fromXml(response);
 
