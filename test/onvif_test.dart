@@ -12,7 +12,7 @@ void main() {
 
     expect(
         body.hasFault &&
-            body.fault['faultstring']['\$'] == 'Well-formed violation',
+            body.fault['faultstring']['\$'] == 'Well-formedness violation',
         true);
   });
   test('metadataConfigurationsResponse is not null when doc parsed', () {
