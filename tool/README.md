@@ -28,11 +28,11 @@ for (var device in multicastProbe.onvifDevices) {
 
 ## New for version 1.0.7
 
-This release has logging capabilities through use of the [loggy](https://pub.dev/packages/loggy) package for Dart code and the [flutter_loggy](https://pub.dev/packages/flutter_loggy) package for Flutter code. The code includes both a [Dart example](https://pub.dev/packages/easy_onvif/example) and a [Flutter example](https://github.com/faithoflifedev/easy_onvif/tree/main/example/flutter_model) that demonstreate usage.  By default the logging level is set to `LogLevel.error`, which only logs exceptions.
+This release has logging capabilities through use of the [loggy](https://pub.dev/packages/loggy) package for Dart code and the [flutter_loggy](https://pub.dev/packages/flutter_loggy) package for Flutter code. The code includes both a [Dart example](https://pub.dev/packages/easy_onvif/example) and a [Flutter example](https://github.com/faithoflifedev/easy_onvif/tree/main/example/flutter_model) that demonstrate usage.  By default the logging level is set to `LogLevel.error`, which only logs exceptions.
 
 ## New for version 1.0.0
 
-As of the 1.0.0 release of this package, there is a cli utility included that can be used to return data for any API call currently supported by the package. If you want to get started quicky with the cli utility run these commands in a termainal session:
+As of the 1.0.0 release of this package, there is a cli utility included that can be used to return data for any API call currently supported by the package. If you want to get started quickly with the cli utility run these commands in a terminal session:
 
 ```sh
 dart pub global activate easy_onvif
@@ -66,7 +66,7 @@ import 'package:easy_onvif/onvif.dart';
 
 ```dart
 final onvif = await Onvif.connect(
- host: [hostname or ipaddress],
+ host: [hostname or ip address],
  username: [username],
  password: [password]);
 ```
