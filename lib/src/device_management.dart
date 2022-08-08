@@ -29,7 +29,7 @@ class DeviceManagement with UiLoggy {
 
     capabilityCategory ??= 'All';
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri,
         SoapRequest.envelope(
             null, SoapRequest.capabilities(capabilityCategory)));
@@ -43,7 +43,7 @@ class DeviceManagement with UiLoggy {
   Future<List<Service>> getServices([includeCapability = false]) async {
     loggy.debug('getServices');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.services(includeCapability)));
 
     if (envelope.body.servicesResponse == null) throw Exception();
@@ -55,7 +55,7 @@ class DeviceManagement with UiLoggy {
   Future<GetDeviceInformationResponse> getDeviceInformation() async {
     loggy.debug('getDeviceInformation');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.deviceInformation()));
 
     if (envelope.body.deviceInformationResponse == null) throw Exception();
@@ -68,7 +68,7 @@ class DeviceManagement with UiLoggy {
   Future<HostnameInformation> getHostname() async {
     loggy.debug('getHostname');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
       uri,
       SoapRequest.envelope(null, SoapRequest.hostname()),
     );
@@ -84,7 +84,7 @@ class DeviceManagement with UiLoggy {
   Future<List<NetworkProtocol>> getNetworkProtocols() async {
     loggy.debug('getNetworkProtocols');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.networkProtocols()));
 
     if (envelope.body.networkProtocolsResponse == null) throw Exception();
@@ -98,8 +98,8 @@ class DeviceManagement with UiLoggy {
   Future<NtpInformation> getNtp() async {
     loggy.debug('getNtp');
 
-    final envelope =
-        await Soap.retrieveEnvlope(uri, onvif.secureRequest(SoapRequest.ntp()));
+    final envelope = await Soap.retrieveEnvelope(
+        uri, onvif.secureRequest(SoapRequest.ntp()));
 
     if (envelope.body.ntpResponse == null) throw Exception();
 
@@ -112,7 +112,7 @@ class DeviceManagement with UiLoggy {
   //returning the address property of the device service endpoint reference.
   // Future<void> getEndpointReference() async {
   //   // Future<GetEndpointReferenceResponse> getEndpointReference() async {
-  //   final envelope = await Soap.retrieveEnvlope(
+  //   final envelope = await Soap.retrieveEnvelope(
   //       uri, onvif.secureRequest(SoapRequest.endpointReference()),
   //       postProcess: (String xmlBody, dynamic jsonMap, Envelope envelope) {
   //     print(xmlBody);
@@ -130,7 +130,7 @@ class DeviceManagement with UiLoggy {
   Future<DeviceServiceCapabilities> getServiceCapabilities() async {
     loggy.debug('getServiceCapabilities');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.serviceCapabilities()));
 
     if (envelope.body.serviceCapabilitiesResponse == null) throw Exception();
@@ -147,7 +147,7 @@ class DeviceManagement with UiLoggy {
   Future<SystemDateAndTime> getSystemDateAndTime() async {
     loggy.debug('getSystemDateAndTime');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri, SoapRequest.envelope(null, SoapRequest.systemDateAndTime()));
 
     if (envelope.body.dateTimeResponse == null) throw Exception();
@@ -177,7 +177,7 @@ class DeviceManagement with UiLoggy {
   Future<GetSystemUrisResponse> getSystemUris() async {
     loggy.debug('getSystemUris');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.systemUris()));
 
     if (envelope.body.systemUrisResponse == null) throw Exception();
@@ -192,7 +192,7 @@ class DeviceManagement with UiLoggy {
   Future<List<User>> getUsers() async {
     loggy.debug('getUsers');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.users()));
 
     if (envelope.body.usersResponse == null) throw Exception();
@@ -213,7 +213,7 @@ class DeviceManagement with UiLoggy {
   Future<void> createUsers(List<User> users) async {
     loggy.debug('createUsers');
 
-    await Soap.retrieveEnvlope(
+    await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.createUsers(users)));
   }
 
@@ -225,7 +225,7 @@ class DeviceManagement with UiLoggy {
   Future<void> deleteUsers(List<String> users) async {
     loggy.debug('deleteUsers');
 
-    await Soap.retrieveEnvlope(
+    await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.deleteUsers(users)));
   }
 }

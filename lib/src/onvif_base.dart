@@ -72,7 +72,7 @@ class Onvif with UiLoggy {
       required password,
       LogOptions logOptions = const LogOptions(
         LogLevel.error,
-        stackTraceLevel: LogLevel.error,
+        stackTraceLevel: LogLevel.off,
       ),
       LoggyPrinter printer = const PrettyPrinter(
         showColors: false,

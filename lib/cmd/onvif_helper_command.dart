@@ -26,9 +26,10 @@ abstract class OnvifHelperCommand extends Command {
 
     //configure device connection
     _onvif = await Onvif.connect(
-        host: auth['host'],
-        username: auth['username'],
-        password: auth['password'],
-        logOptions: OnvifUtil.convertToLogOptions(globalResults!['log-level']));
+      host: auth['host'],
+      username: auth['username'],
+      password: auth['password'],
+      logOptions: OnvifUtil.convertToLogOptions(globalResults!['log-level']),
+    );
   }
 }

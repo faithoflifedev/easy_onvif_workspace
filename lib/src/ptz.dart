@@ -30,7 +30,7 @@ class Ptz with UiLoggy {
       [PtzPosition? speed]) async {
     loggy.debug('absoluteMove');
 
-    await Soap.retrieveEnvlope(
+    await Soap.retrieveEnvelope(
         uri,
         onvif.secureRequest(
             SoapRequest.absoluteMove(profileToken, place, speed)));
@@ -44,7 +44,7 @@ class Ptz with UiLoggy {
       [int? timeout]) async {
     loggy.debug('continuousMove');
 
-    await Soap.retrieveEnvlope(
+    await Soap.retrieveEnvelope(
         uri,
         onvif.secureRequest(
             SoapRequest.continuousMove(profileToken, velocity, timeout)));
@@ -54,7 +54,7 @@ class Ptz with UiLoggy {
       String profileToken) async {
     loggy.debug('getCompatibleConfigurations');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri,
         onvif.secureRequest(
             SoapRequest.getCompatibleConfigurations(profileToken)));
@@ -89,7 +89,7 @@ class Ptz with UiLoggy {
   Future<List<PtzConfiguration>> getConfigurations() async {
     loggy.debug('getConfigurations');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.getPtzConfigurations()));
 
     if (envelope.body.configurationsResponse == null) throw Exception();
@@ -136,7 +136,7 @@ class Ptz with UiLoggy {
       String ptzConfigurationToken) async {
     loggy.debug('ptzConfigurationToken');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri,
         onvif.secureRequest(
             SoapRequest.getPtzConfiguration(ptzConfigurationToken)));
@@ -158,7 +158,7 @@ class Ptz with UiLoggy {
       {int limit = 100}) async {
     loggy.debug('getPresets');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.presets(profileToken)));
 
     if (envelope.body.getPresetResponse == null) throw Exception();
@@ -180,7 +180,7 @@ class Ptz with UiLoggy {
   Future<void> gotoPreset(String profileToken, Preset preset) async {
     loggy.debug('gotoPreset');
 
-    await Soap.retrieveEnvlope(
+    await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.gotoPreset(profileToken, preset)));
   }
 
@@ -188,7 +188,7 @@ class Ptz with UiLoggy {
   Future<PtzStatus> getStatus(String profileToken) async {
     loggy.debug('getStatus');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.status(profileToken)));
 
     if (envelope.body.statusResponse == null) throw Exception();
@@ -274,7 +274,7 @@ class Ptz with UiLoggy {
   Future<void> relativeMove(String profileToken, PtzPosition move) async {
     loggy.debug('relativeMove');
 
-    await Soap.retrieveEnvlope(
+    await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.relativeMove(profileToken, move)));
   }
 
@@ -284,7 +284,7 @@ class Ptz with UiLoggy {
   Future<void> removePreset(String profileToken, Preset preset) async {
     loggy.debug('removePreset');
 
-    await Soap.retrieveEnvlope(uri,
+    await Soap.retrieveEnvelope(uri,
         onvif.secureRequest(SoapRequest.removePreset(profileToken, preset)));
   }
 
@@ -303,7 +303,7 @@ class Ptz with UiLoggy {
       [String? name, String? token]) async {
     loggy.debug('setPreset');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
       uri,
       onvif.secureRequest(SoapRequest.setPreset(profileToken, name, token)),
     );
@@ -320,7 +320,7 @@ class Ptz with UiLoggy {
       {bool panTilt = true, bool zoom = true}) async {
     loggy.debug('stop');
 
-    await Soap.retrieveEnvlope(
+    await Soap.retrieveEnvelope(
         uri,
         onvif.secureRequest(
             SoapRequest.stop(profileToken, panTilt: panTilt, zoom: zoom)));

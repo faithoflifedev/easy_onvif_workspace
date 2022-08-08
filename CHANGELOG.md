@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.7
+
+- add package version info to cli onvif --help output
+
 ## 2.0.6
 
 - improved logging and support for non-compliant TL-IPC43AN-4 with simulated RelativeMove and DateTime.tryParse
@@ -22,7 +26,7 @@
 
 ## 2.0.1
 
-- logging for Onvif discovert
+- logging for Onvif discovery
 
 ## 2.0.0
 

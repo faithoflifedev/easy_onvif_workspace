@@ -51,7 +51,7 @@ class Soap {
   }
 
   ///Retrieve an onvif SOAP envelope
-  static Future<Envelope> retrieveEnvlope(
+  static Future<Envelope> retrieveEnvelope(
     Uri uri,
     XmlDocument soapRequest,
     // {Function? postProcess}

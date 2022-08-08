@@ -13,7 +13,7 @@ class Media with UiLoggy {
     loggy.debug('getAudioSources');
 
     // Future<void> getAudioSources() async {
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.audioSources()));
 
     if (envelope.body.audioSourcesResponse == null) throw Exception();
@@ -26,7 +26,7 @@ class Media with UiLoggy {
   Future<List<Configuration>> getMetadataConfigurations() async {
     loggy.debug('getMetadataConfigurations');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.metadataConfigurations()));
 
     if (envelope.body.metadataConfigurationsResponse == null) throw Exception();
@@ -42,7 +42,7 @@ class Media with UiLoggy {
   Future<List<Profile>> getProfiles() async {
     loggy.debug('getProfiles');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.profiles()));
 
     if (envelope.body.profilesResponse == null) throw Exception();
@@ -55,7 +55,7 @@ class Media with UiLoggy {
   Future<DeviceServiceCapabilities> getServiceCapabilities() async {
     loggy.debug('getServiceCapabilities');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.serviceCapabilities()));
 
     if (envelope.body.serviceCapabilitiesResponse == null) throw Exception();
@@ -79,7 +79,7 @@ class Media with UiLoggy {
       String timeout = 'PT0S'}) async {
     loggy.debug('getSnapshotUri');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.snapshotUri(profileToken)));
 
     if (envelope.body.snapshotUriResponse == null) throw Exception();
@@ -114,7 +114,7 @@ class Media with UiLoggy {
       String timeout = 'PT0S'}) async {
     loggy.debug('getStreamUri');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri,
         onvif.secureRequest(SoapRequest.streamUri(profileToken,
             streamType: streamType, transportProtocol: transportProtocol)));
@@ -128,7 +128,7 @@ class Media with UiLoggy {
   Future<List<VideoSource>> getVideoSources() async {
     loggy.debug('getVideoSources');
 
-    final envelope = await Soap.retrieveEnvlope(
+    final envelope = await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.videoSources()));
 
     if (envelope.body.videoSourcesResponse == null) throw Exception();
@@ -145,7 +145,7 @@ class Media with UiLoggy {
   Future<void> startMulticastStreaming() async {
     loggy.debug('startMulticastStreaming');
 
-    await Soap.retrieveEnvlope(
+    await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.startMulticastStreaming()));
   }
 
@@ -154,7 +154,7 @@ class Media with UiLoggy {
   Future<void> stopMulticastStreaming() async {
     loggy.debug('stopMulticastStreaming');
 
-    await Soap.retrieveEnvlope(
+    await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.stopMulticastStreaming()));
   }
 }

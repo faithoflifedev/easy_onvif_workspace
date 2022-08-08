@@ -1,118 +1,119 @@
+import 'package:easy_onvif/util/meta_update.dart';
 import 'package:grinder/grinder.dart';
 import 'package:mustache_template/mustache.dart';
-import 'package:process_run/shell.dart';
+import 'package:process_run/which.dart';
+import 'package:pub_semver/pub_semver.dart';
+import 'package:pubspec/pubspec.dart';
 import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart';
+// import 'package:yt/util/meta_update.dart';
+
+final config = getConfig();
+
+final pubspecDirectory = Directory.current;
 
 main(args) => grind(args);
 
-@Task()
-test() => TestRunner().testAsync();
-
-@DefaultTask()
+@DefaultTask('Build the project.')
 @Depends(test)
 build() {
-  Pub.build();
+  log("building...");
 }
 
-@Task()
-clean() => defaultClean();
-
 @Task('publish')
-@Depends(analyze, version, dryrun)
-// @Depends(dartdoc, analyze, version, dryrun)
+@Depends(analyze, version, test, doc, dryrun)
 publish() {
-  // log('publishing...');
-
   log('''
   Use the command:
     dart pub publish
 
   To publish this package on the pub.dev site.
   ''');
-
-  // await shell(args: 'pub publish');
 }
 
 @Task('dart pub publish --dry-run')
-dryrun() async {
-  log('dryrun...');
-
-  await shell(args: 'pub publish --dry-run');
+dryrun() {
+  shell(args: ['pub', 'publish', '--dry-run']);
 }
 
 @Task('dartdoc')
-dartdoc() {
-  log('dartdoc...');
-
+@Depends(version)
+doc() {
   DartDoc.doc();
 }
 
 @Task('dart analyze')
 analyze() {
-  log('analyzing...');
-
   Analyzer.analyze('.', fatalWarnings: true);
 }
 
 @Task('version bump')
 version() async {
+  MetaUpdate('pubspec.yaml').writeMetaDartFile('lib/util/meta.dart');
+
+  final version = config['version']!;
+
+  final newTag = await isNewTag(version);
+
+  if (newTag) {
+    updateMarkdown(config);
+
+    await updatePubspec(version);
+  }
+}
+
+@Task('commit to git')
+commit() async {
+  final newTag = await isNewTag(config['version']);
+
+  shell(exec: 'git', args: ['add', '.']);
+
+  shell(exec: 'git', args: ['commit', '-m', '\'${config['change']}\'']);
+
+  if (newTag) {
+    shell(exec: 'git', args: ['tag', 'v${config['version']}']);
+
+    shell(exec: 'git', args: ['push', '--tags']);
+  }
+
+  shell(exec: 'git', args: ['push']);
+}
+
+@Task('run tests')
+@Depends(version)
+test() {
+  TestRunner().test();
+}
+
+YamlMap getConfig() {
   final config = loadYaml(File('tool/config.yaml').readAsStringSync());
 
   if (!config.containsKey('templates') ||
       !config.containsKey('version') ||
       !config.containsKey('change')) throw Exception();
 
-  final newTag = await isNewTag(config['version']);
-
-  if (newTag) {
-    updateMarkdown(config);
-
-    updatePubspec(config['version']);
-  }
-
-  commit(version: config['version'], change: config['change'], newTag: newTag);
+  return config;
 }
 
-Future<String> shell(
-    {String exec = 'dart', String args = '', bool verbose = true}) async {
-  final exectutable = whichSync(exec);
+String shell(
+    {String exec = 'dart',
+    List<String> args = const <String>[],
+    bool verbose = true}) {
+  final executable = whichSync(exec);
 
-  if (exectutable == null) throw Exception();
+  if (executable == null) throw Exception();
 
-  final shell = Shell(verbose: verbose);
-
-  final result = await shell.run('$exectutable $args');
-
-  String response = '';
-
-  for (var processResult in result) {
-    response += processResult.outText;
-  }
-
-  return response;
+  return run(executable, arguments: args, quiet: !verbose);
 }
 
 Future<bool> isNewTag(String version) async {
-  final result =
-      await shell(exec: 'git', args: 'tag -l "v$version"', verbose: false);
+  final result = shell(
+    exec: 'git',
+    args: ['tag', '-l', 'v$version'],
+    verbose: false,
+  );
 
   return result.trim() != 'v$version';
-}
-
-commit(
-    {required String version, required String change, required newTag}) async {
-  await shell(exec: 'git', args: 'add .');
-
-  await shell(exec: 'git', args: 'commit -m "$change"');
-
-  if (newTag) {
-    await shell(exec: 'git', args: 'tag v$version');
-
-    await shell(exec: 'git', args: 'push --tags');
-  }
-
-  await shell(exec: 'git', args: 'push');
 }
 
 void updateMarkdown(config) {
@@ -132,41 +133,42 @@ void updateMarkdown(config) {
     final outputFile = File(templateFileName);
 
     final template =
-        Template(mustacheTpl.readAsStringSync(), name: templateFileName);
+        Template(mustacheTpl.readAsStringSync(), name: templateFileName)
+            .renderString(config);
 
     switch (type) {
       case 'prepend':
         final currentContent =
             outputFile.readAsStringSync().replaceFirst('# Changelog\n', '');
 
-        outputFile.writeAsStringSync(template.renderString(config),
-            mode: FileMode.write);
+        if (!currentContent
+            .startsWith(template.replaceFirst('# Changelog\n', ''))) {
+          outputFile.writeAsStringSync(template, mode: FileMode.write);
 
-        outputFile.writeAsStringSync(currentContent, mode: FileMode.append);
+          outputFile.writeAsStringSync(currentContent, mode: FileMode.append);
+        }
 
         break;
 
       case 'overwrite':
         outputFile.deleteSync();
 
-        outputFile.writeAsStringSync(template.renderString(config));
+        outputFile.writeAsStringSync(template);
 
         break;
 
       default:
-        outputFile.writeAsString(template.renderString(config),
-            mode: FileMode.append);
+        outputFile.writeAsString(template, mode: FileMode.append);
     }
   });
 }
 
-void updatePubspec(String version) {
-  final pubspecFile = File('pubspec.yaml');
+Future<void> updatePubspec(String version) async {
+  final pubSpec = await PubSpec.load(pubspecDirectory);
 
-  final String pubspecContent = pubspecFile.readAsStringSync();
+  final newPubSpec = pubSpec.copy(version: Version.parse(version));
 
-  pubspecFile.renameSync('.pubspec.yaml.bak');
+  await newPubSpec.save(pubspecDirectory);
 
-  File('pubspec.yaml').writeAsStringSync(
-      pubspecContent.replaceAll(RegExp(r'version:.*'), 'version: $version'));
+  Pub.upgrade();
 }
