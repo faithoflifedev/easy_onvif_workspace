@@ -4,5 +4,5 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 2.0.7
-change: "add package version info to cli onvif --help output"
+version: 2.0.8
+change: "flutter example .metadata"

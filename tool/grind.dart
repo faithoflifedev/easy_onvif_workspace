@@ -21,7 +21,7 @@ build() {
 }
 
 @Task('publish')
-@Depends(analyze, version, test, doc, dryrun)
+@Depends(analyze, version, test, doc, commit, dryrun)
 publish() {
   log('''
   Use the command:

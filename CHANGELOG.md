@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.8
+
+- flutter example .metadata
+
 ## 2.0.7
 
 - add package version info to cli onvif --help output
