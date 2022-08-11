@@ -2,7 +2,9 @@
 
 ## 2.0.9
 
-- - corrects ptz.continuousMove error when `zoom` was not included as a parameter - issue #18 - adds tests for ptz.continuousMove and ptz.stop - improvements to the cli README
+- corrects ptz.continuousMove error when `zoom` was not included as a parameter 
+- issue #18 - adds tests for ptz.continuousMove and ptz.stop 
+- improvements to the cli README
 
 
 ## 2.0.8
@@ -63,7 +65,7 @@
 
 ## 1.0.3
 
-- added quickstart to bin&#x2F;README.md
+- added quick-start to bin&#x2F;README.md
 
 ## 1.0.2
 
@@ -103,7 +105,7 @@
 
 ## 0.0.10
 
-- GetProfile from media.wdsl has optional fields that were required in code
+- GetProfile from media.wsdl has optional fields that were required in code
 
 ## 0.0.9
 
@@ -111,7 +113,7 @@
 
 ## 0.0.8
 
-- better inpterpretation of parsed XML
+- better interpretation of parsed XML
 
 ## 0.0.7
 

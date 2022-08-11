@@ -81,7 +81,7 @@ class OnvifUtil {
   }
 
   static LogOptions convertToLogOptions(String logLevel) {
-    var logOptions = const LogOptions(LogLevel.info);
+    var logOptions = const LogOptions(LogLevel.off);
 
     switch (logLevel) {
       case 'all':

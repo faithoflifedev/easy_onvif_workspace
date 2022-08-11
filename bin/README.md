@@ -19,7 +19,7 @@ A command line interface for controlling an Onvif device through terminal comman
       - [device-management get-users](#device-management-get-users)
   - [media](#media)
       - [media get-audio-sources](#media-get-audio-sources)
-      - [media get-profile](#media-get-profile)
+      - [media get-profiles](#media-get-profiles)
       - [media get-snapshot-uri](#media-get-snapshot-uri)
       - [media get-stream-uri](#media-get-stream-uri)
       - [media get-video-sources](#media-get-video-sources)
@@ -52,17 +52,26 @@ A command line interface for controlling an Onvif device through terminal comman
 ## Installation
 A command line interface for controlling an Onvif device with cli commands
 
-To install:
+Install using `dart pub`:
 
 ```sh
 dart pub global activate easy_onvif
 ```
 
-Usage:
+Install using `brew`:
 
 ```sh
-prompt>onvif --help
+brew tap faithoflifedev/easy_onvif
+brew install onvif
 ```
+
+Run the following command to see help:
+
+```sh
+onvif --help
+```
+
+Result,
 
 ```text
 A command line interface for controlling Onvif compliant devices
@@ -310,7 +319,7 @@ Usage: onvif media get-audio-sources [arguments]
 -h, --help    Print this usage information.
 ```
 
-#### media get-profile
+#### media get-profiles
 
 ```sh
 prompt>onvif media get-profiles --help
