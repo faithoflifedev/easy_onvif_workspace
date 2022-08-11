@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.10
+
+* homebrew installation for onvif cli
+* default debug for cli now set to &quot;off&quot;
+
+
 ## 2.0.9
 
 - corrects ptz.continuousMove error when `zoom` was not included as a parameter 

@@ -20,7 +20,8 @@ build() {
 }
 
 @Task('publish')
-@Depends(analyze, version, test, doc, commit, dryrun)
+@Depends(analyze, version, doc, commit, dryrun)
+// @Depends(analyze, version, test, doc, commit, dryrun)
 publish() {
   log('''
 Use the command:
@@ -49,8 +50,6 @@ analyze() {
 @Task('version bump')
 version() async {
   final metaUpdate = MetaUpdate('pubspec.yaml');
-
-  metaUpdate.writeMetaDartFile('lib/util/meta.dart');
 
   metaUpdate.verifyLatestVersionFromPubSpec();
 

@@ -2,4 +2,4 @@
 
 ## {{ version }}
 
-- {{ change }}
+{{ change }}

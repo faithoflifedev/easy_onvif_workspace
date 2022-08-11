@@ -50,7 +50,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^2.0.9
+  easy_onvif: ^2.0.10
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -118,17 +118,26 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 
 A command line interface for controlling an Onvif device with cli commands
 
-To install:
+Install using `dart pub`:
 
 ```sh
 dart pub global activate easy_onvif
 ```
 
-Usage:
+Install using `brew`:
 
 ```sh
-prompt>onvif --help
+brew tap faithoflifedev/easy_onvif
+brew install onvif
 ```
+
+Run the following command to see help:
+
+```sh
+onvif --help
+```
+
+Result,
 
 ```text
 A command line interface for controlling Onvif compliant devices
