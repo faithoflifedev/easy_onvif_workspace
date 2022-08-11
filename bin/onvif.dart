@@ -5,7 +5,7 @@ import 'package:universal_io/io.dart';
 import 'package:easy_onvif/onvif.dart';
 
 void main(List<String> arguments) async {
-  MetaUpdate("pubspec.yaml").verifyLatestVersionFromPubSpec();
+  MetaUpdate('pubspec.yaml').verifyLatestVersionFromPubSpec();
 
   CommandRunner('onvif',
       '''A command line interface for controlling Onvif compliant devices
@@ -21,6 +21,7 @@ Using Dart package: ${meta['name']} v${meta['version']}''')
     ..addCommand(OnvifMediaCommand())
     ..addCommand(OnvifPtzCommand())
     ..addCommand(OnvifProbeCommand())
+    ..addCommand(OnvifVersionCommand())
     ..run(arguments).catchError((error) {
       if (error is! UsageException) throw error;
 

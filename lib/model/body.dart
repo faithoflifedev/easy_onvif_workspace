@@ -8,8 +8,24 @@ import 'probe/probe_matches.dart';
 part 'body.g.dart';
 
 ///represents the body of the XML SOAP response.
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class Body {
+  /// Operation to move pan,tilt or zoom to a absolute destination.
+  ///
+  /// The speed argument is optional. If an x/y speed value is given it is up to
+  /// the device to either use the x value as absolute resulting speed vector
+  /// or to map x and y to the component speed. If the speed argument is
+  /// omitted, the default speed set by the PTZConfiguration will be used.
+  @JsonKey(name: 'AbsoluteMoveResponse')
+  final AbsoluteMoveResponse? absoluteMoveResponse;
+
+  /// Operation for continuous Pan/Tilt and Zoom movements. The operation is
+  /// supported if the PTZNode supports at least one continuous Pan/Tilt or Zoom
+  /// space. If the space argument is omitted, the default space set by the
+  /// PTZConfiguration will be used.
+  @JsonKey(name: 'ContinuousMoveResponse')
+  final ContinuousMoveResponse? continuousMoveResponse;
+
   ///This operation gets the device system date and time. The device shall
   ///support the return of the daylight saving setting and of the manual system
   ///date and time (if applicable) or indication of NTP time (if applicable)
@@ -137,31 +153,38 @@ class Body {
   @JsonKey(name: 'Fault')
   final dynamic fault;
 
-  Body(
-      {this.fault,
-      this.dateTimeResponse,
-      this.capabilitiesResponse,
-      this.serviceCapabilitiesResponse,
-      this.configurationResponse,
-      this.configurationsResponse,
-      this.deviceInformationResponse,
-      this.audioSourcesResponse,
-      this.videoSourcesResponse,
-      this.profilesResponse,
-      this.servicesResponse,
-      this.getPresetResponse,
-      this.setPresetResponse,
-      this.snapshotUriResponse,
-      this.streamUriResponse,
-      this.networkProtocolsResponse,
-      this.statusResponse,
-      this.hostnameResponse,
-      this.ntpResponse,
-      this.systemUrisResponse,
-      this.usersResponse,
-      this.probeMatches,
-      this.metadataConfigurationsResponse,
-      this.compatibleConfigurationsResponse});
+  @JsonKey(name: 'StopResponse')
+  final dynamic stopResponse;
+
+  Body({
+    this.fault,
+    this.absoluteMoveResponse,
+    this.audioSourcesResponse,
+    this.capabilitiesResponse,
+    this.compatibleConfigurationsResponse,
+    this.configurationResponse,
+    this.configurationsResponse,
+    this.continuousMoveResponse,
+    this.dateTimeResponse,
+    this.deviceInformationResponse,
+    this.getPresetResponse,
+    this.hostnameResponse,
+    this.metadataConfigurationsResponse,
+    this.networkProtocolsResponse,
+    this.ntpResponse,
+    this.probeMatches,
+    this.profilesResponse,
+    this.serviceCapabilitiesResponse,
+    this.servicesResponse,
+    this.setPresetResponse,
+    this.snapshotUriResponse,
+    this.statusResponse,
+    this.stopResponse,
+    this.streamUriResponse,
+    this.systemUrisResponse,
+    this.usersResponse,
+    this.videoSourcesResponse,
+  });
 
   factory Body.fromJson(Map<String, dynamic> json) => _$BodyFromJson(json);
 

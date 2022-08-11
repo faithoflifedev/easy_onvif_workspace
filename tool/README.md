@@ -5,6 +5,23 @@ This is a wrapper to ONVIF protocol which allows you to get information about yo
 [![pub package](https://img.shields.io/pub/v/easy_onvif.svg)](https://pub.dartlang.org/packages/easy_onvif)
 [![Build Status](https://github.com/faithoflifedev/easy_onvif/workflows/Dart/badge.svg)](https://github.com/faithoflifedev/easy_onvif/actions)
 
+## Table of contents
+- [New for version 2.0.0](#new-for-version-200)
+- [Getting Started](#getting-started)
+- [Usage Example](#usage-example)
+- [Connecting to an Onvif device](#connecting-to-an-onvif-device)
+- [Interacting with the device through Onvif operations](#interacting-with-the-device-through-onvif-operations)
+- [Onvif cli (Onvif at the command prompt)](#onvif-cli-onvif-at-the-command-prompt)
+- [Supported Onvif Operations](#supported-onvif-operations)
+  - [Device Management](#device-management)
+  - [Media](#media)
+  - [PTZ](#ptz)
+  - [PTZ Helper Methods](#ptz-helper-methods)
+- [Tested Onvif Devices](#tested-onvif-devices)
+- [What's next](#whats-next)
+
+[![Buy me a coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/faithoflif2)
+
 ## New for version 2.0.0
 
 Device discovery is finally here.  If you're using that cli utilities that became available from v1.0.0, you can discover Onvif devices on your network with the command:
@@ -25,22 +42,6 @@ for (var device in multicastProbe.onvifDevices) {
       '${device.name} ${device.location} ${device.hardware} ${device.xaddr}');
 }
 ```
-
-## New for version 1.0.7
-
-This release has logging capabilities through use of the [loggy](https://pub.dev/packages/loggy) package for Dart code and the [flutter_loggy](https://pub.dev/packages/flutter_loggy) package for Flutter code. The code includes both a [Dart example](https://pub.dev/packages/easy_onvif/example) and a [Flutter example](https://github.com/faithoflifedev/easy_onvif/tree/main/example/flutter_model) that demonstrate usage.  By default the logging level is set to `LogLevel.error`, which only logs exceptions.
-
-## New for version 1.0.0
-
-As of the 1.0.0 release of this package, there is a cli utility included that can be used to return data for any API call currently supported by the package. If you want to get started quickly with the cli utility run these commands in a terminal session:
-
-```sh
-dart pub global activate easy_onvif
-
-onvif --help
-```
-
-Please see the cli documentation [README.md](https://github.com/faithoflifedev/easy_onvif/tree/main/bin) for more detailed usage information.
 
 ## Getting Started
 
@@ -89,7 +90,7 @@ Many operations require you to supply a `profileToken` which can be retrieved th
 var profiles = await onvif.media.getProfiles();
 
 profiles.forEach((element) {
- print(element.name + ' ' + element.token);
+ print('${element.name}  ${element.token}');
 });
 
 var profileToken = profiles[0].token;
@@ -112,6 +113,42 @@ await onvif.ptz.gotoPreset(profileToken, preset);
 ```
 
 Be sure to look through the [API Reference](https://pub.dev/documentation/easy_onvif/latest/) for information about the parameters required for the supported Onvif operations.
+
+## Onvif cli (Onvif at the command prompt)
+
+A command line interface for controlling an Onvif device with cli commands
+
+To install:
+
+```sh
+dart pub global activate easy_onvif
+```
+
+Usage:
+
+```sh
+prompt>onvif --help
+```
+
+```text
+A command line interface for controlling Onvif compliant devices
+
+Usage: onvif <command> [arguments]
+
+Global options:
+-h, --help           Print this usage information.
+    --config-file    (defaults to "$HOME/.onvif/credentials.json")
+    --log-level      [all, debug, info, warning, error, off (default)]
+
+Available commands:
+  authorize           Generate an authentication file for an Onvif device
+  device-management   Device management commands.
+  media               Media commands.
+  probe               Probe/device discovery command.
+  ptz                 PTZ commands.
+```
+
+Please see the cli documentation [README.md](https://github.com/faithoflifedev/easy_onvif/tree/main/bin) for more detailed usage information.
 
 ## Supported Onvif Operations
 
@@ -148,8 +185,8 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 
 | Onvif Operation             | Dart Method                 | Dart Return Type                 | Test |
 | --------------------------- | --------------------------- | -------------------------------- | ---- |
-| AbsoluteMove                | absoluteMove                | `Future<void>`                   | [ \]  |
-| ContinuousMove              | continuousMove              | `Future<void>`                   | [ \]  |
+| AbsoluteMove                | absoluteMove                | `Future<bool>`                   | [ \]  |
+| ContinuousMove              | continuousMove              | `Future<bool>`                   | [x\]  |
 | GetCompatibleConfigurations | getCompatibleConfigurations | `Future<List<PtzConfiguration>>` | [x\]  |
 | GetConfiguration            | getConfiguration            | `Future<PtzConfiguration>`       | [x\]  |
 | GetConfigurations           | getConfigurations           | `Future<List<PtzConfiguration>>` | [x\]  |
@@ -159,7 +196,7 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 | RelativeMove                | relativeMove                | `Future<void>`                   | [ \]  |
 | RemovePreset                | removePreset                | `Future<void>`                   | [ \]  |
 | SetPreset                   | setPreset                   | `Future<String>`                 | [x\]  |
-| Stop                        | stop                        | `Future<void>`                   | [ \]  |
+| Stop                        | stop                        | `Future<bool>`                   | [x\]  |
 
 ### PTZ Helper Methods
 
@@ -191,5 +228,3 @@ The values returned by the Onvif API `GetDeviceInformation` call.
 ## What's next
 
 - More comprehensive unit tests
-
-[![A test image](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/faithoflif2)

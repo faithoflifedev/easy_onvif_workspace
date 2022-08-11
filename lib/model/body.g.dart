@@ -8,19 +8,24 @@ part of 'body.dart';
 
 Body _$BodyFromJson(Map<String, dynamic> json) => Body(
       fault: json['Fault'],
-      dateTimeResponse: json['GetSystemDateAndTimeResponse'] == null
+      absoluteMoveResponse: json['AbsoluteMoveResponse'] == null
           ? null
-          : GetSystemDateAndTimeResponse.fromJson(
-              json['GetSystemDateAndTimeResponse'] as Map<String, dynamic>),
+          : AbsoluteMoveResponse.fromJson(
+              json['AbsoluteMoveResponse'] as Map<String, dynamic>),
+      audioSourcesResponse: json['GetAudioSourcesResponse'] == null
+          ? null
+          : GetAudioSourcesResponse.fromJson(
+              json['GetAudioSourcesResponse'] as Map<String, dynamic>),
       capabilitiesResponse: json['GetCapabilitiesResponse'] == null
           ? null
           : GetCapabilitiesResponse.fromJson(
               json['GetCapabilitiesResponse'] as Map<String, dynamic>),
-      serviceCapabilitiesResponse: json['GetServiceCapabilitiesResponse'] ==
-              null
-          ? null
-          : GetServiceCapabilitiesResponse.fromJson(
-              json['GetServiceCapabilitiesResponse'] as Map<String, dynamic>),
+      compatibleConfigurationsResponse:
+          json['GetCompatibleConfigurationsResponse'] == null
+              ? null
+              : GetCompatibleConfigurationsResponse.fromJson(
+                  json['GetCompatibleConfigurationsResponse']
+                      as Map<String, dynamic>),
       configurationResponse: json['GetConfigurationResponse'] == null
           ? null
           : GetConfigurationResponse.fromJson(
@@ -29,30 +34,56 @@ Body _$BodyFromJson(Map<String, dynamic> json) => Body(
           ? null
           : GetConfigurationsResponse.fromJson(
               json['GetConfigurationsResponse'] as Map<String, dynamic>),
+      continuousMoveResponse: json['ContinuousMoveResponse'] == null
+          ? null
+          : ContinuousMoveResponse.fromJson(
+              json['ContinuousMoveResponse'] as Map<String, dynamic>),
+      dateTimeResponse: json['GetSystemDateAndTimeResponse'] == null
+          ? null
+          : GetSystemDateAndTimeResponse.fromJson(
+              json['GetSystemDateAndTimeResponse'] as Map<String, dynamic>),
       deviceInformationResponse: json['GetDeviceInformationResponse'] == null
           ? null
           : GetDeviceInformationResponse.fromJson(
               json['GetDeviceInformationResponse'] as Map<String, dynamic>),
-      audioSourcesResponse: json['GetAudioSourcesResponse'] == null
-          ? null
-          : GetAudioSourcesResponse.fromJson(
-              json['GetAudioSourcesResponse'] as Map<String, dynamic>),
-      videoSourcesResponse: json['GetVideoSourcesResponse'] == null
-          ? null
-          : GetVideoSourcesResponse.fromJson(
-              json['GetVideoSourcesResponse'] as Map<String, dynamic>),
-      profilesResponse: json['GetProfilesResponse'] == null
-          ? null
-          : GetProfilesResponse.fromJson(
-              json['GetProfilesResponse'] as Map<String, dynamic>),
-      servicesResponse: json['GetServicesResponse'] == null
-          ? null
-          : GetServicesResponse.fromJson(
-              json['GetServicesResponse'] as Map<String, dynamic>),
       getPresetResponse: json['GetPresetsResponse'] == null
           ? null
           : GetPresetResponse.fromJson(
               json['GetPresetsResponse'] as Map<String, dynamic>),
+      hostnameResponse: json['GetHostnameResponse'] == null
+          ? null
+          : GetHostnameResponse.fromJson(
+              json['GetHostnameResponse'] as Map<String, dynamic>),
+      metadataConfigurationsResponse:
+          json['GetMetadataConfigurationsResponse'] == null
+              ? null
+              : GetMetadataConfigurationsResponse.fromJson(
+                  json['GetMetadataConfigurationsResponse']
+                      as Map<String, dynamic>),
+      networkProtocolsResponse: json['GetNetworkProtocolsResponse'] == null
+          ? null
+          : GetNetworkProtocolsResponse.fromJson(
+              json['GetNetworkProtocolsResponse'] as Map<String, dynamic>),
+      ntpResponse: json['GetNTPResponse'] == null
+          ? null
+          : GetNTPResponse.fromJson(
+              json['GetNTPResponse'] as Map<String, dynamic>),
+      probeMatches: json['ProbeMatches'] == null
+          ? null
+          : ProbeMatches.fromJson(json['ProbeMatches'] as Map<String, dynamic>),
+      profilesResponse: json['GetProfilesResponse'] == null
+          ? null
+          : GetProfilesResponse.fromJson(
+              json['GetProfilesResponse'] as Map<String, dynamic>),
+      serviceCapabilitiesResponse: json['GetServiceCapabilitiesResponse'] ==
+              null
+          ? null
+          : GetServiceCapabilitiesResponse.fromJson(
+              json['GetServiceCapabilitiesResponse'] as Map<String, dynamic>),
+      servicesResponse: json['GetServicesResponse'] == null
+          ? null
+          : GetServicesResponse.fromJson(
+              json['GetServicesResponse'] as Map<String, dynamic>),
       setPresetResponse: json['SetPresetResponse'] == null
           ? null
           : SetPresetResponse.fromJson(
@@ -61,26 +92,15 @@ Body _$BodyFromJson(Map<String, dynamic> json) => Body(
           ? null
           : GetUriResponse.fromJson(
               json['GetSnapshotUriResponse'] as Map<String, dynamic>),
-      streamUriResponse: json['GetStreamUriResponse'] == null
-          ? null
-          : GetUriResponse.fromJson(
-              json['GetStreamUriResponse'] as Map<String, dynamic>),
-      networkProtocolsResponse: json['GetNetworkProtocolsResponse'] == null
-          ? null
-          : GetNetworkProtocolsResponse.fromJson(
-              json['GetNetworkProtocolsResponse'] as Map<String, dynamic>),
       statusResponse: json['GetStatusResponse'] == null
           ? null
           : GetStatusResponse.fromJson(
               json['GetStatusResponse'] as Map<String, dynamic>),
-      hostnameResponse: json['GetHostnameResponse'] == null
+      stopResponse: json['StopResponse'],
+      streamUriResponse: json['GetStreamUriResponse'] == null
           ? null
-          : GetHostnameResponse.fromJson(
-              json['GetHostnameResponse'] as Map<String, dynamic>),
-      ntpResponse: json['GetNTPResponse'] == null
-          ? null
-          : GetNTPResponse.fromJson(
-              json['GetNTPResponse'] as Map<String, dynamic>),
+          : GetUriResponse.fromJson(
+              json['GetStreamUriResponse'] as Map<String, dynamic>),
       systemUrisResponse: json['GetSystemUrisResponse'] == null
           ? null
           : GetSystemUrisResponse.fromJson(
@@ -89,51 +109,40 @@ Body _$BodyFromJson(Map<String, dynamic> json) => Body(
           ? null
           : GetUsersResponse.fromJson(
               json['GetUsersResponse'] as Map<String, dynamic>),
-      probeMatches: json['ProbeMatches'] == null
+      videoSourcesResponse: json['GetVideoSourcesResponse'] == null
           ? null
-          : ProbeMatches.fromJson(json['ProbeMatches'] as Map<String, dynamic>),
-      metadataConfigurationsResponse:
-          json['GetMetadataConfigurationsResponse'] == null
-              ? null
-              : GetMetadataConfigurationsResponse.fromJson(
-                  json['GetMetadataConfigurationsResponse']
-                      as Map<String, dynamic>),
-      compatibleConfigurationsResponse:
-          json['GetCompatibleConfigurationsResponse'] == null
-              ? null
-              : GetCompatibleConfigurationsResponse.fromJson(
-                  json['GetCompatibleConfigurationsResponse']
-                      as Map<String, dynamic>),
+          : GetVideoSourcesResponse.fromJson(
+              json['GetVideoSourcesResponse'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$BodyToJson(Body instance) => <String, dynamic>{
-      'GetSystemDateAndTimeResponse': instance.dateTimeResponse?.toJson(),
-      'GetCapabilitiesResponse': instance.capabilitiesResponse?.toJson(),
-      'GetConfigurationResponse': instance.configurationResponse?.toJson(),
-      'GetConfigurationsResponse': instance.configurationsResponse?.toJson(),
-      'GetDeviceInformationResponse':
-          instance.deviceInformationResponse?.toJson(),
-      'GetAudioSourcesResponse': instance.audioSourcesResponse?.toJson(),
-      'GetVideoSourcesResponse': instance.videoSourcesResponse?.toJson(),
-      'GetProfilesResponse': instance.profilesResponse?.toJson(),
-      'GetServicesResponse': instance.servicesResponse?.toJson(),
-      'GetServiceCapabilitiesResponse':
-          instance.serviceCapabilitiesResponse?.toJson(),
-      'GetPresetsResponse': instance.getPresetResponse?.toJson(),
-      'SetPresetResponse': instance.setPresetResponse?.toJson(),
-      'GetSnapshotUriResponse': instance.snapshotUriResponse?.toJson(),
-      'GetStreamUriResponse': instance.streamUriResponse?.toJson(),
-      'GetNetworkProtocolsResponse':
-          instance.networkProtocolsResponse?.toJson(),
-      'GetStatusResponse': instance.statusResponse?.toJson(),
-      'GetHostnameResponse': instance.hostnameResponse?.toJson(),
-      'GetNTPResponse': instance.ntpResponse?.toJson(),
-      'ProbeMatches': instance.probeMatches?.toJson(),
-      'GetSystemUrisResponse': instance.systemUrisResponse?.toJson(),
-      'GetUsersResponse': instance.usersResponse?.toJson(),
+      'AbsoluteMoveResponse': instance.absoluteMoveResponse,
+      'ContinuousMoveResponse': instance.continuousMoveResponse,
+      'GetSystemDateAndTimeResponse': instance.dateTimeResponse,
+      'GetCapabilitiesResponse': instance.capabilitiesResponse,
+      'GetConfigurationResponse': instance.configurationResponse,
+      'GetConfigurationsResponse': instance.configurationsResponse,
+      'GetDeviceInformationResponse': instance.deviceInformationResponse,
+      'GetAudioSourcesResponse': instance.audioSourcesResponse,
+      'GetVideoSourcesResponse': instance.videoSourcesResponse,
+      'GetProfilesResponse': instance.profilesResponse,
+      'GetServicesResponse': instance.servicesResponse,
+      'GetServiceCapabilitiesResponse': instance.serviceCapabilitiesResponse,
+      'GetPresetsResponse': instance.getPresetResponse,
+      'SetPresetResponse': instance.setPresetResponse,
+      'GetSnapshotUriResponse': instance.snapshotUriResponse,
+      'GetStreamUriResponse': instance.streamUriResponse,
+      'GetNetworkProtocolsResponse': instance.networkProtocolsResponse,
+      'GetStatusResponse': instance.statusResponse,
+      'GetHostnameResponse': instance.hostnameResponse,
+      'GetNTPResponse': instance.ntpResponse,
+      'ProbeMatches': instance.probeMatches,
+      'GetSystemUrisResponse': instance.systemUrisResponse,
+      'GetUsersResponse': instance.usersResponse,
       'GetMetadataConfigurationsResponse':
-          instance.metadataConfigurationsResponse?.toJson(),
+          instance.metadataConfigurationsResponse,
       'GetCompatibleConfigurationsResponse':
-          instance.compatibleConfigurationsResponse?.toJson(),
+          instance.compatibleConfigurationsResponse,
       'Fault': instance.fault,
+      'StopResponse': instance.stopResponse,
     };

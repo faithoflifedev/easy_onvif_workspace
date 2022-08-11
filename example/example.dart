@@ -4,7 +4,7 @@ import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart';
 
 void main(List<String> arguments) async {
-  //get connection infomration from the config.yaml file
+  //get connection information from the config.yaml file
   final config = loadYaml(File('example/config.yaml').readAsStringSync());
 
   // configure device connection

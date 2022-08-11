@@ -1,5 +1,55 @@
 # Easy Onvif REST API CLI
 
+A command line interface for controlling an Onvif device through terminal commands has been made available through this Dart package.  This tool allows you to use O/S features like `cron` to automate Onvif device functionality.
+
+## Table of Contents
+- [Installation](#installation)
+- [Quick start](#quick-start)
+- [Commands](#commands)
+  - [authorize](#authorize)
+  - [device-management](#device-management)
+      - [device-management get-capabilities](#device-management-get-capabilities)
+      - [device-management get-device-information](#device-management-get-device-information)
+      - [device-management get-hostname](#device-management-get-hostname)
+      - [device-management get-network-protocols](#device-management-get-network-protocols)
+      - [device-management get-service-capabilities](#device-management-get-service-capabilities)
+      - [device-management get-services](#device-management-get-services)
+      - [device-management get-system-date-and-time](#device-management-get-system-date-and-time)
+      - [device-management get-system-uris](#device-management-get-system-uris)
+      - [device-management get-users](#device-management-get-users)
+  - [media](#media)
+      - [media get-audio-sources](#media-get-audio-sources)
+      - [media get-profile](#media-get-profile)
+      - [media get-snapshot-uri](#media-get-snapshot-uri)
+      - [media get-stream-uri](#media-get-stream-uri)
+      - [media get-video-sources](#media-get-video-sources)
+      - [media start-multicast-streaming](#media-start-multicast-streaming)
+      - [media stop-multicast-streaming](#media-stop-multicast-streaming)
+  - [probe](#probe)
+  - [ptz](#ptz)
+      - [ptz absolute-move](#ptz-absolute-move)
+      - [ptz continuous-move](#ptz-continuous-move)
+      - [ptz get-configuration](#ptz-get-configuration)
+      - [ptz get-configurations](#ptz-get-configurations)
+      - [ptz get-presets](#ptz-get-presets)
+      - [ptz get-status](#ptz-get-status)
+      - [ptz goto-preset](#ptz-goto-preset)
+      - [ptz move](#ptz-move)
+      - [ptz move-down](#ptz-move-down)
+      - [ptz move-left](#ptz-move-left)
+      - [ptz move-right](#ptz-move-right)
+      - [ptz move-up](#ptz-move-up)
+      - [ptz relative-move](#ptz-relative-move)
+      - [ptz remove-preset](#ptz-remove-preset)
+      - [ptz set-preset](#ptz-set-preset)
+      - [ptz stop](#ptz-stop)
+      - [ptz zoom](#ptz-zoom)
+      - [ptz zoom-in](#ptz-zoom-in)
+      - [ptz zoom-out](#ptz-zoom-out)
+      - [ptz get-current-preset](#ptz-get-current-preset)
+  - [version](#version)
+
+## Installation
 A command line interface for controlling an Onvif device with cli commands
 
 To install:
@@ -12,6 +62,9 @@ Usage:
 
 ```sh
 prompt>onvif --help
+```
+
+```text
 A command line interface for controlling Onvif compliant devices
 
 Usage: onvif <command> [arguments]
@@ -27,6 +80,7 @@ Available commands:
   media               Media commands.
   probe               Probe/device discovery command.
   ptz                 PTZ commands.
+  version             Display the package name and version.
 ```
 
 |command|description|
@@ -35,6 +89,7 @@ Available commands:
 |[device-management](#device-management)|Onvif device management commands, [spec](https://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl)|
 |[media](#media)|Onvif media commands, [spec](https://www.onvif.org/ver10/media/wsdl/media.wsdl)|
 |[ptz](#ptz)|Onvif PTZ commands, [spec](https://www.onvif.org/ver20/ptz/wsdl/ptz.wsdl)|
+|version|Display the package name and version.|
 
 Just like the main library, any responses provided by the above commands will be given in the JSON format.  So ideally, you will want to use a command line json parser to interpret the results.  The recommended json parser for this purpose is [_jq_](https://stedolan.github.io/jq/).  With _jq_ you can process the results of a command as follows:
 
@@ -53,11 +108,15 @@ onvif ptz get-presets --limit 3 --profile-token Profile_1 | jq -r '.[] | ."@toke
 3       Preset 3
 ```
 
-## authorize
+## Commands
+
+### authorize
 
 ```sh
 prompt>onvif authorize --help
+```
 
+```text
 Generate a refresh token used to authenticate the command line API requests
 
 Usage: yt authorize [arguments]
@@ -70,10 +129,13 @@ The authorize command is used to create the default "--config-file" that can be 
 {"host":"[host name or ip address of device]","username":"[device username]","password":"[device password]"}
 ```
 
-## device-management
+### device-management
 
 ```sh
 prompt>onvif device-management --help
+```
+
+```text
 Device management commands.
 
 Usage: onvif device-management <subcommand> [arguments]
@@ -92,30 +154,39 @@ Available subcommands:
   get-users                  This operation lists the registered users and corresponding credentials on a device. The device shall support retrieval of registered device users and their credentials for the user token through the GetUsers command.
 ```
 
-### device-management get-capabilities
+#### device-management get-capabilities
 
 ```sh
 prompt>onvif device-management get-capabilities --help
+```
+
+```text
 This method has been replaced by the more generic GetServices method. For capabilities of individual services refer to the GetServiceCapabilities methods.
 
 Usage: onvif device-management get-capabilities [arguments]
 -h, --help    Print this usage information.
 ```
 
-### device-management get-device-information
+#### device-management get-device-information
 
 ```sh
 prompt>onvif device-management get-device-information --help
+```
+
+```text
 This operation gets basic device information from the device.
 
 Usage: onvif device-management get-device-information [arguments]
 -h, --help    Print this usage information.
 ```
 
-### device-management get-hostname
+#### device-management get-hostname
 
 ```sh
 prompt>onvif device-management get-hostname --help
+```
+
+```text
 This operation is used by an endpoint to get the hostname from a device. The device shall return its hostname configurations through the GetHostname command.
 
 Usage: onvif device-management get-hostname [arguments]
@@ -123,30 +194,39 @@ Usage: onvif device-management get-hostname [arguments]
 
 ```
 
-### device-management get-network-protocols
+#### device-management get-network-protocols
 
 ```sh
 prompt>onvif device-management get-network-protocols --help
+```
+
+```text
 This operation gets defined network protocols from a device. The device shall support the GetNetworkProtocols command returning configured network protocols.
 
 Usage: onvif device-management get-network-protocols [arguments]
 -h, --help    Print this usage information.
 ```
 
-### device-management get-service-capabilities
+#### device-management get-service-capabilities
 
 ```sh
 prompt>onvif device-management get-service-capabilities --help
+```
+
+```text
 Returns the capabilities of the device service. The result is returned in a typed answer.
 
 Usage: onvif device-management get-service-capabilities [arguments]
 -h, --help    Print this usage information.
 ```
 
-### device-management get-services
+#### device-management get-services
 
 ```sh
 prompt>onvif device-management get-services --help
+```
+
+```text
 Returns information about services on the device.
 
 Usage: onvif device-management get-services [arguments]
@@ -154,10 +234,13 @@ Usage: onvif device-management get-services [arguments]
 -i, --[no-]include-capability    Indicates if the service capabilities (untyped) should be included in the response.
 ```
 
-### device-management get-system-date-and-time
+#### device-management get-system-date-and-time
 
 ```sh
 prompt>onvif device-management get-system-date-and-time --help
+```
+
+```text
 This operation gets the device system date and time. The device shall support the return of the daylight saving setting and of the manual system date and time (if applicable) or indication of NTP time (if applicable) through the GetSystemDateAndTime command.
 
 A device shall provide the UTCDateTime information.
@@ -166,30 +249,39 @@ Usage: onvif device-management get-system-date-and-time [arguments]
 -h, --help    Print this usage information.
 ```
 
-### device-management get-system-uris
+#### device-management get-system-uris
 
 ```sh
 prompt>onvif device-management get-system-uris --help
+```
+
+```text
 This operation is used to retrieve URIs from which system information may be downloaded using HTTP
 
 Usage: onvif device-management get-system-uris [arguments]
 -h, --help    Print this usage information.
 ```
 
-### device-management get-users
+#### device-management get-users
 
 ```sh
 prompt>onvif device-management get-users --help
+```
+
+```text
 This operation lists the registered users and corresponding credentials on a device. The device shall support retrieval of registered device users and their credentials for the user token through the GetUsers command.
 
 Usage: onvif device-management get-users [arguments]
 -h, --help    Print this usage information.
 ```
 
-## media
+### media
 
 ```sh
 prompt>onvif media --help
+```
+
+```text
 Media commands.
 
 Usage: onvif media <subcommand> [arguments]
@@ -205,30 +297,39 @@ Available subcommands:
   stop-multicast-streaming    This command stop multicast streaming using a specified media profile of a device.
 ```
 
-### media get-audio-sources
+#### media get-audio-sources
 
 ```sh
 prompt>onvif media get-audio-sources --help
+```
+
+```text
 This command lists all available physical audio inputs of the device.
 
 Usage: onvif media get-audio-sources [arguments]
 -h, --help    Print this usage information.
 ```
 
-### media get-profile
+#### media get-profile
 
 ```sh
 prompt>onvif media get-profiles --help
+```
+
+```text
 Any endpoint can ask for the existing media profiles of a device using the GetProfiles command. Pre-configured or dynamically configured profiles can be retrieved using this command. This command lists all configured profiles in a device. The client does not need to know the media profile in order to use the command.
 
 Usage: onvif media get-profiles [arguments]
 -h, --help    Print this usage information.
 ```
 
-### media get-snapshot-uri
+#### media get-snapshot-uri
 
 ```sh
 prompt>onvif media get-snapshot-uri --help
+```
+
+```text
 A client uses the GetSnapshotUri command to obtain a JPEG snapshot from the device.
 
 Usage: onvif media get-snapshot-uri [arguments]
@@ -240,10 +341,13 @@ Usage: onvif media get-snapshot-uri [arguments]
                                            (defaults to "PT0S")
 ```
 
-### media get-stream-uri
+#### media get-stream-uri
 
 ```sh
-Usage: onvif media get-stream-uri  --help
+prompt>onvif media get-stream-uri  --help
+```
+
+```text
 This operation requests a URI that can be used to initiate a live media stream using RTSP as the control protocol.
 
 Usage: onvif media get-stream-uri [arguments]
@@ -259,49 +363,51 @@ Usage: onvif media get-stream-uri [arguments]
                                            (defaults to "PT0S")
 ```
 
-### media get-video-sources
+#### media get-video-sources
 
 ```sh
-Usage: onvif media get-video-sources  --help
+prompt>onvif media get-video-sources  --help
+```
+
+```text
 This command lists all available physical video inputs of the device.
 
 Usage: onvif media get-video-sources [arguments]
--h, --help                                 Print this usage information.
--t, --profile-token=<token> (mandatory)    The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.
-    --stream-type=<type>                   Defines if a multicast or unicast stream is requested
-                                           [RTP-Unicast, RTP-Multicast]
-    --transport-protocol=<type>            Defines if a multicast or unicast stream is requested
-                                           [UDP, TCP, RTSP (default), HTTP]
-    --[no-]valid-until-connect             Indicates if the Uri is only valid until the connection is established.
-    --[no-]valid-until-reboot              Indicates if the Uri is invalid after a reboot of the device.
-    --timeout                              Duration how long the Uri is valid.
-                                           (defaults to "PT0S")
 ```
 
-### media start-multicast-streaming
+#### media start-multicast-streaming
 
 ```sh
-Usage: onvif media start-multicast-streaming --help
+prompt>onvif media start-multicast-streaming --help
+```
+
+```text
 This command starts multicast streaming using a specified media profile of a device.
 
 Usage: onvif media start-multicast-streaming [arguments]
 -h, --help    Print this usage information.
 ```
 
-### media stop-multicast-streaming
+#### media stop-multicast-streaming
 
 ```sh
-Usage: onvif media stop-multicast-streaming --help
+prompt>onvif media stop-multicast-streaming --help
+```
+
+```text
 This command stop multicast streaming using a specified media profile of a device.
 
 Usage: onvif media stop-multicast-streaming [arguments]
 -h, --help    Print this usage information.
 ```
 
-## probe
+### probe
 
 ```sh
-Usage: onvif probe --help
+prompt>onvif probe --help
+```
+
+```text
 Probe/device discovery command.
 
 Usage: onvif probe [arguments]
@@ -310,10 +416,13 @@ Usage: onvif probe [arguments]
                           (defaults to "2")
 ```
 
-## ptz
+### ptz
 
 ```sh
-Usage: onvif ptz --help
+prompt>onvif ptz --help
+```
+
+```text
 PTZ commands.
 
 Usage: onvif ptz <subcommand> [arguments]
@@ -341,10 +450,13 @@ Available subcommands:
   zoom-out             Operation for a single step zoom out operation.
 ```
 
-### ptz absolute-move
+#### ptz absolute-move
 
 ```sh
-Usage: onvif ptz absolute-move --help
+prompt>onvif ptz absolute-move --help
+```
+
+```text
 Operation to move pan,tilt or zoom to a absolute destination.
 
 Usage: onvif ptz absolute-move [arguments]
@@ -355,10 +467,13 @@ Usage: onvif ptz absolute-move [arguments]
     --pan-tilt-zoom=<double> (mandatory)    A Position vector specifying the absolute target position zoom.
 ```
 
-### ptz continuous-move
+#### ptz continuous-move
 
 ```sh
-Usage: onvif ptz continuous-move --help
+prompt>onvif ptz continuous-move --help
+```
+
+```text
 Operation for continuous Pan/Tilt and Zoom movements.
 
 Usage: onvif ptz continuous-move [arguments]
@@ -369,10 +484,13 @@ Usage: onvif ptz continuous-move [arguments]
     --pan-tilt-zoom=<double> (mandatory)    A Position vector specifying the absolute target position zoom.
 ```
 
-### ptz get-configuration
+#### ptz get-configuration
 
 ```sh
-Usage: onvif ptz get-configuration --help
+prompt>onvif ptz get-configuration --help
+```
+
+```text
 Option ptz-configuration-token is mandatory.
 
 Usage: onvif ptz get-configuration [arguments]
@@ -380,20 +498,26 @@ Usage: onvif ptz get-configuration [arguments]
 -t, --ptz-configuration-token=<token> (mandatory)    Token of the requested PTZConfiguration.
 ```
 
-### ptz get-configurations
+#### ptz get-configurations
 
 ```sh
-Usage: onvif ptz get-configurations --help
+prompt>onvif ptz get-configurations --help
+```
+
+```text
 Get all the existing PTZConfigurations from the device.
 
 Usage: onvif ptz get-configurations [arguments]
 -h, --help    Print this usage information.
 ```
 
-### ptz get-presets
+#### ptz get-presets
 
 ```sh
-Usage: onvif ptz get-presets --help
+prompt>onvif ptz get-presets --help
+```
+
+```text
 Operation to request all PTZ presets for the PTZNode in the selected profile.
 
 Usage: onvif ptz get-presets [arguments]
@@ -402,10 +526,13 @@ Usage: onvif ptz get-presets [arguments]
     --limit=<int>                          Limit the number of presets returned
 ```
 
-### ptz get-status
+#### ptz get-status
 
 ```sh
-Usage: onvif ptz get-status --help
+prompt>onvif ptz get-status --help
+```
+
+```text
 Operation to request PTZ status for the Node in the selected profile.
 
 Usage: onvif ptz get-status [arguments]
@@ -413,10 +540,13 @@ Usage: onvif ptz get-status [arguments]
 -t, --profile-token=<token> (mandatory)    A reference to the MediaProfile where the PTZStatus should be requested.
 ```
 
-### ptz goto-preset
+#### ptz goto-preset
 
 ```sh
-Usage: onvif ptz goto-preset --help
+prompt>onvif ptz goto-preset --help
+```
+
+```text
 Option profile-token is mandatory.
 
 Usage: onvif ptz goto-preset [arguments]
@@ -425,10 +555,13 @@ Usage: onvif ptz goto-preset [arguments]
     --preset-token=<preset-token> (mandatory)      A requested preset token.
 ```
 
-### ptz move
+#### ptz move
 
 ```sh
-Usage: onvif ptz move --help
+prompt>onvif ptz move --help
+```
+
+```text
 Operation for Relative Pan/Tilt Move without Zoom.
 
 Usage: onvif ptz move [arguments]
@@ -438,10 +571,13 @@ Usage: onvif ptz move [arguments]
     --y=<double> (mandatory)               The y component corresponds to tilt.
 ```
 
-### ptz move-down
+#### ptz move-down
 
 ```sh
-Usage: onvif ptz goto-preset --help
+prompt>onvif ptz goto-preset --help
+```
+
+```text
 Operation for a single step tilt down operation.
 
 Usage: onvif ptz goto-preset [arguments]
@@ -450,10 +586,13 @@ Usage: onvif ptz goto-preset [arguments]
     --preset-token=<preset-token> (mandatory)      A requested preset token.
 ```
 
-### ptz move-left
+#### ptz move-left
 
 ```sh
-Usage: onvif ptz goto-preset --help
+prompt>onvif ptz goto-preset --help
+```
+
+```text
 Operation for a single step pan left operation
 
 Usage: onvif ptz goto-preset [arguments]
@@ -462,10 +601,13 @@ Usage: onvif ptz goto-preset [arguments]
     --preset-token=<preset-token> (mandatory)      A requested preset token.
 ```
 
-### ptz move-right
+#### ptz move-right
 
 ```sh
-Usage: onvif ptz goto-preset --help
+prompt>onvif ptz goto-preset --help
+```
+
+```text
 Operation for a single step pan right operation
 
 Usage: onvif ptz goto-preset [arguments]
@@ -474,10 +616,13 @@ Usage: onvif ptz goto-preset [arguments]
     --preset-token=<preset-token> (mandatory)      A requested preset token.
 ```
 
-### ptz move-up
+#### ptz move-up
 
 ```sh
-Usage: onvif ptz move-up --help
+prompt>onvif ptz move-up --help
+```
+
+```text
 Operation for a single step tilt upwards operation.
 
 Usage: onvif ptz move-up [arguments]
@@ -486,10 +631,13 @@ Usage: onvif ptz move-up [arguments]
     --step=<int>                           The amount of movement for the step.
 ```
 
-### ptz relative-move
+#### ptz relative-move
 
 ```sh
-Usage: onvif ptz relative-move --help
+prompt>onvif ptz relative-move --help
+```
+
+```text
 Operation for Relative Pan/Tilt and Zoom Move.
 
 Usage: onvif ptz relative-move [arguments]
@@ -500,10 +648,13 @@ Usage: onvif ptz relative-move [arguments]
     --translation-zoom=<double>            A zoom speed. If omitted in a request, the current (if any) Zoom movement should not be affected.
 ```
 
-### ptz remove-preset
+#### ptz remove-preset
 
 ```sh
-Usage: onvif ptz remove-preset --help
+prompt>onvif ptz remove-preset --help
+```
+
+```text
 Operation to remove a PTZ preset for the Node in the selected profile.
 
 Usage: onvif ptz remove-preset [arguments]
@@ -512,10 +663,13 @@ Usage: onvif ptz remove-preset [arguments]
     --preset-token=<preset-token> (mandatory)      A requested preset token.
 ```
 
-### ptz set-preset
+#### ptz set-preset
 
 ```sh
-Usage: onvif ptz set-preset --help
+prompt>onvif ptz set-preset --help
+```
+
+```text
 The SetPreset command saves the current device position parameters so that the device can move to the saved preset position through the GotoPreset operation.
 
 Usage: onvif ptz set-preset [arguments]
@@ -525,10 +679,13 @@ Usage: onvif ptz set-preset [arguments]
     --preset-name=<name> (mandatory)    
 ```
 
-### ptz stop
+#### ptz stop
 
 ```sh
-Usage: onvif ptz stop --help
+prompt>onvif ptz stop --help
+```
+
+```text
 Operation to stop ongoing pan, tilt and zoom movements of absolute relative and continuous type.
 
 Usage: onvif ptz stop [arguments]
@@ -540,10 +697,13 @@ Usage: onvif ptz stop [arguments]
                                            (defaults to on) 
 ```
 
-### ptz zoom
+#### ptz zoom
 
 ```sh
-Usage: onvif ptz zoom --help
+prompt>onvif ptz zoom --help
+```
+
+```text
 Operation for zoom.
 
 Usage: onvif ptz zoom [arguments]
@@ -552,10 +712,13 @@ Usage: onvif ptz zoom [arguments]
     --zoom=<double> (mandatory)            The speed for the zoom operation
 ```
 
-### ptz zoom-in
+#### ptz zoom-in
 
 ```sh
-Usage: onvif ptz zoom-in --help
+prompt>onvif ptz zoom-in --help
+```
+
+```text
 Operation for a single step zoom in operation.
 
 Usage: onvif ptz zoom-in [arguments]
@@ -564,10 +727,10 @@ Usage: onvif ptz zoom-in [arguments]
     --step=<int>                           The amount of movement for the step.
 ```
 
-### ptz zoom-out
+#### ptz zoom-out
 
 ```sh
-Usage: onvif ptz zoom-out --help
+prompt>onvif ptz zoom-out --help
 Operation for a single step zoom out operation.
 
 Usage: onvif ptz zoom-out [arguments]
@@ -576,13 +739,29 @@ Usage: onvif ptz zoom-out [arguments]
     --step=<int>                           The amount of movement for the step.
 ```
 
-### ptz get-current-preset
+#### ptz get-current-preset
 
 ```sh
-Usage: onvif ptz get-current-preset --help
+prompt>onvif ptz get-current-preset --help
+```
+
+```text
 Helper function to get the matching preset for the current PtzPosition and Zoom if there is a match
 
 Usage: onvif ptz get-current-preset [arguments]
 -h, --help                                 Print this usage information.
 -t, --profile-token=<token> (mandatory)    The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.
+```
+
+### version
+
+```sh
+prompt>onvif version --help
+```
+
+```text
+Display the package name and version.
+
+Usage: onvif version [arguments]
+-h, --help    Print this usage information.
 ```

@@ -287,6 +287,27 @@ void main() {
         true);
   });
 
+  test('ContinuousMoveResponse is not null when doc parsed', () {
+    final response =
+        File('test/xml/ContinuousMoveResponse.xml').readAsStringSync();
+
+    final envelope = Envelope.fromXml(response);
+
+    var success = envelope.body.continuousMoveResponse != null;
+
+    expect(success, true);
+  });
+
+  test('StopResponse is not null when doc parsed', () {
+    final response = File('test/xml/StopResponse.xml').readAsStringSync();
+
+    final envelope = Envelope.fromXml(response);
+
+    var success = envelope.body.stopResponse != null;
+
+    expect(success, true);
+  });
+
   test('NVR8432P16 probe response', () {
     final response =
         File('test/xml/MulticastProbeSample_NVR8432P16.xml').readAsStringSync();

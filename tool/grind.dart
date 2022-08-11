@@ -1,12 +1,11 @@
-import 'package:easy_onvif/util/meta_update.dart';
 import 'package:grinder/grinder.dart';
 import 'package:mustache_template/mustache.dart';
 import 'package:process_run/which.dart';
+import 'package:easy_onvif/util/meta_update.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:pubspec/pubspec.dart';
 import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart';
-// import 'package:yt/util/meta_update.dart';
 
 final config = getConfig();
 
@@ -24,11 +23,11 @@ build() {
 @Depends(analyze, version, test, doc, commit, dryrun)
 publish() {
   log('''
-  Use the command:
-    dart pub publish
+Use the command:
+  dart pub publish
 
-  To publish this package on the pub.dev site.
-  ''');
+To publish this package on the pub.dev site.
+''');
 }
 
 @Task('dart pub publish --dry-run')
@@ -49,7 +48,11 @@ analyze() {
 
 @Task('version bump')
 version() async {
-  MetaUpdate('pubspec.yaml').writeMetaDartFile('lib/util/meta.dart');
+  final metaUpdate = MetaUpdate('pubspec.yaml');
+
+  metaUpdate.writeMetaDartFile('lib/util/meta.dart');
+
+  metaUpdate.verifyLatestVersionFromPubSpec();
 
   final version = config['version']!;
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.9
+
+- - corrects ptz.continuousMove error when `zoom` was not included as a parameter - issue #18 - adds tests for ptz.continuousMove and ptz.stop - improvements to the cli README
+
+
 ## 2.0.8
 
 - flutter example .metadata

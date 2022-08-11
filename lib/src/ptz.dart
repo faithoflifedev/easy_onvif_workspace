@@ -23,31 +23,43 @@ class Ptz with UiLoggy {
   ///Operation to move pan,tilt or zoom to a absolute destination.
   ///
   ///The speed argument is optional. If an x/y speed value is given it is up to
-  ///the device to either use the x value as absolute resoluting speed vector or
+  ///the device to either use the x value as absolute resulting speed vector or
   ///to map x and y to the component speed. If the speed argument is omitted,
   ///the default speed set by the [PtzConfiguration] will be used.
-  Future<void> absoluteMove(String profileToken, PtzPosition place,
+  Future<bool> absoluteMove(String profileToken, PtzPosition place,
       [PtzPosition? speed]) async {
     loggy.debug('absoluteMove');
 
-    await Soap.retrieveEnvelope(
+    final envelope = await Soap.retrieveEnvelope(
         uri,
         onvif.secureRequest(
             SoapRequest.absoluteMove(profileToken, place, speed)));
+
+    if (envelope.body.absoluteMoveResponse == null) {
+      throw Exception();
+    }
+
+    return true;
   }
 
   ///Operation for continuous Pan/Tilt and Zoom movements. The operation is
   ///supported if the PTZNode supports at least one continuous Pan/Tilt or Zoom
   ///space. If the space argument is omitted, the default space set by the
   ///[PtzConfiguration] will be used.
-  Future<void> continuousMove(String profileToken, PtzPosition velocity,
+  Future<bool> continuousMove(String profileToken, PtzPosition velocity,
       [int? timeout]) async {
     loggy.debug('continuousMove');
 
-    await Soap.retrieveEnvelope(
+    final envelope = await Soap.retrieveEnvelope(
         uri,
         onvif.secureRequest(
             SoapRequest.continuousMove(profileToken, velocity, timeout)));
+
+    if (envelope.body.continuousMoveResponse == null) {
+      throw Exception();
+    }
+
+    return true;
   }
 
   Future<List<PtzConfiguration>> getCompatibleConfigurations(
@@ -268,7 +280,7 @@ class Ptz with UiLoggy {
   ///if the PTZNode supports at least one relative Pan/Tilt or Zoom space.
   ///
   ///The speed argument is optional. If an x/y speed value is given it is up to
-  ///the device to either use the x value as absolute resoluting speed vector or
+  ///the device to either use the x value as absolute resulting speed vector or
   ///to map x and y to the component speed. If the speed argument is omitted,
   ///the default speed set by the [PtzConfiguration] will be used.
   Future<void> relativeMove(String profileToken, PtzPosition move) async {
@@ -316,14 +328,18 @@ class Ptz with UiLoggy {
   ///Operation to stop ongoing pan, tilt and zoom movements of absolute relative
   ///and continuous type. If no stop argument for pan, tilt or zoom is set, the
   ///device will stop all ongoing pan, tilt and zoom movements.
-  Future<void> stop(String profileToken,
+  Future<bool> stop(String profileToken,
       {bool panTilt = true, bool zoom = true}) async {
     loggy.debug('stop');
 
-    await Soap.retrieveEnvelope(
+    final envelope = await Soap.retrieveEnvelope(
         uri,
         onvif.secureRequest(
             SoapRequest.stop(profileToken, panTilt: panTilt, zoom: zoom)));
+
+    if (envelope.body.stopResponse == null) throw Exception();
+
+    return true;
   }
 
   //   Future<void> move(String profileToken, PanTilt direction,

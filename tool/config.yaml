@@ -4,5 +4,8 @@ templates:
   - name: CHANGELOG.md
     type: prepend
 
-version: 2.0.8
-change: "flutter example .metadata"
+version: 2.0.9
+change: >
+  - corrects ptz.continuousMove error when `zoom` was not included as a parameter - issue #18
+  - adds tests for ptz.continuousMove and ptz.stop
+  - improvements to the cli README

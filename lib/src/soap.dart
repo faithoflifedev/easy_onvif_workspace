@@ -554,7 +554,8 @@ class SoapRequest {
 
         builder.element('Zoom', nest: () {
           builder.namespace(Xmlns.tt);
-          builder.attribute('x', velocity.zoom!.x);
+
+          builder.attribute('x', velocity.zoom != null ? velocity.zoom!.x : 0);
         });
       });
 
