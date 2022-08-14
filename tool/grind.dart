@@ -1,6 +1,5 @@
 import 'package:grinder/grinder.dart';
 import 'package:mustache_template/mustache.dart';
-import 'package:process_run/which.dart';
 import 'package:easy_onvif/util/meta_update.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:pubspec/pubspec.dart';
@@ -32,8 +31,8 @@ To publish this package on the pub.dev site.
 }
 
 @Task('dart pub publish --dry-run')
-dryrun() {
-  shell(args: ['pub', 'publish', '--dry-run']);
+dryrun() async {
+  await shell(args: ['pub', 'publish', '--dry-run']);
 }
 
 @Task('dartdoc')
@@ -64,9 +63,13 @@ version() async {
 
 @Task('release')
 release() async {
-  final newTag = await isNewTag(config['version']);
-  if (newTag) {
-    shell(
+  final result = await shell(
+    exec: 'gh',
+    args: ['release', 'view', 'v${config['version']}'],
+  );
+
+  if (result.stderr.contains('not found')) {
+    await shell(
       exec: 'gh',
       args: [
         'release',
@@ -89,18 +92,22 @@ commit() async {
   final newTag = await isNewTag(config['version']);
 
   try {
-    shell(exec: 'git', args: ['commit', '-a', '-m', '\'${config['change']}\'']);
+    await shell(
+      exec: 'git',
+      args: ['commit', '-a', '-m', '\'${config['change']}\''],
+      verbose: true,
+    );
   } catch (exception) {
     log('No files committed');
   }
 
   if (newTag) {
-    shell(exec: 'git', args: ['tag', 'v${config['version']}']);
+    await shell(exec: 'git', args: ['tag', 'v${config['version']}']);
 
-    shell(exec: 'git', args: ['push', '--tags']);
+    await shell(exec: 'git', args: ['push', '--tags']);
   }
 
-  shell(
+  await shell(
     exec: 'git',
     args: ['push'],
     verbose: true,
@@ -123,25 +130,29 @@ YamlMap getConfig() {
   return config;
 }
 
-String shell(
-    {String exec = 'dart',
-    List<String> args = const <String>[],
-    bool verbose = true}) {
-  final executable = whichSync(exec);
-
-  if (executable == null) throw Exception();
-
-  return run(executable, arguments: args, quiet: !verbose);
-}
-
 Future<bool> isNewTag(String version) async {
-  final result = shell(
+  final result = await shell(
     exec: 'git',
     args: ['tag', '-l', 'v$version'],
     verbose: false,
   );
 
-  return result.trim() != 'v$version';
+  return result.stdout.trim() != 'v$version';
+}
+
+Future<ProcessResult> shell(
+    {String exec = 'dart',
+    List<String> args = const <String>[],
+    bool verbose = true}) async {
+  final result = await Process.run(exec, args);
+
+  if (verbose) {
+    log('stderr:\n${result.stderr}');
+
+    log('stdout:\n${result.stdout}');
+  }
+
+  return result;
 }
 
 void updateMarkdown(config) {

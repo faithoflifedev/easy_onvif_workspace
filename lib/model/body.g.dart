@@ -8,7 +8,10 @@ part of 'body.dart';
 
 Body _$BodyFromJson(Map<String, dynamic> json) => Body(
       fault: json['Fault'],
-      absoluteMoveResponse: json['AbsoluteMoveResponse'],
+      absoluteMoveResponse: json['AbsoluteMoveResponse'] == null
+          ? null
+          : AbsoluteMoveResponse.fromJson(
+              json['AbsoluteMoveResponse'] as Map<String, dynamic>),
       audioSourcesResponse: json['GetAudioSourcesResponse'] == null
           ? null
           : GetAudioSourcesResponse.fromJson(
@@ -31,7 +34,10 @@ Body _$BodyFromJson(Map<String, dynamic> json) => Body(
           ? null
           : GetConfigurationsResponse.fromJson(
               json['GetConfigurationsResponse'] as Map<String, dynamic>),
-      continuousMoveResponse: json['ContinuousMoveResponse'],
+      continuousMoveResponse: json['ContinuousMoveResponse'] == null
+          ? null
+          : ContinuousMoveResponse.fromJson(
+              json['ContinuousMoveResponse'] as Map<String, dynamic>),
       dateTimeResponse: json['GetSystemDateAndTimeResponse'] == null
           ? null
           : GetSystemDateAndTimeResponse.fromJson(
@@ -90,7 +96,9 @@ Body _$BodyFromJson(Map<String, dynamic> json) => Body(
           ? null
           : GetStatusResponse.fromJson(
               json['GetStatusResponse'] as Map<String, dynamic>),
-      stopResponse: json['StopResponse'],
+      stopResponse: json['StopResponse'] == null
+          ? null
+          : StopResponse.fromJson(json['StopResponse'] as Map<String, dynamic>),
       streamUriResponse: json['GetStreamUriResponse'] == null
           ? null
           : GetUriResponse.fromJson(
@@ -107,7 +115,10 @@ Body _$BodyFromJson(Map<String, dynamic> json) => Body(
           ? null
           : GetVideoSourcesResponse.fromJson(
               json['GetVideoSourcesResponse'] as Map<String, dynamic>),
-      gotoPresetResponse: json['GotoPresetResponse'],
+      gotoPresetResponse: json['GotoPresetResponse'] == null
+          ? null
+          : GotoPresetResponse.fromJson(
+              json['GotoPresetResponse'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$BodyToJson(Body instance) => <String, dynamic>{

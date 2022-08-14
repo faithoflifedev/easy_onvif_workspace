@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.12+1
+
+* correction for failed tests
+
 ## 2.0.12
 
 * improved release task in grind build
