@@ -1,10 +1,12 @@
+repo: faithoflifedev/easy_onvif
 templates:
   - name: README.md
     type: overwrite
   - name: CHANGELOG.md
     type: prepend
 
-version: 2.0.10
+version: 2.0.11
 change: |
-  * homebrew installation for onvif cli
-  * default debug for cli now set to "off"
+  * tweak to README
+  * bool response for `gotoPreset`
+  * auto create release during publish

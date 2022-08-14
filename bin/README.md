@@ -50,7 +50,6 @@ A command line interface for controlling an Onvif device through terminal comman
   - [version](#version)
 
 ## Installation
-A command line interface for controlling an Onvif device with cli commands
 
 Install using `dart pub`:
 

@@ -194,18 +194,18 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 
 | Onvif Operation             | Dart Method                 | Dart Return Type                 | Test |
 | --------------------------- | --------------------------- | -------------------------------- | ---- |
-| AbsoluteMove                | absoluteMove                | `Future<bool>`                   | [ \]  |
-| ContinuousMove              | continuousMove              | `Future<bool>`                   | [x\]  |
-| GetCompatibleConfigurations | getCompatibleConfigurations | `Future<List<PtzConfiguration>>` | [x\]  |
-| GetConfiguration            | getConfiguration            | `Future<PtzConfiguration>`       | [x\]  |
-| GetConfigurations           | getConfigurations           | `Future<List<PtzConfiguration>>` | [x\]  |
-| GetPresets                  | getPresets                  | `Future<List<Preset>>`           | [x\]  |
-| GetStatus                   | getStatus                   | `Future<PtzStatus>`              | [x\]  |
-| GotoPreset                  | gotoPreset                  | `Future<void>`                   | [ \]  |
-| RelativeMove                | relativeMove                | `Future<void>`                   | [ \]  |
-| RemovePreset                | removePreset                | `Future<void>`                   | [ \]  |
-| SetPreset                   | setPreset                   | `Future<String>`                 | [x\]  |
-| Stop                        | stop                        | `Future<bool>`                   | [x\]  |
+| AbsoluteMove                | absoluteMove                | `Future<bool>`                   | [ \] |
+| ContinuousMove              | continuousMove              | `Future<bool>`                   | [x\] |
+| GetCompatibleConfigurations | getCompatibleConfigurations | `Future<List<PtzConfiguration>>` | [x\] |
+| GetConfiguration            | getConfiguration            | `Future<PtzConfiguration>`       | [x\] |
+| GetConfigurations           | getConfigurations           | `Future<List<PtzConfiguration>>` | [x\] |
+| GetPresets                  | getPresets                  | `Future<List<Preset>>`           | [x\] |
+| GetStatus                   | getStatus                   | `Future<PtzStatus>`              | [x\] |
+| GotoPreset                  | gotoPreset                  | `Future<bool>`                   | [ \] |
+| RelativeMove                | relativeMove                | `Future<void>`                   | [ \] |
+| RemovePreset                | removePreset                | `Future<void>`                   | [ \] |
+| SetPreset                   | setPreset                   | `Future<String>`                 | [x\] |
+| Stop                        | stop                        | `Future<bool>`                   | [x\] |
 
 ### PTZ Helper Methods
 

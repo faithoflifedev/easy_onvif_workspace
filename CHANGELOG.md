@@ -1,17 +1,21 @@
 # Changelog
 
+## 2.0.11
+
+* tweak to README
+* bool response for `gotoPreset`
+* auto create release during publish
+
 ## 2.0.10
 
 * homebrew installation for onvif cli
 * default debug for cli now set to &quot;off&quot;
-
 
 ## 2.0.9
 
 - corrects ptz.continuousMove error when `zoom` was not included as a parameter 
 - issue #18 - adds tests for ptz.continuousMove and ptz.stop 
 - improvements to the cli README
-
 
 ## 2.0.8
 

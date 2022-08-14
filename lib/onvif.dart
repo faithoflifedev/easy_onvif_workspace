@@ -22,6 +22,7 @@ export 'model/device_service_capabilities.dart';
 export 'model/envelope.dart';
 export 'model/get_metadata_configurations_response.dart';
 export 'model/get_preset_response.dart';
+export 'model/goto_preset_response.dart';
 export 'model/hostname_information.dart';
 export 'model/hostname_response.dart';
 export 'model/media_uri.dart';

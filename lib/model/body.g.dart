@@ -8,10 +8,7 @@ part of 'body.dart';
 
 Body _$BodyFromJson(Map<String, dynamic> json) => Body(
       fault: json['Fault'],
-      absoluteMoveResponse: json['AbsoluteMoveResponse'] == null
-          ? null
-          : AbsoluteMoveResponse.fromJson(
-              json['AbsoluteMoveResponse'] as Map<String, dynamic>),
+      absoluteMoveResponse: json['AbsoluteMoveResponse'],
       audioSourcesResponse: json['GetAudioSourcesResponse'] == null
           ? null
           : GetAudioSourcesResponse.fromJson(
@@ -34,10 +31,7 @@ Body _$BodyFromJson(Map<String, dynamic> json) => Body(
           ? null
           : GetConfigurationsResponse.fromJson(
               json['GetConfigurationsResponse'] as Map<String, dynamic>),
-      continuousMoveResponse: json['ContinuousMoveResponse'] == null
-          ? null
-          : ContinuousMoveResponse.fromJson(
-              json['ContinuousMoveResponse'] as Map<String, dynamic>),
+      continuousMoveResponse: json['ContinuousMoveResponse'],
       dateTimeResponse: json['GetSystemDateAndTimeResponse'] == null
           ? null
           : GetSystemDateAndTimeResponse.fromJson(
@@ -113,11 +107,14 @@ Body _$BodyFromJson(Map<String, dynamic> json) => Body(
           ? null
           : GetVideoSourcesResponse.fromJson(
               json['GetVideoSourcesResponse'] as Map<String, dynamic>),
+      gotoPresetResponse: json['GotoPresetResponse'],
     );
 
 Map<String, dynamic> _$BodyToJson(Body instance) => <String, dynamic>{
       'AbsoluteMoveResponse': instance.absoluteMoveResponse,
       'ContinuousMoveResponse': instance.continuousMoveResponse,
+      'StopResponse': instance.stopResponse,
+      'GotoPresetResponse': instance.gotoPresetResponse,
       'GetSystemDateAndTimeResponse': instance.dateTimeResponse,
       'GetCapabilitiesResponse': instance.capabilitiesResponse,
       'GetConfigurationResponse': instance.configurationResponse,
@@ -144,5 +141,4 @@ Map<String, dynamic> _$BodyToJson(Body instance) => <String, dynamic>{
       'GetCompatibleConfigurationsResponse':
           instance.compatibleConfigurationsResponse,
       'Fault': instance.fault,
-      'StopResponse': instance.stopResponse,
     };

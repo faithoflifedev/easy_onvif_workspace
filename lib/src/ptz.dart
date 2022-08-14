@@ -189,11 +189,17 @@ class Ptz with UiLoggy {
   ///Operation to go to a saved preset position for the [Preset] in the selected
   ///profile. The operation is supported if there is support for at least on PTZ
   ///preset by the [Preset].
-  Future<void> gotoPreset(String profileToken, Preset preset) async {
+  Future<bool> gotoPreset(String profileToken, Preset preset) async {
     loggy.debug('gotoPreset');
 
-    await Soap.retrieveEnvelope(
+    final envelope = await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.gotoPreset(profileToken, preset)));
+
+    if (envelope.body.gotoPresetResponse == null) {
+      throw Exception();
+    }
+
+    return true;
   }
 
   ///Operation to request PTZ status for the Node in the selected profile.

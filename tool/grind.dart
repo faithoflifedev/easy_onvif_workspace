@@ -16,12 +16,12 @@ main(args) => grind(args);
 @DefaultTask('Build the project.')
 @Depends(test)
 build() {
-  log("building...");
+  log('building...');
 }
 
 @Task('publish')
-@Depends(analyze, version, doc, commit, dryrun)
-// @Depends(analyze, version, test, doc, commit, dryrun)
+@Depends(analyze, version, doc, commit, release, dryrun)
+// @Depends(analyze, version, test, doc, commit, release, dryrun)
 publish() {
   log('''
 Use the command:
@@ -42,12 +42,12 @@ doc() {
   DartDoc.doc();
 }
 
-@Task('dart analyze')
+@Task('analyze')
 analyze() {
   Analyzer.analyze('.', fatalWarnings: true);
 }
 
-@Task('version bump')
+@Task('version')
 version() async {
   final metaUpdate = MetaUpdate('pubspec.yaml');
 
@@ -64,7 +64,26 @@ version() async {
   }
 }
 
-@Task('commit to git')
+@Task('release')
+release() async {
+  final newTag = await isNewTag(config['version']);
+  if (newTag) {
+    shell(
+      exec: 'gh',
+      args: [
+        'release',
+        'create',
+        'v${config['version']}',
+        '--notes',
+        '${config['change']}',
+        '--repo',
+        '${config['repo']}'
+      ],
+    );
+  }
+}
+
+@Task('commit')
 commit() async {
   final newTag = await isNewTag(config['version']);
 
@@ -81,7 +100,7 @@ commit() async {
   shell(exec: 'git', args: ['push']);
 }
 
-@Task('run tests')
+@Task('test')
 @Depends(version)
 test() {
   TestRunner().test();

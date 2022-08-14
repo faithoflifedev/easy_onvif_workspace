@@ -26,66 +26,80 @@ class Body {
   @JsonKey(name: 'ContinuousMoveResponse')
   final ContinuousMoveResponse? continuousMoveResponse;
 
-  ///This operation gets the device system date and time. The device shall
-  ///support the return of the daylight saving setting and of the manual system
-  ///date and time (if applicable) or indication of NTP time (if applicable)
-  ///through the [DeviceManagement.getSystemDateAndTime] command.
-  ///A device shall provide the UTCDateTime information.
+  /// Operation to stop ongoing pan, tilt and zoom movements of absolute
+  /// relative and continuous type. If no stop argument for pan, tilt or zoom is
+  /// set, the device will stop all ongoing pan, tilt and zoom movements.
+  @JsonKey(name: 'StopResponse')
+  final StopResponse? stopResponse;
+
+  /// Operation to go to a saved preset position for the PTZNode in the selected
+  /// profile. The operation is supported if there is support for at least on
+  /// PTZ preset by the PTZNode.
+  @JsonKey(name: 'GotoPresetResponse')
+  final GotoPresetResponse? gotoPresetResponse;
+
+  /// This operation gets the device system date and time. The device shall
+  /// support the return of the daylight saving setting and of the manual system
+  /// date and time (if applicable) or indication of NTP time (if applicable)
+  /// through the [DeviceManagement.getSystemDateAndTime] command.
+  /// A device shall provide the UTCDateTime information.
   @JsonKey(name: 'GetSystemDateAndTimeResponse')
   final GetSystemDateAndTimeResponse? dateTimeResponse;
 
-  ///This operation has been replaced by the more generic GetServices method.
-  ///For capabilities of individual services refer to the
-  ///[DeviceManagement.getServiceCapabilities] methods.
+  /// This operation has been replaced by the more generic GetServices method.
+  /// For capabilities of individual services refer to the
+  /// [DeviceManagement.getServiceCapabilities] methods.
   @JsonKey(name: 'GetCapabilitiesResponse')
   final GetCapabilitiesResponse? capabilitiesResponse;
 
-  ///Get a specific PTZconfiguration from the device, identified by its reference
-  ///token or name.
+  /// Get a specific PTZconfiguration from the device, identified by its
+  /// reference token or name.
   ///
-  ///The default Position/Translation/Velocity Spaces are introduced to allow NVCs
-  ///sending move requests without the need to specify a certain coordinate
-  ///system. The default Speeds are introduced to control the speed of move
-  ///requests (absolute, relative, preset), where no explicit speed has been set.
+  /// The default Position/Translation/Velocity Spaces are introduced to allow
+  /// NVCs sending move requests without the need to specify a certain
+  /// coordinate system. The default Speeds are introduced to control the speed
+  /// of move requests (absolute, relative, preset), where no explicit speed has
+  /// been set.
   ///
-  ///The allowed pan and tilt range for Pan/Tilt Limits is defined by a
-  ///two-dimensional space range that is mapped to a specific Absolute Pan/Tilt
-  ///Position Space. At least one Pan/Tilt Position Space is required by the
-  ///PTZNode to support Pan/Tilt limits. The limits apply to all supported
-  ///absolute, relative and continuous Pan/Tilt movements. The limits shall be
-  ///checked within the coordinate system for which the limits have been
-  ///specified. That means that even if movements are specified in a different
-  ///coordinate system, the requested movements shall be transformed to the
-  ///coordinate system of the limits where the limits can be checked. When a
-  ///relative or continuous movements is specified, which would leave the
-  ///specified limits, the PTZ unit has to move along the specified limits. The
-  ///Zoom Limits have to be interpreted accordingly.
+  /// The allowed pan and tilt range for Pan/Tilt Limits is defined by a
+  /// two-dimensional space range that is mapped to a specific Absolute Pan/Tilt
+  /// Position Space. At least one Pan/Tilt Position Space is required by the
+  /// PTZNode to support Pan/Tilt limits. The limits apply to all supported
+  /// absolute, relative and continuous Pan/Tilt movements. The limits shall be
+  /// checked within the coordinate system for which the limits have been
+  /// specified. That means that even if movements are specified in a different
+  /// coordinate system, the requested movements shall be transformed to the
+  /// coordinate system of the limits where the limits can be checked. When a
+  /// relative or continuous movements is specified, which would leave the
+  /// specified limits, the PTZ unit has to move along the specified limits. The
+  /// Zoom Limits have to be interpreted accordingly.
   @JsonKey(name: 'GetConfigurationResponse')
   final GetConfigurationResponse? configurationResponse;
 
-  ///Get a specific PTZconfiguration from the device, identified by its reference
-  ///token or name.
+  /// Get a specific PTZconfiguration from the device, identified by its
+  /// reference token or name.
   ///
-  ///The default Position/Translation/Velocity Spaces are introduced to allow NVCs
-  ///sending move requests without the need to specify a certain coordinate
-  ///system. The default Speeds are introduced to control the speed of move
-  ///requests (absolute, relative, preset), where no explicit speed has been set.
+  /// The default Position/Translation/Velocity Spaces are introduced to allow
+  /// NVCs sending move requests without the need to specify a certain
+  /// coordinate system. The default Speeds are introduced to control the speed
+  /// of move requests (absolute, relative, preset), where no explicit speed has
+  /// been set.
   ///
-  ///The allowed pan and tilt range for Pan/Tilt Limits is defined by a
-  ///two-dimensional space range that is mapped to a specific Absolute Pan/Tilt
-  ///Position Space. At least one Pan/Tilt Position Space is required by the
-  ///PTZNode to support Pan/Tilt limits. The limits apply to all supported
-  ///absolute, relative and continuous Pan/Tilt movements. The limits shall be
-  ///checked within the coordinate system for which the limits have been
-  ///specified. That means that even if movements are specified in a different
-  ///coordinate system, the requested movements shall be transformed to the
-  ///coordinate system of the limits where the limits can be checked. When a
-  ///relative or continuous movements is specified, which would leave the
-  ///specified limits, the PTZ unit has to move along the specified limits.
+  /// The allowed pan and tilt range for Pan/Tilt Limits is defined by a
+  /// two-dimensional space range that is mapped to a specific Absolute Pan/Tilt
+  /// Position Space. At least one Pan/Tilt Position Space is required by the
+  /// PTZNode to support Pan/Tilt limits. The limits apply to all supported
+  /// absolute, relative and continuous Pan/Tilt movements. The limits shall be
+  /// checked within the coordinate system for which the limits have been
+  /// specified. That means that even if movements are specified in a different
+  /// coordinate system, the requested movements shall be transformed to the
+  /// coordinate system of the limits where the limits can be checked. When a
+  /// relative or continuous movements is specified, which would leave the
+  /// specified limits, the PTZ unit has to move along the specified limits.
   @JsonKey(name: 'GetConfigurationsResponse')
   final GetConfigurationsResponse? configurationsResponse;
 
-  ///This operation gets basic device information from the device.
+  /// This operation gets basic device information from the device.
   @JsonKey(name: 'GetDeviceInformationResponse')
   final GetDeviceInformationResponse? deviceInformationResponse;
 
@@ -153,9 +167,6 @@ class Body {
   @JsonKey(name: 'Fault')
   final dynamic fault;
 
-  @JsonKey(name: 'StopResponse')
-  final dynamic stopResponse;
-
   Body({
     this.fault,
     this.absoluteMoveResponse,
@@ -184,6 +195,7 @@ class Body {
     this.systemUrisResponse,
     this.usersResponse,
     this.videoSourcesResponse,
+    this.gotoPresetResponse,
   });
 
   factory Body.fromJson(Map<String, dynamic> json) => _$BodyFromJson(json);
