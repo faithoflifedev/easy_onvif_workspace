@@ -88,7 +88,11 @@ release() async {
 commit() async {
   final newTag = await isNewTag(config['version']);
 
-  shell(exec: 'git', args: ['commit', '-a', '-m', '\'${config['change']}\'']);
+  try {
+    shell(exec: 'git', args: ['commit', '-a', '-m', '\'${config['change']}\'']);
+  } catch (exception) {
+    log('No files committed');
+  }
 
   if (newTag) {
     shell(exec: 'git', args: ['tag', 'v${config['version']}']);
