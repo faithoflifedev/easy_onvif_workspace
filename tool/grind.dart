@@ -88,9 +88,9 @@ release() async {
 commit() async {
   final newTag = await isNewTag(config['version']);
 
-  shell(exec: 'git', args: ['add', '.']);
+  // shell(exec: 'git', args: ['add', '.']);
 
-  shell(exec: 'git', args: ['commit', '-m', '\'${config['change']}\'']);
+  shell(exec: 'git', args: ['commit', '-a', '-m', '\'${config['change']}\'']);
 
   if (newTag) {
     shell(exec: 'git', args: ['tag', 'v${config['version']}']);
