@@ -16,7 +16,7 @@ main(args) => grind(args);
 @DefaultTask('Build the project.')
 @Depends(test)
 build() {
-  log('building...');
+  // log('building...');
 }
 
 @Task('publish')
@@ -49,15 +49,13 @@ analyze() {
 
 @Task('version')
 version() async {
-  final metaUpdate = MetaUpdate('pubspec.yaml');
-
-  metaUpdate.verifyLatestVersionFromPubSpec();
-
   final version = config['version']!;
 
   final newTag = await isNewTag(version);
 
   if (newTag) {
+    MetaUpdate('pubspec.yaml').writeMetaDartFile('lib/util/meta.dart');
+
     updateMarkdown(config);
 
     await updatePubspec(version);
@@ -74,11 +72,14 @@ release() async {
         'release',
         'create',
         'v${config['version']}',
+        '--title',
+        'Release v${config['version']}',
         '--notes',
         '${config['change']}',
         '--repo',
         '${config['repo']}'
       ],
+      verbose: true,
     );
   }
 }
