@@ -98,7 +98,11 @@ commit() async {
     shell(exec: 'git', args: ['push', '--tags']);
   }
 
-  shell(exec: 'git', args: ['push']);
+  shell(
+    exec: 'git',
+    args: ['push'],
+    verbose: true,
+  );
 }
 
 @Task('test')
