@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.12
+
+* improved release task in grind build
+
 ## 2.0.11
 
 * tweak to README
