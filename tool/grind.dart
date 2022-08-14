@@ -53,11 +53,12 @@ version() async {
   final newTag = await isNewTag(version);
 
   if (newTag) {
-    MetaUpdate('pubspec.yaml').writeMetaDartFile('lib/util/meta.dart');
-
     updateMarkdown(config);
 
     await updatePubspec(version);
+
+    //uses the pubspec file so this needs to run after the pubspec update
+    MetaUpdate('pubspec.yaml').writeMetaDartFile('lib/util/meta.dart');
   }
 }
 

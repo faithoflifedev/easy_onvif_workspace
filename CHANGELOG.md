@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.13+1
+
+* finally figured out why meta.dart wasn&#x27;t updating correctly
+
 ## 2.0.13
 
 * correction for failed tests
