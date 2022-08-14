@@ -6,6 +6,6 @@ Map<String, String> meta = <String, String>{
   "description":
       // ignore: lines_longer_than_80_chars
       "A pure Dart library designed primarily for command line automation of Onvif compatible devices, but can be used anywhere Dart is used.",  
-  "version":"2.0.12",
+  "version":"2.0.12+1",
 };
   
