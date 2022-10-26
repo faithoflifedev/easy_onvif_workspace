@@ -6,6 +6,12 @@
 * dependency bump
 * ISSUE #20
 
+## 2.0.13+2
+
+* updated build tools
+* dependency bump
+* ISSUE #20
+
 ## 2.0.13+1
 
 * updated build tools
