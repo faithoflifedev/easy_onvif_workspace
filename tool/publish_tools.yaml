@@ -1,0 +1,18 @@
+github:
+  repoUser: faithoflifedev
+  repoName: easy_onvif
+  bearerToken: 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
+
+meta: lib/src/util/meta.dart
+
+templates:
+  - name: README.md
+    type: overwrite
+  - name: CHANGELOG.md
+    type: prepend
+
+commit: updated build tools, dependency bump, ISSUE #20
+changes: |
+  * updated build tools
+  * dependency bump
+  * ISSUE #20

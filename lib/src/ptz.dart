@@ -1,7 +1,3 @@
-import 'package:easy_onvif/model/pan_tilt_limits.dart';
-import 'package:easy_onvif/model/ptz_configuration.dart';
-import 'package:easy_onvif/model/ptz_speed.dart';
-import 'package:easy_onvif/model/zoom_limits.dart';
 import 'package:easy_onvif/onvif.dart';
 import 'package:loggy/loggy.dart';
 

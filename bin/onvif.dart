@@ -1,16 +1,10 @@
 import 'package:args/command_runner.dart';
-import 'package:easy_onvif/util/meta_update.dart';
-import 'package:easy_onvif/util/meta.dart';
-import 'package:universal_io/io.dart';
 import 'package:easy_onvif/onvif.dart';
+import 'package:universal_io/io.dart';
 
 void main(List<String> arguments) async {
-  MetaUpdate('pubspec.yaml').verifyLatestVersionFromPubSpec();
-
   CommandRunner('onvif',
-      '''A command line interface for controlling Onvif compliant devices
-
-Using Dart package: ${meta['name']} v${meta['version']}''')
+      'A command line interface for controlling Onvif compliant devices')
     ..argParser.addOption('config-file',
         defaultsTo: '${OnvifUtil.userHome}/.onvif/credentials.json')
     ..argParser.addOption('log-level',

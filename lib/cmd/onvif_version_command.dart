@@ -1,5 +1,5 @@
 import 'package:args/command_runner.dart';
-import 'package:easy_onvif/util/meta.dart';
+import 'package:easy_onvif/src/util/meta.dart';
 
 class OnvifVersionCommand extends Command {
   @override
@@ -10,6 +10,6 @@ class OnvifVersionCommand extends Command {
 
   @override
   void run() async {
-    print('${meta['name']} v${meta['version']}');
+    print('${pubSpec['name']} v${pubSpec['version']}');
   }
 }

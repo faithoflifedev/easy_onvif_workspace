@@ -1,4 +1,4 @@
-import 'package:easy_onvif/model/configuration.dart';
+import 'package:easy_onvif/src/model/configuration.dart';
 import 'package:easy_onvif/onvif.dart';
 import 'package:loggy/loggy.dart';
 
@@ -22,7 +22,7 @@ class Media with UiLoggy {
   }
 
   ///This operation lists all existing metadata configurations. The client need
-  ///not know anything apriori about the metadata in order to use the command.
+  ///not know anything priori about the metadata in order to use the command.
   Future<List<Configuration>> getMetadataConfigurations() async {
     loggy.debug('getMetadataConfigurations');
 

@@ -1,5 +1,5 @@
 # Changelog
 
-## {{ version }}
+## {{ pubspec.version }}
 
-{{ change }}
+{{ changes }}
