@@ -11,8 +11,8 @@ VideoEncoderConfiguration _$VideoEncoderConfigurationFromJson(
     VideoEncoderConfiguration(
       name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
       useCount: OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
-      encoding:
-          OnvifUtil.mappedToString(json['Encoding'] as Map<String, dynamic>),
+      encoding: OnvifUtil.nullableMappedToString(
+          json['Encoding'] as Map<String, dynamic>?),
       resolution:
           Resolution.fromJson(json['Resolution'] as Map<String, dynamic>),
       quality:

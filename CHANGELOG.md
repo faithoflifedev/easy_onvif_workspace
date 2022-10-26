@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.13+5
+
+* real fix for issue #20
+
 ## 2.0.13+4
 
 * dependency bump
