@@ -25,9 +25,10 @@ doc/api/
 
 *.log
 
-scratch/
-ios/
 android/
+ios/
+.pt-build/
+scratch/
 
 bin/config.yaml
 

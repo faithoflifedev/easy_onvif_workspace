@@ -1,10 +1,8 @@
 # Changelog
 
-## 2.0.13+3
+## 2.0.13+4
 
-* updated build tools
 * dependency bump
-* ISSUE #20
 
 ## 2.0.13+3
 

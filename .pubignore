@@ -5,6 +5,7 @@ build/
 ios/
 android/
 scratch/
+.pt-build/
 tool/
 
 *.log
