@@ -1,0 +1,47 @@
+# host: 150.117.210.44:2020
+# username: admin
+# password: aa888888
+# ENP1A14-IR/25X
+host: "192.168.1.182"
+username: "admin"
+password: "admin12345"
+# GX728MF-IR28 - Galaxy - gym
+# host: "192.168.1.127"
+# username: "admin"
+# password: "admin"
+# DCS-6511
+# host: "192.168.1.33"
+# username: "admin"
+# password: ""
+# happytimesoft
+# host: "192.168.2.177:8000"
+# username: "admin"
+# password: "admin"
+# GX728MF-IR28 - Galaxy - back parking
+# host: "192.168.1.123"
+# username: "admin"
+# password: "admin"
+# GX728MF-IR28 - Galaxy - front tree
+# host: "192.168.1.178"
+# username: "admin"
+# password: "admin"
+# GX728MF-IR28 - Galaxy - back/meat
+# host: "192.168.1.195"
+# username: "admin"
+# password: "admin"
+# GX728MF-IR28 - Galaxy - main stair
+# host: "192.168.1.194"
+# username: "admin"
+# password: "admin"
+# GX728MF-IR28 - Galaxy - front parking
+# host: "192.168.1.171"
+# username: "admin"
+# password: "admin"
+# GX728MF-IR28 - Galaxy - kitchen
+# host: "192.168.1.129"
+# username: "admin"
+# password: "admin"
+# LOREX UNKNOWN
+# host: "192.168.1.64"
+# username: "admin"
+# password: UNKNOWN
