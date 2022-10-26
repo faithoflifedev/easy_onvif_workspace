@@ -31,4 +31,6 @@ android/
 
 bin/config.yaml
 
+tool/publish_tools.yaml
+
 example/flutter_model/assets/config.yaml
