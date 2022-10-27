@@ -8,7 +8,7 @@ part 'white_balance.g.dart';
 ///White balance settings.
 @JsonSerializable()
 class WhiteBalance {
-  ///Auto whitebalancing mode (auto/manual).
+  ///Auto white-balancing mode (auto/manual).
   ///- enum { 'AUTO', 'MANUAL' }
   @JsonKey(name: 'Mode', fromJson: OnvifUtil.mappedToString)
   final String mode;
