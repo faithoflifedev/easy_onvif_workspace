@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.13+6
+
+VideoEncoderConfiguration
+  * Resolution is now optional
+  * RateControl is now optional
+  * `encoding` previously made optional
+
 ## 2.0.13+5
 
 * real fix for issue #20

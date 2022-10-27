@@ -33,7 +33,7 @@ class VideoEncoderConfiguration {
 
   ///Configured video resolution
   @JsonKey(name: 'Resolution')
-  final Resolution resolution;
+  final Resolution? resolution;
 
   ///Relative value for the video quantizers and the quality of the video. A
   ///high value within supported quality range means higher quality
@@ -42,7 +42,7 @@ class VideoEncoderConfiguration {
 
   ///Optional element to configure rate control related parameters.
   @JsonKey(name: 'RateControl')
-  final RateControl rateControl;
+  final RateControl? rateControl;
 
   ///Optional element to configure Mpeg4 related parameters.
   @JsonKey(name: 'MPEG4')
@@ -64,9 +64,9 @@ class VideoEncoderConfiguration {
       {required this.name,
       required this.useCount,
       this.encoding,
-      required this.resolution,
+      this.resolution,
       required this.quality,
-      required this.rateControl,
+      this.rateControl,
       this.mpeg4,
       this.h264,
       required this.multiCast,
