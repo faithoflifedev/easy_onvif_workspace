@@ -308,6 +308,16 @@ void main() {
     expect(success, true);
   });
 
+  test('GetDNSResponse is not null when doc parsed', () {
+    final response = File('test/xml/GetDNSResponse.xml').readAsStringSync();
+
+    final envelope = Envelope.fromXml(response);
+
+    var success = envelope.body.dnsResponse != null;
+
+    expect(success, true);
+  });
+
   test('NVR8432P16 probe response', () {
     final response =
         File('test/xml/MulticastProbeSample_NVR8432P16.xml').readAsStringSync();

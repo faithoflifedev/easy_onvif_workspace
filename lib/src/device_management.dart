@@ -217,15 +217,37 @@ class DeviceManagement with UiLoggy {
         uri, onvif.secureRequest(SoapRequest.createUsers(users)));
   }
 
-  ///This operation deletes users on a device. The device shall support deletion
-  ///of device users and their credentials through the DeleteUsers command. A
-  ///device may have one or more fixed users that cannot be deleted to ensure
-  ///access to the unit. Either all users are deleted successfully or a fault
-  ///message shall be returned and no users be deleted.
+  /// This operation deletes users on a device. The device shall support deletion
+  /// of device users and their credentials through the DeleteUsers command. A
+  /// device may have one or more fixed users that cannot be deleted to ensure
+  /// access to the unit. Either all users are deleted successfully or a fault
+  /// message shall be returned and no users be deleted.
   Future<void> deleteUsers(List<String> users) async {
     loggy.debug('deleteUsers');
 
     await Soap.retrieveEnvelope(
         uri, onvif.secureRequest(SoapRequest.deleteUsers(users)));
+  }
+
+  /// This operation gets the discovery mode of a device. See Section 7.2 for the definition of the different device discovery modes. The device shall support retrieval of the discovery mode setting through the GetDiscoveryMode command.
+  Future<String> getDiscoveryMode() async {
+    loggy.debug('getDiscoveryMode');
+    final envelope = await Soap.retrieveEnvelope(
+        uri, onvif.secureRequest(SoapRequest.discoveryMode()));
+
+    if (envelope.body.discoveryModeResponse == null) throw Exception();
+
+    return envelope.body.discoveryModeResponse!.discoveryMode;
+  }
+
+  /// This operation gets the DNS settings from a device. The device shall return its DNS configurations through the GetDNS command.
+  Future<DnsInformation> getDns() async {
+    loggy.debug('getDns');
+    final envelope = await Soap.retrieveEnvelope(
+        uri, onvif.secureRequest(SoapRequest.dns()));
+
+    if (envelope.body.dnsResponse == null) throw Exception();
+
+    return envelope.body.dnsResponse!.dnsInformation;
   }
 }

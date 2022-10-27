@@ -111,6 +111,10 @@ Body _$BodyFromJson(Map<String, dynamic> json) => Body(
           ? null
           : GetUsersResponse.fromJson(
               json['GetUsersResponse'] as Map<String, dynamic>),
+      discoveryModeResponse: json['GetDiscoveryMode'] == null
+          ? null
+          : GetDiscoveryModeResponse.fromJson(
+              json['GetDiscoveryMode'] as Map<String, dynamic>),
       videoSourcesResponse: json['GetVideoSourcesResponse'] == null
           ? null
           : GetVideoSourcesResponse.fromJson(
@@ -119,6 +123,10 @@ Body _$BodyFromJson(Map<String, dynamic> json) => Body(
           ? null
           : GotoPresetResponse.fromJson(
               json['GotoPresetResponse'] as Map<String, dynamic>),
+      dnsResponse: json['GetDNSResponse'] == null
+          ? null
+          : GetDnsResponse.fromJson(
+              json['GetDNSResponse'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$BodyToJson(Body instance) => <String, dynamic>{
@@ -147,6 +155,8 @@ Map<String, dynamic> _$BodyToJson(Body instance) => <String, dynamic>{
       'ProbeMatches': instance.probeMatches,
       'GetSystemUrisResponse': instance.systemUrisResponse,
       'GetUsersResponse': instance.usersResponse,
+      'GetDiscoveryMode': instance.discoveryModeResponse,
+      'GetDNSResponse': instance.dnsResponse,
       'GetMetadataConfigurationsResponse':
           instance.metadataConfigurationsResponse,
       'GetCompatibleConfigurationsResponse':

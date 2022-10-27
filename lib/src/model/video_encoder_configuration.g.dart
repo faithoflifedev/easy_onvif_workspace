@@ -9,6 +9,7 @@ part of 'video_encoder_configuration.dart';
 VideoEncoderConfiguration _$VideoEncoderConfigurationFromJson(
         Map<String, dynamic> json) =>
     VideoEncoderConfiguration(
+      token: json['@token'] as String?,
       name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
       useCount: OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
       encoding: OnvifUtil.nullableMappedToString(
@@ -16,8 +17,8 @@ VideoEncoderConfiguration _$VideoEncoderConfigurationFromJson(
       resolution: json['Resolution'] == null
           ? null
           : Resolution.fromJson(json['Resolution'] as Map<String, dynamic>),
-      quality:
-          OnvifUtil.mappedToDouble(json['Quality'] as Map<String, dynamic>),
+      quality: OnvifUtil.nullableMappedToDouble(
+          json['Quality'] as Map<String, dynamic>?),
       rateControl: json['RateControl'] == null
           ? null
           : RateControl.fromJson(json['RateControl'] as Map<String, dynamic>),
@@ -27,14 +28,17 @@ VideoEncoderConfiguration _$VideoEncoderConfigurationFromJson(
       h264: json['H264'] == null
           ? null
           : H264.fromJson(json['H264'] as Map<String, dynamic>),
-      multiCast: Multicast.fromJson(json['Multicast'] as Map<String, dynamic>),
-      sessionTimeout: OnvifUtil.mappedToString(
-          json['SessionTimeout'] as Map<String, dynamic>),
+      multiCast: json['Multicast'] == null
+          ? null
+          : Multicast.fromJson(json['Multicast'] as Map<String, dynamic>),
+      sessionTimeout: OnvifUtil.nullableMappedToString(
+          json['SessionTimeout'] as Map<String, dynamic>?),
     );
 
 Map<String, dynamic> _$VideoEncoderConfigurationToJson(
         VideoEncoderConfiguration instance) =>
     <String, dynamic>{
+      '@token': instance.token,
       'Name': instance.name,
       'UseCount': instance.useCount,
       'Encoding': instance.encoding,
@@ -43,6 +47,6 @@ Map<String, dynamic> _$VideoEncoderConfigurationToJson(
       'RateControl': instance.rateControl?.toJson(),
       'MPEG4': instance.mpeg4?.toJson(),
       'H264': instance.h264?.toJson(),
-      'Multicast': instance.multiCast.toJson(),
+      'Multicast': instance.multiCast?.toJson(),
       'SessionTimeout': instance.sessionTimeout,
     };

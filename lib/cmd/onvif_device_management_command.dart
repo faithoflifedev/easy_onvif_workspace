@@ -23,6 +23,8 @@ class OnvifDeviceManagementCommand extends Command {
     addSubcommand(OnvifGetSystemDateAndTimeDeviceManagementCommand());
     addSubcommand(OnvifGetSystemUrisDeviceManagementCommand());
     addSubcommand(OnvifGetUsersDeviceManagementCommand());
+    addSubcommand(OnvifGetDiscoveryModeCommand());
+    addSubcommand(OnvifGetDnsCommand());
   }
 }
 
@@ -297,6 +299,52 @@ class OnvifGetUsersDeviceManagementCommand extends OnvifHelperCommand {
       final users = await deviceManagement.getUsers();
 
       print(json.encode(users));
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// This operation gets the discovery mode of a device. See Section 7.2 for the definition of the different device discovery modes. The device shall support retrieval of the discovery mode setting through the GetDiscoveryMode command.
+class OnvifGetDiscoveryModeCommand extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'This operation gets the discovery mode of a device. See Section 7.2 for the definition of the different device discovery modes. The device shall support retrieval of the discovery mode setting through the GetDiscoveryMode command.';
+
+  @override
+  String get name => 'get-discovery-mode';
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final discoveryMode = await deviceManagement.getDiscoveryMode();
+
+      print(discoveryMode);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// This operation gets the DNS settings from a device. The device shall return its DNS configurations through the GetDNS command.
+class OnvifGetDnsCommand extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'This operation gets the DNS settings from a device. The device shall return its DNS configurations through the GetDNS command.';
+
+  @override
+  String get name => 'get-dns';
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final dns = await deviceManagement.getDns();
+
+      print(dns);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

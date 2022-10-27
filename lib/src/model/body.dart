@@ -158,6 +158,12 @@ class Body {
   @JsonKey(name: 'GetUsersResponse')
   final GetUsersResponse? usersResponse;
 
+  @JsonKey(name: 'GetDiscoveryMode')
+  final GetDiscoveryModeResponse? discoveryModeResponse;
+
+  @JsonKey(name: 'GetDNSResponse')
+  final GetDnsResponse? dnsResponse;
+
   @JsonKey(name: 'GetMetadataConfigurationsResponse')
   final GetMetadataConfigurationsResponse? metadataConfigurationsResponse;
 
@@ -194,8 +200,10 @@ class Body {
     this.streamUriResponse,
     this.systemUrisResponse,
     this.usersResponse,
+    this.discoveryModeResponse,
     this.videoSourcesResponse,
     this.gotoPresetResponse,
+    this.dnsResponse,
   });
 
   factory Body.fromJson(Map<String, dynamic> json) => _$BodyFromJson(json);

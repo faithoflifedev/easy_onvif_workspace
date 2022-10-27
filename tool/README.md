@@ -155,6 +155,7 @@ Available commands:
   media               Media commands.
   probe               Probe/device discovery command.
   ptz                 PTZ commands.
+  version             Display the package name and version.
 ```
 
 Please see the cli documentation [README.md](https://github.com/faithoflifedev/easy_onvif/tree/main/bin) for more detailed usage information.
@@ -165,30 +166,33 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 
 | Onvif Operation        | Dart Method            | Dart Return Type                       | Test |
 | ---------------------- | ---------------------- | -------------------------------------- | ---- |
-| CreateUsers            | createUsers            | `Future<void>`                         | [ \]  |
-| DeleteUsers            | deleteUsers            | `Future<void>`                         | [ \]  |
-| GetCapabilities        | getCapabilities        | `Future<Capabilities>`                 | [x\]  |
-| GetDeviceInformation   | getDeviceInformation   | `Future<GetDeviceInformationResponse>` | [x\]  |
-| GetHostname            | getHostname            | `Future<HostnameInformation>`          | [x\]  |
-| GetNetworkProtocols    | getNetworkProtocols    | `Future<List<NetworkProtocol>>`        | [x\]  |
-| GetNTP                 | getNtp                 | `Future<NtpInformation>`               | [x\]  |
-| GetServiceCapabilities | getServiceCapabilities | `Future<DeviceServiceCapabilities>`    | [x\]  |
-| GetServices            | getServices            | `Future<List<Service>>`                | [x\]  |
-| GetSystemDateAndTime   | getSystemDateAndTime   | `Future<SystemDateAndTime>`            | [x\]  |
-| GetSystemUris          | getSystemUris          | `Future<GetSystemUrisResponse>`        | [x\]  |
-| GetUsers               | getUsers               | `Future<List<User>>`                   | [x\]  |
+| CreateUsers            | createUsers            | `Future<void>`                         | [ \] |
+| DeleteUsers            | deleteUsers            | `Future<void>`                         | [ \] |
+| GetCapabilities        | getCapabilities        | `Future<Capabilities>`                 | [x\] |
+| GetDiscoveryMode       | getDiscoveryMode       | `Future<String>`                       | [ \] |
+| GetDNS                 | getDNS                 | `Future<DnsInformation>`               | [x\] |
+| GetDeviceInformation   | getDeviceInformation   | `Future<GetDeviceInformationResponse>` | [x\] |
+| GetHostname            | getHostname            | `Future<HostnameInformation>`          | [x\] |
+| GetNetworkProtocols    | getNetworkProtocols    | `Future<List<NetworkProtocol>>`        | [x\] |
+| GetNTP                 | getNtp                 | `Future<NtpInformation>`               | [x\] |
+| GetServiceCapabilities | getServiceCapabilities | `Future<DeviceServiceCapabilities>`    | [x\] |
+| GetServices            | getServices            | `Future<List<Service>>`                | [x\] |
+| GetSystemDateAndTime   | getSystemDateAndTime   | `Future<SystemDateAndTime>`            | [x\] |
+| GetSystemUris          | getSystemUris          | `Future<GetSystemUrisResponse>`        | [x\] |
+| GetUsers               | getUsers               | `Future<List<User>>`                   | [x\] |
 
 ### [Media](https://www.onvif.org/ver10/media/wsdl/media.wsdl)
 
 | Onvif Operation         | Dart Method             | Dart Return Type        | Test |
 | ----------------------- | ----------------------- | ----------------------- | ---- |
-| GetAudioSources         | getAudioSources         | `Future<AudioSource>`   | [x\]  |
-| GetProfiles             | getProfiles             | `Future<List<Profile>>` | [x\]  |
-| GetSnapshotUri          | getSnapshotUri          | `Future<MediaUri>`      | [x\]  |
-| GetStreamUri            | getStreamUri            | `Future<MediaUri>`      | [x\]  |
-| GetVideoSources         | getVideoSources         | `Future<VideoSources>`  | [x\]  |
-| StartMulticastStreaming | startMulticastStreaming | `Future<void>`          | [ \]  |
-| StopMulticastStreaming  | stopMulticastStreaming  | `Future<void>`          | [ \]  |
+| GetAudioSources         | getAudioSources         | `Future<AudioSource>`   | [x\] |
+| GetDns                  | getDns                  | `Future<DnsInformation>`| [ \] |
+| GetProfiles             | getProfiles             | `Future<List<Profile>>` | [x\] |
+| GetSnapshotUri          | getSnapshotUri          | `Future<MediaUri>`      | [x\] |
+| GetStreamUri            | getStreamUri            | `Future<MediaUri>`      | [x\] |
+| GetVideoSources         | getVideoSources         | `Future<VideoSources>`  | [x\] |
+| StartMulticastStreaming | startMulticastStreaming | `Future<void>`          | [ \] |
+| StopMulticastStreaming  | stopMulticastStreaming  | `Future<void>`          | [ \] |
 
 ### [PTZ](https://www.onvif.org/ver20/ptz/wsdl/ptz.wsdl)
 
@@ -229,8 +233,9 @@ The values returned by the Onvif API `GetDeviceInformation` call.
 | D-Link Corporation | DCS-6511       |                           |
 | Happytimesoft      | IPCamera       |                           |
 | ONVIF              | ENP1A14-IR/25X |                           |
-| TP-Link            | TL-IPC43AN-4   | RelativeMove&#x00B9; |
+| TP-Link            | TL-IPC43AN-4   | RelativeMove&#x00B9;      |
 | Unknown            | GX728MF-IR28   |                           |
+| TELEKOMSI          | IPC-K22-TSI    | Working on it             |
 
 &#x00B9; For TP-Link, `RelativeMove` is not properly supported on the tested device, however `easy_onvif` falls back to `GetStatus` and `AbsoluteMove` to simulate a relative move.
 

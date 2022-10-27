@@ -13,10 +13,14 @@ part 'video_encoder_configuration.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 
-///If the video encoder configuration token is already known, the encoder
-///configuration can be fetched through the GetVideoEncoderConfiguration
-///command.
+/// If the video encoder configuration token is already known, the encoder
+/// configuration can be fetched through the GetVideoEncoderConfiguration
+/// command.
 class VideoEncoderConfiguration {
+  /// Unique identifier of the profile.
+  @JsonKey(name: '@token')
+  final String? token;
+
   ///User readable name. Length up to 64 characters.
   @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
   final String name;
@@ -37,8 +41,8 @@ class VideoEncoderConfiguration {
 
   ///Relative value for the video quantizers and the quality of the video. A
   ///high value within supported quality range means higher quality
-  @JsonKey(name: 'Quality', fromJson: OnvifUtil.mappedToDouble)
-  final dynamic quality;
+  @JsonKey(name: 'Quality', fromJson: OnvifUtil.nullableMappedToDouble)
+  final double? quality;
 
   ///Optional element to configure rate control related parameters.
   @JsonKey(name: 'RateControl')
@@ -54,23 +58,24 @@ class VideoEncoderConfiguration {
 
   ///Defines the multicast settings that could be used for video streaming.
   @JsonKey(name: 'Multicast')
-  final Multicast multiCast;
+  final Multicast? multiCast;
 
   ///The rtsp session timeout for the related video stream
-  @JsonKey(name: 'SessionTimeout', fromJson: OnvifUtil.mappedToString)
-  final dynamic sessionTimeout;
+  @JsonKey(name: 'SessionTimeout', fromJson: OnvifUtil.nullableMappedToString)
+  final String? sessionTimeout;
 
   VideoEncoderConfiguration(
-      {required this.name,
+      {this.token,
+      required this.name,
       required this.useCount,
       this.encoding,
       this.resolution,
-      required this.quality,
+      this.quality,
       this.rateControl,
       this.mpeg4,
       this.h264,
-      required this.multiCast,
-      required this.sessionTimeout});
+      this.multiCast,
+      this.sessionTimeout});
 
   factory VideoEncoderConfiguration.fromJson(Map<String, dynamic> json) =>
       _$VideoEncoderConfigurationFromJson(json);

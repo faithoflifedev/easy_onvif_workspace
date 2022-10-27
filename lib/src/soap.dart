@@ -610,6 +610,22 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
+  static XmlDocumentFragment discoveryMode() {
+    builder.element('GetDiscoveryMode', nest: () {
+      builder.namespace(Xmlns.tds);
+    });
+
+    return builder.buildFragment();
+  }
+
+  static XmlDocumentFragment dns() {
+    builder.element('GetDNS', nest: () {
+      builder.namespace(Xmlns.tds);
+    });
+
+    return builder.buildFragment();
+  }
+
   static XmlDocumentFragment startMulticastStreaming() {
     builder.element('StartMulticastStreaming', nest: () {
       builder.namespace(Xmlns.trt);

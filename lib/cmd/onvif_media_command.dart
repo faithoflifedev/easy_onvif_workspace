@@ -249,7 +249,7 @@ class OnvifStartMulticastStreamingMediaCommand extends OnvifHelperCommand {
   }
 }
 
-///This command stop multicast streaming using a specified media profile of a device.
+/// This command stop multicast streaming using a specified media profile of a device.
 class OnvifStopMulticastStreamingMediaCommand extends OnvifHelperCommand {
   @override
   String get description =>

@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.13+7
+
+* Issue #20 (again)
+* DeviceManagement
+  * GetDiscoveryMode
+  * GetDNS
+
 ## 2.0.13+6
 
 VideoEncoderConfiguration
