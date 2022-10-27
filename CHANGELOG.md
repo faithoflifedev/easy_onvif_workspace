@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.13+7
+## 2.0.13+8
 
 * Issue #20 (again)
 * DeviceManagement
