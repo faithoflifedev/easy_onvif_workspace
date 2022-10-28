@@ -38,6 +38,10 @@ class Body {
   @JsonKey(name: 'GotoPresetResponse')
   final GotoPresetResponse? gotoPresetResponse;
 
+  /// Operation to move the PTZ device to it's "home" position. The operation is supported if the HomeSupported element in the PTZNode is true.
+  @JsonKey(name: 'GotoHomePositionResponse')
+  final GotoHomePositionResponse? gotoHomePositionResponse;
+
   /// This operation gets the device system date and time. The device shall
   /// support the return of the daylight saving setting and of the manual system
   /// date and time (if applicable) or indication of NTP time (if applicable)
@@ -203,6 +207,7 @@ class Body {
     this.discoveryModeResponse,
     this.videoSourcesResponse,
     this.gotoPresetResponse,
+    this.gotoHomePositionResponse,
     this.dnsResponse,
   });
 

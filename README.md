@@ -50,7 +50,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^2.0.13+9
+  easy_onvif: ^2.0.13+10
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -186,7 +186,6 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | Onvif Operation         | Dart Method             | Dart Return Type        | Test |
 | ----------------------- | ----------------------- | ----------------------- | ---- |
 | GetAudioSources         | getAudioSources         | `Future<AudioSource>`   | [x\] |
-| GetDns                  | getDns                  | `Future<DnsInformation>`| [ \] |
 | GetProfiles             | getProfiles             | `Future<List<Profile>>` | [x\] |
 | GetSnapshotUri          | getSnapshotUri          | `Future<MediaUri>`      | [x\] |
 | GetStreamUri            | getStreamUri            | `Future<MediaUri>`      | [x\] |
@@ -205,6 +204,7 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetConfigurations           | getConfigurations           | `Future<List<PtzConfiguration>>` | [x\] |
 | GetPresets                  | getPresets                  | `Future<List<Preset>>`           | [x\] |
 | GetStatus                   | getStatus                   | `Future<PtzStatus>`              | [x\] |
+| GotoHomePosition            | gotoHomePosition            | `Future<bool>`                   | [ \] |
 | GotoPreset                  | gotoPreset                  | `Future<bool>`                   | [ \] |
 | RelativeMove                | relativeMove                | `Future<void>`                   | [ \] |
 | RemovePreset                | removePreset                | `Future<void>`                   | [ \] |

@@ -182,14 +182,31 @@ class Ptz with UiLoggy {
     };
   }
 
+  /// Operation to move the PTZ device to it's "home" position. The operation is supported if the HomeSupported element in the PTZNode is true.
+  Future<bool> gotoHomePosition(String profileToken, [PtzSpeed? speed]) async {
+    loggy.debug('gotoHomePosition');
+
+    final envelope = await Soap.retrieveEnvelope(uri,
+        onvif.secureRequest(SoapRequest.gotoHomePosition(profileToken, speed)));
+
+    if (envelope.body.gotoHomePositionResponse == null) {
+      throw Exception();
+    }
+
+    return true;
+  }
+
   ///Operation to go to a saved preset position for the [Preset] in the selected
   ///profile. The operation is supported if there is support for at least on PTZ
   ///preset by the [Preset].
-  Future<bool> gotoPreset(String profileToken, Preset preset) async {
+  Future<bool> gotoPreset(String profileToken, String presetToken,
+      [PtzSpeed? speed]) async {
     loggy.debug('gotoPreset');
 
     final envelope = await Soap.retrieveEnvelope(
-        uri, onvif.secureRequest(SoapRequest.gotoPreset(profileToken, preset)));
+        uri,
+        onvif.secureRequest(
+            SoapRequest.gotoPreset(profileToken, presetToken, speed)));
 
     if (envelope.body.gotoPresetResponse == null) {
       throw Exception();

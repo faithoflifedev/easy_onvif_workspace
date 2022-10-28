@@ -123,6 +123,10 @@ Body _$BodyFromJson(Map<String, dynamic> json) => Body(
           ? null
           : GotoPresetResponse.fromJson(
               json['GotoPresetResponse'] as Map<String, dynamic>),
+      gotoHomePositionResponse: json['GotoHomePositionResponse'] == null
+          ? null
+          : GotoHomePositionResponse.fromJson(
+              json['GotoHomePositionResponse'] as Map<String, dynamic>),
       dnsResponse: json['GetDNSResponse'] == null
           ? null
           : GetDnsResponse.fromJson(
@@ -134,6 +138,7 @@ Map<String, dynamic> _$BodyToJson(Body instance) => <String, dynamic>{
       'ContinuousMoveResponse': instance.continuousMoveResponse,
       'StopResponse': instance.stopResponse,
       'GotoPresetResponse': instance.gotoPresetResponse,
+      'GotoHomePositionResponse': instance.gotoHomePositionResponse,
       'GetSystemDateAndTimeResponse': instance.dateTimeResponse,
       'GetCapabilitiesResponse': instance.capabilitiesResponse,
       'GetConfigurationResponse': instance.configurationResponse,

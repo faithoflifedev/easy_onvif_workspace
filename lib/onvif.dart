@@ -25,6 +25,7 @@ export 'src/model/dns_response.dart';
 export 'src/model/envelope.dart';
 export 'src/model/get_metadata_configurations_response.dart';
 export 'src/model/get_preset_response.dart';
+export 'src/model/goto_home_position_response.dart';
 export 'src/model/goto_preset_response.dart';
 export 'src/model/hostname_information.dart';
 export 'src/model/hostname_response.dart';

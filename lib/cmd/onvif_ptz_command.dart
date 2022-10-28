@@ -18,6 +18,7 @@ class OnvifPtzCommand extends Command {
     addSubcommand(OnvifGetConfigurationsPtzCommand());
     addSubcommand(OnvifGetPresetsPtzCommand());
     addSubcommand(OnvifGetStatusPtzCommand());
+    addSubcommand(OnvifGotoHomePositionPtzCommand());
     addSubcommand(OnvifGotoPresetPtzCommand());
     addSubcommand(OnvifRelativeMovePtzCommand());
     addSubcommand(OnvifRemovePresetPtzCommand());
@@ -276,7 +277,7 @@ class OnvifGetPresetsPtzCommand extends OnvifHelperCommand {
   }
 }
 
-///Operation to request PTZ status for the Node in the selected profile.
+/// Operation to request PTZ status for the Node in the selected profile.
 class OnvifGetStatusPtzCommand extends OnvifHelperCommand {
   @override
   String get description =>
@@ -302,6 +303,38 @@ class OnvifGetStatusPtzCommand extends OnvifHelperCommand {
       final ptzStatus = await ptz.getStatus(argResults!['profile-token']);
 
       print(ptzStatus);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// Operation to move the PTZ device to it's "home" position. The operation is supported if the HomeSupported element in the PTZNode is true.
+class OnvifGotoHomePositionPtzCommand extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'Operation to move the PTZ device to it\'s "home" position. The operation is supported if the HomeSupported element in the PTZNode is true.';
+
+  @override
+  String get name => 'goto-home-position';
+
+  OnvifGotoHomePositionPtzCommand() {
+    argParser.addOption('profile-token',
+        abbr: 't',
+        valueHelp: 'profile-token',
+        mandatory: true,
+        help:
+            'A reference to the MediaProfile where the operation should take place.');
+  }
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final profileToken = argResults!['profile-token'];
+
+      await ptz.gotoHomePosition(profileToken);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -340,10 +373,7 @@ class OnvifGotoPresetPtzCommand extends OnvifHelperCommand {
     try {
       final profileToken = argResults!['profile-token'];
 
-      final presetMap = await ptz.getPresetsMap(profileToken);
-
-      await ptz.gotoPreset(
-          profileToken, presetMap[argResults!['preset-token']]!);
+      await ptz.gotoPreset(profileToken, argResults!['preset-token']);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

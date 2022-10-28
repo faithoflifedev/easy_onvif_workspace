@@ -273,7 +273,7 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
-  ///XML for the [serviceCapabilities]
+  /// XML for the [serviceCapabilities]
   static XmlDocumentFragment serviceCapabilities() {
     builder.element('GetServiceCapabilities', nest: () {
       builder.namespace(Xmlns.tds);
@@ -282,8 +282,38 @@ class SoapRequest {
     return builder.buildFragment();
   }
 
-  ///XML for the [snapshotUri], requires a [profileToken] and [Preset]
-  static XmlDocumentFragment gotoPreset(String profileToken, Preset preset) {
+  /// XML for the [gotoHomePosition], requires a [profileToken] and optionally [PtzSpeed]
+  static XmlDocumentFragment gotoHomePosition(
+      String profileToken, PtzSpeed? speed) {
+    builder.element('GotoHomePosition', nest: () {
+      builder.namespace(Xmlns.tds);
+      builder.element('ProfileToken', nest: () {
+        builder.namespace(Xmlns.tptz);
+        builder.text(profileToken);
+      });
+
+      if (speed != null) {
+        builder.element('PanTilt', nest: () {
+          builder.namespace(Xmlns.tt);
+          builder.attribute('x', speed.panTilt!.x);
+          builder.attribute('y', speed.panTilt!.x);
+        });
+
+        if (speed.zoom != null) {
+          builder.element('Zoom', nest: () {
+            builder.namespace(Xmlns.tt);
+            builder.attribute('x', speed.zoom!.x);
+          });
+        }
+      }
+    });
+
+    return builder.buildFragment();
+  }
+
+  /// XML for the [gotoPreset], requires a [profileToken], [presetToken] and optionally [PtzSpeed]
+  static XmlDocumentFragment gotoPreset(
+      String profileToken, String presetToken, PtzSpeed? speed) {
     builder.element('GotoPreset', nest: () {
       builder.namespace(Xmlns.tds);
       builder.element('ProfileToken', nest: () {
@@ -292,20 +322,20 @@ class SoapRequest {
       });
       builder.element('PresetToken', nest: () {
         builder.namespace(Xmlns.tptz);
-        builder.text(preset.token);
+        builder.text(presetToken);
       });
       builder.element('Speed', nest: () {
-        if (preset.position.panTilt != null) {
+        if (speed != null) {
           builder.element('PanTilt', nest: () {
             builder.namespace(Xmlns.tt);
-            builder.attribute('x', preset.position.panTilt!.x);
-            builder.attribute('y', preset.position.panTilt!.y);
+            builder.attribute('x', speed.panTilt!.x);
+            builder.attribute('y', speed.panTilt!.x);
           });
         }
-        if (preset.position.zoom != null) {
+        if (speed?.zoom != null) {
           builder.element('Zoom', nest: () {
             builder.namespace(Xmlns.tt);
-            builder.attribute('x', preset.position.zoom!.x);
+            builder.attribute('x', speed!.zoom!.x);
           });
         }
       });
