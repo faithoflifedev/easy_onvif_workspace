@@ -1,6 +1,7 @@
 import 'package:easy_onvif/onvif.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' as services;
+import 'package:flutter_image/network.dart';
 import 'package:flutter_loggy/flutter_loggy.dart';
 import 'package:loggy/loggy.dart';
 import 'package:yaml/yaml.dart';
@@ -164,9 +165,18 @@ class _MyHomePageState extends State<MyHomePage> with UiLoggy {
                     url != ''
                         ? Padding(
                             padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
-                            child: Image.network(url,
-                                height: 240.0, fit: BoxFit.fill),
-                          )
+                            child: Image(
+                              image: NetworkImageWithRetry(
+                                url,
+                              ),
+                              errorBuilder: (context, exception, stackTrack) =>
+                                  const Icon(
+                                Icons.error,
+                              ),
+                              loadingBuilder:
+                                  (context, exception, stackTrack) =>
+                                      const CircularProgressIndicator(),
+                            ))
                         : Container(),
                   ],
                 ),

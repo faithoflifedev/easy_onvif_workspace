@@ -235,7 +235,7 @@ The values returned by the Onvif API `GetDeviceInformation` call.
 | ONVIF              | ENP1A14-IR/25X |                           |
 | TP-Link            | TL-IPC43AN-4   | RelativeMove&#x00B9;      |
 | Unknown            | GX728MF-IR28   |                           |
-| TELEKOMSI          | IPC-K22-TSI    | Working on it             |
+| TELEKOMSI          | IPC-K22-TSI    |                           |
 
 &#x00B9; For TP-Link, `RelativeMove` is not properly supported on the tested device, however `easy_onvif` falls back to `GetStatus` and `AbsoluteMove` to simulate a relative move.
 

@@ -50,7 +50,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^2.0.13+8
+  easy_onvif: ^2.0.13+9
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -235,7 +235,7 @@ The values returned by the Onvif API `GetDeviceInformation` call.
 | ONVIF              | ENP1A14-IR/25X |                           |
 | TP-Link            | TL-IPC43AN-4   | RelativeMove&#x00B9;      |
 | Unknown            | GX728MF-IR28   |                           |
-| TELEKOMSI          | IPC-K22-TSI    | Working on it             |
+| TELEKOMSI          | IPC-K22-TSI    |                           |
 
 &#x00B9; For TP-Link, `RelativeMove` is not properly supported on the tested device, however `easy_onvif` falls back to `GetStatus` and `AbsoluteMove` to simulate a relative move.
 

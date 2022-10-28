@@ -1,15 +1,15 @@
 # Changelog
 
+## 2.0.13+9
+
+* Issue #21 - fix to dependencies
+
 ## 2.0.13+8
 
 * Issue #20 (again)
-* DeviceManagement
-  * GetDiscoveryMode
-  * GetDNS
 
 ## 2.0.13+7
 
-* Issue #20 (again)
 * DeviceManagement
   * GetDiscoveryMode
   * GetDNS
