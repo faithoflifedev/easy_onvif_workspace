@@ -675,7 +675,8 @@ class SoapRequest {
   static XmlDocument probe(String messageId) {
     builder.declaration(encoding: 'UTF-8');
 
-    builder.element('Envelope', nest: () {
+    builder.element('Envelope',
+        namespace: 'http://www.w3.org/2003/05/soap-envelope', nest: () {
       builder.namespace('http://www.w3.org/2003/05/soap-envelope', 's');
       builder.namespace(
           'http://schemas.xmlsoap.org/ws/2004/08/addressing', 'a');

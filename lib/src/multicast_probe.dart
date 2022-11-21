@@ -32,6 +32,8 @@ class MulticastProbe with UiLoggy {
 
       String messageReceived = String.fromCharCodes(datagram.data);
 
+      loggy.debug('RESPONSE ADDRESS:\n${rawDatagramSocket.address}');
+
       loggy.debug('RESPONSE:\n$messageReceived');
 
       var envelope = Envelope.fromXml(messageReceived);
