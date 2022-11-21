@@ -32,7 +32,7 @@ class MulticastProbe with UiLoggy {
 
       String messageReceived = String.fromCharCodes(datagram.data);
 
-      loggy.debug('RESPONSE ADDRESS:\n${rawDatagramSocket.address}');
+      loggy.debug('RESPONSE ADDRESS:\n${datagram.address}');
 
       loggy.debug('RESPONSE:\n$messageReceived');
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.13+13
+
+* ip address in probe response
+
 ## 2.0.13+12
 
 * Issue #22
