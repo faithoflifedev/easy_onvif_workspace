@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.13+11
+
+* Issue #22
+* Dependency bump
+
 ## 2.0.13+10
 
 * GotoHomePosition now supported

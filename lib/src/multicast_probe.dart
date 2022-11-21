@@ -30,11 +30,11 @@ class MulticastProbe with UiLoggy {
 
       if (datagram == null) return;
 
-      String messageRecived = String.fromCharCodes(datagram.data);
+      String messageReceived = String.fromCharCodes(datagram.data);
 
-      loggy.debug('RESPONSE:\n$messageRecived');
+      loggy.debug('RESPONSE:\n$messageReceived');
 
-      var envelope = Envelope.fromXml(messageRecived);
+      var envelope = Envelope.fromXml(messageReceived);
 
       if (envelope.body.probeMatches == null) return;
 
@@ -55,10 +55,10 @@ class MulticastProbe with UiLoggy {
 
     final messageBodyXml = SoapRequest.probe(Uuid().v4());
 
-    loggy.debug('REQUEST:\n$messageBodyXml');
+    loggy.debug('REQUEST:\n${messageBodyXml.toXmlString(pretty: true)}');
 
-    rawDatagramSocket.send(
-        messageBodyXml.outerXml.codeUnits, broadcastAddress, broadcastPort);
+    rawDatagramSocket.send(messageBodyXml.toXmlString(pretty: true).codeUnits,
+        broadcastAddress, broadcastPort);
 
     // rawDatagramSocket.close();
   }
