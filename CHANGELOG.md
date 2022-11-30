@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.13+14
+
+* Issue [#24](https:&#x2F;&#x2F;github.com&#x2F;faithoflifedev&#x2F;easy_onvif&#x2F;issues&#x2F;24)
+* Added a &#x27;known issues&#x27; section to the README
+
 ## 2.0.13+13
 
 * ip address in probe response

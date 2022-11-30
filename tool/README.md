@@ -242,3 +242,21 @@ The values returned by the Onvif API `GetDeviceInformation` call.
 ## What's next
 
 - More comprehensive unit tests
+
+## Known Issues
+
+Github Issue [#23](https://github.com/faithoflifedev/easy_onvif/issues/23), in Flutter when using **v2.0.13+4** and above you may see the following message when performing a `dart pub get`: 
+
+```text
+Because every version of flutter from sdk depends on collection 1.16.0 and xml >=6.2.0 depends on collection ^1.17.0, flutter from sdk is incompatible with xml >=6.2.0.
+And because easy_onvif >=2.0.13+11 depends on xml ^6.2.2, flutter from sdk is incompatible with easy_onvif >=2.0.13+11.
+So, because cow depends on both flutter from sdk and easy_onvif ^2.0.13+13, version solving failed.
+pub get failed (1; So, because cow depends on both flutter from sdk and easy_onvif ^2.0.13+13, version solving failed.)
+```
+
+The fix for this is to add the following section to your `pubspec.yaml`:
+
+```yaml
+dependency_overrides:
+  collection: ^1.17.0
+```

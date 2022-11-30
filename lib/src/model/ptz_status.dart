@@ -12,7 +12,7 @@ class PtzStatus {
   @JsonKey(name: 'Position')
   final PtzPosition position;
 
-  @JsonKey(name: 'Error', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Error', fromJson: OnvifUtil.nullableMappedToString)
   final String? error;
 
   @JsonKey(name: 'UtcTime', fromJson: OnvifUtil.nullableMappedToDateTime)
