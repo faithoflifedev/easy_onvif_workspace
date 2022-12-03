@@ -15,8 +15,8 @@ part 'system_date_and_time.g.dart';
 class SystemDateAndTime {
   ///Indicates if the time is set manully or through NTP.
   ///- enum { 'Manual', 'NTP' }
-  @JsonKey(name: 'DateTimeType', fromJson: OnvifUtil.mappedToString)
-  final String dateTimeType;
+  @JsonKey(name: 'DateTimeType', fromJson: OnvifUtil.nullableMappedToString)
+  final String? dateTimeType;
 
   ///Informative indicator whether daylight savings is currently on/off.
   @JsonKey(name: 'DaylightSavings', fromJson: OnvifUtil.mappedToString)

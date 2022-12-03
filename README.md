@@ -19,6 +19,9 @@ This is a wrapper to ONVIF protocol which allows you to get information about yo
   - [PTZ Helper Methods](#ptz-helper-methods)
 - [Tested Onvif Devices](#tested-onvif-devices)
 - [What's next](#whats-next)
+- [Features and bugs](#features-and-bugs)
+- [Known Issues](#known-issues)
+- [Contributing](#contributing)
 
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/faithoflif2)
 
@@ -50,7 +53,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^2.0.13+14
+  easy_onvif: ^2.0.13+15
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -243,6 +246,10 @@ The values returned by the Onvif API `GetDeviceInformation` call.
 
 - More comprehensive unit tests
 
+## Features and bugs
+
+Please file feature requests and bugs with [the issue tracker](https://github.com/faithoflifedev/easy_onvif/issues).
+
 ## Known Issues
 
 Github Issue [#23](https://github.com/faithoflifedev/easy_onvif/issues/23), in Flutter when using **v2.0.13+4** and above you may see the following message when performing a `dart pub get`: 
@@ -260,3 +267,25 @@ The fix for this is to add the following section to your `pubspec.yaml`:
 dependency_overrides:
   collection: ^1.17.0
 ```
+
+## Contributing
+
+Any help from the open-source community is always welcome and needed:
+- Found an issue?
+    - Please fill a bug report with details.
+- Need a feature?
+    - Open a feature request with use cases.
+- Are you using and liking the project?
+    - Promote the project: create an article or post about it
+    - Make a donation
+- Do you have a project that uses this package
+    - let's cross promote, let me know and I'll add a link to your project
+- Are you a developer?
+    - Fix a bug and send a pull request.
+    - Implement a new feature.
+    - Improve the Unit Tests.
+- Have you already helped in any way?
+    - **Many thanks from me, the contributors and everybody that uses this project!**
+
+*If you donate 1 hour of your time, you can contribute a lot,
+because others will do the same, just be part and start with your 1 hour.*

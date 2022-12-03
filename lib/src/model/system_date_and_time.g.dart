@@ -8,8 +8,8 @@ part of 'system_date_and_time.dart';
 
 SystemDateAndTime _$SystemDateAndTimeFromJson(Map<String, dynamic> json) =>
     SystemDateAndTime(
-      dateTimeType: OnvifUtil.mappedToString(
-          json['DateTimeType'] as Map<String, dynamic>),
+      dateTimeType: OnvifUtil.nullableMappedToString(
+          json['DateTimeType'] as Map<String, dynamic>?),
       daylightSavings: OnvifUtil.mappedToString(
           json['DaylightSavings'] as Map<String, dynamic>),
       timeZone: json['TimeZone'] == null
