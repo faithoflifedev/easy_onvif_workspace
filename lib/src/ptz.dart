@@ -227,16 +227,17 @@ class Ptz with UiLoggy {
     return envelope.body.statusResponse!.ptzStatus;
   }
 
-  Future<void> move(String profileToken, PanTilt direction) async {
+  Future<void> move(String profileToken, PanTilt direction,
+      [Zoom? zoom]) async {
     loggy.debug('move');
+
+    Zoom zoomAdjust = zoom ?? Zoom(x: 0);
 
     try {
       await relativeMove(
-          profileToken, PtzPosition(panTilt: direction, zoom: Zoom(x: 0)));
+          profileToken, PtzPosition(panTilt: direction, zoom: zoomAdjust));
     } catch (err) {
       PanTilt? panTilt;
-
-      Zoom? zoom;
 
       loggy.error('Relative move failed');
 
@@ -255,11 +256,11 @@ class Ptz with UiLoggy {
       }
 
       if (ptzStatus.position.zoom != null) {
-        zoom = Zoom(x: ptzStatus.position.zoom!.x);
+        zoomAdjust = Zoom(x: ptzStatus.position.zoom!.x + zoomAdjust.x);
       }
 
       await absoluteMove(
-          profileToken, PtzPosition(panTilt: panTilt, zoom: zoom));
+          profileToken, PtzPosition(panTilt: panTilt, zoom: zoomAdjust));
     }
   }
 
@@ -370,8 +371,7 @@ class Ptz with UiLoggy {
   Future<void> zoom(String profileToken, Zoom zoom) async {
     loggy.debug('zoom');
 
-    await relativeMove(
-        profileToken, PtzPosition(panTilt: PanTilt(y: 0, x: 0), zoom: zoom));
+    await move(profileToken, PanTilt(y: 0, x: 0), zoom);
   }
 
   ///A helper method to perform a single [step] of a [relativeMove] on the
