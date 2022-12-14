@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.13+16
+
+* Issue [#25](https:&#x2F;&#x2F;github.com&#x2F;faithoflifedev&#x2F;easy_onvif&#x2F;issues&#x2F;25)
+* dependency bump
+
 ## 2.0.13+15
 
 * Issue [#25](https:&#x2F;&#x2F;github.com&#x2F;faithoflifedev&#x2F;easy_onvif&#x2F;issues&#x2F;25)

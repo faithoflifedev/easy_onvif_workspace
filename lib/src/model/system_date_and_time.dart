@@ -8,30 +8,27 @@ import 'time_zone.dart';
 
 part 'system_date_and_time.g.dart';
 
-///Contains information whether system date and time are set manually or by NTP,
-///daylight savings is on or off, time zone in POSIX 1003.1 format and system
-///date and time in UTC and also local system date and time.
+/// Contains information whether system date and time are set manually or by NTP, daylight savings is on or off, time zone in POSIX 1003.1 format and system date and time in UTC and also local system date and time.
 @JsonSerializable(explicitToJson: true)
 class SystemDateAndTime {
-  ///Indicates if the time is set manully or through NTP.
-  ///- enum { 'Manual', 'NTP' }
+  /// Indicates if the time is set manually or through NTP.
+  /// - enum { 'Manual', 'NTP' }
   @JsonKey(name: 'DateTimeType', fromJson: OnvifUtil.nullableMappedToString)
   final String? dateTimeType;
 
-  ///Informative indicator whether daylight savings is currently on/off.
-  @JsonKey(name: 'DaylightSavings', fromJson: OnvifUtil.mappedToString)
-  final String daylightSavings;
+  /// Informative indicator whether daylight savings is currently on/off.
+  @JsonKey(name: 'DaylightSavings', fromJson: OnvifUtil.nullableMappedToString)
+  final String? daylightSavings;
 
-  ///Timezone information in Posix format.
+  /// Timezone information in Posix format.
   @JsonKey(name: 'TimeZone')
   final TimeZone? timeZone;
 
-  ///Current system date and time in UTC format. This field is mandatory since
-  ///version 2.0.
+  /// Current system date and time in UTC format. This field is mandatory since version 2.0.
   @JsonKey(name: 'UTCDateTime')
   final OnvifDateTime? utc;
 
-  ///Date and time in local format.
+  /// Date and time in local format.
   @JsonKey(name: 'LocalDateTime')
   final OnvifDateTime? local;
 

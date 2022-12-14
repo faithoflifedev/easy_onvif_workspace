@@ -10,8 +10,8 @@ SystemDateAndTime _$SystemDateAndTimeFromJson(Map<String, dynamic> json) =>
     SystemDateAndTime(
       dateTimeType: OnvifUtil.nullableMappedToString(
           json['DateTimeType'] as Map<String, dynamic>?),
-      daylightSavings: OnvifUtil.mappedToString(
-          json['DaylightSavings'] as Map<String, dynamic>),
+      daylightSavings: OnvifUtil.nullableMappedToString(
+          json['DaylightSavings'] as Map<String, dynamic>?),
       timeZone: json['TimeZone'] == null
           ? null
           : TimeZone.fromJson(json['TimeZone'] as Map<String, dynamic>),

@@ -127,7 +127,7 @@ prompt>onvif authorize --help
 ```text
 Generate a refresh token used to authenticate the command line API requests
 
-Usage: yt authorize [arguments]
+Usage: onvif authorize [arguments]
 -h, --help    Print this usage information.
 ```
 
