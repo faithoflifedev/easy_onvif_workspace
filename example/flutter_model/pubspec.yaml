@@ -6,7 +6,7 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.3 <3.0.0"
+  sdk: ">=2.18.0 <3.0.0"
 
 dependencies:
   easy_onvif:
@@ -22,8 +22,8 @@ dependencies:
 dev_dependencies:
   flutter_lints: ^2.0.1
 
-  flutter_test:
-    sdk: flutter
+  # flutter_test:
+  #   sdk: flutter
 
 dependency_overrides:
   collection: ^1.16.0
