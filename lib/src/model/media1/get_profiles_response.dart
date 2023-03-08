@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:json_annotation/json_annotation.dart';
 
 import 'profile.dart';
@@ -12,8 +14,8 @@ part 'get_profiles_response.g.dart';
 @JsonSerializable()
 class GetProfilesResponse {
   /// lists all profiles that exist in the media service
-  @JsonKey(name: 'Profiles')
-  final List<Profile>? profiles;
+  @JsonKey(name: 'Profiles', fromJson: _unbound)
+  final List<Profile> profiles;
 
   GetProfilesResponse(this.profiles);
 
@@ -21,4 +23,21 @@ class GetProfilesResponse {
       _$GetProfilesResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$GetProfilesResponseToJson(this);
+
+  @override
+  String toString() => json.encode(toJson());
+
+  static List<Profile> _unbound(dynamic json) {
+    if (json == null) {
+      return <Profile>[];
+    }
+
+    if (json is List) {
+      return json
+          .map((e) => Profile.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }
+
+    return [Profile.fromJson(json as Map<String, dynamic>)];
+  }
 }

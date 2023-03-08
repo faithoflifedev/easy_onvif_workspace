@@ -90,7 +90,7 @@ class Media1 with UiLoggy {
   /// can be retrieved using this command. This command lists all configured
   /// profiles in a device. The client does not need to know the media1 profile
   /// in order to use the command.
-  Future<List<Profile>?> getProfiles() async {
+  Future<List<Profile>> getProfiles() async {
     loggy.debug('getProfiles');
 
     final envelope = await transport.sendRequest(

@@ -32,7 +32,7 @@ This is a wrapper to ONVIF protocol which allows you to get information about yo
 
 ## New for version 2.1.x
 
-Support for Media2 Onvif operations
+Support for __Media2__ Onvif operations
 
 ```dart
 // defaults to Media2, but will fallback to Media1 if Media2 is not supported
@@ -111,7 +111,7 @@ profiles.forEach((element) {
  print('${element.name}  ${element.token}');
 });
 
-var profileToken = profiles[0].token;
+var profileToken = profiles.first.token;
 ```
 
 With the `ptz` operations you can get a list of camera presets from the connected device.
@@ -195,10 +195,13 @@ Global options:
 Available commands:
   authorize           Generate an authentication file for an Onvif device
   device-management   Device management commands.
-  media               Media commands.
+  media1              Media1 commands.
+  media2              Media2 commands.
   probe               Probe/device discovery command.
   ptz                 PTZ commands.
   version             Display the package name and version.
+
+  Run "onvif help <command>" for more information about a command.
 ```
 
 Please see the cli documentation [README.md](https://github.com/faithoflifedev/easy_onvif/tree/main/bin) for more detailed usage information.
@@ -329,10 +332,6 @@ The values returned by the Onvif API `GetDeviceInformation` call.
 * PTZ:
   * not supported
 
-## What's next
-
-- More comprehensive unit tests
-
 ## Features and bugs
 
 Please file feature requests and bugs with [the issue tracker](https://github.com/faithoflifedev/easy_onvif/issues).
@@ -357,10 +356,9 @@ dependency_overrides:
 
 ## Breaking changes
 
-### v2.1.0
-The following method signatures have changed in this version:
-- PTZ - `continuousMove`
-- PTZ - ``
+### v2.1.x
+
+There is probably a number of breaking changes in this version since some method signatures have changed.  Since a large portion of the code base was rebuilt from scratch tracking all the changes wasn't a priority.  Sorry for any inconvenience.
 
 ## Contributing
 

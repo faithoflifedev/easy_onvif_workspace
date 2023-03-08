@@ -71,7 +71,7 @@ void main() {
         expect(
             GetProfilesResponse.fromJson(envelope.body.response!)
                 .profiles
-                ?.isNotEmpty,
+                .isNotEmpty,
             true);
       });
 
@@ -224,7 +224,7 @@ void main() {
         expect(
             GetProfilesResponse.fromJson(envelope.body.response!)
                 .profiles
-                ?.isNotEmpty,
+                .isNotEmpty,
             true);
       });
 
@@ -349,7 +349,7 @@ void main() {
         expect(
             GetProfilesResponse.fromJson(envelope.body.response!)
                 .profiles
-                ?.isNotEmpty,
+                .isNotEmpty,
             true);
       });
 
@@ -447,7 +447,7 @@ void main() {
         expect(
             GetProfilesResponse.fromJson(envelope.body.response!)
                 .profiles
-                ?.isNotEmpty,
+                .isNotEmpty,
             true);
       });
 
