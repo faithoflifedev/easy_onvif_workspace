@@ -1,12 +1,12 @@
-import 'package:easy_onvif/src/util/util.dart';
+import 'package:easy_onvif/src/model/header.dart';
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'body.dart';
-import 'header.dart';
 
 part 'envelope.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(createToJson: false)
 class Envelope {
   @JsonKey(name: 'Body')
   final Body body;
@@ -21,6 +21,4 @@ class Envelope {
 
   factory Envelope.fromXml(String xml) =>
       Envelope.fromJson(OnvifUtil.xmlToMap(xml));
-
-  Map<String, dynamic> toJson() => _$EnvelopeToJson(this);
 }

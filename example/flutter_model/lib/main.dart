@@ -1,4 +1,7 @@
+import 'package:easy_onvif/device_management.dart' as device;
+import 'package:easy_onvif/media2.dart';
 import 'package:easy_onvif/onvif.dart';
+import 'package:easy_onvif/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' as services;
 import 'package:flutter_image/network.dart';
@@ -34,13 +37,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with UiLoggy {
-  late final List<Profile> profiles;
+  late final List<MediaProfile> profiles;
 
-  late final GetDeviceInformationResponse deviceInfo;
+  late final device.GetDeviceInformationResponse deviceInfo;
 
   late final YamlMap config;
 
-  MediaUri? snapshotUri;
+  String? snapshotUri;
 
   bool connecting = true;
 
@@ -84,7 +87,9 @@ class _MyHomePageState extends State<MyHomePage> with UiLoggy {
     profiles = await onvif.media.getProfiles();
 
     try {
-      snapshotUri = await onvif.media.getSnapshotUri(profiles[0].token);
+      if (profiles.isNotEmpty) {
+        snapshotUri = await onvif.media.getSnapshotUri(profiles[0].token);
+      }
     } catch (err) {
       loggy.error(err.toString());
     }
@@ -100,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> with UiLoggy {
 
       if (snapshotUri != null) {
         url = OnvifUtil.authenticatingUri(
-            snapshotUri!.uri, config['username']!, config['password']!);
+            snapshotUri!, config['username']!, config['password']!);
       }
     });
   }
@@ -134,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> with UiLoggy {
                     ),
                     Text(
                       manufacturer,
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     const Padding(
                       padding: EdgeInsets.all(8.0),
@@ -144,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> with UiLoggy {
                     ),
                     Text(
                       model,
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     const Padding(
                       padding: EdgeInsets.all(8.0),
@@ -154,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> with UiLoggy {
                     ),
                     Text(
                       firmwareVersion,
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     const Padding(
                       padding: EdgeInsets.all(8.0),

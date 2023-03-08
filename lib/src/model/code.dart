@@ -5,15 +5,18 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'code.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class Code {
-  @JsonKey(name: 'Value', fromJson: OnvifUtil.mappedToString)
-  final String value;
+  @JsonKey(name: 'Value', fromJson: OnvifUtil.nullableMappedToString)
+  final String? value;
 
   @JsonKey(name: 'Subcode')
-  final Code? code;
+  final Map<String, dynamic>? subCode;
 
-  Code({required this.value, this.code});
+  Code({
+    this.value,
+    this.subCode,
+  });
 
   factory Code.fromJson(Map<String, dynamic> json) => _$CodeFromJson(json);
 

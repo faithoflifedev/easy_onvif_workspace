@@ -8,8 +8,12 @@ A command line interface for controlling an Onvif device through terminal comman
 - [Commands](#commands)
   - [authorize](#authorize)
   - [device-management](#device-management)
+      - [device-management create-users](#device-management-create-users)
+      - [device-management delete-users](#device-management-delete-users)
       - [device-management get-capabilities](#device-management-get-capabilities)
       - [device-management get-device-information](#device-management-get-device-information)
+      - [device-management get-discovery-mode](#device-management-get-discovery-mode)
+      - [device-management get-dns](#device-management-get-dns)
       - [device-management get-hostname](#device-management-get-hostname)
       - [device-management get-network-protocols](#device-management-get-network-protocols)
       - [device-management get-service-capabilities](#device-management-get-service-capabilities)
@@ -17,14 +21,27 @@ A command line interface for controlling an Onvif device through terminal comman
       - [device-management get-system-date-and-time](#device-management-get-system-date-and-time)
       - [device-management get-system-uris](#device-management-get-system-uris)
       - [device-management get-users](#device-management-get-users)
-  - [media](#media)
-      - [media get-audio-sources](#media-get-audio-sources)
-      - [media get-profiles](#media-get-profiles)
-      - [media get-snapshot-uri](#media-get-snapshot-uri)
-      - [media get-stream-uri](#media-get-stream-uri)
-      - [media get-video-sources](#media-get-video-sources)
-      - [media start-multicast-streaming](#media-start-multicast-streaming)
-      - [media stop-multicast-streaming](#media-stop-multicast-streaming)
+  - [media1](#media1)
+      - [media1 get-audio-sources](#media1-get-audio-sources)
+      - [media1 get-metadata-configuration](#media1-get-metadata-configuration)
+      - [media1 get-metadata-configuration](#media1-get-metadata-configuration-1)
+      - [media1 get-profile](#media1-get-profile)
+      - [media1 get-profiles](#media1-get-profiles)
+      - [media1 get-service-capabilities](#media1-get-service-capabilities)
+      - [media1 get-snapshot-uri](#media1-get-snapshot-uri)
+      - [media1 get-stream-uri](#media1-get-stream-uri)
+      - [media1 get-video-sources](#media1-get-video-sources)
+      - [media1 start-multicast-streaming](#media1-start-multicast-streaming)
+      - [media1 stop-multicast-streaming](#media1-stop-multicast-streaming)
+  - [media2](#media2)
+      - [media2 get-metadata-configuration-options](#media2-get-metadata-configuration-options)
+      - [media2 get-metadata-configurations](#media2-get-metadata-configurations)
+      - [media2 get-profiles](#media2-get-profiles)
+      - [media2 get-service-capabilities](#media2-get-service-capabilities)
+      - [media2 get-snapshot-uri](#media2-get-snapshot-uri)
+      - [media2 get-stream-uri](#media2-get-stream-uri)
+      - [media2 start-multicast-streaming](#media2-start-multicast-streaming)
+      - [media2 stop-multicast-streaming](#media2-stop-multicast-streaming)
   - [probe](#probe)
   - [ptz](#ptz)
       - [ptz absolute-move](#ptz-absolute-move)
@@ -48,6 +65,7 @@ A command line interface for controlling an Onvif device through terminal comman
       - [ptz zoom-out](#ptz-zoom-out)
       - [ptz get-current-preset](#ptz-get-current-preset)
   - [version](#version)
+
 
 ## Installation
 
@@ -85,7 +103,8 @@ Global options:
 Available commands:
   authorize           Generate an authentication file for an Onvif device
   device-management   Device management commands.
-  media               Media commands.
+  media1              Media1 commands.
+  media2              Media2 commands.
   probe               Probe/device discovery command.
   ptz                 PTZ commands.
   version             Display the package name and version.
@@ -150,6 +169,8 @@ Usage: onvif device-management <subcommand> [arguments]
 -h, --help    Print this usage information.
 
 Available subcommands:
+  create-users               This operation creates new device users and corresponding credentials on a device for authentication purposes. The device shall support creation of device users and their credentials through the CreateUsers command. Either all users are created successfully or a fault message shall be returned without creating any user.
+  delete-users               This operation deletes the given storage configuration and configuration change shall always be persistent.
   get-capabilities           This method has been replaced by the more generic GetServices method. For capabilities of individual services refer to the GetServiceCapabilities methods.
   get-device-information     This operation gets basic device information from the device.
   get-discovery-mode         This operation gets the discovery mode of a device. See Section 7.2 for the definition of the different device discovery modes. The device shall support retrieval of the discovery mode setting through the GetDiscoveryMode command.
@@ -162,6 +183,42 @@ Available subcommands:
   get-system-date-and-time   This operation gets the device system date and time. The device shall support the return of the daylight saving setting and of the manual system date and time (if applicable) or indication of NTP time (if applicable) through the GetSystemDateAndTime command.
   get-system-uris            This operation is used to retrieve URIs from which system information may be downloaded using HTTP
   get-users                  This operation lists the registered users and corresponding credentials on a device. The device shall support retrieval of registered device users and their credentials for the user token through the GetUsers command.
+```
+
+#### device-management create-users
+
+```sh
+prompt>onvif device-management create-users --help
+```
+
+```text
+This operation creates new device users and corresponding credentials on a device for authentication purposes. The device shall support creation of device users and their credentials through the CreateUsers command. Either all users are created successfully or a fault message shall be returned without creating any user.
+
+Usage: onvif device-management create-users [arguments]
+-h, --help                                   Print this usage information.
+-f, --users-file=<yaml or json file path>    The path to the file that lists users to be created, cannot be used with other options.
+-u, --username=<string>                      Username string.
+-p, --password=<string>                      Password string.
+-l, --user-level=<enum>                      User level string.
+                                             [administrator, operator, user, anonymous, extended]
+```
+
+#### device-management delete-users
+
+```sh
+prompt>onvif device-management delete-users --help
+```
+
+```text
+This operation creates new device users and corresponding credentials on a device for authentication purposes. The device shall support creation of device users and their credentials through the CreateUsers command. Either all users are created successfully or a fault message shall be returned without creating any user.
+
+Usage: onvif device-management create-users [arguments]
+-h, --help                                   Print this usage information.
+-f, --users-file=<yaml or json file path>    The path to the file that lists users to be created, cannot be used with other options.
+-u, --username=<string>                      Username string. 
+-p, --password=<string>                      Password string.
+-l, --user-level=<enum>                      User level string.
+                                             [administrator, operator, user, anonymous, extended]
 ```
 
 #### device-management get-capabilities
@@ -311,129 +368,325 @@ Usage: onvif device-management get-users [arguments]
 -h, --help    Print this usage information.
 ```
 
-### media
+### media1
 
 ```sh
 prompt>onvif media --help
 ```
 
 ```text
-Media commands.
+Media1 commands.
 
-Usage: onvif media <subcommand> [arguments]
+Usage: onvif media1 <subcommand> [arguments]
 -h, --help    Print this usage information.
 
 Available subcommands:
-  get-audio-sources           This command lists all available physical audio inputs of the device.
-  get-profiles                Any endpoint can ask for the existing media profiles of a device using the GetProfiles command. Pre-configured or dynamically configured profiles can be retrieved using this command. This command lists all configured profiles in a device. The client does not need to know the media profile in order to use the command.
-  get-snapshot-uri            A client uses the GetSnapshotUri command to obtain a JPEG snapshot from the device.
-  get-stream-uri              This operation requests a URI that can be used to initiate a live media stream using RTSP as the control protocol
-  get-video-sources           This command lists all available physical video inputs of the device.
-  start-multicast-streaming   This command starts multicast streaming using a specified media profile of a device.
-  stop-multicast-streaming    This command stop multicast streaming using a specified media profile of a device.
+  get-audio-sources             This command lists all available physical audio inputs of the device.
+  get-metadata-configuration    The GetMetadataConfiguration command fetches the metadata configuration if the metadata token is known.
+  get-metadata-configurations   This operation returns the available options (supported values and ranges for metadata configuration parameters) for changing the metadata configuration.
+  get-profile                   If the profile token is already known, a profile can be fetched through the GetProfile command.
+  get-profiles                  Any endpoint can ask for the existing media profiles of a device using the GetProfiles command. Pre-configured or dynamically configured profiles can be retrieved using this command. This command lists all configured profiles in a device. The client does not need to know the media profile in order to use the command.
+  get-service-capabilities      Returns the capabilities of the media service. The result is returned in a typed answer.
+  get-snapshot-uri              A client uses the GetSnapshotUri command to obtain a JPEG snapshot from the device.
+  get-stream-uri                This operation requests a URI that can be used to initiate a live media stream using RTSP as the control protocol
+  get-video-sources             This command lists all available physical video inputs of the device.
+  start-multicast-streaming     This command starts multicast streaming using a specified media profile of a device.
+  stop-multicast-streaming      This command stop multicast streaming using a specified media profile of a device.
 ```
 
-#### media get-audio-sources
+#### media1 get-audio-sources
 
 ```sh
-prompt>onvif media get-audio-sources --help
+prompt>onvif media1 get-audio-sources --help
 ```
 
 ```text
 This command lists all available physical audio inputs of the device.
 
-Usage: onvif media get-audio-sources [arguments]
+Usage: onvif media1 get-audio-sources [arguments]
 -h, --help    Print this usage information.
 ```
 
-#### media get-profiles
+#### media1 get-metadata-configuration
 
 ```sh
-prompt>onvif media get-profiles --help
+prompt>onvif media1 get-metadata-configuration --help
+```
+
+```text
+This command lists all available physical audio inputs of the device.
+
+Usage: onvif media1 get-metadata-configuration [arguments]
+-h, --help                                        Print this usage information.
+-t, --configuration-token=<string> (mandatory)    Token of the requested metadata configuration.
+```
+
+#### media1 get-metadata-configuration
+
+```sh
+prompt>onvif media1 get-metadata-configurations --help
+```
+
+```text
+This operation returns the available options (supported values and ranges for metadata configuration parameters) for changing the metadata configuration.
+
+Usage: onvif media1 get-metadata-configurations [arguments]
+-h, --help                            Print this usage information.
+    --configuration-token=<string>    Optional metadata configuration token that specifies an existing configuration that the options are intended for.
+    --profile-token=<string>          Optional ProfileToken that specifies an existing media profile that the options shall be compatible with.
+```
+
+#### media1 get-profile
+
+```sh
+prompt>onvif media1 get-profile --help
+```
+
+```text
+If the profile token is already known, a profile can be fetched through the GetProfile command.
+
+Usage: onvif media1 get-profile [arguments]
+-h, --help                                  Print this usage information.
+-t, --profile-token=<string> (mandatory)    Token of the requested media profile.
+```
+
+#### media1 get-profiles
+
+```sh
+prompt>onvif media1 get-profiles --help
 ```
 
 ```text
 Any endpoint can ask for the existing media profiles of a device using the GetProfiles command. Pre-configured or dynamically configured profiles can be retrieved using this command. This command lists all configured profiles in a device. The client does not need to know the media profile in order to use the command.
 
-Usage: onvif media get-profiles [arguments]
+Usage: onvif media1 get-profiles [arguments]
 -h, --help    Print this usage information.
 ```
 
-#### media get-snapshot-uri
+#### media1 get-service-capabilities
 
 ```sh
-prompt>onvif media get-snapshot-uri --help
+prompt>onvif media1 get-service-capabilities --help
+```
+
+```text
+Returns the capabilities of the media service. The result is returned in a typed answer.
+
+Usage: onvif media1 get-service-capabilities [arguments]
+-h, --help    Print this usage information.
+```
+
+##### media1 get-snapshot-uri
+
+```sh
+prompt>onvif media1 get-snapshot-uri --help
 ```
 
 ```text
 A client uses the GetSnapshotUri command to obtain a JPEG snapshot from the device.
 
-Usage: onvif media get-snapshot-uri [arguments]
+Usage: onvif media1 get-snapshot-uri [arguments]
 -h, --help                                 Print this usage information.
 -t, --profile-token=<token> (mandatory)    The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.
-    --[no-]valid-until-connect             Indicates if the Uri is only valid until the connection is established.
-    --[no-]valid-until-reboot              Indicates if the Uri is invalid after a reboot of the device.
-    --timeout                              Duration how long the Uri is valid.
-                                           (defaults to "PT0S")
+
 ```
 
-#### media get-stream-uri
+#### media1 get-stream-uri
 
 ```sh
-prompt>onvif media get-stream-uri  --help
+prompt>onvif media1 get-stream-uri  --help
 ```
 
 ```text
 This operation requests a URI that can be used to initiate a live media stream using RTSP as the control protocol.
 
-Usage: onvif media get-stream-uri [arguments]
--h, --help                                 Print this usage information.
--t, --profile-token=<token> (mandatory)    The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.
-    --stream-type=<type>                   Defines if a multicast or unicast stream is requested
-                                           [RTP-Unicast, RTP-Multicast]
-    --transport-protocol=<type>            Defines if a multicast or unicast stream is requested
-                                           [UDP, TCP, RTSP (default), HTTP]
-    --[no-]valid-until-connect             Indicates if the Uri is only valid until the connection is established.
-    --[no-]valid-until-reboot              Indicates if the Uri is invalid after a reboot of the device.
-    --timeout                              Duration how long the Uri is valid.
-                                           (defaults to "PT0S")
+Usage: onvif media1 get-stream-uri [arguments]
+-h, --help                                                    Print this usage information.
+-t, --profile-token=<token> (mandatory)                       The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.
+    --stream-setup-stream=<stream type>                       Defines if a multicast or unicast stream is requested
+                                                              [RTP-Unicast, RTP-Multicast (default)]
+    --stream-setup-transport-protocol=<transport protocol>    Defines the network protocol for streaming, either UDP=RTP/UDP, RTSP=RTP/RTSP/TCP or HTTP=RTP/RTSP/HTTP/TCP
+                                                              [UDP, TCP, RTSP (default), HTTP]
+
 ```
 
-#### media get-video-sources
+#### media1 get-video-sources
 
 ```sh
-prompt>onvif media get-video-sources  --help
+prompt>onvif media1 get-video-sources  --help
 ```
 
 ```text
 This command lists all available physical video inputs of the device.
 
-Usage: onvif media get-video-sources [arguments]
+Usage: onvif media1 get-video-sources [arguments]
 ```
 
-#### media start-multicast-streaming
+#### media1 start-multicast-streaming
 
 ```sh
-prompt>onvif media start-multicast-streaming --help
+prompt>onvif media1 start-multicast-streaming --help
 ```
 
 ```text
 This command starts multicast streaming using a specified media profile of a device.
 
-Usage: onvif media start-multicast-streaming [arguments]
+Usage: onvif media1 start-multicast-streaming [arguments]
 -h, --help    Print this usage information.
 ```
 
-#### media stop-multicast-streaming
+#### media1 stop-multicast-streaming
 
 ```sh
-prompt>onvif media stop-multicast-streaming --help
+prompt>onvif media1 stop-multicast-streaming --help
 ```
 
 ```text
 This command stop multicast streaming using a specified media profile of a device.
 
-Usage: onvif media stop-multicast-streaming [arguments]
+Usage: onvif media1 stop-multicast-streaming [arguments]
+-h, --help    Print this usage information.
+```
+
+### media2
+
+```sh
+prompt>onvif media2 --help
+```
+
+```text
+Media2 commands.
+
+Usage: onvif media2 <subcommand> [arguments]
+-h, --help    Print this usage information.
+
+Available subcommands:
+  get-metadata-configuration-options   This operation returns the available options (supported values and ranges for metadata configuration parameters) for changing the metadata configuration.
+  get-metadata-configurations          By default this operation lists all existing metadata configurations for a device. Provide a profile token to list only configurations that are compatible with the profile. If a configuration token is provided only a single configuration will be returned.
+  get-profiles                         Retrieve the profile with the specified token or all defined media profiles.
+  get-service-capabilities             Returns the capabilities of the media service. The result is returned in a typed answer.
+  get-snapshot-uri                     A client uses the GetSnapshotUri command to obtain a JPEG snapshot from the device.
+  get-stream-uri                       This operation requests a URI that can be used to initiate a live media stream using RTSP as the control protocol
+  start-multicast-streaming            This command starts multicast streaming using a specified media profile of a device.
+  stop-multicast-streaming             This command stop multicast streaming using a specified media profile of a device.
+  ```
+
+#### media2 get-metadata-configuration-options
+
+```sh
+prompt>onvif media2 get-metadata-configuration-options --help
+```
+
+```text
+This operation returns the available options (supported values and ranges for metadata configuration parameters) for changing the metadata configuration.
+
+Usage: onvif media2 get-metadata-configuration-options [arguments]
+-h, --help                            Print this usage information.
+    --configuration-token=<string>    Token of the requested configuration.
+    --profile-token=<string>          Contains the token of an existing media profile the configurations shall be compatible with.
+```
+
+#### media2 get-metadata-configurations
+
+```sh
+prompt>onvif media2 get-metadata-configurations --help
+```
+
+```text
+By default this operation lists all existing metadata configurations for a device. Provide a profile token to list only configurations that are compatible with the profile. If a configuration token is provided only a single configuration will be returned.
+
+Usage: onvif media2 get-metadata-configurations [arguments]
+-h, --help                            Print this usage information.
+    --configuration-token=<string>    Token of the requested configuration.
+    --profile-token=<string>          Contains the token of an existing media profile the configurations shall be compatible with.
+```
+
+#### media2 get-profiles
+
+```sh
+prompt>onvif media2 get-profiles --help
+```
+
+```text
+Retrieve the profile with the specified token or all defined media profiles.
+
+Usage: onvif media2 get-profiles [arguments]
+-h, --help                             Print this usage information.
+    --reference-token=<string>         Optional token of the requested profile.
+    --type=<comma delimited string>    The types shall be provided as defined by tr2:ConfigurationEnumeration.
+                                       [All, Analytics, AudioSource, AudioDecoder, AudioEncoder, AudioOutput, Metadata, VideoEncoder, VideoSource, PTZ]
+```
+
+#### media2 get-service-capabilities
+
+```sh
+prompt>onvif media2 get-service-capabilities --help
+```
+
+```text
+Returns the capabilities of the media service. The result is returned in a typed answer.
+
+Usage: onvif media2 get-service-capabilities [arguments]
+-h, --help    Print this usage information.
+```
+
+
+#### media2 get-snapshot-uri
+
+```sh
+prompt>onvif media2 get-snapshot-uri --help
+```
+
+```text
+A client uses the GetSnapshotUri command to obtain a JPEG snapshot from the device.
+
+Usage: onvif media2 get-snapshot-uri [arguments]
+-h, --help                                 Print this usage information.
+-t, --profile-token=<token> (mandatory)    The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.
+```
+
+#### media2 get-stream-uri
+
+```sh
+prompt>onvif media2 get-stream-uri  --help
+```
+
+```text
+This operation requests a URI that can be used to initiate a live media stream using RTSP as the control protocol.
+
+Usage: onvif media2 get-stream-uri [arguments]
+-h, --help                                                    Print this usage information.
+-t, --profile-token=<token> (mandatory)                       The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.
+    --stream-setup-stream=<stream type>                       Defines if a multicast or unicast stream is requested
+                                                              [RTP-Unicast, RTP-Multicast (default)]
+    --stream-setup-transport-protocol=<transport protocol>    Defines the network protocol for streaming, either UDP=RTP/UDP, RTSP=RTP/RTSP/TCP or HTTP=RTP/RTSP/HTTP/TCP
+                                                              [UDP, TCP, RTSP (default), HTTP]
+
+```
+
+#### media2 start-multicast-streaming
+
+```sh
+prompt>onvif media2 start-multicast-streaming --help
+```
+
+```text
+This command starts multicast streaming using a specified media profile of a device.
+
+Usage: onvif media2 start-multicast-streaming [arguments]
+-h, --help    Print this usage information.
+```
+
+#### media2 stop-multicast-streaming
+
+```sh
+prompt>onvif media2 stop-multicast-streaming --help
+```
+
+```text
+This command stop multicast streaming using a specified media profile of a device.
+
+Usage: onvif media2 stop-multicast-streaming [arguments]
 -h, --help    Print this usage information.
 ```
 

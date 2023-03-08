@@ -1,4 +1,6 @@
-import 'package:easy_onvif/onvif.dart';
+import 'package:easy_onvif/probe.dart';
+import 'package:easy_onvif/soap.dart';
+import 'package:easy_onvif/src/model/envelope.dart';
 import 'package:loggy/loggy.dart';
 import 'package:universal_io/io.dart';
 import 'package:uuid/uuid.dart';
@@ -21,54 +23,55 @@ class MulticastProbe with UiLoggy {
 
     await RawDatagramSocket.bind(broadcastAddress, broadcastPort);
 
-    final rawDatagramSocket = await RawDatagramSocket.bind(
+    final rawDataGramSocket = await RawDatagramSocket.bind(
         InternetAddress.anyIPv4, 0,
         reuseAddress: false, reusePort: false);
 
-    rawDatagramSocket.listen((RawSocketEvent rawSocketEvent) {
-      var datagram = rawDatagramSocket.receive();
+    rawDataGramSocket.listen((RawSocketEvent rawSocketEvent) {
+      var dataGram = rawDataGramSocket.receive();
 
-      if (datagram == null) return;
+      if (dataGram == null) return;
 
-      String messageReceived = String.fromCharCodes(datagram.data);
+      String messageReceived = String.fromCharCodes(dataGram.data);
 
-      loggy.debug('RESPONSE ADDRESS:\n${datagram.address}');
+      loggy.debug('RESPONSE ADDRESS:\n${dataGram.address}');
 
       loggy.debug('RESPONSE:\n$messageReceived');
 
       var envelope = Envelope.fromXml(messageReceived);
 
-      if (envelope.body.probeMatches == null) return;
+      if (envelope.body.response == null) throw Exception();
 
-      onvifDevices.addAll(envelope.body.probeMatches!.probeMatches);
+      onvifDevices
+          .addAll(ProbeMatches.fromJson(envelope.body.response!).probeMatches);
     });
 
-    start(rawDatagramSocket);
+    start(rawDataGramSocket);
 
-    await finish(rawDatagramSocket);
+    await finish(rawDataGramSocket);
   }
 
   ///timeout of 0 or less means no timeout
-  void start(RawDatagramSocket rawDatagramSocket) {
+  void start(RawDatagramSocket rawDataGramSocket) {
     loggy.debug('send');
 
     loggy.debug(
         'BROADCAST ADDRESS: ${broadcastAddress.address}, PORT: $broadcastPort');
 
-    final messageBodyXml = SoapRequest.probe(Uuid().v4());
+    final messageBodyXml = Transport.probe(Uuid().v4());
 
     loggy.debug('REQUEST:\n${messageBodyXml.toXmlString(pretty: true)}');
 
-    rawDatagramSocket.send(messageBodyXml.toXmlString(pretty: true).codeUnits,
+    rawDataGramSocket.send(messageBodyXml.toXmlString(pretty: true).codeUnits,
         broadcastAddress, broadcastPort);
 
-    // rawDatagramSocket.close();
+    // rawDataGramSocket.close();
   }
 
-  Future<void> finish(RawDatagramSocket rawDatagramSocket,
+  Future<void> finish(RawDatagramSocket rawDataGramSocket,
       [int? timeout]) async {
     await Future.delayed(Duration(seconds: timeout ?? defaultTimeout));
 
-    rawDatagramSocket.close();
+    rawDataGramSocket.close();
   }
 }

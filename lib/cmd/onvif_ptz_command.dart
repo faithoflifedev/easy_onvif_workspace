@@ -1,8 +1,9 @@
-import 'dart:convert';
-
 import 'package:args/command_runner.dart';
 import 'package:dio/dio.dart';
-import 'package:easy_onvif/onvif.dart';
+import 'package:easy_onvif/command.dart';
+import 'package:easy_onvif/ptz.dart';
+import 'package:easy_onvif/shared.dart';
+import 'package:easy_onvif/util.dart';
 
 class OnvifPtzCommand extends Command {
   @override
@@ -14,14 +15,19 @@ class OnvifPtzCommand extends Command {
   OnvifPtzCommand() {
     addSubcommand(OnvifAbsoluteMovePtzCommand());
     addSubcommand(OnvifContinuousMovePtzCommand());
+    addSubcommand(OnvifGetCompatibleConfigurationsPtzCommand());
     addSubcommand(OnvifGetConfigurationPtzCommand());
+    addSubcommand(OnvifGetConfigurationOptionsPtzCommand());
     addSubcommand(OnvifGetConfigurationsPtzCommand());
+    addSubcommand(OnvifGetCurrentPresetPtzCommand());
     addSubcommand(OnvifGetPresetsPtzCommand());
+    addSubcommand(OnvifGetServiceCapabilitiesPtzCommand());
     addSubcommand(OnvifGetStatusPtzCommand());
     addSubcommand(OnvifGotoHomePositionPtzCommand());
     addSubcommand(OnvifGotoPresetPtzCommand());
     addSubcommand(OnvifRelativeMovePtzCommand());
     addSubcommand(OnvifRemovePresetPtzCommand());
+    addSubcommand(OnvifSetHomePositionPtzCommand());
     addSubcommand(OnvifSetPresetPtzCommand());
     addSubcommand(OnvifStopPtzCommand());
     addSubcommand(OnvifMovePtzCommand());
@@ -32,16 +38,15 @@ class OnvifPtzCommand extends Command {
     addSubcommand(OnvifZoomPtzCommand());
     addSubcommand(OnvifZoomInPtzCommand());
     addSubcommand(OnvifZoomOutPtzCommand());
-    addSubcommand(OnvifGetCurrentPresetPtzCommand());
   }
 }
 
-///Operation to move pan,tilt or zoom to a absolute destination.
+/// Operation to move pan,tilt or zoom to a absolute destination.
 ///
-///The speed argument is optional. If an x/y speed value is given it is up to
-///the device to either use the x value as absolute resulting speed vector or
-///to map x and y to the component speed. If the speed argument is omitted, the
-///default speed set by the PTZConfiguration will be used.
+/// The speed argument is optional. If an x/y speed value is given it is up to
+/// the device to either use the x value as absolute resulting speed vector or
+/// to map x and y to the component speed. If the speed argument is omitted, the
+/// default speed set by the PTZConfiguration will be used.
 class OnvifAbsoluteMovePtzCommand extends OnvifHelperCommand {
   @override
   String get description =>
@@ -92,10 +97,10 @@ class OnvifAbsoluteMovePtzCommand extends OnvifHelperCommand {
   }
 }
 
-///Operation for continuous Pan/Tilt and Zoom movements. The operation is
-///supported if the PTZNode supports at least one continuous Pan/Tilt or Zoom
-///space. If the space argument is omitted, the default space set by the
-///PTZConfiguration will be used.
+/// Operation for continuous Pan/Tilt and Zoom movements. The operation is
+/// supported if the PTZNode supports at least one continuous Pan/Tilt or Zoom
+/// space. If the space argument is omitted, the default space set by the
+/// PTZConfiguration will be used.
 class OnvifContinuousMovePtzCommand extends OnvifHelperCommand {
   @override
   String get description =>
@@ -146,26 +151,67 @@ class OnvifContinuousMovePtzCommand extends OnvifHelperCommand {
   }
 }
 
-///Get a specific PTZconfiguration from the device, identified by its reference
-///token or name.
+/// Operation to get all available PTZConfigurations that can be added to the
+/// referenced media profile.
 ///
-///The default Position/Translation/Velocity Spaces are introduced to allow NVCs
-///sending move requests without the need to specify a certain coordinate
-///system. The default Speeds are introduced to control the speed of move
-///requests (absolute, relative, preset), where no explicit speed has been set.
+/// A device providing more than one PTZConfiguration or more than one
+/// VideoSourceConfiguration or which has any other resource interdependency
+/// between PTZConfiguration entities and other resources listable in a media
+/// profile should implement this operation. PTZConfiguration entities returned
+/// by this operation shall not fail on adding them to the referenced media
+/// profile.
+class OnvifGetCompatibleConfigurationsPtzCommand extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'Contains the token of an existing media profile the configurations shall be compatible with.';
+
+  @override
+  String get name => 'get-compatible-configurations';
+
+  OnvifGetCompatibleConfigurationsPtzCommand() {
+    argParser.addOption('profile-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.');
+  }
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final ptzConfigurations =
+          await ptz.getCompatibleConfigurations(argResults!['profile-token']);
+
+      print(ptzConfigurations);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// Get a specific PTZconfiguration from the device, identified by its reference
+/// token or name.
 ///
-///The allowed pan and tilt range for Pan/Tilt Limits is defined by a
-///two-dimensional space range that is mapped to a specific Absolute Pan/Tilt
-///Position Space. At least one Pan/Tilt Position Space is required by the
-///PTZNode to support Pan/Tilt limits. The limits apply to all supported
-///absolute, relative and continuous Pan/Tilt movements. The limits shall be
-///checked within the coordinate system for which the limits have been
-///specified. That means that even if movements are specified in a different
-///coordinate system, the requested movements shall be transformed to the
-///coordinate system of the limits where the limits can be checked. When a
-///relative or continuous movements is specified, which would leave the
-///specified limits, the PTZ unit has to move along the specified limits. The
-///Zoom Limits have to be interpreted accordingly.
+/// The default Position/Translation/Velocity Spaces are introduced to allow
+/// NVCs sending move requests without the need to specify a certain coordinate
+/// system. The default Speeds are introduced to control the speed of move
+/// requests (absolute, relative, preset), where no explicit speed has been set.
+///
+/// The allowed pan and tilt range for Pan/Tilt Limits is defined by a
+/// two-dimensional space range that is mapped to a specific Absolute Pan/Tilt
+/// Position Space. At least one Pan/Tilt Position Space is required by the
+/// PTZNode to support Pan/Tilt limits. The limits apply to all supported
+/// absolute, relative and continuous Pan/Tilt movements. The limits shall be
+/// checked within the coordinate system for which the limits have been
+/// specified. That means that even if movements are specified in a different
+/// coordinate system, the requested movements shall be transformed to the
+/// coordinate system of the limits where the limits can be checked. When a
+/// relative or continuous movements is specified, which would leave the
+/// specified limits, the PTZ unit has to move along the specified limits. The
+/// Zoom Limits have to be interpreted accordingly.
 class OnvifGetConfigurationPtzCommand extends OnvifHelperCommand {
   @override
   String get description =>
@@ -197,25 +243,64 @@ class OnvifGetConfigurationPtzCommand extends OnvifHelperCommand {
   }
 }
 
-///Get all the existing PTZConfigurations from the device.
+/// List supported coordinate systems including their range limitations.
+/// Therefore, the options MAY differ depending on whether the PTZ Configuration
+/// is assigned to a Profile containing a Video Source Configuration. In that
+/// case, the options may additionally contain coordinate systems referring to
+/// the image coordinate system described by the Video Source Configuration. If
+/// the PTZ Node supports continuous movements, it shall return a Timeout Range
+/// within which Timeouts are accepted by the PTZ Node.
+class OnvifGetConfigurationOptionsPtzCommand extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'Token of an existing configuration that the options are intended for.';
+
+  @override
+  String get name => 'get-configuration-options';
+
+  OnvifGetConfigurationOptionsPtzCommand() {
+    argParser.addOption('configuration-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'Token of an existing configuration that the options are intended for.');
+  }
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final ptzConfigurationOptions =
+          await ptz.getConfigurationOptions(argResults!['configuration-token']);
+
+      print(ptzConfigurationOptions);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// Get all the existing PTZConfigurations from the device.
 ///
-///The default Position/Translation/Velocity Spaces are introduced to allow NVCs
-///sending move requests without the need to specify a certain coordinate
-///system. The default Speeds are introduced to control the speed of move
-///requests (absolute, relative, preset), where no explicit speed has been set.
+/// The default Position/Translation/Velocity Spaces are introduced to allow
+/// NVCs sending move requests without the need to specify a certain coordinate
+/// system. The default Speeds are introduced to control the speed of move
+/// requests (absolute, relative, preset), where no explicit speed has been set.
 ///
-///The allowed pan and tilt range for Pan/Tilt Limits is defined by a
-///two-dimensional space range that is mapped to a specific Absolute Pan/Tilt
-///Position Space. At least one Pan/Tilt Position Space is required by the
-///PTZNode to support Pan/Tilt limits. The limits apply to all supported
-///absolute, relative and continuous Pan/Tilt movements. The limits shall be
-///checked within the coordinate system for which the limits have been
-///specified. That means that even if movements are specified in a different
-///coordinate system, the requested movements shall be transformed to the
-///coordinate system of the limits where the limits can be checked. When a
-///relative or continuous movements is specified, which would leave the
-///specified limits, the PTZ unit has to move along the specified limits. The
-///Zoom Limits have to be interpreted accordingly.
+/// The allowed pan and tilt range for Pan/Tilt Limits is defined by a
+/// two-dimensional space range that is mapped to a specific Absolute Pan/Tilt
+/// Position Space. At least one Pan/Tilt Position Space is required by the
+/// PTZNode to support Pan/Tilt limits. The limits apply to all supported
+/// absolute, relative and continuous Pan/Tilt movements. The limits shall be
+/// checked within the coordinate system for which the limits have been
+/// specified. That means that even if movements are specified in a different
+/// coordinate system, the requested movements shall be transformed to the
+/// coordinate system of the limits where the limits can be checked. When a
+/// relative or continuous movements is specified, which would leave the
+/// specified limits, the PTZ unit has to move along the specified limits. The
+/// Zoom Limits have to be interpreted accordingly.
 class OnvifGetConfigurationsPtzCommand extends OnvifHelperCommand {
   @override
   String get description =>
@@ -238,9 +323,9 @@ class OnvifGetConfigurationsPtzCommand extends OnvifHelperCommand {
   }
 }
 
-///Operation to request all PTZ presets for the PTZNode in the selected profile.
-///The operation is supported if there is support for at least on PTZ preset by
-///the PTZNode.
+/// Operation to request all PTZ presets for the PTZNode in the selected
+/// profile. The operation is supported if there is support for at least on PTZ
+/// preset by the PTZNode.
 class OnvifGetPresetsPtzCommand extends OnvifHelperCommand {
   @override
   String get description =>
@@ -258,7 +343,9 @@ class OnvifGetPresetsPtzCommand extends OnvifHelperCommand {
           help:
               'A reference to the MediaProfile where the operation should take place.')
       ..addOption('limit',
-          valueHelp: 'int', help: 'Limit the number of presets returned');
+          defaultsTo: '10',
+          valueHelp: 'int',
+          help: 'Limit the number of presets returned');
   }
 
   @override
@@ -266,11 +353,36 @@ class OnvifGetPresetsPtzCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final presets = await ptz.getPresets(argResults!['profile-token']);
+      final presets = await ptz.getPresets(
+        argResults!['profile-token'],
+        limit: int.tryParse(argResults?['limit']),
+      );
 
-      print(json.encode(argResults?['limit'] != null
-          ? presets.sublist(0, int.parse(argResults!['limit']))
-          : presets));
+      print(presets);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// Returns the capabilities of the PTZ service. The result is returned in a
+/// typed answer.
+class OnvifGetServiceCapabilitiesPtzCommand extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'Returns the capabilities of the PTZ service. The result is returned in a typed answer.';
+
+  @override
+  String get name => 'get-service-capabilities';
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final capabilities = await ptz.getServiceCapabilities();
+
+      print(capabilities);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -309,7 +421,8 @@ class OnvifGetStatusPtzCommand extends OnvifHelperCommand {
   }
 }
 
-/// Operation to move the PTZ device to it's "home" position. The operation is supported if the HomeSupported element in the PTZNode is true.
+/// Operation to move the PTZ device to it's "home" position. The operation is
+/// supported if the HomeSupported element in the PTZNode is true.
 class OnvifGotoHomePositionPtzCommand extends OnvifHelperCommand {
   @override
   String get description =>
@@ -318,6 +431,7 @@ class OnvifGotoHomePositionPtzCommand extends OnvifHelperCommand {
   @override
   String get name => 'goto-home-position';
 
+  // TODO:  support for [PtzSpeed]
   OnvifGotoHomePositionPtzCommand() {
     argParser.addOption('profile-token',
         abbr: 't',
@@ -341,9 +455,9 @@ class OnvifGotoHomePositionPtzCommand extends OnvifHelperCommand {
   }
 }
 
-///Operation to go to a saved preset position for the PTZNode in the selected
-///profile. The operation is supported if there is support for at least on PTZ
-///preset by the PTZNode.
+/// Operation to go to a saved preset position for the PTZNode in the selected
+/// profile. The operation is supported if there is support for at least on PTZ
+/// preset by the PTZNode.
 class OnvifGotoPresetPtzCommand extends OnvifHelperCommand {
   @override
   String get description =>
@@ -352,6 +466,7 @@ class OnvifGotoPresetPtzCommand extends OnvifHelperCommand {
   @override
   String get name => 'goto-preset';
 
+  // TODO:  support for [PtzSpeed], no test for happytimesoft
   OnvifGotoPresetPtzCommand() {
     argParser
       ..addOption('profile-token',
@@ -373,20 +488,21 @@ class OnvifGotoPresetPtzCommand extends OnvifHelperCommand {
     try {
       final profileToken = argResults!['profile-token'];
 
-      await ptz.gotoPreset(profileToken, argResults!['preset-token']);
+      await ptz.gotoPreset(profileToken,
+          presetToken: argResults!['preset-token']);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
 }
 
-///Operation for Relative Pan/Tilt and Zoom Move. The operation is supported if
-///the PTZNode supports at least one relative Pan/Tilt or Zoom space.
+/// Operation for Relative Pan/Tilt and Zoom Move. The operation is supported if
+/// the PTZNode supports at least one relative Pan/Tilt or Zoom space.
 ///
-///The speed argument is optional. If an x/y speed value is given it is up to
-///the device to either use the x value as absolute resulting speed vector or
-///to map x and y to the component speed. If the speed argument is omitted, the
-///default speed set by the PTZConfiguration will be used.
+/// The speed argument is optional. If an x/y speed value is given it is up to
+/// the device to either use the x value as absolute resulting speed vector or
+/// to map x and y to the component speed. If the speed argument is omitted, the
+/// default speed set by the PTZConfiguration will be used.
 class OnvifRelativeMovePtzCommand extends OnvifHelperCommand {
   @override
   String get description => 'Operation for Relative Pan/Tilt and Zoom Move.';
@@ -394,6 +510,7 @@ class OnvifRelativeMovePtzCommand extends OnvifHelperCommand {
   @override
   String get name => 'relative-move';
 
+  // TODO:  support for [PtzSpeed]
   OnvifRelativeMovePtzCommand() {
     argParser
       ..addOption('profile-token',
@@ -464,23 +581,59 @@ class OnvifRemovePresetPtzCommand extends OnvifHelperCommand {
 
     try {
       await ptz.removePreset(
-          argResults!['profile-token'], argResults!['preset-token']);
+        argResults!['profile-token'],
+        preset: Preset.fromToken(argResults!['preset-token']),
+      );
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
 }
 
-///The SetPreset command saves the current device position parameters so that
-///the device can move to the saved preset position through the GotoPreset
-///operation. In order to create a new preset, the SetPresetRequest contains no
-///PresetToken. If creation is successful, the Response contains the PresetToken
-///which uniquely identifies the Preset. An existing Preset can be overwritten
-///by specifying the PresetToken of the corresponding Preset. In both cases
-///(overwriting or creation) an optional PresetName can be specified. The
-///operation fails if the PTZ device is moving during the SetPreset operation.
-///The device MAY internally save additional states such as imaging properties
-///in the PTZ Preset which then should be recalled in the GotoPreset operation.
+/// Operation to save current position as the home position. The SetHomePosition
+/// command returns with a failure if the “home” position is fixed and cannot be
+/// overwritten. If the SetHomePosition is successful, it is possible to recall
+/// the Home Position with the GotoHomePosition command.
+class OnvifSetHomePositionPtzCommand extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'Operation to save current position as the home position. The SetHomePosition command returns with a failure if the “home” position is fixed and cannot be overwritten. If the SetHomePosition is successful, it is possible to recall the Home Position with the GotoHomePosition command.';
+
+  @override
+  String get name => 'set-home-position';
+
+  OnvifSetHomePositionPtzCommand() {
+    argParser.addOption('profile-token',
+        abbr: 't',
+        valueHelp: 'profile-token',
+        mandatory: true,
+        help:
+            'A reference to the MediaProfile where the operation should be set.');
+  }
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      await ptz.setHomePosition(argResults!['profile-token']);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// The SetPreset command saves the current device position parameters so that
+/// the device can move to the saved preset position through the GotoPreset
+/// operation. In order to create a new preset, the SetPresetRequest contains no
+/// PresetToken. If creation is successful, the Response contains the
+/// PresetToken which uniquely identifies the Preset. An existing Preset can be
+/// overwritten by specifying the PresetToken of the corresponding Preset. In
+/// both cases overwriting or creation) an optional PresetName can be specified.
+/// The operation fails if the PTZ device is moving during the SetPreset
+/// operation. The device MAY internally save additional states such as imaging
+/// properties in the PTZ Preset which then should be recalled in the GotoPreset
+/// operation.
 class OnvifSetPresetPtzCommand extends OnvifHelperCommand {
   @override
   String get description =>
@@ -510,17 +663,22 @@ class OnvifSetPresetPtzCommand extends OnvifHelperCommand {
     final profileToken = argResults!['profile-token'];
 
     try {
-      await ptz.setPreset(profileToken, argResults?['preset-name'],
-          argResults?['preset-token']);
+      final token = await ptz.setPreset(
+        profileToken,
+        presetName: argResults?['preset-name'],
+        presetToken: argResults?['preset-token'],
+      );
+
+      print(token);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
 }
 
-///Operation to stop ongoing pan, tilt and zoom movements of absolute relative
-///and continuous type. If no stop argument for pan, tilt or zoom is set, the
-///device will stop all ongoing pan, tilt and zoom movements.
+/// Operation to stop ongoing pan, tilt and zoom movements of absolute relative
+/// and continuous type. If no stop argument for pan, tilt or zoom is set, the
+/// device will stop all ongoing pan, tilt and zoom movements.
 class OnvifStopPtzCommand extends OnvifHelperCommand {
   @override
   String get description =>
@@ -563,7 +721,7 @@ class OnvifStopPtzCommand extends OnvifHelperCommand {
   }
 }
 
-///Operation for Relative Pan/Tilt Move without Zoom.
+/// Operation for Relative Pan/Tilt Move without Zoom.
 class OnvifMovePtzCommand extends OnvifHelperCommand {
   @override
   String get description =>
@@ -603,7 +761,7 @@ class OnvifMovePtzCommand extends OnvifHelperCommand {
   }
 }
 
-///Operation for a single step tilt down operation.
+/// Operation for a single step tilt down operation.
 class OnvifMoveDownPtzCommand extends OnvifHelperCommand {
   @override
   String get description => 'Operation for a single step tilt down operation.';
@@ -643,7 +801,7 @@ class OnvifMoveDownPtzCommand extends OnvifHelperCommand {
   }
 }
 
-///Operation for a single step pan left operation.
+/// Operation for a single step pan left operation.
 class OnvifMoveLeftPtzCommand extends OnvifHelperCommand {
   @override
   String get description => 'Operation for a single step pan left operation.';
@@ -683,7 +841,7 @@ class OnvifMoveLeftPtzCommand extends OnvifHelperCommand {
   }
 }
 
-///Operation for a single step pan right operation.
+/// Operation for a single step pan right operation.
 class OnvifMoveRightPtzCommand extends OnvifHelperCommand {
   @override
   String get description => 'Operation for a single step pan right operation';
@@ -723,7 +881,7 @@ class OnvifMoveRightPtzCommand extends OnvifHelperCommand {
   }
 }
 
-///Operation for a single step tilt upwards operation.
+/// Operation for a single step tilt upwards operation.
 class OnvifMoveUpPtzCommand extends OnvifHelperCommand {
   @override
   String get description =>
@@ -764,7 +922,7 @@ class OnvifMoveUpPtzCommand extends OnvifHelperCommand {
   }
 }
 
-///Operation for zoom.
+/// Operation for zoom.
 class OnvifZoomPtzCommand extends OnvifHelperCommand {
   @override
   String get description => 'Operation for zoom.';
@@ -799,7 +957,7 @@ class OnvifZoomPtzCommand extends OnvifHelperCommand {
   }
 }
 
-///Operation for a single step zoom in operation.
+/// Operation for a single step zoom in operation.
 class OnvifZoomInPtzCommand extends OnvifHelperCommand {
   @override
   String get description => 'Operation for a single step zoom in operation.';
@@ -839,7 +997,7 @@ class OnvifZoomInPtzCommand extends OnvifHelperCommand {
   }
 }
 
-///Operation for a single step zoom out operation.
+/// Operation for a single step zoom out operation.
 class OnvifZoomOutPtzCommand extends OnvifHelperCommand {
   @override
   String get description => 'Operation for a single step zoom out operation.';

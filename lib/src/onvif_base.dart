@@ -1,69 +1,72 @@
 import 'package:dio/dio.dart';
-import 'package:easy_onvif/onvif.dart';
+import 'package:easy_onvif/soap.dart' as soap;
+import 'package:easy_onvif/util.dart';
 import 'package:loggy/loggy.dart';
-import 'package:xml/xml.dart';
+
+import 'device_management.dart';
+import 'media.dart';
+import 'media1.dart';
+import 'media2.dart';
+import 'ptz.dart';
 
 class Onvif with UiLoggy {
-  late final DeviceManagement deviceManagement;
-  late final Uri _deviceServiceUri;
-
-  final String host;
-  final String username;
-  final String password;
+  final AuthInfo authInfo;
   final Uri _hostUri;
 
   final serviceMap = <String, String>{};
 
-  Duration? _timeDelta;
+  MediaSupportLevel mediaSupportLevel = MediaSupportLevel.none;
+
+  soap.Transport? _transport;
+  DeviceManagement? _deviceManagement;
   Media? _media;
   Ptz? _ptz;
 
-  Duration get timeDelta => _timeDelta!;
+  soap.Transport get transport =>
+      _transport ??
+      (throw Exception('DeviceManagement services not available'));
 
-  Media get media {
-    if (_media == null) throw Exception('Media services not available');
+  DeviceManagement get deviceManagement =>
+      _deviceManagement ??
+      (throw Exception('DeviceManagement services not available'));
 
-    return _media!;
-  }
+  Media get media =>
+      _media ?? (throw Exception('Media services not available'));
 
-  Ptz get ptz {
-    if (_ptz == null) throw Exception('PTZ services not available');
-
-    return _ptz!;
-  }
+  Ptz get ptz => _ptz ?? (throw Exception('PTZ services not available'));
 
   Onvif(
-      {required this.host,
-      required this.username,
-      required this.password,
+      {required this.authInfo,
       required LogOptions logOptions,
       required LoggyPrinter printer})
-      : _hostUri = (host.startsWith('http') ? host : 'http://$host').parseUri {
+      : _hostUri = (authInfo.host.startsWith('http')
+                ? authInfo.host
+                : 'http://${authInfo.host}')
+            .parseUri {
     Loggy.initLoggy(logPrinter: printer, logOptions: logOptions);
 
-    final dio = Dio();
+    final dio = Dio()
+      ..interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
+        loggy.debug('URI: ${options.uri}');
 
-    dio.interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
-      loggy.debug('URI: ${options.uri}');
+        loggy.debug('REQUEST:\n${options.data}');
 
-      loggy.debug('REQUEST:\n${options.data}');
+        return handler.next(options); //continue
+      }, onResponse: (response, handler) {
+        loggy.debug('RESPONSE:\n${response.data}');
 
-      return handler.next(options); //continue
-    }, onResponse: (response, handler) {
-      loggy.debug('RESPONSE:\n${response.data}');
+        return handler.next(response); // continue
+      }, onError: (DioError e, handler) {
+        loggy.error('ERROR:\n$e');
 
-      return handler.next(response); // continue
-    }, onError: (DioError e, handler) {
-      loggy.error('ERROR:\n$e');
+        return handler.next(e); //continue
+      }));
 
-      return handler.next(e); //continue
-    }));
+    _transport = soap.Transport(dio: dio, authInfo: authInfo);
 
-    Soap.dio = dio;
-
-    _deviceServiceUri = '${_hostUri.origin}/onvif/device_service'.parseUri;
-
-    deviceManagement = DeviceManagement(onvif: this, uri: _deviceServiceUri);
+    _deviceManagement = DeviceManagement(
+        transport: transport,
+        uri: '${_hostUri.origin}/onvif/device_service'.parseUri);
   }
 
   static Future<Onvif> connect(
@@ -77,10 +80,12 @@ class Onvif with UiLoggy {
       LoggyPrinter printer = const PrettyPrinter(
         showColors: false,
       )}) async {
-    var onvif = Onvif(
-        host: host,
-        username: username,
-        password: password,
+    final onvif = Onvif(
+        authInfo: AuthInfo(
+          host: host,
+          username: username,
+          password: password,
+        ),
         logOptions: logOptions,
         printer: printer);
 
@@ -89,57 +94,82 @@ class Onvif with UiLoggy {
     return onvif;
   }
 
-  ///Connect to the Onvif device and retrieve its capabilities
+  /// Connect to the Onvif device and determine the time delta which is required
+  /// for future requests.
+  Future<Duration> getTimeDelta() async {
+    final dateTime = await deviceManagement.getSystemDateAndTime();
+
+    return dateTime.utcDateTime != null
+        ? dateTime.utcDateTime!.difference(DateTime.now().toUtc())
+        : const Duration(seconds: 0);
+  }
+
+  /// Connect to the Onvif device and retrieve its capabilities
   Future<void> initialize() async {
     loggy.info('initializing ...');
 
-    final datetime = await deviceManagement.getSystemDateAndTime();
+    Media1? media1;
+    Media2? media2;
 
-    _timeDelta = datetime.utcDateTime != null
-        ? datetime.utcDateTime!.difference(DateTime.now().toUtc())
-        : const Duration(seconds: 0);
+    soap.Transport.timeDelta = await getTimeDelta();
 
     try {
-      final serviceList = await deviceManagement.getServices(true);
+      final serviceList = await deviceManagement.getServices();
 
       serviceMap.addAll(
           {for (var service in serviceList) service.nameSpace: service.xAddr});
 
-      if (serviceMap.containsKey('http://www.onvif.org/ver10/media/wsdl')) {
-        _media = Media(
-            onvif: this,
-            uri: _serviceUriOfHost(
-                serviceMap['http://www.onvif.org/ver10/media/wsdl']!));
+      if (serviceMap.containsKey(soap.Xmlns.trt)) {
+        media1 = Media1(
+            transport: transport,
+            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trt]!));
       }
+
+      if (serviceMap.containsKey(soap.Xmlns.tr2)) {
+        media2 = Media2(
+            transport: transport,
+            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.tr2]!));
+      }
+
+      _media = Media(
+        transport: transport,
+        media1: media1,
+        media2: media2,
+      );
 
       if (serviceMap.containsKey('http://www.onvif.org/ver20/ptz/wsdl')) {
         _ptz = Ptz(
-            onvif: this,
+            transport: transport,
             uri: _serviceUriOfHost(
                 serviceMap['http://www.onvif.org/ver20/ptz/wsdl']!));
       }
     } catch (error) {
       loggy.warning('GetServices command not supported');
-    } finally {
+
       final capabilities = await deviceManagement.getCapabilities();
 
-      if (capabilities.media?.xaddr != null) {
+      if (capabilities.media?.xAddr != null) {
         _media = Media(
-            onvif: this, uri: _serviceUriOfHost(capabilities.media!.xaddr));
+          transport: transport,
+          media1: Media1(
+              transport: transport,
+              uri: _serviceUriOfHost(capabilities.media!.xAddr)),
+        );
       }
 
       if (capabilities.ptz?.xAddr != null) {
-        _ptz =
-            Ptz(onvif: this, uri: _serviceUriOfHost(capabilities.ptz!.xAddr));
+        _ptz = Ptz(
+            transport: transport,
+            uri: _serviceUriOfHost(capabilities.ptz!.xAddr));
       }
     }
 
     loggy.info('initialization complete');
   }
 
-  ///if the host and port of the original request to the host is different for a
-  ///service uri, then the request has been made through a firewall and the host
-  ///portion of the uri will need to be updated appropriately.
+  /// If the host and port of the original request to the host is different for
+  /// a service uri, then the request has been made through a firewall and the
+  /// host portion of the uri will need to be updated appropriately.
   Uri _serviceUriOfHost(String serviceUrl) {
     final serviceUri = serviceUrl.parseUri;
 
@@ -155,26 +185,22 @@ class Onvif with UiLoggy {
     );
   }
 
-  XmlDocument secureRequest(XmlDocumentFragment content) =>
-      SoapRequest.envelope(_securityHeader, content);
-
-  XmlDocumentFragment get _securityHeader {
-    final authorization =
-        Authorization(password: password, timeDelta: timeDelta);
-
-    final security = SoapRequest.security(
-        username: username,
-        password: authorization.digest,
-        nonce: authorization.nonce,
-        created: authorization.timeStamp);
-
-    return SoapRequest.header(security);
-  }
-
   /* for testing:
         , postProcess: (String xmlBody, dynamic jsonMap, Envelope envelope) {
       print(xmlBody);
       print('\n\n');
       print(jsonMap);
     } */
+}
+
+class AuthInfo {
+  final String host;
+  final String username;
+  final String password;
+
+  AuthInfo({
+    required this.host,
+    required this.username,
+    required this.password,
+  });
 }

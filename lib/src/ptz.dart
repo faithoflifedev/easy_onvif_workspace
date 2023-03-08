@@ -1,112 +1,187 @@
-import 'package:easy_onvif/onvif.dart';
+import 'package:easy_onvif/ptz.dart';
+import 'package:easy_onvif/shared.dart';
+import 'package:easy_onvif/soap.dart' as soap;
 import 'package:loggy/loggy.dart';
 
 class Ptz with UiLoggy {
-  final Onvif onvif;
+  final soap.Transport transport;
 
   final Uri uri;
 
   final configurationCache = <String, PtzConfiguration>{};
 
-  PtzSpeed? defaultSpeed;
-
   PanTiltLimits? defaultPanTiltLimits;
-
+  PtzSpeed? defaultSpeed;
   ZoomLimits? defaultZoomLimits;
 
-  Ptz({required this.onvif, required this.uri});
+  Ptz({
+    required this.transport,
+    required this.uri,
+  });
 
-  ///Operation to move pan,tilt or zoom to a absolute destination.
+  /// Operation to move pan,tilt or zoom to a absolute destination.
   ///
-  ///The speed argument is optional. If an x/y speed value is given it is up to
-  ///the device to either use the x value as absolute resulting speed vector or
-  ///to map x and y to the component speed. If the speed argument is omitted,
-  ///the default speed set by the [PtzConfiguration] will be used.
+  /// The speed argument is optional. If an x/y speed value is given it is up to
+  /// the device to either use the x value as absolute resulting speed vector or
+  /// to map x and y to the component speed. If the speed argument is omitted,
+  /// the default speed set by the [PtzConfiguration] will be used.
   Future<bool> absoluteMove(String profileToken, PtzPosition place,
       [PtzPosition? speed]) async {
     loggy.debug('absoluteMove');
 
-    final envelope = await Soap.retrieveEnvelope(
+    final envelope = await transport.sendRequest(
         uri,
-        onvif.secureRequest(
-            SoapRequest.absoluteMove(profileToken, place, speed)));
+        transport.securedEnvelope(
+            soap.PtzRequest.absoluteMove(profileToken, place, speed)));
 
-    if (envelope.body.absoluteMoveResponse == null) {
-      throw Exception();
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
     }
 
     return true;
   }
 
-  ///Operation for continuous Pan/Tilt and Zoom movements. The operation is
-  ///supported if the PTZNode supports at least one continuous Pan/Tilt or Zoom
-  ///space. If the space argument is omitted, the default space set by the
-  ///[PtzConfiguration] will be used.
+  /// Operation for continuous Pan/Tilt and Zoom movements. The operation is
+  /// supported if the PTZNode supports at least one continuous Pan/Tilt or Zoom
+  /// space. If the space argument is omitted, the default space set by the
+  /// [PtzConfiguration] will be used.
   Future<bool> continuousMove(String profileToken, PtzPosition velocity,
       [int? timeout]) async {
     loggy.debug('continuousMove');
 
-    final envelope = await Soap.retrieveEnvelope(
+    final envelope = await transport.sendRequest(
         uri,
-        onvif.secureRequest(
-            SoapRequest.continuousMove(profileToken, velocity, timeout)));
+        transport.securedEnvelope(soap.PtzRequest.continuousMove(profileToken,
+            velocity: velocity, timeout: timeout)));
 
-    if (envelope.body.continuousMoveResponse == null) {
-      throw Exception();
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
     }
 
     return true;
   }
 
+  /// Operation to get all available PTZConfigurations that can be added to the
+  /// referenced media profile.
+  /// A device providing more than one PTZConfiguration or more than one
+  /// [VideoSourceConfiguration] or which has any other resource interdependency
+  /// between [PtzConfiguration] entities and other resources listable in a
+  /// media profile should implement this operation. PTZConfiguration entities
+  /// returned by this operation shall not fail on adding them to the referenced
+  /// media profile.
   Future<List<PtzConfiguration>> getCompatibleConfigurations(
       String profileToken) async {
     loggy.debug('getCompatibleConfigurations');
 
-    final envelope = await Soap.retrieveEnvelope(
+    final envelope = await transport.sendRequest(
         uri,
-        onvif.secureRequest(
-            SoapRequest.getCompatibleConfigurations(profileToken)));
+        transport.securedEnvelope(
+            soap.PtzRequest.getCompatibleConfigurations(profileToken)));
 
-    if (envelope.body.compatibleConfigurationsResponse == null) {
-      throw Exception();
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
     }
 
-    return envelope.body.compatibleConfigurationsResponse!.ptzConfigurations;
+    return GetCompatibleConfigurationsResponse.fromJson(envelope.body.response!)
+        .ptzConfigurations;
   }
 
-  ///Get all the existing PTZConfigurations from the device.
+  /// Get a specific PTZconfiguration from the device, identified by its reference token or name.
   ///
-  ///The default Position/Translation/Velocity Spaces are introduced to allow
-  ///NVCs sending move requests without the need to specify a certain coordinate
-  ///system. The default Speeds are introduced to control the speed of move
-  ///requests (absolute, relative, preset), where no explicit speed has been
-  ///set.
+  /// The default Position/Translation/Velocity Spaces are introduced to allow
+  /// NVCs sending move requests without the need to specify a certain
+  /// coordinate system. The default Speeds are introduced to control the speed
+  /// of move requests (absolute, relative, preset), where no explicit speed has
+  /// been set.
   ///
-  ///The allowed pan and tilt range for Pan/Tilt Limits is defined by a
-  ///two-dimensional space range that is mapped to a specific Absolute Pan/Tilt
-  ///Position Space. At least one Pan/Tilt Position Space is required by the
-  ///PTZNode to support Pan/Tilt limits. The limits apply to all supported
-  ///absolute, relative and continuous Pan/Tilt movements. The limits shall be
-  ///checked within the coordinate system for which the limits have been
-  ///specified. That means that even if movements are specified in a different
-  ///coordinate system, the requested movements shall be transformed to the
-  ///coordinate system of the limits where the limits can be checked. When a
-  ///relative or continuous movements is specified, which would leave the
-  ///specified limits, the PTZ unit has to move along the specified limits. The
-  ///Zoom Limits have to be interpreted accordingly.
+  /// The allowed pan and tilt range for Pan/Tilt Limits is defined by a
+  /// two-dimensional space range that is mapped to a specific Absolute Pan/Tilt
+  /// Position Space. At least one Pan/Tilt Position Space is required by the
+  /// PTZNode to support Pan/Tilt limits. The limits apply to all supported
+  /// absolute, relative and continuous Pan/Tilt movements. The limits shall be
+  /// checked within the coordinate system for which the limits have been
+  /// specified. That means that even if movements are specified in a different
+  /// coordinate system, the requested movements shall be transformed to the
+  /// coordinate system of the limits where the limits can be checked. When a
+  /// relative or continuous movements is specified, which would leave the
+  /// specified limits, the PTZ unit has to move along the specified limits. The
+  /// Zoom Limits have to be interpreted accordingly.
+  Future<PtzConfiguration> getConfiguration(String referenceToken) async {
+    loggy.debug('getConfiguration');
+
+    final envelope = await transport.sendRequest(
+        uri,
+        transport
+            .securedEnvelope(soap.PtzRequest.getConfiguration(referenceToken)));
+
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
+    }
+
+    return GetConfigurationResponse.fromJson(envelope.body.response!)
+        .ptzConfiguration;
+  }
+
+  /// List supported coordinate systems including their range limitations.
+  /// Therefore, the options MAY differ depending on whether the PTZ
+  /// Configuration is assigned to a Profile containing a Video Source
+  /// Configuration. In that case, the options may additionally contain
+  /// coordinate systems referring to the image coordinate system described by
+  /// the Video Source Configuration. If the PTZ Node supports continuous
+  /// movements, it shall return a Timeout Range within which Timeouts are
+  /// accepted by the PTZ Node.
+  Future<PtzConfigurationOptions> getConfigurationOptions(
+      String configurationToken) async {
+    loggy.debug('getConfigurationOptions');
+
+    final envelope = await transport.sendRequest(
+        uri,
+        transport.securedEnvelope(
+            soap.PtzRequest.getConfigurationOptions(configurationToken)));
+
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
+    }
+
+    return GetConfigurationOptionsResponse.fromJson(envelope.body.response!)
+        .ptzConfigurationOptions;
+  }
+
+  /// Get all the existing PTZConfigurations from the device.
+  ///
+  /// The default Position/Translation/Velocity Spaces are introduced to allow
+  /// NVCs sending move requests without the need to specify a certain
+  /// coordinate system. The default Speeds are introduced to control the speed
+  /// of move requests (absolute, relative, preset), where no explicit speed has
+  /// been set.
+  ///
+  /// The allowed pan and tilt range for Pan/Tilt Limits is defined by a
+  /// two-dimensional space range that is mapped to a specific Absolute Pan/Tilt
+  /// Position Space. At least one Pan/Tilt Position Space is required by the
+  /// PTZNode to support Pan/Tilt limits. The limits apply to all supported
+  /// absolute, relative and continuous Pan/Tilt movements. The limits shall be
+  /// checked within the coordinate system for which the limits have been
+  /// specified. That means that even if movements are specified in a different
+  /// coordinate system, the requested movements shall be transformed to the
+  /// coordinate system of the limits where the limits can be checked. When a
+  /// relative or continuous movements is specified, which would leave the
+  /// specified limits, the PTZ unit has to move along the specified limits. The
+  /// Zoom Limits have to be interpreted accordingly.
   Future<List<PtzConfiguration>> getConfigurations() async {
     loggy.debug('getConfigurations');
 
-    final envelope = await Soap.retrieveEnvelope(
-        uri, onvif.secureRequest(SoapRequest.getPtzConfigurations()));
+    final envelope = await transport.sendRequest(
+        uri, transport.securedEnvelope(soap.PtzRequest.getConfigurations()));
 
-    if (envelope.body.configurationsResponse == null) throw Exception();
+    if (envelope.body.response == null) throw Exception();
 
-    final ptzConfigs = envelope.body.configurationsResponse!.ptzConfigurations;
+    final ptzConfigurations =
+        GetConfigurationsResponse.fromJson(envelope.body.response!)
+            .ptzConfigurations;
 
     _clearDefaults();
 
-    for (var ptzConfiguration in ptzConfigs) {
+    for (var ptzConfiguration in ptzConfigurations) {
       defaultSpeed ??= ptzConfiguration.defaultPtzSpeed;
 
       defaultPanTiltLimits ??= ptzConfiguration.panTiltLimits;
@@ -116,62 +191,29 @@ class Ptz with UiLoggy {
       configurationCache[ptzConfiguration.token] = ptzConfiguration;
     }
 
-    return ptzConfigs;
+    return ptzConfigurations;
   }
 
-  ///Get a specific PTZconfiguration from the device, identified by its
-  ///reference token or name.
-  ///
-  ///The default Position/Translation/Velocity Spaces are introduced to allow
-  ///NVCs sending move requests without the need to specify a certain coordinate
-  ///system. The default Speeds are introduced to control the speed of move
-  ///requests (absolute, relative, preset), where no explicit speed has been
-  ///set.
-  ///
-  ///The allowed pan and tilt range for Pan/Tilt Limits is defined by a
-  ///two-dimensional space range that is mapped to a specific Absolute Pan/Tilt
-  ///Position Space. At least one Pan/Tilt Position Space is required by the
-  ///PTZNode to support Pan/Tilt limits. The limits apply to all supported
-  ///absolute, relative and continuous Pan/Tilt movements. The limits shall be
-  ///checked within the coordinate system for which the limits have been
-  ///specified. That means that even if movements are specified in a different
-  ///coordinate system, the requested movements shall be transformed to the
-  ///coordinate system of the limits where the limits can be checked. When a
-  ///relative or continuous movements is specified, which would leave the
-  ///specified limits, the PTZ unit has to move along the specified limits. The
-  ///Zoom Limits have to be interpreted accordingly.
-  Future<PtzConfiguration> getConfiguration(
-      String ptzConfigurationToken) async {
-    loggy.debug('ptzConfigurationToken');
-
-    final envelope = await Soap.retrieveEnvelope(
-        uri,
-        onvif.secureRequest(
-            SoapRequest.getPtzConfiguration(ptzConfigurationToken)));
-
-    if (envelope.body.configurationResponse == null) throw Exception();
-
-    final ptzConfiguration =
-        envelope.body.configurationResponse!.ptzConfiguration;
-
-    configurationCache[ptzConfigurationToken] = ptzConfiguration;
-
-    return ptzConfiguration;
-  }
-
-  ///Operation to request all PTZ presets for the [Preset] in the selected
-  ///profile. The operation is supported if there is support for at least one
-  ///PTZ preset by the [Preset].
+  /// Operation to request all PTZ presets for the [Preset] in the selected
+  /// profile. The operation is supported if there is support for at least one
+  /// PTZ preset by the [Preset].
   Future<List<Preset>> getPresets(String profileToken,
-      {int limit = 100}) async {
+      {int? limit = 100}) async {
     loggy.debug('getPresets');
 
-    final envelope = await Soap.retrieveEnvelope(
-        uri, onvif.secureRequest(SoapRequest.presets(profileToken)));
+    final envelope = await transport.sendRequest(uri,
+        transport.securedEnvelope(soap.PtzRequest.getPresets(profileToken)));
 
-    if (envelope.body.getPresetResponse == null) throw Exception();
+    if (envelope.body.response == null) throw Exception();
 
-    return envelope.body.getPresetResponse!.presets.sublist(0, limit);
+    final presets =
+        GetPresetsResponse.fromJson(envelope.body.response!).presets;
+
+    limit = (limit! > presets.length) ? presets.length : limit;
+
+    return GetPresetsResponse.fromJson(envelope.body.response!)
+        .presets
+        .sublist(0, limit);
   }
 
   Future<Map<String, Preset>> getPresetsMap(String profileToken) async {
@@ -182,49 +224,73 @@ class Ptz with UiLoggy {
     };
   }
 
-  /// Operation to move the PTZ device to it's "home" position. The operation is supported if the HomeSupported element in the PTZNode is true.
-  Future<bool> gotoHomePosition(String profileToken, [PtzSpeed? speed]) async {
-    loggy.debug('gotoHomePosition');
+  /// Returns the capabilities of the PTZ service. The result is returned in a
+  /// typed answer.
+  Future<Capabilities> getServiceCapabilities() async {
+    loggy.debug('getServiceCapabilities');
 
-    final envelope = await Soap.retrieveEnvelope(uri,
-        onvif.secureRequest(SoapRequest.gotoHomePosition(profileToken, speed)));
+    final envelope = await transport.sendRequest(uri,
+        transport.securedEnvelope(soap.PtzRequest.getServiceCapabilities()));
 
-    if (envelope.body.gotoHomePositionResponse == null) {
-      throw Exception();
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
     }
 
-    return true;
+    return GetServiceCapabilitiesResponse.fromJson(envelope.body.response!)
+        .capabilities;
   }
 
-  ///Operation to go to a saved preset position for the [Preset] in the selected
-  ///profile. The operation is supported if there is support for at least on PTZ
-  ///preset by the [Preset].
-  Future<bool> gotoPreset(String profileToken, String presetToken,
-      [PtzSpeed? speed]) async {
-    loggy.debug('gotoPreset');
-
-    final envelope = await Soap.retrieveEnvelope(
-        uri,
-        onvif.secureRequest(
-            SoapRequest.gotoPreset(profileToken, presetToken, speed)));
-
-    if (envelope.body.gotoPresetResponse == null) {
-      throw Exception();
-    }
-
-    return true;
-  }
-
-  ///Operation to request PTZ status for the Node in the selected profile.
+  /// Operation to request PTZ status for the Node in the selected profile.
   Future<PtzStatus> getStatus(String profileToken) async {
     loggy.debug('getStatus');
 
-    final envelope = await Soap.retrieveEnvelope(
-        uri, onvif.secureRequest(SoapRequest.status(profileToken)));
+    final envelope = await transport.sendRequest(uri,
+        transport.securedEnvelope(soap.PtzRequest.getStatus(profileToken)));
 
-    if (envelope.body.statusResponse == null) throw Exception();
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
+    }
 
-    return envelope.body.statusResponse!.ptzStatus;
+    return GetStatusResponse.fromJson(envelope.body.response!).ptzStatus;
+  }
+
+  /// Operation to move the PTZ device to it's "home" position. The operation is
+  /// supported if the HomeSupported element in the PTZNode is true.
+  Future<bool> gotoHomePosition(String profileToken, [PtzSpeed? speed]) async {
+    loggy.debug('gotoHomePosition');
+
+    final envelope = await transport.sendRequest(
+        uri,
+        transport.securedEnvelope(
+            soap.PtzRequest.gotoHomePosition(profileToken, speed)));
+
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
+    }
+
+    return true;
+  }
+
+  /// Operation to go to a saved preset position for the [Preset] in the
+  /// selected profile. The operation is supported if there is support for at
+  /// least one PTZ preset by the [Preset].
+  Future<bool> gotoPreset(
+    String profileToken, {
+    required String presetToken,
+    PtzSpeed? speed,
+  }) async {
+    loggy.debug('gotoPreset');
+
+    final envelope = await transport.sendRequest(
+        uri,
+        transport.securedEnvelope(
+            soap.PtzRequest.gotoPreset(profileToken, presetToken, speed)));
+
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
+    }
+
+    return true;
   }
 
   Future<void> move(String profileToken, PanTilt direction,
@@ -245,7 +311,7 @@ class Ptz with UiLoggy {
 
       loggy.error('Attempting workaround with AbsoluteMove');
 
-      final ptzStatus = await onvif.ptz.getStatus(profileToken);
+      final ptzStatus = await getStatus(profileToken);
 
       if (ptzStatus.position.panTilt != null) {
         panTilt = PanTilt(
@@ -264,109 +330,136 @@ class Ptz with UiLoggy {
     }
   }
 
-  ///A helper method to perform a single [step] of a [relativeMove] on the
-  ///negative y axis (down)
+  /// A helper method to perform a single [step] of a [relativeMove] on the
+  /// negative y axis (down)
   Future<void> moveDown(String profileToken, [int step = 25]) async {
     loggy.debug('moveDown');
 
     await move(profileToken, PanTilt.fromInt(y: 0 - step, x: 0));
   }
 
-  ///A helper method to perform a single [step] of a [relativeMove] on the
-  ///negative x axis (left)
+  /// A helper method to perform a single [step] of a [relativeMove] on the
+  /// negative x axis (left)
   Future<void> moveLeft(String profileToken, [int step = 25]) async {
     loggy.debug('moveLeft');
 
     await move(profileToken, PanTilt.fromInt(x: 0 - step, y: 0));
   }
 
-  ///A helper method to perform a single [step] of a [relativeMove] on the
-  ///positive x axis (right)
+  /// A helper method to perform a single [step] of a [relativeMove] on the
+  /// positive x axis (right)
   Future<void> moveRight(String profileToken, [int step = 25]) async {
     loggy.debug('moveRight');
 
     await move(profileToken, PanTilt.fromInt(x: step, y: 0));
   }
 
-  ///A helper method to perform a single [step] of a [relativeMove] on the
-  ///positive y axis (up)
+  /// A helper method to perform a single [step] of a [relativeMove] on the
+  /// positive y axis (up)
   Future<void> moveUp(String profileToken, [int step = 25]) async {
     loggy.debug('moveUp');
 
     await move(profileToken, PanTilt.fromInt(y: step, x: 0));
   }
 
-  ///Operation for Relative Pan/Tilt and Zoom Move. The operation is supported
-  ///if the PTZNode supports at least one relative Pan/Tilt or Zoom space.
+  /// Operation for Relative Pan/Tilt and Zoom Move. The operation is supported
+  /// if the PTZNode supports at least one relative Pan/Tilt or Zoom space.
   ///
-  ///The speed argument is optional. If an x/y speed value is given it is up to
-  ///the device to either use the x value as absolute resulting speed vector or
-  ///to map x and y to the component speed. If the speed argument is omitted,
-  ///the default speed set by the [PtzConfiguration] will be used.
-  Future<void> relativeMove(String profileToken, PtzPosition move) async {
+  /// The speed argument is optional. If an x/y speed value is given it is up to
+  /// the device to either use the x value as absolute resulting speed vector or
+  /// to map x and y to the component speed. If the speed argument is omitted,
+  /// the default speed set by the [PtzConfiguration] will be used.
+  Future<bool> relativeMove(String profileToken, PtzPosition move) async {
     loggy.debug('relativeMove');
 
-    await Soap.retrieveEnvelope(
-        uri, onvif.secureRequest(SoapRequest.relativeMove(profileToken, move)));
+    final envelope = await transport.sendRequest(
+        uri,
+        transport
+            .securedEnvelope(soap.PtzRequest.relativeMove(profileToken, move)));
+
+    return envelope.body.response?.containsKey('RelativeMoveResponse') ?? false;
   }
 
-  ///Operation to remove a PTZ preset for the Node in the selected profile. The
-  ///operation is supported if the PresetPosition capability exists for the Node
-  ///in the selected profile.
-  Future<void> removePreset(String profileToken, Preset preset) async {
+  /// Operation to remove a PTZ preset for the Node in the selected profile. The
+  /// operation is supported if the PresetPosition capability exists for the Node
+  /// in the selected profile.
+  Future<bool> removePreset(String profileToken,
+      {required Preset preset}) async {
     loggy.debug('removePreset');
 
-    await Soap.retrieveEnvelope(uri,
-        onvif.secureRequest(SoapRequest.removePreset(profileToken, preset)));
+    final envelope = await transport.sendRequest(
+        uri,
+        transport.securedEnvelope(
+            soap.PtzRequest.removePreset(profileToken, preset: preset)));
+
+    return envelope.body.response?.containsKey('RemovePresetResponse') ?? false;
   }
 
-  ///The [setPreset] command saves the current device position parameters so
-  ///that the device can move to the saved preset position through the
-  ///[gotoPreset] operation. In order to create a new [Preset], the
-  ///SetPresetRequest contains no PresetToken. If creation is successful, the
-  ///Response contains the PresetToken which uniquely identifies the Preset. An
-  ///existing [Preset] can be overwritten by specifying the PresetToken of the
-  ///corresponding [Preset]. In both cases (overwriting or creation) an optional
-  ///PresetName can be specified. The operation fails if the PTZ device is
-  ///moving during the [setPreset] operation. The device may internally save
-  ///additional states such as imaging properties in the PTZ Preset which then
-  ///should be recalled in the [gotoPreset] operation.
-  Future<String> setPreset(String profileToken,
-      [String? name, String? token]) async {
+  /// Operation to save current position as the home position. The
+  /// SetHomePosition command returns with a failure if the “home” position is
+  /// fixed and cannot be overwritten. If the SetHomePosition is successful, it
+  /// is possible to recall the Home Position with the GotoHomePosition command.
+  Future<bool> setHomePosition(String profileToken) async {
+    loggy.debug('removePreset');
+
+    final envelope = await transport.sendRequest(
+        uri,
+        transport
+            .securedEnvelope(soap.PtzRequest.setHomePosition(profileToken)));
+
+    return envelope.body.response?.containsKey('SetHomePositionResponse') ??
+        false;
+  }
+
+  /// The [setPreset] command saves the current device position parameters so
+  /// that the device can move to the saved preset position through the
+  /// [gotoPreset] operation. In order to create a new [Preset], the
+  /// SetPresetRequest contains no PresetToken. If creation is successful, the
+  /// Response contains the PresetToken which uniquely identifies the Preset. An
+  /// existing [Preset] can be overwritten by specifying the PresetToken of the
+  /// corresponding [Preset]. In both cases (overwriting or creation) an
+  /// optional PresetName can be specified. The operation fails if the PTZ
+  /// device is moving during the [setPreset] operation. The device may
+  /// internally save additional states such as imaging properties in the PTZ
+  /// Preset which then should be recalled in the [gotoPreset] operation.
+  Future<String> setPreset(
+    String profileToken, {
+    String? presetName,
+    String? presetToken,
+  }) async {
     loggy.debug('setPreset');
 
-    final envelope = await Soap.retrieveEnvelope(
+    final envelope = await transport.sendRequest(
       uri,
-      onvif.secureRequest(SoapRequest.setPreset(profileToken, name, token)),
+      transport.securedEnvelope(soap.PtzRequest.setPreset(profileToken,
+          presetName: presetName, presetToken: presetToken)),
     );
 
-    if (envelope.body.setPresetResponse == null) throw Exception();
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
+    }
 
-    return envelope.body.setPresetResponse!.presetToken;
+    return SetPresetResponse.fromJson(envelope.body.response!).presetToken;
   }
 
-  ///Operation to stop ongoing pan, tilt and zoom movements of absolute relative
-  ///and continuous type. If no stop argument for pan, tilt or zoom is set, the
-  ///device will stop all ongoing pan, tilt and zoom movements.
+  /// Operation to stop ongoing pan, tilt and zoom movements of absolute
+  /// relative and continuous type. If no stop argument for pan, tilt or zoom is
+  /// set, the device will stop all ongoing pan, tilt and zoom movements.
   Future<bool> stop(String profileToken,
       {bool panTilt = true, bool zoom = true}) async {
     loggy.debug('stop');
 
-    final envelope = await Soap.retrieveEnvelope(
+    final envelope = await transport.sendRequest(
         uri,
-        onvif.secureRequest(
-            SoapRequest.stop(profileToken, panTilt: panTilt, zoom: zoom)));
+        transport.securedEnvelope(
+            soap.PtzRequest.stop(profileToken, panTilt: panTilt, zoom: zoom)));
 
-    if (envelope.body.stopResponse == null) throw Exception();
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
+    }
 
-    return true;
+    return envelope.body.response?.containsKey('StopResponse') ?? false;
   }
-
-  //   Future<void> move(String profileToken, PanTilt direction,
-  //     [double step = 0.01]) async {
-  //   await relativeMove(profileToken,
-  //       PtzPosition(panTilt: direction, zoom: Zoom.fromDouble(0)));
-  // }
 
   Future<void> zoom(String profileToken, Zoom zoom) async {
     loggy.debug('zoom');
@@ -374,16 +467,16 @@ class Ptz with UiLoggy {
     await move(profileToken, PanTilt(y: 0, x: 0), zoom);
   }
 
-  ///A helper method to perform a single [step] of a [relativeMove] on the
-  ///positive z axis (closer)
+  /// A helper method to perform a single [step] of a [relativeMove] on the
+  /// positive z axis (closer)
   Future<void> zoomIn(String profileToken, [int step = 25]) async {
     loggy.debug('zoomIn');
 
     await zoom(profileToken, Zoom.fromInt(x: step));
   }
 
-  ///A helper method to perform a single [step] of a [relativeMove] on the
-  ///negative y axis (farther)
+  /// A helper method to perform a single [step] of a [relativeMove] on the
+  /// negative y axis (farther)
   Future<void> zoomOut(String profileToken, [int step = 25]) async {
     loggy.debug('zoomOut');
 

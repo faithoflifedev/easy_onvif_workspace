@@ -8,7 +8,7 @@ part 'probe_matches.g.dart';
 
 @JsonSerializable()
 class ProbeMatches {
-  @JsonKey(name: 'ProbeMatch', fromJson: _probeMatchConverter)
+  @JsonKey(name: 'ProbeMatch', fromJson: _unbound)
   final List<ProbeMatch> probeMatches;
 
   ProbeMatches({required this.probeMatches});
@@ -21,7 +21,7 @@ class ProbeMatches {
   @override
   String toString() => json.encode(toJson());
 
-  static List<ProbeMatch> _probeMatchConverter(dynamic json) {
+  static List<ProbeMatch> _unbound(dynamic json) {
     if (json is List) {
       return json
           .map((e) => ProbeMatch.fromJson(e as Map<String, dynamic>))

@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'app_sequence.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class AppSequence {
   @JsonKey(name: '@MessageNumber', fromJson: int.parse)
   final int messageNumber;

@@ -1,5 +1,6 @@
 import 'package:args/command_runner.dart';
-import 'package:easy_onvif/onvif.dart';
+import 'package:easy_onvif/src/multicast_probe.dart';
+import 'package:easy_onvif/util.dart';
 import 'package:loggy/loggy.dart';
 
 class OnvifProbeCommand extends Command {

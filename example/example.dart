@@ -1,10 +1,11 @@
 import 'package:easy_onvif/onvif.dart';
+import 'package:easy_onvif/soap.dart';
 import 'package:loggy/loggy.dart';
 import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart';
 
 void main(List<String> arguments) async {
-  //get connection information from the config.yaml file
+  // get connection information from the config.yaml file
   final config = loadYaml(File('example/config.yaml').readAsStringSync());
 
   // configure device connection
@@ -20,21 +21,21 @@ void main(List<String> arguments) async {
         showColors: true,
       ));
 
-  //get service capabilities
+  // get service capabilities
   // var deviceServiceCapabilities =
   //     await onvif.deviceManagement.getServiceCapabilities();
 
   // print(
   //     'max password length: ${deviceServiceCapabilities.security.maxPasswordLength}');
 
-  //get service addresses
+  // get service addresses
   // var serviceList = await onvif.deviceManagement.getServices();
 
   // for (Service service in serviceList) {
   //   print('${service.nameSpace} ${service.xAddr}');
   // }
 
-  //get device info
+  // get device info
   var deviceInfo = await onvif.deviceManagement.getDeviceInformation();
 
   print('Manufacturer: ${deviceInfo.manufacturer}');
@@ -58,7 +59,7 @@ void main(List<String> arguments) async {
     print('name: ${profile.name}, token: ${profile.token}');
   }
 
-  await onvif.ptz.moveLeft(profs[0].token);
+  // await onvif.ptz.moveLeft(profs[0].token);
 
   // var status = await onvif.ptz.getStatus(profs[0].token);
 
@@ -71,22 +72,22 @@ void main(List<String> arguments) async {
   //             x: status.position.panTilt!.x - 0.025,
   //             y: status.position.panTilt!.y)));
 
-  final uri = await onvif.media.getStreamUri(profs[0].token);
+  // final uri = await onvif.media.getStreamUri(profs[0].token);
 
-  final rtsp = OnvifUtil.authenticatingUri(
-      uri.uri, config['username'], config['password']);
+  // final rtsp =
+  //     OnvifUtil.authenticatingUri(uri, config['username'], config['password']);
 
-  print('stream uri: $rtsp');
+  // print('stream uri: $rtsp');
 
-  var ntpInformation = await onvif.deviceManagement.getNtp();
+  // var ntpInformation = await onvif.deviceManagement.getNtp();
 
-  print(ntpInformation);
+  // print(ntpInformation);
 
-  var configurations = await onvif.media.getMetadataConfigurations();
+  // var configurations = await onvif.media.getMetadataConfigurations();
 
-  for (var configuration in configurations) {
-    print('${configuration.name} ${configuration.token}');
-  }
+  // for (var configuration in configurations) {
+  //   print('${configuration.name} ${configuration.token}');
+  // }
 
   // get compatible configurations
   // var compatibleConfigurations =
@@ -113,37 +114,37 @@ void main(List<String> arguments) async {
     print('${networkProtocol.name} ${networkProtocol.port}');
   }
 
-  //get system uris
+  // get system uris
   // var systemUris = await onvif.deviceManagement.getSystemUris();
 
   // print(systemUris);
 
   //create users
-  var newUsers = <User>[
-    User(username: 'test_1', password: 'onvif.device', userLevel: 'User'),
-    User(username: 'test_2', password: 'onvif.device', userLevel: 'User')
-  ];
+  // var newUsers = <User>[
+  //   User(username: 'test_1', password: 'onvif.device', userLevel: 'User'),
+  //   User(username: 'test_2', password: 'onvif.device', userLevel: 'User')
+  // ];
 
-  await onvif.deviceManagement.createUsers(newUsers);
+  // await onvif.deviceManagement.createUsers(newUsers);
 
-  //get users
+  // get users
   var users = await onvif.deviceManagement.getUsers();
 
   for (var user in users) {
     print('${user.username} ${user.userLevel}');
   }
 
-  //delete users
-  var deleteUsers = ['test_1', 'test_2'];
+  // delete users
+  // var deleteUsers = ['test_1', 'test_2'];
 
-  await onvif.deviceManagement.deleteUsers(deleteUsers);
+  // await onvif.deviceManagement.deleteUsers(deleteUsers);
 
-  //get users
-  users = await onvif.deviceManagement.getUsers();
+  // get users
+  // users = await onvif.deviceManagement.getUsers();
 
-  for (var user in users) {
-    print('${user.username} ${user.userLevel}');
-  }
+  // for (var user in users) {
+  //   print('${user.username} ${user.userLevel}');
+  // }
 
   //get audio sources
   var audioSources = await onvif.media.getAudioSources();
@@ -152,42 +153,59 @@ void main(List<String> arguments) async {
     print('${audioSource.token} ${audioSource.channels}');
   }
 
-  //get video sources
-  var videoSources = await onvif.media.getVideoSources();
+  // get video sources
+  // var videoSources = await onvif.media.getVideoSources();
 
-  for (var videoSource in videoSources) {
-    print('${videoSource.token} ${videoSource.resolution}');
-  }
+  // for (var videoSource in videoSources) {
+  //   print('${videoSource.token} ${videoSource.resolution}');
+  // }
 
-  //get snapshot Uri
+  // get snapshot Uri
   var snapshotUri = await onvif.media.getSnapshotUri(profs[0].token);
 
-  print(snapshotUri.uri);
+  print(snapshotUri);
 
-  //get stream Uri
-  var streamUri = await onvif.media.getStreamUri(profs[0].token);
+  // get stream Uri
+  // var streamUri = await onvif.media.getStreamUri(profs[0].token);
 
-  print(streamUri.uri);
+  // print(streamUri);
 
-  //get get configuration
+  // get get configuration
   // var ptzConfig = await onvif.ptz.getConfiguration(ptzConfigs[0].token);
 
   // print(ptzConfig);
 
-  //get get presets
-  var presets = await onvif.ptz.getPresets(profs[0].token, limit: 5);
+  // get get presets
+  // var presets = await onvif.ptz.getPresets(profs[0].token, limit: 5);
 
-  for (var preset in presets) {
-    print('${preset.token} ${preset.name}');
-  }
+  // for (var preset in presets) {
+  //   print('${preset.token} ${preset.name}');
+  // }
 
-  //get ptz status
+  // get ptz status
   // var status = await onvif.ptz.getStatus(profs[0].token);
 
   // print(status);
 
-  //set preset
-  var res = await onvif.ptz.setPreset(profs[0].token, 'new test', '20');
+  // set preset
+  // var res = await onvif.ptz.setPreset(profs[0].token, 'new test', '20');
 
-  print(res);
+  // print(res);
+
+  // sample low level request
+  //
+  // build a xml fragment for the specific Onvif operation
+  Transport.builder.element('GetAudioOutputs', nest: () {
+    Transport.builder.namespace(Xmlns.trt);
+  });
+
+  final requestFragment = Transport.builder.buildFragment();
+
+  final transport = onvif.transport;
+
+// build the soap request envelope and send the request
+  final envelope = await transport.sendRequest(
+      onvif.media.media1.uri, transport.securedEnvelope(requestFragment));
+
+  print(envelope.body.response);
 }

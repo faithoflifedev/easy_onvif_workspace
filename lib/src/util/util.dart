@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
-import 'package:easy_onvif/onvif.dart' show MediaUri;
+import 'package:easy_onvif/src/model/media_uri.dart';
 import 'package:intl/intl.dart';
 import 'package:loggy/loggy.dart';
 import 'package:universal_io/io.dart';
@@ -113,6 +113,19 @@ class OnvifUtil {
 
   static bool stringToBool(String value) => value.toLowerCase() == 'true';
 
+  static bool stringOrMappedToBool(dynamic value) => value.runtimeType == String
+      ? stringToBool(value as String)
+      : mappedToBool(value as Map<String, dynamic>);
+
+  static List<int>? nullableMappedToIntList(String? value) =>
+      value?.toString().split(',').map((item) => int.parse(item)).toList();
+
+  static List<String>? nullableMappedToStringList(List<dynamic>? value) =>
+      value?.map((element) => mappedToString(element)).toList();
+
+  static bool? nullableStringToBool(String? value) =>
+      value != null ? stringToBool(value) : null;
+
   static bool? optionalBool(String? value) =>
       value != null ? stringToBool(value) : null;
 
@@ -160,7 +173,16 @@ class OnvifUtil {
   static DateTime? nullableMappedToDateTime(Map<String, dynamic>? value) =>
       value != null ? mappedToDateTime(value) : null;
 
-  static List<T> unbound<T>(Map<String, dynamic> value) {
-    return <T>[];
-  }
+  // static List<T> unbound<T>(Map<String, dynamic> value) {
+  //   return <T>[];
+  // }
+
+  static List<String> stringToList(String value) => value.split(',');
+
+  static List<String>? nullableStringToList(String? value) =>
+      value != null ? stringToList(value) : null;
 }
+
+class NotSupportedException implements Exception {}
+
+enum MediaSupportLevel { none, one, two, both }

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:easy_onvif/onvif.dart';
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'endpoint_reference.g.dart';

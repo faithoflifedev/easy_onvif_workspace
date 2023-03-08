@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:easy_onvif/onvif.dart';
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:loggy/loggy.dart';
 
@@ -8,7 +8,7 @@ import 'endpoint_reference.dart';
 
 part 'probe_match.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class ProbeMatch with UiLoggy {
   @JsonKey(name: 'EndpointReference')
   final EndpointReference endpointReference;
@@ -20,7 +20,7 @@ class ProbeMatch with UiLoggy {
   final List<String> scopes;
 
   @JsonKey(name: 'XAddrs', fromJson: _toList)
-  final List<String> xaddrs;
+  final List<String> xAddrs;
 
   @JsonKey(name: 'MetadataVersion', fromJson: OnvifUtil.mappedToString)
   final String metadataVersion;
@@ -32,7 +32,7 @@ class ProbeMatch with UiLoggy {
   String? _name;
   String? _hardware;
 
-  String get xaddr => xaddrs.first;
+  String get xAddr => xAddrs.first;
 
   String get location => _location ?? '';
 
@@ -48,7 +48,7 @@ class ProbeMatch with UiLoggy {
       {required this.endpointReference,
       required this.types,
       required this.scopes,
-      required this.xaddrs,
+      required this.xAddrs,
       required this.metadataVersion}) {
     _setCommonScopes();
   }

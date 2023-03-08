@@ -1,13 +1,12 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/src/model/probe/app_sequence.dart';
 import 'package:easy_onvif/src/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'probe/app_sequence.dart';
-
 part 'header.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable()
 class Header {
   @JsonKey(name: 'AppSequence')
   final AppSequence? appSequence;
@@ -24,8 +23,13 @@ class Header {
   @JsonKey(name: 'Action', fromJson: OnvifUtil.nullableMappedToString)
   final String? action;
 
-  Header(
-      {this.appSequence, this.messageID, this.relatesTo, this.to, this.action});
+  Header({
+    this.appSequence,
+    this.messageID,
+    this.relatesTo,
+    this.to,
+    this.action,
+  });
 
   factory Header.fromJson(Map<String, dynamic> json) => _$HeaderFromJson(json);
 

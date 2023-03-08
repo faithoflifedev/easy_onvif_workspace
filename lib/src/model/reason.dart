@@ -1,23 +1,20 @@
 import 'dart:convert';
 
-import 'package:json_annotation/json_annotation.dart';
-
-import 'i8n_text.dart';
-
-part 'reason.g.dart';
-
-@JsonSerializable(explicitToJson: true)
 class Reason {
-  @JsonKey(name: 'Text')
-  final I8nText i8nText;
+  final String? lang;
 
-  dynamic get why => i8nText.text;
+  final String? note;
 
-  Reason(this.i8nText);
+  Reason({
+    this.lang,
+    this.note,
+  });
 
-  factory Reason.fromJson(Map<String, dynamic> json) => _$ReasonFromJson(json);
+  factory Reason.fromJson(Map<String, dynamic> json) =>
+      Reason(lang: json['Text']['@xml:lang'], note: json['Text']['\$']);
 
-  Map<String, dynamic> toJson() => _$ReasonToJson(this);
+  Map<String, dynamic> toJson() =>
+      <String, dynamic>{'lang': lang, 'note': note};
 
   @override
   String toString() => json.encode(toJson());

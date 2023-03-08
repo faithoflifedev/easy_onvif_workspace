@@ -20,7 +20,7 @@ Header _$HeaderFromJson(Map<String, dynamic> json) => Header(
     );
 
 Map<String, dynamic> _$HeaderToJson(Header instance) => <String, dynamic>{
-      'AppSequence': instance.appSequence?.toJson(),
+      'AppSequence': instance.appSequence,
       'MessageID': instance.messageID,
       'RelatesTo': instance.relatesTo,
       'To': instance.to,

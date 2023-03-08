@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope"
+	xmlns:e="http://www.w3.org/2003/05/soap-encoding"
+	xmlns:wsa="http://www.w3.org/2005/08/addressing"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+	xmlns:wsnt="http://docs.oasis-open.org/wsn/b-2"
+	xmlns:wstop="http://docs.oasis-open.org/wsn/t-1"
+	xmlns:wsntw="http://docs.oasis-open.org/wsn/bw-2"
+	xmlns:wsrf-rw="http://docs.oasis-open.org/wsrf/rw-2"
+	xmlns:wsrf-r="http://docs.oasis-open.org/wsrf/r-2"
+	xmlns:wsrf-bf="http://docs.oasis-open.org/wsrf/bf-2"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl"
+	xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http"
+	xmlns:d="http://schemas.xmlsoap.org/ws/2005/04/discovery"
+	xmlns:wsadis="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+	xmlns:tt="http://www.onvif.org/ver10/schema"
+	xmlns:tns1="http://www.onvif.org/ver10/topics"
+	xmlns:tds="http://www.onvif.org/ver10/device/wsdl"
+	xmlns:trt="http://www.onvif.org/ver10/media/wsdl"
+	xmlns:tev="http://www.onvif.org/ver10/events/wsdl"
+	xmlns:timg="http://www.onvif.org/ver20/imaging/wsdl"
+	xmlns:tst="http://www.onvif.org/ver10/storage/wsdl"
+	xmlns:dn="http://www.onvif.org/ver10/network/wsdl"
+	xmlns:pt="http://www.onvif.org/ver10/pacs"
+	xmlns:tr2="http://www.onvif.org/ver20/media/wsdl"
+	xmlns:tptz="http://www.onvif.org/ver20/ptz/wsdl"
+	xmlns:tan="http://www.onvif.org/ver20/analytics/wsdl"
+	xmlns:axt="http://www.onvif.org/ver20/analytics"
+	xmlns:trp="http://www.onvif.org/ver10/replay/wsdl"
+	xmlns:tse="http://www.onvif.org/ver10/search/wsdl"
+	xmlns:trc="http://www.onvif.org/ver10/recording/wsdl"
+	xmlns:tac="http://www.onvif.org/ver10/accesscontrol/wsdl"
+	xmlns:tdc="http://www.onvif.org/ver10/doorcontrol/wsdl"
+	xmlns:tmd="http://www.onvif.org/ver10/deviceIO/wsdl"
+	xmlns:tth="http://www.onvif.org/ver10/thermal/wsdl"
+	xmlns:tcr="http://www.onvif.org/ver10/credential/wsdl"
+	xmlns:tar="http://www.onvif.org/ver10/accessrules/wsdl"
+	xmlns:tsc="http://www.onvif.org/ver10/schedule/wsdl"
+	xmlns:trv="http://www.onvif.org/ver10/receiver/wsdl"
+	xmlns:tpv="http://www.onvif.org/ver10/provisioning/wsdl"
+	xmlns:ter="http://www.onvif.org/ver10/error">
+	<s:Header>
+	</s:Header>
+	<s:Body>
+		<tds:GetServicesResponse>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver10/device/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/device_service</tds:XAddr>
+				<tds:Capabilities>
+					<tds:Capabilities>
+						<tds:Network IPFilter="true" ZeroConfiguration="true" IPVersion6="false" DynDNS="true" Dot11Configuration="true" Dot1XConfigurations="1" HostnameFromDHCP="true" NTP="2" DHCPv6="false"></tds:Network>
+						<tds:Security TLS1.0="false" TLS1.1="false" TLS1.2="false" OnboardKeyGeneration="false" AccessPolicyConfig="true" DefaultAccessPolicy="true" Dot1X="true" RemoteUserHandling="true" X.509Token="false" SAMLToken="false" KerberosToken="false" UsernameToken="true" HttpDigest="true" RELToken="false" SupportedEAPMethods="0" MaxUsers="10" MaxUserNameLength="32" MaxPasswordLength="32"></tds:Security>
+						<tds:System DiscoveryResolve="true" DiscoveryBye="true" RemoteDiscovery="false" SystemBackup="true" SystemLogging="true" FirmwareUpgrade="true" HttpFirmwareUpgrade="true" HttpSystemBackup="true" HttpSystemLogging="true" HttpSupportInformation="true" StorageConfiguration="true" MaxStorageConfigurations="10" GeoLocationEntries="10" AutoGeo="" StorageTypesSupported="" DiscoveryNotSupported="false" NetworkConfigNotSupported="false" UserConfigNotSupported="false" Addons=""></tds:System>
+						<tds:Misc AuxiliaryCommands=""></tds:Misc>
+					</tds:Capabilities>
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>20</tt:Major>
+					<tt:Minor>6</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver10/events/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/event_service</tds:XAddr>
+				<tds:Capabilities>
+					<tev:Capabilities WSSubscriptionPolicySupport="true" WSPullPointSupport="true" WSPausableSubscriptionManagerInterfaceSupport="true" MaxNotificationProducers="5" MaxPullPoints="5" PersistentNotificationStorage="false" MetadataOverMQTT="false"></tev:Capabilities>
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>19</tt:Major>
+					<tt:Minor>6</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver20/media/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/media2_service</tds:XAddr>
+				<tds:Capabilities>
+					<tr2:Capabilities SnapshotUri="true" Rotation="false" VideoSourceMode="true" OSD="true" TemporaryOSDText="true" Mask="true" SourceMask="true">
+						<tr2:ProfileCapabilities MaximumNumberOfProfiles="10" ConfigurationsSupported="VideoSource VideoEncoder Metadata PTZ AudioSource AudioEncoder AudioOutput AudioDecoder Analytics" />
+						<tr2:StreamingCapabilities RTSPStreaming="true" RTPMulticast="true" RTP_RTSP_TCP="true" NonAggregateControl="false" AutoStartMulticast="false" />
+					</tr2:Capabilities>
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>19</tt:Major>
+					<tt:Minor>6</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver10/media/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/media_service</tds:XAddr>
+				<tds:Capabilities>
+					<trt:Capabilities SnapshotUri="true" Rotation="false" VideoSourceMode="true" OSD="true" TemporaryOSDText="false" EXICompression="false">
+						<trt:ProfileCapabilities MaximumNumberOfProfiles="10" />
+						<trt:StreamingCapabilities RTPMulticast="false" RTP_TCP="true" RTP_RTSP_TCP="true" NonAggregateControl="false" NoRTSPStreaming="false" />
+					</trt:Capabilities>
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>19</tt:Major>
+					<tt:Minor>6</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver20/ptz/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/ptz_service</tds:XAddr>
+				<tds:Capabilities>
+					<tptz:Capabilities EFlip="true" Reverse="true" GetCompatibleConfigurations="false" MoveStatus="true" StatusPosition="true" />
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>17</tt:Major>
+					<tt:Minor>6</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver20/imaging/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/image_service</tds:XAddr>
+				<tds:Capabilities>
+					<timg:Capabilities ImageStabilization="false" Presets="false" AdaptablePreset="true" />
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>19</tt:Major>
+					<tt:Minor>6</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver20/analytics/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/analytics_service</tds:XAddr>
+				<tds:Capabilities>
+					<tan:Capabilities RuleSupport="true" AnalyticsModuleSupport="true" CellBasedSceneDescriptionSupported="true" RuleOptionsSupported="true" AnalyticsModuleOptionsSupported="true" SupportedMetadata="true" ImageSendingType="" />
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>19</tt:Major>
+					<tt:Minor>12</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver10/recording/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/recording_service</tds:XAddr>
+				<tds:Capabilities>
+					<trc:Capabilities DynamicRecordings="true" DynamicTracks="true" Encoding="JPEG MPEG4 H264 H265 G711 G726 AAC " MaxRate="200.0" MaxTotalRate="2000.0" MaxRecordings="5" MaxRecordingJobs="5" Options="true" MetadataRecording="true" SupportedExportFileFormats="" />
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>18</tt:Major>
+					<tt:Minor>6</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver10/search/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/search_service</tds:XAddr>
+				<tds:Capabilities>
+					<tse:Capabilities MetadataSearch="true" GeneralStartEvents="true" />
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>2</tt:Major>
+					<tt:Minor>4</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver10/replay/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/replay_service</tds:XAddr>
+				<tds:Capabilities>
+					<trp:Capabilities ReversePlayback="false" SessionTimeoutRange="10.0 100.0" RTP_RTSP_TCP="true" RTSPWebSocketUri="" />
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>18</tt:Major>
+					<tt:Minor>6</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver10/accesscontrol/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/accesscontrol_service</tds:XAddr>
+				<tds:Capabilities>
+					<tac:Capabilities MaxLimit="10" MaxAccessPoints="10" MaxAreas="10" ClientSuppliedTokenSupported="true" AccessPointManagementSupported="true" AreaManagementSupported="true" />
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>19</tt:Major>
+					<tt:Minor>12</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver10/doorcontrol/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/doorcontrol_service</tds:XAddr>
+				<tds:Capabilities>
+					<tdc:Capabilities MaxLimit="10" MaxDoors="10" ClientSuppliedTokenSupported="true" DoorManagementSupported="true" />
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>19</tt:Major>
+					<tt:Minor>12</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver10/deviceIO/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/deviceIO_service</tds:XAddr>
+				<tds:Capabilities>
+					<tmd:Capabilities VideoSources="1" VideoOutputs="0" AudioSources="1" AudioOutputs="1" RelayOutputs="1" SerialPorts="1" DigitalInputs="1" DigitalInputOptions="true" />
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>19</tt:Major>
+					<tt:Minor>12</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver10/thermal/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/thermal_service</tds:XAddr>
+				<tds:Capabilities>
+					<tth:Capabilities Radiometry="true" />
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>17</tt:Major>
+					<tt:Minor>6</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver10/credential/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/credential_service</tds:XAddr>
+				<tds:Capabilities>
+					<tcr:Capabilities MaxLimit="10" CredentialValiditySupported="true" CredentialAccessProfileValiditySupported="true" ValiditySupportsTimeValue="true" MaxCredentials="10" MaxAccessProfilesPerCredential="1" ResetAntipassbackSupported="true" ClientSuppliedTokenSupported="true" DefaultCredentialSuspensionDuration="PT5M" MaxWhitelistedItems="0" MaxBlacklistedItems="0">
+						<tcr:SupportedIdentifierType>pt:Card</tcr:SupportedIdentifierType>
+						<tcr:SupportedIdentifierType>pt:PIN</tcr:SupportedIdentifierType>
+						<tcr:SupportedIdentifierType>pt:Fingerprint</tcr:SupportedIdentifierType>
+					</tcr:Capabilities>
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>19</tt:Major>
+					<tt:Minor>12</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver10/accessrules/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/accessrules_service</tds:XAddr>
+				<tds:Capabilities>
+					<tar:Capabilities MaxLimit="10" MaxAccessProfiles="10" MaxAccessPoliciesPerAccessProfile="1" MultipleSchedulesPerAccessPointSupported="true" ClientSuppliedTokenSupported="false" />
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>18</tt:Major>
+					<tt:Minor>12</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver10/schedule/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/schedule_service</tds:XAddr>
+				<tds:Capabilities>
+					<tsc:Capabilities MaxLimit="10" MaxSchedules="10" MaxTimePeriodsPerDay="10" MaxSpecialDayGroups="10" MaxDaysInSpecialDayGroup="10" MaxSpecialDaysSchedules="10" ExtendedRecurrenceSupported="true" SpecialDaysSupported="true" StateReportingSupported="true" ClientSuppliedTokenSupported="true" />
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>18</tt:Major>
+					<tt:Minor>12</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver10/receiver/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/receiver_service</tds:XAddr>
+				<tds:Capabilities>
+					<trv:Capabilities RTP_Multicast="true" RTP_TCP="true" RTP_RTSP_TCP="true" SupportedReceivers="10" MaximumRTSPURILength="256" />
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>2</tt:Major>
+					<tt:Minor>1</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+			<tds:Service>
+				<tds:Namespace>http://www.onvif.org/ver10/provisioning/wsdl</tds:Namespace>
+				<tds:XAddr>http://192.168.2.119:10000/onvif/provisioning_service</tds:XAddr>
+				<tds:Capabilities>
+					<tpv:Capabilities>
+						<tpv:DefaultTimeout>PT60S</tpv:DefaultTimeout>
+						<tpv:Source VideoSourceToken="VideoSourceToken_1" MaximumPanMoves="60" MaximumTiltMoves="60" MaximumZoomMoves="60" MaximumRollMoves="60" AutoLevel="true" MaximumFocusMoves="60" AutoFocus="true"></tpv:Source>
+					</tpv:Capabilities>
+				</tds:Capabilities>
+				<tds:Version>
+					<tt:Major>18</tt:Major>
+					<tt:Minor>12</tt:Minor>
+				</tds:Version>
+			</tds:Service>
+		</tds:GetServicesResponse>
+	</s:Body>
+</s:Envelope>

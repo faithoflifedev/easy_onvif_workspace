@@ -1,5 +1,7 @@
 import 'package:args/command_runner.dart';
-import 'package:easy_onvif/onvif.dart';
+import 'package:easy_onvif/command.dart';
+import 'package:easy_onvif/util.dart';
+
 import 'package:universal_io/io.dart';
 
 void main(List<String> arguments) async {
@@ -12,7 +14,8 @@ void main(List<String> arguments) async {
         defaultsTo: 'off')
     ..addCommand(OnvifAuthorizeCommand())
     ..addCommand(OnvifDeviceManagementCommand())
-    ..addCommand(OnvifMediaCommand())
+    ..addCommand(OnvifMedia1Command())
+    ..addCommand(OnvifMedia2Command())
     ..addCommand(OnvifPtzCommand())
     ..addCommand(OnvifProbeCommand())
     ..addCommand(OnvifVersionCommand())

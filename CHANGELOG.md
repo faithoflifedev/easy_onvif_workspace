@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.0-dev.1
+
+* now supports Media2 Operations
+* code restructured for simpler maintenance
+* unit tests based on responses from multiple devices
+* documentation updates
+
 ## 2.0.13+19
 
 * dependency bump
