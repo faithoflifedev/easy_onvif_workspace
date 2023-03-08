@@ -5,11 +5,12 @@ This is a wrapper to ONVIF protocol which allows you to get information about yo
 [![pub package](https://img.shields.io/pub/v/easy_onvif.svg)](https://pub.dartlang.org/packages/easy_onvif) [![Build Status](https://github.com/faithoflifedev/easy_onvif/workflows/Dart/badge.svg)](https://github.com/faithoflifedev/easy_onvif/actions) [![github last commit](https://shields.io/github/last-commit/faithoflifedev/easy_onvif)](https://shields.io/github/last-commit/faithoflifedev/easy_onvif) [![github build](https://img.shields.io/github/actions/workflow/status/faithoflifedev/easy_onvif/dart.yml?branch=main)](https://shields.io/github/workflow/status/faithoflifedev/easy_onvif/Dart) [![github issues](https://shields.io/github/issues/faithoflifedev/easy_onvif)](https://shields.io/github/issues/faithoflifedev/easy_onvif)
 
 ## Table of contents
-- [New for version 2.0.0](#new-for-version-200)
+- [New for version 2.1.x](#new-for-version-21x)
+- [New for version 2.0.x](#new-for-version-20x)
 - [Getting Started](#getting-started)
   - [Dependency](#dependency)
   - [Usage Example](#usage-example)
-  - [Interacting with the device through Onvif operations](#interacting-with-a-device-through-onvif-operations)
+  - [Interacting with a device through Onvif operations](#interacting-with-a-device-through-onvif-operations)
 - [Lower level requests](#lower-level-requests)
 - [Onvif cli (Onvif at the command prompt)](#onvif-cli-onvif-at-the-command-prompt)
 - [Supported Onvif Operations](#supported-onvif-operations)
@@ -25,6 +26,7 @@ This is a wrapper to ONVIF protocol which allows you to get information about yo
 - [Breaking changes](#breaking-changes)
   - [v2.1.0](#v210)
 - [Contributing](#contributing)
+
 
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/faithoflif2)
 

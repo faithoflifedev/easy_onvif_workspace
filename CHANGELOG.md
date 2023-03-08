@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0-dev.3
+
+* fix README
+
 ## 2.1.0-dev.2
 
 * GetVideoEncoderInstances
