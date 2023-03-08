@@ -18,6 +18,7 @@ class OnvifMedia2Command extends Command {
     addSubcommand(OnvifGetServiceCapabilities2MediaCommand());
     addSubcommand(OnvifGetSnapshotUri2MediaCommand());
     addSubcommand(OnvifGetStreamUri2MediaCommand());
+    addSubcommand(OnvifGetVideoEncoderInstancesMediaCommand());
     addSubcommand(OnvifStartMulticastStreaming2MediaCommand());
     addSubcommand(OnvifStopMulticastStreaming2MediaCommand());
   }
@@ -287,6 +288,39 @@ class OnvifGetStreamUri2MediaCommand extends OnvifHelperCommand {
       );
 
       print(mediaUri);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// The GetVideoEncoderInstances command can be used to request the minimum
+/// number of guaranteed video encoder instances (applications) per Video Source
+/// Configuration.
+class OnvifGetVideoEncoderInstancesMediaCommand extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'The GetVideoEncoderInstances command can be used to request the minimum number of guaranteed video encoder instances (applications) per Video Source Configuration.';
+
+  @override
+  String get name => 'get-video-encoder-instances';
+
+  OnvifGetVideoEncoderInstancesMediaCommand() {
+    argParser.addOption('configuration-token',
+        mandatory: true,
+        valueHelp: 'string',
+        help: 'Token of the video source configuration');
+  }
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final info = await media.media2
+          .getVideoEncoderInstances(argResults!['configuration-token']);
+
+      print(info);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

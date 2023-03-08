@@ -169,6 +169,25 @@ class Media2 with UiLoggy {
     return GetStreamUriResponse.fromJson(envelope.body.response!).uri;
   }
 
+  /// The GetVideoEncoderInstances command can be used to request the minimum
+  /// number of guaranteed video encoder instances (applications) per Video
+  /// Source Configuration.
+  Future<Info> getVideoEncoderInstances(String configurationToken) async {
+    loggy.debug('getVideoEncoderInstances');
+
+    final envelope = await transport.sendRequest(
+        uri,
+        transport.securedEnvelope(
+            soap.Media2Request.getVideoEncoderInstances(configurationToken)));
+
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
+    }
+
+    return GetVideoEncoderInstancesResponse.fromJson(envelope.body.response!)
+        .info;
+  }
+
   /// This command starts multicast streaming using a specified media profile of
   /// a device. Streaming continues until StopMulticastStreaming is called for
   /// the same Profile. The streaming shall continue after a reboot of the

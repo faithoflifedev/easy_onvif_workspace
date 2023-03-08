@@ -248,6 +248,7 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetServiceCapabilities          | getServiceCapabilities          | `Future<Capabilities2>`                | [x\] |
 | GetSnapshotUri                  | getSnapshotUri                  | `Future<String>`                       | [x\] |
 | GetStreamUri                    | getStreamUri                    | `Future<String>`                       | [x\] |
+| GetVideoEncoderInstances        | getVideoEncoderInstances        | `Future<Info>`                         | [ \] |
 | StartMulticastStreaming         | startMulticastStreaming         | `Future<bool>`                         | [x\] |
 | StopMulticastStreaming          | stopMulticastStreaming          | `Future<bool>`                         | [x\] |
 

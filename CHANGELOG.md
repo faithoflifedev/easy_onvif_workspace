@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0-dev.2
+
+* GetVideoEncoderInstances
+
 ## 2.1.0-dev.1
 
 * now supports Media2 Operations

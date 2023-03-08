@@ -80,6 +80,19 @@ class Media2Request {
     return Transport.builder.buildFragment();
   }
 
+  /// XML for the [getVideoEncoderInstances]
+  static XmlDocumentFragment getVideoEncoderInstances(
+      String configurationToken) {
+    Transport.builder.element('GetVideoEncoderInstances', nest: () {
+      Transport.builder.namespace(Xmlns.tr2);
+      Transport.builder.element('ConfigurationToken', nest: () {
+        Transport.builder.text(configurationToken);
+      });
+    });
+
+    return Transport.builder.buildFragment();
+  }
+
   /// XML for the [startMulticastStreaming]
   static XmlDocumentFragment startMulticastStreaming(String profileToken) =>
       MediaCommon.startMulticastStreaming(
