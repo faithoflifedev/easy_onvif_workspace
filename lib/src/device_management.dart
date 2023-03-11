@@ -215,7 +215,7 @@ class DeviceManagement with UiLoggy {
   }
 
   /// Returns information about services on the device.
-  Future<List<Service>> getServices([includeCapability = false]) async {
+  Future<List<Service>> getServices([bool includeCapability = false]) async {
     loggy.debug('getServices');
 
     final envelope = await transport.sendRequest(

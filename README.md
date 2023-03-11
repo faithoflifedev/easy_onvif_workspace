@@ -20,12 +20,13 @@ This is a wrapper to ONVIF protocol which allows you to get information about yo
   - [PTZ](#ptz)
   - [PTZ Helper Methods](#ptz-helper-methods)
 - [Tested Onvif Devices](#tested-onvif-devices)
-- [What's next](#whats-next)
 - [Features and bugs](#features-and-bugs)
 - [Known Issues](#known-issues)
 - [Breaking changes](#breaking-changes)
-  - [v2.1.0](#v210)
+  - [v2.1.x](#v21x)
+- [Contributors](#contributors)
 - [Contributing](#contributing)
+
 
 
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/faithoflif2)
@@ -72,7 +73,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^2.1.0-dev.8
+  easy_onvif: ^2.1.0-dev.9
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -359,6 +360,10 @@ dependency_overrides:
 ### v2.1.x
 
 There is probably a number of breaking changes in this version since some method signatures have changed.  Since a large portion of the code base was rebuilt from scratch tracking all the changes wasn't a priority.  Sorry for any inconvenience.
+
+## Contributors
+
+- [LODYZ](hhttps://github.com/LODYZ)
 
 ## Contributing
 

@@ -99,7 +99,7 @@ class Onvif with UiLoggy {
     soap.Transport.timeDelta = await getTimeDelta();
 
     try {
-      final serviceList = await deviceManagement.getServices();
+      final serviceList = await deviceManagement.getServices(true);
 
       serviceMap.addAll(
           {for (var service in serviceList) service.nameSpace: service.xAddr});

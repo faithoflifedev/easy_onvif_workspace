@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0-dev.9
+
+* merged back in LODYZ changes
+
 ## 2.1.0-dev.8
 
 * remove diox

@@ -69,7 +69,7 @@ class DeviceManagementRequest {
   }
 
   /// XML for the [getServices]
-  static XmlDocumentFragment getServices([includeCapability = false]) {
+  static XmlDocumentFragment getServices([bool includeCapability = false]) {
     Transport.builder.element('GetServices', nest: () {
       Transport.builder.namespace(Xmlns.tds);
 
