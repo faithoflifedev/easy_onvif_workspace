@@ -1,3 +1,4 @@
+/// utility classes
 library util;
 
 export 'src/util/extra.dart';

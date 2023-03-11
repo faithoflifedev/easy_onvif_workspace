@@ -1,3 +1,4 @@
+/// cli supporting classes
 library command;
 
 export 'cmd/onvif_authorize_command.dart';

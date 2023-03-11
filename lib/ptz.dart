@@ -1,3 +1,4 @@
+/// ptz classes
 library ptz;
 
 export 'src/model/ptz/capabilities.dart';

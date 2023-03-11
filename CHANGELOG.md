@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0-dev.7
+
+* API doc updates
+
 ## 2.1.0-dev.6
 
 * diox

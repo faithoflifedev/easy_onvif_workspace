@@ -1,3 +1,4 @@
+/// probe classes
 library probe;
 
 export 'src/model/probe/app_sequence.dart';

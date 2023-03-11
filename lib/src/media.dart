@@ -126,14 +126,7 @@ class Media with UiLoggy {
 
   /// A client uses the [getSnapshotUri] command to obtain a JPEG snapshot from
   /// the device. The returned URI shall remain valid indefinitely even if the
-  /// profile is changed. The [validUntilConnect], [validUntilReboot] and
-  /// [timeout] parameter shall be set accordingly (validUntilConnect=false,
-  /// validUntilReboot=false, timeout=PT0S). The URI can be used for
-  /// acquiring a JPEG image through a HTTP GET operation. The image encoding
-  /// will always be JPEG regardless of the encoding setting in the media1
-  /// profile. The Jpeg settings (like resolution or quality) may be taken from
-  /// the profile if suitable. The provided image will be updated automatically
-  /// and independent from calls to [getSnapshotUri].
+  /// profile is changed.
   Future<m1.MediaUri> getSnapshotUri1(String profileToken,
           {required StreamSetup streamSetup}) async =>
       _mediaSupportLevel == MediaSupportLevel.one
@@ -142,14 +135,7 @@ class Media with UiLoggy {
 
   /// A client uses the [getSnapshotUri] command to obtain a JPEG snapshot from
   /// the device. The returned URI shall remain valid indefinitely even if the
-  /// profile is changed. The [validUntilConnect], [validUntilReboot] and
-  /// [timeout] parameter shall be set accordingly (validUntilConnect=false,
-  /// validUntilReboot=false, timeout=PT0S). The URI can be used for
-  /// acquiring a JPEG image through a HTTP GET operation. The image encoding
-  /// will always be JPEG regardless of the encoding setting in the media
-  /// profile. The Jpeg settings (like resolution or quality) may be taken from
-  /// the profile if suitable. The provided image will be updated automatically
-  /// and independent from calls to [getSnapshotUri].
+  /// profile is changed.
   ///
   /// [profileToken] - the ProfileToken element indicates the media profile to
   /// use and will define the source and dimensions of the snapshot.
@@ -164,10 +150,7 @@ class Media with UiLoggy {
 
   /// This operation requests a [Uri] that can be used to initiate a live media1
   /// stream using RTSP as the control protocol. The returned URI shall remain
-  /// valid indefinitely even if the profile is changed. The
-  /// [validUntilConnect], [validUntilReboot] and [timeout] Parameter shall be set
-  /// accordingly (validUntilConnect=false, validUntilReboot=false,
-  /// timeout=PT0S).
+  /// valid indefinitely even if the profile is changed.
   ///
   /// The correct syntax for the StreamSetup element for these media1 stream
   /// setups defined in 5.1.1 of the streaming specification are as follows:
@@ -197,10 +180,7 @@ class Media with UiLoggy {
 
   /// This operation requests a [Uri] that can be used to initiate a live media1
   /// stream using RTSP as the control protocol. The returned URI shall remain
-  /// valid indefinitely even if the profile is changed. The
-  /// [validUntilConnect], [validUntilReboot] and [timeout] Parameter shall be set
-  /// accordingly (validUntilConnect=false, validUntilReboot=false,
-  /// timeout=PT0S).
+  /// valid indefinitely even if the profile is changed.
   ///
   /// The correct syntax for the StreamSetup element for these media1 stream
   /// setups defined in 5.1.1 of the streaming specification are as follows:

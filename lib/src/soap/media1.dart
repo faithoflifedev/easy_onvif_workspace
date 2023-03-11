@@ -5,7 +5,7 @@ import 'package:xml/xml.dart';
 import 'media_common.dart';
 
 class MediaRequest {
-  /// XML for the [audioSources]
+  /// XML for the [getAudioSources]
   static XmlDocumentFragment getAudioSources() {
     Transport.builder.element('GetAudioSources', nest: () {
       Transport.builder.namespace(Xmlns.trt);
@@ -23,7 +23,7 @@ class MediaRequest {
     return Transport.builder.buildFragment();
   }
 
-  /// XML for the [metadataConfiguration]
+  /// XML for the [getMetadataConfiguration]
   static XmlDocumentFragment getMetadataConfiguration(
       String configurationToken) {
     Transport.builder.element('GetMetadataConfiguration', nest: () {
@@ -80,7 +80,7 @@ class MediaRequest {
     return Transport.builder.buildFragment();
   }
 
-  /// XML for the [serviceCapabilities]
+  /// XML for the [getServiceCapabilities]
   static XmlDocumentFragment getServiceCapabilities() {
     Transport.builder.element('GetServiceCapabilities', nest: () {
       Transport.builder.namespace(Xmlns.trt);
@@ -89,7 +89,7 @@ class MediaRequest {
     return Transport.builder.buildFragment();
   }
 
-  /// XML for the [snapshotUri], requires a [profileToken]
+  /// XML for the [getSnapshotUri], requires a [profileToken]
   static XmlDocumentFragment getSnapshotUri(String profileToken,
       {StreamSetup? streamSetup}) {
     Transport.builder.element('GetSnapshotUri', nest: () {
@@ -102,7 +102,7 @@ class MediaRequest {
     return Transport.builder.buildFragment();
   }
 
-  /// XML for the [streamUri], requires a [profileToken]
+  /// XML for the [getStreamUri], requires a [profileToken]
   static XmlDocumentFragment getStreamUri(String profileToken,
       {required StreamSetup streamSetup}) {
     Transport.builder.element('GetStreamUri', nest: () {
@@ -131,7 +131,7 @@ class MediaRequest {
     return Transport.builder.buildFragment();
   }
 
-  /// XML for the [videoSources]
+  /// XML for the [getVideoSources]
   static XmlDocumentFragment getVideoSources() {
     Transport.builder.element('GetVideoSources', nest: () {
       Transport.builder.namespace(Xmlns.trt);

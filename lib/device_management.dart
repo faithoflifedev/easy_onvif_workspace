@@ -1,3 +1,4 @@
+/// device management classes
 library device_management;
 
 export 'src/model/device_management/analytics_capabilities.dart';

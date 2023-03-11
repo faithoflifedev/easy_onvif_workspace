@@ -1,4 +1,4 @@
-///ONVIF Client Implementation in Dart
+/// ONVIF Client Implementation in Dart
 library easy_onvif;
 
 export 'src/onvif_base.dart';

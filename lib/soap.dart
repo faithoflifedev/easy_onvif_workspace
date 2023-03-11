@@ -1,3 +1,4 @@
+/// soap classes
 library soap;
 
 export 'src/soap/authorization.dart';
