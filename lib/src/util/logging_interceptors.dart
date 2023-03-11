@@ -12,6 +12,8 @@ class LoggingInterceptors extends Interceptor with UiLoggy {
     loggy.debug('URI: ${options.uri}');
 
     loggy.debug('REQUEST:\n${options.data}');
+
+    handler.next(options);
   }
 
   @override
@@ -20,6 +22,8 @@ class LoggingInterceptors extends Interceptor with UiLoggy {
     ErrorInterceptorHandler handler,
   ) {
     loggy.error('ERROR:\n$err');
+
+    handler.next(err);
   }
 
   @override
@@ -28,5 +32,7 @@ class LoggingInterceptors extends Interceptor with UiLoggy {
     ResponseInterceptorHandler handler,
   ) {
     loggy.debug('RESPONSE:\n${response.data}');
+
+    handler.next(response);
   }
 }
