@@ -45,22 +45,7 @@ class Onvif with UiLoggy {
             .parseUri {
     Loggy.initLoggy(logPrinter: printer, logOptions: logOptions);
 
-    final dio = Dio()
-      ..interceptors.add(InterceptorsWrapper(onRequest: (options, handler) {
-        loggy.debug('URI: ${options.uri}');
-
-        loggy.debug('REQUEST:\n${options.data}');
-
-        return handler.next(options); //continue
-      }, onResponse: (response, handler) {
-        loggy.debug('RESPONSE:\n${response.data}');
-
-        return handler.next(response); // continue
-      }, onError: (DioError e, handler) {
-        loggy.error('ERROR:\n$e');
-
-        return handler.next(e); //continue
-      }));
+    final dio = Dio()..interceptors.add(LoggingInterceptors());
 
     _transport = soap.Transport(dio: dio, authInfo: authInfo);
 

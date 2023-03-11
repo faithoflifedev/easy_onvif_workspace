@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0-dev.5
+
+* Adjusted logging
+
 ## 2.1.0-dev.4
 
 * `media.getProfiles()` now returns empty list instead of null
