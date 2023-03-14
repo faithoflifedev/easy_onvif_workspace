@@ -2,6 +2,10 @@
 
 ## 2.1.0-dev.9
 
+* use secured header for GetServices request Issue #32
+
+## 2.1.0-dev.9
+
 * merged back in LODYZ changes
 
 ## 2.1.0-dev.8

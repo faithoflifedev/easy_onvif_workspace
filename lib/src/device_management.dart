@@ -220,8 +220,8 @@ class DeviceManagement with UiLoggy {
 
     final envelope = await transport.sendRequest(
         uri,
-        transport.envelope(
-            null, soap.DeviceManagementRequest.getServices(includeCapability)));
+        transport.securedEnvelope(
+            soap.DeviceManagementRequest.getServices(includeCapability)));
 
     if (envelope.body.hasFault) {
       throw Exception(envelope.body.fault.toString());
