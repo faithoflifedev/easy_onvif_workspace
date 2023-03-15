@@ -1,6 +1,6 @@
 import 'package:easy_onvif/device_management.dart' as device;
-import 'package:easy_onvif/media2.dart';
 import 'package:easy_onvif/onvif.dart';
+import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' as services;
@@ -37,7 +37,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with UiLoggy {
-  late final List<MediaProfile> profiles;
+  late final List<MixedProfile> profiles;
 
   late final device.GetDeviceInformationResponse deviceInfo;
 

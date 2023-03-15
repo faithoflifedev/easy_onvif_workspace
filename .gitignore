@@ -30,8 +30,7 @@ ios/
 .pt-build/
 scratch/
 
-bin/config.yaml
+**/config.yaml
 
 tool/publish_tools.yaml
 
-example/flutter_model/assets/config.yaml

@@ -36,11 +36,15 @@ This is a wrapper to ONVIF protocol which allows you to get information about yo
 Support for __Media2__ Onvif operations
 
 ```dart
-// defaults to Media2, but will fallback to Media1 if Media2 is not supported
+// defaults to `MixedProfile` a special case class that has the fields for both 
+// a media1 `Profile` and a media2 `MediaProfile`.
 var profiles = await onvif.media.getProfiles();
 
 // alternatively, make an explicit call to the Media2 operation
 var profiles2 = await onvif.media.media2.getProfiles();
+
+// or, make an explicit call to the Media1 operation
+var profiles1 = await onvif.media.media1.getProfiles();
 ```
 
 ## New for version 2.0.x

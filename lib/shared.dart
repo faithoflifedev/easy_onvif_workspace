@@ -16,6 +16,7 @@ export 'src/model/common/ip_address.dart';
 export 'src/model/common/metadata_configuration_options_extension.dart';
 export 'src/model/common/metadata_configuration_options.dart';
 export 'src/model/common/metadata_configuration.dart';
+export 'src/model/common/mixed_profile.dart';
 export 'src/model/common/mpeg4.dart';
 export 'src/model/common/multicast_configuration.dart';
 export 'src/model/common/pan_tilt_limits.dart';

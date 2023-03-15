@@ -56,7 +56,8 @@ void main(List<String> arguments) async {
   var profs = await onvif.media.getProfiles();
 
   for (var profile in profs) {
-    print('name: ${profile.name}, token: ${profile.token}');
+    print(
+        'name: ${profile.name}, token: ${profile.token}, hasVideoSourceConfig: ${profile.isMedia2 ? profile.configurations?.videoSourceConfiguration?.name : profile.videoSourceConfiguration?.name}');
   }
 
   // await onvif.ptz.moveLeft(profs[0].token);

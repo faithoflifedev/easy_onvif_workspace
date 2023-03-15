@@ -1,10 +1,10 @@
 # Changelog
 
+## 2.1.0-dev.11
+
+* adds `MixedProfile` ro resolve Issue #34
+
 ## 2.1.0-dev.10
-
-* use secured header for GetServices request Issue #32
-
-## 2.1.0-dev.9
 
 * use secured header for GetServices request Issue #32
 

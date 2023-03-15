@@ -1,26 +1,32 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/media1.dart';
+import 'package:easy_onvif/media2.dart';
 import 'package:easy_onvif/shared.dart';
-import 'package:easy_onvif/src/util/util.dart';
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'profile.g.dart';
+part 'mixed_profile.g.dart';
 
-/// representation of a profile that exist in the media service
+/// A special case class that has the fields for both a media1 `Profile` and a
+/// media2 `MediaProfile`.
 @JsonSerializable()
-class Profile {
+class MixedProfile {
   /// Unique identifier of the profile.
   @JsonKey(name: '@token')
   final String token;
 
   /// A value of true signals that the profile cannot be deleted. Default is
   /// false.
-  @JsonKey(name: '@fixed', fromJson: OnvifUtil.stringToBool)
-  final bool fixed;
+  @JsonKey(name: '@fixed', fromJson: OnvifUtil.nullableStringToBool)
+  final bool? fixed;
 
   /// User readable name of the profile.
   @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
   final String name;
+
+  @JsonKey(name: 'Configurations')
+  final ConfigurationSet? configurations;
 
   /// Optional configuration of the Video input.
   @JsonKey(name: 'VideoSourceConfiguration')
@@ -46,10 +52,11 @@ class Profile {
   @JsonKey(name: 'PTZConfiguration')
   final PtzConfiguration? ptzConfiguration;
 
-  Profile(
+  MixedProfile(
       {required this.token,
       required this.fixed,
       required this.name,
+      this.configurations,
       this.videoSourceConfiguration,
       this.audioSourceConfiguration,
       this.videoEncoderConfiguration,
@@ -57,10 +64,31 @@ class Profile {
       this.videoAnalyticsConfiguration,
       this.ptzConfiguration});
 
-  factory Profile.fromJson(Map<String, dynamic> json) =>
-      _$ProfileFromJson(json);
+  factory MixedProfile.fromJson(Map<String, dynamic> json) =>
+      _$MixedProfileFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ProfileToJson(this);
+  Map<String, dynamic> toJson() => _$MixedProfileToJson(this);
+
+  bool get isMedia2 => configurations != null;
+
+  factory MixedProfile.fromMediaProfile(MediaProfile mediaProfile) =>
+      MixedProfile(
+        token: mediaProfile.token,
+        fixed: mediaProfile.fixed,
+        name: mediaProfile.name,
+        configurations: mediaProfile.configurations,
+      );
+
+  factory MixedProfile.fromProfile(Profile profile) => MixedProfile(
+      token: profile.token,
+      fixed: profile.fixed,
+      name: profile.name,
+      videoSourceConfiguration: profile.videoSourceConfiguration,
+      audioSourceConfiguration: profile.audioSourceConfiguration,
+      videoEncoderConfiguration: profile.videoEncoderConfiguration,
+      audioEncoderConfiguration: profile.audioEncoderConfiguration,
+      videoAnalyticsConfiguration: profile.videoAnalyticsConfiguration,
+      ptzConfiguration: profile.ptzConfiguration);
 
   @override
   String toString() => json.encode(toJson());

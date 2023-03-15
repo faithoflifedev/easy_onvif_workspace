@@ -99,12 +99,39 @@ class Media with UiLoggy {
           ? throw NotSupportedException()
           : media2.getProfiles(referenceToken: referenceToken, type: type);
 
-  /// Calls [getProfiles2].
-  Future<List<m2.MediaProfile>> getProfiles({
+  /// returns a [MixedProfile] which will have fields for [m1.Profile] or
+  /// [m2.MediaProfile] depending on what is supported by the device.
+  Future<List<MixedProfile>> getProfiles({
     String? referenceToken,
     List<String>? type,
-  }) async =>
-      getProfiles2(referenceToken: referenceToken, type: type);
+  }) async {
+    List<m2.MediaProfile>? mediaProfiles;
+
+    List<m1.Profile>? profiles;
+
+    final mixedProfiles = <MixedProfile>[];
+
+    if (_mediaSupportLevel == MediaSupportLevel.one) {
+      profiles = await media1.getProfiles();
+
+      for (var profile in profiles) {
+        mixedProfiles.add(MixedProfile.fromProfile(profile));
+      }
+    } else {
+      mediaProfiles =
+          await media2.getProfiles(referenceToken: referenceToken, type: type);
+
+      for (var mediaProfile in mediaProfiles) {
+        mixedProfiles.add(MixedProfile.fromMediaProfile(mediaProfile));
+      }
+    }
+
+    if (mediaProfiles == null && profiles == null) {
+      throw NotSupportedException();
+    }
+
+    return mixedProfiles;
+  }
 
   /// Returns the capabilities of the media service. The result is returned in a
   /// typed answer.
