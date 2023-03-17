@@ -1,8 +1,9 @@
-# ONVIF Client protocol Profile S (Live Streaming) Dart implementation
+# Dart Implementation of ONVIF IP Camera Client
 
-This is a wrapper to ONVIF protocol which allows you to get information about your NVT (network video transmitter) device, its media sources, control PTZ (pan-tilt-zoom) movements and manage presets. It will also allow you to get information about your NVR (network video recorder).
+This package works with a variety of ONVIF compatible devices allowing for IP Cameras and NVRs (network video recorders) to be integrated into Dart and Flutter applications.  The package includes the ability to control the PTZ (pan-tilt-zoom) movements of a device along with managing presets as well as controlling how video and audio is being streamed from the device.  Review the documentation below to get more details on available features.
 
-[![pub package](https://img.shields.io/pub/v/easy_onvif.svg)](https://pub.dartlang.org/packages/easy_onvif) [![Build Status](https://github.com/faithoflifedev/easy_onvif/workflows/Dart/badge.svg)](https://github.com/faithoflifedev/easy_onvif/actions) [![github last commit](https://shields.io/github/last-commit/faithoflifedev/easy_onvif)](https://shields.io/github/last-commit/faithoflifedev/easy_onvif) [![github build](https://img.shields.io/github/actions/workflow/status/faithoflifedev/easy_onvif/dart.yml?branch=main)](https://shields.io/github/workflow/status/faithoflifedev/easy_onvif/Dart) [![github issues](https://shields.io/github/issues/faithoflifedev/easy_onvif)](https://shields.io/github/issues/faithoflifedev/easy_onvif)
+[![pub package](https://img.shields.io/pub/v/easy_onvif.svg)](https://pub.dartlang.org/packages/easy_onvif)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Table of contents
 - [New for version 2.1.x](#new-for-version-21x)
@@ -27,46 +28,9 @@ This is a wrapper to ONVIF protocol which allows you to get information about yo
 - [Contributors](#contributors)
 - [Contributing](#contributing)
 
-
-
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/faithoflif2)
 
-## New for version 2.1.x
-
-Support for __Media2__ Onvif operations
-
-```dart
-// defaults to `MixedProfile` a special case class that has the fields for both 
-// a media1 `Profile` and a media2 `MediaProfile`.
-var profiles = await onvif.media.getProfiles();
-
-// alternatively, make an explicit call to the Media2 operation
-var profiles2 = await onvif.media.media2.getProfiles();
-
-// or, make an explicit call to the Media1 operation
-var profiles1 = await onvif.media.media1.getProfiles();
-```
-
-## New for version 2.0.x
-
-Device discovery is finally here.  If you're using that cli utilities that became available from v1.0.0, you can discover Onvif devices on your network with the command:
-
-```sh
-onvif probe
-```
-
-Or, in dart code:
-
-```dart
-final multicastProbe = MulticastProbe();
-
-await multicastProbe.probe();
-
-for (var device in multicastProbe.onvifDevices) {
-  print(
-      '${device.name} ${device.location} ${device.hardware} ${device.xAddr}');
-}
-```
+[![Build Status](https://github.com/faithoflifedev/easy_onvif/workflows/Dart/badge.svg)](https://github.com/faithoflifedev/easy_onvif/actions) [![github last commit](https://shields.io/github/last-commit/faithoflifedev/easy_onvif)](https://shields.io/github/last-commit/faithoflifedev/easy_onvif) [![github build](https://img.shields.io/github/actions/workflow/status/faithoflifedev/easy_onvif/dart.yml?branch=main)](https://shields.io/github/workflow/status/faithoflifedev/easy_onvif/Dart) [![github issues](https://shields.io/github/issues/faithoflifedev/easy_onvif)](https://shields.io/github/issues/faithoflifedev/easy_onvif)
 
 ## Getting Started
 
@@ -77,7 +41,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^2.1.0-dev.12
+  easy_onvif: ^2.1.0-dev.13
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -209,7 +173,7 @@ Available commands:
   Run "onvif help <command>" for more information about a command.
 ```
 
-Please see the cli documentation [README.md](https://github.com/faithoflifedev/easy_onvif/tree/main/bin) for more detailed usage information.
+Please see the cli documentation [README.md](https://github.com/faithoflifedev/easy_onvif/blob/main/bin/README.md) for more detailed usage information.
 
 ## Supported Onvif Operations
 
@@ -315,7 +279,6 @@ The values returned by the Onvif API `GetDeviceInformation` call.
   * `GetMetadataConfiguration`
   * `GetProfile`
   * `GetServiceCapabilities`
-  * `GetStreamUri`
 * Media2:
   * is not supported by this device
 * PTZ:
@@ -336,6 +299,44 @@ The values returned by the Onvif API `GetDeviceInformation` call.
   * `StopMulticastStreaming`
 * PTZ:
   * not supported
+
+
+## New for version 2.1.x
+
+Support for __Media2__ Onvif operations
+
+```dart
+// defaults to `MixedProfile` a special case object that has the fields for both 
+// a media1 `Profile` and a media2 `MediaProfile`.
+var profiles = await onvif.media.getProfiles();
+
+// alternatively, make an explicit call to the Media1 operation
+var profiles1 = await onvif.media.media1.getProfiles();
+
+// or, make an explicit call to the Media2 operation
+var profiles2 = await onvif.media.media2.getProfiles();
+```
+
+## New for version 2.0.x
+
+__Device discovery__ is finally here.  If you're using the [command line utility](https://github.com/faithoflifedev/easy_onvif/blob/main/bin/README.md) that became available from v1.0.0, you can discover Onvif devices on your network with the command:
+
+```sh
+onvif probe
+```
+
+Or, in dart code:
+
+```dart
+final multicastProbe = MulticastProbe();
+
+await multicastProbe.probe();
+
+for (var device in multicastProbe.onvifDevices) {
+  print(
+      '${device.name} ${device.location} ${device.hardware} ${device.xAddr}');
+}
+```
 
 ## Features and bugs
 
@@ -367,7 +368,8 @@ There is probably a number of breaking changes in this version since some method
 
 ## Contributors
 
-- [LODYZ](hhttps://github.com/LODYZ)
+- <img src="https://avatars.githubusercontent.com/u/923202?v=4" width="25" height="25"> [faithoflifedev](https://github.com/faithoflifedev)
+- <img src="https://avatars.githubusercontent.com/u/38936462?v=4" width="25" height="25"> [LODYZ](https://github.com/LODYZ)
 
 ## Contributing
 

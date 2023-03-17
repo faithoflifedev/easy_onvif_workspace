@@ -1,6 +1,6 @@
-# Easy Onvif REST API CLI
+# Easy Onvif Command Line Interface (CLI)
 
-A command line interface for controlling an Onvif device through terminal commands has been made available through this Dart package.  This tool allows you to use O/S features like `cron` to automate Onvif device functionality.
+A command line interface application for controlling an Onvif device through terminal commands.  This tool allows you to use O/S features like `cron` to automate Onvif device functionality.
 
 ## Table of Contents
 - [Installation](#installation)

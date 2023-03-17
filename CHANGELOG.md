@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.0-dev.13
+
+* improved readme
+* added pana to workflow
+* added spellcheck to workflow
+
 ## 2.1.0-dev.12
 
 * fixes empty map in response [#35](https:&#x2F;&#x2F;github.com&#x2F;faithoflifedev&#x2F;easy_onvif&#x2F;issues&#x2F;35)
