@@ -38,6 +38,9 @@
     "tmpl",
     "tptz",
     "USERPROFILE",
-    "xmlsoap"
+    "xmlsoap",
+    "Onvif",
+    "onvif",
+    "faithoflifedev"
   ]
 }
