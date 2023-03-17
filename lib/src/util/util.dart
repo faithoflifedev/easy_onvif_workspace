@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
+import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/src/model/media_uri.dart';
 import 'package:intl/intl.dart';
 import 'package:loggy/loggy.dart';
@@ -159,6 +160,11 @@ class OnvifUtil {
 
   static String? nullableMappedToString(Map<String, dynamic>? value) =>
       value != null && value.containsKey('\$') ? mappedToString(value) : null;
+
+  static MulticastConfiguration? emptyMapToNull(Map<String, dynamic>? json) =>
+      json != null && json.keys.isNotEmpty
+          ? MulticastConfiguration.fromJson(json)
+          : null;
 
   // The tryParse is used to work-around the non-compliant date returned by the
   // TL-IPC43AN-4 device

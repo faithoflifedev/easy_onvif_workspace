@@ -63,7 +63,7 @@ class MetadataConfiguration {
   final bool? analytics;
 
   ///Defines the multicast settings that could be used for video streaming.
-  @JsonKey(name: 'Multicast')
+  @JsonKey(name: 'Multicast', fromJson: OnvifUtil.emptyMapToNull)
   final MulticastConfiguration? multicast;
 
   ///The rtsp session timeout for the related audio stream (when using Media2

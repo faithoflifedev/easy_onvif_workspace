@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.0-dev.12
+
+* fixes empty map in response [#35](https:&#x2F;&#x2F;github.com&#x2F;faithoflifedev&#x2F;easy_onvif&#x2F;issues&#x2F;35)
+* fixes wrong namespace for GetStreamUri [#36](https:&#x2F;&#x2F;github.com&#x2F;faithoflifedev&#x2F;easy_onvif&#x2F;issues&#x2F;36)
+
 ## 2.1.0-dev.11
 
 * adds `MixedProfile` ro resolve Issue #34

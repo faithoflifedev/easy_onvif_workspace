@@ -111,13 +111,13 @@ class MediaRequest {
       Transport.builder.element('StreamSetup', nest: () {
         Transport.builder.namespace(Xmlns.trt);
         Transport.builder.element('Stream', nest: () {
-          Transport.builder.namespace(Xmlns.trt);
+          Transport.builder.namespace(Xmlns.tt);
           Transport.builder.text(streamSetup.stream);
         });
         Transport.builder.element('Transport', nest: () {
-          Transport.builder.namespace(Xmlns.trt);
+          Transport.builder.namespace(Xmlns.tt);
           Transport.builder.element('Protocol', nest: () {
-            Transport.builder.namespace(Xmlns.trt);
+            Transport.builder.namespace(Xmlns.tt);
             Transport.builder.text(streamSetup.transport.protocol);
           });
         });

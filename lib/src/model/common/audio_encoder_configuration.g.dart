@@ -14,10 +14,7 @@ AudioEncoderConfiguration _$AudioEncoderConfigurationFromJson(
       OnvifUtil.mappedToString(json['Encoding'] as Map<String, dynamic>),
       OnvifUtil.mappedToInt(json['Bitrate'] as Map<String, dynamic>),
       OnvifUtil.mappedToInt(json['SampleRate'] as Map<String, dynamic>),
-      json['Multicast'] == null
-          ? null
-          : MulticastConfiguration.fromJson(
-              json['Multicast'] as Map<String, dynamic>),
+      OnvifUtil.emptyMapToNull(json['Multicast'] as Map<String, dynamic>?),
       OnvifUtil.mappedToString(json['SessionTimeout'] as Map<String, dynamic>),
     );
 

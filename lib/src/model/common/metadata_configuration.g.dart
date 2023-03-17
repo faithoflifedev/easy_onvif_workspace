@@ -23,10 +23,8 @@ MetadataConfiguration _$MetadataConfigurationFromJson(
           .toList(),
       analytics: OnvifUtil.nullableMappedToBool(
           json['Analytics'] as Map<String, dynamic>?),
-      multicast: json['Multicast'] == null
-          ? null
-          : MulticastConfiguration.fromJson(
-              json['Multicast'] as Map<String, dynamic>),
+      multicast:
+          OnvifUtil.emptyMapToNull(json['Multicast'] as Map<String, dynamic>?),
       sessionTimeout: OnvifUtil.mappedToString(
           json['SessionTimeout'] as Map<String, dynamic>),
       analyticsEngineConfiguration:

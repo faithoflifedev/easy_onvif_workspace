@@ -31,7 +31,7 @@ class AudioEncoderConfiguration {
   @JsonKey(name: 'SampleRate', fromJson: OnvifUtil.mappedToInt)
   final int sampleRate;
 
-  @JsonKey(name: 'Multicast')
+  @JsonKey(name: 'Multicast', fromJson: OnvifUtil.emptyMapToNull)
   final MulticastConfiguration? multiCast;
 
   ///The rtsp session timeout for the related audio stream

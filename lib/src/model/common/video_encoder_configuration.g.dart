@@ -28,10 +28,8 @@ VideoEncoderConfiguration _$VideoEncoderConfigurationFromJson(
       h264: json['H264'] == null
           ? null
           : H264.fromJson(json['H264'] as Map<String, dynamic>),
-      multiCast: json['Multicast'] == null
-          ? null
-          : MulticastConfiguration.fromJson(
-              json['Multicast'] as Map<String, dynamic>),
+      multiCast:
+          OnvifUtil.emptyMapToNull(json['Multicast'] as Map<String, dynamic>?),
       sessionTimeout: OnvifUtil.nullableMappedToString(
           json['SessionTimeout'] as Map<String, dynamic>?),
     );
