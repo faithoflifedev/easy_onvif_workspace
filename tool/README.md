@@ -6,8 +6,6 @@ This package works with a variety of ONVIF compatible devices allowing for IP Ca
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Table of contents
-- [New for version 2.1.x](#new-for-version-21x)
-- [New for version 2.0.x](#new-for-version-20x)
 - [Getting Started](#getting-started)
   - [Dependency](#dependency)
   - [Usage Example](#usage-example)
@@ -21,6 +19,8 @@ This package works with a variety of ONVIF compatible devices allowing for IP Ca
   - [PTZ](#ptz)
   - [PTZ Helper Methods](#ptz-helper-methods)
 - [Tested Onvif Devices](#tested-onvif-devices)
+- [New for version 2.1.x](#new-for-version-21x)
+- [New for version 2.0.x](#new-for-version-20x)
 - [Features and bugs](#features-and-bugs)
 - [Known Issues](#known-issues)
 - [Breaking changes](#breaking-changes)
