@@ -22,11 +22,16 @@
     "dartdoc",
     "Datagram",
     "datetime",
+    "diox",
     "dryrun",
+    "faithoflifedev",
     "faultstring",
     "formedness",
+    "Happytimesoft",
     "kbps",
     "LODYZ",
+    "onvif",
+    "Onvif",
     "POSIX",
     "quantizers",
     "Rgain",
@@ -38,13 +43,6 @@
     "tmpl",
     "tptz",
     "USERPROFILE",
-    "xmlsoap",
-    "Onvif",
-    "onvif",
-    "faithoflifedev",
-    "diox",
-    "Happytimesoft",
-    "Github",
-    "open-source"
+    "xmlsoap"
   ]
 }
