@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.1.0-dev.15
+
+* Issue - https:&#x2F;&#x2F;github.com&#x2F;faithoflifedev&#x2F;easy_onvif&#x2F;issues&#x2F;37
+  * Future&lt;String&gt; `media.getSnapshotUri(profileToken)` 
+  * Future&lt;String&gt; `media.getStreamUri(profileToken)` 
+  * both methods will return a `String` independent of the `MediaSupportLevel` if the device
+  * media.mediaSupportLevel can be used to determine what level of support is available on the device
+
 ## 2.1.0-dev.14
 
 * improved readme

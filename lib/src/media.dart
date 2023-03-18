@@ -3,6 +3,7 @@ import 'package:easy_onvif/media1.dart' as m1;
 import 'package:easy_onvif/media2.dart' as m2;
 import 'package:easy_onvif/soap.dart' as soap;
 import 'package:easy_onvif/src/model/media1/stream_setup.dart';
+import 'package:easy_onvif/src/model/media1/transport.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:loggy/loggy.dart';
 
@@ -19,6 +20,8 @@ class Media with UiLoggy {
 
   Media1 get media1 => _media1 ?? (throw NotSupportedException());
   Media2 get media2 => _media2 ?? (throw NotSupportedException());
+
+  MediaSupportLevel get mediaSupportLevel => _mediaSupportLevel;
 
   Media({
     required this.transport,
@@ -172,8 +175,18 @@ class Media with UiLoggy {
           : media2.getSnapshotUri(profileToken);
 
   /// Calls [getSnapshotUri2].
-  Future<String> getSnapshotUri(String profileToken) async =>
-      getSnapshotUri2(profileToken);
+  // Future<String> getSnapshotUri(String profileToken) async =>
+  //     getSnapshotUri2(profileToken);
+
+  Future<String> getSnapshotUri(String profileToken) async {
+    dynamic snapshotUri = _mediaSupportLevel == MediaSupportLevel.one
+        ? await media1.getSnapshotUri(profileToken)
+        : await media2.getSnapshotUri(profileToken);
+
+    return (snapshotUri is String)
+        ? snapshotUri
+        : (snapshotUri as m1.MediaUri).uri;
+  }
 
   /// This operation requests a [Uri] that can be used to initiate a live media1
   /// stream using RTSP as the control protocol. The returned URI shall remain
@@ -233,11 +246,17 @@ class Media with UiLoggy {
           : media2.getStreamUri(profileToken);
 
   /// Calls [getStreamUri2].
-  Future<String> getStreamUri(
-    String profileToken, {
-    String protocol = 'RTSP',
-  }) async =>
-      getStreamUri2(profileToken, protocol: protocol);
+  Future<String> getStreamUri(String profileToken) async {
+    dynamic streamUri = _mediaSupportLevel == MediaSupportLevel.one
+        ? await media1.getStreamUri(profileToken,
+            streamSetup: StreamSetup(
+              stream: 'RTP-Unicast',
+              transport: Transport(protocol: 'HTTP'),
+            ))
+        : await media2.getStreamUri(profileToken);
+
+    return (streamUri is String) ? streamUri : (streamUri as m1.MediaUri).uri;
+  }
 
   /// This command lists all available physical video inputs of the device.
   Future<List<m1.VideoSource>> getVideoSources() async =>

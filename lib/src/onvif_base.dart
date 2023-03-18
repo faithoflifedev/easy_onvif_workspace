@@ -15,8 +15,6 @@ class Onvif with UiLoggy {
 
   final serviceMap = <String, String>{};
 
-  MediaSupportLevel mediaSupportLevel = MediaSupportLevel.none;
-
   soap.Transport? _transport;
   DeviceManagement? _deviceManagement;
   Media? _media;

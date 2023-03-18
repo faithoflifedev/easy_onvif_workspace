@@ -41,7 +41,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^2.1.0-dev.14
+  easy_onvif: ^2.1.0-dev.15
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -309,6 +309,9 @@ Support for __Media2__ Onvif operations
 // defaults to `MixedProfile` a special case object that has the fields for both 
 // a media1 `Profile` and a media2 `MediaProfile`.
 var profiles = await onvif.media.getProfiles();
+
+// determine the media level supported
+print(onvif.media.mediaSupportLevel.name);
 
 // alternatively, make an explicit call to the Media1 operation
 var profiles1 = await onvif.media.media1.getProfiles();

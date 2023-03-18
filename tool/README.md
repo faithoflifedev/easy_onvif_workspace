@@ -310,6 +310,9 @@ Support for __Media2__ Onvif operations
 // a media1 `Profile` and a media2 `MediaProfile`.
 var profiles = await onvif.media.getProfiles();
 
+// determine the media level supported
+print(onvif.media.mediaSupportLevel.name);
+
 // alternatively, make an explicit call to the Media1 operation
 var profiles1 = await onvif.media.media1.getProfiles();
 

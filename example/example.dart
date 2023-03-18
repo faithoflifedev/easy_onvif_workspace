@@ -52,6 +52,9 @@ void main(List<String> arguments) async {
   // print('yMax: ${ptzConfigs[0].panTiltLimits!.range.yRange.max}');
   // print('yMin: ${ptzConfigs[0].panTiltLimits!.range.yRange.min}');
 
+  // determine the media level supported
+  print(onvif.media.mediaSupportLevel.name);
+
   // get device profiles
   var profs = await onvif.media.getProfiles();
 
@@ -59,6 +62,15 @@ void main(List<String> arguments) async {
     print(
         'name: ${profile.name}, token: ${profile.token}, hasVideoSourceConfig: ${profile.isMedia2 ? profile.configurations?.videoSourceConfiguration?.name : profile.videoSourceConfiguration?.name}');
   }
+
+  // get snapshot Uri
+  var snapshotUri = await onvif.media.getSnapshotUri(profs[0].token);
+
+  print(snapshotUri);
+
+  var streamUri = await onvif.media.getStreamUri(profs[0].token);
+
+  print(streamUri);
 
   // await onvif.ptz.moveLeft(profs[0].token);
 
@@ -162,7 +174,8 @@ void main(List<String> arguments) async {
   // }
 
   // get snapshot Uri
-  var snapshotUri = await onvif.media.getSnapshotUri(profs[0].token);
+  // var snapshotUri =
+  //     await onvif.media.getSnapshotUriType<m1.MediaUri>(profs[0].token);
 
   print(snapshotUri);
 
