@@ -9,9 +9,9 @@ environment:
   sdk: ">=2.18.0 <3.0.0"
 
 dependencies:
+  cached_network_image: ^3.2.3
   easy_onvif:
     path: ../../
-  flutter_image: ^4.1.4
   flutter_loggy: ^2.0.1
   loggy: ^2.0.1+1
   yaml: ^3.1.1
@@ -32,4 +32,4 @@ flutter:
   uses-material-design: true
 
   assets:
-    - config.yaml
+    - assets/config.yaml

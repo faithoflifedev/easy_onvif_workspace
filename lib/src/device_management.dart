@@ -71,7 +71,7 @@ class DeviceManagement with UiLoggy {
   /// This method has been replaced by the more generic [getServices] method.
   /// For capabilities of individual services refer to the
   /// [getServiceCapabilities] methods.
-  @Deprecated('Use [getServices]')
+  //  @Deprecated('Use [getServices]')
   Future<Capabilities> getCapabilities(
       {CapabilityCategory? capabilityCategory}) async {
     loggy.debug('getCapabilities');

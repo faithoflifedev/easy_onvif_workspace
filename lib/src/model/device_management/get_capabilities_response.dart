@@ -7,8 +7,8 @@ part 'get_capabilities_response.g.dart';
 /// This method has been replaced by the more generic GetServices method. For
 /// capabilities of individual services refer to the [DeviceManagement.getServiceCapabilities]
 /// methods.
+// @Deprecated('Use [DeviceManagement.getServiceCapabilities]')
 @JsonSerializable()
-@Deprecated('Use [DeviceManagement.getServiceCapabilities]')
 class GetCapabilitiesResponse {
   /// Capability information.
   @JsonKey(name: 'Capabilities')

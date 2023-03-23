@@ -184,10 +184,10 @@ class OnvifDeleteUsersDeviceManagementCommand extends OnvifHelperCommand {
   }
 }
 
-///This method has been replaced by the more generic GetServices method. For
-///capabilities of individual services refer to the GetServiceCapabilities
-///methods.
-@Deprecated('Use OnvifGetServicesDeviceManagementCommand')
+/// This method has been replaced by the more generic GetServices method. For
+/// capabilities of individual services refer to the GetServiceCapabilities
+/// methods.
+//  @Deprecated('Use OnvifGetServicesDeviceManagementCommand')
 class OnvifGetCapabilitiesDeviceManagementCommand extends OnvifHelperCommand {
   @override
   String get description =>

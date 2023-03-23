@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.0-dev.16
+
+* Issue - https:&#x2F;&#x2F;github.com&#x2F;faithoflifedev&#x2F;easy_onvif&#x2F;issues&#x2F;38
+* remove deprecated annotation, since the code still needs to support old devices regardless
+
 ## 2.1.0-dev.15
 
 * Issue - https:&#x2F;&#x2F;github.com&#x2F;faithoflifedev&#x2F;easy_onvif&#x2F;issues&#x2F;37

@@ -1,10 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_onvif/device_management.dart' as device;
 import 'package:easy_onvif/onvif.dart';
 import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' as services;
-import 'package:flutter_image/network.dart';
 import 'package:flutter_loggy/flutter_loggy.dart';
 import 'package:loggy/loggy.dart';
 import 'package:yaml/yaml.dart';
@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> with UiLoggy {
     }
   }
 
-  void _update() {
+  void _update() async {
     setState(() {
       model = deviceInfo.model;
 
@@ -170,18 +170,16 @@ class _MyHomePageState extends State<MyHomePage> with UiLoggy {
                     url != ''
                         ? Padding(
                             padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
-                            child: Image(
-                              image: NetworkImageWithRetry(
-                                url,
-                              ),
-                              errorBuilder: (context, exception, stackTrack) =>
-                                  const Icon(
-                                Icons.error,
-                              ),
-                              loadingBuilder:
-                                  (context, exception, stackTrack) =>
-                                      const CircularProgressIndicator(),
-                            ))
+                            child: CachedNetworkImage(
+                              imageUrl: url,
+                              progressIndicatorBuilder:
+                                  (context, url, downloadProgress) =>
+                                      CircularProgressIndicator(
+                                          value: downloadProgress.progress),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                            ),
+                          )
                         : Container(),
                   ],
                 ),
