@@ -431,14 +431,26 @@ class OnvifGotoHomePositionPtzCommand extends OnvifHelperCommand {
   @override
   String get name => 'goto-home-position';
 
-  // TODO:  support for [PtzSpeed]
   OnvifGotoHomePositionPtzCommand() {
-    argParser.addOption('profile-token',
-        abbr: 't',
-        valueHelp: 'profile-token',
-        mandatory: true,
-        help:
-            'A reference to the MediaProfile where the operation should take place.');
+    argParser
+      ..addOption('profile-token',
+          abbr: 't',
+          valueHelp: 'profile-token',
+          mandatory: true,
+          help:
+              'A reference to the MediaProfile where the operation should take place.')
+      ..addOption('pan-tilt-x',
+          valueHelp: 'double',
+          help:
+              'Pan and tilt speed. The x component corresponds to pan. If omitted in a request, the current (if any) PanTilt movement should not be affected.')
+      ..addOption('pan-tilt-y',
+          valueHelp: 'double',
+          help:
+              'Pan and tilt speed. The y component corresponds to tilt. If omitted in a request, the current (if any) PanTilt movement should not be affected.')
+      ..addOption('zoom',
+          valueHelp: 'double',
+          help:
+              'A zoom speed. If omitted in a request, the current (if any) Zoom movement should not be affected.');
   }
 
   @override
@@ -448,7 +460,17 @@ class OnvifGotoHomePositionPtzCommand extends OnvifHelperCommand {
     try {
       final profileToken = argResults!['profile-token'];
 
-      await ptz.gotoHomePosition(profileToken);
+      await ptz.gotoHomePosition(
+          profileToken,
+          argResults?['pan-tilt-x'] != null && argResults?['pan-tilt-y'] != null
+              ? PtzSpeed(
+                  panTilt: PanTilt.fromString(
+                      x: argResults!['pan-tilt-x'],
+                      y: argResults!['pan-tilt-y']),
+                  zoom: argResults?['zoom'] != null
+                      ? Zoom.fromString(x: argResults!['zoom'])
+                      : null)
+              : null);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -466,7 +488,6 @@ class OnvifGotoPresetPtzCommand extends OnvifHelperCommand {
   @override
   String get name => 'goto-preset';
 
-  // TODO:  support for [PtzSpeed], no test for happytimesoft
   OnvifGotoPresetPtzCommand() {
     argParser
       ..addOption('profile-token',
@@ -478,7 +499,19 @@ class OnvifGotoPresetPtzCommand extends OnvifHelperCommand {
       ..addOption('preset-token',
           valueHelp: 'preset-token',
           mandatory: true,
-          help: 'A requested preset token.');
+          help: 'A requested preset token.')
+      ..addOption('pan-tilt-x',
+          valueHelp: 'double',
+          help:
+              'Pan and tilt speed. The x component corresponds to pan. If omitted in a request, the current (if any) PanTilt movement should not be affected.')
+      ..addOption('pan-tilt-y',
+          valueHelp: 'double',
+          help:
+              'Pan and tilt speed. The y component corresponds to tilt. If omitted in a request, the current (if any) PanTilt movement should not be affected.')
+      ..addOption('zoom',
+          valueHelp: 'double',
+          help:
+              'A zoom speed. If omitted in a request, the current (if any) Zoom movement should not be affected.');
   }
 
   @override
@@ -488,8 +521,19 @@ class OnvifGotoPresetPtzCommand extends OnvifHelperCommand {
     try {
       final profileToken = argResults!['profile-token'];
 
-      await ptz.gotoPreset(profileToken,
-          presetToken: argResults!['preset-token']);
+      await ptz.gotoPreset(
+        profileToken,
+        presetToken: argResults!['preset-token'],
+        speed: argResults?['pan-tilt-x'] != null &&
+                argResults?['pan-tilt-y'] != null
+            ? PtzSpeed(
+                panTilt: PanTilt.fromString(
+                    x: argResults!['pan-tilt-x'], y: argResults!['pan-tilt-y']),
+                zoom: argResults?['zoom'] != null
+                    ? Zoom.fromString(x: argResults!['zoom'])
+                    : null)
+            : null,
+      );
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -510,7 +554,6 @@ class OnvifRelativeMovePtzCommand extends OnvifHelperCommand {
   @override
   String get name => 'relative-move';
 
-  // TODO:  support for [PtzSpeed]
   OnvifRelativeMovePtzCommand() {
     argParser
       ..addOption('profile-token',
@@ -521,14 +564,17 @@ class OnvifRelativeMovePtzCommand extends OnvifHelperCommand {
               'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.')
       ..addOption('translation-x',
           valueHelp: 'double',
+          mandatory: true,
           help:
               'Pan and tilt speed. The x component corresponds to pan. If omitted in a request, the current (if any) PanTilt movement should not be affected.')
       ..addOption('translation-y',
           valueHelp: 'double',
+          mandatory: true,
           help:
               'Pan and tilt speed. The y component corresponds to tilt. If omitted in a request, the current (if any) PanTilt movement should not be affected.')
       ..addOption('translation-zoom',
           valueHelp: 'double',
+          mandatory: true,
           help:
               'A zoom speed. If omitted in a request, the current (if any) Zoom movement should not be affected.');
   }

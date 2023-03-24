@@ -8,4 +8,6 @@ scratch/
 tool/
 test/
 
+example/flutter_model
+
 *.log

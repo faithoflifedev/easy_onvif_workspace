@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.0-dev.17
+
+* support `PtzSpeed` for `gotoHomePosition` and `gotoPreset`
+* default to RTSP transport for media1 getStreamUri
+
 ## 2.1.0-dev.16
 
 * Issue - https:&#x2F;&#x2F;github.com&#x2F;faithoflifedev&#x2F;easy_onvif&#x2F;issues&#x2F;38

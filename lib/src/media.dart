@@ -251,7 +251,7 @@ class Media with UiLoggy {
         ? await media1.getStreamUri(profileToken,
             streamSetup: StreamSetup(
               stream: 'RTP-Unicast',
-              transport: Transport(protocol: 'HTTP'),
+              transport: Transport(protocol: 'RTSP'),
             ))
         : await media2.getStreamUri(profileToken);
 
