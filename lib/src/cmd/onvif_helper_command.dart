@@ -16,6 +16,10 @@ abstract class OnvifHelperCommand extends Command {
 
   Media get media => onvif.media;
 
+  Recordings get recordings => onvif.recordings;
+
+  Replay get replay => onvif.replay;
+
   Future<void> initializeOnvif() async {
     final authFile = File(globalResults!['config-file']);
 

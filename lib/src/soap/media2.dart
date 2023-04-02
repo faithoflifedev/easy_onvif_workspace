@@ -1,7 +1,8 @@
-import 'package:easy_onvif/soap.dart';
 import 'package:xml/xml.dart';
 
 import 'media_common.dart';
+import 'transport.dart';
+import 'xmlns.dart';
 
 class Media2Request {
   /// XML for the [getMetadataConfigurationOptions]
@@ -23,22 +24,12 @@ class Media2Request {
       );
 
   /// XML for the [getProfiles]
-  static XmlDocumentFragment getProfiles() {
-    Transport.builder.element('GetProfiles', nest: () {
-      Transport.builder.namespace(Xmlns.tr2);
-    });
-
-    return Transport.builder.buildFragment();
-  }
+  static XmlDocumentFragment getProfiles() =>
+      Transport.quickTag('GetProfiles', Xmlns.tr2);
 
   /// XML for the [getServiceCapabilities]
-  static XmlDocumentFragment getServiceCapabilities() {
-    Transport.builder.element('GetServiceCapabilities', nest: () {
-      Transport.builder.namespace(Xmlns.tr2);
-    });
-
-    return Transport.builder.buildFragment();
-  }
+  static XmlDocumentFragment getServiceCapabilities() =>
+      Transport.quickTag('GetServiceCapabilities', Xmlns.tr2);
 
   /// XML for the [getSnapshotUri], requires a [profileToken]
   static XmlDocumentFragment getSnapshotUri(String profileToken) {
@@ -54,25 +45,16 @@ class Media2Request {
 
   /// XML for the [getStreamUri], requires a [profileToken]
   static XmlDocumentFragment getStreamUri(String profileToken,
-      {String streamType = 'RTP-Unicast', String transportProtocol = 'RTSP'}) {
+      {String protocol = 'RTSP'}) {
     Transport.builder.element('GetStreamUri', nest: () {
       Transport.builder.namespace(Xmlns.tr2);
-
-      Transport.builder.element('StreamSetup', nest: () {
-        Transport.builder.element('Stream', nest: () {
-          Transport.builder.namespace(Xmlns.tt);
-          Transport.builder.text(streamType);
-        });
-
-        Transport.builder.element('Transport', nest: () {
-          Transport.builder.namespace(Xmlns.tt);
-          Transport.builder.element('Protocol', nest: () {
-            Transport.builder.text(transportProtocol);
-          });
-        });
+      Transport.builder.element('Protocol', nest: () {
+        Transport.builder.namespace(Xmlns.tt);
+        Transport.builder.text(protocol);
       });
 
       Transport.builder.element('ProfileToken', nest: () {
+        Transport.builder.namespace(Xmlns.tt);
         Transport.builder.text(profileToken);
       });
     });

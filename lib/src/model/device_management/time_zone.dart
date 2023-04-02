@@ -5,7 +5,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'time_zone.g.dart';
 
-///Timezone information in Posix format.
+/// Timezone information in Posix format.
 @JsonSerializable()
 class TimeZone {
   ///Posix timezone string.

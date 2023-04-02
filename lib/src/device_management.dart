@@ -230,6 +230,43 @@ class DeviceManagement with UiLoggy {
     return GetServicesResponse.fromJson(envelope.body.response!).services;
   }
 
+  /// This operation retrieves the Storage configuration associated with the
+  /// given storage configuration toke
+  Future<StorageConfiguration> getStorageConfiguration(
+      String referenceToken) async {
+    loggy.debug('getStorageConfigurations');
+
+    final envelope = await transport.sendRequest(
+        uri,
+        transport.securedEnvelope(
+            soap.DeviceManagementRequest.getStorageConfiguration(
+                referenceToken)));
+
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
+    }
+
+    return GetStorageConfigurationResponse.fromJson(envelope.body.response!)
+        .storageConfiguration;
+  }
+
+  /// This operation lists all existing storage configurations for the device.
+  Future<List<StorageConfiguration>> getStorageConfigurations() async {
+    loggy.debug('getStorageConfigurations');
+
+    final envelope = await transport.sendRequest(
+        uri,
+        transport.securedEnvelope(
+            soap.DeviceManagementRequest.getStorageConfigurations()));
+
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
+    }
+
+    return GetStorageConfigurationsResponse.fromJson(envelope.body.response!)
+        .storageConfigurations;
+  }
+
   /// This operation gets the device system date and time. The device shall
   /// support the return of the daylight saving setting and of the manual system
   /// date and time (if applicable) or indication of NTP time (if applicable)
@@ -250,6 +287,39 @@ class DeviceManagement with UiLoggy {
 
     return GetSystemDateAndTimeResponse.fromJson(envelope.body.response!)
         .systemDateAndTime;
+  }
+
+  /// This operation gets a system log from the device. The exact format of the
+  /// system logs is outside the scope of this standard.
+  Future<SystemInformation> getSystemLog(String logType) async {
+    loggy.debug('getSystemLog');
+
+    final envelope = await transport.sendRequest(
+        uri,
+        transport.securedEnvelope(
+            soap.DeviceManagementRequest.getSystemLog(logType)));
+
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
+    }
+
+    return GetSystemLogResponse.fromJson(envelope.body.response!).systemLog;
+  }
+
+  Future<SystemInformation> getSystemSupportInformation() async {
+    loggy.debug('getSystemSupportInformation');
+
+    final envelope = await transport.sendRequest(
+        uri,
+        transport.securedEnvelope(
+            soap.DeviceManagementRequest.getSystemSupportInformation()));
+
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
+    }
+
+    return GetSystemSupportInformationResponse.fromJson(envelope.body.response!)
+        .supportInformation;
   }
 
   /// This operation is used to retrieve URIs from which system information may
@@ -309,7 +379,7 @@ class DeviceManagement with UiLoggy {
   // // Future<void> getEndpointReference() async {
   // //   // Future<GetEndpointReferenceResponse> getEndpointReference() async {
   // //   final envelope = await Soap.retrieveEnvelope(
-  // //       uri, onvif.secureRequest(SoapRequest.endpointReference()),
+  // //       uri, onvif.secureRequest(Transport.endpointReference()),
   // //       postProcess: (String xmlBody, dynamic jsonMap, Envelope envelope) {
   // //     print(xmlBody);
   // //     print('\n\n');
@@ -320,4 +390,18 @@ class DeviceManagement with UiLoggy {
 
   // //   // return envelope.body.deviceInformationResponse!;
   // // }
+
+  /// This operation reboots the device.
+  Future<String> systemReboot() async {
+    loggy.debug('systemReboot');
+
+    final envelope = await transport.sendRequest(uri,
+        transport.securedEnvelope(soap.DeviceManagementRequest.systemReboot()));
+
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
+    }
+
+    return SystemRebootResponse.fromJson(envelope.body.response!).message;
+  }
 }

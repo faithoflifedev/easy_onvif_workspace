@@ -1,17 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'system_log_uris.dart';
+part of 'system_log_uri_list.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SystemLogUris _$SystemLogUrisFromJson(Map<String, dynamic> json) =>
-    SystemLogUris(
-      systemLogs: SystemLogUris._unbound(json['SystemLog']),
+SystemLogUriList _$SystemLogUriListFromJson(Map<String, dynamic> json) =>
+    SystemLogUriList(
+      systemLogs: SystemLogUriList._unbound(json['SystemLog']),
     );
 
-Map<String, dynamic> _$SystemLogUrisToJson(SystemLogUris instance) =>
+Map<String, dynamic> _$SystemLogUriListToJson(SystemLogUriList instance) =>
     <String, dynamic>{
       'SystemLog': instance.systemLogs,
     };

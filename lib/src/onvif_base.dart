@@ -8,6 +8,8 @@ import 'media.dart';
 import 'media1.dart';
 import 'media2.dart';
 import 'ptz.dart';
+import 'recordings.dart';
+import 'replay.dart';
 
 class Onvif with UiLoggy {
   final AuthInfo authInfo;
@@ -19,6 +21,8 @@ class Onvif with UiLoggy {
   DeviceManagement? _deviceManagement;
   Media? _media;
   Ptz? _ptz;
+  Recordings? _recordings;
+  Replay? _replay;
 
   soap.Transport get transport =>
       _transport ??
@@ -33,6 +37,12 @@ class Onvif with UiLoggy {
 
   Ptz get ptz => _ptz ?? (throw Exception('PTZ services not available'));
 
+  Recordings get recordings =>
+      _recordings ?? (throw Exception('Recordings services not available'));
+
+  Replay get replay =>
+      _replay ?? (throw Exception('Replay services not available'));
+
   Onvif(
       {required this.authInfo,
       required LogOptions logOptions,
@@ -43,7 +53,12 @@ class Onvif with UiLoggy {
             .parseUri {
     Loggy.initLoggy(logPrinter: printer, logOptions: logOptions);
 
-    final dio = Dio()..interceptors.add(LoggingInterceptors());
+    final dio = Dio(
+      BaseOptions(
+        connectTimeout: Duration(seconds: 20),
+        receiveTimeout: Duration(seconds: 10),
+      ),
+    )..interceptors.add(LoggingInterceptors());
 
     _transport = soap.Transport(dio: dio, authInfo: authInfo);
 
@@ -96,37 +111,48 @@ class Onvif with UiLoggy {
 
     soap.Transport.timeDelta = await getTimeDelta();
 
-    try {
-      final serviceList = await deviceManagement.getServices(true);
+    final serviceList = await deviceManagement.getServices(true);
 
-      serviceMap.addAll(
-          {for (var service in serviceList) service.nameSpace: service.xAddr});
+    serviceMap.addAll(
+        {for (var service in serviceList) service.nameSpace: service.xAddr});
 
-      if (serviceMap.containsKey(soap.Xmlns.trt)) {
-        media1 = Media1(
-            transport: transport,
-            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trt]!));
-      }
+    if (serviceMap.containsKey(soap.Xmlns.trt)) {
+      media1 = Media1(
+          transport: transport,
+          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trt]!));
+    }
 
-      if (serviceMap.containsKey(soap.Xmlns.tr2)) {
-        media2 = Media2(
-            transport: transport,
-            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.tr2]!));
-      }
+    if (serviceMap.containsKey(soap.Xmlns.tr2)) {
+      media2 = Media2(
+          transport: transport,
+          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.tr2]!));
+    }
 
+    if (serviceMap.containsKey(soap.Xmlns.tptz)) {
+      _ptz = Ptz(
+          transport: transport,
+          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.tptz]!));
+    }
+
+    if (serviceMap.containsKey(soap.Xmlns.trc)) {
+      _recordings = Recordings(
+          transport: transport,
+          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trc]!));
+    }
+
+    if (serviceMap.containsKey(soap.Xmlns.trp)) {
+      _replay = Replay(
+          transport: transport,
+          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trp]!));
+    }
+
+    if (media1 != null || media2 != null) {
       _media = Media(
         transport: transport,
         media1: media1,
         media2: media2,
       );
-
-      if (serviceMap.containsKey('http://www.onvif.org/ver20/ptz/wsdl')) {
-        _ptz = Ptz(
-            transport: transport,
-            uri: _serviceUriOfHost(
-                serviceMap['http://www.onvif.org/ver20/ptz/wsdl']!));
-      }
-    } catch (error) {
+    } else {
       loggy.warning('GetServices command not supported');
 
       final capabilities = await deviceManagement.getCapabilities();

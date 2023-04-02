@@ -3,14 +3,14 @@ import 'dart:convert';
 import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'system_log_uris.dart';
+import 'system_log_uri_list.dart';
 
 part 'get_system_uris_response.g.dart';
 
 @JsonSerializable()
 class GetSystemUrisResponse {
   @JsonKey(name: 'SystemLogUris')
-  final SystemLogUris? systemLogUris;
+  final SystemLogUriList? systemLogUris;
 
   @JsonKey(name: 'SupportInfoUri', fromJson: OnvifUtil.nullableMappedToString)
   final String? supportInfoUri;

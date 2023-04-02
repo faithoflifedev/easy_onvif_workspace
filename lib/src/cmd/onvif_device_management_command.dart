@@ -28,9 +28,14 @@ class OnvifDeviceManagementCommand extends Command {
     addSubcommand(OnvifGetNtpDeviceManagementCommand());
     addSubcommand(OnvifGetServiceCapabilitiesDeviceManagementCommand());
     addSubcommand(OnvifGetServicesDeviceManagementCommand());
+    addSubcommand(OnvifGetStorageConfigurationDeviceManagementCommand());
+    addSubcommand(OnvifGetStorageConfigurationsDeviceManagementCommand());
     addSubcommand(OnvifGetSystemDateAndTimeDeviceManagementCommand());
+    addSubcommand(OnvifGetSystemLogDeviceManagementCommand());
+    addSubcommand(OnvifGetSystemSupportInformationDeviceManagementCommand());
     addSubcommand(OnvifGetSystemUrisDeviceManagementCommand());
     addSubcommand(OnvifGetUsersDeviceManagementCommand());
+    addSubcommand(OnvifSystemRebootDeviceManagementCommand());
   }
 }
 
@@ -417,6 +422,64 @@ class OnvifGetServicesDeviceManagementCommand extends OnvifHelperCommand {
   }
 }
 
+/// This operation retrieves the Storage configuration associated with the given
+/// storage configuration token.
+class OnvifGetStorageConfigurationDeviceManagementCommand
+    extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'This operation retrieves the Storage configuration associated with the given storage configuration token.';
+
+  @override
+  String get name => 'get-storage-configuration';
+
+  OnvifGetStorageConfigurationDeviceManagementCommand() {
+    argParser.addOption('storage-token',
+        abbr: 't',
+        mandatory: true,
+        help: 'Unique identifier referencing the physical entity.');
+  }
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final systemDateAndTime = await deviceManagement
+          .getStorageConfiguration(argResults!['storage-token']);
+
+      print(systemDateAndTime);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// This operation lists all existing storage configurations for the device.
+class OnvifGetStorageConfigurationsDeviceManagementCommand
+    extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'This operation lists all existing storage configurations for the device.';
+
+  @override
+  String get name => 'get-storage-configurations';
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final systemDateAndTime =
+          await deviceManagement.getStorageConfigurations();
+
+      print(systemDateAndTime);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
 /// This operation gets the device system date and time. The device shall
 /// support the return of the daylight saving setting and of the manual system
 /// date and time (if applicable) or indication of NTP time (if applicable)
@@ -442,6 +505,68 @@ A device shall provide the UTCDateTime information.''';
       final systemDateAndTime = await deviceManagement.getSystemDateAndTime();
 
       print(systemDateAndTime);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// This operation gets a system log from the device. The exact format of the
+/// system logs is outside the scope of this standard.
+class OnvifGetSystemLogDeviceManagementCommand extends OnvifHelperCommand {
+  @override
+  String get description => 'This operation gets a system log from the device.';
+
+  @override
+  String get name => 'get-system-log';
+
+  OnvifGetSystemLogDeviceManagementCommand() {
+    argParser.addOption('type',
+        abbr: 't',
+        defaultsTo: 'System',
+        allowed: ['Access', 'System'],
+        allowedHelp: {
+          'Access': 'Indicates that a access log is requested.',
+          'System': ' Indicates that a system log is requested.',
+        },
+        help: 'Specifies the type of system log to get.');
+  }
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final systemLog =
+          await deviceManagement.getSystemLog(argResults!['type']);
+
+      print(systemLog);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// This operation gets arbitrary device diagnostics information from the
+/// device.
+class OnvifGetSystemSupportInformationDeviceManagementCommand
+    extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'This operation gets arbitrary device diagnostics information from the device.';
+
+  @override
+  String get name => 'get-system-support-information';
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final systemInformation =
+          await deviceManagement.getSystemSupportInformation();
+
+      print(systemInformation);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -506,7 +631,29 @@ class OnvifGetUsersDeviceManagementCommand extends OnvifHelperCommand {
     try {
       final users = await deviceManagement.getUsers();
 
-      print(json.encode(users));
+      print(users);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// This operation reboots the device.
+class OnvifSystemRebootDeviceManagementCommand extends OnvifHelperCommand {
+  @override
+  String get description => 'This operation reboots the device.';
+
+  @override
+  String get name => 'system-reboot';
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final message = await deviceManagement.systemReboot();
+
+      print(message);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

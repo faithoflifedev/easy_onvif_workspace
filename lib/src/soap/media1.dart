@@ -1,27 +1,18 @@
 import 'package:easy_onvif/media1.dart' hide Transport;
-import 'package:easy_onvif/soap.dart';
 import 'package:xml/xml.dart';
 
 import 'media_common.dart';
+import 'transport.dart';
+import 'xmlns.dart';
 
 class MediaRequest {
   /// XML for the [getAudioSources]
-  static XmlDocumentFragment getAudioSources() {
-    Transport.builder.element('GetAudioSources', nest: () {
-      Transport.builder.namespace(Xmlns.trt);
-    });
-
-    return Transport.builder.buildFragment();
-  }
+  static XmlDocumentFragment getAudioSources() =>
+      Transport.quickTag('GetAudioSources', Xmlns.trt);
 
   /// XML for the [getAudioOutputs]
-  static XmlDocumentFragment getAudioOutputs() {
-    Transport.builder.element('GetAudioSources', nest: () {
-      Transport.builder.namespace(Xmlns.trt);
-    });
-
-    return Transport.builder.buildFragment();
-  }
+  static XmlDocumentFragment getAudioOutputs() =>
+      Transport.quickTag('GetAudioOutputs', Xmlns.trt);
 
   /// XML for the [getMetadataConfiguration]
   static XmlDocumentFragment getMetadataConfiguration(
@@ -72,22 +63,12 @@ class MediaRequest {
   }
 
   /// XML for the [getProfiles]
-  static XmlDocumentFragment getProfiles() {
-    Transport.builder.element('GetProfiles', nest: () {
-      Transport.builder.namespace(Xmlns.trt);
-    });
-
-    return Transport.builder.buildFragment();
-  }
+  static XmlDocumentFragment getProfiles() =>
+      Transport.quickTag('GetProfiles', Xmlns.trt);
 
   /// XML for the [getServiceCapabilities]
-  static XmlDocumentFragment getServiceCapabilities() {
-    Transport.builder.element('GetServiceCapabilities', nest: () {
-      Transport.builder.namespace(Xmlns.trt);
-    });
-
-    return Transport.builder.buildFragment();
-  }
+  static XmlDocumentFragment getServiceCapabilities() =>
+      Transport.quickTag('GetServiceCapabilities', Xmlns.trt);
 
   /// XML for the [getSnapshotUri], requires a [profileToken]
   static XmlDocumentFragment getSnapshotUri(String profileToken,
@@ -132,13 +113,8 @@ class MediaRequest {
   }
 
   /// XML for the [getVideoSources]
-  static XmlDocumentFragment getVideoSources() {
-    Transport.builder.element('GetVideoSources', nest: () {
-      Transport.builder.namespace(Xmlns.trt);
-    });
-
-    return Transport.builder.buildFragment();
-  }
+  static XmlDocumentFragment getVideoSources() =>
+      Transport.quickTag('GetVideoSources', Xmlns.trt);
 
   /// XML for the [startMulticastStreaming]
   static XmlDocumentFragment startMulticastStreaming(String profileToken) =>

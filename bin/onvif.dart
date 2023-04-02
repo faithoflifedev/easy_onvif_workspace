@@ -18,6 +18,8 @@ void main(List<String> arguments) async {
     ..addCommand(OnvifMedia2Command())
     ..addCommand(OnvifPtzCommand())
     ..addCommand(OnvifProbeCommand())
+    ..addCommand(OnvifRecordingsCommand())
+    ..addCommand(OnvifReplayCommand())
     ..addCommand(OnvifVersionCommand())
     ..run(arguments).catchError((error) {
       if (error is! UsageException) throw error;

@@ -3,22 +3,22 @@ import 'dart:convert';
 import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'system_log.g.dart';
+part 'system_log_uri.g.dart';
 
 @JsonSerializable()
-class SystemLog {
+class SystemLogUri {
   @JsonKey(name: 'Type', fromJson: OnvifUtil.mappedToString)
   final String type;
 
   @JsonKey(name: 'Uri', fromJson: OnvifUtil.nullableMappedToString)
   final String? uri;
 
-  SystemLog({required this.type, this.uri});
+  SystemLogUri({required this.type, this.uri});
 
-  factory SystemLog.fromJson(Map<String, dynamic> json) =>
-      _$SystemLogFromJson(json);
+  factory SystemLogUri.fromJson(Map<String, dynamic> json) =>
+      _$SystemLogUriFromJson(json);
 
-  Map<String, dynamic> toJson() => _$SystemLogToJson(this);
+  Map<String, dynamic> toJson() => _$SystemLogUriToJson(this);
 
   @override
   String toString() => json.encode(toJson());

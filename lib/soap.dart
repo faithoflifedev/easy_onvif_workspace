@@ -7,5 +7,7 @@ export 'src/soap/media1.dart';
 export 'src/soap/media2.dart';
 export 'src/soap/nonce.dart';
 export 'src/soap/ptz.dart';
+export 'src/soap/recordings.dart';
+export 'src/soap/replay.dart';
 export 'src/soap/transport.dart';
 export 'src/soap/xmlns.dart';

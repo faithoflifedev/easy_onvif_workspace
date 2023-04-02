@@ -1,89 +1,72 @@
+import 'dart:convert';
+
 import 'package:args/command_runner.dart';
 import 'package:dio/dio.dart';
+import 'package:easy_onvif/command.dart';
+import 'package:easy_onvif/media1.dart';
 import 'package:easy_onvif/util.dart';
 
-import 'onvif_helper_command.dart';
-
-class OnvifMedia2Command extends Command {
+class OnvifMedia1Command extends Command {
   @override
-  String get description => 'Media2 commands.';
+  String get description => 'Media ver10 commands.';
 
   @override
-  String get name => 'media2';
+  String get name => 'media1';
 
-  OnvifMedia2Command() {
-    addSubcommand(OnvifGetMetadataConfigurationOptionsMediaCommand());
-    addSubcommand(OnvifGetMetadataConfigurations2MediaCommand());
-    addSubcommand(OnvifGetProfiles2MediaCommand());
-    addSubcommand(OnvifGetServiceCapabilities2MediaCommand());
-    addSubcommand(OnvifGetSnapshotUri2MediaCommand());
-    addSubcommand(OnvifGetStreamUri2MediaCommand());
-    addSubcommand(OnvifGetVideoEncoderInstancesMediaCommand());
-    addSubcommand(OnvifStartMulticastStreaming2MediaCommand());
-    addSubcommand(OnvifStopMulticastStreaming2MediaCommand());
+  OnvifMedia1Command() {
+    addSubcommand(OnvifGetAudioSourcesMediaCommand());
+    addSubcommand(OnvifGetMetadataConfiguration1MediaCommand());
+    addSubcommand(OnvifGetMetadataConfigurations1MediaCommand());
+    addSubcommand(OnvifGetProfileMediaCommand());
+    addSubcommand(OnvifGetProfiles1MediaCommand());
+    addSubcommand(OnvifGetServiceCapabilities1MediaCommand());
+    addSubcommand(OnvifGetSnapshotUri1MediaCommand());
+    addSubcommand(OnvifGetStreamUri1MediaCommand());
+    addSubcommand(OnvifGetVideoSourcesMediaCommand());
+    addSubcommand(OnvifStartMulticastStreaming1MediaCommand());
+    addSubcommand(OnvifStopMulticastStreaming1MediaCommand());
   }
 }
 
-/// This operation returns the available options (supported values and ranges
-/// for metadata configuration parameters) for changing the metadata
-/// configuration.
-class OnvifGetMetadataConfigurationOptionsMediaCommand
-    extends OnvifHelperCommand {
+///This command lists all available physical audio inputs of the device.
+class OnvifGetAudioSourcesMediaCommand extends OnvifHelperCommand {
   @override
   String get description =>
-      'This operation returns the available options (supported values and ranges for metadata configuration parameters) for changing the metadata configuration.';
+      'This command lists all available physical audio inputs of the device.';
 
   @override
-  String get name => 'get-metadata-configuration-options';
-
-  OnvifGetMetadataConfigurationOptionsMediaCommand() {
-    argParser
-      ..addOption('configuration-token',
-          valueHelp: 'string', help: 'Token of the requested configuration.')
-      ..addOption('profile-token',
-          valueHelp: 'string',
-          help:
-              'Contains the token of an existing media profile the configurations shall be compatible with.');
-  }
+  String get name => 'get-audio-sources';
 
   @override
   void run() async {
     await initializeOnvif();
 
     try {
-      final metadataConfigurationOptions =
-          await media.media2.getMetadataConfigurationOptions(
-        configurationToken: argResults?['configuration-token'],
-        profileToken: argResults?['profile-token'],
-      );
+      final audioSources = await media.media1.getAudioSources();
 
-      print(metadataConfigurationOptions);
+      print(audioSources);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
 }
 
-/// By default this operation lists all existing metadata configurations for a
-/// device. Provide a profile token to list only configurations that are
-/// compatible with the profile. If a configuration token is provided only a
-/// single configuration will be returned.
-class OnvifGetMetadataConfigurations2MediaCommand extends OnvifHelperCommand {
+/// The GetMetadataConfiguration command fetches the metadata configuration if
+/// the metadata token is known.
+class OnvifGetMetadataConfiguration1MediaCommand extends OnvifHelperCommand {
   @override
   String get description =>
-      'By default this operation lists all existing metadata configurations for a device. Provide a profile token to list only configurations that are compatible with the profile. If a configuration token is provided only a single configuration will be returned.';
+      'The GetMetadataConfiguration command fetches the metadata configuration if the metadata token is known.';
 
   @override
-  String get name => 'get-metadata-configurations';
+  String get name => 'get-metadata-configuration';
 
-  OnvifGetMetadataConfigurations2MediaCommand() {
-    argParser
-      ..addOption('configuration-token',
-          valueHelp: 'string', help: 'Token of the requested configuration.')
-      ..addOption('profile-token',
-          valueHelp: 'string',
-          help:
-              'Contains the token of an existing media profile the configurations shall be compatible with.');
+  OnvifGetMetadataConfiguration1MediaCommand() {
+    argParser.addOption('configuration-token',
+        abbr: 't',
+        valueHelp: 'string',
+        mandatory: true,
+        help: 'Token of the requested metadata configuration.');
   }
 
   @override
@@ -91,8 +74,45 @@ class OnvifGetMetadataConfigurations2MediaCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
+      final metadataConfiguration = await media.media1
+          .getMetadataConfiguration(argResults!['configuration-token']);
+
+      print(json.encode(metadataConfiguration));
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// This operation returns the available options (supported values and ranges
+/// for metadata configuration parameters) for changing the metadata
+/// configuration.
+class OnvifGetMetadataConfigurations1MediaCommand extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'This operation returns the available options (supported values and ranges for metadata configuration parameters) for changing the metadata configuration.';
+
+  @override
+  String get name => 'get-metadata-configurations';
+
+  OnvifGetMetadataConfigurations1MediaCommand() {
+    argParser
+      ..addOption('configuration-token',
+          valueHelp: 'string',
+          help:
+              'Optional metadata configuration token that specifies an existing configuration that the options are intended for.')
+      ..addOption('profile-token',
+          valueHelp: 'string',
+          help:
+              'Optional ProfileToken that specifies an existing media profile that the options shall be compatible with.');
+  }
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
       final metadataConfigurations =
-          await media.media2.getMetadataConfigurations(
+          await media.media1.getMetadataConfigurations(
         configurationToken: argResults?['configuration-token'],
         profileToken: argResults?['profile-token'],
       );
@@ -104,44 +124,22 @@ class OnvifGetMetadataConfigurations2MediaCommand extends OnvifHelperCommand {
   }
 }
 
-/// Retrieve the profile with the specified token or all defined media profiles.
-/// - If no Type is provided the returned profiles shall contain no
-///   configuration information.
-/// - If a single Type with value 'All' is provided the returned profiles shall
-///   include all associated configurations.
-/// - Otherwise the requested list of configurations shall for each profile
-///   include the configurations present as Type.
-class OnvifGetProfiles2MediaCommand extends OnvifHelperCommand {
+/// If the profile token is already known, a profile can be fetched through the
+/// GetProfile command.
+class OnvifGetProfileMediaCommand extends OnvifHelperCommand {
   @override
   String get description =>
-      'Retrieve the profile with the specified token or all defined media profiles.';
+      'If the profile token is already known, a profile can be fetched through the GetProfile command.';
 
   @override
-  String get name => 'get-profiles';
+  String get name => 'get-profile';
 
-  OnvifGetProfiles2MediaCommand() {
-    argParser
-      ..addOption(
-        'reference-token',
+  OnvifGetProfileMediaCommand() {
+    argParser.addOption('profile-token',
+        abbr: 't',
         valueHelp: 'string',
-        help: 'Optional token of the requested profile.',
-      )
-      ..addOption('type',
-          valueHelp: 'comma delimited string',
-          allowed: [
-            'All',
-            'Analytics',
-            'AudioSource',
-            'AudioDecoder',
-            'AudioEncoder',
-            'AudioOutput',
-            'Metadata',
-            'VideoEncoder',
-            'VideoSource',
-            'PTZ',
-          ],
-          help:
-              'The types shall be provided as defined by tr2:ConfigurationEnumeration.');
+        mandatory: true,
+        help: 'Token of the requested media profile.');
   }
 
   @override
@@ -149,9 +147,35 @@ class OnvifGetProfiles2MediaCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final profiles = await media.media2.getProfiles(
-          referenceToken: argResults?['reference-token'],
-          type: argResults?['reference-token']);
+      final profile =
+          await media.media1.getProfile(argResults!['profile-token']);
+
+      print(profile);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// Any endpoint can ask for the existing media profiles of a device using the
+/// GetProfiles command. Pre-configured or dynamically configured profiles can
+/// be retrieved using this command. This command lists all configured profiles
+/// in a device. The client does not need to know the media profile in order to
+/// use the command.
+class OnvifGetProfiles1MediaCommand extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'Any endpoint can ask for the existing media profiles of a device using the GetProfiles command. Pre-configured or dynamically configured profiles can be retrieved using this command. This command lists all configured profiles in a device. The client does not need to know the media profile in order to use the command.';
+
+  @override
+  String get name => 'get-profiles';
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final profiles = await media.media1.getProfiles();
 
       print(profiles);
     } on DioError catch (err) {
@@ -162,7 +186,7 @@ class OnvifGetProfiles2MediaCommand extends OnvifHelperCommand {
 
 /// Returns the capabilities of the media service. The result is returned in a
 /// typed answer.
-class OnvifGetServiceCapabilities2MediaCommand extends OnvifHelperCommand {
+class OnvifGetServiceCapabilities1MediaCommand extends OnvifHelperCommand {
   @override
   String get description =>
       'Returns the capabilities of the media service. The result is returned in a typed answer.';
@@ -176,7 +200,7 @@ class OnvifGetServiceCapabilities2MediaCommand extends OnvifHelperCommand {
 
     try {
       final mediaServiceCapabilities =
-          await media.media2.getServiceCapabilities();
+          await media.media1.getServiceCapabilities();
 
       print(mediaServiceCapabilities);
     } on DioError catch (err) {
@@ -194,7 +218,7 @@ class OnvifGetServiceCapabilities2MediaCommand extends OnvifHelperCommand {
 /// encoding setting in the media profile. The Jpeg settings (like resolution or
 /// quality) may be taken from the profile if suitable. The provided image will
 /// be updated automatically and independent from calls to GetSnapshotUri.
-class OnvifGetSnapshotUri2MediaCommand extends OnvifHelperCommand {
+class OnvifGetSnapshotUri1MediaCommand extends OnvifHelperCommand {
   @override
   String get description =>
       'A client uses the GetSnapshotUri command to obtain a JPEG snapshot from the device.';
@@ -202,7 +226,7 @@ class OnvifGetSnapshotUri2MediaCommand extends OnvifHelperCommand {
   @override
   String get name => 'get-snapshot-uri';
 
-  OnvifGetSnapshotUri2MediaCommand() {
+  OnvifGetSnapshotUri1MediaCommand() {
     argParser.addOption('profile-token',
         abbr: 't',
         valueHelp: 'token',
@@ -217,7 +241,7 @@ class OnvifGetSnapshotUri2MediaCommand extends OnvifHelperCommand {
 
     try {
       final mediaUri =
-          await media.media2.getSnapshotUri(argResults!['profile-token']);
+          await media.media1.getSnapshotUri(argResults!['profile-token']);
 
       print(mediaUri);
     } on DioError catch (err) {
@@ -247,7 +271,7 @@ class OnvifGetSnapshotUri2MediaCommand extends OnvifHelperCommand {
 ///
 /// For full compatibility with other ONVIF services a device should not
 /// generate Uris longer than 128 octets.
-class OnvifGetStreamUri2MediaCommand extends OnvifHelperCommand {
+class OnvifGetStreamUri1MediaCommand extends OnvifHelperCommand {
   @override
   String get description =>
       'This operation requests a URI that can be used to initiate a live media stream using RTSP as the control protocol';
@@ -255,7 +279,7 @@ class OnvifGetStreamUri2MediaCommand extends OnvifHelperCommand {
   @override
   String get name => 'get-stream-uri';
 
-  OnvifGetStreamUri2MediaCommand() {
+  OnvifGetStreamUri1MediaCommand() {
     argParser
       ..addOption('profile-token',
           abbr: 't',
@@ -263,10 +287,13 @@ class OnvifGetStreamUri2MediaCommand extends OnvifHelperCommand {
           mandatory: true,
           help:
               'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.')
-      ..addOption('stream-setup-stream-type',
-          defaultsTo: 'RTP-Multicast',
+      ..addOption('stream-setup-stream',
+          defaultsTo: 'RTP-Unicast',
           valueHelp: 'stream type',
-          allowed: ['RTP-Unicast', 'RTP-Multicast'],
+          allowed: [
+            'RTP-Unicast',
+            'RTP-Multicast'
+          ], // ['UDP', 'TCP', 'RTSP', 'HTTP'],
           help: 'Defines if a multicast or unicast stream is requested')
       ..addOption('stream-setup-transport-protocol',
           defaultsTo: 'RTSP',
@@ -281,10 +308,12 @@ class OnvifGetStreamUri2MediaCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final mediaUri = await media.media2.getStreamUri(
+      final mediaUri = await media.media1.getStreamUri(
         argResults!['profile-token'],
-        streamType: argResults?['stream-setup-stream-type'],
-        protocol: argResults?['stream-setup-transport-protocol'],
+        streamSetup: StreamSetup(
+            stream: argResults!['stream-setup-stream'],
+            transport: Transport(
+                protocol: argResults!['stream-setup-transport-protocol'])),
       );
 
       print(mediaUri);
@@ -294,33 +323,23 @@ class OnvifGetStreamUri2MediaCommand extends OnvifHelperCommand {
   }
 }
 
-/// The GetVideoEncoderInstances command can be used to request the minimum
-/// number of guaranteed video encoder instances (applications) per Video Source
-/// Configuration.
-class OnvifGetVideoEncoderInstancesMediaCommand extends OnvifHelperCommand {
+/// This command lists all available physical video inputs of the device.
+class OnvifGetVideoSourcesMediaCommand extends OnvifHelperCommand {
   @override
   String get description =>
-      'The GetVideoEncoderInstances command can be used to request the minimum number of guaranteed video encoder instances (applications) per Video Source Configuration.';
+      'This command lists all available physical video inputs of the device.';
 
   @override
-  String get name => 'get-video-encoder-instances';
-
-  OnvifGetVideoEncoderInstancesMediaCommand() {
-    argParser.addOption('configuration-token',
-        mandatory: true,
-        valueHelp: 'string',
-        help: 'Token of the video source configuration');
-  }
+  String get name => 'get-video-sources';
 
   @override
   void run() async {
     await initializeOnvif();
 
     try {
-      final info = await media.media2
-          .getVideoEncoderInstances(argResults!['configuration-token']);
+      final videoSources = await media.media1.getVideoSources();
 
-      print(info);
+      print(videoSources);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -333,7 +352,7 @@ class OnvifGetVideoEncoderInstancesMediaCommand extends OnvifHelperCommand {
 /// until a StopMulticastStreaming request is received. The multicast address,
 /// port and TTL are configured in the VideoEncoderConfiguration,
 /// AudioEncoderConfiguration and MetadataConfiguration respectively.
-class OnvifStartMulticastStreaming2MediaCommand extends OnvifHelperCommand {
+class OnvifStartMulticastStreaming1MediaCommand extends OnvifHelperCommand {
   @override
   String get description =>
       'This command starts multicast streaming using a specified media profile of a device.';
@@ -341,13 +360,13 @@ class OnvifStartMulticastStreaming2MediaCommand extends OnvifHelperCommand {
   @override
   String get name => 'start-multicast-streaming';
 
-  OnvifStartMulticastStreaming2MediaCommand() {
+  OnvifStartMulticastStreaming1MediaCommand() {
     argParser.addOption('profile-token',
         abbr: 't',
         valueHelp: 'token',
         mandatory: true,
         help:
-            'Contains the token of the Profile that is used to define the multicast stream.');
+            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.');
   }
 
   @override
@@ -355,7 +374,7 @@ class OnvifStartMulticastStreaming2MediaCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      await media.media2.startMulticastStreaming(argResults!['profile-token']);
+      await media.media1.startMulticastStreaming(argResults!['profile-token']);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -363,7 +382,7 @@ class OnvifStartMulticastStreaming2MediaCommand extends OnvifHelperCommand {
 }
 
 /// This command stop multicast streaming using a specified media profile of a device.
-class OnvifStopMulticastStreaming2MediaCommand extends OnvifHelperCommand {
+class OnvifStopMulticastStreaming1MediaCommand extends OnvifHelperCommand {
   @override
   String get description =>
       'This command stop multicast streaming using a specified media profile of a device.';
@@ -371,13 +390,13 @@ class OnvifStopMulticastStreaming2MediaCommand extends OnvifHelperCommand {
   @override
   String get name => 'stop-multicast-streaming';
 
-  OnvifStopMulticastStreaming2MediaCommand() {
+  OnvifStopMulticastStreaming1MediaCommand() {
     argParser.addOption('profile-token',
         abbr: 't',
         valueHelp: 'token',
         mandatory: true,
         help:
-            'Contains the token of the Profile that is used to define the multicast stream.');
+            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.');
   }
 
   @override
@@ -385,7 +404,7 @@ class OnvifStopMulticastStreaming2MediaCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      await media.media2.stopMulticastStreaming(argResults!['profile-token']);
+      await media.media1.stopMulticastStreaming(argResults!['profile-token']);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

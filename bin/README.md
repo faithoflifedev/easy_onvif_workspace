@@ -3,68 +3,92 @@
 A command line interface application for controlling an Onvif device through terminal commands.  This tool allows you to use O/S features like `cron` to automate Onvif device functionality.
 
 ## Table of Contents
+
 - [Installation](#installation)
 - [Quick start](#quick-start)
 - [Commands](#commands)
-  - [authorize](#authorize)
-  - [device-management](#device-management)
-      - [device-management create-users](#device-management-create-users)
-      - [device-management delete-users](#device-management-delete-users)
-      - [device-management get-capabilities](#device-management-get-capabilities)
-      - [device-management get-device-information](#device-management-get-device-information)
-      - [device-management get-discovery-mode](#device-management-get-discovery-mode)
-      - [device-management get-dns](#device-management-get-dns)
-      - [device-management get-hostname](#device-management-get-hostname)
-      - [device-management get-network-protocols](#device-management-get-network-protocols)
-      - [device-management get-service-capabilities](#device-management-get-service-capabilities)
-      - [device-management get-services](#device-management-get-services)
-      - [device-management get-system-date-and-time](#device-management-get-system-date-and-time)
-      - [device-management get-system-uris](#device-management-get-system-uris)
-      - [device-management get-users](#device-management-get-users)
-  - [media1](#media1)
-      - [media1 get-audio-sources](#media1-get-audio-sources)
-      - [media1 get-metadata-configuration](#media1-get-metadata-configuration)
-      - [media1 get-metadata-configuration](#media1-get-metadata-configuration-1)
-      - [media1 get-profile](#media1-get-profile)
-      - [media1 get-profiles](#media1-get-profiles)
-      - [media1 get-service-capabilities](#media1-get-service-capabilities)
-      - [media1 get-snapshot-uri](#media1-get-snapshot-uri)
-      - [media1 get-stream-uri](#media1-get-stream-uri)
-      - [media1 get-video-sources](#media1-get-video-sources)
-      - [media1 start-multicast-streaming](#media1-start-multicast-streaming)
-      - [media1 stop-multicast-streaming](#media1-stop-multicast-streaming)
-  - [media2](#media2)
-      - [media2 get-metadata-configuration-options](#media2-get-metadata-configuration-options)
-      - [media2 get-metadata-configurations](#media2-get-metadata-configurations)
-      - [media2 get-profiles](#media2-get-profiles)
-      - [media2 get-service-capabilities](#media2-get-service-capabilities)
-      - [media2 get-snapshot-uri](#media2-get-snapshot-uri)
-      - [media2 get-stream-uri](#media2-get-stream-uri)
-      - [media2 start-multicast-streaming](#media2-start-multicast-streaming)
-      - [media2 stop-multicast-streaming](#media2-stop-multicast-streaming)
-  - [probe](#probe)
-  - [ptz](#ptz)
-      - [ptz absolute-move](#ptz-absolute-move)
-      - [ptz continuous-move](#ptz-continuous-move)
-      - [ptz get-configuration](#ptz-get-configuration)
-      - [ptz get-configurations](#ptz-get-configurations)
-      - [ptz get-presets](#ptz-get-presets)
-      - [ptz get-status](#ptz-get-status)
-      - [ptz goto-preset](#ptz-goto-preset)
-      - [ptz move](#ptz-move)
-      - [ptz move-down](#ptz-move-down)
-      - [ptz move-left](#ptz-move-left)
-      - [ptz move-right](#ptz-move-right)
-      - [ptz move-up](#ptz-move-up)
-      - [ptz relative-move](#ptz-relative-move)
-      - [ptz remove-preset](#ptz-remove-preset)
-      - [ptz set-preset](#ptz-set-preset)
-      - [ptz stop](#ptz-stop)
-      - [ptz zoom](#ptz-zoom)
-      - [ptz zoom-in](#ptz-zoom-in)
-      - [ptz zoom-out](#ptz-zoom-out)
-      - [ptz get-current-preset](#ptz-get-current-preset)
-  - [version](#version)
+- [authorize](#authorize)
+- [device-management](#device-management)
+    - [device-management create-users](#device-management-create-users)
+    - [device-management delete-users](#device-management-delete-users)
+    - [device-management get-capabilities](#device-management-get-capabilities)
+    - [device-management get-device-information](#device-management-get-device-information)
+    - [device-management get-discovery-mode](#device-management-get-discovery-mode)
+    - [device-management get-dns](#device-management-get-dns)
+    - [device-management get-hostname](#device-management-get-hostname)
+    - [device-management get-network-protocols](#device-management-get-network-protocols)
+    - [device-management get-ntp](#device-management-get-ntp)
+    - [device-management get-service-capabilities](#device-management-get-service-capabilities)
+    - [device-management get-services](#device-management-get-services)
+    - [device-management get-storage-configuration](#device-management-get-storage-configuration)
+    - [device-management get-storage-configurations](#device-management-get-storage-configurations)
+    - [device-management get-system-date-and-time](#device-management-get-system-date-and-time)
+    - [device-management get-system-log](#device-management-get-system-log)
+    - [device-management get-system-support-information](#device-management-get-system-support-information)
+    - [device-management get-system-uris](#device-management-get-system-uris)
+    - [device-management get-users](#device-management-get-users)
+    - [device-management system-reboot](#device-management-system-reboot)
+- [media1](#media1)
+    - [media1 get-audio-sources](#media1-get-audio-sources)
+    - [media1 get-metadata-configuration](#media1-get-metadata-configuration)
+    - [media1 get-metadata-configuration](#media1-get-metadata-configuration-1)
+    - [media1 get-profile](#media1-get-profile)
+    - [media1 get-profiles](#media1-get-profiles)
+    - [media1 get-service-capabilities](#media1-get-service-capabilities)
+    - [media1 get-snapshot-uri](#media1-get-snapshot-uri)
+    - [media1 get-stream-uri](#media1-get-stream-uri)
+    - [media1 get-video-sources](#media1-get-video-sources)
+    - [media1 start-multicast-streaming](#media1-start-multicast-streaming)
+    - [media1 stop-multicast-streaming](#media1-stop-multicast-streaming)
+- [media2](#media2)
+    - [media2 get-metadata-configuration-options](#media2-get-metadata-configuration-options)
+    - [media2 get-metadata-configurations](#media2-get-metadata-configurations)
+    - [media2 get-profiles](#media2-get-profiles)
+    - [media2 get-service-capabilities](#media2-get-service-capabilities)
+    - [media2 get-snapshot-uri](#media2-get-snapshot-uri)
+    - [media2 get-stream-uri](#media2-get-stream-uri)
+    - [media2 get-video-encoder-instances](#media2-get-video-encoder-instances)
+    - [media2 start-multicast-streaming](#media2-start-multicast-streaming)
+    - [media2 stop-multicast-streaming](#media2-stop-multicast-streaming)
+- [probe](#probe)
+- [ptz](#ptz)
+    - [ptz absolute-move](#ptz-absolute-move)
+    - [ptz continuous-move](#ptz-continuous-move)
+    - [ptz get-configuration](#ptz-get-configuration)
+    - [ptz get-configurations](#ptz-get-configurations)
+    - [ptz get-presets](#ptz-get-presets)
+    - [ptz get-status](#ptz-get-status)
+    - [ptz goto-preset](#ptz-goto-preset)
+    - [ptz move](#ptz-move)
+    - [ptz move-down](#ptz-move-down)
+    - [ptz move-left](#ptz-move-left)
+    - [ptz move-right](#ptz-move-right)
+    - [ptz move-up](#ptz-move-up)
+    - [ptz relative-move](#ptz-relative-move)
+    - [ptz remove-preset](#ptz-remove-preset)
+    - [ptz set-preset](#ptz-set-preset)
+    - [ptz stop](#ptz-stop)
+    - [ptz zoom](#ptz-zoom)
+    - [ptz zoom-in](#ptz-zoom-in)
+    - [ptz zoom-out](#ptz-zoom-out)
+    - [ptz get-current-preset](#ptz-get-current-preset)
+- [recordings](#recordings)
+    - [recordings create-recording](#recordings-create-recording)
+    - [recordings create-recording-job](#recordings-create-recording-job)
+    - [recordings delete-recording-job](#recordings-delete-recording-job)
+    - [recordings delete-recordings](#recordings-delete-recordings)
+    - [recordings get-recording-job-state](#recordings-get-recording-job-state)
+    - [recordings get-recording-jobs](#recordings-get-recording-jobs)
+    - [recordings get-recording-options](#recordings-get-recording-options)
+    - [recordings get-recordings](#recordings-get-recordings)
+    - [recordings get-service-capabilities](#recordings-get-service-capabilities)
+    - [recordings set-recording-job-mode](#recordings-set-recording-job-mode)
+- [replay](#replay)
+    - [replay get-replay-configuration](#replay-get-replay-configuration)
+    - [replay get-replay-uri](#replay-get-replay-uri)
+    - [replay get-service-capabilities](#replay-get-service-capabilities)
+    - [replay set-replay-configuration](#replay-set-replay-configuration)
+- [version](#version)
 
 
 ## Installation
@@ -103,20 +127,26 @@ Global options:
 Available commands:
   authorize           Generate an authentication file for an Onvif device
   device-management   Device management commands.
-  media1              Media1 commands.
-  media2              Media2 commands.
+  media1              Media ver10 commands.
+  media2              Media ver20 commands.
   probe               Probe/device discovery command.
   ptz                 PTZ commands.
+  recordings          Recordings commands.
+  replay              Replay commands.
   version             Display the package name and version.
 ```
 
-|command|description|
-|--- |--- |
-|[authorize](#authorize)|Generate a credentials file used to authenticate the command line API requests|
-|[device-management](#device-management)|Onvif device management commands, [spec](https://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl)|
-|[media](#media)|Onvif media commands, [spec](https://www.onvif.org/ver10/media/wsdl/media.wsdl)|
-|[ptz](#ptz)|Onvif PTZ commands, [spec](https://www.onvif.org/ver20/ptz/wsdl/ptz.wsdl)|
-|version|Display the package name and version.|
+| command | description |
+| --- | --- |
+| [authorize](#authorize) | Generate a credentials file used to authenticate the command line API requests |
+| [device-management](#device-management) | Onvif device management commands, [spec](https://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl) |
+| [media1](#media1) | Onvif media ver10 commands, [spec](https://www.onvif.org/ver10/media/wsdl/media.wsdl) |
+| [media2](#media2) | Onvif media ver20 commands, [spec](https://www.onvif.org/ver20/media/wsdl/media.wsdl) |
+| probe | Probe/device discovery command | 
+| [ptz](#ptz)|Onvif PTZ commands, [spec](https://www.onvif.org/ver20/ptz/wsdl/ptz.wsdl) |
+| [recordings](#recordings) | Recordings commands, [spec]((https://www.onvif.org/ver10/recording.wsdl)) | 
+| [replay](#replay) | Replay commands, [spec](https://www.onvif.org/ver10/replay.wsdl)| 
+|version|Display the package name and version. |
 
 Just like the main library, any responses provided by the above commands will be given in the JSON format.  So ideally, you will want to use a command line json parser to interpret the results.  The recommended json parser for this purpose is [_jq_](https://stedolan.github.io/jq/).  With _jq_ you can process the results of a command as follows:
 
@@ -140,7 +170,7 @@ onvif ptz get-presets --limit 3 --profile-token Profile_1 | jq -r '.[] | ."@toke
 ### authorize
 
 ```sh
-prompt>onvif authorize --help
+onvif authorize --help
 ```
 
 ```text
@@ -159,7 +189,7 @@ The authorize command is used to create the default "--config-file" that can be 
 ### device-management
 
 ```sh
-prompt>onvif device-management --help
+onvif device-management --help
 ```
 
 ```text
@@ -168,27 +198,35 @@ Device management commands.
 Usage: onvif device-management <subcommand> [arguments]
 -h, --help    Print this usage information.
 
+Usage: onvif device-management <subcommand> [arguments]
+-h, --help    Print this usage information.
+
 Available subcommands:
-  create-users               This operation creates new device users and corresponding credentials on a device for authentication purposes. The device shall support creation of device users and their credentials through the CreateUsers command. Either all users are created successfully or a fault message shall be returned without creating any user.
-  delete-users               This operation deletes the given storage configuration and configuration change shall always be persistent.
-  get-capabilities           This method has been replaced by the more generic GetServices method. For capabilities of individual services refer to the GetServiceCapabilities methods.
-  get-device-information     This operation gets basic device information from the device.
-  get-discovery-mode         This operation gets the discovery mode of a device. See Section 7.2 for the definition of the different device discovery modes. The device shall support retrieval of the discovery mode setting through the GetDiscoveryMode command.
-  get-dns                    This operation gets the DNS settings from a device. The device shall return its DNS configurations through the GetDNS command.
-  get-hostname               This operation is used by an endpoint to get the hostname from a device. The device shall return its hostname configurations through the GetHostname command.
-  get-network-protocols      This operation gets defined network protocols from a device. The device shall support the GetNetworkProtocols command returning configured network protocols.
-  get-ntp                    This operation gets defined network protocols from a device. The device shall support This operation gets the NTP settings from a device. If the device supports NTP, it shall be possible to get the NTP server settings through the GetNTP command.
-  get-service-capabilities   Returns the capabilities of the device service. The result is returned in a typed answer.
-  get-services               Returns information about services on the device.
-  get-system-date-and-time   This operation gets the device system date and time. The device shall support the return of the daylight saving setting and of the manual system date and time (if applicable) or indication of NTP time (if applicable) through the GetSystemDateAndTime command.
-  get-system-uris            This operation is used to retrieve URIs from which system information may be downloaded using HTTP
-  get-users                  This operation lists the registered users and corresponding credentials on a device. The device shall support retrieval of registered device users and their credentials for the user token through the GetUsers command.
+  create-users                     This operation creates new device users and corresponding credentials on a device for authentication purposes. The device shall support creation of device users and their credentials through the CreateUsers command. Either all users are created successfully or a fault message shall be returned without creating any user.
+  delete-users                     This operation deletes the given storage configuration and configuration change shall always be persistent.
+  get-capabilities                 This method has been replaced by the more generic GetServices method. For capabilities of individual services refer to the GetServiceCapabilities methods.
+  get-device-information           This operation gets basic device information from the device.
+  get-discovery-mode               This operation gets the discovery mode of a device. See Section 7.2 for the definition of the different device discovery modes. The device shall support retrieval of the discovery mode setting through the GetDiscoveryMode command.
+  get-dns                          This operation gets the DNS settings from a device. The device shall return its DNS configurations through the GetDNS command.
+  get-hostname                     This operation is used by an endpoint to get the hostname from a device. The device shall return its hostname configurations through the GetHostname command.
+  get-network-protocols            This operation gets defined network protocols from a device. The device shall support the GetNetworkProtocols command returning configured network protocols.
+  get-ntp                          This operation gets defined network protocols from a device. The device shall support This operation gets the NTP settings from a device. If the device supports NTP, it shall be possible to get the NTP server settings through the GetNTP command.
+  get-service-capabilities         Returns the capabilities of the device service. The result is returned in a typed answer.
+  get-services                     Returns information about services on the device.
+  get-storage-configuration        This operation retrieves the Storage configuration associated with the given storage configuration token.
+  get-storage-configurations       This operation retrieves the Storage configuration associated with the given storage configuration token.
+  get-system-date-and-time         This operation gets the device system date and time. The device shall support the return of the daylight saving setting and of the manual system date and time (if applicable) or indication of NTP time (if applicable) through the GetSystemDateAndTime command.
+  get-system-log                   This operation gets a system log from the device.
+  get-system-support-information   This operation gets arbitrary device diagnostics information from the device.
+  get-system-uris                  This operation is used to retrieve URIs from which system information may be downloaded using HTTP
+  get-users                        This operation lists the registered users and corresponding credentials on a device. The device shall support retrieval of registered device users and their credentials for the user token through the GetUsers command.
+  system-reboot                    This operation reboots the device.
 ```
 
 #### device-management create-users
 
 ```sh
-prompt>onvif device-management create-users --help
+onvif device-management create-users --help
 ```
 
 ```text
@@ -206,7 +244,7 @@ Usage: onvif device-management create-users [arguments]
 #### device-management delete-users
 
 ```sh
-prompt>onvif device-management delete-users --help
+onvif device-management delete-users --help
 ```
 
 ```text
@@ -224,7 +262,7 @@ Usage: onvif device-management create-users [arguments]
 #### device-management get-capabilities
 
 ```sh
-prompt>onvif device-management get-capabilities --help
+onvif device-management get-capabilities --help
 ```
 
 ```text
@@ -237,7 +275,7 @@ Usage: onvif device-management get-capabilities [arguments]
 #### device-management get-device-information
 
 ```sh
-prompt>onvif device-management get-device-information --help
+onvif device-management get-device-information --help
 ```
 
 ```text
@@ -250,7 +288,7 @@ Usage: onvif device-management get-device-information [arguments]
 #### device-management get-discovery-mode
 
 ```sh
-prompt>onvif device-management get-discovery-mode --help
+onvif device-management get-discovery-mode --help
 ```
 
 ```text
@@ -263,7 +301,7 @@ Usage: onvif device-management get-device-information [arguments]
 #### device-management get-dns
 
 ```sh
-prompt>onvif device-management get-dns --help
+onvif device-management get-dns --help
 ```
 
 ```text
@@ -276,7 +314,7 @@ Usage: onvif device-management get-device-information [arguments]
 #### device-management get-hostname
 
 ```sh
-prompt>onvif device-management get-hostname --help
+onvif device-management get-hostname --help
 ```
 
 ```text
@@ -290,7 +328,7 @@ Usage: onvif device-management get-hostname [arguments]
 #### device-management get-network-protocols
 
 ```sh
-prompt>onvif device-management get-network-protocols --help
+onvif device-management get-network-protocols --help
 ```
 
 ```text
@@ -300,10 +338,23 @@ Usage: onvif device-management get-network-protocols [arguments]
 -h, --help    Print this usage information.
 ```
 
+#### device-management get-ntp
+
+```sh
+onvif device-management get-ntp --help
+```
+
+```text
+This operation gets defined network protocols from a device. The device shall support This operation gets the NTP settings from a device. If the device supports NTP, it shall be possible to get the NTP server settings through the GetNTP command.
+
+Usage: onvif device-management get-ntp [arguments]
+-h, --help    Print this usage information.
+```
+
 #### device-management get-service-capabilities
 
 ```sh
-prompt>onvif device-management get-service-capabilities --help
+onvif device-management get-service-capabilities --help
 ```
 
 ```text
@@ -316,7 +367,7 @@ Usage: onvif device-management get-service-capabilities [arguments]
 #### device-management get-services
 
 ```sh
-prompt>onvif device-management get-services --help
+onvif device-management get-services --help
 ```
 
 ```text
@@ -327,10 +378,36 @@ Usage: onvif device-management get-services [arguments]
 -i, --[no-]include-capability    Indicates if the service capabilities (untyped) should be included in the response.
 ```
 
+#### device-management get-storage-configuration
+
+```sh
+onvif device-management get-storage-configuration --help
+```
+
+```text
+This operation retrieves the Storage configuration associated with the given storage configuration token.
+
+Usage: onvif device-management get-storage-configuration [arguments]
+-h, --help                         Print this usage information.
+-t, --storage-token (mandatory)    Unique identifier referencing the physical entity.
+```
+#### device-management get-storage-configurations
+
+```sh
+onvif device-management get-storage-configurations --help
+```
+
+```text
+This operation lists all existing storage configurations for the device.
+
+Usage: onvif device-management get-storage-configurations [arguments]
+-h, --help    Print this usage information.
+```
+
 #### device-management get-system-date-and-time
 
 ```sh
-prompt>onvif device-management get-system-date-and-time --help
+onvif device-management get-system-date-and-time --help
 ```
 
 ```text
@@ -342,10 +419,40 @@ Usage: onvif device-management get-system-date-and-time [arguments]
 -h, --help    Print this usage information.
 ```
 
+#### device-management get-system-log
+
+```sh
+onvif device-management get-system-log --help
+```
+
+```text
+This operation gets a system log from the device.
+
+Usage: onvif device-management get-system-log [arguments]
+-h, --help                      Print this usage information.
+-t, --type                      Specifies the type of system log to get.
+
+          [Access]              Indicates that a access log is requested.
+          [System] (default)    Indicates that a system log is requested.
+```
+
+#### device-management get-system-support-information
+
+```sh
+onvif device-management get-system-support-information --help
+```
+
+```text
+This operation gets arbitrary device diagnostics information from the device.
+
+Usage: onvif device-management get-system-support-information [arguments]
+-h, --help    Print this usage information.
+```
+
 #### device-management get-system-uris
 
 ```sh
-prompt>onvif device-management get-system-uris --help
+onvif device-management get-system-uris --help
 ```
 
 ```text
@@ -358,7 +465,7 @@ Usage: onvif device-management get-system-uris [arguments]
 #### device-management get-users
 
 ```sh
-prompt>onvif device-management get-users --help
+onvif device-management get-users --help
 ```
 
 ```text
@@ -368,10 +475,23 @@ Usage: onvif device-management get-users [arguments]
 -h, --help    Print this usage information.
 ```
 
+#### device-management system-reboot
+
+```sh
+onvif device-management system-reboot --help
+```
+
+```text
+This operation reboots the device.
+
+Usage: onvif device-management system-reboot [arguments]
+-h, --help    Print this usage information.
+```
+
 ### media1
 
 ```sh
-prompt>onvif media --help
+onvif media --help
 ```
 
 ```text
@@ -397,7 +517,7 @@ Available subcommands:
 #### media1 get-audio-sources
 
 ```sh
-prompt>onvif media1 get-audio-sources --help
+onvif media1 get-audio-sources --help
 ```
 
 ```text
@@ -410,7 +530,7 @@ Usage: onvif media1 get-audio-sources [arguments]
 #### media1 get-metadata-configuration
 
 ```sh
-prompt>onvif media1 get-metadata-configuration --help
+onvif media1 get-metadata-configuration --help
 ```
 
 ```text
@@ -424,7 +544,7 @@ Usage: onvif media1 get-metadata-configuration [arguments]
 #### media1 get-metadata-configuration
 
 ```sh
-prompt>onvif media1 get-metadata-configurations --help
+onvif media1 get-metadata-configurations --help
 ```
 
 ```text
@@ -439,7 +559,7 @@ Usage: onvif media1 get-metadata-configurations [arguments]
 #### media1 get-profile
 
 ```sh
-prompt>onvif media1 get-profile --help
+onvif media1 get-profile --help
 ```
 
 ```text
@@ -453,7 +573,7 @@ Usage: onvif media1 get-profile [arguments]
 #### media1 get-profiles
 
 ```sh
-prompt>onvif media1 get-profiles --help
+onvif media1 get-profiles --help
 ```
 
 ```text
@@ -466,7 +586,7 @@ Usage: onvif media1 get-profiles [arguments]
 #### media1 get-service-capabilities
 
 ```sh
-prompt>onvif media1 get-service-capabilities --help
+onvif media1 get-service-capabilities --help
 ```
 
 ```text
@@ -479,7 +599,7 @@ Usage: onvif media1 get-service-capabilities [arguments]
 ##### media1 get-snapshot-uri
 
 ```sh
-prompt>onvif media1 get-snapshot-uri --help
+onvif media1 get-snapshot-uri --help
 ```
 
 ```text
@@ -494,7 +614,7 @@ Usage: onvif media1 get-snapshot-uri [arguments]
 #### media1 get-stream-uri
 
 ```sh
-prompt>onvif media1 get-stream-uri  --help
+onvif media1 get-stream-uri  --help
 ```
 
 ```text
@@ -513,7 +633,7 @@ Usage: onvif media1 get-stream-uri [arguments]
 #### media1 get-video-sources
 
 ```sh
-prompt>onvif media1 get-video-sources  --help
+onvif media1 get-video-sources  --help
 ```
 
 ```text
@@ -525,7 +645,7 @@ Usage: onvif media1 get-video-sources [arguments]
 #### media1 start-multicast-streaming
 
 ```sh
-prompt>onvif media1 start-multicast-streaming --help
+onvif media1 start-multicast-streaming --help
 ```
 
 ```text
@@ -538,7 +658,7 @@ Usage: onvif media1 start-multicast-streaming [arguments]
 #### media1 stop-multicast-streaming
 
 ```sh
-prompt>onvif media1 stop-multicast-streaming --help
+onvif media1 stop-multicast-streaming --help
 ```
 
 ```text
@@ -551,7 +671,7 @@ Usage: onvif media1 stop-multicast-streaming [arguments]
 ### media2
 
 ```sh
-prompt>onvif media2 --help
+onvif media2 --help
 ```
 
 ```text
@@ -567,6 +687,7 @@ Available subcommands:
   get-service-capabilities             Returns the capabilities of the media service. The result is returned in a typed answer.
   get-snapshot-uri                     A client uses the GetSnapshotUri command to obtain a JPEG snapshot from the device.
   get-stream-uri                       This operation requests a URI that can be used to initiate a live media stream using RTSP as the control protocol
+  get-video-encoder-instances          The GetVideoEncoderInstances command can be used to request the minimum number of guaranteed video encoder instances (applications) per Video Source Configuration.
   start-multicast-streaming            This command starts multicast streaming using a specified media profile of a device.
   stop-multicast-streaming             This command stop multicast streaming using a specified media profile of a device.
   ```
@@ -574,7 +695,7 @@ Available subcommands:
 #### media2 get-metadata-configuration-options
 
 ```sh
-prompt>onvif media2 get-metadata-configuration-options --help
+onvif media2 get-metadata-configuration-options --help
 ```
 
 ```text
@@ -589,7 +710,7 @@ Usage: onvif media2 get-metadata-configuration-options [arguments]
 #### media2 get-metadata-configurations
 
 ```sh
-prompt>onvif media2 get-metadata-configurations --help
+onvif media2 get-metadata-configurations --help
 ```
 
 ```text
@@ -604,7 +725,7 @@ Usage: onvif media2 get-metadata-configurations [arguments]
 #### media2 get-profiles
 
 ```sh
-prompt>onvif media2 get-profiles --help
+onvif media2 get-profiles --help
 ```
 
 ```text
@@ -620,7 +741,7 @@ Usage: onvif media2 get-profiles [arguments]
 #### media2 get-service-capabilities
 
 ```sh
-prompt>onvif media2 get-service-capabilities --help
+onvif media2 get-service-capabilities --help
 ```
 
 ```text
@@ -634,7 +755,7 @@ Usage: onvif media2 get-service-capabilities [arguments]
 #### media2 get-snapshot-uri
 
 ```sh
-prompt>onvif media2 get-snapshot-uri --help
+onvif media2 get-snapshot-uri --help
 ```
 
 ```text
@@ -648,26 +769,37 @@ Usage: onvif media2 get-snapshot-uri [arguments]
 #### media2 get-stream-uri
 
 ```sh
-prompt>onvif media2 get-stream-uri  --help
+onvif media2 get-stream-uri --help
 ```
 
 ```text
 This operation requests a URI that can be used to initiate a live media stream using RTSP as the control protocol.
 
 Usage: onvif media2 get-stream-uri [arguments]
--h, --help                                                    Print this usage information.
--t, --profile-token=<token> (mandatory)                       The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.
-    --stream-setup-stream=<stream type>                       Defines if a multicast or unicast stream is requested
-                                                              [RTP-Unicast, RTP-Multicast (default)]
-    --stream-setup-transport-protocol=<transport protocol>    Defines the network protocol for streaming, either UDP=RTP/UDP, RTSP=RTP/RTSP/TCP or HTTP=RTP/RTSP/HTTP/TCP
-                                                              [UDP, TCP, RTSP (default), HTTP]
+-h, --help                                 Print this usage information.
+-t, --profile-token=<token> (mandatory)    The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.
+    --protocol=<transport protocol>        The Protocol defines how the encoded data is expected to be streamed to the client
+                                           [RtspUnicast, RtspMulticast, RTSP (default), RtspsUnicast, RtspsMulticast, RtspOverHttp]
+```
 
+#### media2 get-video-encoder-instances
+
+```sh
+onvif media2 get-video-encoder-instances --help
+```
+
+```text
+The get-video-encoder-instances command can be used to request the minimum number of guaranteed video encoder instances (applications) per Video Source Configuration.
+
+Usage: onvif media2 get-video-encoder-instances [arguments]
+-h, --help                                        Print this usage information.
+    --configuration-token=<string> (mandatory)    Token of the video source configuration
 ```
 
 #### media2 start-multicast-streaming
 
 ```sh
-prompt>onvif media2 start-multicast-streaming --help
+onvif media2 start-multicast-streaming --help
 ```
 
 ```text
@@ -680,7 +812,7 @@ Usage: onvif media2 start-multicast-streaming [arguments]
 #### media2 stop-multicast-streaming
 
 ```sh
-prompt>onvif media2 stop-multicast-streaming --help
+onvif media2 stop-multicast-streaming --help
 ```
 
 ```text
@@ -693,7 +825,7 @@ Usage: onvif media2 stop-multicast-streaming [arguments]
 ### probe
 
 ```sh
-prompt>onvif probe --help
+onvif probe --help
 ```
 
 ```text
@@ -708,7 +840,7 @@ Usage: onvif probe [arguments]
 ### ptz
 
 ```sh
-prompt>onvif ptz --help
+onvif ptz --help
 ```
 
 ```text
@@ -742,7 +874,7 @@ Available subcommands:
 #### ptz absolute-move
 
 ```sh
-prompt>onvif ptz absolute-move --help
+onvif ptz absolute-move --help
 ```
 
 ```text
@@ -759,7 +891,7 @@ Usage: onvif ptz absolute-move [arguments]
 #### ptz continuous-move
 
 ```sh
-prompt>onvif ptz continuous-move --help
+onvif ptz continuous-move --help
 ```
 
 ```text
@@ -776,7 +908,7 @@ Usage: onvif ptz continuous-move [arguments]
 #### ptz get-configuration
 
 ```sh
-prompt>onvif ptz get-configuration --help
+onvif ptz get-configuration --help
 ```
 
 ```text
@@ -790,7 +922,7 @@ Usage: onvif ptz get-configuration [arguments]
 #### ptz get-configurations
 
 ```sh
-prompt>onvif ptz get-configurations --help
+onvif ptz get-configurations --help
 ```
 
 ```text
@@ -803,7 +935,7 @@ Usage: onvif ptz get-configurations [arguments]
 #### ptz get-presets
 
 ```sh
-prompt>onvif ptz get-presets --help
+onvif ptz get-presets --help
 ```
 
 ```text
@@ -818,7 +950,7 @@ Usage: onvif ptz get-presets [arguments]
 #### ptz get-status
 
 ```sh
-prompt>onvif ptz get-status --help
+onvif ptz get-status --help
 ```
 
 ```text
@@ -832,7 +964,7 @@ Usage: onvif ptz get-status [arguments]
 #### ptz goto-preset
 
 ```sh
-prompt>onvif ptz goto-preset --help
+onvif ptz goto-preset --help
 ```
 
 ```text
@@ -847,7 +979,7 @@ Usage: onvif ptz goto-preset [arguments]
 #### ptz move
 
 ```sh
-prompt>onvif ptz move --help
+onvif ptz move --help
 ```
 
 ```text
@@ -863,7 +995,7 @@ Usage: onvif ptz move [arguments]
 #### ptz move-down
 
 ```sh
-prompt>onvif ptz goto-preset --help
+onvif ptz goto-preset --help
 ```
 
 ```text
@@ -878,7 +1010,7 @@ Usage: onvif ptz goto-preset [arguments]
 #### ptz move-left
 
 ```sh
-prompt>onvif ptz goto-preset --help
+onvif ptz goto-preset --help
 ```
 
 ```text
@@ -893,7 +1025,7 @@ Usage: onvif ptz goto-preset [arguments]
 #### ptz move-right
 
 ```sh
-prompt>onvif ptz goto-preset --help
+onvif ptz goto-preset --help
 ```
 
 ```text
@@ -908,7 +1040,7 @@ Usage: onvif ptz goto-preset [arguments]
 #### ptz move-up
 
 ```sh
-prompt>onvif ptz move-up --help
+onvif ptz move-up --help
 ```
 
 ```text
@@ -923,7 +1055,7 @@ Usage: onvif ptz move-up [arguments]
 #### ptz relative-move
 
 ```sh
-prompt>onvif ptz relative-move --help
+onvif ptz relative-move --help
 ```
 
 ```text
@@ -940,7 +1072,7 @@ Usage: onvif ptz relative-move [arguments]
 #### ptz remove-preset
 
 ```sh
-prompt>onvif ptz remove-preset --help
+onvif ptz remove-preset --help
 ```
 
 ```text
@@ -955,7 +1087,7 @@ Usage: onvif ptz remove-preset [arguments]
 #### ptz set-preset
 
 ```sh
-prompt>onvif ptz set-preset --help
+onvif ptz set-preset --help
 ```
 
 ```text
@@ -971,7 +1103,7 @@ Usage: onvif ptz set-preset [arguments]
 #### ptz stop
 
 ```sh
-prompt>onvif ptz stop --help
+onvif ptz stop --help
 ```
 
 ```text
@@ -989,7 +1121,7 @@ Usage: onvif ptz stop [arguments]
 #### ptz zoom
 
 ```sh
-prompt>onvif ptz zoom --help
+onvif ptz zoom --help
 ```
 
 ```text
@@ -1004,7 +1136,7 @@ Usage: onvif ptz zoom [arguments]
 #### ptz zoom-in
 
 ```sh
-prompt>onvif ptz zoom-in --help
+onvif ptz zoom-in --help
 ```
 
 ```text
@@ -1019,7 +1151,7 @@ Usage: onvif ptz zoom-in [arguments]
 #### ptz zoom-out
 
 ```sh
-prompt>onvif ptz zoom-out --help
+onvif ptz zoom-out --help
 Operation for a single step zoom out operation.
 
 Usage: onvif ptz zoom-out [arguments]
@@ -1031,7 +1163,7 @@ Usage: onvif ptz zoom-out [arguments]
 #### ptz get-current-preset
 
 ```sh
-prompt>onvif ptz get-current-preset --help
+onvif ptz get-current-preset --help
 ```
 
 ```text
@@ -1042,10 +1174,265 @@ Usage: onvif ptz get-current-preset [arguments]
 -t, --profile-token=<token> (mandatory)    The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.
 ```
 
+### recordings
+
+```sh
+onvif recordings --help
+```
+
+```text
+Recordings commands.
+
+Usage: onvif recordings <subcommand> [arguments]
+-h, --help    Print this usage information.
+
+Available subcommands:
+  create-recording           create-recording shall create a new recording.
+  create-recording-job       create-recording-job shall create a new recording job.
+  delete-recording-job       delete-recordings removes a recording job.
+  delete-recordings          delete-recording shall delete a recording object.
+  get-recording-job-state    get-recording-job-state returns the state of a recording job. It includes an aggregated state, and state for each track of the recording job.
+  get-recording-jobs         get-recording-jobs shall return a description of all the recordings in the device.
+  get-recording-options      get-recording-options returns information for a recording identified by the RecordingToken.
+  get-recordings             get-recordings shall return a description of all the recordings in the device.
+  get-service-capabilities   Returns the capabilities of the recording service. The result is returned in a typed answer.
+  set-recording-job-mode     get-recording-job-mode shall change the mode of the recording job.
+```
+
+#### recordings create-recording
+
+```sh
+onvif recordings create-recording --help
+```
+
+```text
+create-recording shall create a new recording.
+
+Usage: onvif recordings create-recording [arguments]
+-h, --help                                       Print this usage information.
+    --source-source-id=<string> (mandatory)      Identifier for the source chosen by the client that creates the structure. This identifier is opaque to the device. Clients may use any type of URI for this field. A device shall support at least 128 characters.
+    --source-name=<string> (mandatory)           Informative user readable name of the source, e.g. "Camera23". A device shall support at least 20 characters.
+    --source-location=<string> (mandatory)       Informative description of the physical location of the source, e.g. the coordinates on a map.
+    --source-description=<string> (mandatory)    Informative description of the source.
+    --source-address=<string> (mandatory)        URI provided by the service supplying data to be recorded. A device shall support at least 128 characters.
+    --content=<string> (mandatory)               Informative description of the source.
+    --maximum-retention-time=<duration>          Specifies the maximum time that data in any track within the recording shall be stored. The device shall delete any data older than the maximum retention time. Such data shall not be accessible anymore. If the MaximumRetentionPeriod is set to 0, the device shall not limit the retention time of stored data, except by resource constraints. Whatever the value of MaximumRetentionTime, the device may automatically delete recordings to free up storage space for new recordings.
+                                                 (defaults to "PT0S")
+```
+
+#### recordings create-recording-job
+
+```sh
+onvif recordings create-recording-job --help
+```
+
+```text
+create-recording-job shall create a new recording job.
+
+Usage: onvif recordings create-recording-job [arguments]
+-h, --help                                                      Print this usage information.
+    --job-configuration-schedule-token=<string>                 This attribute adds an additional requirement for activating the recording job. If this optional field is provided the job shall only record if the schedule exists and is active.
+    --job-configuration-recording-token=<string> (mandatory)    Identifies the recording to which this job shall store the received data.
+    --job-configuration-mode=<string>                           The mode of the job. If it is idle, nothing shall happen. If it is active, the device shall try to obtain data from the receivers. A client shall use GetRecordingJobState to determine if data transfer is really taking place.
+                                                                
+                                                                The only valid values for Mode shall be “Idle” and “Active”.
+                                                                [Idle, Active]
+    --job-configuration-priority=<int> (mandatory)              This shall be a non-negative number. If there are multiple recording jobs that store data to the same track, the device will only store the data for the recording job with the highest priority. The priority is specified per recording job, but the device shall determine the priority of each track individually. If there are two recording jobs with the same priority, the device shall record the data corresponding to the recording job that was activated the latest.
+```
+
+#### recordings delete-recording-job
+
+```sh
+onvif recordings delete-recording-job --help
+```
+
+```text
+delete-recording shall delete a recording object.
+
+Usage: onvif recordings delete-recording-job [arguments]
+-h, --help                             Print this usage information.
+-t, --job-token=<token> (mandatory)    The token of the job to be deleted.
+```
+
+#### recordings delete-recordings
+
+```sh
+onvif recordings delete-recordings --help
+```
+
+```text
+Option recording-token is mandatory.
+
+Usage: onvif recordings delete-recordings [arguments]
+-h, --help                                   Print this usage information.
+-t, --recording-token=<token> (mandatory)    The reference of the recording to be deleted.
+```
+
+#### recordings get-recording-job-state
+
+```sh
+onvif recordings get-recording-job-state --help
+```
+
+```text
+get-recording-job-state returns the state of a recording job. It includes an aggregated state, and state for each track of the recording job.
+
+Usage: onvif recordings get-recording-job-state [arguments]
+-h, --help                             Print this usage information.
+-t, --job-token=<token> (mandatory)    The token of the job to be deleted.
+```
+
+#### recordings get-recording-jobs
+
+```sh
+onvif recordings get-recording-jobs --help
+```
+
+```text
+get-recording-jobs shall return a description of all the recordings in the device.
+
+Usage: onvif recordings get-recording-jobs [arguments]
+-h, --help                             Print this usage information.
+```
+
+#### recordings get-recording-options
+
+```sh
+onvif recordings get-recording-options --help
+```
+
+```text
+get-recording-options returns information for a recording identified by the RecordingToken.
+
+Usage: onvif recordings get-recording-options [arguments]
+-h, --help                             Print this usage information.
+-t, --recording-token=<token> (mandatory)    Token of the recording.
+```
+
+#### recordings get-recordings
+
+```sh
+onvif recordings get-recordings --help
+```
+
+```text
+get-recordings shall return a description of all the recordings in the device.
+
+Usage: onvif recordings get-recordings [arguments]
+-h, --help                             Print this usage information.
+```
+
+#### recordings get-service-capabilities
+
+```sh
+onvif recordings get-service-capabilities --help
+```
+
+```text
+Returns the capabilities of the recording service. The result is returned in a typed answer.
+
+Usage: onvif recordings get-service-capabilities [arguments]
+-h, --help    Print this usage information.
+```
+
+#### recordings set-recording-job-mode
+
+```sh
+onvif recordings set-recording-job-mode --help
+```
+
+```text
+set-recording-job-mode shall change the mode of the recording job.
+
+Usage: onvif recordings set-recording-job-mode [arguments]
+-h, --help                             Print this usage information.
+-t, --job-token=<token> (mandatory)    Token of the recording job.
+    --mode=<string> (mandatory)        The new mode for the recording job.
+                                       [Idle, Active]
+```
+
+### replay
+
+```sh
+onvif replay --help
+```
+
+```text
+Replay commands.
+
+Usage: onvif replay <subcommand> [arguments]
+-h, --help    Print this usage information.
+
+Available subcommands:
+  get-replay-configuration   Returns the current configuration of the replay service. 
+  get-replay-uri             Requests a URI that can be used to initiate playback of a recorded stream using RTSP as the control protocol
+  get-service-capabilities   Returns the capabilities of the replay service.
+  set-replay-configuration   Returns the capabilities of the replay service.
+```
+
+#### replay get-replay-configuration
+
+```sh
+onvif replay get-replay-configuration --help
+```
+
+```text
+Returns the current configuration of the replay service. 
+
+Usage: onvif replay get-replay-configuration [arguments]
+-h, --help    Print this usage information.
+```
+
+#### replay get-replay-uri
+
+```sh
+onvif replay get-replay-uri --help
+```
+
+```text
+Requests a URI that can be used to initiate playback of a recorded stream using RTSP as the control protocol
+
+Usage: onvif replay get-replay-uri [arguments]
+-h, --help                                                    Print this usage information.
+-t, --recording-token=<token> (mandatory)                     The identifier of the recording to be streamed.
+    --stream-setup-stream=<stream type>                       Defines if a multicast or unicast stream is requested
+                                                              [RTP-Unicast (default), RTP-Multicast]
+    --stream-setup-transport-protocol=<transport protocol>    Defines the network protocol for streaming, either UDP=RTP/UDP, RTSP=RTP/RTSP/TCP or HTTP=RTP/RTSP/HTTP/TCP
+                                                              [UDP, TCP, RTSP (default), HTTP]
+```
+
+#### replay get-service-capabilities
+
+```sh
+onvif replay get-service-capabilities --help
+```
+
+```text
+Returns the capabilities of the replay service.
+
+Usage: onvif replay get-service-capabilities [arguments]
+-h, --help    Print this usage information.
+```
+
+#### replay set-replay-configuration
+
+```sh
+onvif replay set-replay-configuration --help
+```
+
+```text
+Changes the current configuration of the replay service.
+
+Usage: onvif replay set-replay-configuration [arguments]
+-h, --help                        Print this usage information.
+-t, --session-timeout=<string>    The RTSP session timeout.
+                                  (defaults to "PT60S")
+```
+
 ### version
 
 ```sh
-prompt>onvif version --help
+onvif version --help
 ```
 
 ```text

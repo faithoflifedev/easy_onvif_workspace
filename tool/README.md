@@ -6,6 +6,7 @@ This package works with a variety of ONVIF compatible devices allowing for IP Ca
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Table of contents
+
 - [Getting Started](#getting-started)
   - [Dependency](#dependency)
   - [Usage Example](#usage-example)
@@ -18,6 +19,8 @@ This package works with a variety of ONVIF compatible devices allowing for IP Ca
   - [Media 2](#media-2)
   - [PTZ](#ptz)
   - [PTZ Helper Methods](#ptz-helper-methods)
+  - [Recording](#recording)
+  - [Replay](#replay)
 - [Tested Onvif Devices](#tested-onvif-devices)
 - [New for version 2.1.x](#new-for-version-21x)
 - [New for version 2.0.x](#new-for-version-20x)
@@ -179,22 +182,27 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 
 ### [Device Management](https://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl)
 
-| Onvif Operation        | Dart Method            | Dart Return Type                       | Test |
-| ---------------------- | ---------------------- | -------------------------------------- | ---- |
-| CreateUsers            | createUsers            | `Future<bool>`                         | [x\] |
-| DeleteUsers            | deleteUsers            | `Future<bool>`                         | [x\] |
-| GetCapabilities        | getCapabilities        | `Future<Capabilities>`                 | [x\] |
-| GetDeviceInformation   | getDeviceInformation   | `Future<GetDeviceInformationResponse>` | [x\] |
-| GetDiscoveryMode       | getDiscoveryMode       | `Future<String>`                       | [x\] |
-| GetDNS                 | getDNS                 | `Future<DnsInformation>`               | [x\] |
-| GetHostname            | getHostname            | `Future<HostnameInformation>`          | [x\] |
-| GetNetworkProtocols    | getNetworkProtocols    | `Future<List<NetworkProtocol>>`        | [x\] |
-| GetNTP                 | getNtp                 | `Future<NtpInformation>`               | [x\] |
-| GetServiceCapabilities | getServiceCapabilities | `Future<DeviceServiceCapabilities>`    | [x\] |
-| GetServices            | getServices            | `Future<List<Service>>`                | [x\] |
-| GetSystemDateAndTime   | getSystemDateAndTime   | `Future<SystemDateAndTime>`            | [x\] |
-| GetSystemUris          | getSystemUris          | `Future<GetSystemUrisResponse>`        | [x\] |
-| GetUsers               | getUsers               | `Future<List<User>>`                   | [x\] |
+| Onvif Operation             | Dart Method                 | Dart Return Type                       | Test |
+| --------------------------- | --------------------------- | -------------------------------------- | ---- |
+| CreateUsers                 | createUsers                 | `Future<bool>`                         | [x\] |
+| DeleteUsers                 | deleteUsers                 | `Future<bool>`                         | [x\] |
+| GetCapabilities             | getCapabilities             | `Future<Capabilities>`                 | [x\] |
+| GetDeviceInformation        | getDeviceInformation        | `Future<GetDeviceInformationResponse>` | [x\] |
+| GetDiscoveryMode            | getDiscoveryMode            | `Future<String>`                       | [x\] |
+| GetDNS                      | getDNS                      | `Future<DnsInformation>`               | [x\] |
+| GetHostname                 | getHostname                 | `Future<HostnameInformation>`          | [x\] |
+| GetNetworkProtocols         | getNetworkProtocols         | `Future<List<NetworkProtocol>>`        | [x\] |
+| GetNTP                      | getNtp                      | `Future<NtpInformation>`               | [x\] |
+| GetServiceCapabilities      | getServiceCapabilities      | `Future<DeviceServiceCapabilities>`    | [x\] |
+| GetServices                 | getServices                 | `Future<List<Service>>`                | [x\] |
+| GetStorageConfiguration     | getStorageConfiguration     | `Future<StorageConfiguration>`         | [ \] |
+| GetStorageConfigurations    | getStorageConfigurations    | `Future<List<StorageConfiguration>>`   | [ \] |
+| GetSystemDateAndTime        | getSystemDateAndTime        | `Future<SystemDateAndTime>`            | [x\] |
+| GetSystemUris               | getSystemUris               | `Future<GetSystemUrisResponse>`        | [x\] |
+| GetSystemLog                | getSystemLog                | `Future<SystemInformation>`            | [ \] |
+| GetSystemSupportInformation | getSystemSupportInformation | `Future<SystemInformation>`            | [ \] |
+| GetUsers                    | getUsers                    | `Future<List<User>>`                   | [x\] |
+| SystemReboot                | systemReboot                | `Future<String>`                       | [ \] |
 
 ### [Media 1](https://www.onvif.org/ver10/media/wsdl/media.wsdl) 
 
@@ -260,18 +268,48 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | N/A             | zoomOut          | `Future<void>`    |
 | N/A             | getCurrentPreset | `Future<Preset?>` |
 
+### [Recording](https://www.onvif.org/ver10/recording.wsdl)
+
+| Onvif Operation             | Dart Method                 | Dart Return Type                             | Test |
+| --------------------------- | --------------------------- | -------------------------------------------- | ---- |
+| CreateRecording             | createRecording             | `Future<String>`                             | [ \] |
+| CreateRecordingJob          | createRecordingJob          | `Future<CreateRecordingJobResponse>`         | [ \] |
+| DeleteRecording             | deleteRecording             | `Future<bool>`                               | [ \] |
+| DeleteRecordingJob          | deleteRecordingJo           | `Future<bool>`                               | [ \] |
+| GetRecordingJobs            | getRecordingJobs            | `Future<List<GetRecordingJobsResponseItem>>` | [ \] |
+| GetRecordingJobState        | getRecordingJobState        | `Future<List<RecordingJobStateInformation>>` | [ \] |
+| GetRecordingOptions         | getRecordingOptions         | `Future<List<RecordingOptions>>`             | [ \] |
+| GetRecordings               | getRecordings               | `Future<List<GetRecordingsResponseItem>>`    | [ \] |
+| GetServiceCapabilities      | getServiceCapabilities      | `Future<Capabilities>`                       | [ \] |
+| setRecordingJobMode         | setRecordingJobMode         | `Future<bool>`                               | [ \] |
+
+### [Replay](https://www.onvif.org/ver10/replay.wsdl)
+
+| Onvif Operation             | Dart Method                 | Dart Return Type                             | Test |
+| --------------------------- | --------------------------- | -------------------------------------------- | ---- |
+| GetReplayConfiguration      | getReplayConfiguration      | `Future<ReplayConfiguration>`                | [ \] |
+| GetReplayUri                | getReplayUri                | `Future<String>`                             | [ \] |
+| GetServiceCapabilities      | getServiceCapabilities      | `Future<Capabilities>`                       | [ \] |
+| SetReplayConfiguration      | setReplayConfiguration      | `Future<bool>`                               | [ \] |
+
 ## Tested Onvif Devices
 
 The values returned by the Onvif API `GetDeviceInformation` call.
 
 | Manufacturer       | Model          | Known Issue                      |
 | ------------------ | -------------- | -------------------------------- |
+| Happytimesoft      | IPCamera       | limited capabilities             |
 | D-Link Corporation | DCS-6511       | commands not implemented&#x00B9; |
-| Happytimesoft      | IPCamera       |                                  |
-| ONVIF              | ENP1A14-IR/25X |                                  |
-| NONE               | GX728MF-IR28   | commands not implemented&#x00B2; |
+| ONVIF              | ENP1A14-IR/25X | commands not implemented&#x00B2; |
+| NONE               | GX728MF-IR28   | commands not implemented&#x00B3; |
+| LOREX              | LNB4421SB      | testing in progress              |
 
-&#x00B9; The following are not implemented for the DCS-6511: 
+&#x00B9; The following are not implemented for the ENP1A14-IR/25X:
+* Recordings
+  * `CreateRecording`
+  * `DeleteRecording`
+
+&#x00B2; The following are not implemented for the DCS-6511: 
 * Device Management:
   * `GetServices`
   * `GetServiceCapabilities`
@@ -284,7 +322,7 @@ The values returned by the Onvif API `GetDeviceInformation` call.
 * PTZ:
   * not tested
 
-&#x00B2; The following are not implemented for the GX728MF-IR28: 
+&#x00B3; The following are not implemented for the GX728MF-IR28: 
 * Device Management:
   * `GetSystemUris`
 * Media1:
@@ -303,7 +341,9 @@ The values returned by the Onvif API `GetDeviceInformation` call.
 
 ## New for version 2.1.x
 
-Support for __Media2__ Onvif operations
+* Support for __Media2__ Onvif operations
+* Support for __Recording__ Onvif operations (experimental)
+* Support for __Replay__ Onvif operations (experimental)
 
 ```dart
 // defaults to `MixedProfile` a special case object that has the fields for both 

@@ -9,7 +9,7 @@ part of 'get_system_date_and_time_response.dart';
 GetSystemDateAndTimeResponse _$GetSystemDateAndTimeResponseFromJson(
         Map<String, dynamic> json) =>
     GetSystemDateAndTimeResponse(
-      SystemDateAndTime.fromJson(
+      systemDateAndTime: SystemDateAndTime.fromJson(
           json['SystemDateAndTime'] as Map<String, dynamic>),
     );
 

@@ -1,7 +1,9 @@
 import 'package:easy_onvif/ptz.dart';
 import 'package:easy_onvif/shared.dart';
-import 'package:easy_onvif/soap.dart';
 import 'package:xml/xml.dart';
+
+import 'transport.dart';
+import 'xmlns.dart';
 
 class PtzRequest {
   static XmlDocumentFragment absoluteMove(
@@ -130,13 +132,8 @@ class PtzRequest {
   }
 
   /// XML for the [getConfigurations]
-  static XmlDocumentFragment getConfigurations() {
-    Transport.builder.element('GetConfigurations', nest: () {
-      Transport.builder.namespace(Xmlns.tptz);
-    });
-
-    return Transport.builder.buildFragment();
-  }
+  static XmlDocumentFragment getConfigurations() =>
+      Transport.quickTag('GetConfigurations', Xmlns.tptz);
 
   /// XML for the [getPresets], requires a [profileToken]
   static XmlDocumentFragment getPresets(String profileToken) {
@@ -151,13 +148,8 @@ class PtzRequest {
   }
 
   /// XML for the [getServiceCapabilities]
-  static XmlDocumentFragment getServiceCapabilities() {
-    Transport.builder.element('GetServiceCapabilities', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
-    });
-
-    return Transport.builder.buildFragment();
-  }
+  static XmlDocumentFragment getServiceCapabilities() =>
+      Transport.quickTag('GetServiceCapabilities', Xmlns.tds);
 
   /// XML for the [getStatus], requires a [profileToken]
   static XmlDocumentFragment getStatus(String profileToken) {

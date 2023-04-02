@@ -156,11 +156,12 @@ class Media2 with UiLoggy {
 
     final envelope = await transport.sendRequest(
         uri,
-        transport.securedEnvelope(soap.Media2Request.getStreamUri(
-          profileToken,
-          streamType: streamType,
-          transportProtocol: protocol,
-        )));
+        transport.securedEnvelope(
+          soap.Media2Request.getStreamUri(
+            profileToken,
+            protocol: protocol,
+          ),
+        ));
 
     if (envelope.body.hasFault) {
       throw Exception(envelope.body.fault.toString());

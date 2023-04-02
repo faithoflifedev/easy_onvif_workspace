@@ -1,5 +1,37 @@
 # Changelog
 
+## 2.1.1-dev.1
+
+The following helper methods have been added to the package:
+* `Recordings` request suppot has been added (experimental)
+  * CreateRecording
+  * CreateRecordingJob
+  * DeleteRecording
+  * DeleteRecordingJob
+  * GetRecordingJobs
+  * GetRecordingJobState
+  * GetRecordingOptions
+  * GetRecordings
+  * GetServiceCapabilities
+  * SetRecordingJobMode
+* `Replay` request suppot has been added (experimental)
+  * GetReplayConfiguration
+  * GetReplayUri
+  * GetServiceCapabilities
+  * SetReplayConfiguration
+* `Device Management`
+  * GetStorageConfiguration
+  * GetStorageConfigurations
+  * GetSystemLog
+  * GetSystemSupportInformation
+  * SystemReboot
+* `Media` ver20
+  * GetVideoEncoderInstances
+
+The following bug fixes were made:
+  * media2.getStreamUri throws **connection closed** - https:&#x2F;&#x2F;github.com&#x2F;faithoflifedev&#x2F;easy_onvif&#x2F;issues&#x2F;32#issuecomment-1493346568
+  * https:&#x2F;&#x2F;github.com&#x2F;faithoflifedev&#x2F;easy_onvif&#x2F;issues&#x2F;41 - a failed onvif.connect will throw an exception
+
 ## 2.1.0-dev.17
 
 * support `PtzSpeed` for `gotoHomePosition` and `gotoPreset`

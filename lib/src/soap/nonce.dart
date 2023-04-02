@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:math' as math;
 import 'dart:typed_data';
 
-///implementse the [Nonce] algorithm specified by the Onvif spec.
+/// implements the [Nonce] algorithm specified by the Onvif spec.
 class Nonce {
   final int size;
 

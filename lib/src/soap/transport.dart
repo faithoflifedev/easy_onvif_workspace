@@ -16,7 +16,10 @@ class Transport with UiLoggy {
 
   static final builder = XmlBuilder();
 
-  Transport({required this.dio, required this.authInfo});
+  Transport({
+    required this.dio,
+    required this.authInfo,
+  });
 
   /// Send the SOAP [requestData] to the given [url] endpoint.
   Future<Envelope> sendRequest(Uri uri, XmlDocument requestData) async {
@@ -26,8 +29,8 @@ class Transport with UiLoggy {
       response = await dio.post(uri.toString(),
           data: requestData.toString(),
           options: Options(headers: {
-            Headers.contentTypeHeader: 'application/soap+xml; charset=utf-8',
-            Headers.contentLengthHeader: requestData.toString().length
+            Headers.contentTypeHeader: 'text/xml; charset=utf-8',
+            // Headers.contentTypeHeader: 'application/soap+xml; charset=utf-8',
           }));
     } on DioError catch (error) {
       switch (error.response?.statusCode) {
@@ -49,6 +52,17 @@ class Transport with UiLoggy {
     }
 
     return Envelope.fromXml(response.data);
+  }
+
+  static XmlDocumentFragment quickTag(
+    String tagName,
+    String nameSpace,
+  ) {
+    Transport.builder.element(tagName, nest: () {
+      Transport.builder.namespace(nameSpace);
+    });
+
+    return Transport.builder.buildFragment();
   }
 
   XmlDocumentFragment getSecurityHeader(AuthInfo authInfo) {

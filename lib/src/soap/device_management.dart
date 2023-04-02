@@ -1,6 +1,8 @@
 import 'package:easy_onvif/device_management.dart';
-import 'package:easy_onvif/soap.dart';
 import 'package:xml/xml.dart';
+
+import 'transport.dart';
+import 'xmlns.dart';
 
 class DeviceManagementRequest {
   /// XML for the [createUsers]
@@ -48,13 +50,8 @@ class DeviceManagementRequest {
   }
 
   /// XML for the [systemDateAndTime]
-  static XmlDocumentFragment systemDateAndTime() {
-    Transport.builder.element('GetSystemDateAndTime', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
-    });
-
-    return Transport.builder.buildFragment();
-  }
+  static XmlDocumentFragment systemDateAndTime() =>
+      Transport.quickTag('GetSystemDateAndTime', Xmlns.tds);
 
   ///XML for the [capabilities]
   static XmlDocumentFragment capabilities(String category) {
@@ -81,91 +78,85 @@ class DeviceManagementRequest {
     return Transport.builder.buildFragment();
   }
 
-  /// XML for the [deviceInformation]
-  static XmlDocumentFragment deviceInformation() {
-    Transport.builder.element('GetDeviceInformation', nest: () {
+  /// XML for the [getStorageConfiguration]
+  static XmlDocumentFragment getStorageConfiguration(String referenceToken) {
+    Transport.builder.element('GetStorageConfiguration', nest: () {
+      Transport.builder.namespace(Xmlns.tds);
+
+      Transport.builder.element('Token', nest: () {
+        Transport.builder.namespace(Xmlns.tds);
+        Transport.builder.text(referenceToken);
+      });
+    });
+
+    return Transport.builder.buildFragment();
+  }
+
+  /// XML for the [getStorageConfigurations]
+  static XmlDocumentFragment getStorageConfigurations() =>
+      Transport.quickTag('GetStorageConfigurations', Xmlns.tds);
+
+  /// XML for the [getSystemLog]
+  static XmlDocumentFragment getSystemLog(String logType) {
+    Transport.builder.element('GetSystemLog', nest: () {
+      Transport.builder.namespace(Xmlns.tds);
+
+      Transport.builder.element('LogType', nest: () {
+        Transport.builder.namespace(Xmlns.tds);
+
+        Transport.builder.text(logType);
+      });
+    });
+
+    return Transport.builder.buildFragment();
+  }
+
+  /// XML for the [getSystemSupportInformation]
+  static XmlDocumentFragment getSystemSupportInformation() {
+    Transport.builder.element('GetSystemSupportInformation', nest: () {
       Transport.builder.namespace(Xmlns.tds);
     });
 
     return Transport.builder.buildFragment();
   }
+
+  /// XML for the [deviceInformation]
+  static XmlDocumentFragment deviceInformation() =>
+      Transport.quickTag('GetDeviceInformation', Xmlns.tds);
 
   /// XML for the [hostname]
-  static XmlDocumentFragment hostname() {
-    Transport.builder.element('GetHostname', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
-    });
-
-    return Transport.builder.buildFragment();
-  }
+  static XmlDocumentFragment hostname() =>
+      Transport.quickTag('GetHostname', Xmlns.tds);
 
   /// XML for the [endpointReference]
-  static XmlDocumentFragment endpointReference() {
-    Transport.builder.element('GetEndpointReference', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
-    });
-
-    return Transport.builder.buildFragment();
-  }
+  static XmlDocumentFragment endpointReference() =>
+      Transport.quickTag('GetEndpointReference', Xmlns.tds);
 
   /// XML for the [serviceCapabilities]
-  static XmlDocumentFragment serviceCapabilities() {
-    Transport.builder.element('GetServiceCapabilities', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
-    });
-
-    return Transport.builder.buildFragment();
-  }
+  static XmlDocumentFragment serviceCapabilities() =>
+      Transport.quickTag('GetServiceCapabilities', Xmlns.tds);
 
   /// XML for the [networkProtocols]
-  static XmlDocumentFragment networkProtocols() {
-    Transport.builder.element('GetNetworkProtocols', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
-    });
+  static XmlDocumentFragment networkProtocols() =>
+      Transport.quickTag('GetNetworkProtocols', Xmlns.tds);
 
-    return Transport.builder.buildFragment();
-  }
+  /// XML for the [systemReboot]
+  static XmlDocumentFragment systemReboot() =>
+      Transport.quickTag('SystemReboot', Xmlns.tds);
 
   /// XML for the [systemUris]
-  static XmlDocumentFragment systemUris() {
-    Transport.builder.element('GetSystemUris', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
-    });
-
-    return Transport.builder.buildFragment();
-  }
+  static XmlDocumentFragment systemUris() =>
+      Transport.quickTag('GetSystemUris', Xmlns.tds);
 
   /// XML for the [getUsers]
-  static XmlDocumentFragment getUsers() {
-    Transport.builder.element('GetUsers', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
-    });
+  static XmlDocumentFragment getUsers() =>
+      Transport.quickTag('GetUsers', Xmlns.tds);
 
-    return Transport.builder.buildFragment();
-  }
+  static XmlDocumentFragment discoveryMode() =>
+      Transport.quickTag('GetDiscoveryMode', Xmlns.tds);
 
-  static XmlDocumentFragment discoveryMode() {
-    Transport.builder.element('GetDiscoveryMode', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
-    });
-
-    return Transport.builder.buildFragment();
-  }
-
-  static XmlDocumentFragment dns() {
-    Transport.builder.element('GetDNS', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
-    });
-
-    return Transport.builder.buildFragment();
-  }
+  static XmlDocumentFragment dns() => Transport.quickTag('GetDNS', Xmlns.tds);
 
   /// XML for the [ntp]
-  static XmlDocumentFragment ntp() {
-    Transport.builder.element('GetNTP', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
-    });
-
-    return Transport.builder.buildFragment();
-  }
+  static XmlDocumentFragment ntp() => Transport.quickTag('GetNTP', Xmlns.tds);
 }

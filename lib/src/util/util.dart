@@ -121,6 +121,9 @@ class OnvifUtil {
   static List<int>? nullableMappedToIntList(String? value) =>
       value?.toString().split(',').map((item) => int.parse(item)).toList();
 
+  static List<String> mappedToStringList(Map<String, dynamic> value) =>
+      stringToList(mappedToString(value));
+
   static List<String>? nullableMappedToStringList(List<dynamic>? value) =>
       value?.map((element) => mappedToString(element)).toList();
 
@@ -183,7 +186,8 @@ class OnvifUtil {
   //   return <T>[];
   // }
 
-  static List<String> stringToList(String value) => value.split(',');
+  static List<String> stringToList(String value) =>
+      value.split(RegExp(r'[ ,]'));
 
   static List<String>? nullableStringToList(String? value) =>
       value != null ? stringToList(value) : null;
