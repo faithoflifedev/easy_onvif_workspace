@@ -18,6 +18,24 @@ The following helper methods have been added to the package:
 * Multicast Probe
   * genral improvements
 
+## 2.1.2
+
+The following helper methods have been added to the package:
+* `Search` request suppot has been added (experimental)
+  * FindRecordings
+  * GetRecordingSearchResults
+  * GetRecordingInformation
+  * GetRecordingSummary
+* `Imaging` request suppot has been added (experimental)
+  * GetCurrentPreset
+  * GetPresets
+  * GetServiceCapabilities
+  * GetStatus
+* `Media` ver20
+  * GetVideoSourceConfigurationOptions
+* Multicast Probe
+  * genral improvements
+
 ## 2.1.1-dev.1
 
 The following helper methods have been added to the package:
