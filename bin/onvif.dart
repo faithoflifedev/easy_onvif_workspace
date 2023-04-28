@@ -14,12 +14,14 @@ void main(List<String> arguments) async {
         defaultsTo: 'off')
     ..addCommand(OnvifAuthorizeCommand())
     ..addCommand(OnvifDeviceManagementCommand())
+    ..addCommand(OnvifImagingCommand())
     ..addCommand(OnvifMedia1Command())
     ..addCommand(OnvifMedia2Command())
     ..addCommand(OnvifPtzCommand())
     ..addCommand(OnvifProbeCommand())
     ..addCommand(OnvifRecordingsCommand())
     ..addCommand(OnvifReplayCommand())
+    ..addCommand(OnvifSearchCommand())
     ..addCommand(OnvifVersionCommand())
     ..run(arguments).catchError((error) {
       if (error is! UsageException) throw error;

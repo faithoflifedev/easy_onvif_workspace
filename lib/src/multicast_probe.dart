@@ -48,7 +48,7 @@ class MulticastProbe with UiLoggy {
 
     start(rawDataGramSocket);
 
-    await finish(rawDataGramSocket);
+    await finish(rawDataGramSocket, timeout);
   }
 
   ///timeout of 0 or less means no timeout

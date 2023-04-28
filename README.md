@@ -44,7 +44,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^2.1.1-dev.1
+  easy_onvif: ^2.1.2
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -204,6 +204,15 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetUsers                    | getUsers                    | `Future<List<User>>`                   | [x\] |
 | SystemReboot                | systemReboot                | `Future<String>`                       | [ \] |
 
+### [Imaging](https://www.onvif.org/ver20/imaging/wsdl/imaging.wsdl) 
+
+| Onvif Operation                 | Dart Method                     | Dart Return Type                       | Test |
+| ------------------------------- | ------------------------------- | -------------------------------------- | ---- |
+| GetCurrentPreset                | getCurrentPreset                | `Future<ImagingPreset>`                | [ \] |
+| GetPresets                      | getPresets                      | `Future<List<ImagingPreset>>`          | [ \] |
+| GetServiceCapabilities          | getServiceCapabilities          | `Future<Capabilities>`                 | [ \] |
+| GetStatus                       | getStatus                       | `Future<Status>`                       | [ \] |
+
 ### [Media 1](https://www.onvif.org/ver10/media/wsdl/media.wsdl) 
 
 | Onvif Operation                 | Dart Method                     | Dart Return Type                       | Test |
@@ -222,17 +231,18 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 
 ### [Media 2](https://www.onvif.org/ver20/media/wsdl/media.wsdl)
 
-| Onvif Operation                 | Dart Method                     | Dart Return Type                       | Test |
-| ------------------------------- | ------------------------------- | -------------------------------------- | ---- |
-| GetMetadataConfigurationOptions | getMetadataConfigurationOptions | `Future<MetadataConfigurationOptions>` | [x\] |
-| GetMetadataConfigurations       | getMetadataConfigurations       | `Future<List<MetadataConfiguration>>`  | [x\] |
-| GetProfiles                     | getProfiles                     | `Future<List<MediaProfile>?>`          | [x\] |
-| GetServiceCapabilities          | getServiceCapabilities          | `Future<Capabilities2>`                | [x\] |
-| GetSnapshotUri                  | getSnapshotUri                  | `Future<String>`                       | [x\] |
-| GetStreamUri                    | getStreamUri                    | `Future<String>`                       | [x\] |
-| GetVideoEncoderInstances        | getVideoEncoderInstances        | `Future<Info>`                         | [ \] |
-| StartMulticastStreaming         | startMulticastStreaming         | `Future<bool>`                         | [x\] |
-| StopMulticastStreaming          | stopMulticastStreaming          | `Future<bool>`                         | [x\] |
+| Onvif Operation                    | Dart Method                        | Dart Return Type                          | Test |
+| ---------------------------------- | ---------------------------------- | ----------------------------------------- | ---- |
+| GetMetadataConfigurationOptions    | getMetadataConfigurationOptions    | `Future<MetadataConfigurationOptions>`    | [x\] |
+| GetMetadataConfigurations          | getMetadataConfigurations          | `Future<List<MetadataConfiguration>>`     | [x\] |
+| GetProfiles                        | getProfiles                        | `Future<List<MediaProfile>?>`             | [x\] |
+| GetServiceCapabilities             | getServiceCapabilities             | `Future<Capabilities2>`                   | [x\] |
+| GetSnapshotUri                     | getSnapshotUri                     | `Future<String>`                          | [x\] |
+| GetStreamUri                       | getStreamUri                       | `Future<String>`                          | [x\] |
+| GetVideoEncoderInstances           | getVideoEncoderInstances           | `Future<Info>`                            | [ \] |
+| GetVideoSourceConfigurationOptions | getVideoSourceConfigurationOptions | `Future<VideoSourceConfigurationOptions>` | [ \] |
+| StartMulticastStreaming            | startMulticastStreaming            | `Future<bool>`                            | [x\] |
+| StopMulticastStreaming             | stopMulticastStreaming             | `Future<bool>`                            | [x\] |
 
 ### [PTZ](https://www.onvif.org/ver20/ptz/wsdl/ptz.wsdl)
 
@@ -291,6 +301,15 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetReplayUri                | getReplayUri                | `Future<String>`                             | [ \] |
 | GetServiceCapabilities      | getServiceCapabilities      | `Future<Capabilities>`                       | [ \] |
 | SetReplayConfiguration      | setReplayConfiguration      | `Future<bool>`                               | [ \] |
+
+### [Search](https://www.onvif.org/ver10/search.wsdl)
+
+| Onvif Operation           | Dart Method               | Dart Return Type                             | Test |
+| ------------------------- | --------------------------| -------------------------------------------- | ---- |
+| FindRecordings            | findRecordings            | `Future<String>`                             | [ \] |
+| GetRecordingSearchResults | getRecordingSearchResults | `Future<List<FindRecordingResult>>`          | [ \] |
+| GetRecordingInformation   | getRecordingInformation   | `Future<RecordingInformation>`               | [ \] |
+| GetRecordingSummary       | getRecordingSummary       | `Future<RecordingSummary>`                   | [ \] |
 
 ## Tested Onvif Devices
 

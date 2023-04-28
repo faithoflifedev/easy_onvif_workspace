@@ -189,6 +189,35 @@ class Media2 with UiLoggy {
         .info;
   }
 
+  /// This operation returns the available options (supported values and ranges
+  /// for video source configuration parameters) when the video source
+  /// parameters are reconfigured If a video source configuration is specified,
+  /// the options shall concern that particular configuration. If a media
+  /// profile is specified, the options shall be compatible with that media
+  /// profile.
+  Future<VideoSourceConfigurationOptions> getVideoSourceConfigurationOptions({
+    String? configurationToken,
+    String? profileToken,
+  }) async {
+    loggy.debug('getVideoSourceConfigurationOptionsResponse');
+
+    final envelope = await transport.sendRequest(
+        uri,
+        transport.securedEnvelope(
+            soap.Media2Request.getVideoSourceConfigurationOptions(
+          configurationToken: configurationToken,
+          profileToken: profileToken,
+        )));
+
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
+    }
+
+    return GetVideoSourceConfigurationOptionsResponse.fromJson(
+            envelope.body.response!)
+        .options;
+  }
+
   /// This command starts multicast streaming using a specified media profile of
   /// a device. Streaming continues until StopMulticastStreaming is called for
   /// the same Profile. The streaming shall continue after a reboot of the
