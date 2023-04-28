@@ -1,3 +1,4 @@
+/// imaging classes
 library imaging;
 
 export 'src/model/imaging/capabilities.dart';
