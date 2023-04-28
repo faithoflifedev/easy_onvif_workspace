@@ -15,12 +15,14 @@ This package works with a variety of ONVIF compatible devices allowing for IP Ca
 - [Onvif cli (Onvif at the command prompt)](#onvif-cli-onvif-at-the-command-prompt)
 - [Supported Onvif Operations](#supported-onvif-operations)
   - [Device Management](#device-management)
+  - [Imaging](#imaging)
   - [Media 1](#media-1)
   - [Media 2](#media-2)
   - [PTZ](#ptz)
   - [PTZ Helper Methods](#ptz-helper-methods)
   - [Recording](#recording)
   - [Replay](#replay)
+  - [Search](#search)
 - [Tested Onvif Devices](#tested-onvif-devices)
 - [New for version 2.1.x](#new-for-version-21x)
 - [New for version 2.0.x](#new-for-version-20x)
@@ -44,7 +46,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^2.1.2
+  easy_onvif: ^2.1.2+1
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).

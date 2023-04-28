@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.2+1
+
+readme correction
+
 ## 2.1.2
 
 The following helper methods have been added to the package:
