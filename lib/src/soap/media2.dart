@@ -75,6 +75,30 @@ class Media2Request {
     return Transport.builder.buildFragment();
   }
 
+  /// XML for the [getVideoSourceConfigurationOptions]
+  static XmlDocumentFragment getVideoSourceConfigurationOptions({
+    String? configurationToken,
+    String? profileToken,
+  }) {
+    Transport.builder.element('GetVideoSourceConfigurationOptions', nest: () {
+      Transport.builder.namespace(Xmlns.tr2);
+
+      if (configurationToken != null) {
+        Transport.builder.element('ConfigurationToken', nest: () {
+          Transport.builder.text(configurationToken);
+        });
+      }
+
+      if (profileToken != null) {
+        Transport.builder.element('ProfileToken', nest: () {
+          Transport.builder.text(profileToken);
+        });
+      }
+    });
+
+    return Transport.builder.buildFragment();
+  }
+
   /// XML for the [startMulticastStreaming]
   static XmlDocumentFragment startMulticastStreaming(String profileToken) =>
       MediaCommon.startMulticastStreaming(

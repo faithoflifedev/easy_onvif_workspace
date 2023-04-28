@@ -1,9 +1,27 @@
 # Changelog
 
+## 2.1.2
+
+The following helper methods have been added to the package:
+* `Search` request suppot has been added (experimental)
+  * FindRecordings
+  * GetRecordingSearchResults
+  * GetRecordingInformation
+  * GetRecordingSummary
+* `Imaging` request suppot has been added (experimental)
+  * GetCurrentPreset
+  * GetPresets
+  * GetServiceCapabilities
+  * GetStatus
+* `Media` ver20
+  * GetVideoSourceConfigurationOptions
+* Multicast Probe
+  * genral improvements
+
 ## 2.1.1-dev.1
 
 The following helper methods have been added to the package:
-* `Recordings` request suppot has been added (experimental)
+* `Recordings` request support has been added (experimental)
   * CreateRecording
   * CreateRecordingJob
   * DeleteRecording
@@ -14,7 +32,7 @@ The following helper methods have been added to the package:
   * GetRecordings
   * GetServiceCapabilities
   * SetRecordingJobMode
-* `Replay` request suppot has been added (experimental)
+* `Replay` request support has been added (experimental)
   * GetReplayConfiguration
   * GetReplayUri
   * GetServiceCapabilities

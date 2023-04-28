@@ -4,12 +4,14 @@ import 'package:easy_onvif/util.dart';
 import 'package:loggy/loggy.dart';
 
 import 'device_management.dart';
+import 'imaging.dart';
 import 'media.dart';
 import 'media1.dart';
 import 'media2.dart';
 import 'ptz.dart';
 import 'recordings.dart';
 import 'replay.dart';
+import 'search.dart';
 
 class Onvif with UiLoggy {
   final AuthInfo authInfo;
@@ -19,10 +21,12 @@ class Onvif with UiLoggy {
 
   soap.Transport? _transport;
   DeviceManagement? _deviceManagement;
+  Imaging? _imaging;
   Media? _media;
   Ptz? _ptz;
   Recordings? _recordings;
   Replay? _replay;
+  Search? _search;
 
   soap.Transport get transport =>
       _transport ??
@@ -31,6 +35,9 @@ class Onvif with UiLoggy {
   DeviceManagement get deviceManagement =>
       _deviceManagement ??
       (throw Exception('DeviceManagement services not available'));
+
+  Imaging get imaging =>
+      _imaging ?? (throw Exception('Imaging services not available'));
 
   Media get media =>
       _media ?? (throw Exception('Media services not available'));
@@ -42,6 +49,9 @@ class Onvif with UiLoggy {
 
   Replay get replay =>
       _replay ?? (throw Exception('Replay services not available'));
+
+  Search get search =>
+      _search ?? (throw Exception('Search services not available'));
 
   Onvif(
       {required this.authInfo,
@@ -116,6 +126,12 @@ class Onvif with UiLoggy {
     serviceMap.addAll(
         {for (var service in serviceList) service.nameSpace: service.xAddr});
 
+    if (serviceMap.containsKey(soap.Xmlns.timg)) {
+      _imaging = Imaging(
+          transport: transport,
+          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.timg]!));
+    }
+
     if (serviceMap.containsKey(soap.Xmlns.trt)) {
       media1 = Media1(
           transport: transport,
@@ -144,6 +160,12 @@ class Onvif with UiLoggy {
       _replay = Replay(
           transport: transport,
           uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trp]!));
+    }
+
+    if (serviceMap.containsKey(soap.Xmlns.tse)) {
+      _search = Search(
+          transport: transport,
+          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.tse]!));
     }
 
     if (media1 != null || media2 != null) {

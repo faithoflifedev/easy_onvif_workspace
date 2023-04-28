@@ -19,6 +19,7 @@ class OnvifMedia2Command extends Command {
     addSubcommand(OnvifGetSnapshotUri2MediaCommand());
     addSubcommand(OnvifGetStreamUri2MediaCommand());
     addSubcommand(OnvifGetVideoEncoderInstancesMediaCommand());
+    addSubcommand(OnvifGetVideoSourceConfigurationOptionsMediaCommand());
     addSubcommand(OnvifStartMulticastStreaming2MediaCommand());
     addSubcommand(OnvifStopMulticastStreaming2MediaCommand());
   }
@@ -322,6 +323,48 @@ class OnvifGetVideoEncoderInstancesMediaCommand extends OnvifHelperCommand {
           .getVideoEncoderInstances(argResults!['configuration-token']);
 
       print(info);
+    } on DioError catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// This operation returns the available options (supported values and ranges
+/// for video source configuration parameters) when the video source parameters
+/// are reconfigured If a video source configuration is specified, the options
+/// shall concern that particular configuration. If a media profile is
+/// specified, the options shall be compatible with that media profile.
+class OnvifGetVideoSourceConfigurationOptionsMediaCommand
+    extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'This operation returns the available options (supported values and ranges for video source configuration parameters) when the video source parameters are reconfigured If a video source configuration is specified, the options shall concern that particular configuration. If a media profile is specified, the options shall be compatible with that media profile.';
+
+  @override
+  String get name => 'get-video-source-configuration-options';
+
+  OnvifGetVideoSourceConfigurationOptionsMediaCommand() {
+    argParser
+      ..addOption('configuration-token',
+          valueHelp: 'string', help: 'Token of the requested configuration.')
+      ..addOption('profile-token',
+          valueHelp: 'string',
+          help:
+              'Contains the token of an existing media profile the configurations shall be compatible with.');
+  }
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final videoSourceConfigurationOptions =
+          await media.media2.getVideoSourceConfigurationOptions(
+        configurationToken: argResults?['configuration-token'],
+        profileToken: argResults?['configuration-token'],
+      );
+
+      print(videoSourceConfigurationOptions);
     } on DioError catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

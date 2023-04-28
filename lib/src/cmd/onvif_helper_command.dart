@@ -12,13 +12,17 @@ abstract class OnvifHelperCommand extends Command {
 
   DeviceManagement get deviceManagement => onvif.deviceManagement;
 
-  Ptz get ptz => onvif.ptz;
+  Imaging get imaging => onvif.imaging;
 
   Media get media => onvif.media;
+
+  Ptz get ptz => onvif.ptz;
 
   Recordings get recordings => onvif.recordings;
 
   Replay get replay => onvif.replay;
+
+  Search get search => onvif.search;
 
   Future<void> initializeOnvif() async {
     final authFile = File(globalResults!['config-file']);

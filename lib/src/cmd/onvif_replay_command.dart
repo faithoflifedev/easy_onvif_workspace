@@ -1,5 +1,5 @@
 import 'package:args/command_runner.dart';
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' show DioError;
 import 'package:easy_onvif/command.dart';
 import 'package:easy_onvif/media1.dart' show StreamSetup, Transport;
 import 'package:easy_onvif/replay.dart';
@@ -14,15 +14,15 @@ class OnvifReplayCommand extends Command {
   String get name => 'replay';
 
   OnvifReplayCommand() {
-    addSubcommand(GetReplayConfigurationReplayCommand());
-    addSubcommand(GetReplayUriReplayCommand());
+    addSubcommand(OnvifGetReplayConfigurationReplayCommand());
+    addSubcommand(OnvifGetReplayUriReplayCommand());
     addSubcommand(OnvifGetServiceCapabilitiesReplayCommand());
     addSubcommand(OnvifSetReplayConfigurationReplayCommand());
   }
 }
 
 /// Returns the current configuration of the replay service. This operation is mandatory.
-class GetReplayConfigurationReplayCommand extends OnvifHelperCommand {
+class OnvifGetReplayConfigurationReplayCommand extends OnvifHelperCommand {
   @override
   String get description =>
       'Returns the current configuration of the replay service. ';
@@ -48,7 +48,7 @@ class GetReplayConfigurationReplayCommand extends OnvifHelperCommand {
 /// using RTSP as the control protocol. The URI is valid only as it is specified
 /// in the response. A device supporting the Replay Service shall support the
 /// GetReplayUri command.
-class GetReplayUriReplayCommand extends OnvifHelperCommand {
+class OnvifGetReplayUriReplayCommand extends OnvifHelperCommand {
   @override
   String get description =>
       'Requests a URI that can be used to initiate playback of a recorded stream using RTSP as the control protocol';
@@ -56,7 +56,7 @@ class GetReplayUriReplayCommand extends OnvifHelperCommand {
   @override
   String get name => 'get-replay-uri';
 
-  GetReplayUriReplayCommand() {
+  OnvifGetReplayUriReplayCommand() {
     argParser
       ..addOption('recording-token',
           abbr: 't',

@@ -182,9 +182,16 @@ class OnvifUtil {
   static DateTime? nullableMappedToDateTime(Map<String, dynamic>? value) =>
       value != null ? mappedToDateTime(value) : null;
 
-  // static List<T> unbound<T>(Map<String, dynamic> value) {
-  //   return <T>[];
-  // }
+  static DateTime mappedToStdDateTime(Map<String, dynamic> value) {
+    final rawDt = value['\$'];
+
+    final formatter = DateFormat('YYYY-MM-dd\'T\'HH:mm:ss\'Z\'');
+
+    return DateTime.tryParse(rawDt) ?? formatter.parse(rawDt);
+  }
+
+  static DateTime? nullableMappedStdToDateTime(Map<String, dynamic>? value) =>
+      value != null && value.isNotEmpty ? mappedToStdDateTime(value) : null;
 
   static List<String> stringToList(String value) =>
       value.split(RegExp(r'[ ,]'));
