@@ -1,4 +1,4 @@
-<center><img src="logo/easy_onvif_logo_640.png" height="160"></center>
+<p align="center" width="100%"><img src="logo/easy_onvif_logo_640.png" height="160"></p>
 
 # Dart Implementation of ONVIF IP Camera Client
 
