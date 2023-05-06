@@ -1,14 +1,14 @@
+import 'dart:convert';
 import 'dart:io';
 
-import 'package:annotated_shelf/annotated_shelf.dart';
 import 'package:args/command_runner.dart';
 import 'package:easy_onvif/command.dart';
-import 'package:easy_onvif/probe.dart';
 import 'package:easy_onvif/src/multicast_probe.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:loggy/loggy.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as io;
+import 'package:shelf_router/shelf_router.dart';
 
 class OnvifProbeCommand extends Command {
   @override
@@ -23,22 +23,35 @@ class OnvifProbeCommand extends Command {
   }
 }
 
-@RestAPI(baseUrl: '')
-class DevicesAdaptor {
+class DevicesController {
   final multicastProbe = MulticastProbe();
 
-  DevicesAdaptor() {
+  DevicesController() {
     _init();
   }
 
   void _init() async => await multicastProbe.probe();
 
-  @GET(url: '/list')
-  List<ProbeMatch> getAllItems(Request request) => multicastProbe.onvifDevices;
+  // Define our getter for our handler
+  Handler get handler {
+    final router = Router();
 
-  @GET(url: '/refresh')
-  Future<RestResponse> refresh() async =>
-      RestResponse(200, {'msj': 'ok'}, 'application/json');
+    router.get(
+        '/list',
+        (Request request) => Response.ok(
+              json.encode(multicastProbe.onvifDevices),
+              headers: {'Content-type': 'application/json'},
+            ));
+
+    router.all(
+        '/refresh',
+        (Request request) => Response.ok(
+              {'success': 'true'},
+              headers: {'Content-type': 'application/json'},
+            ));
+
+    return router;
+  }
 }
 
 class OnvifListDevicesProbeCommand extends OnvifHelperCommand {
@@ -105,10 +118,8 @@ class OnvifProxyProbeCommand extends OnvifHelperCommand {
         ),
         logOptions: OnvifUtil.convertToLogOptions(globalResults!['log-level']));
 
-    final router = await mount(DevicesAdaptor(), Cascade());
-
     var server = await io.serve(
-      router.handler,
+      DevicesController().handler,
       argResults!['bind-ip'],
       argResults!['port'],
     );
