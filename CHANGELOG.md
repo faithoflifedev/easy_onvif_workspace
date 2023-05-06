@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.2+5
+
+missed some changes
+
 ## 2.1.2+4
 
 simple ws-proxy support

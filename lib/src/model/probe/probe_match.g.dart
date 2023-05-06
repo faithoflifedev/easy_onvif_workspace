@@ -9,9 +9,9 @@ part of 'probe_match.dart';
 ProbeMatch _$ProbeMatchFromJson(Map<String, dynamic> json) => ProbeMatch(
       endpointReference: EndpointReference.fromJson(
           json['EndpointReference'] as Map<String, dynamic>),
-      types: ProbeMatch._list(json['Types']),
-      scopes: ProbeMatch._list(json['Scopes']),
-      xAddrs: ProbeMatch._list(json['XAddrs']),
+      types: ProbeMatch._listFromJson(json['Types']),
+      scopes: ProbeMatch._listFromJson(json['Scopes']),
+      xAddrs: ProbeMatch._listFromJson(json['XAddrs']),
       metadataVersion: ProbeMatch._metadata(json['MetadataVersion']),
     );
 
