@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.2+4
+
+simple ws-proxy support
+
 ## 2.1.2+3
 
 real meta fix

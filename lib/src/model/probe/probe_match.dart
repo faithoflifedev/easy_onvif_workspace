@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:easy_onvif/util.dart';
+import 'package:html_unescape/html_unescape.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:loggy/loggy.dart';
 
@@ -13,16 +14,17 @@ class ProbeMatch with UiLoggy {
   @JsonKey(name: 'EndpointReference')
   final EndpointReference endpointReference;
 
-  @JsonKey(name: 'Types', fromJson: _toList)
+  @JsonKey(name: 'Types', fromJson: _listFromJson) // _toList
   final List<String> types;
 
-  @JsonKey(name: 'Scopes', fromJson: _toList)
+  @JsonKey(name: 'Scopes', fromJson: _listFromJson)
   final List<String> scopes;
 
-  @JsonKey(name: 'XAddrs', fromJson: _toList)
+  @JsonKey(name: 'XAddrs', fromJson: _listFromJson)
   final List<String> xAddrs;
 
-  @JsonKey(name: 'MetadataVersion', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(
+      name: 'MetadataVersion', fromJson: _metadata) //OnvifUtil.mappedToString
   final String metadataVersion;
 
   final _profiles = <String>[];
@@ -106,6 +108,31 @@ class ProbeMatch with UiLoggy {
   @override
   String toString() => json.encode(toJson());
 
-  static List<String> _toList(Map<String, dynamic> value) =>
-      OnvifUtil.mappedToString(value).toString().split(RegExp('[ |,]'));
+  static List<String> _listFromXmlJson(Map<String, dynamic> value) {
+    final unescape = HtmlUnescape();
+
+    return unescape
+        .convert(OnvifUtil.mappedToString(value))
+        .split(RegExp('[ |,]'));
+  }
+
+  static List<String> _listFromJson(dynamic json) {
+    if (json is Map) {
+      // json from XML
+      return _listFromXmlJson(json as Map<String, dynamic>);
+    } else {
+      // json from serialized object
+      return (json as List).map((e) => e as String).toList();
+    }
+  }
+
+  static String _metadata(dynamic json) {
+    if (json is Map) {
+      // json from XML
+      return OnvifUtil.mappedToString(json as Map<String, dynamic>);
+    } else {
+      // json from serialized object
+      return json;
+    }
+  }
 }
