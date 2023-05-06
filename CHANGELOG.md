@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.2+8
+
+strings aren&#x27;t integers
+
 ## 2.1.2+7
 
 it&#x27;s never easy

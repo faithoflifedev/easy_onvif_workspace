@@ -121,7 +121,7 @@ class OnvifProxyProbeCommand extends OnvifHelperCommand {
     var server = await io.serve(
       DevicesController().handler,
       argResults!['bind-ip'],
-      argResults!['port'],
+      int.parse(argResults!['port']),
     );
 
     if (argResults!['bind-ip'] == _defaultIp) {
