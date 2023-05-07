@@ -1,10 +1,10 @@
 import 'dart:convert';
-import 'dart:html' as html;
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/src/model/media_uri.dart';
+import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 import 'package:loggy/loggy.dart';
 import 'package:universal_io/io.dart';
@@ -201,7 +201,7 @@ class OnvifUtil {
       value != null ? stringToList(value) : null;
 
   static String parseHtmlString(String htmlString) =>
-      (html.Element.span()..appendHtml(htmlString)).innerText;
+      parse(htmlString).outerHtml;
 }
 
 class NotSupportedException implements Exception {}

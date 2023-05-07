@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.1.2+9
+## 2.1.2+10
 
 convert html entities appearing in probe response
 
