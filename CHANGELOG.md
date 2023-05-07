@@ -1,42 +1,30 @@
 # Changelog
 
+## 2.1.2+9
+
+convert html entities appearing in probe response
+
 ## 2.1.2+8
 
 strings aren&#x27;t integers
-
-## 2.1.2+7
-
-it&#x27;s never easy
 
 ## 2.1.2+5
 
 annotated_shelf was a big mistake
 
-## 2.1.2+5
-
-missed some changes
-
 ## 2.1.2+4
 
 simple ws-proxy support
 
-## 2.1.2+3
-
-real meta fix
-
-## 2.1.2+2
-
-meta fix
-
 ## 2.1.2
 
 The following helper methods have been added to the package:
-* `Search` request suppot has been added (experimental)
+* `Search` request support has been added (experimental)
   * FindRecordings
   * GetRecordingSearchResults
   * GetRecordingInformation
   * GetRecordingSummary
-* `Imaging` request suppot has been added (experimental)
+* `Imaging` request support has been added (experimental)
   * GetCurrentPreset
   * GetPresets
   * GetServiceCapabilities
@@ -44,7 +32,7 @@ The following helper methods have been added to the package:
 * `Media` ver20
   * GetVideoSourceConfigurationOptions
 * Multicast Probe
-  * genral improvements
+  * general improvements
 
 ## 2.1.1-dev.1
 

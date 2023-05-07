@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html' as html;
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
@@ -198,6 +199,9 @@ class OnvifUtil {
 
   static List<String>? nullableStringToList(String? value) =>
       value != null ? stringToList(value) : null;
+
+  static String parseHtmlString(String htmlString) =>
+      (html.Element.span()..appendHtml(htmlString)).innerText;
 }
 
 class NotSupportedException implements Exception {}

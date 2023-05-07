@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:easy_onvif/util.dart';
-import 'package:html_unescape/html_unescape.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:loggy/loggy.dart';
 
@@ -108,13 +107,9 @@ class ProbeMatch with UiLoggy {
   @override
   String toString() => json.encode(toJson());
 
-  static List<String> _listFromXmlJson(Map<String, dynamic> value) {
-    final unescape = HtmlUnescape();
-
-    return unescape
-        .convert(OnvifUtil.mappedToString(value))
-        .split(RegExp('[ |,]'));
-  }
+  static List<String> _listFromXmlJson(Map<String, dynamic> value) =>
+      OnvifUtil.parseHtmlString(OnvifUtil.mappedToString(value))
+          .split(RegExp('[ |,|\n]'));
 
   static List<String> _listFromJson(dynamic json) {
     if (json is Map) {
