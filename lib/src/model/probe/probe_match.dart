@@ -108,8 +108,8 @@ class ProbeMatch with UiLoggy {
   String toString() => json.encode(toJson());
 
   static List<String> _listFromXmlJson(Map<String, dynamic> value) =>
-      OnvifUtil.parseHtmlString(OnvifUtil.mappedToString(value))
-          .split(RegExp('[ |,|\n]'));
+      OnvifUtil.mappedToString(value)
+          .split(RegExp([' ', ',', r'\r\\n'].map(RegExp.escape).join('|')));
 
   static List<String> _listFromJson(dynamic json) {
     if (json is Map) {

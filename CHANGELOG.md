@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.2+12
+
+split probeMatch scope containing html
+
 ## 2.1.2+11
 
 convert html entities appearing in probe response
