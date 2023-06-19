@@ -1,5 +1,5 @@
 import 'package:args/command_runner.dart';
-import 'package:dio/dio.dart' show DioError;
+import 'package:dio/dio.dart' show DioException;
 import 'package:easy_onvif/command.dart';
 import 'package:easy_onvif/media1.dart' show StreamSetup, Transport;
 import 'package:easy_onvif/replay.dart';
@@ -38,7 +38,7 @@ class OnvifGetReplayConfigurationReplayCommand extends OnvifHelperCommand {
       final replayConfiguration = await replay.getReplayConfiguration();
 
       print(replayConfiguration);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -90,7 +90,7 @@ class OnvifGetReplayUriReplayCommand extends OnvifHelperCommand {
       );
 
       print(uri);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -113,7 +113,7 @@ class OnvifGetServiceCapabilitiesReplayCommand extends OnvifHelperCommand {
       final capabilities = await replay.getServiceCapabilities();
 
       print(capabilities);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -146,7 +146,7 @@ class OnvifSetReplayConfigurationReplayCommand extends OnvifHelperCommand {
           ReplayConfiguration(sessionTimeout: argResults!['session-timeout']));
 
       print(capabilities);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }

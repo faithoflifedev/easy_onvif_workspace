@@ -1,5 +1,5 @@
 import 'package:args/command_runner.dart';
-import 'package:dio/dio.dart' show DioError;
+import 'package:dio/dio.dart' show DioException;
 import 'package:easy_onvif/command.dart';
 import 'package:easy_onvif/recordings.dart' show SourceToken;
 import 'package:easy_onvif/search.dart';
@@ -45,7 +45,7 @@ class OnvifGetRecordingInformationSearchCommand extends OnvifHelperCommand {
           await search.getRecordingInformation(argResults!['recording-token']);
 
       print(recordingInformation);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -108,7 +108,7 @@ class OnvifGetRecordingSearchResultsSearchCommand extends OnvifHelperCommand {
       );
 
       print(findRecordingResults);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -133,7 +133,7 @@ class OnvifGetRecordingSummarySearchCommand extends OnvifHelperCommand {
       final recordingSummary = await search.getRecordingSummary();
 
       print(recordingSummary);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -222,7 +222,7 @@ class OnvifFindRecordingsSearchCommand extends OnvifHelperCommand {
           keepAliveTime: argResults!['keep-alive-time']);
 
       print(searchToken);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }

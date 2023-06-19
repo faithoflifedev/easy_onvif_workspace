@@ -32,12 +32,13 @@ class SystemDateAndTime {
   @JsonKey(name: 'LocalDateTime')
   final OnvifDateTime? local;
 
-  SystemDateAndTime(
-      {required this.dateTimeType,
-      required this.daylightSavings,
-      this.timeZone,
-      this.utc,
-      this.local});
+  SystemDateAndTime({
+    required this.dateTimeType,
+    required this.daylightSavings,
+    this.timeZone,
+    this.utc,
+    this.local,
+  });
 
   factory SystemDateAndTime.fromJson(Map<String, dynamic> json) =>
       _$SystemDateAndTimeFromJson(json);

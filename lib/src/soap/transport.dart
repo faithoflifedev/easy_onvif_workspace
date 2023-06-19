@@ -32,7 +32,7 @@ class Transport with UiLoggy {
             Headers.contentTypeHeader: 'text/xml; charset=utf-8',
             // Headers.contentTypeHeader: 'application/soap+xml; charset=utf-8',
           }));
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       switch (error.response?.statusCode) {
         case 500:
         case 400:

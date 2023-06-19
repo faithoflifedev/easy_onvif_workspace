@@ -215,6 +215,7 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetPresets                      | getPresets                      | `Future<List<ImagingPreset>>`          | [ \] |
 | GetServiceCapabilities          | getServiceCapabilities          | `Future<Capabilities>`                 | [ \] |
 | GetStatus                       | getStatus                       | `Future<Status>`                       | [ \] |
+| SetCurrentPreset                | setCurrentPreset                | `Future<bool>`                         | [ \] |
 
 ### [Media 1](https://www.onvif.org/ver10/media/wsdl/media.wsdl) 
 

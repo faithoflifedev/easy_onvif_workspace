@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-extension UsageExtension on DioError {
+extension UsageExtension on DioException {
   String get usage {
     return response?.data['error']['errors'] == null
         ? message!

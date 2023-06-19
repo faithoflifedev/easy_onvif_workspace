@@ -15,6 +15,7 @@ class OnvifImagingCommand extends Command {
     addSubcommand(OnvifGetPresetsImagingCommand());
     addSubcommand(OnvifGetServiceCapabilitiesImagingCommand());
     addSubcommand(OnvifGetStatusImagingCommand());
+    addSubcommand(OnvifSetCurrentPresetImagingCommand());
   }
 }
 
@@ -48,7 +49,7 @@ class OnvifGetCurrentPresetImagingCommand extends OnvifHelperCommand {
           await imaging.getCurrentPreset(argResults!['video-source-token']);
 
       print(preset);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -88,7 +89,7 @@ class OnvifGetPresetsImagingCommand extends OnvifHelperCommand {
       );
 
       print(presets);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -111,7 +112,7 @@ class OnvifGetServiceCapabilitiesImagingCommand extends OnvifHelperCommand {
       final capabilities = await imaging.getServiceCapabilities();
 
       print(capabilities);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -146,7 +147,58 @@ class OnvifGetStatusImagingCommand extends OnvifHelperCommand {
           await imaging.getStatus(argResults!['video-source-token']);
 
       print(imagingStatus);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// The SetCurrentPreset command shall request a given Imaging Preset to be
+/// applied to the specified Video Source. SetCurrentPreset shall only be
+/// available for Video Sources with Imaging Presets Capability. Imaging
+/// Presets are defined by the Manufacturer, and offered as a tool to simplify
+/// Imaging Settings adjustments for specific scene content. When the new
+/// Imaging Preset is applied by SetCurrentPreset, the Device shall adjust the
+/// Video Source settings to match those defined by the specified Imaging
+/// Preset.
+class OnvifSetCurrentPresetImagingCommand extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'The SetCurrentPreset command shall request a given Imaging Preset to be applied to the specified Video Source.';
+
+  @override
+  String get name => 'set-current-preset';
+
+  OnvifSetCurrentPresetImagingCommand() {
+    argParser
+      ..addOption('video-source-token',
+          abbr: 't',
+          valueHelp: 'string',
+          mandatory: true,
+          help:
+              'A reference to the MediaProfile where the operation should take place.')
+      ..addOption('preset-token',
+          valueHelp: 'string',
+          mandatory: true,
+          help:
+              'Reference token to the Imaging Preset to be applied to the specified Video Source.');
+  }
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    final profileToken = argResults!['profile-token'];
+
+    try {
+      final token = await ptz.setPreset(
+        profileToken,
+        presetName: argResults?['preset-name'],
+        presetToken: argResults?['preset-token'],
+      );
+
+      print(token);
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }

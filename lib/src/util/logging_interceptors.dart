@@ -22,7 +22,7 @@ class LoggingInterceptors extends Interceptor with UiLoggy {
   /// The callback will be executed on error.
   @override
   FutureOr<dynamic> onError(
-    DioError err,
+    DioException err,
     ErrorInterceptorHandler handler,
   ) {
     loggy.error('ERROR:\n$err');

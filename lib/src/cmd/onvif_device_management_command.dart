@@ -123,7 +123,7 @@ class OnvifCreateUsersDeviceManagementCommand extends OnvifHelperCommand {
       } else {
         throw UsageException('User information required.', usage);
       }
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -183,7 +183,7 @@ class OnvifDeleteUsersDeviceManagementCommand extends OnvifHelperCommand {
 
     try {
       await deviceManagement.deleteUsers(users);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -209,7 +209,7 @@ class OnvifGetCapabilitiesDeviceManagementCommand extends OnvifHelperCommand {
       final capabilities = await deviceManagement.getCapabilities();
 
       print(capabilities);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -234,7 +234,7 @@ class OnvifGetDeviceInformationResponseDeviceManagementCommand
           await deviceManagement.getDeviceInformation();
 
       print(getDeviceInformationResponse);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -260,7 +260,7 @@ class OnvifGetDiscoveryModeDeviceManagementCommand extends OnvifHelperCommand {
       final discoveryMode = await deviceManagement.getDiscoveryMode();
 
       print(discoveryMode);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -284,7 +284,7 @@ class OnvifGetDnsDeviceManagementCommand extends OnvifHelperCommand {
       final dns = await deviceManagement.getDns();
 
       print(dns);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -309,7 +309,7 @@ class OnvifGetHostnameDeviceManagementCommand extends OnvifHelperCommand {
       final hostnameInformation = await deviceManagement.getHostname();
 
       print(hostnameInformation);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -335,7 +335,7 @@ class OnvifGetNetworkProtocolsDeviceManagementCommand
       final networkProtocols = await deviceManagement.getNetworkProtocols();
 
       print(json.encode(networkProtocols));
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -360,7 +360,7 @@ class OnvifGetNtpDeviceManagementCommand extends OnvifHelperCommand {
       final ntpInformation = await deviceManagement.getNtp();
 
       print(ntpInformation);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -385,7 +385,7 @@ class OnvifGetServiceCapabilitiesDeviceManagementCommand
           await deviceManagement.getServiceCapabilities();
 
       print(deviceServiceCapabilities);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -416,7 +416,7 @@ class OnvifGetServicesDeviceManagementCommand extends OnvifHelperCommand {
           await deviceManagement.getServices(argResults!['include-capability']);
 
       print(json.encode(services));
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -449,7 +449,7 @@ class OnvifGetStorageConfigurationDeviceManagementCommand
           .getStorageConfiguration(argResults!['storage-token']);
 
       print(systemDateAndTime);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -474,7 +474,7 @@ class OnvifGetStorageConfigurationsDeviceManagementCommand
           await deviceManagement.getStorageConfigurations();
 
       print(systemDateAndTime);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -505,7 +505,7 @@ A device shall provide the UTCDateTime information.''';
       final systemDateAndTime = await deviceManagement.getSystemDateAndTime();
 
       print(systemDateAndTime);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -541,7 +541,7 @@ class OnvifGetSystemLogDeviceManagementCommand extends OnvifHelperCommand {
           await deviceManagement.getSystemLog(argResults!['type']);
 
       print(systemLog);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -567,7 +567,7 @@ class OnvifGetSystemSupportInformationDeviceManagementCommand
           await deviceManagement.getSystemSupportInformation();
 
       print(systemInformation);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -607,7 +607,7 @@ class OnvifGetSystemUrisDeviceManagementCommand extends OnvifHelperCommand {
       final getSystemUrisResponse = await deviceManagement.getSystemUris();
 
       print(getSystemUrisResponse);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -632,7 +632,7 @@ class OnvifGetUsersDeviceManagementCommand extends OnvifHelperCommand {
       final users = await deviceManagement.getUsers();
 
       print(users);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -654,7 +654,7 @@ class OnvifSystemRebootDeviceManagementCommand extends OnvifHelperCommand {
       final message = await deviceManagement.systemReboot();
 
       print(message);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }

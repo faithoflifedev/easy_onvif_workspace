@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:easy_onvif/soap.dart';
 
-///Implementation of the [Authorization] algorithm required to authenticate to
-///Onvif devices
+/// Implementation of the [Authorization] algorithm required to authenticate to
+/// Onvif devices
 class Authorization {
   final Nonce _nonce = Nonce();
 

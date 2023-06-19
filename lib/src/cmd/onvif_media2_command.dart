@@ -59,7 +59,7 @@ class OnvifGetMetadataConfigurationOptionsMediaCommand
       );
 
       print(metadataConfigurationOptions);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -99,7 +99,7 @@ class OnvifGetMetadataConfigurations2MediaCommand extends OnvifHelperCommand {
       );
 
       print(metadataConfigurations);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -155,7 +155,7 @@ class OnvifGetProfiles2MediaCommand extends OnvifHelperCommand {
           type: argResults?['reference-token']);
 
       print(profiles);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -180,7 +180,7 @@ class OnvifGetServiceCapabilities2MediaCommand extends OnvifHelperCommand {
           await media.media2.getServiceCapabilities();
 
       print(mediaServiceCapabilities);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -221,7 +221,7 @@ class OnvifGetSnapshotUri2MediaCommand extends OnvifHelperCommand {
           await media.media2.getSnapshotUri(argResults!['profile-token']);
 
       print(mediaUri);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -290,7 +290,7 @@ class OnvifGetStreamUri2MediaCommand extends OnvifHelperCommand {
       );
 
       print(mediaUri);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -323,7 +323,7 @@ class OnvifGetVideoEncoderInstancesMediaCommand extends OnvifHelperCommand {
           .getVideoEncoderInstances(argResults!['configuration-token']);
 
       print(info);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -365,7 +365,7 @@ class OnvifGetVideoSourceConfigurationOptionsMediaCommand
       );
 
       print(videoSourceConfigurationOptions);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -400,7 +400,7 @@ class OnvifStartMulticastStreaming2MediaCommand extends OnvifHelperCommand {
 
     try {
       await media.media2.startMulticastStreaming(argResults!['profile-token']);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -430,7 +430,7 @@ class OnvifStopMulticastStreaming2MediaCommand extends OnvifHelperCommand {
 
     try {
       await media.media2.stopMulticastStreaming(argResults!['profile-token']);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }

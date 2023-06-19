@@ -1,5 +1,3 @@
-// import 'package:easy_onvif/imaging.dart';
-// import 'package:easy_onvif/shared.dart';
 import 'package:xml/xml.dart';
 
 import 'transport.dart';
@@ -43,6 +41,28 @@ class ImagingRequest {
 
       Transport.builder.element('VideoSourceToken', nest: () {
         Transport.builder.text(videoSourceToken);
+      });
+    });
+
+    return Transport.builder.buildFragment();
+  }
+
+  /// XML for the [setCurrentPreset], requires a [videoSourceToken]
+  static XmlDocumentFragment setCurrentPreset({
+    required String videoSourceToken,
+    required String presetToken,
+  }) {
+    Transport.builder.element('SetPreset', nest: () {
+      Transport.builder.namespace(Xmlns.timg);
+
+      Transport.builder.element('ProfileToken', nest: () {
+        Transport.builder.namespace(Xmlns.timg);
+        Transport.builder.text(videoSourceToken);
+      });
+
+      Transport.builder.element('PresetToken', nest: () {
+        Transport.builder.namespace(Xmlns.timg);
+        Transport.builder.text(presetToken);
       });
     });
 

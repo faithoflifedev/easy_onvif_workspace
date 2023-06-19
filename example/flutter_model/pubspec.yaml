@@ -6,15 +6,21 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.18.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
   cached_network_image: ^3.2.3
+  collection: ^1.17.0
   easy_onvif:
     path: ../../
+  flutter_form_builder: ^9.0.0
+  form_builder_validators: ^9.0.0
   flutter_loggy: ^2.0.1
+  flutter_solidart: ^0.4.2
+  getwidget: ^2.0.4
   http: ^0.13.6
   loggy: ^2.0.1+1
+  shared_preferences: ^2.1.1
   yaml: ^3.1.1
 
   flutter:
@@ -22,6 +28,7 @@ dependencies:
 
 dev_dependencies:
   flutter_lints: ^2.0.1
+  solidart_lint: ^0.2.0
 
   # flutter_test:
   #   sdk: flutter

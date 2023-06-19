@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.2+13
+
+* updated dependencies
+* `Imaging`
+  * SetCurrentPreset
+
 ## 2.1.2+12
 
 split probeMatch scope containing html

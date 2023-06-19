@@ -119,9 +119,9 @@ class _MyHomePageState extends State<MyHomePage> with UiLoggy {
       body: SafeArea(
         child: Center(
           child: connecting
-              ? Column(
+              ? const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                       Text('Connecting to camera'),
                       Padding(
                         padding: EdgeInsets.all(8.0),

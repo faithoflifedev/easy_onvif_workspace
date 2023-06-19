@@ -47,7 +47,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^2.1.2+12
+  easy_onvif: ^2.1.2+13
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -215,6 +215,7 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetPresets                      | getPresets                      | `Future<List<ImagingPreset>>`          | [ \] |
 | GetServiceCapabilities          | getServiceCapabilities          | `Future<Capabilities>`                 | [ \] |
 | GetStatus                       | getStatus                       | `Future<Status>`                       | [ \] |
+| SetCurrentPreset                | setCurrentPreset                | `Future<bool>`                         | [ \] |
 
 ### [Media 1](https://www.onvif.org/ver10/media/wsdl/media.wsdl) 
 

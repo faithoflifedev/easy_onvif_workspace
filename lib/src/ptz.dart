@@ -400,7 +400,7 @@ class Ptz with UiLoggy {
   /// fixed and cannot be overwritten. If the SetHomePosition is successful, it
   /// is possible to recall the Home Position with the GotoHomePosition command.
   Future<bool> setHomePosition(String profileToken) async {
-    loggy.debug('removePreset');
+    loggy.debug('setHomePosition');
 
     final envelope = await transport.sendRequest(
         uri,

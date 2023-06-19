@@ -91,7 +91,7 @@ class OnvifAbsoluteMovePtzCommand extends OnvifHelperCommand {
           zoom: Zoom.fromString(x: argResults!['pan-tilt-zoom']));
 
       await ptz.absoluteMove(argResults!['profile-token'], place);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -145,7 +145,7 @@ class OnvifContinuousMovePtzCommand extends OnvifHelperCommand {
           zoom: Zoom.fromString(x: argResults!['pan-tilt-zoom']));
 
       await ptz.continuousMove(argResults!['profile-token'], velocity);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -186,7 +186,7 @@ class OnvifGetCompatibleConfigurationsPtzCommand extends OnvifHelperCommand {
           await ptz.getCompatibleConfigurations(argResults!['profile-token']);
 
       print(ptzConfigurations);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -237,7 +237,7 @@ class OnvifGetConfigurationPtzCommand extends OnvifHelperCommand {
           await ptz.getConfiguration(argResults!['ptz-configuration-token']);
 
       print(ptzConfiguration);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -276,7 +276,7 @@ class OnvifGetConfigurationOptionsPtzCommand extends OnvifHelperCommand {
           await ptz.getConfigurationOptions(argResults!['configuration-token']);
 
       print(ptzConfigurationOptions);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -317,7 +317,7 @@ class OnvifGetConfigurationsPtzCommand extends OnvifHelperCommand {
       final ptzConfigurations = await ptz.getConfigurations();
 
       print(ptzConfigurations);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -359,7 +359,7 @@ class OnvifGetPresetsPtzCommand extends OnvifHelperCommand {
       );
 
       print(presets);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -383,7 +383,7 @@ class OnvifGetServiceCapabilitiesPtzCommand extends OnvifHelperCommand {
       final capabilities = await ptz.getServiceCapabilities();
 
       print(capabilities);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -415,7 +415,7 @@ class OnvifGetStatusPtzCommand extends OnvifHelperCommand {
       final ptzStatus = await ptz.getStatus(argResults!['profile-token']);
 
       print(ptzStatus);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -471,7 +471,7 @@ class OnvifGotoHomePositionPtzCommand extends OnvifHelperCommand {
                       ? Zoom.fromString(x: argResults!['zoom'])
                       : null)
               : null);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -534,7 +534,7 @@ class OnvifGotoPresetPtzCommand extends OnvifHelperCommand {
                     : null)
             : null,
       );
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -590,7 +590,7 @@ class OnvifRelativeMovePtzCommand extends OnvifHelperCommand {
           zoom: Zoom.fromString(x: argResults!['translation-zoom']));
 
       await ptz.relativeMove(argResults!['profile-token'], translation);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -630,7 +630,7 @@ class OnvifRemovePresetPtzCommand extends OnvifHelperCommand {
         argResults!['profile-token'],
         preset: Preset.fromToken(argResults!['preset-token']),
       );
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -663,7 +663,7 @@ class OnvifSetHomePositionPtzCommand extends OnvifHelperCommand {
 
     try {
       await ptz.setHomePosition(argResults!['profile-token']);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -716,7 +716,7 @@ class OnvifSetPresetPtzCommand extends OnvifHelperCommand {
       );
 
       print(token);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -761,7 +761,7 @@ class OnvifStopPtzCommand extends OnvifHelperCommand {
         panTilt: argResults!['pan-tilt'],
         zoom: argResults!['zoom'],
       );
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -801,7 +801,7 @@ class OnvifMovePtzCommand extends OnvifHelperCommand {
     try {
       await ptz.move(argResults!['profile-token'],
           PanTilt.fromString(x: argResults!['x'], y: argResults!['y']));
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -841,7 +841,7 @@ class OnvifMoveDownPtzCommand extends OnvifHelperCommand {
 
     try {
       await ptz.moveDown(argResults!['profile-token'], step!);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -881,7 +881,7 @@ class OnvifMoveLeftPtzCommand extends OnvifHelperCommand {
 
     try {
       await ptz.moveLeft(argResults!['profile-token'], step!);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -921,7 +921,7 @@ class OnvifMoveRightPtzCommand extends OnvifHelperCommand {
 
     try {
       await ptz.moveRight(argResults!['profile-token'], step!);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -962,7 +962,7 @@ class OnvifMoveUpPtzCommand extends OnvifHelperCommand {
 
     try {
       await ptz.moveUp(argResults!['profile-token'], step!);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -997,7 +997,7 @@ class OnvifZoomPtzCommand extends OnvifHelperCommand {
     try {
       await ptz.zoom(argResults!['profile-token'],
           Zoom.fromString(x: argResults!['zoom']));
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -1037,7 +1037,7 @@ class OnvifZoomInPtzCommand extends OnvifHelperCommand {
 
     try {
       await ptz.zoomIn(argResults!['profile-token'], step!);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -1077,7 +1077,7 @@ class OnvifZoomOutPtzCommand extends OnvifHelperCommand {
 
     try {
       await ptz.zoomOut(argResults!['profile-token'], step!);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }

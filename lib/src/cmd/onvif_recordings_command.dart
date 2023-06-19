@@ -105,7 +105,7 @@ class OnvifCreateRecordingRecordingsCommand extends OnvifHelperCommand {
       );
 
       print(recordingToken);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -167,7 +167,7 @@ The only valid values for Mode shall be “Idle” and “Active”.''')
       );
 
       print(createRecordingJobResponse);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -204,7 +204,7 @@ class OnvifDeleteRecordingRecordingsCommand extends OnvifHelperCommand {
 
     try {
       await recordings.deleteRecording(argResults!['recording-token']);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -235,7 +235,7 @@ class OnvifDeleteRecordingJobRecordingsCommand extends OnvifHelperCommand {
 
     try {
       await recordings.deleteRecording(argResults!['job-token']);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -269,7 +269,7 @@ class OnvifGetRecordingOptionsRecordingsCommand extends OnvifHelperCommand {
           await recordings.getRecordingOptions(argResults!['recording-token']);
 
       print(recordingOptions);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -294,7 +294,7 @@ class OnvifGetRecordingsRecordingsCommand extends OnvifHelperCommand {
       final recordingItems = await recordings.getRecordings();
 
       print(recordingItems);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -316,7 +316,7 @@ class OnvifGetRecordingJobsRecordingsCommand extends OnvifHelperCommand {
       final recordingJobs = await recordings.getRecordingJobs();
 
       print(recordingJobs);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -349,7 +349,7 @@ class OnvifGetRecordingJobStateRecordingsCommand extends OnvifHelperCommand {
           await recordings.getRecordingJobState(argResults!['job-token']);
 
       print(recordingJobState);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -373,7 +373,7 @@ class OnvifGetServiceCapabilitiesRecordingsCommand extends OnvifHelperCommand {
       final capabilities = await recordings.getServiceCapabilities();
 
       print(capabilities);
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
@@ -412,7 +412,7 @@ class OnvifSetRecordingJobModeRecordingsCommand extends OnvifHelperCommand {
           jobToken: argResults!['job-token'],
           mode: RecordingJobConfigurationMode.values
               .firstWhere((mode) => mode.value == argResults!['mode']));
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
   }
