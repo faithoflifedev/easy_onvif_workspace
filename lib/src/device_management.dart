@@ -404,4 +404,39 @@ class DeviceManagement with UiLoggy {
 
     return SystemRebootResponse.fromJson(envelope.body.response!).message;
   }
+
+  // Future<GetGeoLocationResponse> getGeoLocation() async {
+  //   loggy.debug('getGeoLocation');
+
+  //   final envelope = await transport.sendRequest(
+  //       uri,
+  //       transport
+  //           .securedEnvelope(soap.DeviceManagementRequest.getGeoLocation()));
+
+  //   if (envelope.body.hasFault) {
+  //     throw Exception(envelope.body.fault.toString());
+  //   }
+
+  //   // return SystemRebootResponse.fromJson(envelope.body.response!).message;
+  //   return envelope.body.response!;
+  // }
+
+  /// A client can ask for the device service endpoint reference address
+  /// property that can be used to derive the password equivalent for remote
+  /// user operation. The device shall support the GetEndpointReference command
+  /// returning the address property of the device service endpoint reference.
+  Future<Map<String, dynamic>> getEndpointReference() async {
+    loggy.debug('getEndpointReference');
+
+    final envelope = await transport.sendRequest(
+        uri,
+        transport.securedEnvelope(
+            soap.DeviceManagementRequest.getEndpointReference()));
+
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
+    }
+
+    return envelope.body.response!;
+  }
 }

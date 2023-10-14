@@ -3,7 +3,6 @@
 A command line interface application for controlling an Onvif device through terminal commands.  This tool allows you to use O/S features like `cron` to automate Onvif device functionality.
 
 ## Table of Contents
-
 - [Installation](#installation)
 - [Quick start](#quick-start)
 - [Commands](#commands)
@@ -15,6 +14,7 @@ A command line interface application for controlling an Onvif device through ter
     - [device-management get-device-information](#device-management-get-device-information)
     - [device-management get-discovery-mode](#device-management-get-discovery-mode)
     - [device-management get-dns](#device-management-get-dns)
+    - [device-management get-endpoint-reference](#device-management-get-endpoint-reference)
     - [device-management get-hostname](#device-management-get-hostname)
     - [device-management get-network-protocols](#device-management-get-network-protocols)
     - [device-management get-ntp](#device-management-get-ntp)
@@ -208,6 +208,7 @@ Available subcommands:
   get-device-information           This operation gets basic device information from the device.
   get-discovery-mode               This operation gets the discovery mode of a device. See Section 7.2 for the definition of the different device discovery modes. The device shall support retrieval of the discovery mode setting through the GetDiscoveryMode command.
   get-dns                          This operation gets the DNS settings from a device. The device shall return its DNS configurations through the GetDNS command.
+  get-endpoint-reference           A client can ask for the device service endpoint reference address property that can be used to derive the password equivalent for remote user operation.
   get-hostname                     This operation is used by an endpoint to get the hostname from a device. The device shall return its hostname configurations through the GetHostname command.
   get-network-protocols            This operation gets defined network protocols from a device. The device shall support the GetNetworkProtocols command returning configured network protocols.
   get-ntp                          This operation gets defined network protocols from a device. The device shall support This operation gets the NTP settings from a device. If the device supports NTP, it shall be possible to get the NTP server settings through the GetNTP command.
@@ -308,6 +309,19 @@ onvif device-management get-dns --help
 This operation gets the DNS settings from a device. The device shall return its DNS configurations through the GetDNS command.
 
 Usage: onvif device-management get-device-information [arguments]
+-h, --help    Print this usage information.
+```
+
+#### device-management get-endpoint-reference
+
+```sh
+onvif device-management get-endpoint-reference --help
+```
+
+```text
+A client can ask for the device service endpoint reference address property that can be used to derive the password equivalent for remote user operation.
+
+Usage: onvif device-management get-endpoint-reference [arguments]
 -h, --help    Print this usage information.
 ```
 

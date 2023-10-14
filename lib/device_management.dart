@@ -11,6 +11,7 @@ export 'src/model/device_management/dns_information.dart';
 export 'src/model/device_management/dns_entry.dart';
 export 'src/model/device_management/event_capabilities.dart';
 export 'src/model/device_management/get_capabilities_response.dart';
+export 'src/model/device_management/get_endpoint_reference_response.dart';
 export 'src/model/device_management/get_services_response.dart';
 export 'src/model/device_management/get_device_information_response.dart';
 export 'src/model/device_management/get_discovery_mode_response.dart';

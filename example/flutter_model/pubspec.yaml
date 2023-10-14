@@ -16,7 +16,7 @@ dependencies:
   flutter_form_builder: ^9.0.0
   form_builder_validators: ^9.0.0
   flutter_loggy: ^2.0.1
-  flutter_solidart: ^0.4.2
+  flutter_solidart: ^1.2.0
   getwidget: ^2.0.4
   http: ^0.13.6
   loggy: ^2.0.1+1
@@ -27,15 +27,12 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  flutter_lints: ^2.0.1
-  solidart_lint: ^0.2.0
+  flutter_lints: ^2.0.3
+  solidart_lint: ^1.0.1
 
-  # flutter_test:
-  #   sdk: flutter
-
-dependency_overrides:
-  # collection: ^1.16.0
-  meta: ^1.9.1
+# dependency_overrides:
+# collection: ^1.16.0
+# meta: ^1.9.1
 
 flutter:
   uses-material-design: true

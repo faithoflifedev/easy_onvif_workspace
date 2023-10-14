@@ -193,6 +193,7 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetDeviceInformation        | getDeviceInformation        | `Future<GetDeviceInformationResponse>` | [x\] |
 | GetDiscoveryMode            | getDiscoveryMode            | `Future<String>`                       | [x\] |
 | GetDNS                      | getDNS                      | `Future<DnsInformation>`               | [x\] |
+| GetEndpointReference        | getEndpointReference        | `Future<Map<String, dynamic>>`         | [ \] |
 | GetHostname                 | getHostname                 | `Future<HostnameInformation>`          | [x\] |
 | GetNetworkProtocols         | getNetworkProtocols         | `Future<List<NetworkProtocol>>`        | [x\] |
 | GetNTP                      | getNtp                      | `Future<NtpInformation>`               | [x\] |
