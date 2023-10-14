@@ -11,7 +11,9 @@ import 'package:uuid/uuid.dart';
 final Pointer<T> Function<T extends NativeType>(String symbolName) _lookup =
     () {
   if (Platform.isWindows) {
-    return DynamicLibrary.open('onvif.dll').lookup;
+    return DynamicLibrary.open(
+            'lib/src/discovery_library/discovery_library.dll')
+        .lookup;
   } else {
     throw UnimplementedError();
   }
