@@ -8,30 +8,6 @@ import 'package:loggy/loggy.dart';
 import 'package:universal_io/io.dart';
 import 'package:uuid/uuid.dart';
 
-final Pointer<T> Function<T extends NativeType>(String symbolName) _lookup =
-    () {
-  if (Platform.isWindows) {
-    return DynamicLibrary.open('${Directory.current}/discovery.dll').lookup;
-  } else {
-    throw UnimplementedError();
-  }
-}();
-
-final _discoveryPtr = _lookup<
-    NativeFunction<
-        Int32 Function(
-          Pointer<NativeType>,
-          Pointer<NativeType>,
-          Int32,
-        )>>('discovery');
-
-final _discovery = _discoveryPtr.asFunction<
-    int Function(
-      Pointer<NativeType>,
-      Pointer<NativeType>,
-      int,
-    )>();
-
 @Packed(1)
 sealed class _OnvifDiscoveryData extends Struct {
   @Array<Int8>(128, 8192)
@@ -39,17 +15,57 @@ sealed class _OnvifDiscoveryData extends Struct {
 }
 
 class MulticastProbe with UiLoggy {
+  late final int Function(Pointer<NativeType>, Pointer<NativeType>, int)
+      _discovery;
+
   static final broadcastAddress = InternetAddress('239.255.255.250');
 
   static final broadcastPort = 3702;
 
   static final defaultTimeout = 2;
 
-  final int? timeout;
-
   final onvifDevices = <ProbeMatch>[];
 
-  MulticastProbe({this.timeout});
+  int? probeTimeout = 2;
+
+  factory MulticastProbe({int? timeout, String? dllPath}) {
+    if (Platform.isWindows) {
+      return MulticastProbe.windows(timeout: timeout, dllPath: dllPath);
+    } else {
+      return MulticastProbe.other(timeout: timeout);
+    }
+  }
+
+  MulticastProbe.other({int? timeout}) {
+    probeTimeout = timeout ?? defaultTimeout;
+  }
+
+  MulticastProbe.windows({int? timeout, String? dllPath}) {
+    final String discoveryDllPath = dllPath ??
+        '${String.fromEnvironment('ONVIF_DISCOVERY_DLL', defaultValue: Directory.current.absolute.toString())}/discovery.dll';
+
+    final Pointer<T> Function<T extends NativeType>(String symbolName) lookup =
+        () {
+      return DynamicLibrary.open(discoveryDllPath).lookup;
+    }();
+
+    final discoveryPtr = lookup<
+        NativeFunction<
+            Int32 Function(
+              Pointer<NativeType>,
+              Pointer<NativeType>,
+              Int32,
+            )>>('discovery');
+
+    _discovery = discoveryPtr.asFunction<
+        int Function(
+          Pointer<NativeType>,
+          Pointer<NativeType>,
+          int,
+        )>();
+
+    probeTimeout = timeout ?? defaultTimeout;
+  }
 
   Future<void> probe() async {
     loggy.debug('init');
@@ -84,7 +100,7 @@ class MulticastProbe with UiLoggy {
 
       start(rawDataGramSocket);
 
-      await finish(rawDataGramSocket, timeout);
+      await finish(rawDataGramSocket, probeTimeout);
     }
   }
 
