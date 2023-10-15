@@ -42,7 +42,7 @@ class MulticastProbe with UiLoggy {
 
   MulticastProbe.windows({int? timeout, String? dllPath}) {
     final String discoveryDllPath = dllPath ??
-        '${String.fromEnvironment('ONVIF_DISCOVERY_DLL', defaultValue: Directory.current.absolute.toString())}/discovery.dll';
+        '${String.fromEnvironment('ONVIF_DISCOVERY_DLL', defaultValue: Directory.current.path)}/discovery.dll';
 
     final Pointer<T> Function<T extends NativeType>(String symbolName) lookup =
         () {
