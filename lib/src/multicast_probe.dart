@@ -11,9 +11,7 @@ import 'package:uuid/uuid.dart';
 final Pointer<T> Function<T extends NativeType>(String symbolName) _lookup =
     () {
   if (Platform.isWindows) {
-    return DynamicLibrary.open(
-            'lib/src/discovery_library/discovery_library.dll')
-        .lookup;
+    return DynamicLibrary.open('${Directory.current}/discovery.dll').lookup;
   } else {
     throw UnimplementedError();
   }
@@ -124,19 +122,13 @@ class MulticastProbe with UiLoggy {
     final devices = _discovery(data, probeMessageData, duration.inMilliseconds);
 
     for (var index = 0; index < devices; index++) {
-      onvifDevices.add(ProbeMatch(
-          endpointReference: EndpointReference(
-              address: Pointer.fromAddress(data.address + index * 8192)
-                  .cast<Utf8>()
-                  .toDartString()),
-          types: [],
-          scopes: [],
-          xAddrs: [
-            Pointer.fromAddress(data.address + index * 8192)
-                .cast<Utf8>()
-                .toDartString()
-          ],
-          metadataVersion: ''));
+      var envelope = Envelope.fromXml(
+          Pointer.fromAddress(data.address + index * 8192)
+              .cast<Utf8>()
+              .toDartString());
+
+      onvifDevices
+          .addAll(ProbeMatches.fromJson(envelope.body.response!).probeMatches);
     }
 
     malloc.free(probeMessageData);
