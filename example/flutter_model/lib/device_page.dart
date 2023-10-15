@@ -1,5 +1,6 @@
 import 'package:easy_onvif/onvif.dart';
 import 'package:easy_onvif/probe.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:universal_io/io.dart';
@@ -7,12 +8,14 @@ import 'package:universal_io/io.dart';
 final String? dllPath = () {
   if (!Platform.isWindows) return null;
 
-  final String localLib =
-      join('data', 'flutter_assets', 'assets', 'discovery.dll');
+  var pathToLib = '${Directory.current.path}/assets/discovery.dll';
 
-  final String pathToLib =
-      join(Directory(Platform.resolvedExecutable).parent.path, localLib);
+  if (kReleaseMode) {
+    final String localLib = join('flutter_assets', 'assets', 'discovery.dll');
 
+    pathToLib =
+        join(Directory(Platform.resolvedExecutable).parent.path, localLib);
+  }
   return pathToLib;
 }();
 
