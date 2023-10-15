@@ -16,6 +16,7 @@ final String? dllPath = () {
     pathToLib =
         join(Directory(Platform.resolvedExecutable).parent.path, localLib);
   }
+
   return pathToLib;
 }();
 
