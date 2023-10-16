@@ -65,9 +65,9 @@ class OnvifAuthorizeCommand extends Command {
       throw Exception('Error: missing required data.');
     }
 
-    credFile.writeAsString(json.encode(credentials));
-
     credFile.createSync(recursive: true);
+
+    credFile.writeAsString(json.encode(credentials));
 
     print('Authorization completed.');
   }

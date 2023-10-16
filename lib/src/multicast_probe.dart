@@ -42,7 +42,7 @@ class MulticastProbe with UiLoggy {
 
   MulticastProbe.windows({int? timeout, String? dllPath}) {
     final String discoveryDllPath = dllPath ??
-        '${String.fromEnvironment('ONVIF_DISCOVERY_DLL', defaultValue: Directory.current.absolute.toString())}/discovery.dll';
+        '${String.fromEnvironment('ONVIF_DISCOVERY_DLL', defaultValue: Directory.current.path)}\\bin\\discovery.dll';
 
     final Pointer<T> Function<T extends NativeType>(String symbolName) lookup =
         () {
@@ -128,8 +128,6 @@ class MulticastProbe with UiLoggy {
 
   Future<void> windowsDiscovery(
       [Duration duration = const Duration(seconds: 5)]) async {
-    final onvifDevices = <ProbeMatch>[];
-
     final data = calloc<_OnvifDiscoveryData>();
 
     final probeMessageData =

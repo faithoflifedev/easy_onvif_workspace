@@ -30,6 +30,7 @@ dependencies:
 
 dev_dependencies:
   flutter_lints: ^2.0.3
+  msix: ^3.16.4
   solidart_lint: ^1.0.1
 
 # dependency_overrides:

@@ -29,8 +29,8 @@ class Transport with UiLoggy {
       response = await dio.post(uri.toString(),
           data: requestData.toString(),
           options: Options(headers: {
-            Headers.contentTypeHeader: 'text/xml; charset=utf-8',
-            // Headers.contentTypeHeader: 'application/soap+xml; charset=utf-8',
+            // Headers.contentTypeHeader: 'text/xml; charset=utf-8',
+            Headers.contentTypeHeader: 'application/soap+xml; charset=utf-8',
           }));
     } on DioException catch (error) {
       switch (error.response?.statusCode) {

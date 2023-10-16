@@ -8,10 +8,11 @@ import 'package:universal_io/io.dart';
 final String? dllPath = () {
   if (!Platform.isWindows) return null;
 
-  var pathToLib = '${Directory.current.path}/assets/discovery.dll';
+  var pathToLib = join(Directory.current.path, 'assets', 'discovery.dll');
 
   if (kReleaseMode) {
-    final String localLib = join('flutter_assets', 'assets', 'discovery.dll');
+    final String localLib =
+        join('data', 'flutter_assets', 'assets', 'discovery.dll');
 
     pathToLib =
         join(Directory(Platform.resolvedExecutable).parent.path, localLib);
@@ -39,25 +40,31 @@ class DevicePage extends StatelessWidget {
         title: const Text('Search'),
       ),
       body: Center(
-        child: FutureBuilder<List<ProbeMatch>>(
-          future: fetchDevices(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                shrinkWrap: true,
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(snapshot.data![index].name),
-                    subtitle: Text(snapshot.data![index].xAddr),
+        child: Column(
+          children: [
+            const Text(kReleaseMode ? 'release' : 'debug'),
+            Text(dllPath ?? 'No path to dll'),
+            FutureBuilder<List<ProbeMatch>>(
+              future: fetchDevices(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(snapshot.data![index].name),
+                        subtitle: Text(snapshot.data![index].xAddr),
+                      );
+                    },
                   );
-                },
-              );
-            } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
-            }
-            return const CircularProgressIndicator();
-          },
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                }
+                return const CircularProgressIndicator();
+              },
+            ),
+          ],
         ),
       ),
     );
