@@ -2,28 +2,9 @@ import 'package:easy_onvif/onvif.dart';
 import 'package:easy_onvif/probe.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
-import 'package:universal_io/io.dart';
-
-final String? dllPath = () {
-  if (!Platform.isWindows) return null;
-
-  var pathToLib = join(Directory.current.path, 'assets', 'discovery.dll');
-
-  if (kReleaseMode) {
-    final String localLib =
-        join('data', 'flutter_assets', 'assets', 'discovery.dll');
-
-    pathToLib =
-        join(Directory(Platform.resolvedExecutable).parent.path, localLib);
-  }
-
-  return pathToLib;
-}();
 
 class DevicePage extends StatelessWidget {
-  final multicastProbe =
-      MulticastProbe(dllPath: Platform.isWindows ? dllPath : null);
+  final multicastProbe = MulticastProbe(releaseMode: kReleaseMode);
 
   DevicePage({Key? key}) : super(key: key);
 
@@ -43,7 +24,6 @@ class DevicePage extends StatelessWidget {
         child: Column(
           children: [
             const Text(kReleaseMode ? 'release' : 'debug'),
-            Text(dllPath ?? 'No path to dll'),
             FutureBuilder<List<ProbeMatch>>(
               future: fetchDevices(),
               builder: (context, snapshot) {

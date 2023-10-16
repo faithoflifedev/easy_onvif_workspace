@@ -5,6 +5,7 @@ import 'package:easy_onvif/soap.dart';
 import 'package:easy_onvif/src/model/envelope.dart';
 import 'package:ffi/ffi.dart';
 import 'package:loggy/loggy.dart';
+import 'package:path/path.dart';
 import 'package:universal_io/io.dart';
 import 'package:uuid/uuid.dart';
 
@@ -28,9 +29,9 @@ class MulticastProbe with UiLoggy {
 
   int? probeTimeout = 2;
 
-  factory MulticastProbe({int? timeout, String? dllPath}) {
+  factory MulticastProbe({int? timeout, bool? releaseMode}) {
     if (Platform.isWindows) {
-      return MulticastProbe.windows(timeout: timeout, dllPath: dllPath);
+      return MulticastProbe.windows(timeout: timeout, releaseMode: releaseMode);
     } else {
       return MulticastProbe.other(timeout: timeout);
     }
@@ -40,9 +41,31 @@ class MulticastProbe with UiLoggy {
     probeTimeout = timeout ?? defaultTimeout;
   }
 
-  MulticastProbe.windows({int? timeout, String? dllPath}) {
-    final String discoveryDllPath = dllPath ??
-        '${String.fromEnvironment('ONVIF_DISCOVERY_DLL', defaultValue: Directory.current.path)}\\bin\\discovery.dll';
+  /// Constructor for Windows OS builds, we need the `kReleaseMode` flag from
+  /// Flutter to determine if we are running in debug or release mode so that
+  /// the appropriate path to the `discovery.dll` file can be used.  The default
+  /// assumes the application is running as a `cli` app and will look for the
+  /// DLL in the same folder as the executable.  For `cli` the path to the DLL
+  /// can be overwritten with the `ONVIF_DISCOVERY_DLL` environment variable.
+  MulticastProbe.windows({int? timeout, bool? releaseMode}) {
+    var discoveryDllPath = join(
+        String.fromEnvironment('ONVIF_DISCOVERY_DLL',
+            defaultValue: Directory.current.path),
+        'bin',
+        'discovery.dll');
+
+    if (releaseMode != null) {
+      discoveryDllPath =
+          join(Directory.current.path, 'assets', 'discovery.dll');
+
+      if (releaseMode) {
+        final String localLib =
+            join('data', 'flutter_assets', 'assets', 'discovery.dll');
+
+        discoveryDllPath =
+            join(Directory(Platform.resolvedExecutable).parent.path, localLib);
+      }
+    }
 
     final Pointer<T> Function<T extends NativeType>(String symbolName) lookup =
         () {
@@ -71,37 +94,39 @@ class MulticastProbe with UiLoggy {
     loggy.debug('init');
 
     if (Platform.isWindows) {
-      await windowsDiscovery();
-    } else {
-      await RawDatagramSocket.bind(broadcastAddress, broadcastPort);
+      await windowsDiscovery(Duration(seconds: probeTimeout!));
 
-      final rawDataGramSocket = await RawDatagramSocket.bind(
-          InternetAddress.anyIPv4, 0,
-          reuseAddress: false, reusePort: false);
-
-      rawDataGramSocket.listen((RawSocketEvent rawSocketEvent) {
-        var dataGram = rawDataGramSocket.receive();
-
-        if (dataGram == null) return;
-
-        String messageReceived = String.fromCharCodes(dataGram.data);
-
-        loggy.debug('RESPONSE ADDRESS:\n${dataGram.address}');
-
-        loggy.debug('RESPONSE:\n$messageReceived');
-
-        var envelope = Envelope.fromXml(messageReceived);
-
-        if (envelope.body.response == null) throw Exception();
-
-        onvifDevices.addAll(
-            ProbeMatches.fromJson(envelope.body.response!).probeMatches);
-      });
-
-      start(rawDataGramSocket);
-
-      await finish(rawDataGramSocket, probeTimeout);
+      return;
     }
+
+    await RawDatagramSocket.bind(broadcastAddress, broadcastPort);
+
+    final rawDataGramSocket = await RawDatagramSocket.bind(
+        InternetAddress.anyIPv4, 0,
+        reuseAddress: false, reusePort: false);
+
+    rawDataGramSocket.listen((RawSocketEvent rawSocketEvent) {
+      var dataGram = rawDataGramSocket.receive();
+
+      if (dataGram == null) return;
+
+      String messageReceived = String.fromCharCodes(dataGram.data);
+
+      loggy.debug('RESPONSE ADDRESS:\n${dataGram.address}');
+
+      loggy.debug('RESPONSE:\n$messageReceived');
+
+      var envelope = Envelope.fromXml(messageReceived);
+
+      if (envelope.body.response == null) throw Exception();
+
+      onvifDevices
+          .addAll(ProbeMatches.fromJson(envelope.body.response!).probeMatches);
+    });
+
+    start(rawDataGramSocket);
+
+    await finish(rawDataGramSocket, probeTimeout);
   }
 
   /// timeout of 0 or less means no timeout
@@ -126,8 +151,7 @@ class MulticastProbe with UiLoggy {
     rawDataGramSocket.close();
   }
 
-  Future<void> windowsDiscovery(
-      [Duration duration = const Duration(seconds: 5)]) async {
+  Future<void> windowsDiscovery(Duration duration) async {
     final data = calloc<_OnvifDiscoveryData>();
 
     final probeMessageData =
