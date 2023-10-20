@@ -47,7 +47,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^2.1.2+13
+  easy_onvif: ^2.1.3+1
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -193,6 +193,7 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetDeviceInformation        | getDeviceInformation        | `Future<GetDeviceInformationResponse>` | [x\] |
 | GetDiscoveryMode            | getDiscoveryMode            | `Future<String>`                       | [x\] |
 | GetDNS                      | getDNS                      | `Future<DnsInformation>`               | [x\] |
+| GetEndpointReference        | getEndpointReference        | `Future<Map<String, dynamic>>`         | [ \] |
 | GetHostname                 | getHostname                 | `Future<HostnameInformation>`          | [x\] |
 | GetNetworkProtocols         | getNetworkProtocols         | `Future<List<NetworkProtocol>>`        | [x\] |
 | GetNTP                      | getNtp                      | `Future<NtpInformation>`               | [x\] |
@@ -414,6 +415,29 @@ Please file feature requests and bugs with [the issue tracker](https://github.co
 
 ## Known Issues
 
+### Issue #45
+
+Github Issue [#45](https://github.com/faithoflifedev/easy_onvif/issues/45), when using **v2.1.2+13** (and likely earlier) on Windows 11 (and probably 10) the following error will the displayed when attempting to use the `Multicast.probe` method.  
+
+```text
+Unhandled exception:
+SocketException: Failed to create datagram socket (OS Error: The requested address is not valid in its context., errno = 10049), address = 239.255.255.250, port = 3702
+```
+
+This is due to a bug in the underlying Dart SDK [#53477](https://github.com/flutter/flutter/issues/53477).
+
+With the help of [Viper-Bit](https://github.com/Viper-Bit) (who has supplied a c++ workaround that uses Dart FFI) and [Add00](https://github.com/Add00) (building and testing the c++ code on Windows 11) version *2.1.3* of the package now uses Dart FFI to resolve this issue on the Windows platform.  For Flutter Windows applications there is a supplied `discovery.dll` file that must be placed in the `assets` folder and referenced in the `pubspec.yaml`, for Windows Dart (cli) apps the `discovery.dll` defaults to the folder derived as `join(Directory.current.path, 'bin', 'discovery.dll')`.  Alternatively, cli apps on Windows can use the `ONVIF_DISCOVERY_DLL` environment variable to override the default path for instance:
+
+```text
+$env:ONVIF_DISCOVERY_DLL="example/flutter_model/assets/discovery.dll"
+
+dart run bin/onvif.dart probe list-devices
+```
+
+The `discovery.dll` file can be found in the [bin](https://github.com/faithoflifedev/easy_onvif/tree/win-ffi/bin) folder of the project on GitHub.
+
+### Issue #23
+
 Github Issue [#23](https://github.com/faithoflifedev/easy_onvif/issues/23), in Flutter when using **v2.0.13+4** and above you may see the following message when performing a `dart pub get`: 
 
 ```text
@@ -440,6 +464,8 @@ There is probably a number of breaking changes in this version since some method
 
 - <img src="https://avatars.githubusercontent.com/u/923202?v=4" width="25" height="25"> [faithoflifedev](https://github.com/faithoflifedev)
 - <img src="https://avatars.githubusercontent.com/u/38936462?v=4" width="25" height="25"> [LODYZ](https://github.com/LODYZ)
+- <img src="https://avatars.githubusercontent.com/u/60050879?v=4" width="25" height="25"> [Add00](https://github.com/Add00)
+- <img src="https://avatars.githubusercontent.com/u/24822764?v=4" width="25" height="25"> [Viper-Bit](https://github.com/Viper-Bit)
 
 ## Contributing
 

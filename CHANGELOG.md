@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.3+1
+
+* workaround for [#53477](https:&#x2F;&#x2F;github.com&#x2F;flutter&#x2F;flutter&#x2F;issues&#x2F;53477)
+
 ## 2.1.2+13
 
 * updated dependencies
