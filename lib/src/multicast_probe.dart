@@ -48,11 +48,11 @@ class MulticastProbe with UiLoggy {
   /// DLL in the same folder as the executable.  For `cli` the path to the DLL
   /// can be overwritten with the `ONVIF_DISCOVERY_DLL` environment variable.
   MulticastProbe.windows({int? timeout, bool? releaseMode}) {
-    var discoveryDllPath = join(
-        String.fromEnvironment('ONVIF_DISCOVERY_DLL',
-            defaultValue: Directory.current.path),
-        'bin',
-        'discovery.dll');
+    final env = Platform.environment;
+
+    var discoveryDllPath = env.containsKey('ONVIF_DISCOVERY_DLL')
+        ? env['ONVIF_DISCOVERY_DLL']!
+        : join(Directory.current.path, 'bin', 'discovery.dll');
 
     if (releaseMode != null) {
       discoveryDllPath =
