@@ -36,6 +36,8 @@ class OnvifDeviceManagementCommand extends Command {
     addSubcommand(OnvifGetSystemUrisDeviceManagementCommand());
     addSubcommand(OnvifGetUsersDeviceManagementCommand());
     addSubcommand(OnvifSystemRebootDeviceManagementCommand());
+    // addSubcommand(OnvifGetGeoLocationDeviceManagementCommand());
+    addSubcommand(OnvifGetEndpointReferenceDeviceManagementCommand());
   }
 }
 
@@ -652,6 +654,53 @@ class OnvifSystemRebootDeviceManagementCommand extends OnvifHelperCommand {
 
     try {
       final message = await deviceManagement.systemReboot();
+
+      print(message);
+    } on DioException catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// This operation lists all existing geo location configurations for the
+/// device.
+// class OnvifGetGeoLocationDeviceManagementCommand extends OnvifHelperCommand {
+//   @override
+//   String get description =>
+//       'This operation lists all existing geo location configurations for the device.';
+
+//   @override
+//   String get name => 'get-geolocation';
+
+//   @override
+//   void run() async {
+//     await initializeOnvif();
+
+//     try {
+//       final message = await deviceManagement.getGeoLocation();
+
+//       print(message);
+//     } on DioException catch (err) {
+//       throw UsageException('API usage error:', err.usage);
+//     }
+//   }
+// }
+
+class OnvifGetEndpointReferenceDeviceManagementCommand
+    extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'A client can ask for the device service endpoint reference address property that can be used to derive the password equivalent for remote user operation.';
+
+  @override
+  String get name => 'get-endpoint-reference';
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final message = await deviceManagement.getEndpointReference();
 
       print(message);
     } on DioException catch (err) {

@@ -9,6 +9,8 @@ import 'package:flutter_loggy/flutter_loggy.dart';
 import 'package:loggy/loggy.dart';
 import 'package:yaml/yaml.dart';
 
+import 'device_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -115,6 +117,14 @@ class _MyHomePageState extends State<MyHomePage> with UiLoggy {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.device_hub),
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => DevicePage()),
+            ),
+          )
+        ],
       ),
       body: SafeArea(
         child: Center(

@@ -159,4 +159,12 @@ class DeviceManagementRequest {
 
   /// XML for the [ntp]
   static XmlDocumentFragment ntp() => Transport.quickTag('GetNTP', Xmlns.tds);
+
+  /// XML for the [getGeoLocation]
+  static XmlDocumentFragment getGeoLocation() =>
+      Transport.quickTag('GetGeoLocation', Xmlns.tds);
+
+  /// XML for the [getEndpointReference]
+  static XmlDocumentFragment getEndpointReference() =>
+      Transport.quickTag('GetEndpointReference', Xmlns.tds);
 }
