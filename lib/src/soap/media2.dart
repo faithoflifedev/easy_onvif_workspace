@@ -5,6 +5,18 @@ import 'transport.dart';
 import 'xmlns.dart';
 
 class Media2Request {
+  /// XML for the [deleteProfile]
+  static XmlDocumentFragment deleteProfile(String referenceToken) {
+    Transport.builder.element('DeleteProfile', nest: () {
+      Transport.builder.namespace(Xmlns.tr2);
+      Transport.builder.element('ReferenceToken', nest: () {
+        Transport.builder.text(referenceToken);
+      });
+    });
+
+    return Transport.builder.buildFragment();
+  }
+
   /// XML for the [getMetadataConfigurationOptions]
   static XmlDocumentFragment getMetadataConfigurationOptions(
           {String? configurationToken, String? profileToken}) =>

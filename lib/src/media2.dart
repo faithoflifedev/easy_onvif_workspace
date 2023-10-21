@@ -12,6 +12,22 @@ class Media2 with UiLoggy {
     required this.uri,
   });
 
+  Future<bool> deleteProfile(String referenceToken) async {
+    loggy.debug('deleteProfile');
+
+    final envelope = await transport.sendRequest(
+        uri,
+        transport
+            .securedEnvelope(soap.Media2Request.deleteProfile(referenceToken)));
+
+    if (envelope.body.hasFault) {
+      throw Exception(envelope.body.fault.toString());
+    }
+
+    return envelope.body.response?.containsKey('DeleteProfileResponse') ??
+        false;
+  }
+
   Future<MetadataConfigurationOptions> getMetadataConfigurationOptions({
     String? configurationToken,
     String? profileToken,

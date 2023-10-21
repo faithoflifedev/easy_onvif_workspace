@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.3+2
+
+* depencency bump
+* Media2
+  * DeleteProfile
+
 ## 2.1.3+1
 
 * workaround for [#53477](https:&#x2F;&#x2F;github.com&#x2F;flutter&#x2F;flutter&#x2F;issues&#x2F;53477)

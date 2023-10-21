@@ -50,7 +50,7 @@ class DevicesController {
               headers: {'Content-type': 'application/json'},
             ));
 
-    return router;
+    return router.call;
   }
 }
 
