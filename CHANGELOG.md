@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.3+3
+
+* accept null values in ProbeMatch
+
 ## 2.1.3+2
 
 * depencency bump

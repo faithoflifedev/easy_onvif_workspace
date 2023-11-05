@@ -47,7 +47,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^2.1.3+2
+  easy_onvif: ^2.1.3+3
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).

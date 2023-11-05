@@ -115,6 +115,10 @@ class ProbeMatch with UiLoggy {
           .split(RegExp([' ', ',', r'\r\\n'].map(RegExp.escape).join('|')));
 
   static List<String> _listFromJson(dynamic json) {
+    if (json == null) {
+      return [];
+    }
+
     if (json is Map) {
       // json from XML
       return _listFromXmlJson(json as Map<String, dynamic>);
