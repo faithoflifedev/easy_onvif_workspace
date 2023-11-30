@@ -21,6 +21,8 @@ class OnvifPtzCommand extends Command {
     addSubcommand(OnvifGetConfigurationsPtzCommand());
     addSubcommand(OnvifGetCurrentPresetPtzCommand());
     addSubcommand(OnvifGetPresetsPtzCommand());
+    addSubcommand(OnvifGetPresetTourPtzCommand());
+    addSubcommand(OnvifGetPresetToursPtzCommand());
     addSubcommand(OnvifGetServiceCapabilitiesPtzCommand());
     addSubcommand(OnvifGetStatusPtzCommand());
     addSubcommand(OnvifGotoHomePositionPtzCommand());
@@ -253,7 +255,7 @@ class OnvifGetConfigurationPtzCommand extends OnvifHelperCommand {
 class OnvifGetConfigurationOptionsPtzCommand extends OnvifHelperCommand {
   @override
   String get description =>
-      'Token of an existing configuration that the options are intended for.';
+      'List supported coordinate systems including their range limitations.';
 
   @override
   String get name => 'get-configuration-options';
@@ -317,6 +319,79 @@ class OnvifGetConfigurationsPtzCommand extends OnvifHelperCommand {
       final ptzConfigurations = await ptz.getConfigurations();
 
       print(ptzConfigurations);
+    } on DioException catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// Operation to request a specific PTZ preset tour in the selected media profile.
+class OnvifGetPresetTourPtzCommand extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'Operation to request a specific PTZ preset tour in the selected media profile.';
+
+  @override
+  String get name => 'get-preset-tour';
+
+  OnvifGetPresetTourPtzCommand() {
+    argParser
+      ..addOption('profile-token',
+          abbr: 't',
+          valueHelp: 'token',
+          mandatory: true,
+          help:
+              'A reference to the MediaProfile where the operation should take place.')
+      ..addOption('preset-tour-token',
+          valueHelp: 'token',
+          mandatory: true,
+          help: 'A requested preset tour token.');
+  }
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final presetTour = await ptz.getPresetTour(
+        argResults!['profile-token'],
+        presetTourToken: argResults!['preset-tour-token'],
+      );
+
+      print(presetTour);
+    } on DioException catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// Operation to request PTZ preset tours in the selected media profiles.
+class OnvifGetPresetToursPtzCommand extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'Operation to request PTZ preset tours in the selected media profiles.';
+
+  @override
+  String get name => 'get-preset-tours';
+
+  OnvifGetPresetToursPtzCommand() {
+    argParser.addOption('profile-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'A reference to the MediaProfile where the operation should take place.');
+  }
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final presetTours =
+          await ptz.getPresetTours(argResults!['profile-token']);
+
+      print(presetTours);
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

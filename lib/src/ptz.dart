@@ -216,6 +216,37 @@ class Ptz with UiLoggy {
         .sublist(0, limit);
   }
 
+  Future<PresetTour> getPresetTour(
+    String profileToken, {
+    required String presetTourToken,
+  }) async {
+    loggy.debug('getPresetTour');
+
+    final envelope = await transport.sendRequest(
+        uri,
+        transport.securedEnvelope(soap.PtzRequest.getPresetTour(
+          profileToken,
+          presetTourToken: presetTourToken,
+        )));
+
+    if (envelope.body.response == null) throw Exception();
+
+    return GetPresetTourResponse.fromJson(envelope.body.response!).presetTour;
+  }
+
+  Future<List<PresetTour>> getPresetTours(String profileToken) async {
+    loggy.debug('getPresetTours');
+
+    final envelope = await transport.sendRequest(
+        uri,
+        transport
+            .securedEnvelope(soap.PtzRequest.getPresetTours(profileToken)));
+
+    if (envelope.body.response == null) throw Exception();
+
+    return GetPresetToursResponse.fromJson(envelope.body.response!).presetTours;
+  }
+
   Future<Map<String, Preset>> getPresetsMap(String profileToken) async {
     loggy.debug('getPresetsMap');
 

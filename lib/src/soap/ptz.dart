@@ -147,6 +147,38 @@ class PtzRequest {
     return Transport.builder.buildFragment();
   }
 
+  /// XML for the [getPresetTour], requires a [profileToken] and [PresetTourToken]
+  static XmlDocumentFragment getPresetTour(String profileToken,
+      {required String presetTourToken}) {
+    Transport.builder.element('GetPresetTour', nest: () {
+      Transport.builder.namespace(Xmlns.tptz);
+      Transport.builder.element('ProfileToken', nest: () {
+        Transport.builder.namespace(Xmlns.tptz);
+        Transport.builder.text(profileToken);
+      });
+
+      Transport.builder.element('PresetTourToken', nest: () {
+        Transport.builder.namespace(Xmlns.tptz);
+        Transport.builder.text(presetTourToken);
+      });
+    });
+
+    return Transport.builder.buildFragment();
+  }
+
+  /// XML for the [getPresetTours], requires a [profileToken]
+  static XmlDocumentFragment getPresetTours(String profileToken) {
+    Transport.builder.element('GetPresetTours', nest: () {
+      Transport.builder.namespace(Xmlns.tptz);
+      Transport.builder.element('ProfileToken', nest: () {
+        Transport.builder.namespace(Xmlns.tptz);
+        Transport.builder.text(profileToken);
+      });
+    });
+
+    return Transport.builder.buildFragment();
+  }
+
   /// XML for the [getServiceCapabilities]
   static XmlDocumentFragment getServiceCapabilities() =>
       Transport.quickTag('GetServiceCapabilities', Xmlns.tds);
@@ -265,6 +297,25 @@ class PtzRequest {
       Transport.builder.element('PresetToken', nest: () {
         Transport.builder.namespace(Xmlns.tptz);
         Transport.builder.text(preset.token);
+      });
+    });
+
+    return Transport.builder.buildFragment();
+  }
+
+  /// XML for the [removePresetTour], requires a [profileToken] and [PresetTourToken]
+  static XmlDocumentFragment removePresetTour(String profileToken,
+      {required PresetTour presetTour}) {
+    Transport.builder.element('RemovePresetTour', nest: () {
+      Transport.builder.namespace(Xmlns.tptz);
+      Transport.builder.element('ProfileToken', nest: () {
+        Transport.builder.namespace(Xmlns.tptz);
+        Transport.builder.text(profileToken);
+      });
+
+      Transport.builder.element('PresetTourToken', nest: () {
+        Transport.builder.namespace(Xmlns.tptz);
+        Transport.builder.text(presetTour.token);
       });
     });
 

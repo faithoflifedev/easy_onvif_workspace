@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.1.3+4
+
+* dependency bump
+* corrections to cli README
+* PTZ
+  * GetPresetTour
+  * GetPresetTours
+
 ## 2.1.3+3
 
 * accept null values in ProbeMatch

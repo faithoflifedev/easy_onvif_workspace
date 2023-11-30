@@ -260,6 +260,8 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetConfigurationOptions     | getConfigurationOptions     | `Future<PtzConfigurationOptions>` | [x\] |
 | GetConfigurations           | getConfigurations           | `Future<List<PtzConfiguration>>`  | [x\] |
 | GetPresets                  | getPresets                  | `Future<List<Preset>>`            | [x\] |
+| GetPresetTour               | getPresetTour               | `Future<PresetTour>`              | [ \] |
+| GetPresetTours              | getPresetTours              | `Future<List<PresetTours>>`       | [ \] |
 | GetServiceCapabilities      | getServiceCapabilities      | `Future<Capabilities>`            | [x\] |
 | GetStatus                   | getStatus                   | `Future<PtzStatus>`               | [x\] |
 | GotoHomePosition            | gotoHomePosition            | `Future<bool>`                    | [x\] |
@@ -323,17 +325,17 @@ The values returned by the Onvif API `GetDeviceInformation` call.
 | Manufacturer       | Model          | Known Issue                      |
 | ------------------ | -------------- | -------------------------------- |
 | Happytimesoft      | IPCamera       | limited capabilities             |
-| D-Link Corporation | DCS-6511       | commands not implemented&#x00B9; |
-| ONVIF              | ENP1A14-IR/25X | commands not implemented&#x00B2; |
+| ONVIF              | ENP1A14-IR/25X | commands not implemented&#x00B9; |
+| D-Link Corporation | DCS-6511       | commands not implemented&#x00B2; |
 | NONE               | GX728MF-IR28   | commands not implemented&#x00B3; |
 | LOREX              | LNB4421SB      | testing in progress              |
 
-&#x00B9; The following are not implemented for the ENP1A14-IR/25X:
+&#x00B9; The ENP1A14-IR/25X does not support the following commands:
 * Recordings
   * `CreateRecording`
   * `DeleteRecording`
 
-&#x00B2; The following are not implemented for the DCS-6511: 
+&#x00B2; The DCS-6511 does not support the following commands: 
 * Device Management:
   * `GetServices`
   * `GetServiceCapabilities`
@@ -346,7 +348,7 @@ The values returned by the Onvif API `GetDeviceInformation` call.
 * PTZ:
   * not tested
 
-&#x00B3; The following are not implemented for the GX728MF-IR28: 
+&#x00B3; The GX728MF-IR28 does not support the following commands: 
 * Device Management:
   * `GetSystemUris`
 * Media1:

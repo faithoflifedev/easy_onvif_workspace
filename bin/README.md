@@ -864,25 +864,33 @@ Usage: onvif ptz <subcommand> [arguments]
 -h, --help    Print this usage information.
 
 Available subcommands:
-  absolute-move        Operation to move pan,tilt or zoom to a absolute destination.
-  continuous-move      Operation for continuous Pan/Tilt and Zoom movements.
-  get-configuration    Get a specific PTZconfiguration from the device, identified by its reference token or name.
-  get-configurations   Get all the existing PTZConfigurations from the device.
-  get-presets          Operation to request all PTZ presets for the PTZNode in the selected profile.
-  get-status           Operation to request PTZ status for the Node in the selected profile.
-  goto-preset          Operation to go to a saved preset position for the PTZNode in the selected profile.
-  move                 Operation for Relative Pan/Tilt and Zoom Move, without Zoom.
-  move-down            Operation for a single step tilt down operation.
-  move-left            Operation for a single step pan left operation.
-  move-right           Operation for a single step tilt upwards operation
-  move-up              Operation for a single step tilt upwards operation.
-  relative-move        Operation for Relative Pan/Tilt and Zoom Move.
-  remove-preset        Operation to remove a PTZ preset for the Node in the selected profile.
-  set-preset           The SetPreset command saves the current device position parameters so that the device can move to the saved preset position through the GotoPreset operation.
-  stop                 Operation to stop ongoing pan, tilt and zoom movements of absolute relative and continuous type.
-  zoom                 Operation for zoom.
-  zoom-in              Operation for a single step zoom in operation.
-  zoom-out             Operation for a single step zoom out operation.
+  absolute-move                   Operation to move pan,tilt or zoom to a absolute destination.
+  continuous-move                 Operation for continuous Pan/Tilt and Zoom movements.
+  get-compatible-configurations   Contains the token of an existing media profile the configurations shall be compatible with.
+  get-configuration               Get a specific PTZconfiguration from the device, identified by its reference token or name.
+  get-configuration-options       Token of an existing configuration that the options are intended for.
+  get-configurations              Get all the existing PTZConfigurations from the device.
+  get-current-preset              Helper function to get the matching preset for the current PtzPosition and Zoom if there is a match
+  get-preset-tour                 Operation to request a specific PTZ preset tour in the selected media profile.
+  get-preset-tours                Operation to request PTZ preset tours in the selected media profiles.
+  get-presets                     Operation to request all PTZ presets for the PTZNode in the selected profile.
+  get-service-capabilities        Returns the capabilities of the PTZ service. The result is returned in a typed answer.
+  get-status                      Operation to request PTZ status for the Node in the selected profile.
+  goto-home-position              Operation to move the PTZ device to it's "home" position. The operation is supported if the HomeSupported element in the PTZNode is true.
+  goto-preset                     Operation to go to a saved preset position for the PTZNode in the selected profile.
+  move                            Operation for Relative Pan/Tilt Move without Zoom.
+  move-down                       Operation for a single step tilt down operation.
+  move-left                       Operation for a single step pan left operation.
+  move-right                      Operation for a single step pan right operation
+  move-up                         Operation for a single step tilt upwards operation.
+  relative-move                   Operation for Relative Pan/Tilt and Zoom Move.
+  remove-preset                   Operation to remove a PTZ preset for the Node in the selected profile.
+  set-home-position               Operation to save current position as the home position. The SetHomePosition command returns with a failure if the “home” position is fixed and cannot be overwritten. If the SetHomePosition is successful, it is possible to recall the Home Position with the GotoHomePosition command.
+  set-preset                      The SetPreset command saves the current device position parameters so that the device can move to the saved preset position through the GotoPreset operation.
+  stop                            Operation to stop ongoing pan, tilt and zoom movements of absolute relative and continuous type.
+  zoom                            Operation for zoom.
+  zoom-in                         Operation for a single step zoom in operation.
+  zoom-out                        Operation for a single step zoom out operation.
 ```
 
 #### ptz absolute-move
@@ -919,6 +927,20 @@ Usage: onvif ptz continuous-move [arguments]
     --pan-tilt-zoom=<double> (mandatory)    A Position vector specifying the absolute target position zoom.
 ```
 
+### ptz get-compatible-configurations
+
+```sh
+onvif ptz get-compatible-configurations --help
+```
+
+```text
+Contains the token of an existing media profile the configurations shall be compatible with.
+
+Usage: onvif ptz get-compatible-configurations [arguments]
+-h, --help                                 Print this usage information.
+-t, --profile-token=<token> (mandatory)    The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.
+```
+
 #### ptz get-configuration
 
 ```sh
@@ -931,6 +953,20 @@ Option ptz-configuration-token is mandatory.
 Usage: onvif ptz get-configuration [arguments]
 -h, --help                                           Print this usage information.
 -t, --ptz-configuration-token=<token> (mandatory)    Token of the requested PTZConfiguration.
+```
+
+#### ptz get-configuration-options
+
+```sh
+onvif ptz get-configuration-options --help
+```
+
+```text
+List supported coordinate systems including their range limitations.
+
+Usage: onvif ptz get-configuration-options [arguments]
+-h, --help                                       Print this usage information.
+-t, --configuration-token=<token> (mandatory)    Token of an existing configuration that the options are intended for.
 ```
 
 #### ptz get-configurations
@@ -946,6 +982,49 @@ Usage: onvif ptz get-configurations [arguments]
 -h, --help    Print this usage information.
 ```
 
+#### ptz get-current-preset
+
+```sh
+onvif ptz get-current-preset --help
+```
+
+```text
+Helper function to get the matching preset for the current PtzPosition and Zoom if there is a match
+
+Usage: onvif ptz get-current-preset [arguments]
+-h, --help                                 Print this usage information.
+-t, --profile-token=<token> (mandatory)    The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.
+```
+
+#### ptz get-preset-tour
+
+```sh
+onvif ptz get-preset-tour --help
+```
+
+```text
+Operation to request a specific PTZ preset tour in the selected media profile.
+
+Usage: onvif ptz get-preset-tour [arguments]
+-h, --help                                     Print this usage information.
+-t, --profile-token=<token> (mandatory)        A reference to the MediaProfile where the operation should take place.
+    --preset-tour-token=<token> (mandatory)    A requested preset tour token.
+```
+
+#### ptz get-preset-tours
+
+```sh
+onvif ptz get-preset-tours --help
+```
+
+```text
+Operation to request PTZ preset tours in the selected media profiles.
+
+Usage: onvif ptz get-preset-tours [arguments]
+-h, --help                                 Print this usage information.
+-t, --profile-token=<token> (mandatory)    A reference to the MediaProfile where the operation should take place.
+```
+
 #### ptz get-presets
 
 ```sh
@@ -959,6 +1038,18 @@ Usage: onvif ptz get-presets [arguments]
 -h, --help                                 Print this usage information.
 -t, --profile-token=<token> (mandatory)    A reference to the MediaProfile where the operation should take place.
     --limit=<int>                          Limit the number of presets returned
+```
+
+#### ptz get-service-capabilities
+
+```sh
+onvif ptz get-service-capabilities --help
+```
+
+```text
+Returns the capabilities of the PTZ service. The result is returned in a typed answer.
+
+Usage: onvif ptz get-service-capabilities [arguments]
 ```
 
 #### ptz get-status
@@ -1098,6 +1189,20 @@ Usage: onvif ptz remove-preset [arguments]
     --preset-token=<preset-token> (mandatory)      A requested preset token.
 ```
 
+#### ptz set-home-position
+
+```sh
+onvif ptz set-home-position --help
+```
+
+```text
+Operation to save current position as the home position. The SetHomePosition command returns with a failure if the “home” position is fixed and cannot be overwritten. If the SetHomePosition is successful, it is possible to recall the Home Position with the GotoHomePosition command.
+
+Usage: onvif ptz set-home-position [arguments]
+-h, --help                                         Print this usage information.
+-t, --profile-token=<profile-token> (mandatory)    A reference to the MediaProfile where the operation should be set.
+```
+
 #### ptz set-preset
 
 ```sh
@@ -1172,20 +1277,6 @@ Usage: onvif ptz zoom-out [arguments]
 -h, --help                                 Print this usage information.
 -t, --profile-token=<token> (mandatory)    The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.
     --step=<int>                           The amount of movement for the step.
-```
-
-#### ptz get-current-preset
-
-```sh
-onvif ptz get-current-preset --help
-```
-
-```text
-Helper function to get the matching preset for the current PtzPosition and Zoom if there is a match
-
-Usage: onvif ptz get-current-preset [arguments]
--h, --help                                 Print this usage information.
--t, --profile-token=<token> (mandatory)    The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.
 ```
 
 ### recordings
