@@ -147,7 +147,7 @@ class PtzRequest {
     return Transport.builder.buildFragment();
   }
 
-  /// XML for the [getPresetTour], requires a [profileToken] and [PresetTourToken]
+  /// XML for the [getPresetTour], requires a [profileToken] and [presetTourToken]
   static XmlDocumentFragment getPresetTour(String profileToken,
       {required String presetTourToken}) {
     Transport.builder.element('GetPresetTour', nest: () {
