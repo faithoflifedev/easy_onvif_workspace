@@ -11,5 +11,6 @@ export 'src/soap/ptz.dart';
 export 'src/soap/recordings.dart';
 export 'src/soap/replay.dart';
 export 'src/soap/search.dart';
+export 'src/soap/thermal.dart';
 export 'src/soap/transport.dart';
 export 'src/soap/xmlns.dart';

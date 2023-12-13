@@ -138,7 +138,7 @@ class PtzRequest {
   /// XML for the [getPresets], requires a [profileToken]
   static XmlDocumentFragment getPresets(String profileToken) {
     Transport.builder.element('GetPresets', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
+      Transport.builder.namespace(Xmlns.tptz);
       Transport.builder.element('ProfileToken', nest: () {
         Transport.builder.text(profileToken);
       });
