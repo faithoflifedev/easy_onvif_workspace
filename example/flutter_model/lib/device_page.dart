@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class DevicePage extends StatelessWidget {
   final multicastProbe = MulticastProbe(releaseMode: kReleaseMode);
 
-  DevicePage({Key? key}) : super(key: key);
+  DevicePage({super.key});
 
   Future<List<ProbeMatch>> fetchDevices() async {
     await multicastProbe.probe();

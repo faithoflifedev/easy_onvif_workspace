@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.3+5
+
+* PTZ - GetPreset namespace fix [Issue #49](https:&#x2F;&#x2F;github.com&#x2F;faithoflifedev&#x2F;easy_onvif&#x2F;issues&#x2F;49)
+* dependency bump
+
 ## 2.1.3+4
 
 * dependency bump
