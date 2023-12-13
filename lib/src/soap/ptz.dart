@@ -303,7 +303,7 @@ class PtzRequest {
     return Transport.builder.buildFragment();
   }
 
-  /// XML for the [removePresetTour], requires a [profileToken] and [PresetTourToken]
+  /// XML for the [removePresetTour], requires a [profileToken] and [presetTour]
   static XmlDocumentFragment removePresetTour(String profileToken,
       {required PresetTour presetTour}) {
     Transport.builder.element('RemovePresetTour', nest: () {
