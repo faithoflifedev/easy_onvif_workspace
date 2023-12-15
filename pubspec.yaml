@@ -32,8 +32,10 @@ dev_dependencies:
   mustache_template: ^2.0.0
   process_run: ^0.13.0
   pub_semver: ^2.1.4
-  publish_tools: ^0.1.0+14
+  # publish_tools: ^0.1.0+14
+  publish_tools:
+    path: /Users/chris/projects/skc/publish_tools
   pubspec: ^2.3.0
-  test: ^1.24.9
+  test: ^1.25.0
 executables:
   onvif:
