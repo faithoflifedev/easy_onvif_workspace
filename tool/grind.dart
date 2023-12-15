@@ -8,7 +8,7 @@ main(args) async {
 }
 
 @DefaultTask('Just keeping it real')
-@Depends('pt-commit', 'pt-publish', 'pt-homebrew')
+@Depends('pt-commit', 'pt-publish')
 done() {
   log('commit to faithoflifedev/easy_onvif complete');
   log('publish to pub.dev/packages complete.');

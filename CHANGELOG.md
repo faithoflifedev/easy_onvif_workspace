@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.3+7
+
+* README update
+* temporary work-around for broken publish tools
+
 ## 2.1.3+6
 
 * Preset position is missing in some device responses [Issue #49](https:&#x2F;&#x2F;github.com&#x2F;faithoflifedev&#x2F;easy_onvif&#x2F;issues&#x2F;49)

@@ -7,7 +7,7 @@ scratch/
 .pt-build/
 tool/
 test/
-
+logo/
 example/
 
 *.log
