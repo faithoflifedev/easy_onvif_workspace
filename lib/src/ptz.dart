@@ -527,9 +527,14 @@ class Ptz with UiLoggy {
 
     Preset? matchedPreset;
 
-    final ptzStatus = await getStatus(profileToken);
-
     final presets = await getPresets(profileToken);
+
+    if (presets.first.position == null) {
+      throw Exception(
+          'Preset position is not available, the getCurrentPreset method can not be used on this device.');
+    }
+
+    final ptzStatus = await getStatus(profileToken);
 
     for (var preset in presets) {
       if (_matchPositionSettings(preset, ptzStatus)) {
@@ -549,13 +554,13 @@ class Ptz with UiLoggy {
 
   bool _matchPositionSettings(Preset preset, PtzStatus ptzStatus) {
     bool matchX =
-        _matchValue(preset.position.panTilt!.x, ptzStatus.position.panTilt!.x);
+        _matchValue(preset.position!.panTilt!.x, ptzStatus.position.panTilt!.x);
 
     bool matchY =
-        _matchValue(preset.position.panTilt!.y, ptzStatus.position.panTilt!.y);
+        _matchValue(preset.position!.panTilt!.y, ptzStatus.position.panTilt!.y);
 
     bool matchZ =
-        _matchValue(preset.position.zoom!.x, ptzStatus.position.zoom!.x);
+        _matchValue(preset.position!.zoom!.x, ptzStatus.position.zoom!.x);
 
     return matchX && matchY && matchZ;
   }

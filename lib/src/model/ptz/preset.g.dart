@@ -9,8 +9,9 @@ part of 'preset.dart';
 Preset _$PresetFromJson(Map<String, dynamic> json) => Preset(
       token: json['@token'] as String,
       name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
-      position:
-          PtzPosition.fromJson(json['PTZPosition'] as Map<String, dynamic>),
+      position: json['PTZPosition'] == null
+          ? null
+          : PtzPosition.fromJson(json['PTZPosition'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$PresetToJson(Preset instance) => <String, dynamic>{

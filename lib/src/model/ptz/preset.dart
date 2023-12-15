@@ -16,14 +16,20 @@ class Preset {
   final String name;
 
   @JsonKey(name: 'PTZPosition')
-  final PtzPosition position;
+  final PtzPosition? position;
 
-  Preset({required this.token, required this.name, required this.position});
+  Preset({
+    required this.token,
+    required this.name,
+    this.position,
+  });
 
   factory Preset.fromJson(Map<String, dynamic> json) => _$PresetFromJson(json);
 
-  factory Preset.fromToken(String token) =>
-      Preset(token: token, name: '', position: PtzPosition());
+  factory Preset.fromToken(String token) => Preset(
+        token: token,
+        name: '',
+      );
 
   Map<String, dynamic> toJson() => _$PresetToJson(this);
 
