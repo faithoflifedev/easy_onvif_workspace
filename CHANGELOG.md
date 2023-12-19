@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.3+8
+
+* PTZ
+  * GotoPreset - namespace tweak
+
 ## 2.1.3+7
 
 * README update

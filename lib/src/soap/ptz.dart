@@ -228,7 +228,7 @@ class PtzRequest {
   static XmlDocumentFragment gotoPreset(
       String profileToken, String presetToken, PtzSpeed? speed) {
     Transport.builder.element('GotoPreset', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
+      Transport.builder.namespace(Xmlns.tptz);
       Transport.builder.element('ProfileToken', nest: () {
         Transport.builder.namespace(Xmlns.tptz);
         Transport.builder.text(profileToken);
