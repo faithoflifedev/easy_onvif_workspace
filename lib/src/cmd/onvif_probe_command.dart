@@ -23,16 +23,19 @@ class OnvifProbeCommand extends Command {
   }
 }
 
+/// `DevicesController` is a class that is used to define the routes for an API that would allow a client to get device data from the server in cases that the client and server are on separate networks.
+/// [multicastProbe] is a reference to the multicast probe that is used to discover devices.
 class DevicesController {
   final multicastProbe = MulticastProbe();
 
+  /// Initialize the controller by probing for devices.
   DevicesController() {
     _init();
   }
 
   void _init() async => await multicastProbe.probe();
 
-  // Define our getter for our handler
+  // Define our getter for our handler which resolves to a shelf handler that will respond to client requests.
   Handler get handler {
     final router = Router();
 

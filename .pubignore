@@ -8,6 +8,5 @@ scratch/
 tool/
 test/
 logo/
-example/
 
 *.log

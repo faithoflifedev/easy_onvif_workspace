@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.3+9
+
+* API doc updates
+
 ## 2.1.3+8
 
 * PTZ
