@@ -26,9 +26,9 @@ class Preset {
 
   factory Preset.fromJson(Map<String, dynamic> json) => _$PresetFromJson(json);
 
-  factory Preset.fromToken(String token) => Preset(
+  factory Preset.fromToken(String token, {String? name}) => Preset(
         token: token,
-        name: '',
+        name: name ?? '',
       );
 
   Map<String, dynamic> toJson() => _$PresetToJson(this);

@@ -21,9 +21,7 @@ Capabilities _$CapabilitiesFromJson(Map<String, dynamic> json) => Capabilities(
           ? null
           : ImagingCapabilities.fromJson(
               json['Imaging'] as Map<String, dynamic>),
-      media: json['Media'] == null
-          ? null
-          : MediaCapabilities.fromJson(json['Media'] as Map<String, dynamic>),
+      mediaCapabilities: Capabilities._unbound(json['Media']),
       ptz: json['PTZ'] == null
           ? null
           : PtzCapabilities.fromJson(json['PTZ'] as Map<String, dynamic>),
@@ -36,7 +34,7 @@ Map<String, dynamic> _$CapabilitiesToJson(Capabilities instance) =>
       'Device': instance.device,
       'Events': instance.events,
       'Imaging': instance.imaging,
-      'Media': instance.media,
+      'Media': instance.mediaCapabilities,
       'PTZ': instance.ptz,
       'Extension': instance.extension,
     };

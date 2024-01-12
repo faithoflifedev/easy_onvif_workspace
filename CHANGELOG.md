@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.3+10
+
+* Issue #53
+
 ## 2.1.3+9
 
 * API doc updates

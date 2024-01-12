@@ -31,8 +31,8 @@ class Capabilities {
   final ImagingCapabilities? imaging;
 
   /// Media capabilities
-  @JsonKey(name: 'Media')
-  final MediaCapabilities? media;
+  @JsonKey(name: 'Media', fromJson: _unbound)
+  final List<MediaCapabilities>? mediaCapabilities;
 
   /// PTZ capabilities
   @JsonKey(name: 'PTZ')
@@ -41,14 +41,17 @@ class Capabilities {
   @JsonKey(name: 'Extension')
   Map<String, dynamic>? extension;
 
-  Capabilities(
-      {this.analytics,
-      this.device,
-      this.events,
-      this.imaging,
-      this.media,
-      this.ptz,
-      this.extension});
+  MediaCapabilities? get media => mediaCapabilities?.first;
+
+  Capabilities({
+    this.analytics,
+    this.device,
+    this.events,
+    this.imaging,
+    this.mediaCapabilities,
+    this.ptz,
+    this.extension,
+  });
 
   factory Capabilities.fromJson(Map<String, dynamic> json) =>
       _$CapabilitiesFromJson(json);
@@ -57,6 +60,16 @@ class Capabilities {
 
   @override
   String toString() => json.encode(toJson());
+
+  static List<MediaCapabilities> _unbound(dynamic json) {
+    if (json is List) {
+      return json
+          .map((e) => MediaCapabilities.fromJson(e as Map<String, dynamic>))
+          .toList();
+    }
+
+    return [MediaCapabilities.fromJson(json as Map<String, dynamic>)];
+  }
 }
 
 @JsonEnum()
