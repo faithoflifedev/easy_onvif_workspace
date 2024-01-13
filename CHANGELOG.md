@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.3+13
+
+* fix the repository link on pub.dev
+
 ## 2.1.3+12
 
 * dependency bump
