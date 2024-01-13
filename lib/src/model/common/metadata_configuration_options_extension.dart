@@ -6,7 +6,7 @@ part 'metadata_configuration_options_extension.g.dart';
 
 @JsonSerializable()
 class MetadataConfigurationOptionsExtension {
-  @JsonKey(name: 'CompressionType', fromJson: _unbound)
+  @JsonKey(name: 'CompressionType', fromJson: _parseUnbound)
   final List<String>? compressionType;
 
   @JsonKey(name: 'Extension')
@@ -27,7 +27,7 @@ class MetadataConfigurationOptionsExtension {
   @override
   String toString() => json.encode(toJson());
 
-  static List<String> _unbound(dynamic json) {
+  static List<String> _parseUnbound(dynamic json) {
     if (json == null) {
       return [];
     } else if (json is String && json.contains(',')) {

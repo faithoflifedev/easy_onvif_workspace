@@ -21,7 +21,7 @@ Capabilities _$CapabilitiesFromJson(Map<String, dynamic> json) => Capabilities(
           ? null
           : ImagingCapabilities.fromJson(
               json['Imaging'] as Map<String, dynamic>),
-      mediaCapabilities: Capabilities._unbound(json['Media']),
+      mediaCapabilities: Capabilities._fromJson(json['Media']),
       ptz: json['PTZ'] == null
           ? null
           : PtzCapabilities.fromJson(json['PTZ'] as Map<String, dynamic>),

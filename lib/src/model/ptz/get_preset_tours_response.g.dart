@@ -9,7 +9,7 @@ part of 'get_preset_tours_response.dart';
 GetPresetToursResponse _$GetPresetToursResponseFromJson(
         Map<String, dynamic> json) =>
     GetPresetToursResponse(
-      presetTours: GetPresetToursResponse._unbound(json['PresetTour']),
+      presetTours: GetPresetToursResponse._fromJson(json['PresetTour']),
     );
 
 Map<String, dynamic> _$GetPresetToursResponseToJson(

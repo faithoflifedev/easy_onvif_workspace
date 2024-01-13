@@ -12,7 +12,7 @@ part 'recording_event_filter.g.dart';
 /// active.
 @JsonSerializable()
 class RecordingEventFilter {
-  @JsonKey(name: 'Filter', fromJson: _unboundFilter)
+  @JsonKey(name: 'Filter', fromJson: _fromJson)
   final List<Filter> filters;
 
   /// Optional time-span to record before the actual event condition became
@@ -51,15 +51,6 @@ class RecordingEventFilter {
     });
   }
 
-  static List<Filter> _unboundFilter(dynamic json) {
-    if (json == null) {
-      return <Filter>[];
-    } else if (json is List) {
-      return json
-          .map((e) => Filter.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [Filter.fromJson(json as Map<String, dynamic>)];
-  }
+  static List<Filter> _fromJson(dynamic json) => OnvifUtil.jsonList<Filter>(
+      json, (json) => Filter.fromJson(json as Map<String, dynamic>));
 }

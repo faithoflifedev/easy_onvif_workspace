@@ -36,7 +36,7 @@ class SystemCapabilities {
   final bool firmwareUpgrade;
 
   /// Indicates supported ONVIF version(s).
-  @JsonKey(name: 'SupportedVersions', fromJson: _unbound)
+  @JsonKey(name: 'SupportedVersions', fromJson: _fromJson)
   final List<Version>? supportedVersions;
 
   @JsonKey(name: 'Extension')
@@ -63,21 +63,10 @@ class SystemCapabilities {
   @override
   String toString() => json.encode(toJson());
 
-  static bool _complexBool(dynamic value) {
-    if (value.runtimeType == String) return OnvifUtil.stringToBool(value);
+  static bool _complexBool(dynamic value) => value.runtimeType == String
+      ? OnvifUtil.stringToBool(value)
+      : OnvifUtil.mappedToBool(value);
 
-    return OnvifUtil.mappedToBool(value);
-  }
-
-  static List<Version>? _unbound(dynamic json) {
-    if (json == null) return <Version>[];
-
-    if (json is List) {
-      return json
-          .map((e) => Version.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [Version.fromJson(json as Map<String, dynamic>)];
-  }
+  static List<Version> _fromJson(dynamic json) => OnvifUtil.jsonList<Version>(
+      json, (json) => Version.fromJson(json as Map<String, dynamic>));
 }

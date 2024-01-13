@@ -10,7 +10,7 @@ MetadataConfigurationOptionsExtension
     _$MetadataConfigurationOptionsExtensionFromJson(
             Map<String, dynamic> json) =>
         MetadataConfigurationOptionsExtension(
-          compressionType: MetadataConfigurationOptionsExtension._unbound(
+          compressionType: MetadataConfigurationOptionsExtension._parseUnbound(
               json['CompressionType']),
           extension: json['Extension'] as Map<String, dynamic>?,
         );

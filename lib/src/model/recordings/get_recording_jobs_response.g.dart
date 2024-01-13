@@ -9,7 +9,7 @@ part of 'get_recording_jobs_response.dart';
 GetRecordingJobsResponse _$GetRecordingJobsResponseFromJson(
         Map<String, dynamic> json) =>
     GetRecordingJobsResponse(
-      jobItems: GetRecordingJobsResponse._unboundJobItems(json['JobItem']),
+      jobItems: GetRecordingJobsResponse._fromJson(json['JobItem']),
     );
 
 Map<String, dynamic> _$GetRecordingJobsResponseToJson(

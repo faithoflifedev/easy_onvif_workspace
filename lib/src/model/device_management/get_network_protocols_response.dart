@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'network_protocol.dart';
@@ -8,7 +9,7 @@ part 'get_network_protocols_response.g.dart';
 
 @JsonSerializable()
 class GetNetworkProtocolsResponse {
-  @JsonKey(name: 'NetworkProtocols', fromJson: _unbound)
+  @JsonKey(name: 'NetworkProtocols', fromJson: _fromJson)
   final List<NetworkProtocol> networkProtocols;
 
   GetNetworkProtocolsResponse(this.networkProtocols);
@@ -21,13 +22,7 @@ class GetNetworkProtocolsResponse {
   @override
   String toString() => json.encode(toJson());
 
-  static List<NetworkProtocol> _unbound(dynamic json) {
-    if (json is List) {
-      return json
-          .map((e) => NetworkProtocol.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [NetworkProtocol.fromJson(json as Map<String, dynamic>)];
-  }
+  static List<NetworkProtocol> _fromJson(dynamic json) =>
+      OnvifUtil.jsonList<NetworkProtocol>(json,
+          (json) => NetworkProtocol.fromJson(json as Map<String, dynamic>));
 }

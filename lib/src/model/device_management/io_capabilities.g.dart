@@ -8,10 +8,16 @@ part of 'io_capabilities.dart';
 
 IoCapabilities _$IoCapabilitiesFromJson(Map<String, dynamic> json) =>
     IoCapabilities(
-      auxiliaryCommands: IoCapabilities._unbound(json['@AuxiliaryCommands']),
+      inputConnectors: OnvifUtil.nullableMappedToInt(
+          json['InputConnectors'] as Map<String, dynamic>?),
+      relayOutputs: OnvifUtil.nullableMappedToInt(
+          json['RelayOutputs'] as Map<String, dynamic>?),
+      extension: json['Extension'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$IoCapabilitiesToJson(IoCapabilities instance) =>
     <String, dynamic>{
-      '@AuxiliaryCommands': instance.auxiliaryCommands,
+      'InputConnectors': instance.inputConnectors,
+      'RelayOutputs': instance.relayOutputs,
+      'Extension': instance.extension,
     };

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'find_recording_result.dart';
@@ -22,7 +23,7 @@ part 'get_recording_search_results_response.g.dart';
 /// This operation is mandatory to support for a device implementing the recording search service.
 @JsonSerializable()
 class GetRecordingSearchResultsResponse {
-  @JsonKey(name: 'ResultList', fromJson: _unboundResultList)
+  @JsonKey(name: 'ResultList', fromJson: _fromJson)
   final List<FindRecordingResult> findRecordingResults;
 
   GetRecordingSearchResultsResponse({required this.findRecordingResults});
@@ -37,15 +38,7 @@ class GetRecordingSearchResultsResponse {
   @override
   String toString() => json.encode(toJson());
 
-  static List<FindRecordingResult> _unboundResultList(dynamic json) {
-    if (json == null) {
-      return <FindRecordingResult>[];
-    } else if (json is List) {
-      return json
-          .map((e) => FindRecordingResult.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [FindRecordingResult.fromJson(json as Map<String, dynamic>)];
-  }
+  static List<FindRecordingResult> _fromJson(dynamic json) =>
+      OnvifUtil.jsonList<FindRecordingResult>(json,
+          (json) => FindRecordingResult.fromJson(json as Map<String, dynamic>));
 }

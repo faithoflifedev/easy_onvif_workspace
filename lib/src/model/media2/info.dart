@@ -14,7 +14,7 @@ class Info {
   /// If a device limits the number of instances for respective Video Codecs the
   /// response contains the information how many streams can be set up at the
   /// same time per VideoSource.
-  @JsonKey(name: 'Codec', fromJson: _unbound)
+  @JsonKey(name: 'Codec', fromJson: _fromJson)
   final List<Codec>? codec;
 
   /// The minimum guaranteed total number of encoder instances (applications)
@@ -32,16 +32,9 @@ class Info {
 
   Map<String, dynamic> toJson() => _$InfoToJson(this);
 
-  static List<Codec>? _unbound(dynamic json) {
-    if (json is List) {
-      return json
-          .map((e) => Codec.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [Codec.fromJson(json as Map<String, dynamic>)];
-  }
-
   @override
   String toString() => json.encode(toJson());
+
+  static List<Codec> _fromJson(dynamic json) => OnvifUtil.jsonList<Codec>(
+      json, (json) => Codec.fromJson(json as Map<String, dynamic>));
 }

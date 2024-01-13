@@ -35,7 +35,7 @@ class RecordingInformation {
 
   /// Basic information about the track. Note that a track may represent a
   /// single contiguous time span or consist of multiple slices.
-  @JsonKey(name: 'Track', fromJson: _unboundTracks)
+  @JsonKey(name: 'Track', fromJson: _fromJson)
   final List<TrackInformation>? tracks;
 
   @JsonKey(name: 'RecordingStatus', fromJson: _recordingStatus)
@@ -59,17 +59,9 @@ class RecordingInformation {
   @override
   String toString() => json.encode(toJson());
 
-  static List<TrackInformation> _unboundTracks(dynamic json) {
-    if (json == null) {
-      return <TrackInformation>[];
-    } else if (json is List) {
-      return json
-          .map((e) => TrackInformation.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [TrackInformation.fromJson(json as Map<String, dynamic>)];
-  }
+  static List<TrackInformation> _fromJson(dynamic json) =>
+      OnvifUtil.jsonList<TrackInformation>(json,
+          (json) => TrackInformation.fromJson(json as Map<String, dynamic>));
 
   static RecordingStatus _recordingStatus(dynamic json) =>
       $enumDecode(_$RecordingStatusEnumMap, OnvifUtil.mappedToString(json));
@@ -90,5 +82,6 @@ enum RecordingStatus {
   unknown('Unknown');
 
   const RecordingStatus(this.value);
+
   final String value;
 }

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'analytics_capabilities.dart';
@@ -31,7 +32,7 @@ class Capabilities {
   final ImagingCapabilities? imaging;
 
   /// Media capabilities
-  @JsonKey(name: 'Media', fromJson: _unbound)
+  @JsonKey(name: 'Media', fromJson: _fromJson)
   final List<MediaCapabilities>? mediaCapabilities;
 
   /// PTZ capabilities
@@ -61,19 +62,9 @@ class Capabilities {
   @override
   String toString() => json.encode(toJson());
 
-  static List<MediaCapabilities>? _unbound(dynamic json) {
-    if (json == null) {
-      return null;
-    }
-
-    if (json is List) {
-      return json
-          .map((e) => MediaCapabilities.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [MediaCapabilities.fromJson(json as Map<String, dynamic>)];
-  }
+  static List<MediaCapabilities> _fromJson(dynamic json) =>
+      OnvifUtil.jsonList<MediaCapabilities>(json,
+          (json) => MediaCapabilities.fromJson(json as Map<String, dynamic>));
 }
 
 @JsonEnum()

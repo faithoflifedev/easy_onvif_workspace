@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:easy_onvif/shared.dart';
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'get_metadata_configurations_response.g.dart';
@@ -10,7 +11,7 @@ part 'get_metadata_configurations_response.g.dart';
 @JsonSerializable()
 class GetMetadataConfigurationsResponse {
   ///This element contains a list of metadata configurations
-  @JsonKey(name: 'Configurations', fromJson: _unbound)
+  @JsonKey(name: 'Configurations', fromJson: _fromJson)
   final List<MetadataConfiguration> configurations;
 
   GetMetadataConfigurationsResponse(this.configurations);
@@ -22,17 +23,11 @@ class GetMetadataConfigurationsResponse {
   Map<String, dynamic> toJson() =>
       _$GetMetadataConfigurationsResponseToJson(this);
 
-  static List<MetadataConfiguration> _unbound(dynamic json) {
-    if (json == null) return <MetadataConfiguration>[];
-
-    if (json is List) {
-      return json
-          .map((e) => MetadataConfiguration.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [MetadataConfiguration.fromJson(json as Map<String, dynamic>)];
-  }
+  static List<MetadataConfiguration> _fromJson(dynamic json) =>
+      OnvifUtil.jsonList<MetadataConfiguration>(
+          json,
+          (json) =>
+              MetadataConfiguration.fromJson(json as Map<String, dynamic>));
 
   @override
   String toString() => json.encode(toJson());

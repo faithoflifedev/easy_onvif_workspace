@@ -12,7 +12,7 @@ RecordingJobStateInformation _$RecordingJobStateInformationFromJson(
       recordingToken: OnvifUtil.mappedToString(
           json['RecordingToken'] as Map<String, dynamic>),
       state: OnvifUtil.mappedToString(json['State'] as Map<String, dynamic>),
-      sources: RecordingJobStateInformation._unboundSources(json['Sources']),
+      sources: RecordingJobStateInformation._fromJson(json['Sources']),
       tracks: json['Tracks'] == null
           ? null
           : Tracks.fromJson(json['Tracks'] as Map<String, dynamic>),

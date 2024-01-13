@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'get_recordings_response_item.dart';
@@ -12,7 +13,7 @@ part 'get_recordings_response.g.dart';
 @JsonSerializable()
 class GetRecordingsResponse {
   /// List of recording items.
-  @JsonKey(name: 'RecordingItem', fromJson: _unboundRecordingItem)
+  @JsonKey(name: 'RecordingItem', fromJson: _fromJson)
   final List<GetRecordingsResponseItem> recordingItems;
 
   GetRecordingsResponse({required this.recordingItems});
@@ -25,16 +26,9 @@ class GetRecordingsResponse {
   @override
   String toString() => json.encode(toJson());
 
-  static List<GetRecordingsResponseItem> _unboundRecordingItem(dynamic json) {
-    if (json == null) {
-      return <GetRecordingsResponseItem>[];
-    } else if (json is List) {
-      return json
-          .map((e) =>
-              GetRecordingsResponseItem.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [GetRecordingsResponseItem.fromJson(json as Map<String, dynamic>)];
-  }
+  static List<GetRecordingsResponseItem> _fromJson(dynamic json) =>
+      OnvifUtil.jsonList<GetRecordingsResponseItem>(
+          json,
+          (json) =>
+              GetRecordingsResponseItem.fromJson(json as Map<String, dynamic>));
 }

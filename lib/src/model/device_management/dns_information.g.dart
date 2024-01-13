@@ -10,9 +10,9 @@ DnsInformation _$DnsInformationFromJson(Map<String, dynamic> json) =>
     DnsInformation(
       fromDhcp: OnvifUtil.nullableMappedToBool(
           json['FromDHCP'] as Map<String, dynamic>?),
-      searchDomain: DnsInformation._unboundSearchDomain(json['SearchDomain']),
-      dnsFromDhcp: DnsInformation._unbound(json['DNSFromDHCP']),
-      dnsManual: DnsInformation._unbound(json['DNSManual']),
+      searchDomain: DnsInformation._searchDomain(json['SearchDomain']),
+      dnsFromDhcp: DnsInformation._fromJson(json['DNSFromDHCP']),
+      dnsManual: DnsInformation._fromJson(json['DNSManual']),
       extension: json['extension'],
     );
 

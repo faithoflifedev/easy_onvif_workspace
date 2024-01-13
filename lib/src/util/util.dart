@@ -170,6 +170,17 @@ class OnvifUtil {
           ? MulticastConfiguration.fromJson(json)
           : null;
 
+  static List<T>? nullableJsonList<T>(
+          dynamic json, T Function(dynamic) fromJson) =>
+      json != null ? (json as List).map((e) => fromJson(e)).toList() : null;
+
+  static List<T> jsonList<T>(dynamic json, T Function(dynamic) fromJson) =>
+      json != null
+          ? json is List
+              ? json.map((e) => fromJson(e)).toList()
+              : [fromJson(json)]
+          : <T>[];
+
   // The tryParse is used to work-around the non-compliant date returned by the
   // TL-IPC43AN-4 device
   static DateTime mappedToDateTime(Map<String, dynamic> value) {

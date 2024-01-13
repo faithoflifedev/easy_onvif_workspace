@@ -8,7 +8,7 @@ part of 'get_profiles_response.dart';
 
 GetProfilesResponse _$GetProfilesResponseFromJson(Map<String, dynamic> json) =>
     GetProfilesResponse(
-      GetProfilesResponse._unbound(json['Profiles']),
+      GetProfilesResponse._fromJson(json['Profiles']),
     );
 
 Map<String, dynamic> _$GetProfilesResponseToJson(

@@ -19,7 +19,7 @@ RecordingInformation _$RecordingInformationFromJson(
           json['LatestRecording'] as Map<String, dynamic>),
       content:
           OnvifUtil.mappedToString(json['Content'] as Map<String, dynamic>),
-      tracks: RecordingInformation._unboundTracks(json['Track']),
+      tracks: RecordingInformation._fromJson(json['Track']),
       recordingStatus:
           RecordingInformation._recordingStatus(json['RecordingStatus']),
     );

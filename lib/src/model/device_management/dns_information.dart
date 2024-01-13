@@ -15,15 +15,15 @@ class DnsInformation {
   final bool? fromDhcp;
 
   /// Search domain.
-  @JsonKey(name: 'SearchDomain', fromJson: _unboundSearchDomain)
+  @JsonKey(name: 'SearchDomain', fromJson: _searchDomain)
   final List<String>? searchDomain;
 
   /// List of DNS addresses received from DHCP.
-  @JsonKey(name: 'DNSFromDHCP', fromJson: _unbound)
+  @JsonKey(name: 'DNSFromDHCP', fromJson: _fromJson)
   final List<DnsEntry>? dnsFromDhcp;
 
   /// List of manually entered DNS addresses.
-  @JsonKey(name: 'DNSManual', fromJson: _unbound)
+  @JsonKey(name: 'DNSManual', fromJson: _fromJson)
   final List<DnsEntry>? dnsManual;
 
   final dynamic extension;
@@ -41,21 +41,10 @@ class DnsInformation {
 
   Map<String, dynamic> toJson() => _$DnsInformationToJson(this);
 
-  static List<DnsEntry> _unbound(dynamic json) {
-    if (json == null) {
-      return <DnsEntry>[];
-    }
+  static List<DnsEntry> _fromJson(dynamic json) => OnvifUtil.jsonList<DnsEntry>(
+      json, (json) => DnsEntry.fromJson(json as Map<String, dynamic>));
 
-    if (json is List) {
-      return json
-          .map((e) => DnsEntry.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [DnsEntry.fromJson(json as Map<String, dynamic>)];
-  }
-
-  static List<String>? _unboundSearchDomain(dynamic json) {
+  static List<String>? _searchDomain(dynamic json) {
     if (json == null) {
       return <String>[];
     }

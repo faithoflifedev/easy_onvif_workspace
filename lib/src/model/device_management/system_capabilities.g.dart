@@ -15,7 +15,8 @@ SystemCapabilities _$SystemCapabilitiesFromJson(Map<String, dynamic> json) =>
       systemBackup: SystemCapabilities._complexBool(json['SystemBackup']),
       systemLogging: SystemCapabilities._complexBool(json['SystemLogging']),
       firmwareUpgrade: SystemCapabilities._complexBool(json['FirmwareUpgrade']),
-      supportedVersions: SystemCapabilities._unbound(json['SupportedVersions']),
+      supportedVersions:
+          SystemCapabilities._fromJson(json['SupportedVersions']),
       extension: json['Extension'] == null
           ? null
           : SystemCapabilitiesExtension.fromJson(

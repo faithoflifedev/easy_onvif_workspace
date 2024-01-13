@@ -30,7 +30,7 @@ class RecordingJobSource {
   @JsonKey(name: 'AutoCreateReceiver', fromJson: OnvifUtil.nullableMappedToBool)
   final bool? autoCreateReceiver;
 
-  @JsonKey(name: 'Tracks', fromJson: _unboundTracks)
+  @JsonKey(name: 'Tracks', fromJson: _fromJson)
   final List<Track>? tracks;
 
   @JsonKey(name: 'Extension')
@@ -68,15 +68,6 @@ class RecordingJobSource {
     });
   }
 
-  static List<Track> _unboundTracks(dynamic json) {
-    if (json == null) {
-      return <Track>[];
-    } else if (json is List) {
-      return json
-          .map((e) => Track.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [Track.fromJson(json as Map<String, dynamic>)];
-  }
+  static List<Track> _fromJson(dynamic json) => OnvifUtil.jsonList<Track>(
+      json, (json) => Track.fromJson(json as Map<String, dynamic>));
 }

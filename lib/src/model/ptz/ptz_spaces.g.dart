@@ -8,19 +8,19 @@ part of 'ptz_spaces.dart';
 
 PtzSpaces _$PtzSpacesFromJson(Map<String, dynamic> json) => PtzSpaces(
       absolutePanTiltPositionSpace:
-          PtzSpaces._unboundSpace2D(json['AbsolutePanTiltPositionSpace']),
+          PtzSpaces._fromJson2D(json['AbsolutePanTiltPositionSpace']),
       absoluteZoomPositionSpace:
-          PtzSpaces._unboundSpace1D(json['AbsoluteZoomPositionSpace']),
+          PtzSpaces._fromJson1D(json['AbsoluteZoomPositionSpace']),
       relativePanTiltTranslationSpace:
-          PtzSpaces._unboundSpace2D(json['RelativePanTiltTranslationSpace']),
+          PtzSpaces._fromJson2D(json['RelativePanTiltTranslationSpace']),
       relativeZoomTranslationSpace:
-          PtzSpaces._unboundSpace1D(json['RelativeZoomTranslationSpace']),
+          PtzSpaces._fromJson1D(json['RelativeZoomTranslationSpace']),
       continuousPanTiltVelocitySpace:
-          PtzSpaces._unboundSpace2D(json['ContinuousPanTiltVelocitySpace']),
+          PtzSpaces._fromJson2D(json['ContinuousPanTiltVelocitySpace']),
       continuousZoomVelocitySpace:
-          PtzSpaces._unboundSpace1D(json['ContinuousZoomVelocitySpace']),
-      panTiltSpeedSpace: PtzSpaces._unboundSpace1D(json['PanTiltSpeedSpace']),
-      zoomSpeedSpace: PtzSpaces._unboundSpace1D(json['ZoomSpeedSpace']),
+          PtzSpaces._fromJson1D(json['ContinuousZoomVelocitySpace']),
+      panTiltSpeedSpace: PtzSpaces._fromJson1D(json['PanTiltSpeedSpace']),
+      zoomSpeedSpace: PtzSpaces._fromJson1D(json['ZoomSpeedSpace']),
       extension: json['Extension'] as Map<String, dynamic>?,
     );
 

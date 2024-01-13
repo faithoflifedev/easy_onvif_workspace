@@ -8,7 +8,7 @@ part of 'users_response.dart';
 
 GetUsersResponse _$GetUsersResponseFromJson(Map<String, dynamic> json) =>
     GetUsersResponse(
-      users: GetUsersResponse._unbound(json['User']),
+      users: GetUsersResponse._fromJson(json['User']),
     );
 
 Map<String, dynamic> _$GetUsersResponseToJson(GetUsersResponse instance) =>

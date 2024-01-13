@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'system_log_uri.dart';
@@ -8,7 +9,7 @@ part 'system_log_uri_list.g.dart';
 
 @JsonSerializable()
 class SystemLogUriList {
-  @JsonKey(name: 'SystemLog', fromJson: _unbound)
+  @JsonKey(name: 'SystemLog', fromJson: _fromJson)
   final List<SystemLogUri>? systemLogs;
 
   SystemLogUriList({required this.systemLogs});
@@ -21,13 +22,7 @@ class SystemLogUriList {
   @override
   String toString() => json.encode(toJson());
 
-  static List<SystemLogUri> _unbound(dynamic json) {
-    if (json is List) {
-      return json
-          .map((e) => SystemLogUri.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [SystemLogUri.fromJson(json as Map<String, dynamic>)];
-  }
+  static List<SystemLogUri> _fromJson(dynamic json) =>
+      OnvifUtil.jsonList<SystemLogUri>(
+          json, (json) => SystemLogUri.fromJson(json as Map<String, dynamic>));
 }

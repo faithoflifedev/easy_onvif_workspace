@@ -9,7 +9,7 @@ part of 'get_network_protocols_response.dart';
 GetNetworkProtocolsResponse _$GetNetworkProtocolsResponseFromJson(
         Map<String, dynamic> json) =>
     GetNetworkProtocolsResponse(
-      GetNetworkProtocolsResponse._unbound(json['NetworkProtocols']),
+      GetNetworkProtocolsResponse._fromJson(json['NetworkProtocols']),
     );
 
 Map<String, dynamic> _$GetNetworkProtocolsResponseToJson(

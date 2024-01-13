@@ -23,6 +23,7 @@ DeviceServiceCapabilities _$DeviceServiceCapabilitiesFromJson(
           ? null
           : SecurityCapabilities.fromJson(
               json['Security'] as Map<String, dynamic>),
+      extension: json['Extension'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$DeviceServiceCapabilitiesToJson(
@@ -32,4 +33,5 @@ Map<String, dynamic> _$DeviceServiceCapabilitiesToJson(
       'System': instance.system,
       'IO': instance.io,
       'Security': instance.security,
+      'Extension': instance.extension,
     };

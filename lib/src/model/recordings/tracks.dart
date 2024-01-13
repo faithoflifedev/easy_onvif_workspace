@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'track.dart';
@@ -9,7 +10,7 @@ part 'tracks.g.dart';
 @JsonSerializable()
 class Tracks {
   /// Identifies the data source of the recording job.
-  @JsonKey(name: 'Track', fromJson: _unboundTracks)
+  @JsonKey(name: 'Track', fromJson: _fromJson)
   final List<Track> tracks;
 
   Tracks({
@@ -23,15 +24,6 @@ class Tracks {
   @override
   String toString() => json.encode(toJson());
 
-  static List<Track> _unboundTracks(dynamic json) {
-    if (json == null) {
-      return <Track>[];
-    } else if (json is List) {
-      return json
-          .map((e) => Track.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [Track.fromJson(json as Map<String, dynamic>)];
-  }
+  static List<Track> _fromJson(dynamic json) => OnvifUtil.jsonList<Track>(
+      json, (json) => Track.fromJson(json as Map<String, dynamic>));
 }

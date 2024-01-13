@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'probe_match.dart';
@@ -8,7 +9,7 @@ part 'probe_matches.g.dart';
 
 @JsonSerializable()
 class ProbeMatches {
-  @JsonKey(name: 'ProbeMatch', fromJson: _unbound)
+  @JsonKey(name: 'ProbeMatch', fromJson: _fromJson)
   final List<ProbeMatch> probeMatches;
 
   ProbeMatches({required this.probeMatches});
@@ -21,13 +22,7 @@ class ProbeMatches {
   @override
   String toString() => json.encode(toJson());
 
-  static List<ProbeMatch> _unbound(dynamic json) {
-    if (json is List) {
-      return json
-          .map((e) => ProbeMatch.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [ProbeMatch.fromJson(json as Map<String, dynamic>)];
-  }
+  static List<ProbeMatch> _fromJson(dynamic json) =>
+      OnvifUtil.jsonList<ProbeMatch>(
+          json, (json) => ProbeMatch.fromJson(json as Map<String, dynamic>));
 }

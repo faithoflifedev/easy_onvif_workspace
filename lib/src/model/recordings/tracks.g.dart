@@ -7,7 +7,7 @@ part of 'tracks.dart';
 // **************************************************************************
 
 Tracks _$TracksFromJson(Map<String, dynamic> json) => Tracks(
-      tracks: Tracks._unboundTracks(json['Track']),
+      tracks: Tracks._fromJson(json['Track']),
     );
 
 Map<String, dynamic> _$TracksToJson(Tracks instance) => <String, dynamic>{

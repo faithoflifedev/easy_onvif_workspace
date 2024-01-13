@@ -24,6 +24,7 @@ class DeviceCapabilities extends DeviceServiceCapabilities {
     super.system,
     super.io,
     super.security,
+    super.extension,
   });
 
   factory DeviceCapabilities.fromJson(Map<String, dynamic> json) =>

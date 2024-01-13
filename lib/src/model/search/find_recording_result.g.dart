@@ -9,8 +9,8 @@ part of 'find_recording_result.dart';
 FindRecordingResult _$FindRecordingResultFromJson(Map<String, dynamic> json) =>
     FindRecordingResult(
       searchState: FindRecordingResult._searchState(json['SearchState']),
-      recordingInformation: FindRecordingResult._unboundRecordingInformation(
-          json['RecordingInformation']),
+      recordingInformation:
+          FindRecordingResult._fromJson(json['RecordingInformation']),
     );
 
 Map<String, dynamic> _$FindRecordingResultToJson(

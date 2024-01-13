@@ -9,7 +9,7 @@ part of 'recording_event_filter.dart';
 RecordingEventFilter _$RecordingEventFilterFromJson(
         Map<String, dynamic> json) =>
     RecordingEventFilter(
-      filters: RecordingEventFilter._unboundFilter(json['Filter']),
+      filters: RecordingEventFilter._fromJson(json['Filter']),
       before: OnvifUtil.nullableMappedToString(
           json['Before'] as Map<String, dynamic>?),
       after: OnvifUtil.nullableMappedToString(

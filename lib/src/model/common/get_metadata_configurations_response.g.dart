@@ -9,7 +9,7 @@ part of 'get_metadata_configurations_response.dart';
 GetMetadataConfigurationsResponse _$GetMetadataConfigurationsResponseFromJson(
         Map<String, dynamic> json) =>
     GetMetadataConfigurationsResponse(
-      GetMetadataConfigurationsResponse._unbound(json['Configurations']),
+      GetMetadataConfigurationsResponse._fromJson(json['Configurations']),
     );
 
 Map<String, dynamic> _$GetMetadataConfigurationsResponseToJson(

@@ -9,9 +9,8 @@ part of 'get_storage_configurations_response.dart';
 GetStorageConfigurationsResponse _$GetStorageConfigurationsResponseFromJson(
         Map<String, dynamic> json) =>
     GetStorageConfigurationsResponse(
-      storageConfigurations:
-          GetStorageConfigurationsResponse._unboundStorageConfiguration(
-              json['StorageConfigurations']),
+      storageConfigurations: GetStorageConfigurationsResponse._fromJson(
+          json['StorageConfigurations']),
     );
 
 Map<String, dynamic> _$GetStorageConfigurationsResponseToJson(

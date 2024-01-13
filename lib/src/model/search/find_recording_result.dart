@@ -12,7 +12,7 @@ class FindRecordingResult {
   @JsonKey(name: 'SearchState', fromJson: _searchState)
   final SearchState searchState;
 
-  @JsonKey(name: 'RecordingInformation', fromJson: _unboundRecordingInformation)
+  @JsonKey(name: 'RecordingInformation', fromJson: _fromJson)
   final List<RecordingInformation>? recordingInformation;
 
   FindRecordingResult({
@@ -31,17 +31,11 @@ class FindRecordingResult {
   static SearchState _searchState(dynamic json) =>
       $enumDecode(_$SearchStateEnumMap, OnvifUtil.mappedToString(json));
 
-  static List<RecordingInformation> _unboundRecordingInformation(dynamic json) {
-    if (json == null) {
-      return <RecordingInformation>[];
-    } else if (json is List) {
-      return json
-          .map((e) => RecordingInformation.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [RecordingInformation.fromJson(json as Map<String, dynamic>)];
-  }
+  static List<RecordingInformation> _fromJson(dynamic json) =>
+      OnvifUtil.jsonList<RecordingInformation>(
+          json,
+          (json) =>
+              RecordingInformation.fromJson(json as Map<String, dynamic>));
 }
 
 enum SearchState {
@@ -55,5 +49,6 @@ enum SearchState {
   unknown('Unknown');
 
   const SearchState(this.value);
+
   final String value;
 }

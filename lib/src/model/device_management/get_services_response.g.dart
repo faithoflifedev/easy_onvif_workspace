@@ -8,7 +8,7 @@ part of 'get_services_response.dart';
 
 GetServicesResponse _$GetServicesResponseFromJson(Map<String, dynamic> json) =>
     GetServicesResponse(
-      GetServicesResponse._unbound(json['Service']),
+      GetServicesResponse._fromJson(json['Service']),
     );
 
 Map<String, dynamic> _$GetServicesResponseToJson(

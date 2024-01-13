@@ -20,7 +20,7 @@ class RecordingJobStateInformation {
   final String state;
 
   /// Identifies the data source of the recording job.
-  @JsonKey(name: 'Sources', fromJson: _unboundSources)
+  @JsonKey(name: 'Sources', fromJson: _fromJson)
   final List<RecordingJobStateSource> sources;
 
   /// List of track items.
@@ -46,16 +46,9 @@ class RecordingJobStateInformation {
   @override
   String toString() => json.encode(toJson());
 
-  static List<RecordingJobStateSource> _unboundSources(dynamic json) {
-    if (json == null) {
-      return <RecordingJobStateSource>[];
-    } else if (json is List) {
-      return json
-          .map((e) =>
-              RecordingJobStateSource.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [RecordingJobStateSource.fromJson(json as Map<String, dynamic>)];
-  }
+  static List<RecordingJobStateSource> _fromJson(dynamic json) =>
+      OnvifUtil.jsonList<RecordingJobStateSource>(
+          json,
+          (json) =>
+              RecordingJobStateSource.fromJson(json as Map<String, dynamic>));
 }

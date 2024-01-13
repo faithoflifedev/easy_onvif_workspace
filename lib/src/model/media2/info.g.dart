@@ -7,7 +7,7 @@ part of 'info.dart';
 // **************************************************************************
 
 Info _$InfoFromJson(Map<String, dynamic> json) => Info(
-      codec: Info._unbound(json['Codec']),
+      codec: Info._fromJson(json['Codec']),
       total: OnvifUtil.mappedToInt(json['Total'] as Map<String, dynamic>),
     );
 

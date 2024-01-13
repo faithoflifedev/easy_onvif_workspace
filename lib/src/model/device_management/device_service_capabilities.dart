@@ -28,11 +28,15 @@ class DeviceServiceCapabilities {
   @JsonKey(name: 'Security')
   SecurityCapabilities? security;
 
+  @JsonKey(name: 'Extension')
+  Map<String, dynamic>? extension;
+
   DeviceServiceCapabilities({
     this.network,
     this.system,
     this.io,
     this.security,
+    this.extension,
   });
 
   factory DeviceServiceCapabilities.fromJson(Map<String, dynamic> json) =>

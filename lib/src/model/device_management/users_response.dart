@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'user.dart';
@@ -8,7 +9,7 @@ part 'users_response.g.dart';
 
 @JsonSerializable()
 class GetUsersResponse {
-  @JsonKey(name: 'User', fromJson: _unbound)
+  @JsonKey(name: 'User', fromJson: _fromJson)
   final List<User> users;
 
   GetUsersResponse({required this.users});
@@ -18,14 +19,9 @@ class GetUsersResponse {
 
   Map<String, dynamic> toJson() => _$GetUsersResponseToJson(this);
 
-  static List<User> _unbound(dynamic json) {
-    if (json is List) {
-      return json.map((e) => User.fromJson(e as Map<String, dynamic>)).toList();
-    }
-
-    return [User.fromJson(json as Map<String, dynamic>)];
-  }
-
   @override
   String toString() => json.encode(toJson());
+
+  static List<User> _fromJson(dynamic json) => OnvifUtil.jsonList<User>(
+      json, (json) => User.fromJson(json as Map<String, dynamic>));
 }

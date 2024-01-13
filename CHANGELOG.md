@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.1.3+12
+
+* dependency bump
+* reduced code duplication
+
 ## 2.1.3+11
 
 * Issue #53, retry

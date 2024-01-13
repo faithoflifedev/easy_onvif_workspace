@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'profile.dart';
@@ -14,7 +15,7 @@ part 'get_profiles_response.g.dart';
 @JsonSerializable()
 class GetProfilesResponse {
   /// lists all profiles that exist in the media service
-  @JsonKey(name: 'Profiles', fromJson: _unbound)
+  @JsonKey(name: 'Profiles', fromJson: _fromJson)
   final List<Profile> profiles;
 
   GetProfilesResponse(this.profiles);
@@ -27,17 +28,6 @@ class GetProfilesResponse {
   @override
   String toString() => json.encode(toJson());
 
-  static List<Profile> _unbound(dynamic json) {
-    if (json == null) {
-      return <Profile>[];
-    }
-
-    if (json is List) {
-      return json
-          .map((e) => Profile.fromJson(e as Map<String, dynamic>))
-          .toList();
-    }
-
-    return [Profile.fromJson(json as Map<String, dynamic>)];
-  }
+  static List<Profile> _fromJson(dynamic json) => OnvifUtil.jsonList<Profile>(
+      json, (json) => Profile.fromJson(json as Map<String, dynamic>));
 }

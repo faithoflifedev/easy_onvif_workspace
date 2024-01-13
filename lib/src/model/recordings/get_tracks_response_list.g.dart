@@ -9,7 +9,7 @@ part of 'get_tracks_response_list.dart';
 GetTracksResponseList _$GetTracksResponseListFromJson(
         Map<String, dynamic> json) =>
     GetTracksResponseList(
-      recordingItems: GetTracksResponseList._unboundTracksItem(json['Track']),
+      recordingItems: GetTracksResponseList._fromJson(json['Track']),
     );
 
 Map<String, dynamic> _$GetTracksResponseListToJson(

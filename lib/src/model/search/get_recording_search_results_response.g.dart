@@ -10,8 +10,7 @@ GetRecordingSearchResultsResponse _$GetRecordingSearchResultsResponseFromJson(
         Map<String, dynamic> json) =>
     GetRecordingSearchResultsResponse(
       findRecordingResults:
-          GetRecordingSearchResultsResponse._unboundResultList(
-              json['ResultList']),
+          GetRecordingSearchResultsResponse._fromJson(json['ResultList']),
     );
 
 Map<String, dynamic> _$GetRecordingSearchResultsResponseToJson(
