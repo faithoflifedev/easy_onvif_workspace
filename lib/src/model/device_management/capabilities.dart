@@ -61,7 +61,11 @@ class Capabilities {
   @override
   String toString() => json.encode(toJson());
 
-  static List<MediaCapabilities> _unbound(dynamic json) {
+  static List<MediaCapabilities>? _unbound(dynamic json) {
+    if (json == null) {
+      return null;
+    }
+
     if (json is List) {
       return json
           .map((e) => MediaCapabilities.fromJson(e as Map<String, dynamic>))

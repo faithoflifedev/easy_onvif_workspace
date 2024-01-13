@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.3+11
+
+* Issue #53, retry
+
 ## 2.1.3+10
 
 * Issue #53
