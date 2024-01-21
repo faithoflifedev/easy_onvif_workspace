@@ -121,50 +121,78 @@ class DeviceManagementRequest {
   }
 
   /// XML for the [deviceInformation]
-  static XmlDocumentFragment deviceInformation() =>
-      Transport.quickTag('GetDeviceInformation', Xmlns.tds);
+  static XmlDocumentFragment deviceInformation() => Transport.quickTag(
+        'GetDeviceInformation',
+        Xmlns.tds,
+      );
 
   /// XML for the [hostname]
-  static XmlDocumentFragment hostname() =>
-      Transport.quickTag('GetHostname', Xmlns.tds);
+  static XmlDocumentFragment hostname() => Transport.quickTag(
+        'GetHostname',
+        Xmlns.tds,
+      );
 
   /// XML for the [endpointReference]
-  static XmlDocumentFragment endpointReference() =>
-      Transport.quickTag('GetEndpointReference', Xmlns.tds);
+  static XmlDocumentFragment endpointReference() => Transport.quickTag(
+        'GetEndpointReference',
+        Xmlns.tds,
+      );
 
   /// XML for the [serviceCapabilities]
-  static XmlDocumentFragment serviceCapabilities() =>
-      Transport.quickTag('GetServiceCapabilities', Xmlns.tds);
+  static XmlDocumentFragment serviceCapabilities() => Transport.quickTag(
+        'GetServiceCapabilities',
+        Xmlns.tds,
+      );
 
   /// XML for the [networkProtocols]
-  static XmlDocumentFragment networkProtocols() =>
-      Transport.quickTag('GetNetworkProtocols', Xmlns.tds);
+  static XmlDocumentFragment networkProtocols() => Transport.quickTag(
+        'GetNetworkProtocols',
+        Xmlns.tds,
+      );
 
   /// XML for the [systemReboot]
-  static XmlDocumentFragment systemReboot() =>
-      Transport.quickTag('SystemReboot', Xmlns.tds);
+  static XmlDocumentFragment systemReboot() => Transport.quickTag(
+        'SystemReboot',
+        Xmlns.tds,
+      );
 
   /// XML for the [systemUris]
-  static XmlDocumentFragment systemUris() =>
-      Transport.quickTag('GetSystemUris', Xmlns.tds);
+  static XmlDocumentFragment systemUris() => Transport.quickTag(
+        'GetSystemUris',
+        Xmlns.tds,
+      );
 
   /// XML for the [getUsers]
-  static XmlDocumentFragment getUsers() =>
-      Transport.quickTag('GetUsers', Xmlns.tds);
+  static XmlDocumentFragment getUsers() => Transport.quickTag(
+        'GetUsers',
+        Xmlns.tds,
+      );
 
-  static XmlDocumentFragment discoveryMode() =>
-      Transport.quickTag('GetDiscoveryMode', Xmlns.tds);
+  static XmlDocumentFragment discoveryMode() => Transport.quickTag(
+        'GetDiscoveryMode',
+        Xmlns.tds,
+      );
 
-  static XmlDocumentFragment dns() => Transport.quickTag('GetDNS', Xmlns.tds);
+  static XmlDocumentFragment dns() => Transport.quickTag(
+        'GetDNS',
+        Xmlns.tds,
+      );
 
   /// XML for the [ntp]
-  static XmlDocumentFragment ntp() => Transport.quickTag('GetNTP', Xmlns.tds);
+  static XmlDocumentFragment ntp() => Transport.quickTag(
+        'GetNTP',
+        Xmlns.tds,
+      );
 
   /// XML for the [getGeoLocation]
-  static XmlDocumentFragment getGeoLocation() =>
-      Transport.quickTag('GetGeoLocation', Xmlns.tds);
+  static XmlDocumentFragment getGeoLocation() => Transport.quickTag(
+        'GetGeoLocation',
+        Xmlns.tds,
+      );
 
   /// XML for the [getEndpointReference]
-  static XmlDocumentFragment getEndpointReference() =>
-      Transport.quickTag('GetEndpointReference', Xmlns.tds);
+  static XmlDocumentFragment getEndpointReference() => Transport.quickTag(
+        'GetEndpointReference',
+        Xmlns.tds,
+      );
 }

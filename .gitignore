@@ -27,6 +27,7 @@ doc/api/
 
 .pt-build/
 scratch/
+debug/
 
 **/config.yaml
 

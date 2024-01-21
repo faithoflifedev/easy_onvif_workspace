@@ -51,7 +51,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^2.1.3+13
+  easy_onvif: ^2.2.0
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -369,6 +369,10 @@ The values returned by the Onvif API `GetDeviceInformation` call.
   * not supported
 
 
+## New for version 2.2.x
+A new `cli` command has been added that will hopefully ease in debugging issues with this library when it comes to the vast variety of Onvif devices that are out in the wild.  Once the `cli` utility has been installed and authorized per the [quick start instructions](https://github.com/faithoflifedev/easy_onvif/blob/main/bin/README.md#quick-start), the command `onvif debug` will create a debug folder with a `debug.txt` and `debug.zip` that can be added to an [issue](https://github.com/faithoflifedev/easy_onvif/issues) to help to debug and resolve that issue.
+
+
 ## New for version 2.1.x
 
 * Support for __Media2__ Onvif operations
@@ -432,7 +436,7 @@ SocketException: Failed to create datagram socket (OS Error: The requested addre
 
 This is due to a bug in the underlying Dart SDK [#53477](https://github.com/flutter/flutter/issues/53477).
 
-With the help of [Viper-Bit](https://github.com/Viper-Bit) (who has supplied a c++ workaround that uses Dart FFI) and [Add00](https://github.com/Add00) (building and testing the c++ code on Windows 11) version *2.1.3* of the package now uses Dart FFI to resolve this issue on the Windows platform.  For Flutter Windows applications there is a supplied `discovery.dll` file that must be placed in the `assets` folder and referenced in the `pubspec.yaml`, for Windows Dart (cli) apps the `discovery.dll` defaults to the folder derived as `join(Directory.current.path, 'bin', 'discovery.dll')`.  Alternatively, cli apps on Windows can use the `ONVIF_DISCOVERY_DLL` environment variable to override the default path for instance:
+With the help of [Viper-Bit](https://github.com/Viper-Bit) (who has supplied a c++ workaround that uses Dart FFI) and [Add00](https://github.com/Add00) (building and testing the c++ code on Windows 11) version *2.1.3* and up of the package now uses Dart FFI to resolve this issue on the Windows platform.  For Flutter Windows applications there is a supplied `discovery.dll` file that must be placed in the `assets` folder and referenced in the `pubspec.yaml`, for Windows Dart (cli) apps the `discovery.dll` defaults to the folder derived as `join(Directory.current.path, 'bin', 'discovery.dll')`.  Alternatively, cli apps on Windows can use the `ONVIF_DISCOVERY_DLL` environment variable to override the default path for instance:
 
 ```text
 $env:ONVIF_DISCOVERY_DLL="example/flutter_model/assets/discovery.dll"

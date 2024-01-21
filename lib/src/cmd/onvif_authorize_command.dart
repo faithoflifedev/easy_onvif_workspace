@@ -8,14 +8,14 @@ import 'package:universal_io/io.dart';
 class OnvifAuthorizeCommand extends Command {
   @override
   String get description =>
-      'Generate an authentication file for an Onvif device';
+      'Generate an authentication file for an Onvif device.';
 
   @override
   String get name => 'authorize';
 
   @override
   void run() async {
-    final credFile = File('${OnvifUtil.userHome}/.onvif/credentials.json');
+    final credFile = OnvifUtil.defaultConfigFile;
 
     final hasCred = credFile.existsSync();
 

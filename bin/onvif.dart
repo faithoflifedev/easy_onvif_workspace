@@ -7,12 +7,13 @@ import 'package:universal_io/io.dart';
 void main(List<String> arguments) async {
   CommandRunner('onvif',
       'A command line interface for controlling Onvif compliant devices')
-    ..argParser.addOption('config-file',
-        defaultsTo: '${OnvifUtil.userHome}/.onvif/credentials.json')
+    ..argParser
+        .addOption('config-file', defaultsTo: OnvifUtil.defaultConfigFile.path)
     ..argParser.addOption('log-level',
         allowed: ['all', 'debug', 'info', 'warning', 'error', 'off'],
         defaultsTo: 'off')
     ..addCommand(OnvifAuthorizeCommand())
+    ..addCommand(OnvifDebugCommand())
     ..addCommand(OnvifDeviceManagementCommand())
     ..addCommand(OnvifImagingCommand())
     ..addCommand(OnvifMedia1Command())

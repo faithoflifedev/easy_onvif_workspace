@@ -5,35 +5,40 @@ import 'package:universal_io/io.dart';
 
 void main() {
   group('Device Management', () {
+    group('unknown', () {
+      test('GetCapabilitiesResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/unknown/device_management/GetCapabilitiesResponse.xml');
+
+        expect(
+            GetCapabilitiesResponse.fromJson(envelope.body.response!)
+                .capabilities
+                .device
+                ?.xAddr,
+            'http://10.201.1.11:80/onvif/Device_service');
+      });
+    });
+
     group('Happytimesoft', () {
       test('CreateUsersResponse', () {
-        final response = File(
-                'test/xml/happytimesoft/device_management/CreateUsersResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/device_management/CreateUsersResponse.xml');
 
         expect(
             envelope.body.response?.containsKey('CreateUsersResponse'), true);
       });
 
       test('DeleteUsersResponse', () {
-        final response = File(
-                'test/xml/happytimesoft/device_management/DeleteUsersResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/device_management/DeleteUsersResponse.xml');
 
         expect(
             envelope.body.response?.containsKey('DeleteUsersResponse'), true);
       });
 
       test('GetCapabilitiesResponse', () {
-        final response = File(
-                'test/xml/happytimesoft/device_management/GetCapabilitiesResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/device_management/GetCapabilitiesResponse.xml');
 
         expect(
             GetCapabilitiesResponse.fromJson(envelope.body.response!)
@@ -44,11 +49,8 @@ void main() {
       });
 
       test('GetDeviceInformationResponse', () {
-        final response = File(
-                'test/xml/happytimesoft/device_management/GetDeviceInformationResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/device_management/GetDeviceInformationResponse.xml');
 
         expect(
             GetDeviceInformationResponse.fromJson(envelope.body.response!)
@@ -57,11 +59,8 @@ void main() {
       });
 
       test('GetDiscoveryModeResponse', () {
-        final response = File(
-                'test/xml/happytimesoft/device_management/GetDiscoveryModeResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/device_management/GetDiscoveryModeResponse.xml');
 
         expect(
             GetDiscoveryModeResponse.fromJson(envelope.body.response!)
@@ -70,11 +69,8 @@ void main() {
       });
 
       test('GetDNSResponse', () {
-        final response =
-            File('test/xml/happytimesoft/device_management/GetDNSResponse.xml')
-                .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/device_management/GetDNSResponse.xml');
 
         expect(
             GetDnsResponse.fromJson(envelope.body.response!)
@@ -84,11 +80,8 @@ void main() {
       });
 
       test('GetHostnameResponse', () {
-        final response = File(
-                'test/xml/happytimesoft/device_management/GetHostnameResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/device_management/GetHostnameResponse.xml');
 
         expect(
             GetHostnameResponse.fromJson(envelope.body.response!)
@@ -98,11 +91,8 @@ void main() {
       });
 
       test('GetNetworkProtocolsResponse', () {
-        final response = File(
-                'test/xml/happytimesoft/device_management/GetNetworkProtocolsResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/device_management/GetNetworkProtocolsResponse.xml');
 
         expect(
             GetNetworkProtocolsResponse.fromJson(envelope.body.response!)
@@ -112,11 +102,8 @@ void main() {
       });
 
       test('GetNTPResponse', () {
-        final response =
-            File('test/xml/happytimesoft/device_management/GetNTPResponse.xml')
-                .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/device_management/GetNTPResponse.xml');
 
         expect(
             GetNtpResponse.fromJson(envelope.body.response!)
@@ -126,11 +113,8 @@ void main() {
       });
 
       test('GetServiceCapabilitiesResponse', () {
-        final response = File(
-                'test/xml/happytimesoft/device_management/GetServiceCapabilitiesResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/device_management/GetServiceCapabilitiesResponse.xml');
 
         expect(
             GetServiceCapabilitiesResponse.fromJson(envelope.body.response!)
@@ -141,11 +125,8 @@ void main() {
       });
 
       test('GetServicesResponse', () {
-        final response = File(
-                'test/xml/happytimesoft/device_management/GetServicesResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/device_management/GetServicesResponse.xml');
 
         expect(
             GetServicesResponse.fromJson(envelope.body.response!)
@@ -155,11 +136,8 @@ void main() {
       });
 
       test('GetSystemDateAndTimeResponse', () {
-        final response = File(
-                'test/xml/happytimesoft/device_management/GetSystemDateAndTimeResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/device_management/GetSystemDateAndTimeResponse.xml');
 
         expect(
             GetSystemDateAndTimeResponse.fromJson(envelope.body.response!)
@@ -169,11 +147,8 @@ void main() {
       });
 
       test('GetSystemUrisResponse', () {
-        final response = File(
-                'test/xml/happytimesoft/device_management/GetSystemUrisResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/device_management/GetSystemUrisResponse.xml');
 
         expect(
             GetSystemUrisResponse.fromJson(envelope.body.response!)
@@ -182,11 +157,8 @@ void main() {
       });
 
       test('GetUsersResponse', () {
-        final response = File(
-                'test/xml/happytimesoft/device_management/GetUsersResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/device_management/GetUsersResponse.xml');
 
         expect(
             GetUsersResponse.fromJson(envelope.body.response!).users.isNotEmpty,

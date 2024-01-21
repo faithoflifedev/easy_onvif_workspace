@@ -65,17 +65,22 @@ class Transport with UiLoggy {
     return Transport.builder.buildFragment();
   }
 
-  XmlDocumentFragment getSecurityHeader(AuthInfo authInfo) {
-    final authorization =
-        Authorization(password: authInfo.password, timeDelta: timeDelta);
+  XmlDocumentFragment getSecurityHeader({
+    Authorization? authorization,
+  }) {
+    authorization ??= Authorization(
+      password: authInfo.password,
+      timeStamp: DateTime.now(),
+      timeDelta: timeDelta,
+    );
 
-    final security = Transport.security(
+    final securityHeader = Transport.security(
         username: authInfo.username,
         password: authorization.digest,
-        nonce: authorization.nonce,
-        created: authorization.timeStamp);
+        nonce: authorization.nonce.toBase64(),
+        created: authorization.utcTimeStamp);
 
-    return Transport.header(security);
+    return securityHeader;
   }
 
   /// XML for the SOAP envelope
@@ -102,12 +107,9 @@ class Transport with UiLoggy {
 
   /// XML for the SOAP envelope
   XmlDocument securedEnvelope(XmlDocumentFragment body) =>
-      envelope(getSecurityHeader(authInfo), body);
+      envelope(getSecurityHeader(), body);
 
-  ///XML for the SOAP security header
-  static XmlDocumentFragment header(XmlDocumentFragment security) => security;
-
-  ///XML for the SOAP [security]
+  /// XML for the SOAP [security]
   static XmlDocumentFragment security(
       {required String username,
       required String password,

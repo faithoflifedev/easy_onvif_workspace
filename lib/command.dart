@@ -2,6 +2,7 @@
 library command;
 
 export 'src/cmd/onvif_authorize_command.dart';
+export 'src/cmd/onvif_debug_command.dart';
 export 'src/cmd/onvif_device_management_command.dart';
 export 'src/cmd/onvif_helper_command.dart';
 export 'src/cmd/onvif_imaging_command.dart';

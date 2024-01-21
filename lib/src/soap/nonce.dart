@@ -1,22 +1,21 @@
 import 'dart:convert' show base64;
 import 'dart:math' show Random;
-import 'dart:typed_data' show Uint8List;
 
-/// implements the [Nonce] algorithm specified by the Onvif spec.
 class Nonce {
-  final int size;
+  final _random = Random.secure();
 
-  final Uint8List bytes;
+  final List<int>? bytesOverride;
 
-  Nonce({this.size = 16})
-      : bytes = Uint8List.fromList(
-            List<int>.generate(size, (i) => Random().nextInt(255)));
+  late final List<int> bytes;
 
-  String toBase64() => base64.encode(bytes.toList());
+  Nonce({this.bytesOverride}) {
+    bytes = bytesOverride ??
+        List<int>.generate(
+          16,
+          (_) => _random.nextInt(255),
+          growable: false,
+        );
+  }
 
-  @override
-  String toString() => bytes
-      .map((element) => element.toRadixString(size).padLeft(2, '0'))
-      .toList()
-      .join();
+  String toBase64() => base64.encode(bytes);
 }
