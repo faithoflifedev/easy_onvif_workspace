@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.2.0+1
+
+* new cli feature `onvif debug` generates a debug.zip with request&#x2F;response for most common device features
+* older devices that don&#x27;t support GetServices work again
+* unit test for authentication digest
+* unit test for XML `Security` header
+
 ## 2.2.0
 
 * new cli fearture `onvif debug` geneerates a debug.zip with request&#x2F;response for most common device features
