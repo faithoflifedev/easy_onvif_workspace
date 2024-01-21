@@ -3,92 +3,100 @@
 A command line interface application for controlling an Onvif device through terminal commands.  This tool allows you to use O/S features like `cron` to automate Onvif device functionality.
 
 ## Table of Contents
-- [Installation](#installation)
-- [Quick start](#quick-start)
-- [Commands](#commands)
-- [authorize](#authorize)
-- [device-management](#device-management)
-    - [device-management create-users](#device-management-create-users)
-    - [device-management delete-users](#device-management-delete-users)
-    - [device-management get-capabilities](#device-management-get-capabilities)
-    - [device-management get-device-information](#device-management-get-device-information)
-    - [device-management get-discovery-mode](#device-management-get-discovery-mode)
-    - [device-management get-dns](#device-management-get-dns)
-    - [device-management get-endpoint-reference](#device-management-get-endpoint-reference)
-    - [device-management get-hostname](#device-management-get-hostname)
-    - [device-management get-network-protocols](#device-management-get-network-protocols)
-    - [device-management get-ntp](#device-management-get-ntp)
-    - [device-management get-service-capabilities](#device-management-get-service-capabilities)
-    - [device-management get-services](#device-management-get-services)
-    - [device-management get-storage-configuration](#device-management-get-storage-configuration)
-    - [device-management get-storage-configurations](#device-management-get-storage-configurations)
-    - [device-management get-system-date-and-time](#device-management-get-system-date-and-time)
-    - [device-management get-system-log](#device-management-get-system-log)
-    - [device-management get-system-support-information](#device-management-get-system-support-information)
-    - [device-management get-system-uris](#device-management-get-system-uris)
-    - [device-management get-users](#device-management-get-users)
-    - [device-management system-reboot](#device-management-system-reboot)
-- [media1](#media1)
-    - [media1 get-audio-sources](#media1-get-audio-sources)
-    - [media1 get-metadata-configuration](#media1-get-metadata-configuration)
-    - [media1 get-metadata-configuration](#media1-get-metadata-configuration-1)
-    - [media1 get-profile](#media1-get-profile)
-    - [media1 get-profiles](#media1-get-profiles)
-    - [media1 get-service-capabilities](#media1-get-service-capabilities)
-    - [media1 get-snapshot-uri](#media1-get-snapshot-uri)
-    - [media1 get-stream-uri](#media1-get-stream-uri)
-    - [media1 get-video-sources](#media1-get-video-sources)
-    - [media1 start-multicast-streaming](#media1-start-multicast-streaming)
-    - [media1 stop-multicast-streaming](#media1-stop-multicast-streaming)
-- [media2](#media2)
-    - [media2 get-metadata-configuration-options](#media2-get-metadata-configuration-options)
-    - [media2 get-metadata-configurations](#media2-get-metadata-configurations)
-    - [media2 get-profiles](#media2-get-profiles)
-    - [media2 get-service-capabilities](#media2-get-service-capabilities)
-    - [media2 get-snapshot-uri](#media2-get-snapshot-uri)
-    - [media2 get-stream-uri](#media2-get-stream-uri)
-    - [media2 get-video-encoder-instances](#media2-get-video-encoder-instances)
-    - [media2 start-multicast-streaming](#media2-start-multicast-streaming)
-    - [media2 stop-multicast-streaming](#media2-stop-multicast-streaming)
-- [probe](#probe)
-- [ptz](#ptz)
-    - [ptz absolute-move](#ptz-absolute-move)
-    - [ptz continuous-move](#ptz-continuous-move)
-    - [ptz get-configuration](#ptz-get-configuration)
-    - [ptz get-configurations](#ptz-get-configurations)
-    - [ptz get-presets](#ptz-get-presets)
-    - [ptz get-status](#ptz-get-status)
-    - [ptz goto-preset](#ptz-goto-preset)
-    - [ptz move](#ptz-move)
-    - [ptz move-down](#ptz-move-down)
-    - [ptz move-left](#ptz-move-left)
-    - [ptz move-right](#ptz-move-right)
-    - [ptz move-up](#ptz-move-up)
-    - [ptz relative-move](#ptz-relative-move)
-    - [ptz remove-preset](#ptz-remove-preset)
-    - [ptz set-preset](#ptz-set-preset)
-    - [ptz stop](#ptz-stop)
-    - [ptz zoom](#ptz-zoom)
-    - [ptz zoom-in](#ptz-zoom-in)
-    - [ptz zoom-out](#ptz-zoom-out)
-    - [ptz get-current-preset](#ptz-get-current-preset)
-- [recordings](#recordings)
-    - [recordings create-recording](#recordings-create-recording)
-    - [recordings create-recording-job](#recordings-create-recording-job)
-    - [recordings delete-recording-job](#recordings-delete-recording-job)
-    - [recordings delete-recordings](#recordings-delete-recordings)
-    - [recordings get-recording-job-state](#recordings-get-recording-job-state)
-    - [recordings get-recording-jobs](#recordings-get-recording-jobs)
-    - [recordings get-recording-options](#recordings-get-recording-options)
-    - [recordings get-recordings](#recordings-get-recordings)
-    - [recordings get-service-capabilities](#recordings-get-service-capabilities)
-    - [recordings set-recording-job-mode](#recordings-set-recording-job-mode)
-- [replay](#replay)
-    - [replay get-replay-configuration](#replay-get-replay-configuration)
-    - [replay get-replay-uri](#replay-get-replay-uri)
-    - [replay get-service-capabilities](#replay-get-service-capabilities)
-    - [replay set-replay-configuration](#replay-set-replay-configuration)
-- [version](#version)
+  - [Installation](#installation)
+  - [Quick start](#quick-start)
+  - [Commands](#commands)
+    - [authorize](#authorize)
+    - [device-management](#device-management)
+      - [device-management create-users](#device-management-create-users)
+      - [device-management delete-users](#device-management-delete-users)
+      - [device-management get-capabilities](#device-management-get-capabilities)
+      - [device-management get-device-information](#device-management-get-device-information)
+      - [device-management get-discovery-mode](#device-management-get-discovery-mode)
+      - [device-management get-dns](#device-management-get-dns)
+      - [device-management get-endpoint-reference](#device-management-get-endpoint-reference)
+      - [device-management get-hostname](#device-management-get-hostname)
+      - [device-management get-network-protocols](#device-management-get-network-protocols)
+      - [device-management get-ntp](#device-management-get-ntp)
+      - [device-management get-service-capabilities](#device-management-get-service-capabilities)
+      - [device-management get-services](#device-management-get-services)
+      - [device-management get-storage-configuration](#device-management-get-storage-configuration)
+      - [device-management get-storage-configurations](#device-management-get-storage-configurations)
+      - [device-management get-system-date-and-time](#device-management-get-system-date-and-time)
+      - [device-management get-system-log](#device-management-get-system-log)
+      - [device-management get-system-support-information](#device-management-get-system-support-information)
+      - [device-management get-system-uris](#device-management-get-system-uris)
+      - [device-management get-users](#device-management-get-users)
+      - [device-management system-reboot](#device-management-system-reboot)
+    - [debug](#debug)
+    - [media1](#media1)
+      - [media1 get-audio-sources](#media1-get-audio-sources)
+      - [media1 get-metadata-configuration](#media1-get-metadata-configuration)
+      - [media1 get-metadata-configuration](#media1-get-metadata-configuration-1)
+      - [media1 get-profile](#media1-get-profile)
+      - [media1 get-profiles](#media1-get-profiles)
+      - [media1 get-service-capabilities](#media1-get-service-capabilities)
+        - [media1 get-snapshot-uri](#media1-get-snapshot-uri)
+      - [media1 get-stream-uri](#media1-get-stream-uri)
+      - [media1 get-video-sources](#media1-get-video-sources)
+      - [media1 start-multicast-streaming](#media1-start-multicast-streaming)
+      - [media1 stop-multicast-streaming](#media1-stop-multicast-streaming)
+    - [media2](#media2)
+      - [media2 get-metadata-configuration-options](#media2-get-metadata-configuration-options)
+      - [media2 get-metadata-configurations](#media2-get-metadata-configurations)
+      - [media2 get-profiles](#media2-get-profiles)
+      - [media2 get-service-capabilities](#media2-get-service-capabilities)
+      - [media2 get-snapshot-uri](#media2-get-snapshot-uri)
+      - [media2 get-stream-uri](#media2-get-stream-uri)
+      - [media2 get-video-encoder-instances](#media2-get-video-encoder-instances)
+      - [media2 start-multicast-streaming](#media2-start-multicast-streaming)
+      - [media2 stop-multicast-streaming](#media2-stop-multicast-streaming)
+    - [probe](#probe)
+    - [ptz](#ptz)
+      - [ptz absolute-move](#ptz-absolute-move)
+      - [ptz continuous-move](#ptz-continuous-move)
+    - [ptz get-compatible-configurations](#ptz-get-compatible-configurations)
+      - [ptz get-configuration](#ptz-get-configuration)
+      - [ptz get-configuration-options](#ptz-get-configuration-options)
+      - [ptz get-configurations](#ptz-get-configurations)
+      - [ptz get-current-preset](#ptz-get-current-preset)
+      - [ptz get-preset-tour](#ptz-get-preset-tour)
+      - [ptz get-preset-tours](#ptz-get-preset-tours)
+      - [ptz get-presets](#ptz-get-presets)
+      - [ptz get-service-capabilities](#ptz-get-service-capabilities)
+      - [ptz get-status](#ptz-get-status)
+      - [ptz goto-preset](#ptz-goto-preset)
+      - [ptz move](#ptz-move)
+      - [ptz move-down](#ptz-move-down)
+      - [ptz move-left](#ptz-move-left)
+      - [ptz move-right](#ptz-move-right)
+      - [ptz move-up](#ptz-move-up)
+      - [ptz relative-move](#ptz-relative-move)
+      - [ptz remove-preset](#ptz-remove-preset)
+      - [ptz set-home-position](#ptz-set-home-position)
+      - [ptz set-preset](#ptz-set-preset)
+      - [ptz stop](#ptz-stop)
+      - [ptz zoom](#ptz-zoom)
+      - [ptz zoom-in](#ptz-zoom-in)
+      - [ptz zoom-out](#ptz-zoom-out)
+    - [recordings](#recordings)
+      - [recordings create-recording](#recordings-create-recording)
+      - [recordings create-recording-job](#recordings-create-recording-job)
+      - [recordings delete-recording-job](#recordings-delete-recording-job)
+      - [recordings delete-recordings](#recordings-delete-recordings)
+      - [recordings get-recording-job-state](#recordings-get-recording-job-state)
+      - [recordings get-recording-jobs](#recordings-get-recording-jobs)
+      - [recordings get-recording-options](#recordings-get-recording-options)
+      - [recordings get-recordings](#recordings-get-recordings)
+      - [recordings get-service-capabilities](#recordings-get-service-capabilities)
+      - [recordings set-recording-job-mode](#recordings-set-recording-job-mode)
+    - [replay](#replay)
+      - [replay get-replay-configuration](#replay-get-replay-configuration)
+      - [replay get-replay-uri](#replay-get-replay-uri)
+      - [replay get-service-capabilities](#replay-get-service-capabilities)
+      - [replay set-replay-configuration](#replay-set-replay-configuration)
+    - [version](#version)
+
 
 
 ## Installation
@@ -125,7 +133,8 @@ Global options:
     --log-level      [all, debug, info, warning, error, off (default)]
 
 Available commands:
-  authorize           Generate an authentication file for an Onvif device
+  authorize           Generate an authentication file for an Onvif device.
+  debug               Generate a debug bundle for an Onvif device.
   device-management   Device management commands.
   media1              Media ver10 commands.
   media2              Media ver20 commands.
@@ -133,12 +142,14 @@ Available commands:
   ptz                 PTZ commands.
   recordings          Recordings commands.
   replay              Replay commands.
+  search              Search commands.
   version             Display the package name and version.
 ```
 
 | command | description |
 | --- | --- |
 | [authorize](#authorize) | Generate a credentials file used to authenticate the command line API requests |
+| debug | Generate a debug bundle for an Onvif device. |
 | [device-management](#device-management) | Onvif device management commands, [spec](https://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl) |
 | [media1](#media1) | Onvif media ver10 commands, [spec](https://www.onvif.org/ver10/media/wsdl/media.wsdl) |
 | [media2](#media2) | Onvif media ver20 commands, [spec](https://www.onvif.org/ver20/media/wsdl/media.wsdl) |
@@ -500,6 +511,21 @@ This operation reboots the device.
 
 Usage: onvif device-management system-reboot [arguments]
 -h, --help    Print this usage information.
+```
+
+###  debug
+
+```sh
+onvif debug --help
+```
+
+```text
+Generate a debug bundle for an Onvif device.
+
+Usage: onvif debug [arguments]
+-h, --help                         Print this usage information.
+-o, --output-folder=<file path>    destination folder for debug bundle
+                                   (defaults to "debug")
 ```
 
 ### media1

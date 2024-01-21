@@ -12,9 +12,9 @@ class LoggingInterceptors extends Interceptor with UiLoggy {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) {
-    loggy.debug('URI: ${options.uri}');
+    loggy.debug('\nURI: ${options.uri}');
 
-    loggy.debug('REQUEST:\n${options.data}');
+    loggy.debug('\nREQUEST:\n${options.data}');
 
     handler.next(options);
   }
@@ -25,7 +25,7 @@ class LoggingInterceptors extends Interceptor with UiLoggy {
     DioException err,
     ErrorInterceptorHandler handler,
   ) {
-    loggy.error('ERROR:\n$err');
+    loggy.error('\nERROR:\n$err');
 
     handler.next(err);
   }
@@ -36,7 +36,7 @@ class LoggingInterceptors extends Interceptor with UiLoggy {
     Response response,
     ResponseInterceptorHandler handler,
   ) {
-    loggy.debug('RESPONSE:\n${response.data}');
+    loggy.debug('\nRESPONSE:\n${response.data}');
 
     handler.next(response);
   }

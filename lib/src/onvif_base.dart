@@ -121,63 +121,71 @@ class Onvif with UiLoggy {
 
     soap.Transport.timeDelta = await getTimeDelta();
 
-    final serviceList = await deviceManagement.getServices(true);
+    try {
+      final serviceList = await deviceManagement.getServices(true);
 
-    serviceMap.addAll(
-        {for (var service in serviceList) service.nameSpace: service.xAddr});
+      serviceMap.addAll(
+          {for (var service in serviceList) service.nameSpace: service.xAddr});
 
-    if (serviceMap.containsKey(soap.Xmlns.timg)) {
-      _imaging = Imaging(
+      if (serviceMap.containsKey(soap.Xmlns.timg)) {
+        _imaging = Imaging(
+            transport: transport,
+            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.timg]!));
+      }
+
+      if (serviceMap.containsKey(soap.Xmlns.trt)) {
+        media1 = Media1(
+            transport: transport,
+            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trt]!));
+      }
+
+      if (serviceMap.containsKey(soap.Xmlns.tr2)) {
+        media2 = Media2(
+            transport: transport,
+            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.tr2]!));
+      }
+
+      if (serviceMap.containsKey(soap.Xmlns.tptz)) {
+        _ptz = Ptz(
+            transport: transport,
+            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.tptz]!));
+      }
+
+      if (serviceMap.containsKey(soap.Xmlns.trc)) {
+        _recordings = Recordings(
+            transport: transport,
+            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trc]!));
+      }
+
+      if (serviceMap.containsKey(soap.Xmlns.trp)) {
+        _replay = Replay(
+            transport: transport,
+            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trp]!));
+      }
+
+      if (serviceMap.containsKey(soap.Xmlns.tse)) {
+        _search = Search(
+            transport: transport,
+            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.tse]!));
+      }
+
+      if (media1 != null || media2 != null) {
+        _media = Media(
           transport: transport,
-          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.timg]!));
-    }
-
-    if (serviceMap.containsKey(soap.Xmlns.trt)) {
-      media1 = Media1(
-          transport: transport,
-          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trt]!));
-    }
-
-    if (serviceMap.containsKey(soap.Xmlns.tr2)) {
-      media2 = Media2(
-          transport: transport,
-          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.tr2]!));
-    }
-
-    if (serviceMap.containsKey(soap.Xmlns.tptz)) {
-      _ptz = Ptz(
-          transport: transport,
-          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.tptz]!));
-    }
-
-    if (serviceMap.containsKey(soap.Xmlns.trc)) {
-      _recordings = Recordings(
-          transport: transport,
-          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trc]!));
-    }
-
-    if (serviceMap.containsKey(soap.Xmlns.trp)) {
-      _replay = Replay(
-          transport: transport,
-          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trp]!));
-    }
-
-    if (serviceMap.containsKey(soap.Xmlns.tse)) {
-      _search = Search(
-          transport: transport,
-          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.tse]!));
-    }
-
-    if (media1 != null || media2 != null) {
-      _media = Media(
-        transport: transport,
-        media1: media1,
-        media2: media2,
-      );
-    } else {
+          media1: media1,
+          media2: media2,
+        );
+      }
+    } catch (e) {
       loggy.warning('GetServices command not supported');
-
+    } finally {
       final capabilities = await deviceManagement.getCapabilities();
+
+      if (capabilities.imaging?.xAddr != null) {
+        _imaging = Imaging(
+            transport: transport,
+            uri: _serviceUriOfHost(capabilities.imaging!.xAddr));
+      }
 
       if (capabilities.media?.xAddr != null) {
         _media = Media(
@@ -215,13 +223,6 @@ class Onvif with UiLoggy {
       fragment: serviceUri.fragment == '' ? null : serviceUri.fragment,
     );
   }
-
-  /* for testing:
-        , postProcess: (String xmlBody, dynamic jsonMap, Envelope envelope) {
-      print(xmlBody);
-      print('\n\n');
-      print(jsonMap);
-    } */
 }
 
 class AuthInfo {

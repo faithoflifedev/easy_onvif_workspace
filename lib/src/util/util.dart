@@ -7,6 +7,7 @@ import 'package:easy_onvif/src/model/media_uri.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:intl/intl.dart';
 import 'package:loggy/loggy.dart';
+import 'package:path/path.dart' as p;
 import 'package:universal_io/io.dart';
 import 'package:xml/xml.dart';
 import 'package:xml2json/xml2json.dart';
@@ -112,6 +113,10 @@ class OnvifUtil {
 
   static String? get userHome =>
       Platform.environment['HOME'] ?? Platform.environment['USERPROFILE'];
+
+  static File get defaultConfigFile => OnvifUtil.userHome != null
+      ? File(p.join(OnvifUtil.userHome!, '.onvif/credentials.json'))
+      : throw Exception('User home directory not found');
 
   static bool stringToBool(String value) => value.toLowerCase() == 'true';
 

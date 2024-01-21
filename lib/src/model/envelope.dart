@@ -1,6 +1,7 @@
 import 'package:easy_onvif/src/model/header.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:universal_io/io.dart';
 
 import 'body.dart';
 
@@ -21,4 +22,7 @@ class Envelope {
 
   factory Envelope.fromXml(String xml) =>
       Envelope.fromJson(OnvifUtil.xmlToMap(xml));
+
+  factory Envelope.fromXmlFile(String fileNameAndPath) =>
+      Envelope.fromXml(File(fileNameAndPath).readAsStringSync());
 }

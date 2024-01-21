@@ -2,28 +2,34 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 import 'package:easy_onvif/soap.dart';
+import 'package:intl/intl.dart';
 
 /// Implementation of the [Authorization] algorithm required to authenticate to
 /// Onvif devices
 class Authorization {
-  final Nonce _nonce = Nonce();
+  late final Nonce nonce;
+
+  final Nonce? nonceOverride;
 
   final String password;
-  final String timeStamp;
+
+  final DateTime timeStamp;
 
   final Duration timeDelta;
 
-  //Calculate the digest used in the SOAP authorization header
-  late final String digest = base64.encode(sha1
-      .convert([
-        ..._nonce.bytes,
-        ...utf8.encode(timeStamp),
-        ...utf8.encode(password)
-      ].toList())
+  String get utcTimeStamp => DateFormat('yyyy-MM-DD\'T\'HH:mm:ss\'Z\'')
+      .format(timeStamp.add(timeDelta));
+
+  String get digest => base64.encode(sha1
+      .convert(nonce.bytes + utf8.encode(utcTimeStamp) + utf8.encode(password))
       .bytes);
 
-  String get nonce => _nonce.toBase64();
-
-  Authorization({required this.password, required this.timeDelta})
-      : timeStamp = DateTime.now().toUtc().add(timeDelta).toIso8601String();
+  Authorization({
+    required this.password,
+    required this.timeStamp,
+    required this.timeDelta,
+    this.nonceOverride,
+  }) {
+    nonce = nonceOverride ?? Nonce();
+  }
 }
