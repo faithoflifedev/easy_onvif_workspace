@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.0+2
+
+* ptz absolute-move cli command params better match the Onvif spec
+
 ## 2.2.0+1
 
 * new cli feature `onvif debug` generates a debug.zip with request&#x2F;response for most common device features

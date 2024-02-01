@@ -2,17 +2,13 @@ import 'package:easy_onvif/media2.dart';
 import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/src/model/envelope.dart';
 import 'package:test/test.dart';
-import 'package:universal_io/io.dart';
 
 void main() {
   group('Media2', () {
     group('Happytimesoft', () {
       test('GetMetadataConfigurationOptionsResponse', () {
-        final response = File(
-                'test/xml/happytimesoft/media2/GetMetadataConfigurationOptionsResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/media2/GetMetadataConfigurationOptionsResponse.xml');
 
         expect(
             GetMetadataConfigurationOptionsResponse.fromJson(
@@ -24,11 +20,8 @@ void main() {
       });
 
       test('GetMetadataConfigurationsResponse', () {
-        final response = File(
-                'test/xml/happytimesoft/media2/GetMetadataConfigurationsResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/media2/GetMetadataConfigurationsResponse.xml');
 
         expect(
             GetMetadataConfigurationsResponse.fromJson(envelope.body.response!)
@@ -38,11 +31,8 @@ void main() {
       });
 
       test('GetProfilesResponse', () {
-        final response =
-            File('test/xml/happytimesoft/media2/GetProfilesResponse.xml')
-                .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/media2/GetProfilesResponse.xml');
 
         expect(
             GetProfilesResponse.fromJson(envelope.body.response!)
@@ -52,11 +42,8 @@ void main() {
       });
 
       test('GetServiceCapabilitiesResponse', () {
-        final response = File(
-                'test/xml/happytimesoft/media2/GetServiceCapabilitiesResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/media2/GetServiceCapabilitiesResponse.xml');
 
         expect(
             GetServiceCapabilitiesResponse.fromJson(envelope.body.response!)
@@ -66,22 +53,16 @@ void main() {
       });
 
       test('GetSnapshotUriResponse', () {
-        final response =
-            File('test/xml/happytimesoft/media2/GetSnapshotUriResponse.xml')
-                .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/media2/GetSnapshotUriResponse.xml');
 
         expect(GetSnapshotUriResponse.fromJson(envelope.body.response!).uri,
             'http://192.168.2.119:10000/snapshot/ProfileToken_1');
       });
 
       test('GetStreamUriResponse', () {
-        final response =
-            File('test/xml/happytimesoft/media2/GetStreamUriResponse.xml')
-                .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/media2/GetStreamUriResponse.xml');
 
         expect(
             GetStreamUriResponse.fromJson(envelope.body.response!).uri ==
@@ -90,11 +71,8 @@ void main() {
       });
 
       test('StartMulticastStreamingResponse', () {
-        final response = File(
-                'test/xml/happytimesoft/media2/StartMulticastStreamingResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/media2/StartMulticastStreamingResponse.xml');
 
         expect(
             envelope.body.response!
@@ -103,11 +81,8 @@ void main() {
       });
 
       test('StopMulticastStreamingResponse', () {
-        final response = File(
-                'test/xml/happytimesoft/media2/StopMulticastStreamingResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/happytimesoft/media2/StopMulticastStreamingResponse.xml');
 
         expect(
             envelope.body.response!
@@ -118,11 +93,8 @@ void main() {
 
     group('ENP1A14-IR_25X', () {
       test('GetMetadataConfigurationOptionsResponse', () {
-        final response = File(
-                'test/xml/ENP1A14-IR_25X/media2/GetMetadataConfigurationOptionsResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/ENP1A14-IR_25X/media2/GetMetadataConfigurationOptionsResponse.xml');
 
         expect(
             GetMetadataConfigurationOptionsResponse.fromJson(
@@ -134,11 +106,8 @@ void main() {
       });
 
       test('GetMetadataConfigurationsResponse', () {
-        final response = File(
-                'test/xml/ENP1A14-IR_25X/media2/GetMetadataConfigurationsResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/ENP1A14-IR_25X/media2/GetMetadataConfigurationsResponse.xml');
 
         expect(
             GetMetadataConfigurationsResponse.fromJson(envelope.body.response!)
@@ -148,11 +117,8 @@ void main() {
       });
 
       test('GetProfilesResponse', () {
-        final response =
-            File('test/xml/ENP1A14-IR_25X/media2/GetProfilesResponse.xml')
-                .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/ENP1A14-IR_25X/media2/GetProfilesResponse.xml');
 
         expect(
             GetProfilesResponse.fromJson(envelope.body.response!)
@@ -162,11 +128,8 @@ void main() {
       });
 
       test('GetServiceCapabilitiesResponse', () {
-        final response = File(
-                'test/xml/ENP1A14-IR_25X/media2/GetServiceCapabilitiesResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/ENP1A14-IR_25X/media2/GetServiceCapabilitiesResponse.xml');
 
         expect(
             GetServiceCapabilitiesResponse.fromJson(envelope.body.response!)
@@ -176,22 +139,16 @@ void main() {
       });
 
       test('GetSnapshotUriResponse', () {
-        final response =
-            File('test/xml/ENP1A14-IR_25X/media2/GetSnapshotUriResponse.xml')
-                .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/ENP1A14-IR_25X/media2/GetSnapshotUriResponse.xml');
 
         expect(GetSnapshotUriResponse.fromJson(envelope.body.response!).uri,
             'http://192.168.1.182/onvif-http/snapshot?Profile_1');
       });
 
       test('GetStreamUriResponse', () {
-        final response =
-            File('test/xml/ENP1A14-IR_25X/media2/GetStreamUriResponse.xml')
-                .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/ENP1A14-IR_25X/media2/GetStreamUriResponse.xml');
 
         expect(
             GetStreamUriResponse.fromJson(envelope.body.response!).uri ==
@@ -200,11 +157,8 @@ void main() {
       });
 
       test('StartMulticastStreamingResponse', () {
-        final response = File(
-                'test/xml/ENP1A14-IR_25X/media2/StartMulticastStreamingResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/ENP1A14-IR_25X/media2/StartMulticastStreamingResponse.xml');
 
         expect(
             envelope.body.response!
@@ -213,11 +167,8 @@ void main() {
       });
 
       test('StopMulticastStreamingResponse', () {
-        final response = File(
-                'test/xml/ENP1A14-IR_25X/media2/StopMulticastStreamingResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/ENP1A14-IR_25X/media2/StopMulticastStreamingResponse.xml');
 
         expect(
             envelope.body.response!
@@ -228,11 +179,8 @@ void main() {
 
     group('GX728MF-IR28', () {
       test('GetMetadataConfigurationOptionsResponse', () {
-        final response = File(
-                'test/xml/GX728MF-IR28/media2/GetMetadataConfigurationOptionsResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/GX728MF-IR28/media2/GetMetadataConfigurationOptionsResponse.xml');
 
         expect(
             GetMetadataConfigurationOptionsResponse.fromJson(
@@ -244,11 +192,8 @@ void main() {
       });
 
       test('GetMetadataConfigurationsResponse', () {
-        final response = File(
-                'test/xml/GX728MF-IR28/media2/GetMetadataConfigurationsResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/GX728MF-IR28/media2/GetMetadataConfigurationsResponse.xml');
 
         expect(
             GetMetadataConfigurationsResponse.fromJson(envelope.body.response!)
@@ -258,11 +203,8 @@ void main() {
       });
 
       test('GetProfilesResponse', () {
-        final response =
-            File('test/xml/GX728MF-IR28/media2/GetProfilesResponse.xml')
-                .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/GX728MF-IR28/media2/GetProfilesResponse.xml');
 
         expect(
             GetProfilesResponse.fromJson(envelope.body.response!)
@@ -272,11 +214,8 @@ void main() {
       });
 
       test('GetServiceCapabilitiesResponse', () {
-        final response = File(
-                'test/xml/GX728MF-IR28/media2/GetServiceCapabilitiesResponse.xml')
-            .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/GX728MF-IR28/media2/GetServiceCapabilitiesResponse.xml');
 
         expect(
             GetServiceCapabilitiesResponse.fromJson(envelope.body.response!)
@@ -286,11 +225,8 @@ void main() {
       });
 
       test('GetSnapshotUriResponse', () {
-        final response =
-            File('test/xml/GX728MF-IR28/media2/GetSnapshotUriResponse.xml')
-                .readAsStringSync();
-
-        final envelope = Envelope.fromXml(response);
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/GX728MF-IR28/media2/GetSnapshotUriResponse.xml');
 
         expect(GetSnapshotUriResponse.fromJson(envelope.body.response!).uri,
             'http://192.168.1.127:85/images/snapshot.jpg');

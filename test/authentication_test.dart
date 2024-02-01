@@ -17,7 +17,7 @@ void main() {
     );
 
     final authorization = Authorization(
-      password: authInfo.password,
+      authInfo: authInfo,
       timeStamp: DateTime(2024, 1, 20, 16, 10, 0),
       timeDelta: Duration(seconds: 0),
       nonceOverride: Nonce(

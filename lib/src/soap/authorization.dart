@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
+import 'package:easy_onvif/onvif.dart';
 import 'package:easy_onvif/soap.dart';
 import 'package:intl/intl.dart';
 
@@ -9,23 +10,25 @@ import 'package:intl/intl.dart';
 class Authorization {
   late final Nonce nonce;
 
-  final Nonce? nonceOverride;
-
-  final String password;
+  final AuthInfo authInfo;
 
   final DateTime timeStamp;
 
   final Duration timeDelta;
 
+  final Nonce? nonceOverride;
+
   String get utcTimeStamp => DateFormat('yyyy-MM-DD\'T\'HH:mm:ss\'Z\'')
       .format(timeStamp.add(timeDelta));
 
   String get digest => base64.encode(sha1
-      .convert(nonce.bytes + utf8.encode(utcTimeStamp) + utf8.encode(password))
+      .convert(nonce.bytes +
+          utf8.encode(utcTimeStamp) +
+          utf8.encode(authInfo.password))
       .bytes);
 
   Authorization({
-    required this.password,
+    required this.authInfo,
     required this.timeStamp,
     required this.timeDelta,
     this.nonceOverride,

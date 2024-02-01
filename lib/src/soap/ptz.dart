@@ -16,11 +16,14 @@ class PtzRequest {
       });
       Transport.builder.element('Position', nest: () {
         Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.element('PanTilt', nest: () {
-          Transport.builder.namespace(Xmlns.tt);
-          Transport.builder.attribute('x', place.panTilt!.x);
-          Transport.builder.attribute('y', place.panTilt!.y);
-        });
+        if (place.panTilt != null) {
+          Transport.builder.element('PanTilt', nest: () {
+            Transport.builder.namespace(Xmlns.tt);
+            Transport.builder.attribute('x', place.panTilt!.x);
+            Transport.builder.attribute('y', place.panTilt!.y);
+          });
+        }
+
         if (place.zoom != null) {
           Transport.builder.element('Zoom', nest: () {
             Transport.builder.namespace(Xmlns.tt);
@@ -38,6 +41,7 @@ class PtzRequest {
               Transport.builder.attribute('y', speed.panTilt!.y);
             });
           }
+
           if (speed.zoom != null) {
             Transport.builder.element('Zoom', nest: () {
               Transport.builder.namespace(Xmlns.tt);

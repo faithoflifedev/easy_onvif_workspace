@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/src/soap/xmlns.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:xml/xml.dart';
 
 part 'app_sequence.g.dart';
 
@@ -18,6 +20,26 @@ class AppSequence {
       _$AppSequenceFromJson(json);
 
   Map<String, dynamic> toJson() => _$AppSequenceToJson(this);
+
+  XmlDocumentFragment toXml(XmlBuilder builder) {
+    builder.element(
+      'AppSequence',
+      namespaces: {Xmlns.ws: 'ws'},
+      nest: () {
+        builder.attribute(
+          'MessageNumber',
+          messageNumber,
+        );
+
+        builder.attribute(
+          'InstanceId',
+          instanceId,
+        );
+      },
+    );
+
+    return builder.buildFragment();
+  }
 
   @override
   String toString() => json.encode(toJson());

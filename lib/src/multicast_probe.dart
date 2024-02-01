@@ -116,7 +116,7 @@ class MulticastProbe with UiLoggy {
 
       loggy.debug('RESPONSE:\n$messageReceived');
 
-      var envelope = Envelope.fromXml(messageReceived);
+      var envelope = Envelope.fromXmlString(messageReceived);
 
       if (envelope.body.response == null) throw Exception();
 
@@ -160,7 +160,7 @@ class MulticastProbe with UiLoggy {
     final devices = _discovery(data, probeMessageData, duration.inMilliseconds);
 
     for (var index = 0; index < devices; index++) {
-      var envelope = Envelope.fromXml(
+      var envelope = Envelope.fromXmlString(
           Pointer.fromAddress(data.address + index * 8192)
               .cast<Utf8>()
               .toDartString());

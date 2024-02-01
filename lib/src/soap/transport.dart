@@ -51,7 +51,7 @@ class Transport with UiLoggy {
       throw Exception(error);
     }
 
-    return Envelope.fromXml(response.data);
+    return Envelope.fromXmlString(response.data);
   }
 
   static XmlDocumentFragment quickTag(
@@ -69,7 +69,7 @@ class Transport with UiLoggy {
     Authorization? authorization,
   }) {
     authorization ??= Authorization(
-      password: authInfo.password,
+      authInfo: authInfo,
       timeStamp: DateTime.now(),
       timeDelta: timeDelta,
     );

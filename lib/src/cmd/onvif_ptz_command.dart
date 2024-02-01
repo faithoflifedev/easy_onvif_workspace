@@ -66,17 +66,14 @@ class OnvifAbsoluteMovePtzCommand extends OnvifHelperCommand {
           help:
               'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.')
       ..addOption('pan-tilt-x',
-          mandatory: true,
           valueHelp: 'double',
           help:
               'A Position vector specifying the absolute target position x-axis.')
       ..addOption('pan-tilt-y',
-          mandatory: true,
           valueHelp: 'double',
           help:
               'A Position vector specifying the absolute target position y-axis.')
       ..addOption('pan-tilt-zoom',
-          mandatory: true,
           valueHelp: 'double',
           help:
               'A Position vector specifying the absolute target position zoom.');
@@ -84,13 +81,40 @@ class OnvifAbsoluteMovePtzCommand extends OnvifHelperCommand {
 
   @override
   void run() async {
+    if (argResults?['pan-tilt-x'] == null &&
+        argResults?['pan-tilt-y'] == null &&
+        argResults?['pan-tilt-zoom'] == null) {
+      throw UsageException('API usage error:',
+          'Either pan-tilt (both x and y values) or pan-tilt-zoom must be specified.');
+    } else if ((argResults?['pan-tilt-x'] != null &&
+            argResults?['pan-tilt-y'] == null) ||
+        (argResults?['pan-tilt-x'] == null &&
+            argResults?['pan-tilt-y'] != null)) {
+      throw UsageException('API usage error:',
+          'When using pan-tilt, both pan-tilt-x or pan-tilt-y must be specified.');
+    }
+
+    PanTilt? panTilt;
+
+    Zoom? zoom;
+
+    if (argResults?['pan-tilt-x'] != null &&
+        argResults?['pan-tilt-y'] != null) {
+      panTilt = PanTilt.fromString(
+          x: argResults!['pan-tilt-x'], y: argResults!['pan-tilt-y']);
+    }
+
+    if (argResults?['pan-tilt-zoom'] != null) {
+      zoom = Zoom.fromString(x: argResults!['pan-tilt-zoom']);
+    }
+
     await initializeOnvif();
 
     try {
       final place = PtzPosition(
-          panTilt: PanTilt.fromString(
-              x: argResults!['pan-tilt-x'], y: argResults!['pan-tilt-y']),
-          zoom: Zoom.fromString(x: argResults!['pan-tilt-zoom']));
+        panTilt: panTilt,
+        zoom: zoom,
+      );
 
       await ptz.absoluteMove(argResults!['profile-token'], place);
     } on DioException catch (err) {

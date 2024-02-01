@@ -20,9 +20,9 @@ class Envelope {
   factory Envelope.fromJson(Map<String, dynamic> json) =>
       _$EnvelopeFromJson(json);
 
-  factory Envelope.fromXml(String xml) =>
+  factory Envelope.fromXmlString(String xml) =>
       Envelope.fromJson(OnvifUtil.xmlToMap(xml));
 
   factory Envelope.fromXmlFile(String fileNameAndPath) =>
-      Envelope.fromXml(File(fileNameAndPath).readAsStringSync());
+      Envelope.fromXmlString(File(fileNameAndPath).readAsStringSync());
 }
