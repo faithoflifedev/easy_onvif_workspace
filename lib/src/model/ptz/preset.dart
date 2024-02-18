@@ -1,9 +1,8 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/src/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import 'ptz_position.dart';
 
 part 'preset.g.dart';
 
@@ -16,7 +15,9 @@ class Preset {
   final String name;
 
   @JsonKey(name: 'PTZPosition')
-  final PtzPosition? position;
+  final PtzVector? position;
+
+  ReferenceToken get referenceToken => ReferenceToken(token);
 
   Preset({
     required this.token,

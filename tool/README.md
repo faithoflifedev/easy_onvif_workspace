@@ -470,7 +470,11 @@ dependency_overrides:
 
 ## Breaking changes
 
-### v2.1.x
+### v2.3.0
+
+For this release a number of `Common` classes where given name changes to better reflect the Onvif spec.  Since these classes are used fairly deep in the API it's unlikely that if will affect many users.  In addition in the current release these changes are limits to the `PTZ` module, so if the changes cause issue, it would only be in this section of the code.
+
+### v2.1.0
 
 There is probably a number of breaking changes in this version since some method signatures have changed.  Since a large portion of the code base was rebuilt from scratch tracking all the changes wasn't a priority.  Sorry for any inconvenience.
 

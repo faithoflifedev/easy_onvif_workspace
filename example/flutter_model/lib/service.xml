@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+	xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsc="http://docs.oasis-open.org/ws-sx/ws-secureconversation/200512"
+	xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+	xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+	xmlns:wsa5="http://www.w3.org/2005/08/addressing"
+	xmlns:xmime="http://tempuri.org/xmime.xsd"
+	xmlns:xop="http://www.w3.org/2004/08/xop/include"
+	xmlns:tt="http://www.onvif.org/ver10/schema"
+	xmlns:wsbf2="http://docs.oasis-open.org/wsrf/bf-2"
+	xmlns:wstop="http://docs.oasis-open.org/wsn/t-1"
+	xmlns:wsr2="http://docs.oasis-open.org/wsrf/r-2"
+	xmlns:wsnt="http://docs.oasis-open.org/wsn/b-2"
+	xmlns:tetsm="http://www.onvif.org/ver10/events/wsdl/SubscriptionManagerBinding"
+	xmlns:tr2="http://www.onvif.org/ver20/media/wsdl"
+	xmlns:trt="http://www.onvif.org/ver10/media/wsdl"
+	xmlns:ter="http://www.onvif.org/ver10/error">
+	<SOAP-ENV:Body>
+		<tr2:GetServiceCapabilitiesResponse>
+			<tr2:Capabilities SnapshotUri="true" Rotation="false" VideoSourceMode="true" OSD="true" TemporaryOSDText="false" Mask="false" SourceMask="false">
+				<tr2:ProfileCapabilities MaximumNumberOfProfiles="64" ConfigurationsSupported="VideoSource AudioSource VideoEncoder AudioEncoder AudioOutput AudioDecoder PTZ Analytics"></tr2:ProfileCapabilities>
+				<tr2:StreamingCapabilities RTSPStreaming="true" RTPMulticast="true" RTP_RTSP_TCP="true" NonAggregateControl="true" AutoStartMulticast="true"></tr2:StreamingCapabilities>
+			</tr2:Capabilities>
+		</tr2:GetServiceCapabilitiesResponse>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

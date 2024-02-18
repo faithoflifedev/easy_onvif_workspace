@@ -3,14 +3,18 @@ import 'dart:convert';
 import 'package:easy_onvif/src/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'ptz_position.dart';
+import 'ptz_vector.dart';
+import 'ptz_move_status.dart';
 
 part 'ptz_status.g.dart';
 
 @JsonSerializable()
 class PtzStatus {
   @JsonKey(name: 'Position')
-  final PtzPosition position;
+  final PtzVector position;
+
+  @JsonKey(name: 'MoveStatus')
+  final PtzMoveStatus? moveStatus;
 
   @JsonKey(name: 'Error', fromJson: OnvifUtil.nullableMappedToString)
   final String? error;
@@ -20,6 +24,7 @@ class PtzStatus {
 
   PtzStatus({
     required this.position,
+    this.moveStatus,
     this.error,
     this.utcTime,
   });

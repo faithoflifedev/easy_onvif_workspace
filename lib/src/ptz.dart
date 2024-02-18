@@ -25,14 +25,14 @@ class Ptz with UiLoggy {
   /// the device to either use the x value as absolute resulting speed vector or
   /// to map x and y to the component speed. If the speed argument is omitted,
   /// the default speed set by the [PtzConfiguration] will be used.
-  Future<bool> absoluteMove(String profileToken, PtzPosition place,
-      [PtzPosition? speed]) async {
+  Future<bool> absoluteMove(String profileToken, PtzVector position,
+      [PtzSpeed? speed]) async {
     loggy.debug('absoluteMove');
 
     final envelope = await transport.sendRequest(
         uri,
         transport.securedEnvelope(
-            soap.PtzRequest.absoluteMove(profileToken, place, speed)));
+            soap.PtzRequest.absoluteMove(profileToken, position, speed)));
 
     if (envelope.body.hasFault) {
       throw Exception(envelope.body.fault.toString());
@@ -45,7 +45,7 @@ class Ptz with UiLoggy {
   /// supported if the PTZNode supports at least one continuous Pan/Tilt or Zoom
   /// space. If the space argument is omitted, the default space set by the
   /// [PtzConfiguration] will be used.
-  Future<bool> continuousMove(String profileToken, PtzPosition velocity,
+  Future<bool> continuousMove(String profileToken, PtzSpeed velocity,
       [int? timeout]) async {
     loggy.debug('continuousMove');
 
@@ -324,17 +324,20 @@ class Ptz with UiLoggy {
     return true;
   }
 
-  Future<void> move(String profileToken, PanTilt direction,
-      [Zoom? zoom]) async {
+  Future<void> move(String profileToken, Vector2D direction,
+      [Vector1D? zoom]) async {
     loggy.debug('move');
 
-    Zoom zoomAdjust = zoom ?? Zoom(x: 0);
+    Vector1D zoomAdjust = zoom ?? Vector1D(x: 0);
 
     try {
       await relativeMove(
-          profileToken, PtzPosition(panTilt: direction, zoom: zoomAdjust));
+        profileToken,
+        PtzVector(panTilt: direction, zoom: zoomAdjust),
+        null,
+      );
     } catch (err) {
-      PanTilt? panTilt;
+      Vector2D? panTilt;
 
       loggy.error('Relative move failed');
 
@@ -345,52 +348,52 @@ class Ptz with UiLoggy {
       final ptzStatus = await getStatus(profileToken);
 
       if (ptzStatus.position.panTilt != null) {
-        panTilt = PanTilt(
+        panTilt = Vector2D(
             x: ptzStatus.position.panTilt!.x + direction.x,
             y: ptzStatus.position.panTilt!.y + direction.y);
       } else {
-        panTilt = PanTilt(x: 0, y: 0);
+        panTilt = Vector2D(x: 0, y: 0);
       }
 
       if (ptzStatus.position.zoom != null) {
-        zoomAdjust = Zoom(x: ptzStatus.position.zoom!.x + zoomAdjust.x);
+        zoomAdjust = Vector1D(x: ptzStatus.position.zoom!.x + zoomAdjust.x);
       }
 
       await absoluteMove(
-          profileToken, PtzPosition(panTilt: panTilt, zoom: zoomAdjust));
+          profileToken, PtzVector(panTilt: panTilt, zoom: zoomAdjust));
     }
   }
 
   /// A helper method to perform a single [step] of a [relativeMove] on the
   /// negative y axis (down)
-  Future<void> moveDown(String profileToken, [int step = 25]) async {
+  Future<void> moveDown(String profileToken, [double step = -0.025]) async {
     loggy.debug('moveDown');
 
-    await move(profileToken, PanTilt.fromInt(y: 0 - step, x: 0));
+    await move(profileToken, Vector2D(y: step, x: 0));
   }
 
   /// A helper method to perform a single [step] of a [relativeMove] on the
   /// negative x axis (left)
-  Future<void> moveLeft(String profileToken, [int step = 25]) async {
+  Future<void> moveLeft(String profileToken, [double step = -0.025]) async {
     loggy.debug('moveLeft');
 
-    await move(profileToken, PanTilt.fromInt(x: 0 - step, y: 0));
+    await move(profileToken, Vector2D(x: step, y: 0));
   }
 
   /// A helper method to perform a single [step] of a [relativeMove] on the
   /// positive x axis (right)
-  Future<void> moveRight(String profileToken, [int step = 25]) async {
+  Future<void> moveRight(String profileToken, [double step = 0.025]) async {
     loggy.debug('moveRight');
 
-    await move(profileToken, PanTilt.fromInt(x: step, y: 0));
+    await move(profileToken, Vector2D(x: step, y: 0));
   }
 
   /// A helper method to perform a single [step] of a [relativeMove] on the
   /// positive y axis (up)
-  Future<void> moveUp(String profileToken, [int step = 25]) async {
+  Future<void> moveUp(String profileToken, [double step = 0.025]) async {
     loggy.debug('moveUp');
 
-    await move(profileToken, PanTilt.fromInt(y: step, x: 0));
+    await move(profileToken, Vector2D(y: step, x: 0));
   }
 
   /// Operation for Relative Pan/Tilt and Zoom Move. The operation is supported
@@ -400,13 +403,17 @@ class Ptz with UiLoggy {
   /// the device to either use the x value as absolute resulting speed vector or
   /// to map x and y to the component speed. If the speed argument is omitted,
   /// the default speed set by the [PtzConfiguration] will be used.
-  Future<bool> relativeMove(String profileToken, PtzPosition move) async {
+  Future<bool> relativeMove(
+      String profileToken, PtzVector translation, PtzSpeed? speed) async {
     loggy.debug('relativeMove');
 
     final envelope = await transport.sendRequest(
         uri,
-        transport
-            .securedEnvelope(soap.PtzRequest.relativeMove(profileToken, move)));
+        transport.securedEnvelope(soap.PtzRequest.relativeMove(
+          profileToken,
+          translation,
+          speed,
+        )));
 
     return envelope.body.response?.containsKey('RelativeMoveResponse') ?? false;
   }
@@ -492,26 +499,26 @@ class Ptz with UiLoggy {
     return envelope.body.response?.containsKey('StopResponse') ?? false;
   }
 
-  Future<void> zoom(String profileToken, Zoom zoom) async {
+  Future<void> zoom(String profileToken, Vector1D zoom) async {
     loggy.debug('zoom');
 
-    await move(profileToken, PanTilt(y: 0, x: 0), zoom);
+    await move(profileToken, Vector2D(y: 0, x: 0), zoom);
   }
 
   /// A helper method to perform a single [step] of a [relativeMove] on the
   /// positive z axis (closer)
-  Future<void> zoomIn(String profileToken, [int step = 25]) async {
+  Future<void> zoomIn(String profileToken, [double step = 0.025]) async {
     loggy.debug('zoomIn');
 
-    await zoom(profileToken, Zoom.fromInt(x: step));
+    await zoom(profileToken, Vector1D(x: step));
   }
 
   /// A helper method to perform a single [step] of a [relativeMove] on the
   /// negative y axis (farther)
-  Future<void> zoomOut(String profileToken, [int step = 25]) async {
+  Future<void> zoomOut(String profileToken, [double step = 0.025]) async {
     loggy.debug('zoomOut');
 
-    await zoom(profileToken, Zoom.fromInt(x: 0 - step));
+    await zoom(profileToken, Vector1D(x: step));
   }
 
   void _clearDefaults() {

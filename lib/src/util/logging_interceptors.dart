@@ -16,7 +16,7 @@ class LoggingInterceptors extends Interceptor with UiLoggy {
 
     loggy.debug('\nREQUEST:\n${options.data}');
 
-    handler.next(options);
+    super.onRequest(options, handler);
   }
 
   /// The callback will be executed on error.
@@ -38,6 +38,6 @@ class LoggingInterceptors extends Interceptor with UiLoggy {
   ) {
     loggy.debug('\nRESPONSE:\n${response.data}');
 
-    handler.next(response);
+    super.onResponse(response, handler);
   }
 }

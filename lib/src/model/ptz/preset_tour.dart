@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -37,6 +38,8 @@ class PresetTour {
 
   @JsonKey(name: 'Extension')
   final dynamic extension;
+
+  ReferenceToken get referenceToken => ReferenceToken(token);
 
   PresetTour({
     required this.token,

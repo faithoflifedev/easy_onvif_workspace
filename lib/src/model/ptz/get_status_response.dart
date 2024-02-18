@@ -1,6 +1,5 @@
+import 'package:easy_onvif/shared.dart';
 import 'package:json_annotation/json_annotation.dart';
-
-import 'ptz_status.dart';
 
 part 'get_status_response.g.dart';
 

@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
 
-import 'space1d.dart';
+import 'space_1d.dart';
 
 part 'zoom_limits.g.dart';
 
-///A range of x or y-axis.
+/// A range of x or y-axis.
 @JsonSerializable()
 class ZoomLimits {
-  ///Capability information.
+  /// Capability information.
   @JsonKey(name: 'Range')
   final Space1D range;
 

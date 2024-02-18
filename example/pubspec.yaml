@@ -1,0 +1,12 @@
+name: examples
+version: 0.0.1
+homepage: https://github.com/faithoflifedev/easy_onvif
+description: An example
+repository: https://github.com/faithoflifedev/easy_onvif
+environment:
+  sdk: ">=3.2.0 <4.0.0"
+
+dependencies:
+  easy_onvif: ^2.2.0+2
+  http: ^1.2.0
+  dio: ^5.4.0

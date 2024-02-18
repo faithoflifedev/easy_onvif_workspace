@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.3.0
+
+* Issue #58
+  * Reverted the timestamp format to build in dart `toIso8601String()`
+* PTZ
+  * Revised class names for PTZ functionality to better match the Onvif Spec - PanTilt =&gt; Vector2D, Zoom =&gt; Vector1D
+  * Implemented the buildXML() method for much of the PTZ functionality to better place functionality in its useful class
+  * Capabilities
+    * All fields are now optional, not all devices are reporting this information
+* DeviceManagement
+  * GetDeviceInformationResponse
+    * manufacturer and model are now optional fields, not all devices are reporting this information
+
 ## 2.2.0+2
 
 * ptz absolute-move cli command params better match the Onvif spec

@@ -6,24 +6,24 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'ptz_configuration.g.dart';
 
-///A specific PtzConfiguration from the device.
+/// A specific PtzConfiguration from the device.
 ///
-///The default Position/Translation/Velocity Spaces are introduced to allow NVCs
-///sending move requests without the need to specify a certain coordinate
-///system. The default Speeds are introduced to control the speed of move
-///requests (absolute, relative, preset), where no explicit speed has been set.
+/// The default Position/Translation/Velocity Spaces are introduced to allow NVCs
+/// sending move requests without the need to specify a certain coordinate
+/// system. The default Speeds are introduced to control the speed of move
+/// requests (absolute, relative, preset), where no explicit speed has been set.
 ///
-///The allowed pan and tilt range for Pan/Tilt Limits is defined by a
-///two-dimensional space range that is mapped to a specific Absolute Pan/Tilt
-///Position Space. At least one Pan/Tilt Position Space is required by the
-///PTZNode to support Pan/Tilt limits. The limits apply to all supported
-///absolute, relative and continuous Pan/Tilt movements. The limits shall be
-///checked within the coordinate system for which the limits have been
-///specified. That means that even if movements are specified in a different
-///coordinate system, the requested movements shall be transformed to the
-///coordinate system of the limits where the limits can be checked. When a
-///relative or continuous movements is specified, which would leave the
-///specified limits, the PTZ unit has to move along the specified limits.
+/// The allowed pan and tilt range for Pan/Tilt Limits is defined by a
+/// two-dimensional space range that is mapped to a specific Absolute Pan/Tilt
+/// Position Space. At least one Pan/Tilt Position Space is required by the
+/// PTZNode to support Pan/Tilt limits. The limits apply to all supported
+/// absolute, relative and continuous Pan/Tilt movements. The limits shall be
+/// checked within the coordinate system for which the limits have been
+/// specified. That means that even if movements are specified in a different
+/// coordinate system, the requested movements shall be transformed to the
+/// coordinate system of the limits where the limits can be checked. When a
+/// relative or continuous movements is specified, which would leave the
+/// specified limits, the PTZ unit has to move along the specified limits.
 @JsonSerializable()
 class PtzConfiguration {
   ///Token that uniquely references this configuration. Length up to 64
@@ -61,44 +61,44 @@ class PtzConfiguration {
   ///If the PTZ Node supports absolute Pan/Tilt movements, it shall specify one
   ///Absolute Pan/Tilt Position Space as default.
   @JsonKey(
-      name: 'DefaultAbsolutePantTiltPositionSpace',
-      fromJson: OnvifUtil.nullableMappedToString)
-  final String? defaultAbsolutePantTiltPositionSpace;
+    name: 'DefaultAbsolutePantTiltPositionSpace',
+    fromJson: nullableMappedToSpace,
+  )
+  final Space? defaultAbsolutePantTiltPositionSpace;
 
   ///If the PTZ Node supports absolute zoom movements, it shall specify one
   ///Absolute Zoom Position Space as default.
   @JsonKey(
-      name: 'DefaultAbsoluteZoomPositionSpace',
-      fromJson: OnvifUtil.nullableMappedToString)
-  final String? defaultAbsoluteZoomPositionSpace;
+      name: 'DefaultAbsoluteZoomPositionSpace', fromJson: nullableMappedToSpace)
+  final Space? defaultAbsoluteZoomPositionSpace;
 
   ///If the PTZ Node supports relative Pan/Tilt movements, it shall specify one
   ///RelativePan/Tilt Translation Space as default.
   @JsonKey(
       name: 'DefaultRelativePanTiltTranslationSpace',
-      fromJson: OnvifUtil.nullableMappedToString)
-  final String? defaultRelativePanTiltTranslationSpace;
+      fromJson: nullableMappedToSpace)
+  final Space? defaultRelativePanTiltTranslationSpace;
 
   ///If the PTZ Node supports relative zoom movements, it shall specify one
   ///Relative Zoom Translation Space as default.
   @JsonKey(
       name: 'DefaultRelativeZoomTranslationSpace',
-      fromJson: OnvifUtil.nullableMappedToString)
-  final String? defaultRelativeZoomTranslationSpace;
+      fromJson: nullableMappedToSpace)
+  final Space? defaultRelativeZoomTranslationSpace;
 
   ///If the PTZ Node supports continuous Pan/Tilt movements, it shall specify
   ///one Continuous Pan/Tilt Velocity Space as default.
   @JsonKey(
       name: 'DefaultContinuousPanTiltVelocitySpace',
-      fromJson: OnvifUtil.nullableMappedToString)
-  final String? defaultContinuousPanTiltVelocitySpace;
+      fromJson: nullableMappedToSpace)
+  final Space? defaultContinuousPanTiltVelocitySpace;
 
   ///If the PTZ Node supports continuous zoom movements, it shall specify one
   ///Continuous Zoom Velocity Space as default.
   @JsonKey(
       name: 'DefaultContinuousZoomVelocitySpace',
-      fromJson: OnvifUtil.nullableMappedToString)
-  final String? defaultContinuousZoomVelocitySpace;
+      fromJson: nullableMappedToSpace)
+  final Space? defaultContinuousZoomVelocitySpace;
 
   ///If the PTZ Node supports absolute or relative PTZ movements, it shall
   ///specify corresponding default Pan/Tilt and Zoom speeds.
@@ -153,4 +153,7 @@ class PtzConfiguration {
 
   @override
   String toString() => json.encode(toJson());
+
+  static Space? nullableMappedToSpace(Map<String, dynamic>? value) =>
+      value != null ? $enumDecodeNullable(_$SpaceEnumMap, value['\$']) : null;
 }

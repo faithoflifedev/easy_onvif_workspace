@@ -99,9 +99,9 @@ class _MyHomePageState extends State<MyHomePage> with UiLoggy {
 
   void _update() async {
     setState(() {
-      model = deviceInfo.model;
+      model = deviceInfo.model ?? '';
 
-      manufacturer = deviceInfo.manufacturer;
+      manufacturer = deviceInfo.manufacturer ?? '';
 
       firmwareVersion = deviceInfo.firmwareVersion;
 

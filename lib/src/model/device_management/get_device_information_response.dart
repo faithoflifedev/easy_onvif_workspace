@@ -9,12 +9,12 @@ part 'get_device_information_response.g.dart';
 @JsonSerializable()
 class GetDeviceInformationResponse {
   /// The manufacturer of the device.
-  @JsonKey(name: 'Manufacturer', fromJson: OnvifUtil.mappedToString)
-  final String manufacturer;
+  @JsonKey(name: 'Manufacturer', fromJson: OnvifUtil.nullableMappedToString)
+  final String? manufacturer;
 
   /// The device model.
-  @JsonKey(name: 'Model', fromJson: OnvifUtil.mappedToString)
-  final String model;
+  @JsonKey(name: 'Model', fromJson: OnvifUtil.nullableMappedToString)
+  final String? model;
 
   /// The firmware version in the device.
   @JsonKey(name: 'FirmwareVersion', fromJson: OnvifUtil.mappedToString)

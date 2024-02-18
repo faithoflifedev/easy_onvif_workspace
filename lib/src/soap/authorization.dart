@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:easy_onvif/onvif.dart';
 import 'package:easy_onvif/soap.dart';
-import 'package:intl/intl.dart';
 
 /// Implementation of the [Authorization] algorithm required to authenticate to
 /// Onvif devices
@@ -16,10 +15,10 @@ class Authorization {
 
   final Duration timeDelta;
 
+  /// During testing use a user generated Nonce so that results can be validated.
   final Nonce? nonceOverride;
 
-  String get utcTimeStamp => DateFormat('yyyy-MM-DD\'T\'HH:mm:ss\'Z\'')
-      .format(timeStamp.add(timeDelta));
+  String get utcTimeStamp => timeStamp.add(timeDelta).toIso8601String();
 
   String get digest => base64.encode(sha1
       .convert(nonce.bytes +

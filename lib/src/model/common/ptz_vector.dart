@@ -1,36 +1,34 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/soap.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:xml/xml.dart';
 
-import 'vector_2d.dart';
-import 'vector_1d.dart';
+part 'ptz_vector.g.dart';
 
-part 'ptz_speed.g.dart';
-
-/// If the PTZ Node supports absolute or relative PTZ movements, it shall specify
-/// corresponding default Pan/Tilt and Zoom speeds.
+/// A list of preset position.
 @JsonSerializable()
-class PtzSpeed {
-  /// Capability information.
-  @JsonKey(name: 'Capabilities')
+class PtzVector {
+  @JsonKey(name: 'PanTilt')
   final Vector2D? panTilt;
+
+  @JsonKey(name: 'Zoom')
   final Vector1D? zoom;
 
-  PtzSpeed({this.panTilt, this.zoom});
+  PtzVector({this.panTilt, this.zoom});
 
-  factory PtzSpeed.fromJson(Map<String, dynamic> json) =>
-      _$PtzSpeedFromJson(json);
+  factory PtzVector.fromJson(Map<String, dynamic> json) =>
+      _$PtzVectorFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PtzSpeedToJson(this);
+  Map<String, dynamic> toJson() => _$PtzVectorToJson(this);
 
   @override
   String toString() => json.encode(toJson());
 
   void buildXml(
     XmlBuilder builder, {
-    String tag = 'PtzSpeed',
+    String tag = 'PtzVector',
     String namespace = Xmlns.tt,
   }) =>
       builder.element(tag, nest: () {

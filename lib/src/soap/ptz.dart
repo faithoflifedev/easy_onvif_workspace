@@ -7,49 +7,23 @@ import 'xmlns.dart';
 
 class PtzRequest {
   static XmlDocumentFragment absoluteMove(
-      String profileToken, PtzPosition place, PtzPosition? speed) {
+      String profileToken, PtzVector position, PtzSpeed? speed) {
     Transport.builder.element('AbsoluteMove', nest: () {
       Transport.builder.namespace(Xmlns.tptz); //tptz
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text(profileToken);
-      });
-      Transport.builder.element('Position', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        if (place.panTilt != null) {
-          Transport.builder.element('PanTilt', nest: () {
-            Transport.builder.namespace(Xmlns.tt);
-            Transport.builder.attribute('x', place.panTilt!.x);
-            Transport.builder.attribute('y', place.panTilt!.y);
-          });
-        }
 
-        if (place.zoom != null) {
-          Transport.builder.element('Zoom', nest: () {
-            Transport.builder.namespace(Xmlns.tt);
-            Transport.builder.attribute('x', place.zoom!.x);
-          });
-        }
-      });
-      if (speed != null) {
-        Transport.builder.element('Speed', nest: () {
-          Transport.builder.namespace(Xmlns.tptz);
-          if (speed.panTilt != null) {
-            Transport.builder.element('PanTilt', nest: () {
-              Transport.builder.namespace(Xmlns.tt);
-              Transport.builder.attribute('x', speed.panTilt!.x);
-              Transport.builder.attribute('y', speed.panTilt!.y);
-            });
-          }
+      ReferenceToken(profileToken).buildXml(Transport.builder);
 
-          if (speed.zoom != null) {
-            Transport.builder.element('Zoom', nest: () {
-              Transport.builder.namespace(Xmlns.tt);
-              Transport.builder.attribute('x', speed.zoom!.x);
-            });
-          }
-        });
-      }
+      position.buildXml(
+        Transport.builder,
+        tag: 'Position',
+        namespace: Xmlns.tptz,
+      );
+
+      speed?.buildXml(
+        Transport.builder,
+        tag: 'Speed',
+        namespace: Xmlns.tptz,
+      );
     });
 
     return Transport.builder.buildFragment();
@@ -58,36 +32,24 @@ class PtzRequest {
   /// XML for the [continuousMove], requires a [profileToken] and [PtzPosition],
   /// and optionally [timeout]
   static XmlDocumentFragment continuousMove(String profileToken,
-      {required PtzPosition velocity, int? timeout}) {
+      {required PtzSpeed velocity, int? timeout}) {
     Transport.builder.element('ContinuousMove', nest: () {
       Transport.builder.namespace(Xmlns.tptz); //tptz
 
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text(profileToken);
-      });
+      ReferenceToken(profileToken).buildXml(Transport.builder);
 
-      Transport.builder.element('Velocity', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
+      velocity.buildXml(
+        Transport.builder,
+        tag: 'Velocity',
+        namespace: Xmlns.tptz,
+      );
 
-        Transport.builder.element('PanTilt', nest: () {
-          Transport.builder.namespace(Xmlns.tt);
-          Transport.builder.attribute('x', velocity.panTilt!.x);
-          Transport.builder.attribute('y', velocity.panTilt!.y);
+      if (timeout != null) {
+        Transport.builder.element('Timeout', nest: () {
+          Transport.builder.namespace(Xmlns.tptz);
+          Transport.builder.text('PT${timeout}S');
         });
-
-        Transport.builder.element('Zoom', nest: () {
-          Transport.builder.namespace(Xmlns.tt);
-
-          Transport.builder
-              .attribute('x', velocity.zoom != null ? velocity.zoom!.x : 0);
-        });
-      });
-
-      Transport.builder.element('Timeout', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text('PT${timeout}S');
-      });
+      }
     });
 
     return Transport.builder.buildFragment();
@@ -98,10 +60,7 @@ class PtzRequest {
     Transport.builder.element('GetCompatibleConfigurations', nest: () {
       Transport.builder.namespace(Xmlns.tptz);
 
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text(profileToken);
-      });
+      ReferenceToken(profileToken).buildXml(Transport.builder);
     });
 
     return Transport.builder.buildFragment();
@@ -112,10 +71,10 @@ class PtzRequest {
     Transport.builder.element('GetConfiguration', nest: () {
       Transport.builder.namespace(Xmlns.tptz);
 
-      Transport.builder.element('PTZConfigurationToken', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text(profileToken);
-      });
+      ReferenceToken(profileToken).buildXml(
+        Transport.builder,
+        tag: 'PTZConfigurationToken',
+      );
     });
 
     return Transport.builder.buildFragment();
@@ -126,10 +85,10 @@ class PtzRequest {
     Transport.builder.element('GetConfigurationOptions', nest: () {
       Transport.builder.namespace(Xmlns.tptz);
 
-      Transport.builder.element('ConfigurationToken', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text(profileToken);
-      });
+      ReferenceToken(profileToken).buildXml(
+        Transport.builder,
+        tag: 'ConfigurationToken',
+      );
     });
 
     return Transport.builder.buildFragment();
@@ -143,28 +102,27 @@ class PtzRequest {
   static XmlDocumentFragment getPresets(String profileToken) {
     Transport.builder.element('GetPresets', nest: () {
       Transport.builder.namespace(Xmlns.tptz);
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.text(profileToken);
-      });
+
+      ReferenceToken(profileToken).buildXml(Transport.builder);
     });
 
     return Transport.builder.buildFragment();
   }
 
   /// XML for the [getPresetTour], requires a [profileToken] and [presetTourToken]
-  static XmlDocumentFragment getPresetTour(String profileToken,
-      {required String presetTourToken}) {
+  static XmlDocumentFragment getPresetTour(
+    String profileToken, {
+    required String presetTourToken,
+  }) {
     Transport.builder.element('GetPresetTour', nest: () {
       Transport.builder.namespace(Xmlns.tptz);
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text(profileToken);
-      });
 
-      Transport.builder.element('PresetTourToken', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text(presetTourToken);
-      });
+      ReferenceToken(profileToken).buildXml(Transport.builder);
+
+      ReferenceToken(presetTourToken).buildXml(
+        Transport.builder,
+        tag: 'PresetTourToken',
+      );
     });
 
     return Transport.builder.buildFragment();
@@ -174,10 +132,8 @@ class PtzRequest {
   static XmlDocumentFragment getPresetTours(String profileToken) {
     Transport.builder.element('GetPresetTours', nest: () {
       Transport.builder.namespace(Xmlns.tptz);
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text(profileToken);
-      });
+
+      ReferenceToken(profileToken).buildXml(Transport.builder);
     });
 
     return Transport.builder.buildFragment();
@@ -185,15 +141,14 @@ class PtzRequest {
 
   /// XML for the [getServiceCapabilities]
   static XmlDocumentFragment getServiceCapabilities() =>
-      Transport.quickTag('GetServiceCapabilities', Xmlns.tds);
+      Transport.quickTag('GetServiceCapabilities', Xmlns.tptz);
 
   /// XML for the [getStatus], requires a [profileToken]
   static XmlDocumentFragment getStatus(String profileToken) {
     Transport.builder.element('GetStatus', nest: () {
       Transport.builder.namespace(Xmlns.tptz);
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.text(profileToken);
-      });
+
+      ReferenceToken(profileToken).buildXml(Transport.builder);
     });
 
     return Transport.builder.buildFragment();
@@ -203,26 +158,15 @@ class PtzRequest {
   static XmlDocumentFragment gotoHomePosition(
       String profileToken, PtzSpeed? speed) {
     Transport.builder.element('GotoHomePosition', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text(profileToken);
-      });
+      Transport.builder.namespace(Xmlns.tptz);
 
-      if (speed != null) {
-        Transport.builder.element('PanTilt', nest: () {
-          Transport.builder.namespace(Xmlns.tt);
-          Transport.builder.attribute('x', speed.panTilt!.x);
-          Transport.builder.attribute('y', speed.panTilt!.x);
-        });
+      ReferenceToken(profileToken).buildXml(Transport.builder);
 
-        if (speed.zoom != null) {
-          Transport.builder.element('Zoom', nest: () {
-            Transport.builder.namespace(Xmlns.tt);
-            Transport.builder.attribute('x', speed.zoom!.x);
-          });
-        }
-      }
+      speed?.buildXml(
+        Transport.builder,
+        tag: 'Speed',
+        namespace: Xmlns.tptz,
+      );
     });
 
     return Transport.builder.buildFragment();
@@ -233,29 +177,19 @@ class PtzRequest {
       String profileToken, String presetToken, PtzSpeed? speed) {
     Transport.builder.element('GotoPreset', nest: () {
       Transport.builder.namespace(Xmlns.tptz);
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text(profileToken);
-      });
-      Transport.builder.element('PresetToken', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text(presetToken);
-      });
-      Transport.builder.element('Speed', nest: () {
-        if (speed != null) {
-          Transport.builder.element('PanTilt', nest: () {
-            Transport.builder.namespace(Xmlns.tt);
-            Transport.builder.attribute('x', speed.panTilt!.x);
-            Transport.builder.attribute('y', speed.panTilt!.x);
-          });
-        }
-        if (speed?.zoom != null) {
-          Transport.builder.element('Zoom', nest: () {
-            Transport.builder.namespace(Xmlns.tt);
-            Transport.builder.attribute('x', speed!.zoom!.x);
-          });
-        }
-      });
+
+      ReferenceToken(profileToken).buildXml(Transport.builder);
+
+      ReferenceToken(presetToken).buildXml(
+        Transport.builder,
+        tag: 'PresetToken',
+      );
+
+      speed?.buildXml(
+        Transport.builder,
+        tag: 'Speed',
+        namespace: Xmlns.tptz,
+      );
     });
 
     return Transport.builder.buildFragment();
@@ -263,27 +197,23 @@ class PtzRequest {
 
   /// XML for the [relativeMove], requires a [profileToken] and [PtzPosition]
   static XmlDocumentFragment relativeMove(
-      String profileToken, PtzPosition move) {
+      String profileToken, PtzVector translation, PtzSpeed? speed) {
     Transport.builder.element('RelativeMove', nest: () {
       Transport.builder.namespace(Xmlns.tptz); //tptz
-      Transport.builder.element('ProfileToken',
-          nest: () => Transport.builder.text(profileToken));
-      Transport.builder.element('Translation', nest: () {
-        if (move.panTilt != null) {
-          Transport.builder.element('PanTilt', nest: () {
-            Transport.builder.namespace(Xmlns.tt);
-            Transport.builder.attribute('x', move.panTilt!.x);
-            Transport.builder.attribute('y', move.panTilt!.y);
-          });
-        }
 
-        if (move.zoom != null) {
-          Transport.builder.element('Zoom', nest: () {
-            Transport.builder.namespace(Xmlns.tt);
-            Transport.builder.attribute('x', move.zoom!.x);
-          });
-        }
-      });
+      ReferenceToken(profileToken).buildXml(Transport.builder);
+
+      translation.buildXml(
+        Transport.builder,
+        tag: 'Translation',
+        namespace: Xmlns.tptz,
+      );
+
+      speed?.buildXml(
+        Transport.builder,
+        tag: 'Speed',
+        namespace: Xmlns.tptz,
+      );
     });
 
     return Transport.builder.buildFragment();
@@ -294,14 +224,10 @@ class PtzRequest {
       {required Preset preset}) {
     Transport.builder.element('RemovePreset', nest: () {
       Transport.builder.namespace(Xmlns.tptz);
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text(profileToken);
-      });
-      Transport.builder.element('PresetToken', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text(preset.token);
-      });
+
+      ReferenceToken(profileToken).buildXml(Transport.builder);
+
+      preset.referenceToken.buildXml(Transport.builder, tag: 'PresetToken');
     });
 
     return Transport.builder.buildFragment();
@@ -312,15 +238,13 @@ class PtzRequest {
       {required PresetTour presetTour}) {
     Transport.builder.element('RemovePresetTour', nest: () {
       Transport.builder.namespace(Xmlns.tptz);
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text(profileToken);
-      });
 
-      Transport.builder.element('PresetTourToken', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text(presetTour.token);
-      });
+      ReferenceToken(profileToken).buildXml(Transport.builder);
+
+      presetTour.referenceToken.buildXml(
+        Transport.builder,
+        tag: 'PresetTourToken',
+      );
     });
 
     return Transport.builder.buildFragment();
@@ -330,9 +254,8 @@ class PtzRequest {
   static XmlDocumentFragment setHomePosition(String profileToken) {
     Transport.builder.element('SetHomePosition', nest: () {
       Transport.builder.namespace(Xmlns.tptz);
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.text(profileToken);
-      });
+
+      ReferenceToken(profileToken).buildXml(Transport.builder);
     });
 
     return Transport.builder.buildFragment();
@@ -344,10 +267,8 @@ class PtzRequest {
       {String? presetName, String? presetToken}) {
     Transport.builder.element('SetPreset', nest: () {
       Transport.builder.namespace(Xmlns.tptz);
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text(profileToken);
-      });
+
+      ReferenceToken(profileToken).buildXml(Transport.builder);
 
       if (presetName != null) {
         Transport.builder.element('PresetName', nest: () {
@@ -373,10 +294,8 @@ class PtzRequest {
       {bool panTilt = false, bool zoom = false}) {
     Transport.builder.element('Stop', nest: () {
       Transport.builder.namespace(Xmlns.tptz); //tptz
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.namespace(Xmlns.tptz);
-        Transport.builder.text(profileToken);
-      });
+
+      ReferenceToken(profileToken).buildXml(Transport.builder);
 
       Transport.builder.element('PanTilt', nest: () {
         Transport.builder.namespace(Xmlns.tt);

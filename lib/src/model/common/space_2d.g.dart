@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'space2d.dart';
+part of 'space_2d.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -8,8 +8,8 @@ part of 'space2d.dart';
 
 Space2D _$Space2DFromJson(Map<String, dynamic> json) => Space2D(
       uri: OnvifUtil.mappedToString(json['URI'] as Map<String, dynamic>),
-      xRange: Space.fromJson(json['XRange'] as Map<String, dynamic>),
-      yRange: Space.fromJson(json['YRange'] as Map<String, dynamic>),
+      xRange: FloatRange.fromJson(json['XRange'] as Map<String, dynamic>),
+      yRange: FloatRange.fromJson(json['YRange'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$Space2DToJson(Space2D instance) => <String, dynamic>{

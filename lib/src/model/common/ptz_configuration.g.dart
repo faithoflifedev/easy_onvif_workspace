@@ -19,21 +19,28 @@ PtzConfiguration _$PtzConfigurationFromJson(Map<String, dynamic> json) =>
           json['PresetTourRamp'] as Map<String, dynamic>?),
       nodeToken:
           OnvifUtil.mappedToString(json['NodeToken'] as Map<String, dynamic>),
-      defaultAbsolutePantTiltPositionSpace: OnvifUtil.nullableMappedToString(
-          json['DefaultAbsolutePantTiltPositionSpace']
-              as Map<String, dynamic>?),
-      defaultAbsoluteZoomPositionSpace: OnvifUtil.nullableMappedToString(
+      defaultAbsolutePantTiltPositionSpace:
+          PtzConfiguration.nullableMappedToSpace(
+              json['DefaultAbsolutePantTiltPositionSpace']
+                  as Map<String, dynamic>?),
+      defaultAbsoluteZoomPositionSpace: PtzConfiguration.nullableMappedToSpace(
           json['DefaultAbsoluteZoomPositionSpace'] as Map<String, dynamic>?),
-      defaultRelativePanTiltTranslationSpace: OnvifUtil.nullableMappedToString(
-          json['DefaultRelativePanTiltTranslationSpace']
-              as Map<String, dynamic>?),
-      defaultRelativeZoomTranslationSpace: OnvifUtil.nullableMappedToString(
-          json['DefaultRelativeZoomTranslationSpace'] as Map<String, dynamic>?),
-      defaultContinuousPanTiltVelocitySpace: OnvifUtil.nullableMappedToString(
-          json['DefaultContinuousPanTiltVelocitySpace']
-              as Map<String, dynamic>?),
-      defaultContinuousZoomVelocitySpace: OnvifUtil.nullableMappedToString(
-          json['DefaultContinuousZoomVelocitySpace'] as Map<String, dynamic>?),
+      defaultRelativePanTiltTranslationSpace:
+          PtzConfiguration.nullableMappedToSpace(
+              json['DefaultRelativePanTiltTranslationSpace']
+                  as Map<String, dynamic>?),
+      defaultRelativeZoomTranslationSpace:
+          PtzConfiguration.nullableMappedToSpace(
+              json['DefaultRelativeZoomTranslationSpace']
+                  as Map<String, dynamic>?),
+      defaultContinuousPanTiltVelocitySpace:
+          PtzConfiguration.nullableMappedToSpace(
+              json['DefaultContinuousPanTiltVelocitySpace']
+                  as Map<String, dynamic>?),
+      defaultContinuousZoomVelocitySpace:
+          PtzConfiguration.nullableMappedToSpace(
+              json['DefaultContinuousZoomVelocitySpace']
+                  as Map<String, dynamic>?),
       defaultPtzSpeed: json['PtzSpeed'] == null
           ? null
           : PtzSpeed.fromJson(json['PtzSpeed'] as Map<String, dynamic>),
@@ -58,19 +65,38 @@ Map<String, dynamic> _$PtzConfigurationToJson(PtzConfiguration instance) =>
       'PresetTourRamp': instance.presetTourRamp,
       'NodeToken': instance.nodeToken,
       'DefaultAbsolutePantTiltPositionSpace':
-          instance.defaultAbsolutePantTiltPositionSpace,
+          _$SpaceEnumMap[instance.defaultAbsolutePantTiltPositionSpace],
       'DefaultAbsoluteZoomPositionSpace':
-          instance.defaultAbsoluteZoomPositionSpace,
+          _$SpaceEnumMap[instance.defaultAbsoluteZoomPositionSpace],
       'DefaultRelativePanTiltTranslationSpace':
-          instance.defaultRelativePanTiltTranslationSpace,
+          _$SpaceEnumMap[instance.defaultRelativePanTiltTranslationSpace],
       'DefaultRelativeZoomTranslationSpace':
-          instance.defaultRelativeZoomTranslationSpace,
+          _$SpaceEnumMap[instance.defaultRelativeZoomTranslationSpace],
       'DefaultContinuousPanTiltVelocitySpace':
-          instance.defaultContinuousPanTiltVelocitySpace,
+          _$SpaceEnumMap[instance.defaultContinuousPanTiltVelocitySpace],
       'DefaultContinuousZoomVelocitySpace':
-          instance.defaultContinuousZoomVelocitySpace,
+          _$SpaceEnumMap[instance.defaultContinuousZoomVelocitySpace],
       'PtzSpeed': instance.defaultPtzSpeed,
       'DefaultPTZTimeout': instance.defaultPtzTimeout,
       'PanTiltLimits': instance.panTiltLimits,
       'ZoomLimits': instance.zoomLimits,
     };
+
+const _$SpaceEnumMap = {
+  Space.zoomPositionGenericSpace:
+      'http://www.onvif.org/ver10/tptz/ZoomSpaces/PositionGenericSpace',
+  Space.zoomTranslationGenericSpace:
+      'http://www.onvif.org/ver10/tptz/ZoomSpaces/TranslationGenericSpace',
+  Space.zoomVelocityGenericSpace:
+      'http://www.onvif.org/ver10/tptz/ZoomSpaces/VelocityGenericSpace',
+  Space.zoomGenericSpeedSpace:
+      'http://www.onvif.org/ver10/tptz/ZoomSpaces/GenericSpeedSpace',
+  Space.panTiltPositionGenericSpace:
+      'http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace',
+  Space.panTiltTranslationGenericSpace:
+      'http://www.onvif.org/ver10/tptz/PanTiltSpaces/TranslationGenericSpace',
+  Space.panTiltVelocityGenericSpace:
+      'http://www.onvif.org/ver10/tptz/PanTiltSpaces/VelocityGenericSpace',
+  Space.panTiltGenericSpeedSpace:
+      'http://www.onvif.org/ver10/tptz/PanTiltSpaces/GenericSpeedSpace',
+};
