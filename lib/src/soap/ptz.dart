@@ -29,7 +29,7 @@ class PtzRequest {
     return Transport.builder.buildFragment();
   }
 
-  /// XML for the [continuousMove], requires a [profileToken] and [PtzPosition],
+  /// XML for the [continuousMove], requires a [profileToken] and [PtzSpeed],
   /// and optionally [timeout]
   static XmlDocumentFragment continuousMove(String profileToken,
       {required PtzSpeed velocity, int? timeout}) {
@@ -195,7 +195,7 @@ class PtzRequest {
     return Transport.builder.buildFragment();
   }
 
-  /// XML for the [relativeMove], requires a [profileToken] and [PtzPosition]
+  /// XML for the [relativeMove], requires a [profileToken] and [PtzVector]
   static XmlDocumentFragment relativeMove(
       String profileToken, PtzVector translation, PtzSpeed? speed) {
     Transport.builder.element('RelativeMove', nest: () {
