@@ -27,9 +27,9 @@ void main() {
     );
 
     test('generate valid nonce and digest', () {
-      expect(authorization.digest, 'lxUpbVRgbw+v3tgeMNnJLXGNemc=');
+      expect(authorization.digest, 'ZLSXZSjr+AeSFHLrsrK9jhEXjls=');
       expect(authorization.nonce.toBase64(), 'AQIDBAUGBwgJCgsMDQ4PEA==');
-      expect(authorization.utcTimeStamp, '2024-01-20T16:10:00Z');
+      expect(authorization.utcTimeStamp, '2024-01-20T16:10:00.000');
     });
 
     test('generate valid security header', () {
@@ -50,11 +50,11 @@ void main() {
 
       expect(json['Security']['UsernameToken']['Username']['\$'], 'admin');
       expect(json['Security']['UsernameToken']['Password']['\$'],
-          'lxUpbVRgbw+v3tgeMNnJLXGNemc=');
+          'ZLSXZSjr+AeSFHLrsrK9jhEXjls=');
       expect(json['Security']['UsernameToken']['Nonce']['\$'],
           'AQIDBAUGBwgJCgsMDQ4PEA==');
       expect(json['Security']['UsernameToken']['Created']['\$'],
-          '2024-01-20T16:10:00Z');
+          '2024-01-20T16:10:00.000');
     });
   });
 }

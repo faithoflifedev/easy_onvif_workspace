@@ -4,7 +4,7 @@ import 'package:easy_onvif/src/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'ptz_vector.dart';
-import 'ptz_move_status.dart';
+import 'move_status.dart';
 
 part 'ptz_status.g.dart';
 
@@ -14,7 +14,7 @@ class PtzStatus {
   final PtzVector position;
 
   @JsonKey(name: 'MoveStatus')
-  final PtzMoveStatus? moveStatus;
+  final MoveStatus? moveStatus;
 
   @JsonKey(name: 'Error', fromJson: OnvifUtil.nullableMappedToString)
   final String? error;

@@ -10,7 +10,7 @@ PtzStatus _$PtzStatusFromJson(Map<String, dynamic> json) => PtzStatus(
       position: PtzVector.fromJson(json['Position'] as Map<String, dynamic>),
       moveStatus: json['MoveStatus'] == null
           ? null
-          : PtzMoveStatus.fromJson(json['MoveStatus'] as Map<String, dynamic>),
+          : MoveStatus.fromJson(json['MoveStatus'] as Map<String, dynamic>),
       error: OnvifUtil.nullableMappedToString(
           json['Error'] as Map<String, dynamic>?),
       utcTime: OnvifUtil.nullableMappedToDateTime(

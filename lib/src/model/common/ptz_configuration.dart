@@ -62,42 +62,43 @@ class PtzConfiguration {
   ///Absolute Pan/Tilt Position Space as default.
   @JsonKey(
     name: 'DefaultAbsolutePantTiltPositionSpace',
-    fromJson: nullableMappedToSpace,
+    fromJson: _nullableMappedToSpace,
   )
   final Space? defaultAbsolutePantTiltPositionSpace;
 
   ///If the PTZ Node supports absolute zoom movements, it shall specify one
   ///Absolute Zoom Position Space as default.
   @JsonKey(
-      name: 'DefaultAbsoluteZoomPositionSpace', fromJson: nullableMappedToSpace)
+      name: 'DefaultAbsoluteZoomPositionSpace',
+      fromJson: _nullableMappedToSpace)
   final Space? defaultAbsoluteZoomPositionSpace;
 
   ///If the PTZ Node supports relative Pan/Tilt movements, it shall specify one
   ///RelativePan/Tilt Translation Space as default.
   @JsonKey(
       name: 'DefaultRelativePanTiltTranslationSpace',
-      fromJson: nullableMappedToSpace)
+      fromJson: _nullableMappedToSpace)
   final Space? defaultRelativePanTiltTranslationSpace;
 
   ///If the PTZ Node supports relative zoom movements, it shall specify one
   ///Relative Zoom Translation Space as default.
   @JsonKey(
       name: 'DefaultRelativeZoomTranslationSpace',
-      fromJson: nullableMappedToSpace)
+      fromJson: _nullableMappedToSpace)
   final Space? defaultRelativeZoomTranslationSpace;
 
   ///If the PTZ Node supports continuous Pan/Tilt movements, it shall specify
   ///one Continuous Pan/Tilt Velocity Space as default.
   @JsonKey(
       name: 'DefaultContinuousPanTiltVelocitySpace',
-      fromJson: nullableMappedToSpace)
+      fromJson: _nullableMappedToSpace)
   final Space? defaultContinuousPanTiltVelocitySpace;
 
   ///If the PTZ Node supports continuous zoom movements, it shall specify one
   ///Continuous Zoom Velocity Space as default.
   @JsonKey(
       name: 'DefaultContinuousZoomVelocitySpace',
-      fromJson: nullableMappedToSpace)
+      fromJson: _nullableMappedToSpace)
   final Space? defaultContinuousZoomVelocitySpace;
 
   ///If the PTZ Node supports absolute or relative PTZ movements, it shall
@@ -154,6 +155,6 @@ class PtzConfiguration {
   @override
   String toString() => json.encode(toJson());
 
-  static Space? nullableMappedToSpace(Map<String, dynamic>? value) =>
+  static Space? _nullableMappedToSpace(Map<String, dynamic>? value) =>
       value != null ? $enumDecodeNullable(_$SpaceEnumMap, value['\$']) : null;
 }

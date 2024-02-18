@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.0+1
+
+* some tweaks to pass tests
+
 ## 2.3.0
 
 * Issue #58
