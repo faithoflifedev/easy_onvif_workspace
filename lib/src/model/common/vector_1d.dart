@@ -1,24 +1,23 @@
 import 'dart:convert';
 
-import 'package:easy_onvif/soap.dart';
+import 'package:easy_onvif/shared.dart';
+import 'package:easy_onvif/soap.dart' show Xmlns;
 import 'package:json_annotation/json_annotation.dart';
 import 'package:xml/xml.dart';
-
-import 'vector_2d.dart';
 
 part 'vector_1d.g.dart';
 
 @JsonSerializable()
-class Vector1D {
+class Vector1D implements XmlSerializable {
   @JsonKey(name: '@x', fromJson: double.parse)
   final double x;
 
   @JsonKey(name: '@space')
-  final Space? selector;
+  final Space? space;
 
   Vector1D({
     required this.x,
-    this.selector,
+    this.space,
   });
 
   factory Vector1D.fromString({required String x}) =>
@@ -32,18 +31,19 @@ class Vector1D {
   @override
   String toString() => json.encode(toJson());
 
+  @override
   void buildXml(
     XmlBuilder builder, {
-    String tag = 'Vector2D',
-    String namespace = Xmlns.tt,
+    String tag = 'Vector1D',
+    String? namespace = Xmlns.tt,
   }) =>
       builder.element(tag, nest: () {
-        builder.namespace(namespace);
+        builder.namespace(namespace!);
 
         builder.attribute('x', x);
 
-        if (selector != null) {
-          builder.attribute('space', selector!.space);
+        if (space != null) {
+          builder.attribute('space', space!.value);
         }
       });
 }

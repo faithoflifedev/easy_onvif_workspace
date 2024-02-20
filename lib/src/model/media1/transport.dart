@@ -1,11 +1,14 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/shared.dart';
+import 'package:easy_onvif/soap.dart' show Xmlns;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:xml/xml.dart';
 
 part 'transport.g.dart';
 
 @JsonSerializable()
-class Transport {
+class Transport implements XmlSerializable {
   /// Defines the network protocol for streaming, either UDP=RTP/UDP,
   /// RTSP=RTP/RTSP/TCP or HTTP=RTP/RTSP/HTTP/TCP
   /// - enum { 'UDP', 'TCP', 'RTSP', 'HTTP' }
@@ -23,4 +26,18 @@ class Transport {
 
   @override
   String toString() => json.encode(toJson());
+
+  @override
+  void buildXml(
+    XmlBuilder builder, {
+    String tag = 'Transport',
+    String? namespace = Xmlns.tt,
+  }) =>
+      builder.element('Transport', nest: () {
+        builder.namespace(namespace!);
+
+        builder.element('Protocol', nest: () {
+          builder.text(protocol);
+        });
+      });
 }

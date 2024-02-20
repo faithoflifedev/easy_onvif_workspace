@@ -2,7 +2,6 @@ import 'dart:ffi';
 
 import 'package:easy_onvif/probe.dart';
 import 'package:easy_onvif/soap.dart';
-import 'package:easy_onvif/src/model/envelope.dart';
 import 'package:ffi/ffi.dart';
 import 'package:loggy/loggy.dart';
 import 'package:path/path.dart';

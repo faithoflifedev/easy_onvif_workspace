@@ -1,13 +1,27 @@
 import 'package:easy_onvif/ptz.dart';
 import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/soap.dart' as soap;
-import 'package:loggy/loggy.dart';
 
-class Ptz with UiLoggy {
-  final soap.Transport transport;
+import 'operation.dart';
 
-  final Uri uri;
+typedef PtzRequest = soap.PtzRequest;
 
+/// The PTZ model groups the possible movements of the PTZ unit into a pan/tilt
+/// component and into a Zoom component.  To steer the PTZ unit, the service
+/// provides absolute move, relative move and continuous move operations.
+/// Different coordinate systems and units are used to feed these operations.
+///
+/// Default Access Policy Definition
+/// | | Administrator | Operator | User | Anonymous |
+/// | PRE_AUTH | X | X | X | X |
+/// | READ_SYSTEM | X | X | X | |
+/// | READ_SYSTEM_SENSITIVE | X | X | | |
+/// | READ_SYSTEM_SECRET | X | | | |
+/// | WRITE_SYSTEM | X | | | |
+/// | UNRECOVERABLE | X | | | |
+/// | READ_MEDIA | X | X | X | |
+/// | ACTUATE | X | X | | |
+class Ptz extends Operation {
   final configurationCache = <String, PtzConfiguration>{};
 
   PanTiltLimits? defaultPanTiltLimits;
@@ -15,8 +29,8 @@ class Ptz with UiLoggy {
   ZoomLimits? defaultZoomLimits;
 
   Ptz({
-    required this.transport,
-    required this.uri,
+    required super.transport,
+    required super.uri,
   });
 
   /// Operation to move pan,tilt or zoom to a absolute destination.
@@ -25,17 +39,24 @@ class Ptz with UiLoggy {
   /// the device to either use the x value as absolute resulting speed vector or
   /// to map x and y to the component speed. If the speed argument is omitted,
   /// the default speed set by the [PtzConfiguration] will be used.
+  ///
+  /// ACCESS CLASS: ACTUATE
   Future<bool> absoluteMove(String profileToken, PtzVector position,
       [PtzSpeed? speed]) async {
     loggy.debug('absoluteMove');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(
-            soap.PtzRequest.absoluteMove(profileToken, position, speed)));
+        soap.Body(
+          request: PtzRequest.absoluteMove(
+            profileToken,
+            position: position,
+            speed: speed,
+          ),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return true;
@@ -45,17 +66,27 @@ class Ptz with UiLoggy {
   /// supported if the PTZNode supports at least one continuous Pan/Tilt or Zoom
   /// space. If the space argument is omitted, the default space set by the
   /// [PtzConfiguration] will be used.
-  Future<bool> continuousMove(String profileToken, PtzSpeed velocity,
-      [int? timeout]) async {
+  ///
+  /// ACCESS CLASS: ACTUATE
+  Future<bool> continuousMove(
+    String profileToken, {
+    required PtzSpeed velocity,
+    int? timeout,
+  }) async {
     loggy.debug('continuousMove');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(soap.PtzRequest.continuousMove(profileToken,
-            velocity: velocity, timeout: timeout)));
+        soap.Body(
+          request: PtzRequest.continuousMove(
+            profileToken,
+            velocity: velocity,
+            timeout: timeout,
+          ),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return true;
@@ -69,20 +100,24 @@ class Ptz with UiLoggy {
   /// media profile should implement this operation. PTZConfiguration entities
   /// returned by this operation shall not fail on adding them to the referenced
   /// media profile.
+  ///
+  /// ACCESS CLASS: READ_MEDIA
   Future<List<PtzConfiguration>> getCompatibleConfigurations(
       String profileToken) async {
     loggy.debug('getCompatibleConfigurations');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(
-            soap.PtzRequest.getCompatibleConfigurations(profileToken)));
+        soap.Body(
+          request: PtzRequest.getCompatibleConfigurations(profileToken),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetCompatibleConfigurationsResponse.fromJson(envelope.body.response!)
+    return GetCompatibleConfigurationsResponse.fromJson(
+            responseEnvelope.body.response!)
         .ptzConfigurations;
   }
 
@@ -106,19 +141,22 @@ class Ptz with UiLoggy {
   /// relative or continuous movements is specified, which would leave the
   /// specified limits, the PTZ unit has to move along the specified limits. The
   /// Zoom Limits have to be interpreted accordingly.
+  ///
+  /// ACCESS CLASS: READ_MEDIA
   Future<PtzConfiguration> getConfiguration(String referenceToken) async {
     loggy.debug('getConfiguration');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport
-            .securedEnvelope(soap.PtzRequest.getConfiguration(referenceToken)));
+        soap.Body(
+          request: PtzRequest.getConfiguration(referenceToken),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetConfigurationResponse.fromJson(envelope.body.response!)
+    return GetConfigurationResponse.fromJson(responseEnvelope.body.response!)
         .ptzConfiguration;
   }
 
@@ -130,20 +168,24 @@ class Ptz with UiLoggy {
   /// the Video Source Configuration. If the PTZ Node supports continuous
   /// movements, it shall return a Timeout Range within which Timeouts are
   /// accepted by the PTZ Node.
+  ///
+  /// ACCESS CLASS: READ_MEDIA
   Future<PtzConfigurationOptions> getConfigurationOptions(
       String configurationToken) async {
     loggy.debug('getConfigurationOptions');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(
-            soap.PtzRequest.getConfigurationOptions(configurationToken)));
+        soap.Body(
+          request: PtzRequest.getConfigurationOptions(configurationToken),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetConfigurationOptionsResponse.fromJson(envelope.body.response!)
+    return GetConfigurationOptionsResponse.fromJson(
+            responseEnvelope.body.response!)
         .ptzConfigurationOptions;
   }
 
@@ -167,16 +209,21 @@ class Ptz with UiLoggy {
   /// relative or continuous movements is specified, which would leave the
   /// specified limits, the PTZ unit has to move along the specified limits. The
   /// Zoom Limits have to be interpreted accordingly.
+  ///
+  /// ACCESS CLASS: READ_MEDIA
   Future<List<PtzConfiguration>> getConfigurations() async {
     loggy.debug('getConfigurations');
 
-    final envelope = await transport.sendRequest(
-        uri, transport.securedEnvelope(soap.PtzRequest.getConfigurations()));
+    final responseEnvelope = await transport.securedRequest(
+        uri,
+        soap.Body(
+          request: PtzRequest.getConfigurations(),
+        ));
 
-    if (envelope.body.response == null) throw Exception();
+    if (responseEnvelope.body.response == null) throw Exception();
 
     final ptzConfigurations =
-        GetConfigurationsResponse.fromJson(envelope.body.response!)
+        GetConfigurationsResponse.fromJson(responseEnvelope.body.response!)
             .ptzConfigurations;
 
     _clearDefaults();
@@ -197,56 +244,74 @@ class Ptz with UiLoggy {
   /// Operation to request all PTZ presets for the [Preset] in the selected
   /// profile. The operation is supported if there is support for at least one
   /// PTZ preset by the [Preset].
+  ///
+  /// ACCESS CLASS: READ_MEDIA
   Future<List<Preset>> getPresets(String profileToken,
       {int? limit = 100}) async {
     loggy.debug('getPresets');
 
-    final envelope = await transport.sendRequest(uri,
-        transport.securedEnvelope(soap.PtzRequest.getPresets(profileToken)));
+    final responseEnvelope = await transport.securedRequest(
+        uri,
+        soap.Body(
+          request: PtzRequest.getPresets(profileToken),
+        ));
 
-    if (envelope.body.response == null) throw Exception();
+    if (responseEnvelope.body.response == null) throw Exception();
 
     final presets =
-        GetPresetsResponse.fromJson(envelope.body.response!).presets;
+        GetPresetsResponse.fromJson(responseEnvelope.body.response!).presets;
 
     limit = (limit! > presets.length) ? presets.length : limit;
 
-    return GetPresetsResponse.fromJson(envelope.body.response!)
+    return GetPresetsResponse.fromJson(responseEnvelope.body.response!)
         .presets
         .sublist(0, limit);
   }
 
+  /// Operation to request a specific PTZ preset tour in the selected media
+  /// profile.
+  ///
+  /// ACCESS CLASS: READ_MEDIA
   Future<PresetTour> getPresetTour(
     String profileToken, {
     required String presetTourToken,
   }) async {
     loggy.debug('getPresetTour');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(soap.PtzRequest.getPresetTour(
-          profileToken,
-          presetTourToken: presetTourToken,
-        )));
+        soap.Body(
+          request: PtzRequest.getPresetTour(
+            profileToken,
+            presetTourToken: presetTourToken,
+          ),
+        ));
 
-    if (envelope.body.response == null) throw Exception();
+    if (responseEnvelope.body.response == null) throw Exception();
 
-    return GetPresetTourResponse.fromJson(envelope.body.response!).presetTour;
+    return GetPresetTourResponse.fromJson(responseEnvelope.body.response!)
+        .presetTour;
   }
 
+  /// Operation to request PTZ preset tours in the selected media profiles.
+  ///
+  /// ACCESS CLASS: READ_MEDIA
   Future<List<PresetTour>> getPresetTours(String profileToken) async {
     loggy.debug('getPresetTours');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport
-            .securedEnvelope(soap.PtzRequest.getPresetTours(profileToken)));
+        soap.Body(
+          request: PtzRequest.getPresetTours(profileToken),
+        ));
 
-    if (envelope.body.response == null) throw Exception();
+    if (responseEnvelope.body.response == null) throw Exception();
 
-    return GetPresetToursResponse.fromJson(envelope.body.response!).presetTours;
+    return GetPresetToursResponse.fromJson(responseEnvelope.body.response!)
+        .presetTours;
   }
 
+  /// Helper method
   Future<Map<String, Preset>> getPresetsMap(String profileToken) async {
     loggy.debug('getPresetsMap');
 
@@ -257,46 +322,64 @@ class Ptz with UiLoggy {
 
   /// Returns the capabilities of the PTZ service. The result is returned in a
   /// typed answer.
+  ///
+  /// ACCESS CLASS: PRE_AUTH
   Future<Capabilities> getServiceCapabilities() async {
     loggy.debug('getServiceCapabilities');
 
-    final envelope = await transport.sendRequest(uri,
-        transport.securedEnvelope(soap.PtzRequest.getServiceCapabilities()));
+    final responseEnvelope = await transport.request(
+        uri,
+        soap.Body(
+          request: PtzRequest.getServiceCapabilities(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetServiceCapabilitiesResponse.fromJson(envelope.body.response!)
+    return GetServiceCapabilitiesResponse.fromJson(
+            responseEnvelope.body.response!)
         .capabilities;
   }
 
   /// Operation to request PTZ status for the Node in the selected profile.
+  ///
+  /// ACCESS CLASS: READ_MEDIA
   Future<PtzStatus> getStatus(String profileToken) async {
     loggy.debug('getStatus');
 
-    final envelope = await transport.sendRequest(uri,
-        transport.securedEnvelope(soap.PtzRequest.getStatus(profileToken)));
+    final responseEnvelope = await transport.securedRequest(
+        uri,
+        soap.Body(
+          request: PtzRequest.getStatus(profileToken),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetStatusResponse.fromJson(envelope.body.response!).ptzStatus;
+    return GetStatusResponse.fromJson(responseEnvelope.body.response!)
+        .ptzStatus;
   }
 
   /// Operation to move the PTZ device to it's "home" position. The operation is
   /// supported if the HomeSupported element in the PTZNode is true.
-  Future<bool> gotoHomePosition(String profileToken, [PtzSpeed? speed]) async {
+  ///
+  /// ACCESS CLASS: ACTUATE
+  Future<bool> gotoHomePosition(String profileToken, {PtzSpeed? speed}) async {
     loggy.debug('gotoHomePosition');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(
-            soap.PtzRequest.gotoHomePosition(profileToken, speed)));
+        soap.Body(
+          request: PtzRequest.gotoHomePosition(
+            profileToken,
+            speed: speed,
+          ),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return true;
@@ -305,6 +388,8 @@ class Ptz with UiLoggy {
   /// Operation to go to a saved preset position for the [Preset] in the
   /// selected profile. The operation is supported if there is support for at
   /// least one PTZ preset by the [Preset].
+  ///
+  /// ACCESS CLASS: ACTUATE
   Future<bool> gotoPreset(
     String profileToken, {
     required String presetToken,
@@ -312,20 +397,29 @@ class Ptz with UiLoggy {
   }) async {
     loggy.debug('gotoPreset');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(
-            soap.PtzRequest.gotoPreset(profileToken, presetToken, speed)));
+        soap.Body(
+          request: PtzRequest.gotoPreset(
+            profileToken,
+            presetToken: presetToken,
+            speed: speed,
+          ),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return true;
   }
 
-  Future<void> move(String profileToken, Vector2D direction,
-      [Vector1D? zoom]) async {
+  /// Helper method
+  Future<void> move(
+    String profileToken, {
+    required Vector2D direction,
+    Vector1D? zoom,
+  }) async {
     loggy.debug('move');
 
     Vector1D zoomAdjust = zoom ?? Vector1D(x: 0);
@@ -369,7 +463,7 @@ class Ptz with UiLoggy {
   Future<void> moveDown(String profileToken, [double step = -0.025]) async {
     loggy.debug('moveDown');
 
-    await move(profileToken, Vector2D(y: step, x: 0));
+    await move(profileToken, direction: Vector2D(y: step, x: 0));
   }
 
   /// A helper method to perform a single [step] of a [relativeMove] on the
@@ -377,7 +471,7 @@ class Ptz with UiLoggy {
   Future<void> moveLeft(String profileToken, [double step = -0.025]) async {
     loggy.debug('moveLeft');
 
-    await move(profileToken, Vector2D(x: step, y: 0));
+    await move(profileToken, direction: Vector2D(x: step, y: 0));
   }
 
   /// A helper method to perform a single [step] of a [relativeMove] on the
@@ -385,7 +479,7 @@ class Ptz with UiLoggy {
   Future<void> moveRight(String profileToken, [double step = 0.025]) async {
     loggy.debug('moveRight');
 
-    await move(profileToken, Vector2D(x: step, y: 0));
+    await move(profileToken, direction: Vector2D(x: step, y: 0));
   }
 
   /// A helper method to perform a single [step] of a [relativeMove] on the
@@ -393,7 +487,7 @@ class Ptz with UiLoggy {
   Future<void> moveUp(String profileToken, [double step = 0.025]) async {
     loggy.debug('moveUp');
 
-    await move(profileToken, Vector2D(y: step, x: 0));
+    await move(profileToken, direction: Vector2D(y: step, x: 0));
   }
 
   /// Operation for Relative Pan/Tilt and Zoom Move. The operation is supported
@@ -403,49 +497,64 @@ class Ptz with UiLoggy {
   /// the device to either use the x value as absolute resulting speed vector or
   /// to map x and y to the component speed. If the speed argument is omitted,
   /// the default speed set by the [PtzConfiguration] will be used.
+  ///
+  /// ACCESS CLASS: ACTUATE
   Future<bool> relativeMove(
       String profileToken, PtzVector translation, PtzSpeed? speed) async {
     loggy.debug('relativeMove');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(soap.PtzRequest.relativeMove(
-          profileToken,
-          translation,
-          speed,
-        )));
+        soap.Body(
+          request: PtzRequest.relativeMove(
+            profileToken,
+            translation: translation,
+            speed: speed,
+          ),
+        ));
 
-    return envelope.body.response?.containsKey('RelativeMoveResponse') ?? false;
+    return responseEnvelope.body.response
+            ?.containsKey('RelativeMoveResponse') ??
+        false;
   }
 
   /// Operation to remove a PTZ preset for the Node in the selected profile. The
   /// operation is supported if the PresetPosition capability exists for the Node
   /// in the selected profile.
+  ///
+  /// ACCESS CLASS: ACTUATE
   Future<bool> removePreset(String profileToken,
       {required Preset preset}) async {
     loggy.debug('removePreset');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(
-            soap.PtzRequest.removePreset(profileToken, preset: preset)));
+        soap.Body(
+          request: PtzRequest.removePreset(profileToken, preset: preset),
+        ));
 
-    return envelope.body.response?.containsKey('RemovePresetResponse') ?? false;
+    return responseEnvelope.body.response
+            ?.containsKey('RemovePresetResponse') ??
+        false;
   }
 
   /// Operation to save current position as the home position. The
   /// SetHomePosition command returns with a failure if the “home” position is
   /// fixed and cannot be overwritten. If the SetHomePosition is successful, it
   /// is possible to recall the Home Position with the GotoHomePosition command.
+  ///
+  /// ACCESS CLASS: ACTUATE
   Future<bool> setHomePosition(String profileToken) async {
     loggy.debug('setHomePosition');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport
-            .securedEnvelope(soap.PtzRequest.setHomePosition(profileToken)));
+        soap.Body(
+          request: PtzRequest.setHomePosition(profileToken),
+        ));
 
-    return envelope.body.response?.containsKey('SetHomePositionResponse') ??
+    return responseEnvelope.body.response
+            ?.containsKey('SetHomePositionResponse') ??
         false;
   }
 
@@ -460,6 +569,8 @@ class Ptz with UiLoggy {
   /// device is moving during the [setPreset] operation. The device may
   /// internally save additional states such as imaging properties in the PTZ
   /// Preset which then should be recalled in the [gotoPreset] operation.
+  ///
+  /// ACCESS CLASS: ACTUATE
   Future<String> setPreset(
     String profileToken, {
     String? presetName,
@@ -467,42 +578,55 @@ class Ptz with UiLoggy {
   }) async {
     loggy.debug('setPreset');
 
-    final envelope = await transport.sendRequest(
-      uri,
-      transport.securedEnvelope(soap.PtzRequest.setPreset(profileToken,
-          presetName: presetName, presetToken: presetToken)),
-    );
+    final responseEnvelope = await transport.securedRequest(
+        uri,
+        soap.Body(
+          request: PtzRequest.setPreset(
+            profileToken,
+            presetName: presetName,
+            presetToken: presetToken,
+          ),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return SetPresetResponse.fromJson(envelope.body.response!).presetToken;
+    return SetPresetResponse.fromJson(responseEnvelope.body.response!)
+        .presetToken;
   }
 
   /// Operation to stop ongoing pan, tilt and zoom movements of absolute
   /// relative and continuous type. If no stop argument for pan, tilt or zoom is
   /// set, the device will stop all ongoing pan, tilt and zoom movements.
+  ///
+  /// ACCESS CLASS: ACTUATE
   Future<bool> stop(String profileToken,
       {bool panTilt = true, bool zoom = true}) async {
     loggy.debug('stop');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(
-            soap.PtzRequest.stop(profileToken, panTilt: panTilt, zoom: zoom)));
+        soap.Body(
+          request: PtzRequest.stop(profileToken, panTilt: panTilt, zoom: zoom),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return envelope.body.response?.containsKey('StopResponse') ?? false;
+    return responseEnvelope.body.response?.containsKey('StopResponse') ?? false;
   }
 
+  /// Helper method
   Future<void> zoom(String profileToken, Vector1D zoom) async {
     loggy.debug('zoom');
 
-    await move(profileToken, Vector2D(y: 0, x: 0), zoom);
+    await move(
+      profileToken,
+      direction: Vector2D(y: 0, x: 0),
+      zoom: zoom,
+    );
   }
 
   /// A helper method to perform a single [step] of a [relativeMove] on the

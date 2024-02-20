@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/soap.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:xml/xml.dart';
 
 import 'recording_event_filter.dart';
 import 'recording_job_source.dart';
@@ -10,7 +12,7 @@ import 'recording_job_source.dart';
 part 'recording_job_configuration.g.dart';
 
 @JsonSerializable()
-class RecordingJobConfiguration {
+class RecordingJobConfiguration implements XmlSerializable {
   /// This attribute adds an additional requirement for activating the recording
   /// job. If this optional field is provided the job shall only record if the
   /// schedule exists and is active.
@@ -58,44 +60,39 @@ class RecordingJobConfiguration {
   @override
   String toString() => json.encode(toJson());
 
-  void toXml() {
-    Transport.builder.element('JobConfiguration', nest: () {
-      Transport.builder.namespace(Xmlns.trc);
-
-      if (scheduleToken != null) {
-        Transport.builder.element('ScheduleToken', nest: () {
-          Transport.builder.namespace(Xmlns.trc);
-          Transport.builder.text(scheduleToken!);
-        });
-      }
-
-      Transport.builder.element('RecordingToken', nest: () {
-        Transport.builder.namespace(Xmlns.trc);
-        Transport.builder.text(recordingToken);
-      });
-
-      Transport.builder.element('Mode', nest: () {
-        Transport.builder.namespace(Xmlns.trc);
-        Transport.builder.text(_$RecordingJobConfigurationModeEnumMap[mode]!);
-      });
-
-      Transport.builder.element('Priority', nest: () {
-        Transport.builder.namespace(Xmlns.trc);
-        Transport.builder.text(priority);
-      });
-
-      source?.toXml();
-
-      if (eventFilter != null) {
-        eventFilter!.toXml();
-      }
-    });
-  }
-
   static RecordingJobConfigurationMode _recordingJobConfiguration(
           dynamic json) =>
       $enumDecode(_$RecordingJobConfigurationModeEnumMap,
           OnvifUtil.mappedToString(json));
+
+  @override
+  void buildXml(
+    XmlBuilder builder, {
+    String tag = 'JobConfiguration',
+    String? namespace = Xmlns.trc,
+  }) =>
+      builder.element(tag, nest: () {
+        builder.namespace(namespace!);
+
+        if (scheduleToken != null) {
+          ReferenceToken(scheduleToken!)
+              .buildXml(builder, tag: 'ScheduleToken', namespace: Xmlns.trc);
+        }
+
+        ReferenceToken(recordingToken)
+            .buildXml(builder, tag: 'RecordingToken', namespace: Xmlns.trc);
+
+        _$RecordingJobConfigurationModeEnumMap[mode]!
+            .buildXml(builder, tag: 'Mode', namespace: Xmlns.trc);
+
+        priority
+            .toString()
+            .buildXml(builder, tag: 'Priority', namespace: Xmlns.trc);
+
+        source?.buildXml(builder);
+
+        eventFilter?.buildXml(builder);
+      });
 }
 
 enum RecordingJobConfigurationMode {

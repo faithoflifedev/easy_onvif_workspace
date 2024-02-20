@@ -1,14 +1,16 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/soap.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:xml/xml.dart';
 
 part 'recording_source_information.g.dart';
 
 /// Information about the source of the recording.
 @JsonSerializable()
-class RecordingSourceInformation {
+class RecordingSourceInformation implements XmlSerializable {
   /// Identifier for the source chosen by the client that creates the structure.
   /// This identifier is opaque to the device. Clients may use any type of URI
   /// for this field. A device shall support at least 128 characters.
@@ -51,34 +53,23 @@ class RecordingSourceInformation {
   @override
   String toString() => json.encode(toJson());
 
-  void toXml() {
-    Transport.builder.element('Source', nest: () {
-      Transport.builder.namespace(Xmlns.tt);
+  @override
+  void buildXml(
+    XmlBuilder builder, {
+    String tag = 'Source',
+    String? namespace = Xmlns.tt,
+  }) =>
+      Transport.builder.element(tag, nest: () {
+        Transport.builder.namespace(namespace!);
 
-      Transport.builder.element('SourceId', nest: () {
-        Transport.builder.namespace(Xmlns.tt);
-        Transport.builder.text(sourceId);
-      });
+        sourceId.buildXml(Transport.builder, tag: 'SourceId');
 
-      Transport.builder.element('Name', nest: () {
-        Transport.builder.namespace(Xmlns.tt);
-        Transport.builder.text(name);
-      });
+        name.buildXml(Transport.builder, tag: 'Name');
 
-      Transport.builder.element('Location', nest: () {
-        Transport.builder.namespace(Xmlns.tt);
-        Transport.builder.text(location);
-      });
+        location.buildXml(Transport.builder, tag: 'Location');
 
-      Transport.builder.element('Description', nest: () {
-        Transport.builder.namespace(Xmlns.tt);
-        Transport.builder.text(description);
-      });
+        description.buildXml(Transport.builder, tag: 'Description');
 
-      Transport.builder.element('Address', nest: () {
-        Transport.builder.namespace(Xmlns.tt);
-        Transport.builder.text(address);
+        address.buildXml(Transport.builder, tag: 'Address');
       });
-    });
-  }
 }

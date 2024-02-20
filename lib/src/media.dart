@@ -10,6 +10,9 @@ import 'package:loggy/loggy.dart';
 import 'media1.dart';
 import 'media2.dart';
 
+/// Real-time video and audio streaming configurations are controlled using
+/// media profiles. A media profile maps a video and/or audio source to a video
+/// and/or an audio encoder, PTZ and analytics configurations.
 class Media with UiLoggy {
   final soap.Transport transport;
 

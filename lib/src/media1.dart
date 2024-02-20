@@ -1,88 +1,120 @@
 import 'package:easy_onvif/media1.dart';
 import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/soap.dart' as soap;
-import 'package:loggy/loggy.dart';
 
-class Media1 with UiLoggy {
-  final soap.Transport transport;
+import 'operation.dart';
 
-  final Uri uri;
+typedef MediaRequest = soap.MediaRequest;
 
+/// Real-time video and audio streaming configurations are controlled using
+/// media profiles. A media profile maps a video and/or audio source to a video
+/// and/or an audio encoder, PTZ and analytics configurations.
+///
+/// Default Access Policy Definition
+/// | | Administrator | Operator | User | Anonymous |
+/// | PRE_AUTH | X | X | X | X |
+/// | READ_SYSTEM | X | X | X | |
+/// | READ_SYSTEM_SENSITIVE | X | X | | |
+/// | READ_SYSTEM_SECRET | X | | | |
+/// | WRITE_SYSTEM | X | | | |
+/// | UNRECOVERABLE | X | | | |
+/// | READ_MEDIA | X | X | X | |
+/// | ACTUATE | X | X | | |
+class Media1 extends Operation {
   Media1({
-    required this.transport,
-    required this.uri,
+    required super.transport,
+    required super.uri,
   });
 
   /// This command lists all available physical audio inputs of the device.
+  ///
+  /// ACCESS CLASS: READ_MEDIA
   Future<List<AudioSource>> getAudioSources() async {
     loggy.debug('getAudioSources');
 
-    final envelope = await transport.sendRequest(
-        uri, transport.securedEnvelope(soap.MediaRequest.getAudioSources()));
+    final responseEnvelope = await transport.securedRequest(
+        uri,
+        soap.Body(
+          request: MediaRequest.getAudioSources(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetAudioSourcesResponse.fromJson(envelope.body.response!)
+    return GetAudioSourcesResponse.fromJson(responseEnvelope.body.response!)
         .audioSources;
   }
 
   /// The GetMetadataConfiguration command fetches the metadata configuration if
   /// the metadata token is known.
+  ///
+  /// ACCESS CLASS: READ_MEDIA
   Future<MetadataConfiguration> getMetadataConfiguration(
       String configurationToken) async {
     loggy.debug('getMetadataConfiguration');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(
-            soap.MediaRequest.getMetadataConfiguration(configurationToken)));
+        soap.Body(
+          request: MediaRequest.getMetadataConfiguration(configurationToken),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetMetadataConfigurationResponse.fromJson(envelope.body.response!)
+    return GetMetadataConfigurationResponse.fromJson(
+            responseEnvelope.body.response!)
         .configuration;
   }
 
   /// This operation lists all existing metadata configurations. The client need
   /// not know anything apriori about the metadata in order to use the command.
+  ///
+  /// Access Class: READ_MEDIA
   Future<List<MetadataConfiguration>> getMetadataConfigurations({
     String? configurationToken,
     String? profileToken,
   }) async {
     loggy.debug('getMetadataConfigurations');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(soap.MediaRequest.getMetadataConfigurations(
-          configurationToken: configurationToken,
-          profileToken: profileToken,
-        )));
+        soap.Body(
+          request: MediaRequest.getMetadataConfigurations(
+            configurationToken: configurationToken,
+            profileToken: profileToken,
+          ),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetMetadataConfigurationsResponse.fromJson(envelope.body.response!)
+    return GetMetadataConfigurationsResponse.fromJson(
+            responseEnvelope.body.response!)
         .configurations;
   }
 
   /// If the profile token is already known, a profile can be fetched through
   /// the [getProfile] command.
+  ///
+  /// Access Class: READ_MEDIA
   Future<Profile> getProfile(String profileToken) async {
     loggy.debug('getProfile');
 
-    final envelope = await transport.sendRequest(uri,
-        transport.securedEnvelope(soap.MediaRequest.getProfile(profileToken)));
+    final responseEnvelope = await transport.securedRequest(
+        uri,
+        soap.Body(
+          request: MediaRequest.getProfile(profileToken),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetProfileResponse.fromJson(envelope.body.response!).profile;
+    return GetProfileResponse.fromJson(responseEnvelope.body.response!).profile;
   }
 
   /// Any endpoint can ask for the existing media1 profiles of a device using the
@@ -90,35 +122,49 @@ class Media1 with UiLoggy {
   /// can be retrieved using this command. This command lists all configured
   /// profiles in a device. The client does not need to know the media1 profile
   /// in order to use the command.
+  ///
+  /// Access Class: READ_MEDIA
   Future<List<Profile>> getProfiles() async {
     loggy.debug('getProfiles');
 
-    final envelope = await transport.sendRequest(
-        uri, transport.securedEnvelope(soap.MediaRequest.getProfiles()));
+    final responseEnvelope = await transport.securedRequest(
+        uri,
+        soap.Body(
+          request: MediaRequest.getProfiles(),
+        ));
 
-    final success = envelope.body.response?.containsKey('Profiles') ?? false;
+    final success =
+        responseEnvelope.body.response?.containsKey('Profiles') ?? false;
 
     if (!success) {
-      throw Exception(
-          envelope.body.hasFault ? envelope.body.fault.toString() : null);
+      throw Exception(responseEnvelope.body.hasFault
+          ? responseEnvelope.body.fault.toString()
+          : null);
     }
 
-    return GetProfilesResponse.fromJson(envelope.body.response!).profiles;
+    return GetProfilesResponse.fromJson(responseEnvelope.body.response!)
+        .profiles;
   }
 
   /// Returns the capabilities of the media1 service. The result is returned in a
   /// typed answer.
+  ///
+  /// Access Class: PRE_AUTH
   Future<Capabilities1> getServiceCapabilities() async {
     loggy.debug('getServiceCapabilities');
 
-    final envelope = await transport.sendRequest(uri,
-        transport.securedEnvelope(soap.MediaRequest.getServiceCapabilities()));
+    final responseEnvelope = await transport.request(
+        uri,
+        soap.Body(
+          request: MediaRequest.getServiceCapabilities(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetServiceCapabilitiesResponse.fromJson(envelope.body.response!)
+    return GetServiceCapabilitiesResponse.fromJson(
+            responseEnvelope.body.response!)
         .capabilities;
   }
 
@@ -132,19 +178,23 @@ class Media1 with UiLoggy {
   /// profile. The Jpeg settings (like resolution or quality) may be taken from
   /// the profile if suitable. The provided image will be updated automatically
   /// and independent from calls to [getSnapshotUri].
+  ///
+  /// Access Class: READ_MEDIA
   Future<MediaUri> getSnapshotUri(String profileToken) async {
     loggy.debug('getSnapshotUri');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport
-            .securedEnvelope(soap.MediaRequest.getSnapshotUri(profileToken)));
+        soap.Body(
+          request: MediaRequest.getSnapshotUri(profileToken),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetSnapshotUriResponse.fromJson(envelope.body.response!).mediaUri;
+    return GetSnapshotUriResponse.fromJson(responseEnvelope.body.response!)
+        .mediaUri;
   }
 
   /// This operation requests a [Uri] that can be used to initiate a live media1
@@ -169,36 +219,46 @@ class Media1 with UiLoggy {
   ///
   /// For full compatibility with other ONVIF services a device should not
   /// generate Uris longer than 128 octets.
+  ///
+  /// Access Class: READ_MEDIA
   Future<MediaUri> getStreamUri(
     String profileToken, {
     required StreamSetup streamSetup,
   }) async {
     loggy.debug('getStreamUri');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(soap.MediaRequest.getStreamUri(profileToken,
-            streamSetup: streamSetup)));
+        soap.Body(
+          request:
+              MediaRequest.getStreamUri(profileToken, streamSetup: streamSetup),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetStreamUriResponse.fromJson(envelope.body.response!).mediaUri;
+    return GetStreamUriResponse.fromJson(responseEnvelope.body.response!)
+        .mediaUri;
   }
 
   /// This command lists all available physical video inputs of the device.
+  ///
+  /// Access Class: READ_MEDIA
   Future<List<VideoSource>> getVideoSources() async {
     loggy.debug('getVideoSources');
 
-    final envelope = await transport.sendRequest(
-        uri, transport.securedEnvelope(soap.MediaRequest.getVideoSources()));
+    final responseEnvelope = await transport.securedRequest(
+        uri,
+        soap.Body(
+          request: MediaRequest.getVideoSources(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetVideoSourcesResponse.fromJson(envelope.body.response!)
+    return GetVideoSourcesResponse.fromJson(responseEnvelope.body.response!)
         .videoSources;
   }
 
@@ -208,16 +268,19 @@ class Media1 with UiLoggy {
   /// device until a StopMulticastStreaming request is received. The multicast
   /// address, port and TTL are configured in the VideoEncoderConfiguration,
   /// AudioEncoderConfiguration and MetadataConfiguration respectively.
+  ///
+  /// Access Class: ACTUATE
   Future<bool> startMulticastStreaming(String profileToken) async {
     loggy.debug('startMulticastStreaming');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(
-            soap.MediaRequest.startMulticastStreaming(profileToken)));
+        soap.Body(
+          request: MediaRequest.startMulticastStreaming(profileToken),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return true;
@@ -228,13 +291,14 @@ class Media1 with UiLoggy {
   Future<bool> stopMulticastStreaming(String profileToken) async {
     loggy.debug('stopMulticastStreaming');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(
-            soap.MediaRequest.stopMulticastStreaming(profileToken)));
+        soap.Body(
+          request: MediaRequest.stopMulticastStreaming(profileToken),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return true;

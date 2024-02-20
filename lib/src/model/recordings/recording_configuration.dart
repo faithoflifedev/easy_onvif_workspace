@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/soap.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:xml/xml.dart';
 
 import 'recording_source_information.dart';
 
@@ -10,7 +12,7 @@ part 'recording_configuration.g.dart';
 
 /// Configuration of the recording.
 @JsonSerializable()
-class RecordingConfiguration {
+class RecordingConfiguration implements XmlSerializable {
   /// Information about the source of the recording.
   @JsonKey(name: 'Source')
   final RecordingSourceInformation source;
@@ -43,21 +45,19 @@ class RecordingConfiguration {
   @override
   String toString() => json.encode(toJson());
 
-  void toXml() {
-    Transport.builder.element('RecordingConfiguration', nest: () {
-      Transport.builder.namespace(Xmlns.tt);
+  @override
+  void buildXml(
+    XmlBuilder builder, {
+    String tag = 'RecordingConfiguration',
+    String? namespace = Xmlns.tt,
+  }) =>
+      builder.element(tag, nest: () {
+        builder.namespace(namespace!);
 
-      source.toXml();
+        source.buildXml(builder);
 
-      Transport.builder.element('Content', nest: () {
-        Transport.builder.namespace(Xmlns.tt);
-        Transport.builder.text(content);
+        content.buildXml(builder, tag: 'Content');
+
+        maximumRetentionTime.buildXml(builder, tag: 'MaximumRetentionTime');
       });
-
-      Transport.builder.element('MaximumRetentionTime', nest: () {
-        Transport.builder.namespace(Xmlns.tt);
-        Transport.builder.text(maximumRetentionTime);
-      });
-    });
-  }
 }

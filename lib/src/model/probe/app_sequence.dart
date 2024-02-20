@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/src/soap/xmlns.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:xml/xml.dart';
@@ -7,7 +8,7 @@ import 'package:xml/xml.dart';
 part 'app_sequence.g.dart';
 
 @JsonSerializable()
-class AppSequence {
+class AppSequence implements XmlSerializable {
   @JsonKey(name: '@MessageNumber', fromJson: int.parse)
   final int messageNumber;
 
@@ -21,26 +22,28 @@ class AppSequence {
 
   Map<String, dynamic> toJson() => _$AppSequenceToJson(this);
 
-  XmlDocumentFragment toXml(XmlBuilder builder) {
-    builder.element(
-      'AppSequence',
-      namespaces: {Xmlns.ws: 'ws'},
-      nest: () {
-        builder.attribute(
-          'MessageNumber',
-          messageNumber,
-        );
-
-        builder.attribute(
-          'InstanceId',
-          instanceId,
-        );
-      },
-    );
-
-    return builder.buildFragment();
-  }
-
   @override
   String toString() => json.encode(toJson());
+
+  @override
+  void buildXml(
+    XmlBuilder builder, {
+    String tag = 'AppSequence',
+    String? namespace,
+  }) =>
+      builder.element(
+        tag,
+        namespaces: {Xmlns.ws: 'ws'},
+        nest: () {
+          builder.attribute(
+            'MessageNumber',
+            messageNumber,
+          );
+
+          builder.attribute(
+            'InstanceId',
+            instanceId,
+          );
+        },
+      );
 }

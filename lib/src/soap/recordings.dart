@@ -1,62 +1,59 @@
 import 'package:easy_onvif/recordings.dart';
+import 'package:easy_onvif/shared.dart';
+import 'package:easy_onvif/util.dart';
 import 'package:xml/xml.dart';
 
 import 'transport.dart';
 import 'xmlns.dart';
 
 class RecordingsRequest {
+  static XmlBuilder get builder => Transport.builder;
+
   /// XML for the [createRecording]
   static XmlDocumentFragment createRecording(
       RecordingConfiguration recordingConfiguration) {
-    Transport.builder.element('CreateRecording', nest: () {
-      Transport.builder.namespace(Xmlns.trc);
+    builder.element('CreateRecording', nest: () {
+      builder.namespace(Xmlns.trc);
 
-      recordingConfiguration.toXml();
+      recordingConfiguration.buildXml(builder);
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [createRecordingJob]
   static XmlDocumentFragment createRecordingJob(
       RecordingJobConfiguration recordingJobConfiguration) {
-    Transport.builder.element('CreateRecordingJob', nest: () {
-      Transport.builder.namespace(Xmlns.trc);
+    builder.element('CreateRecordingJob', nest: () {
+      builder.namespace(Xmlns.trc);
 
-      recordingJobConfiguration.toXml();
+      recordingJobConfiguration.buildXml(builder);
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [deleteRecording]
   static XmlDocumentFragment deleteRecording(String recordingToken) {
-    Transport.builder.element('DeleteRecordingJob', nest: () {
-      Transport.builder.namespace(Xmlns.trc);
+    builder.element('DeleteRecordingJob', nest: () {
+      builder.namespace(Xmlns.trc);
 
-      Transport.builder.element('JobToken', nest: () {
-        Transport.builder.namespace(Xmlns.tt);
-
-        Transport.builder.text(recordingToken);
-      });
+      recordingToken.buildXml(builder,
+          tag: 'RecordingToken', namespace: Xmlns.tt);
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [deleteRecordingJob]
   static XmlDocumentFragment deleteRecordingJob(String jobToken) {
-    Transport.builder.element('DeleteRecordingJob', nest: () {
-      Transport.builder.namespace(Xmlns.trc);
+    builder.element('DeleteRecordingJob', nest: () {
+      builder.namespace(Xmlns.trc);
 
-      Transport.builder.element('JobToken', nest: () {
-        Transport.builder.namespace(Xmlns.tt);
-
-        Transport.builder.text(jobToken);
-      });
+      jobToken.buildXml(builder, tag: 'JobToken', namespace: Xmlns.tt);
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [getRecordingJobs]
@@ -65,32 +62,26 @@ class RecordingsRequest {
 
   /// XML for the [getRecordingJobState]
   static XmlDocumentFragment getRecordingJobState(String jobToken) {
-    Transport.builder.element('GetRecordingJobState', nest: () {
-      Transport.builder.namespace(Xmlns.trc);
+    builder.element('GetRecordingJobState', nest: () {
+      builder.namespace(Xmlns.trc);
 
-      Transport.builder.element('JobToken', nest: () {
-        Transport.builder.namespace(Xmlns.tt);
-
-        Transport.builder.text(jobToken);
-      });
+      jobToken.buildXml(builder, tag: 'JobToken', namespace: Xmlns.tt);
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [getRecordingOptions]
-  static XmlDocumentFragment getRecordingOptions(String recordingToken) {
-    Transport.builder.element('GetRecordingOptions', nest: () {
-      Transport.builder.namespace(Xmlns.trc);
+  static XmlDocumentFragment getRecordingOptions(
+      ReferenceToken recordingToken) {
+    builder.element('GetRecordingOptions', nest: () {
+      builder.namespace(Xmlns.trc);
 
-      Transport.builder.element('RecordingToken', nest: () {
-        Transport.builder.namespace(Xmlns.tt);
-
-        Transport.builder.text(recordingToken);
-      });
+      recordingToken.buildXml(builder,
+          tag: 'RecordingToken', namespace: Xmlns.tt);
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [getRecordings]
@@ -106,22 +97,14 @@ class RecordingsRequest {
     required String jobToken,
     required RecordingJobConfigurationMode mode,
   }) {
-    Transport.builder.element('SetRecordingJobMode', nest: () {
-      Transport.builder.namespace(Xmlns.trc);
+    builder.element('SetRecordingJobMode', nest: () {
+      builder.namespace(Xmlns.trc);
 
-      Transport.builder.element('JobToken', nest: () {
-        Transport.builder.namespace(Xmlns.tt);
+      jobToken.buildXml(builder, tag: 'JobToken', namespace: Xmlns.tt);
 
-        Transport.builder.text(jobToken);
-      });
-
-      Transport.builder.element('Mode', nest: () {
-        Transport.builder.namespace(Xmlns.tt);
-
-        Transport.builder.text(mode.value);
-      });
+      mode.value.buildXml(builder, tag: 'Mode', namespace: Xmlns.tt);
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 }

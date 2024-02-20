@@ -1,37 +1,31 @@
 import 'package:easy_onvif/search.dart' show SearchScope;
+import 'package:easy_onvif/shared.dart';
+import 'package:easy_onvif/src/util/extra.dart';
 import 'package:xml/xml.dart';
 
 import 'transport.dart';
 import 'xmlns.dart';
 
 class SearchRequest {
+  static XmlBuilder get builder => Transport.builder;
+
   /// XML for the [findRecordings]
   static XmlDocumentFragment findRecordings({
     SearchScope? searchScope,
     int? maxMatches,
     required int keepAliveTime,
   }) {
-    Transport.builder.element('FindRecordings', nest: () {
-      Transport.builder.namespace(Xmlns.tse);
+    builder.element('FindRecordings', nest: () {
+      builder.namespace(Xmlns.tse);
 
-      if (searchScope != null) {
-        Transport.builder.element('RecordingToken', nest: () {
-          searchScope.toXml();
-        });
-      }
+      searchScope?.buildXml(builder);
 
-      if (maxMatches != null) {
-        Transport.builder.element('MaxMatches', nest: () {
-          Transport.builder.text(maxMatches);
-        });
-      }
+      maxMatches?.toString().buildXml(builder, tag: 'MaxMatches');
 
-      Transport.builder.element('KeepAliveTime', nest: () {
-        Transport.builder.text(keepAliveTime);
-      });
+      keepAliveTime.toString().buildXml(builder, tag: 'KeepAliveTime');
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [getRecordingSummary]
@@ -40,15 +34,13 @@ class SearchRequest {
 
   /// XML for the [getRecordingInformation]
   static XmlDocumentFragment getRecordingInformation(String recordingToken) {
-    Transport.builder.element('GetRecordingInformation', nest: () {
-      Transport.builder.namespace(Xmlns.tse);
+    builder.element('GetRecordingInformation', nest: () {
+      builder.namespace(Xmlns.tse);
 
-      Transport.builder.element('RecordingToken', nest: () {
-        Transport.builder.text(recordingToken);
-      });
+      ReferenceToken(recordingToken).buildXml(builder, tag: 'RecordingToken');
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [getRecordingSearchResults]
@@ -58,32 +50,18 @@ class SearchRequest {
     int? maxResults,
     String? waitTime,
   }) {
-    Transport.builder.element('GetRecordingSearchResults', nest: () {
-      Transport.builder.namespace(Xmlns.tse);
+    builder.element('GetRecordingSearchResults', nest: () {
+      builder.namespace(Xmlns.tse);
 
-      Transport.builder.element('SearchToken', nest: () {
-        Transport.builder.text(searchToken);
-      });
+      ReferenceToken(searchToken).buildXml(builder, tag: 'SearchToken');
 
-      if (minResults != null) {
-        Transport.builder.element('MinResults', nest: () {
-          Transport.builder.text(minResults);
-        });
-      }
+      minResults?.toString().buildXml(builder, tag: 'MinResults');
 
-      if (maxResults != null) {
-        Transport.builder.element('MaxResults', nest: () {
-          Transport.builder.text(maxResults);
-        });
-      }
+      maxResults?.toString().buildXml(builder, tag: 'MaxResults');
 
-      if (waitTime != null) {
-        Transport.builder.element('WaitTime', nest: () {
-          Transport.builder.text(waitTime);
-        });
-      }
+      waitTime?.buildXml(builder, tag: 'WaitTime');
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 }

@@ -1,17 +1,21 @@
+import 'package:easy_onvif/shared.dart';
 import 'package:xml/xml.dart';
 
 import 'transport.dart';
 import 'xmlns.dart';
 
 class ImagingRequest {
+  static XmlBuilder get builder => Transport.builder;
+
   /// XML for the [getCurrentPreset], requires a [videoSourceToken]
   static XmlDocumentFragment getCurrentPreset(String videoSourceToken) {
     Transport.builder.element('GetCurrentPreset', nest: () {
       Transport.builder.namespace(Xmlns.timg);
 
-      Transport.builder.element('VideoSourceToken', nest: () {
-        Transport.builder.text(videoSourceToken);
-      });
+      ReferenceToken(videoSourceToken).buildXml(
+        builder,
+        tag: 'VideoSourceToken',
+      );
     });
 
     return Transport.builder.buildFragment();
@@ -22,9 +26,10 @@ class ImagingRequest {
     Transport.builder.element('GetPresets', nest: () {
       Transport.builder.namespace(Xmlns.timg);
 
-      Transport.builder.element('VideoSourceToken', nest: () {
-        Transport.builder.text(videoSourceToken);
-      });
+      ReferenceToken(videoSourceToken).buildXml(
+        builder,
+        tag: 'VideoSourceToken',
+      );
     });
 
     return Transport.builder.buildFragment();
@@ -39,9 +44,10 @@ class ImagingRequest {
     Transport.builder.element('GetStatus', nest: () {
       Transport.builder.namespace(Xmlns.timg);
 
-      Transport.builder.element('VideoSourceToken', nest: () {
-        Transport.builder.text(videoSourceToken);
-      });
+      ReferenceToken(videoSourceToken).buildXml(
+        builder,
+        tag: 'VideoSourceToken',
+      );
     });
 
     return Transport.builder.buildFragment();
@@ -55,15 +61,15 @@ class ImagingRequest {
     Transport.builder.element('SetPreset', nest: () {
       Transport.builder.namespace(Xmlns.timg);
 
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.namespace(Xmlns.timg);
-        Transport.builder.text(videoSourceToken);
-      });
+      ReferenceToken(videoSourceToken).buildXml(
+        builder,
+        tag: 'VideoSourceToken',
+      );
 
-      Transport.builder.element('PresetToken', nest: () {
-        Transport.builder.namespace(Xmlns.timg);
-        Transport.builder.text(presetToken);
-      });
+      ReferenceToken(videoSourceToken).buildXml(
+        builder,
+        tag: 'PresetToken',
+      );
     });
 
     return Transport.builder.buildFragment();

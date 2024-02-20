@@ -1,13 +1,15 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:xml/xml.dart';
 import 'package:yaml/yaml.dart';
 
 part 'user.g.dart';
 
 @JsonSerializable()
-class User {
+class User implements XmlSerializable {
   @JsonKey(name: 'Username', fromJson: OnvifUtil.mappedToString)
   final String username;
 
@@ -44,6 +46,18 @@ class User {
 
   static UserLevel _mappedToUserLevel(Map<String, dynamic> value) =>
       $enumDecode(_$UserLevelEnumMap, value['\$']);
+
+  @override
+  void buildXml(XmlBuilder builder, {String tag = 'User', String? namespace}) =>
+      builder.element(
+        tag,
+        namespace: namespace,
+        nest: () {
+          username.buildXml(builder, tag: 'Username');
+          password?.buildXml(builder, tag: 'Password');
+          userLevel.code.buildXml(builder, tag: 'UserLevel');
+        },
+      );
 }
 
 @JsonEnum(valueField: 'code')

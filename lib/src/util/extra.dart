@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:xml/xml.dart';
 
 extension UsageExtension on DioException {
   String get usage {
@@ -8,8 +9,21 @@ extension UsageExtension on DioException {
   }
 }
 
-extension UriExtension on String {
+extension Helpers on String {
   Uri get parseUri {
     return Uri.parse(this);
   }
+
+  void buildXml(
+    XmlBuilder builder, {
+    required String tag,
+    String? namespace,
+  }) =>
+      builder.element(tag, nest: () {
+        if (namespace != null) {
+          builder.namespace(namespace);
+        }
+
+        builder.text(this);
+      });
 }

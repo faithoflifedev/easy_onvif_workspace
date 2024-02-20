@@ -9,13 +9,13 @@ part of 'vector_2d.dart';
 Vector2D _$Vector2DFromJson(Map<String, dynamic> json) => Vector2D(
       x: double.parse(json['@x'] as String),
       y: double.parse(json['@y'] as String),
-      selector: $enumDecodeNullable(_$SpaceEnumMap, json['@space']),
+      space: $enumDecodeNullable(_$SpaceEnumMap, json['@space']),
     );
 
 Map<String, dynamic> _$Vector2DToJson(Vector2D instance) => <String, dynamic>{
       '@x': instance.x,
       '@y': instance.y,
-      '@space': _$SpaceEnumMap[instance.selector],
+      '@space': _$SpaceEnumMap[instance.space],
     };
 
 const _$SpaceEnumMap = {

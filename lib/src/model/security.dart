@@ -1,12 +1,13 @@
-import 'package:easy_onvif/src/soap/authorization.dart';
+import 'dart:convert';
+
+import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/src/soap/xmlns.dart';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:xml/xml.dart';
 
 import 'username_token.dart';
 
-class Security {
-  @JsonKey(name: 'UsernameToken')
+/// Security header for SOAP requests.
+class Security implements XmlSerializable {
   final UsernameToken usernameToken;
 
   final int mustUnderstand;
@@ -16,24 +17,41 @@ class Security {
     required this.mustUnderstand,
   });
 
-  XmlDocumentFragment toXml(XmlBuilder builder, Authorization authorization) {
-    builder.element(
-      'Security',
-      namespaces: {Xmlns.s: 's'},
-      nest: () {
-        builder.namespace(
-            'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd');
+  Map<String, dynamic> toJson() => {
+        'UsernameToken': {
+          'Authorization': {
+            'Username': usernameToken.authorization.authInfo.username,
+            'Password': usernameToken.authorization.digest,
+            'Nonce': usernameToken.authorization.nonce.toBase64(),
+            'Created': usernameToken.authorization.utcTimestamp,
+          },
+        },
+      };
 
-        builder.attribute(
-          'mustUnderstand',
-          mustUnderstand,
-          namespace: Xmlns.s,
-        );
+  @override
+  String toString() => json.encode(toJson());
 
-        usernameToken.toXml(builder, authorization);
-      },
-    );
+  @override
+  void buildXml(
+    XmlBuilder builder, {
+    String tag = 'Security',
+    String? namespace = Xmlns.s,
+  }) =>
+      builder.element(
+        'Security',
+        namespace: namespace,
+        namespaces: {Xmlns.s: 's'},
+        nest: () {
+          builder.namespace(
+              'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd');
 
-    return builder.buildFragment();
-  }
+          builder.attribute(
+            'mustUnderstand',
+            mustUnderstand,
+            namespace: Xmlns.s,
+          );
+
+          usernameToken.buildXml(builder);
+        },
+      );
 }

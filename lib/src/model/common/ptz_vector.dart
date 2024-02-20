@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:easy_onvif/shared.dart';
-import 'package:easy_onvif/soap.dart';
+import 'package:easy_onvif/soap.dart' show Xmlns;
 import 'package:json_annotation/json_annotation.dart';
 import 'package:xml/xml.dart';
 
@@ -9,7 +9,7 @@ part 'ptz_vector.g.dart';
 
 /// A list of preset position.
 @JsonSerializable()
-class PtzVector {
+class PtzVector implements XmlSerializable {
   @JsonKey(name: 'PanTilt')
   final Vector2D? panTilt;
 
@@ -26,13 +26,14 @@ class PtzVector {
   @override
   String toString() => json.encode(toJson());
 
+  @override
   void buildXml(
     XmlBuilder builder, {
     String tag = 'PtzVector',
-    String namespace = Xmlns.tt,
+    String? namespace = Xmlns.tt,
   }) =>
       builder.element(tag, nest: () {
-        builder.namespace(namespace);
+        builder.namespace(namespace!);
 
         panTilt?.buildXml(builder, tag: 'PanTilt');
 

@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/soap.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:xml/xml.dart';
 
 import 'filter.dart';
 
@@ -11,7 +13,7 @@ part 'recording_event_filter.g.dart';
 /// Optional filter defining on which event condition a recording job gets
 /// active.
 @JsonSerializable()
-class RecordingEventFilter {
+class RecordingEventFilter implements XmlSerializable {
   @JsonKey(name: 'Filter', fromJson: _fromJson)
   final List<Filter> filters;
 
@@ -39,18 +41,22 @@ class RecordingEventFilter {
   @override
   String toString() => json.encode(toJson());
 
-  void toXml() {
-    Transport.builder.element('EventFilter', nest: () {
-      Transport.builder.namespace(Xmlns.trc);
-
-      if (filters.isNotEmpty) {
-        for (var filter in filters) {
-          filter.toXml();
-        }
-      }
-    });
-  }
-
   static List<Filter> _fromJson(dynamic json) => OnvifUtil.jsonList<Filter>(
       json, (json) => Filter.fromJson(json as Map<String, dynamic>));
+
+  @override
+  void buildXml(
+    XmlBuilder builder, {
+    String tag = 'EventFilter',
+    String? namespace = Xmlns.trc,
+  }) =>
+      builder.element(tag, nest: () {
+        builder.namespace(namespace!);
+
+        if (filters.isNotEmpty) {
+          for (var filter in filters) {
+            filter.buildXml(builder);
+          }
+        }
+      });
 }

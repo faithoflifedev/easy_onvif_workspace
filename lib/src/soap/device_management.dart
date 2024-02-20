@@ -1,35 +1,20 @@
 import 'package:easy_onvif/device_management.dart';
+import 'package:easy_onvif/util.dart';
 import 'package:xml/xml.dart';
 
 import 'transport.dart';
 import 'xmlns.dart';
 
 class DeviceManagementRequest {
+  static XmlBuilder get builder => Transport.builder;
+
   /// XML for the [createUsers]
   static XmlDocumentFragment createUsers(List<User> users) {
-    Transport.builder.element('CreateUsers', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
+    builder.element('CreateUsers', nest: () {
+      builder.namespace(Xmlns.tds);
 
       for (var user in users) {
-        Transport.builder.element('User', nest: () {
-          Transport.builder.namespace(Xmlns.tds);
-          Transport.builder.element('Username', nest: () {
-            Transport.builder.namespace(Xmlns.tt);
-            Transport.builder.text(user.username);
-          });
-
-          if (user.password != null) {
-            Transport.builder.element('Password', nest: () {
-              Transport.builder.namespace(Xmlns.tt);
-              Transport.builder.text(user.password!);
-            });
-          }
-
-          Transport.builder.element('UserLevel', nest: () {
-            Transport.builder.namespace(Xmlns.tt);
-            Transport.builder.text(user.userLevel.code);
-          });
-        });
+        user.buildXml(builder);
       }
     });
 
@@ -38,19 +23,19 @@ class DeviceManagementRequest {
 
   /// XML for the [deleteUsers]
   static XmlDocumentFragment deleteUsers(List<String> userNames) {
-    Transport.builder.element('DeleteUsers', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
+    builder.element('DeleteUsers', nest: () {
+      builder.namespace(Xmlns.tds);
 
       for (var userName in userNames) {
-        Transport.builder.element('Username', nest: userName);
+        userName.buildXml(builder, tag: 'Username');
       }
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
-  /// XML for the [systemDateAndTime]
-  static XmlDocumentFragment systemDateAndTime() =>
+  /// XML for the [getSystemDateAndTime]
+  static XmlDocumentFragment getSystemDateAndTime() =>
       Transport.quickTag('GetSystemDateAndTime', Xmlns.tds);
 
   ///XML for the [capabilities]
@@ -83,10 +68,10 @@ class DeviceManagementRequest {
     Transport.builder.element('GetStorageConfiguration', nest: () {
       Transport.builder.namespace(Xmlns.tds);
 
-      Transport.builder.element('Token', nest: () {
-        Transport.builder.namespace(Xmlns.tds);
-        Transport.builder.text(referenceToken);
-      });
+      referenceToken.buildXml(
+        builder,
+        tag: 'Token',
+      );
     });
 
     return Transport.builder.buildFragment();
@@ -101,11 +86,11 @@ class DeviceManagementRequest {
     Transport.builder.element('GetSystemLog', nest: () {
       Transport.builder.namespace(Xmlns.tds);
 
-      Transport.builder.element('LogType', nest: () {
-        Transport.builder.namespace(Xmlns.tds);
-
-        Transport.builder.text(logType);
-      });
+      logType.buildXml(
+        builder,
+        tag: 'LogType',
+        namespace: Xmlns.tds,
+      );
     });
 
     return Transport.builder.buildFragment();
@@ -120,32 +105,32 @@ class DeviceManagementRequest {
     return Transport.builder.buildFragment();
   }
 
-  /// XML for the [deviceInformation]
-  static XmlDocumentFragment deviceInformation() => Transport.quickTag(
+  /// XML for the [getDeviceInformation]
+  static XmlDocumentFragment getDeviceInformation() => Transport.quickTag(
         'GetDeviceInformation',
         Xmlns.tds,
       );
 
-  /// XML for the [hostname]
-  static XmlDocumentFragment hostname() => Transport.quickTag(
-        'GetHostname',
-        Xmlns.tds,
-      );
-
-  /// XML for the [endpointReference]
-  static XmlDocumentFragment endpointReference() => Transport.quickTag(
+  /// XML for the [getEndpointReference]
+  static XmlDocumentFragment getEndpointReference() => Transport.quickTag(
         'GetEndpointReference',
         Xmlns.tds,
       );
 
-  /// XML for the [serviceCapabilities]
-  static XmlDocumentFragment serviceCapabilities() => Transport.quickTag(
+  /// XML for the [getHostname]
+  static XmlDocumentFragment getHostname() => Transport.quickTag(
+        'GetHostname',
+        Xmlns.tds,
+      );
+
+  /// XML for the [getServiceCapabilities]
+  static XmlDocumentFragment getServiceCapabilities() => Transport.quickTag(
         'GetServiceCapabilities',
         Xmlns.tds,
       );
 
-  /// XML for the [networkProtocols]
-  static XmlDocumentFragment networkProtocols() => Transport.quickTag(
+  /// XML for the [getNetworkProtocols]
+  static XmlDocumentFragment getNetworkProtocols() => Transport.quickTag(
         'GetNetworkProtocols',
         Xmlns.tds,
       );
@@ -156,8 +141,8 @@ class DeviceManagementRequest {
         Xmlns.tds,
       );
 
-  /// XML for the [systemUris]
-  static XmlDocumentFragment systemUris() => Transport.quickTag(
+  /// XML for the [getSystemUris]
+  static XmlDocumentFragment getSystemUris() => Transport.quickTag(
         'GetSystemUris',
         Xmlns.tds,
       );
@@ -168,18 +153,20 @@ class DeviceManagementRequest {
         Xmlns.tds,
       );
 
-  static XmlDocumentFragment discoveryMode() => Transport.quickTag(
+  /// XML for the [getDiscoveryMode]
+  static XmlDocumentFragment getDiscoveryMode() => Transport.quickTag(
         'GetDiscoveryMode',
         Xmlns.tds,
       );
 
-  static XmlDocumentFragment dns() => Transport.quickTag(
+  /// XML for the [getDns]
+  static XmlDocumentFragment getDns() => Transport.quickTag(
         'GetDNS',
         Xmlns.tds,
       );
 
-  /// XML for the [ntp]
-  static XmlDocumentFragment ntp() => Transport.quickTag(
+  /// XML for the [getNtp]
+  static XmlDocumentFragment getNtp() => Transport.quickTag(
         'GetNTP',
         Xmlns.tds,
       );
@@ -187,12 +174,6 @@ class DeviceManagementRequest {
   /// XML for the [getGeoLocation]
   static XmlDocumentFragment getGeoLocation() => Transport.quickTag(
         'GetGeoLocation',
-        Xmlns.tds,
-      );
-
-  /// XML for the [getEndpointReference]
-  static XmlDocumentFragment getEndpointReference() => Transport.quickTag(
-        'GetEndpointReference',
         Xmlns.tds,
       );
 }

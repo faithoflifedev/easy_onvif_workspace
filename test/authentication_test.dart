@@ -1,11 +1,12 @@
 import 'dart:convert';
 
 import 'package:convert/convert.dart';
-import 'package:dio/dio.dart';
 import 'package:easy_onvif/onvif.dart';
 import 'package:easy_onvif/soap.dart';
 
 import 'package:test/test.dart';
+import 'package:xml/xml.dart';
+import 'package:xml/xpath.dart';
 import 'package:xml2json/xml2json.dart';
 
 void main() {
@@ -18,8 +19,8 @@ void main() {
 
     final authorization = Authorization(
       authInfo: authInfo,
-      timeStamp: DateTime(2024, 1, 20, 16, 10, 0),
       timeDelta: Duration(seconds: 0),
+      timestampOverride: DateTime(2024, 1, 20, 16, 10, 0),
       nonceOverride: Nonce(
           bytesOverride: hex.decode(
         '0102030405060708090A0B0C0D0E0F10',
@@ -27,34 +28,42 @@ void main() {
     );
 
     test('generate valid nonce and digest', () {
-      expect(authorization.digest, 'ZLSXZSjr+AeSFHLrsrK9jhEXjls=');
+      expect(authorization.digest, 'iJSWNCOtYP5YI9F5j4z4/hkM/yo=');
       expect(authorization.nonce.toBase64(), 'AQIDBAUGBwgJCgsMDQ4PEA==');
-      expect(authorization.utcTimeStamp, '2024-01-20T16:10:00.000');
+      expect(authorization.utcTimestamp, '2024-01-20T21:10:00.000Z');
     });
 
     test('generate valid security header', () {
-      final transport = Transport(
-        dio: Dio(),
-        authInfo: authInfo,
-      );
-
-      final securityHeader = transport.getSecurityHeader(
-        authorization: authorization,
-      );
+      final builder = XmlBuilder();
 
       final jsonTransformer = Xml2Json();
 
-      jsonTransformer.parse(securityHeader.lastChild!.toXmlString());
+      final securityHeader = Header(
+          security: Security(
+        usernameToken: UsernameToken(
+          authorization: authorization,
+        ),
+        mustUnderstand: 1,
+      ));
 
-      final json = jsonDecode(jsonTransformer.toBadgerfish());
+      final envelope = Envelope(header: securityHeader, body: Body());
 
-      expect(json['Security']['UsernameToken']['Username']['\$'], 'admin');
-      expect(json['Security']['UsernameToken']['Password']['\$'],
-          'ZLSXZSjr+AeSFHLrsrK9jhEXjls=');
-      expect(json['Security']['UsernameToken']['Nonce']['\$'],
+      final xml = envelope.toXml(builder);
+
+      jsonTransformer.parse(xml
+          .xpath('s:Envelope/s:Header/s:Security/UsernameToken')
+          .last
+          .toXmlString());
+
+      final usernameJson = json.decode(jsonTransformer.toBadgerfish());
+
+      expect(usernameJson['UsernameToken']['Username']['\$'], 'admin');
+      expect(usernameJson['UsernameToken']['Password']['\$'],
+          'iJSWNCOtYP5YI9F5j4z4/hkM/yo=');
+      expect(usernameJson['UsernameToken']['Nonce']['\$'],
           'AQIDBAUGBwgJCgsMDQ4PEA==');
-      expect(json['Security']['UsernameToken']['Created']['\$'],
-          '2024-01-20T16:10:00.000');
+      expect(usernameJson['UsernameToken']['Created']['\$'],
+          '2024-01-20T21:10:00.000Z');
     });
   });
 }

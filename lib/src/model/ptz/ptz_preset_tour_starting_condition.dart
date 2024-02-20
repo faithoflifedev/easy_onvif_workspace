@@ -38,7 +38,7 @@ class PtzPresetTourStartingCondition {
   final dynamic extension;
 
   PtzPresetTourStartingCondition({
-    required this.randomPresetOrder,
+    this.randomPresetOrder,
     this.recurringTime,
     this.recurringDuration,
     this.direction,

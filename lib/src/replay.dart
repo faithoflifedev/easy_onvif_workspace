@@ -1,31 +1,50 @@
 import 'package:easy_onvif/media1.dart' show StreamSetup;
 import 'package:easy_onvif/replay.dart';
 import 'package:easy_onvif/soap.dart' as soap;
-import 'package:loggy/loggy.dart';
 
-class Replay with UiLoggy {
-  final soap.Transport transport;
+import 'operation.dart';
 
-  final Uri uri;
+typedef ReplayRequest = soap.ReplayRequest;
 
+/// The replay service provides a mechanism for replay of stored video, audio
+/// and metadata. This mechanism may also be used to download data from the
+/// storage device so that export functionality can be provided.
+///
+/// Default Access Policy Definition
+/// | | Administrator | Operator | User | Anonymous |
+/// | PRE_AUTH | X | X | X | X |
+/// | READ_SYSTEM | X | X | X | |
+/// | READ_SYSTEM_SENSITIVE | X | X | | |
+/// | READ_SYSTEM_SECRET | X | | | |
+/// | WRITE_SYSTEM | X | | | |
+/// | UNRECOVERABLE | X | | | |
+/// | READ_MEDIA | X | X | X | |
+/// | ACTUATE | X | X | | |
+class Replay extends Operation {
   Replay({
-    required this.transport,
-    required this.uri,
+    required super.transport,
+    required super.uri,
   });
 
   /// Returns the current configuration of the replay service. This operation is
   /// mandatory.
+  ///
+  /// ACCESS CLASS: READ_MEDIA
   Future<ReplayConfiguration> getReplayConfiguration() async {
     loggy.debug('getReplayConfiguration');
 
-    final envelope = await transport.sendRequest(uri,
-        transport.securedEnvelope(soap.ReplayRequest.getReplayConfiguration()));
+    final responseEnvelope = await transport.securedRequest(
+        uri,
+        soap.Body(
+          request: ReplayRequest.getReplayConfiguration(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetReplayConfigurationResponse.fromJson(envelope.body.response!)
+    return GetReplayConfigurationResponse.fromJson(
+            responseEnvelope.body.response!)
         .configuration;
   }
 
@@ -33,54 +52,64 @@ class Replay with UiLoggy {
   /// using RTSP as the control protocol. The URI is valid only as it is
   /// specified in the response. A device supporting the Replay Service shall
   /// support the GetReplayUri command.
+  ///
+  /// ACCESS CLASS: READ_MEDIA
   Future<String> getReplayUri(
     String recordingToken, {
     required StreamSetup streamSetup,
   }) async {
     loggy.debug('getReplayUri');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(soap.ReplayRequest.getReplayUri(
-          recordingToken,
-          streamSetup: streamSetup,
-        )));
+        soap.Body(
+          request: ReplayRequest.getReplayUri(
+            recordingToken,
+            streamSetup: streamSetup,
+          ),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetReplayUriResponse.fromJson(envelope.body.response!).uri;
+    return GetReplayUriResponse.fromJson(responseEnvelope.body.response!).uri;
   }
 
   /// Returns the capabilities of the replay service. The result is returned in
   /// a typed answer.
+  ///
+  /// ACCESS CLASS: PRE_AUTH
   Future<Capabilities> getServiceCapabilities() async {
     loggy.debug('getServiceCapabilities');
 
-    final envelope = await transport.sendRequest(uri,
-        transport.securedEnvelope(soap.ReplayRequest.getServiceCapabilities()));
+    final responseEnvelope = await transport.request(
+        uri, soap.Body(request: ReplayRequest.getServiceCapabilities()));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetServiceCapabilitiesResponse.fromJson(envelope.body.response!)
+    return GetServiceCapabilitiesResponse.fromJson(
+            responseEnvelope.body.response!)
         .capabilities;
   }
 
   /// Changes the current configuration of the replay service. This operation is
   /// mandatory.
+  ///
+  /// ACCESS CLASS: READ_MEDIA
   Future<bool> setReplayConfiguration(ReplayConfiguration configuration) async {
     loggy.debug('getReplayConfiguration');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(
-            soap.ReplayRequest.setReplayConfiguration(configuration)));
+        soap.Body(
+          request: ReplayRequest.setReplayConfiguration(configuration),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return true;

@@ -1,14 +1,17 @@
 import 'dart:convert';
 
-import 'package:easy_onvif/recordings.dart' show SourceToken;
+import 'package:easy_onvif/recordings.dart';
+import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/soap.dart';
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:xml/xml.dart';
 
 part 'search_scope.g.dart';
 
 /// Scope defines the dataset to consider for this search.
 @JsonSerializable()
-class SearchScope {
+class SearchScope implements XmlSerializable {
   /// A list of sources that are included in the scope. If this list is
   /// included, only data from one of these sources shall be searched.
   @JsonKey(name: 'IncludedSources')
@@ -39,29 +42,30 @@ class SearchScope {
   @override
   String toString() => json.encode(toJson());
 
-  void toXml() {
-    Transport.builder.element('Scope', nest: () {
-      Transport.builder.namespace(Xmlns.tse);
+  @override
+  void buildXml(
+    XmlBuilder builder, {
+    String tag = 'Scope',
+    String? namespace = Xmlns.tse,
+  }) =>
+      builder.element(tag, nest: () {
+        builder.namespace(namespace!);
 
-      if (includedSources != null) {
-        Transport.builder.element('IncludedSources', nest: () {
-          for (var sourceToken in includedSources!) {
-            sourceToken.toXml();
-          }
-        });
-      }
+        if (includedSources != null) {
+          builder.element('IncludedSources', nest: () {
+            for (var sourceToken in includedSources!) {
+              sourceToken.buildXml(builder);
+            }
+          });
+        }
 
-      if (includedRecordings != null) {
-        Transport.builder.element('IncludedRecordings', nest: () {
-          Transport.builder.text(includedRecordings!.join(','));
-        });
-      }
+        if (includedRecordings != null) {
+          builder.element('IncludedRecordings', nest: () {
+            builder.text(includedRecordings!.join(','));
+          });
+        }
 
-      if (recordingInformationFilter != null) {
-        Transport.builder.element('RecordingInformationFilter', nest: () {
-          Transport.builder.text(recordingInformationFilter!);
-        });
-      }
-    });
-  }
+        recordingInformationFilter?.buildXml(builder,
+            tag: 'RecordingInformationFilter');
+      });
 }

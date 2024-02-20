@@ -179,27 +179,29 @@ class Onvif with UiLoggy {
     } catch (e) {
       loggy.warning('GetServices command not supported');
     } finally {
-      final capabilities = await deviceManagement.getCapabilities();
+      if (serviceMap.isEmpty) {
+        final capabilities = await deviceManagement.getCapabilities();
 
-      if (capabilities.imaging?.xAddr != null) {
-        _imaging = Imaging(
-            transport: transport,
-            uri: _serviceUriOfHost(capabilities.imaging!.xAddr));
-      }
-
-      if (capabilities.media?.xAddr != null) {
-        _media = Media(
-          transport: transport,
-          media1: Media1(
+        if (_imaging == null && capabilities.imaging?.xAddr != null) {
+          _imaging = Imaging(
               transport: transport,
-              uri: _serviceUriOfHost(capabilities.media!.xAddr)),
-        );
-      }
+              uri: _serviceUriOfHost(capabilities.imaging!.xAddr));
+        }
 
-      if (capabilities.ptz?.xAddr != null) {
-        _ptz = Ptz(
+        if (_media == null && capabilities.media?.xAddr != null) {
+          _media = Media(
             transport: transport,
-            uri: _serviceUriOfHost(capabilities.ptz!.xAddr));
+            media1: Media1(
+                transport: transport,
+                uri: _serviceUriOfHost(capabilities.media!.xAddr)),
+          );
+        }
+
+        if (_ptz == null && capabilities.ptz?.xAddr != null) {
+          _ptz = Ptz(
+              transport: transport,
+              uri: _serviceUriOfHost(capabilities.ptz!.xAddr));
+        }
       }
     }
 

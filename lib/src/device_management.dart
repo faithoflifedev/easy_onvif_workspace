@@ -1,16 +1,29 @@
 import 'package:easy_onvif/device_management.dart';
 import 'package:easy_onvif/soap.dart' as soap;
-import 'package:loggy/loggy.dart';
 
-// ignore: constant_identifier_names
-// enum CapabilityCategory { All, Analytics, Device, Events, Imaging, Media, PTZ }
+import 'operation.dart';
 
-class DeviceManagement with UiLoggy {
-  final soap.Transport transport;
+typedef DeviceManagementRequest = soap.DeviceManagementRequest;
 
-  final Uri uri;
-
-  DeviceManagement({required this.transport, required this.uri});
+/// Device management functions are handled through the device service. The
+/// device service is the entry point to all other services provided by a
+/// device.
+///
+/// Default Access Policy Definition
+/// | | Administrator | Operator | User | Anonymous |
+/// | PRE_AUTH | X | X | X | X |
+/// | READ_SYSTEM | X | X | X | |
+/// | READ_SYSTEM_SENSITIVE | X | X | | |
+/// | READ_SYSTEM_SECRET | X | | | |
+/// | WRITE_SYSTEM | X | | | |
+/// | UNRECOVERABLE | X | | | |
+/// | READ_MEDIA | X | X | X | |
+/// | ACTUATE | X | X | | |
+class DeviceManagement extends Operation {
+  DeviceManagement({
+    required super.transport,
+    required super.uri,
+  });
 
   /// This operation creates new device users and corresponding credentials on a
   /// device for authentication purposes. The device shall support creation of
@@ -22,16 +35,19 @@ class DeviceManagement with UiLoggy {
   /// least 28 bytes, as clients may follow the password derivation mechanism
   /// which results in 'password equivalent' of length 28 bytes, as described in
   /// section 3.1.2 of the ONVIF security white paper.
+  ///
+  /// Access Class: WRITE_SYSTEM
   Future<bool> createUsers(List<User> users) async {
     loggy.debug('createUsers');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport
-            .securedEnvelope(soap.DeviceManagementRequest.createUsers(users)));
+        soap.Body(
+          request: DeviceManagementRequest.createUsers(users),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return true;
@@ -42,16 +58,19 @@ class DeviceManagement with UiLoggy {
   /// device may have one or more fixed users that cannot be deleted to ensure
   /// access to the unit. Either all users are deleted successfully or a fault
   /// message shall be returned and no users be deleted.
+  ///
+  /// Access Class: WRITE_SYSTEM
   Future<bool> deleteUsers(List<String> users) async {
     loggy.debug('deleteUsers');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport
-            .securedEnvelope(soap.DeviceManagementRequest.deleteUsers(users)));
+        soap.Body(
+          request: DeviceManagementRequest.deleteUsers(users),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return true;
@@ -71,199 +90,244 @@ class DeviceManagement with UiLoggy {
   /// This method has been replaced by the more generic [getServices] method.
   /// For capabilities of individual services refer to the
   /// [getServiceCapabilities] methods.
-  //  @Deprecated('Use [getServices]')
+  ///  @Deprecated('Use [getServices]')
+  ///
+  /// Access Class: PRE_AUTH
   Future<Capabilities> getCapabilities(
       {CapabilityCategory? capabilityCategory}) async {
     loggy.debug('getCapabilities');
 
     capabilityCategory ??= CapabilityCategory.all;
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.request(
         uri,
-        transport.envelope(
-            null,
-            soap.DeviceManagementRequest.capabilities(
-                capabilityCategory.value)));
+        soap.Body(
+          request:
+              DeviceManagementRequest.capabilities(capabilityCategory.value),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetCapabilitiesResponse.fromJson(envelope.body.response!)
+    return GetCapabilitiesResponse.fromJson(responseEnvelope.body.response!)
         .capabilities;
   }
 
   /// This operation gets basic device information from the device.
+  ///
+  /// Access Class: READ_SYSTEM
   Future<GetDeviceInformationResponse> getDeviceInformation() async {
     loggy.debug('getDeviceInformation');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport
-            .securedEnvelope(soap.DeviceManagementRequest.deviceInformation()));
+        soap.Body(
+          request: DeviceManagementRequest.getDeviceInformation(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetDeviceInformationResponse.fromJson(envelope.body.response!);
+    return GetDeviceInformationResponse.fromJson(
+        responseEnvelope.body.response!);
   }
 
   /// This operation gets the discovery mode of a device. See Section 7.2 for
   /// the definition of the different device discovery modes. The device shall
   /// support retrieval of the discovery mode setting through the
   /// GetDiscoveryMode command.
+  ///
+  /// Access Class: READ_SYSTEM
   Future<String> getDiscoveryMode() async {
     loggy.debug('getDiscoveryMode');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport
-            .securedEnvelope(soap.DeviceManagementRequest.discoveryMode()));
+        soap.Body(
+          request: DeviceManagementRequest.getDiscoveryMode(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetDiscoveryModeResponse.fromJson(envelope.body.response!)
+    return GetDiscoveryModeResponse.fromJson(responseEnvelope.body.response!)
         .discoveryMode;
   }
 
   /// This operation gets the DNS settings from a device. The device shall
   /// return its DNS configurations through the GetDNS command.
+  ///
+  /// Access Class: READ_SYSTEM
   Future<DnsInformation> getDns() async {
     loggy.debug('getDns');
 
-    final envelope = await transport.sendRequest(
-        uri, transport.securedEnvelope(soap.DeviceManagementRequest.dns()));
+    final responseEnvelope = await transport.securedRequest(
+        uri,
+        soap.Body(
+          request: DeviceManagementRequest.getDns(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetDnsResponse.fromJson(envelope.body.response!).dnsInformation;
+    return GetDnsResponse.fromJson(responseEnvelope.body.response!)
+        .dnsInformation;
   }
 
   /// This operation is used by an endpoint to get the hostname from a device.
   /// The device shall return its hostname configurations through the
   /// [getHostname]
+  ///
+  /// Access Class: PRE_AUTH
   Future<HostnameInformation> getHostname() async {
     loggy.debug('getHostname');
 
-    final envelope = await transport.sendRequest(uri,
-        transport.securedEnvelope(soap.DeviceManagementRequest.hostname()));
+    final responseEnvelope = await transport.request(
+        uri,
+        soap.Body(
+          request: DeviceManagementRequest.getHostname(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetHostnameResponse.fromJson(envelope.body.response!)
+    return GetHostnameResponse.fromJson(responseEnvelope.body.response!)
         .hostnameInformation;
   }
 
   /// This operation gets defined network protocols from a device. The device
   /// shall support the [getNetworkProtocols] command returning configured
   /// network protocols.
+  ///
+  /// Access Class: READ_SYSTEM
   Future<List<NetworkProtocol>> getNetworkProtocols() async {
     loggy.debug('getNetworkProtocols');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport
-            .securedEnvelope(soap.DeviceManagementRequest.networkProtocols()));
+        soap.Body(
+          request: DeviceManagementRequest.getNetworkProtocols(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetNetworkProtocolsResponse.fromJson(envelope.body.response!)
+    return GetNetworkProtocolsResponse.fromJson(responseEnvelope.body.response!)
         .networkProtocols;
   }
 
   /// This operation gets the NTP settings from a device. If the device supports
   /// NTP, it shall be possible to get the NTP server settings through the
   /// [getNtp] command.
+  ///
+  /// Access Class: READ_SYSTEM
   Future<NtpInformation> getNtp() async {
     loggy.debug('getNtp');
 
-    final envelope = await transport.sendRequest(
-        uri, transport.securedEnvelope(soap.DeviceManagementRequest.ntp()));
+    final responseEnvelope = await transport.securedRequest(
+        uri,
+        soap.Body(
+          request: DeviceManagementRequest.getNtp(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetNtpResponse.fromJson(envelope.body.response!).ntpInformation;
+    return GetNtpResponse.fromJson(responseEnvelope.body.response!)
+        .ntpInformation;
   }
 
   /// Returns the capabilities of the device service. The result is returned in
   /// a typed answer.
+  ///
+  /// Access Class: PRE_AUTH
   Future<DeviceServiceCapabilities> getServiceCapabilities() async {
     loggy.debug('getServiceCapabilities');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.request(
         uri,
-        transport.securedEnvelope(
-            soap.DeviceManagementRequest.serviceCapabilities()));
+        soap.Body(
+          request: DeviceManagementRequest.getServiceCapabilities(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetServiceCapabilitiesResponse.fromJson(envelope.body.response!)
+    return GetServiceCapabilitiesResponse.fromJson(
+            responseEnvelope.body.response!)
         .capabilities;
   }
 
   /// Returns information about services on the device.
+  ///
+  /// Access Class: PRE_AUTH
   Future<List<Service>> getServices([bool includeCapability = false]) async {
     loggy.debug('getServices');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.request(
         uri,
-        transport.securedEnvelope(
-            soap.DeviceManagementRequest.getServices(includeCapability)));
+        soap.Body(
+          request: DeviceManagementRequest.getServices(includeCapability),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetServicesResponse.fromJson(envelope.body.response!).services;
+    return GetServicesResponse.fromJson(responseEnvelope.body.response!)
+        .services;
   }
 
   /// This operation retrieves the Storage configuration associated with the
-  /// given storage configuration toke
+  /// given storage configuration token
+  ///
+  /// Access Class: READ_MEDIA
   Future<StorageConfiguration> getStorageConfiguration(
       String referenceToken) async {
     loggy.debug('getStorageConfigurations');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(
-            soap.DeviceManagementRequest.getStorageConfiguration(
-                referenceToken)));
+        soap.Body(
+          request:
+              DeviceManagementRequest.getStorageConfiguration(referenceToken),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetStorageConfigurationResponse.fromJson(envelope.body.response!)
+    return GetStorageConfigurationResponse.fromJson(
+            responseEnvelope.body.response!)
         .storageConfiguration;
   }
 
   /// This operation lists all existing storage configurations for the device.
+  ///
+  /// Access Class: READ_MEDIA
   Future<List<StorageConfiguration>> getStorageConfigurations() async {
     loggy.debug('getStorageConfigurations');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(
-            soap.DeviceManagementRequest.getStorageConfigurations()));
+        soap.Body(
+          request: DeviceManagementRequest.getStorageConfigurations(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetStorageConfigurationsResponse.fromJson(envelope.body.response!)
+    return GetStorageConfigurationsResponse.fromJson(
+            responseEnvelope.body.response!)
         .storageConfigurations;
   }
 
@@ -273,52 +337,66 @@ class DeviceManagement with UiLoggy {
   /// through the [getSystemDateAndTime] command.
   ///
   /// A device shall provide the UTC [DateTime] information.
+  ///
+  /// Access Class: PRE_AUTH
   Future<SystemDateAndTime> getSystemDateAndTime() async {
     loggy.debug('getSystemDateAndTime');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.request(
         uri,
-        transport.envelope(
-            null, soap.DeviceManagementRequest.systemDateAndTime()));
+        soap.Body(
+          request: DeviceManagementRequest.getSystemDateAndTime(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetSystemDateAndTimeResponse.fromJson(envelope.body.response!)
+    return GetSystemDateAndTimeResponse.fromJson(
+            responseEnvelope.body.response!)
         .systemDateAndTime;
   }
 
   /// This operation gets a system log from the device. The exact format of the
   /// system logs is outside the scope of this standard.
+  ///
+  /// Access Class: READ_SYSTEM_SECRET
   Future<SystemInformation> getSystemLog(String logType) async {
     loggy.debug('getSystemLog');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(
-            soap.DeviceManagementRequest.getSystemLog(logType)));
+        soap.Body(
+          request: DeviceManagementRequest.getSystemLog(logType),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetSystemLogResponse.fromJson(envelope.body.response!).systemLog;
+    return GetSystemLogResponse.fromJson(responseEnvelope.body.response!)
+        .systemLog;
   }
 
+  /// This operation gets arbitrary device diagnostics information from the
+  /// device.
+  ///
+  /// Access Class: READ_SYSTEM_SECRET
   Future<SystemInformation> getSystemSupportInformation() async {
     loggy.debug('getSystemSupportInformation');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(
-            soap.DeviceManagementRequest.getSystemSupportInformation()));
+        soap.Body(
+          request: DeviceManagementRequest.getSystemSupportInformation(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetSystemSupportInformationResponse.fromJson(envelope.body.response!)
+    return GetSystemSupportInformationResponse.fromJson(
+            responseEnvelope.body.response!)
         .supportInformation;
   }
 
@@ -342,76 +420,74 @@ class DeviceManagement with UiLoggy {
   /// If the device allows retrieval of system logs, support information or
   /// system backup data, it should make them available via HTTP GET. If it
   /// does, it shall support the GetSystemUris command.
+  ///
+  /// Access Class: READ_SYSTEM
   Future<GetSystemUrisResponse?> getSystemUris() async {
     loggy.debug('getSystemUris');
 
-    final envelope = await transport.sendRequest(uri,
-        transport.securedEnvelope(soap.DeviceManagementRequest.systemUris()));
+    final responseEnvelope = await transport.securedRequest(
+        uri,
+        soap.Body(
+          request: DeviceManagementRequest.getSystemUris(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetSystemUrisResponse.fromJson(envelope.body.response!);
+    return GetSystemUrisResponse.fromJson(responseEnvelope.body.response!);
   }
 
   /// This operation lists the registered users and corresponding credentials on
   /// a device. The device shall support retrieval of registered device users
   /// and their credentials for the user token through the [getUsers] (GetUsers)
   /// command.
+  ///
+  /// Access Class: READ_SYSTEM_SECRET
   Future<List<User>> getUsers() async {
     loggy.debug('getUsers');
 
-    final envelope = await transport.sendRequest(uri,
-        transport.securedEnvelope(soap.DeviceManagementRequest.getUsers()));
+    final responseEnvelope = await transport.securedRequest(
+        uri,
+        soap.Body(
+          request: DeviceManagementRequest.getUsers(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetUsersResponse.fromJson(envelope.body.response!).users;
+    return GetUsersResponse.fromJson(responseEnvelope.body.response!).users;
   }
 
-  // //A client can ask for the device service endpoint reference address property
-  // //that can be used to derive the password equivalent for remote user
-  // //operation. The device shall support the [getEndpointReference] command
-  // //returning the address property of the device service endpoint reference.
-  // // Future<void> getEndpointReference() async {
-  // //   // Future<GetEndpointReferenceResponse> getEndpointReference() async {
-  // //   final envelope = await Soap.retrieveEnvelope(
-  // //       uri, onvif.secureRequest(Transport.endpointReference()),
-  // //       postProcess: (String xmlBody, dynamic jsonMap, Envelope envelope) {
-  // //     print(xmlBody);
-  // //     print('\n\n');
-  // //     print(jsonMap);
-  // //   });
-
-  // //   // if (envelope.body.endpointReferenceResponse == null) throw Exception();
-
-  // //   // return envelope.body.deviceInformationResponse!;
-  // // }
-
   /// This operation reboots the device.
+  ///
+  /// Access Class: UNRECOVERABLE
   Future<String> systemReboot() async {
     loggy.debug('systemReboot');
 
-    final envelope = await transport.sendRequest(uri,
-        transport.securedEnvelope(soap.DeviceManagementRequest.systemReboot()));
+    final responseEnvelope = await transport.securedRequest(
+        uri,
+        soap.Body(
+          request: DeviceManagementRequest.systemReboot(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return SystemRebootResponse.fromJson(envelope.body.response!).message;
+    return SystemRebootResponse.fromJson(responseEnvelope.body.response!)
+        .message;
   }
 
+  /// Access Class: READ_SYSTEM
   // Future<GetGeoLocationResponse> getGeoLocation() async {
   //   loggy.debug('getGeoLocation');
 
   //   final envelope = await transport.sendRequest(
   //       uri,
   //       transport
-  //           .securedEnvelope(soap.DeviceManagementRequest.getGeoLocation()));
+  //           .securedEnvelope(DeviceManagementRequest.getGeoLocation()));
 
   //   if (envelope.body.hasFault) {
   //     throw Exception(envelope.body.fault.toString());
@@ -425,18 +501,36 @@ class DeviceManagement with UiLoggy {
   /// property that can be used to derive the password equivalent for remote
   /// user operation. The device shall support the GetEndpointReference command
   /// returning the address property of the device service endpoint reference.
+  ///
+  /// Access Class: PRE_AUTH
   Future<Map<String, dynamic>> getEndpointReference() async {
     loggy.debug('getEndpointReference');
 
-    final envelope = await transport.sendRequest(
+    final responseEnvelope = await transport.securedRequest(
         uri,
-        transport.securedEnvelope(
-            soap.DeviceManagementRequest.getEndpointReference()));
+        soap.Body(
+          request: DeviceManagementRequest.getEndpointReference(),
+        ));
 
-    if (envelope.body.hasFault) {
-      throw Exception(envelope.body.fault.toString());
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return envelope.body.response!;
+    return responseEnvelope.body.response!;
   }
+
+  // Future<void> getLogOutput() async {
+  // //   // Future<GetEndpointReferenceResponse> getEndpointReference() async {
+  // //   final envelope = await Soap.retrieveEnvelope(
+  // //       uri, onvif.secureRequest(Transport.endpointReference()),
+  // //       postProcess: (String xmlBody, dynamic jsonMap, Envelope envelope) {
+  // //     print(xmlBody);
+  // //     print('\n\n');
+  // //     print(jsonMap);
+  // //   });
+
+  // //   // if (envelope.body.endpointReferenceResponse == null) throw Exception();
+
+  // //   // return envelope.body.deviceInformationResponse!;
+  // // }
 }

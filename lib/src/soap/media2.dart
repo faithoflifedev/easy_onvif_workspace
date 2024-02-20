@@ -1,3 +1,5 @@
+import 'package:easy_onvif/shared.dart';
+import 'package:easy_onvif/util.dart';
 import 'package:xml/xml.dart';
 
 import 'media_common.dart';
@@ -5,16 +7,20 @@ import 'transport.dart';
 import 'xmlns.dart';
 
 class Media2Request {
+  static XmlBuilder get builder => Transport.builder;
+
   /// XML for the [deleteProfile]
   static XmlDocumentFragment deleteProfile(String referenceToken) {
-    Transport.builder.element('DeleteProfile', nest: () {
-      Transport.builder.namespace(Xmlns.tr2);
-      Transport.builder.element('ReferenceToken', nest: () {
-        Transport.builder.text(referenceToken);
-      });
+    builder.element('DeleteProfile', nest: () {
+      builder.namespace(Xmlns.tr2);
+
+      ReferenceToken(referenceToken).buildXml(
+        builder,
+        tag: 'Token',
+      );
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [getMetadataConfigurationOptions]
@@ -45,46 +51,47 @@ class Media2Request {
 
   /// XML for the [getSnapshotUri], requires a [profileToken]
   static XmlDocumentFragment getSnapshotUri(String profileToken) {
-    Transport.builder.element('GetSnapshotUri', nest: () {
-      Transport.builder.namespace(Xmlns.tr2);
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.text(profileToken);
-      });
+    builder.element('GetSnapshotUri', nest: () {
+      builder.namespace(Xmlns.tr2);
+
+      ReferenceToken(profileToken).buildXml(builder);
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [getStreamUri], requires a [profileToken]
   static XmlDocumentFragment getStreamUri(String profileToken,
       {String protocol = 'RTSP'}) {
-    Transport.builder.element('GetStreamUri', nest: () {
-      Transport.builder.namespace(Xmlns.tr2);
-      Transport.builder.element('Protocol', nest: () {
-        Transport.builder.namespace(Xmlns.tt);
-        Transport.builder.text(protocol);
+    builder.element('GetStreamUri', nest: () {
+      builder.namespace(Xmlns.tr2);
+
+      protocol.buildXml(builder, tag: 'Protocol');
+
+      builder.element('Protocol', nest: () {
+        builder.namespace(Xmlns.tt);
+        builder.text(protocol);
       });
 
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.namespace(Xmlns.tt);
-        Transport.builder.text(profileToken);
-      });
+      ReferenceToken(profileToken).buildXml(builder);
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [getVideoEncoderInstances]
   static XmlDocumentFragment getVideoEncoderInstances(
       String configurationToken) {
-    Transport.builder.element('GetVideoEncoderInstances', nest: () {
-      Transport.builder.namespace(Xmlns.tr2);
-      Transport.builder.element('ConfigurationToken', nest: () {
-        Transport.builder.text(configurationToken);
-      });
+    builder.element('GetVideoEncoderInstances', nest: () {
+      builder.namespace(Xmlns.tr2);
+
+      ReferenceToken(configurationToken).buildXml(
+        builder,
+        tag: 'ConfigurationToken',
+      );
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [getVideoSourceConfigurationOptions]
@@ -92,23 +99,22 @@ class Media2Request {
     String? configurationToken,
     String? profileToken,
   }) {
-    Transport.builder.element('GetVideoSourceConfigurationOptions', nest: () {
-      Transport.builder.namespace(Xmlns.tr2);
+    builder.element('GetVideoSourceConfigurationOptions', nest: () {
+      builder.namespace(Xmlns.tr2);
 
       if (configurationToken != null) {
-        Transport.builder.element('ConfigurationToken', nest: () {
-          Transport.builder.text(configurationToken);
-        });
+        ReferenceToken(configurationToken).buildXml(
+          builder,
+          tag: 'ConfigurationToken',
+        );
       }
 
       if (profileToken != null) {
-        Transport.builder.element('ProfileToken', nest: () {
-          Transport.builder.text(profileToken);
-        });
+        ReferenceToken(profileToken).buildXml(builder);
       }
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [startMulticastStreaming]

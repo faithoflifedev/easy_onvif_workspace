@@ -1,31 +1,33 @@
+import 'package:easy_onvif/shared.dart';
 import 'package:xml/xml.dart';
 
 import 'transport.dart';
 
 class MediaCommon {
+  static XmlBuilder get builder => Transport.builder;
+
   /// XML for the [getMetadataConfigurationOptions]
   static XmlDocumentFragment getMetadataConfigurationOptions({
     String? configurationToken,
     String? profileToken,
     required String namespace,
   }) {
-    Transport.builder.element('GetMetadataConfigurationOptions', nest: () {
-      Transport.builder.namespace(namespace);
+    builder.element('GetMetadataConfigurationOptions', nest: () {
+      builder.namespace(namespace);
 
       if (configurationToken != null) {
-        Transport.builder.element('ConfigurationToken', nest: () {
-          Transport.builder.text(configurationToken);
-        });
+        ReferenceToken(configurationToken).buildXml(
+          builder,
+          tag: 'ConfigurationToken',
+        );
       }
 
       if (profileToken != null) {
-        Transport.builder.element('ProfileToken', nest: () {
-          Transport.builder.text(profileToken);
-        });
+        ReferenceToken(profileToken).buildXml(builder);
       }
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [getMetadataConfigurations]
@@ -34,23 +36,22 @@ class MediaCommon {
     String? profileToken,
     required String namespace,
   }) {
-    Transport.builder.element('GetMetadataConfigurations', nest: () {
-      Transport.builder.namespace(namespace);
+    builder.element('GetMetadataConfigurations', nest: () {
+      builder.namespace(namespace);
 
       if (configurationToken != null) {
-        Transport.builder.element('ConfigurationToken', nest: () {
-          Transport.builder.text(configurationToken);
-        });
+        ReferenceToken(configurationToken).buildXml(
+          builder,
+          tag: 'ConfigurationToken',
+        );
       }
 
       if (profileToken != null) {
-        Transport.builder.element('ProfileToken', nest: () {
-          Transport.builder.text(profileToken);
-        });
+        ReferenceToken(profileToken).buildXml(builder);
       }
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [startMulticastStreaming]
@@ -58,14 +59,13 @@ class MediaCommon {
     required String profileToken,
     required String namespace,
   }) {
-    Transport.builder.element('StartMulticastStreaming', nest: () {
-      Transport.builder.namespace(namespace);
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.text(profileToken);
-      });
+    builder.element('StartMulticastStreaming', nest: () {
+      builder.namespace(namespace);
+
+      ReferenceToken(profileToken).buildXml(builder);
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [stopMulticastStreaming]
@@ -73,13 +73,12 @@ class MediaCommon {
     required String profileToken,
     required String namespace,
   }) {
-    Transport.builder.element('StopMulticastStreaming', nest: () {
-      Transport.builder.namespace(namespace);
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.text(profileToken);
-      });
+    builder.element('StopMulticastStreaming', nest: () {
+      builder.namespace(namespace);
+
+      ReferenceToken(profileToken).buildXml(builder);
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 }

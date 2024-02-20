@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/soap.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:xml/xml.dart';
 
 part 'source_token.g.dart';
 
@@ -14,7 +16,7 @@ part 'source_token.g.dart';
 /// identifies a media profile, instructing the device to obtain data from a
 /// profile that exists on the local device.
 @JsonSerializable()
-class SourceToken {
+class SourceToken implements XmlSerializable {
   @JsonKey(name: '@Type')
   final String? type;
 
@@ -34,21 +36,18 @@ class SourceToken {
   @override
   String toString() => json.encode(toJson());
 
-  void toXml() {
-    Transport.builder.element('SourceToken', nest: () {
-      Transport.builder.namespace(Xmlns.tt);
+  @override
+  void buildXml(
+    XmlBuilder builder, {
+    String tag = 'SourceToken',
+    String? namespace = Xmlns.tt,
+  }) =>
+      builder.element(tag, nest: () {
+        builder.namespace(namespace!);
 
-      if (type != null) {
-        Transport.builder.element('Type', nest: () {
-          Transport.builder.namespace(Xmlns.tt);
-          Transport.builder.text(type!);
-        });
+        type?.buildXml(builder, tag: 'Type', namespace: Xmlns.tt);
 
-        Transport.builder.element('Token', nest: () {
-          Transport.builder.namespace(Xmlns.tt);
-          Transport.builder.text(token);
-        });
-      }
-    });
-  }
+        ReferenceToken(token)
+            .buildXml(builder, tag: 'Token', namespace: Xmlns.tt);
+      });
 }

@@ -1,4 +1,5 @@
 import 'package:easy_onvif/media1.dart' hide Transport;
+import 'package:easy_onvif/shared.dart';
 import 'package:xml/xml.dart';
 
 import 'media_common.dart';
@@ -6,6 +7,8 @@ import 'transport.dart';
 import 'xmlns.dart';
 
 class MediaRequest {
+  static XmlBuilder get builder => Transport.builder;
+
   /// XML for the [getAudioSources]
   static XmlDocumentFragment getAudioSources() =>
       Transport.quickTag('GetAudioSources', Xmlns.trt);
@@ -17,14 +20,16 @@ class MediaRequest {
   /// XML for the [getMetadataConfiguration]
   static XmlDocumentFragment getMetadataConfiguration(
       String configurationToken) {
-    Transport.builder.element('GetMetadataConfiguration', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
-      Transport.builder.element('ConfigurationToken', nest: () {
-        Transport.builder.text(configurationToken);
-      });
+    builder.element('GetMetadataConfiguration', nest: () {
+      builder.namespace(Xmlns.tds);
+
+      ReferenceToken(configurationToken).buildXml(
+        builder,
+        tag: 'ConfigurationToken',
+      );
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [getMetadataConfigurationOptions]
@@ -52,14 +57,13 @@ class MediaRequest {
 
   /// XML for the [getProfile], requires a [profileToken]
   static XmlDocumentFragment getProfile(String profileToken) {
-    Transport.builder.element('GetProfile', nest: () {
-      Transport.builder.namespace(Xmlns.tds);
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.text(profileToken);
-      });
+    builder.element('GetProfile', nest: () {
+      builder.namespace(Xmlns.tds);
+
+      ReferenceToken(profileToken).buildXml(builder);
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [getProfiles]
@@ -73,43 +77,27 @@ class MediaRequest {
   /// XML for the [getSnapshotUri], requires a [profileToken]
   static XmlDocumentFragment getSnapshotUri(String profileToken,
       {StreamSetup? streamSetup}) {
-    Transport.builder.element('GetSnapshotUri', nest: () {
-      Transport.builder.namespace(Xmlns.trt);
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.text(profileToken);
-      });
+    builder.element('GetSnapshotUri', nest: () {
+      builder.namespace(Xmlns.trt);
+
+      ReferenceToken(profileToken).buildXml(builder);
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [getStreamUri], requires a [profileToken]
   static XmlDocumentFragment getStreamUri(String profileToken,
       {required StreamSetup streamSetup}) {
-    Transport.builder.element('GetStreamUri', nest: () {
-      Transport.builder.namespace(Xmlns.trt);
+    builder.element('GetStreamUri', nest: () {
+      builder.namespace(Xmlns.trt);
 
-      Transport.builder.element('StreamSetup', nest: () {
-        Transport.builder.namespace(Xmlns.trt);
-        Transport.builder.element('Stream', nest: () {
-          Transport.builder.namespace(Xmlns.tt);
-          Transport.builder.text(streamSetup.stream);
-        });
-        Transport.builder.element('Transport', nest: () {
-          Transport.builder.namespace(Xmlns.tt);
-          Transport.builder.element('Protocol', nest: () {
-            Transport.builder.namespace(Xmlns.tt);
-            Transport.builder.text(streamSetup.transport.protocol);
-          });
-        });
-      });
+      streamSetup.buildXml(builder);
 
-      Transport.builder.element('ProfileToken', nest: () {
-        Transport.builder.text(profileToken);
-      });
+      ReferenceToken(profileToken).buildXml(builder);
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [getVideoSources]

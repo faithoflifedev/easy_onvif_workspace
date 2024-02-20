@@ -1,13 +1,14 @@
 import 'dart:convert';
 
-import 'package:easy_onvif/soap.dart';
+import 'package:easy_onvif/shared.dart';
+import 'package:easy_onvif/soap.dart' show Xmlns;
 import 'package:json_annotation/json_annotation.dart';
 import 'package:xml/xml.dart';
 
 part 'vector_2d.g.dart';
 
 @JsonSerializable()
-class Vector2D {
+class Vector2D implements XmlSerializable {
   @JsonKey(name: '@x', fromJson: double.parse)
   final double x;
 
@@ -16,12 +17,12 @@ class Vector2D {
 
   /// coordinate space selector
   @JsonKey(name: '@space')
-  final Space? selector;
+  final Space? space;
 
   Vector2D({
     required this.x,
     required this.y,
-    this.selector,
+    this.space,
   });
 
   factory Vector2D.fromString({required String x, required String y}) =>
@@ -35,24 +36,25 @@ class Vector2D {
   @override
   String toString() => json.encode(toJson());
 
+  @override
   void buildXml(
     XmlBuilder builder, {
     String tag = 'Vector2D',
-    String namespace = Xmlns.tt,
+    String? namespace = Xmlns.tt,
   }) =>
       builder.element(tag, nest: () {
-        builder.namespace(namespace);
+        builder.namespace(namespace!);
 
         builder.attribute('x', x);
         builder.attribute('y', y);
 
-        if (selector != null) {
-          builder.attribute('space', selector!.space);
+        if (space != null) {
+          builder.attribute('space', space!.value);
         }
       });
 }
 
-@JsonEnum(valueField: 'space')
+@JsonEnum(valueField: 'value')
 enum Space {
   zoomPositionGenericSpace(
       'http://www.onvif.org/ver10/tptz/ZoomSpaces/PositionGenericSpace'),
@@ -72,7 +74,7 @@ enum Space {
   panTiltGenericSpeedSpace(
       'http://www.onvif.org/ver10/tptz/PanTiltSpaces/GenericSpeedSpace');
 
-  const Space(this.space);
+  const Space(this.value);
 
-  final String space;
+  final String value;
 }

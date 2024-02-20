@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.0.0-dev.0
+
+* Method signature changes in attempt to standardize signatures.
+* Object model changes to better match the Onvif documented model.
+* Classes that can be serialized to XML now implent the XmlSerializable interface allowing each class to build it&#x27;s own XML representation.
+* The Transport class now has a more logical method to build the XML for SOAP requests, this change also allows for unit tests.
+* Each Onvif module has been refactored to take advantage the new XML serialization model.
+* The Onvif security model has been added to the API documentation an all commands have the required user authorization level noted.
+* All currently supported Onvif commands XML Requests now have unti tests.
+* Issues resolved
+  * Issue #58 - Authentication
+  * Issue #54 - PTZ
+
 ## 2.3.0+1
 
 * some tweaks to pass tests

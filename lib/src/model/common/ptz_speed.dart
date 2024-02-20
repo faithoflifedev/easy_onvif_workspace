@@ -1,18 +1,16 @@
 import 'dart:convert';
 
-import 'package:easy_onvif/soap.dart';
+import 'package:easy_onvif/shared.dart';
+import 'package:easy_onvif/soap.dart' show Xmlns;
 import 'package:json_annotation/json_annotation.dart';
 import 'package:xml/xml.dart';
-
-import 'vector_2d.dart';
-import 'vector_1d.dart';
 
 part 'ptz_speed.g.dart';
 
 /// If the PTZ Node supports absolute or relative PTZ movements, it shall specify
 /// corresponding default Pan/Tilt and Zoom speeds.
 @JsonSerializable()
-class PtzSpeed {
+class PtzSpeed implements XmlSerializable {
   /// Capability information.
   @JsonKey(name: 'Capabilities')
   final Vector2D? panTilt;
@@ -28,13 +26,14 @@ class PtzSpeed {
   @override
   String toString() => json.encode(toJson());
 
+  @override
   void buildXml(
     XmlBuilder builder, {
     String tag = 'PtzSpeed',
-    String namespace = Xmlns.tt,
+    String? namespace = Xmlns.tt,
   }) =>
       builder.element(tag, nest: () {
-        builder.namespace(namespace);
+        builder.namespace(namespace!);
 
         panTilt?.buildXml(builder, tag: 'PanTilt');
 

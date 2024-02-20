@@ -10,37 +10,38 @@ This package works with a variety of ONVIF compatible devices allowing for IP Ca
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Table of contents
-
-  - [Getting Started](#getting-started)
-    - [Dependency](#dependency)
-    - [Usage Example](#usage-example)
-    - [Interacting with a device through Onvif operations](#interacting-with-a-device-through-onvif-operations)
-  - [Lower level requests](#lower-level-requests)
-  - [Onvif cli (Onvif at the command prompt)](#onvif-cli-onvif-at-the-command-prompt)
-  - [Supported Onvif Operations](#supported-onvif-operations)
-    - [Device Management](#device-management)
-    - [Imaging](#imaging)
-    - [Media 1](#media-1)
-    - [Media 2](#media-2)
-    - [PTZ](#ptz)
-    - [PTZ Helper Methods](#ptz-helper-methods)
-    - [Recording](#recording)
-    - [Replay](#replay)
-    - [Search](#search)
-  - [Tested Onvif Devices](#tested-onvif-devices)
-  - [New for version 2.2.x](#new-for-version-22x)
-  - [New for version 2.1.x](#new-for-version-21x)
-  - [New for version 2.0.x](#new-for-version-20x)
-  - [Onvif specifications and documentation](#onvif-specifications-and-documentation)
-  - [Features and bugs](#features-and-bugs)
-  - [Known Issues](#known-issues)
-    - [Issue #45](#issue-45)
-    - [Issue #23](#issue-23)
-  - [Breaking changes](#breaking-changes)
-    - [v2.1.x](#v21x)
-  - [Contributors](#contributors)
-  - [Contributing](#contributing)
-
+- [Getting Started](#getting-started)
+  - [Dependency](#dependency)
+  - [Usage Example](#usage-example)
+  - [Interacting with a device through Onvif operations](#interacting-with-a-device-through-onvif-operations)
+- [Lower level requests](#lower-level-requests)
+- [Onvif cli (Onvif at the command prompt)](#onvif-cli-onvif-at-the-command-prompt)
+- [Supported Onvif Operations](#supported-onvif-operations)
+  - [Device Management wsdl Specification PDF](#device-management-wsdl-specification-pdf)
+  - [Imaging wsdl Specification PDF](#imaging-wsdl-specification-pdf)
+  - [Media 1 wsdl Specification PDF](#media-1-wsdl-specification-pdf)
+  - [Media 2 wsdl Specification PDF](#media-2-wsdl-specification-pdf)
+  - [PTZ wsdl Specification PDF](#ptz-wsdl-specification-pdf)
+  - [PTZ Helper Methods](#ptz-helper-methods)
+  - [Recording wsdl Specification PDF](#recording-wsdl-specification-pdf)
+  - [Replay wsdl Specification PDF](#replay-wsdl-specification-pdf)
+  - [Search wsdl Specification PDF](#search-wsdl-specification-pdf)
+- [Tested Onvif Devices](#tested-onvif-devices)
+- [New for version 3.0.0-dev.0](#new-for-version-300-dev0)
+- [New for version 2.2.x](#new-for-version-22x)
+- [New for version 2.1.x](#new-for-version-21x)
+- [New for version 2.0.x](#new-for-version-20x)
+- [Onvif specifications and documentation](#onvif-specifications-and-documentation)
+- [Features and bugs](#features-and-bugs)
+- [Known Issues](#known-issues)
+  - [Issue #45](#issue-45)
+  - [Issue #23](#issue-23)
+- [Breaking changes](#breaking-changes)
+  - [v3.0.0-dev.0](#v300-dev0)
+  - [v2.3.0](#v230)
+  - [v2.1.0](#v210)
+- [Contributors](#contributors)
+- [Contributing](#contributing)
 
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/faithoflif2)
 
@@ -75,12 +76,25 @@ final onvif = await Onvif.connect(
 
 ### Interacting with a device through Onvif operations
 
-Refer to the tables below for the supported operations.
+It's important to understand that all Onvif commands have an associated `Access Policy` assigned to them based on the table below:
+
+|    | Administrator | Operator | User | Anonymous |
+| -- | ------------- | -------- | ---- | --------- |
+| PRE_AUTH | X | X | X | X |
+| READ_SYSTEM | X | X | X | |
+| READ_SYSTEM_SENSITIVE | X | X | | |
+| READ_SYSTEM_SECRET | X | | | |
+| WRITE_SYSTEM | X | | | |
+| UNRECOVERABLE | X | | | |
+| READ_MEDIA | X | X | X | |
+| ACTUATE | X | X | | |
+
+You can find the command and it's `Access Policy` in the [API reference](https://pub.dev/documentation/easy_onvif/latest/easy_onvif/easy_onvif-library.html) or in the spec PDF (links in the table below).  As shown in the above table, a user with `Administrator` access can use all Onvif commands.  It is recommended that you authenticate with an `Administrator` while using this package to avoid unexpected errors when sending your device different Onvif commands.
 
 Through the `deviceManagement` operations you can get information about the connected device.
 
 ```dart
-var deviceInfo = await onvif.deviceManagement.getDeviceInformation();
+var deviceInfo = await onvif.deviceManagement.getDeviceInformation(); // Access Class: READ_SYSTEM
 
 print(deviceInfo.model);
 ```
@@ -88,7 +102,7 @@ print(deviceInfo.model);
 Many operations require you to supply a `profileToken` which can be retrieved through `media` operations.
 
 ```dart
-var profiles = await onvif.media.getProfiles();
+var profiles = await onvif.media.getProfiles(); // Access Class: READ_MEDIA
 
 profiles.forEach((element) {
  print('${element.name}  ${element.token}');
@@ -100,7 +114,7 @@ var profileToken = profiles.first.token;
 With the `ptz` operations you can get a list of camera presets from the connected device.
 
 ```dart
-var presets = await onvif.ptz.getPresets(profileToken);
+var presets = await onvif.ptz.getPresets(profileToken); // ACCESS CLASS: READ_MEDIA
 
 //get a specific preset
 var preset = presets[11];
@@ -110,7 +124,7 @@ print(
  'preset: ${preset.position.panTilt?.x}  ${preset.position.panTilt?.y}  ${preset.position.zoom?.x}');
 
 //use the GotoPreset operation to point the camera to the given preset
-await onvif.ptz.gotoPreset(profileToken, preset);
+await onvif.ptz.gotoPreset(profileToken, preset); // ACCESS CLASS: ACTUATE
 ```
 
 Be sure to look through the [API Reference](https://pub.dev/documentation/easy_onvif/latest/) for information about the parameters required for the supported Onvif operations.
@@ -120,24 +134,27 @@ Be sure to look through the [API Reference](https://pub.dev/documentation/easy_o
 In cases where there is no helper method for a specific Onvif operation, a low-level call can be used to make the request to the device.  The code below performs the `GetAudioOutputs` Media1 operation.  All responses take the form of a hashmap `Map<String,dynamic>`.
 
 ```dart
-// sample low level request
+// code fragment for a sample low level request
 //
 // build a xml fragment for the specific Onvif operation
-Transport.builder.element('GetAudioOutputs', nest: () {
-  Transport.builder.namespace(Xmlns.trt);
-});
+Transport.builder.element('GetStatus', nest: () { // ACCESS CLASS: READ_MEDIA
+  Transport.builder.namespace(Xmlns.tptz);
 
-final requestFragment = Transport.builder.buildFragment();
+  ReferenceToken(profileToken).buildXml(builder);
+});
 
 // using the connected onvif object from the earlier example
 final transport = onvif.transport;
 
 // build the soap request envelope and send the request
 // since this is a media1 request, send to the media1 endpoint
-final envelope = await transport.sendRequest(
-    onvif.media.media1.uri, transport.securedEnvelope(requestFragment));
+final responseEnvelope = await transport.securedRequest( // include a Security header in the request
+    onvif.ptz.uri,
+    soap.Body(
+      request: Transport.builder.buildFragment(),
+    ));
 
-print(envelope.body.response);
+print(responseEnvelope.body.response);
 ```
 
 ## Onvif cli (Onvif at the command prompt)
@@ -191,7 +208,7 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 
 ## Supported Onvif Operations
 
-### [Device Management](https://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl)
+### Device Management [wsdl](https://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl) [Specification PDF](https://www.onvif.org/specs/core/ONVIF-Core-Specification.pdf)
 
 | Onvif Operation             | Dart Method                 | Dart Return Type                       | Test |
 | --------------------------- | --------------------------- | -------------------------------------- | ---- |
@@ -216,7 +233,7 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetUsers                    | getUsers                    | `Future<List<User>>`                   | [x\] |
 | SystemReboot                | systemReboot                | `Future<String>`                       | [ \] |
 
-### [Imaging](https://www.onvif.org/ver20/imaging/wsdl/imaging.wsdl) 
+### Imaging [wsdl](https://www.onvif.org/ver20/imaging/wsdl/imaging.wsdl) [Specification PDF](https://www.onvif.org/specs/srv/img/ONVIF-Imaging-Service-Spec.pdf)
 
 | Onvif Operation                 | Dart Method                     | Dart Return Type                       | Test |
 | ------------------------------- | ------------------------------- | -------------------------------------- | ---- |
@@ -226,7 +243,7 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetStatus                       | getStatus                       | `Future<Status>`                       | [ \] |
 | SetCurrentPreset                | setCurrentPreset                | `Future<bool>`                         | [ \] |
 
-### [Media 1](https://www.onvif.org/ver10/media/wsdl/media.wsdl) 
+### Media 1 [wsdl](https://www.onvif.org/ver10/media/wsdl/media.wsdl) [Specification PDF](https://www.onvif.org/specs/srv/media/ONVIF-Media-Service-Spec.pdf)
 
 | Onvif Operation                 | Dart Method                     | Dart Return Type                       | Test |
 | ------------------------------- | ------------------------------- | -------------------------------------- | ---- |
@@ -242,7 +259,7 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | StartMulticastStreaming         | startMulticastStreaming         | `Future<bool>`                         | [x\] |
 | StopMulticastStreaming          | stopMulticastStreaming          | `Future<bool>`                         | [x\] |
 
-### [Media 2](https://www.onvif.org/ver20/media/wsdl/media.wsdl)
+### Media 2 [wsdl](https://www.onvif.org/ver20/media/wsdl/media.wsdl) [Specification PDF](https://www.onvif.org/specs/srv/media/ONVIF-Media2-Service-Spec.pdf)
 
 | Onvif Operation                    | Dart Method                        | Dart Return Type                          | Test |
 | ---------------------------------- | ---------------------------------- | ----------------------------------------- | ---- |
@@ -257,7 +274,7 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | StartMulticastStreaming            | startMulticastStreaming            | `Future<bool>`                            | [x\] |
 | StopMulticastStreaming             | stopMulticastStreaming             | `Future<bool>`                            | [x\] |
 
-### [PTZ](https://www.onvif.org/ver20/ptz/wsdl/ptz.wsdl)
+### PTZ [wsdl](https://www.onvif.org/ver20/ptz/wsdl/ptz.wsdl) [Specification PDF](https://www.onvif.org/specs/srv/ptz/ONVIF-PTZ-Service-Spec.pdf)
 
 | Onvif Operation             | Dart Method                 | Dart Return Type                  | Test |
 | --------------------------- | --------------------------- | --------------------------------- | ---- |
@@ -293,7 +310,7 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | N/A             | zoomOut          | `Future<void>`    |
 | N/A             | getCurrentPreset | `Future<Preset?>` |
 
-### [Recording](https://www.onvif.org/ver10/recording.wsdl)
+### Recording [wsdl](https://www.onvif.org/ver10/recording.wsdl) [Specification PDF](https://www.onvif.org/specs/srv/rec/ONVIF-RecordingControl-Service-Spec.pdf)
 
 | Onvif Operation             | Dart Method                 | Dart Return Type                             | Test |
 | --------------------------- | --------------------------- | -------------------------------------------- | ---- |
@@ -308,7 +325,7 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetServiceCapabilities      | getServiceCapabilities      | `Future<Capabilities>`                       | [ \] |
 | setRecordingJobMode         | setRecordingJobMode         | `Future<bool>`                               | [ \] |
 
-### [Replay](https://www.onvif.org/ver10/replay.wsdl)
+### Replay [wsdl](https://www.onvif.org/ver10/replay.wsdl) [Specification PDF](https://www.onvif.org/specs/srv/replay/ONVIF-ReplayControl-Service-Spec.pdf)
 
 | Onvif Operation             | Dart Method                 | Dart Return Type                             | Test |
 | --------------------------- | --------------------------- | -------------------------------------------- | ---- |
@@ -317,7 +334,7 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetServiceCapabilities      | getServiceCapabilities      | `Future<Capabilities>`                       | [ \] |
 | SetReplayConfiguration      | setReplayConfiguration      | `Future<bool>`                               | [ \] |
 
-### [Search](https://www.onvif.org/ver10/search.wsdl)
+### Search [wsdl](https://www.onvif.org/ver10/search.wsdl) [Specification PDF](https://www.onvif.org/specs/srv/rsrch/ONVIF-RecordingSearch-Service-Spec.pdf)
 
 | Onvif Operation           | Dart Method               | Dart Return Type                             | Test |
 | ------------------------- | --------------------------| -------------------------------------------- | ---- |
@@ -372,6 +389,8 @@ The values returned by the Onvif API `GetDeviceInformation` call.
 * PTZ:
   * not supported
 
+## New for version 3.0.0-dev.0
+Bug fixes for a number of small bugs that got introduced through adding some experimental features in some of the previous releases.  The main issues identified and resolved where in the areas of Authentication [Issue #58](https://github.com/faithoflifedev/easy_onvif/issues/58), PTZ [Issue #54](https://github.com/faithoflifedev/easy_onvif/issues/54) and the Media2 module (no issue reported).  In addition all currently supported SOAP requests now have unit tests to confirm that the package continues to create the requests properly as the code evolves.  Finally, there have been extensive code revisions to help with the long term maintenance of the package.  As part of this a number of method signatures have changed as well as some of the objects in the object model have been renamed.  For the most part these changes are in the lower level interfaces within the package and should not affect too many users.
 
 ## New for version 2.2.x
 A new `cli` command has been added that will hopefully ease in debugging issues with this library when it comes to the vast variety of Onvif devices that are out in the wild.  Once the `cli` utility has been installed and authorized per the [quick start instructions](https://github.com/faithoflifedev/easy_onvif/blob/main/bin/README.md#quick-start), the command `onvif debug` will create a debug folder with a `debug.txt` and `debug.zip` that can be added to an [issue](https://github.com/faithoflifedev/easy_onvif/issues) to help to debug and resolve that issue.
@@ -469,6 +488,10 @@ dependency_overrides:
 ```
 
 ## Breaking changes
+
+### v3.0.0-dev.0
+
+There have been extensive code revisions to help with the long term maintenance of the package.  As part of this a number of method signatures have changed as well as some of the objects in the object model have been renamed.  For the most part these changes are in the lower level interfaces within the package and should not affect too many users.
 
 ### v2.3.0
 

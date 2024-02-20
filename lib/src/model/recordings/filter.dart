@@ -1,15 +1,17 @@
 import 'dart:convert';
 
+import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/soap.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:xml/xml.dart';
 
 part 'filter.g.dart';
 
 /// Optional filter defining on which event condition a recording job gets
 /// active.
 @JsonSerializable()
-class Filter {
+class Filter implements XmlSerializable {
   /// Topic filter as defined in section 9.6.3 of the ONVIF Core Specification.
   @JsonKey(name: 'Topic', fromJson: OnvifUtil.mappedToString)
   final String topic;
@@ -31,21 +33,17 @@ class Filter {
   @override
   String toString() => json.encode(toJson());
 
-  void toXml() {
-    Transport.builder.element('Filter', nest: () {
-      Transport.builder.namespace(Xmlns.tt);
+  @override
+  void buildXml(
+    XmlBuilder builder, {
+    String tag = 'Filter',
+    String? namespace = Xmlns.tt,
+  }) =>
+      builder.element(tag, nest: () {
+        builder.namespace(namespace!);
 
-      Transport.builder.element('Topic', nest: () {
-        Transport.builder.namespace(Xmlns.tt);
-        Transport.builder.text(topic);
+        topic.buildXml(builder, tag: 'Topic', namespace: Xmlns.tt);
+
+        source?.buildXml(builder, tag: 'Source', namespace: Xmlns.tt);
       });
-
-      if (source != null) {
-        Transport.builder.element('Source', nest: () {
-          Transport.builder.namespace(Xmlns.tt);
-          Transport.builder.text(source!);
-        });
-      }
-    });
-  }
 }

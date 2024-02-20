@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:easy_onvif/onvif.dart';
 import 'package:easy_onvif/soap.dart';
-import 'package:easy_onvif/src/model/envelope.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:loggy/loggy.dart';
 import 'package:xml/xml.dart';
@@ -65,84 +64,40 @@ class Transport with UiLoggy {
     return Transport.builder.buildFragment();
   }
 
-  XmlDocumentFragment getSecurityHeader({
+  /// XML for the SOAP envelope
+  Envelope getEnvelope(Body body) => Envelope(
+        body: body,
+        header: Header(),
+      );
+
+  /// XML for the SOAP envelope
+  Envelope getSecuredEnvelope(
+    Body body, [
     Authorization? authorization,
-  }) {
-    authorization ??= Authorization(
-      authInfo: authInfo,
-      timeStamp: DateTime.now(),
-      timeDelta: timeDelta,
-    );
+  ]) =>
+      Envelope(
+          body: body,
+          header: Header(
+              security: Security(
+            usernameToken: UsernameToken(
+                authorization: authorization ??
+                    Authorization(
+                      authInfo: authInfo,
+                      timeDelta: timeDelta,
+                    )),
+            mustUnderstand: 1,
+          )));
 
-    final securityHeader = Transport.security(
-        username: authInfo.username,
-        password: authorization.digest,
-        nonce: authorization.nonce.toBase64(),
-        created: authorization.utcTimeStamp);
+  Future<Envelope> request(Uri uri, Body body) async => await sendRequest(
+        uri,
+        getEnvelope(body).toXml(builder),
+      );
 
-    return securityHeader;
-  }
-
-  /// XML for the SOAP envelope
-  XmlDocument envelope(XmlDocumentFragment? header, XmlDocumentFragment body) {
-    builder.declaration(encoding: 'UTF-8');
-
-    builder.element('Envelope',
-        namespace: Xmlns.s,
-        namespaces: {Xmlns.s: 's', 'http://www.w3.org/2005/08/addressing': 'a'},
-        nest: () {
-      builder.element('Header', namespace: Xmlns.s, nest: header);
-
-      builder.element('Body',
-          namespace: Xmlns.s,
-          namespaces: {
-            'http://www.w3.org/2001/XMLSchema-instance': 'xsi',
-            Xmlns.xsd: 'xsd'
-          },
-          nest: body);
-    });
-
-    return builder.buildDocument();
-  }
-
-  /// XML for the SOAP envelope
-  XmlDocument securedEnvelope(XmlDocumentFragment body) =>
-      envelope(getSecurityHeader(), body);
-
-  /// XML for the SOAP [security]
-  static XmlDocumentFragment security(
-      {required String username,
-      required String password,
-      required String nonce,
-      required String created}) {
-    builder.element('Security', namespaces: {Xmlns.s: 's'}, nest: () {
-      builder.namespace(
-          'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd');
-      builder.attribute('mustUnderstand', 1, namespace: Xmlns.s);
-      builder.element('UsernameToken', nest: () {
-        builder.element('Username', nest: username);
-        builder.element('Password',
-            attributes: {
-              'Type':
-                  'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordDigest'
-            },
-            nest: password);
-        builder.element('Nonce',
-            attributes: {
-              'EncodingType':
-                  'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary'
-            },
-            nest: nonce);
-        builder.element('Created', nest: () {
-          builder.namespace(
-              'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd');
-          builder.text(created);
-        });
-      });
-    });
-
-    return builder.buildFragment();
-  }
+  Future<Envelope> securedRequest(Uri uri, Body body) async =>
+      await sendRequest(
+        uri,
+        getSecuredEnvelope(body).toXml(builder),
+      );
 
   static XmlDocument probe(String messageId) {
     builder.declaration(encoding: 'UTF-8');

@@ -1,11 +1,14 @@
 import 'package:easy_onvif/media1.dart' show StreamSetup;
 import 'package:easy_onvif/replay.dart';
+import 'package:easy_onvif/shared.dart';
 import 'package:xml/xml.dart';
 
 import 'transport.dart';
 import 'xmlns.dart';
 
 class ReplayRequest {
+  static XmlBuilder get builder => Transport.builder;
+
   /// XML for the [getReplayConfiguration]
   static XmlDocumentFragment getReplayConfiguration() =>
       Transport.quickTag('GetReplayConfiguration', Xmlns.trp);
@@ -15,29 +18,15 @@ class ReplayRequest {
     String recordingToken, {
     required StreamSetup streamSetup,
   }) {
-    Transport.builder.element('GetReplayUri', nest: () {
-      Transport.builder.namespace(Xmlns.trp);
+    builder.element('GetReplayUri', nest: () {
+      builder.namespace(Xmlns.trp);
 
-      Transport.builder.element('StreamSetup', nest: () {
-        Transport.builder.element('Stream', nest: () {
-          Transport.builder.namespace(Xmlns.tt);
-          Transport.builder.text(streamSetup.stream);
-        });
+      streamSetup.buildXml(builder);
 
-        Transport.builder.element('Transport', nest: () {
-          Transport.builder.namespace(Xmlns.tt);
-          Transport.builder.element('Protocol', nest: () {
-            Transport.builder.text(streamSetup.transport.protocol);
-          });
-        });
-      });
-
-      Transport.builder.element('RecordingToken', nest: () {
-        Transport.builder.text(recordingToken);
-      });
+      ReferenceToken(recordingToken).buildXml(builder, tag: 'RecordingToken');
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 
   /// XML for the [getServiceCapabilities]
@@ -47,17 +36,12 @@ class ReplayRequest {
   /// XML for the [setReplayConfiguration]
   static XmlDocumentFragment setReplayConfiguration(
       ReplayConfiguration configuration) {
-    Transport.builder.element('SetReplayConfiguration', nest: () {
-      Transport.builder.namespace(Xmlns.trp);
+    builder.element('SetReplayConfiguration', nest: () {
+      builder.namespace(Xmlns.trp);
 
-      Transport.builder.element('Configuration', nest: () {
-        Transport.builder.element('SessionTimeout', nest: () {
-          Transport.builder.namespace(Xmlns.tt);
-          Transport.builder.text(configuration.sessionTimeout);
-        });
-      });
+      configuration.buildXml(builder);
     });
 
-    return Transport.builder.buildFragment();
+    return builder.buildFragment();
   }
 }

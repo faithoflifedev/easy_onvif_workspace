@@ -170,7 +170,8 @@ class OnvifContinuousMovePtzCommand extends OnvifHelperCommand {
               x: argResults!['pan-tilt-x'], y: argResults!['pan-tilt-y']),
           zoom: Vector1D.fromString(x: argResults!['pan-tilt-zoom']));
 
-      await ptz.continuousMove(argResults!['profile-token'], velocity);
+      await ptz.continuousMove(argResults!['profile-token'],
+          velocity: velocity);
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -559,9 +560,9 @@ class OnvifGotoHomePositionPtzCommand extends OnvifHelperCommand {
     try {
       final profileToken = argResults!['profile-token'];
 
-      await ptz.gotoHomePosition(
-          profileToken,
-          argResults?['pan-tilt-x'] != null && argResults?['pan-tilt-y'] != null
+      await ptz.gotoHomePosition(profileToken,
+          speed: argResults?['pan-tilt-x'] != null &&
+                  argResults?['pan-tilt-y'] != null
               ? PtzSpeed(
                   panTilt: Vector2D.fromString(
                       x: argResults!['pan-tilt-x'],
@@ -899,7 +900,8 @@ class OnvifMovePtzCommand extends OnvifHelperCommand {
 
     try {
       await ptz.move(argResults!['profile-token'],
-          Vector2D.fromString(x: argResults!['x'], y: argResults!['y']));
+          direction:
+              Vector2D.fromString(x: argResults!['x'], y: argResults!['y']));
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
