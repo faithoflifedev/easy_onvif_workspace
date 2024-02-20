@@ -28,9 +28,9 @@ void main() {
     );
 
     test('generate valid nonce and digest', () {
-      expect(authorization.digest, 'iJSWNCOtYP5YI9F5j4z4/hkM/yo=');
-      expect(authorization.nonce.toBase64(), 'AQIDBAUGBwgJCgsMDQ4PEA==');
       expect(authorization.utcTimestamp, '2024-01-20T21:10:00.000Z');
+      expect(authorization.nonce.toBase64(), 'AQIDBAUGBwgJCgsMDQ4PEA==');
+      expect(authorization.digest, 'iJSWNCOtYP5YI9F5j4z4/hkM/yo=');
     });
 
     test('generate valid security header', () {

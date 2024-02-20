@@ -8,11 +8,11 @@
 
 * Method signature changes in attempt to standardize signatures.
 * Object model changes to better match the Onvif documented model.
-* Classes that can be serialized to XML now implent the XmlSerializable interface allowing each class to build it&#x27;s own XML representation.
+* Classes that can be serialized to XML now implement the XmlSerializable interface allowing each class to build it&#x27;s own XML representation.
 * The Transport class now has a more logical method to build the XML for SOAP requests, this change also allows for unit tests.
 * Each Onvif module has been refactored to take advantage the new XML serialization model.
 * The Onvif security model has been added to the API documentation an all commands have the required user authorization level noted.
-* All currently supported Onvif commands XML Requests now have unti tests.
+* All currently supported Onvif commands XML Requests now have unit tests.
 * Issues resolved
   * Issue #58 - Authentication
   * Issue #54 - PTZ
@@ -20,19 +20,6 @@
 ## 2.3.0+1
 
 * some tweaks to pass tests
-
-## 2.3.0
-
-* Issue #58
-  * Reverted the timestamp format to build in dart `toIso8601String()`
-* PTZ
-  * Revised class names for PTZ functionality to better match the Onvif Spec - PanTilt =&gt; Vector2D, Zoom =&gt; Vector1D
-  * Implemented the buildXML() method for much of the PTZ functionality to better place functionality in its useful class
-  * Capabilities
-    * All fields are now optional, not all devices are reporting this information
-* DeviceManagement
-  * GetDeviceInformationResponse
-    * manufacturer and model are now optional fields, not all devices are reporting this information
 
 ## 2.3.0
 
@@ -60,7 +47,7 @@
 
 ## 2.2.0
 
-* new cli fearture `onvif debug` geneerates a debug.zip with request&#x2F;response for most common device features
+* new cli feature `onvif debug` generates a debug.zip with request&#x2F;response for most common device features
 * older devices that don&#x27;t support GetServices work again
 * unit test for authentication digest
 * unit test for XML `Security` header
@@ -119,7 +106,7 @@
 
 ## 2.1.3+2
 
-* depencency bump
+* dependency bump
 * Media2
   * DeleteProfile
 
@@ -143,7 +130,7 @@ convert html entities appearing in probe response
 
 ## 2.1.2+8
 
-strings aren&#x27;t integers
+strings aren't integers
 
 ## 2.1.2+5
 
