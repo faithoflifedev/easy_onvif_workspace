@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: szenius/set-timezone@v1.2
+      - uses: hoang-rio/set-timezone@v1.4
         with:
           timezoneLinux: "America/Toronto"
 
