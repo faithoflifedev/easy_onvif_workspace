@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0-dev.1
+
+* local test works, but github build fails the tests
+
 ## 3.0.0-dev.0
 
 * Method signature changes in attempt to standardize signatures.
