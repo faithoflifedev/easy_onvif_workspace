@@ -208,7 +208,12 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 
 ## Supported Onvif Operations
 
-### Device Management [wsdl](https://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl) [Specification PDF](https://www.onvif.org/specs/core/ONVIF-Core-Specification.pdf)
+### Device Management 
+
+#### Additional Documentation
+
+  * [Specification PDF](https://www.onvif.org/specs/core/ONVIF-Core-Specification.pdf)
+  * [wsdl](https://www.onvif.org/onvif/ver10/device/wsdl/devicemgmt.wsdl) 
 
 | Onvif Operation             | Dart Method                 | Dart Return Type                       | Test |
 | --------------------------- | --------------------------- | -------------------------------------- | ---- |
@@ -233,7 +238,12 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetUsers                    | getUsers                    | `Future<List<User>>`                   | [x\] |
 | SystemReboot                | systemReboot                | `Future<String>`                       | [ \] |
 
-### Imaging [wsdl](https://www.onvif.org/ver20/imaging/wsdl/imaging.wsdl) [Specification PDF](https://www.onvif.org/specs/srv/img/ONVIF-Imaging-Service-Spec.pdf)
+### Imaging
+
+#### Additional Documentation
+
+  * [Specification PDF](https://www.onvif.org/specs/srv/img/ONVIF-Imaging-Service-Spec.pdf)
+  * [wsdl](https://www.onvif.org/ver20/imaging/wsdl/imaging.wsdl)
 
 | Onvif Operation                 | Dart Method                     | Dart Return Type                       | Test |
 | ------------------------------- | ------------------------------- | -------------------------------------- | ---- |
@@ -243,8 +253,13 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetStatus                       | getStatus                       | `Future<Status>`                       | [ \] |
 | SetCurrentPreset                | setCurrentPreset                | `Future<bool>`                         | [ \] |
 
-### Media 1 [wsdl](https://www.onvif.org/ver10/media/wsdl/media.wsdl) [Specification PDF](https://www.onvif.org/specs/srv/media/ONVIF-Media-Service-Spec.pdf)
+### Media 1
 
+#### Additional Documentation
+
+  * [Specification PDF](https://www.onvif.org/specs/srv/media/ONVIF-Media-Service-Spec.pdf)
+  * [wsdl](https://www.onvif.org/ver10/media/wsdl/media.wsdl)
+  
 | Onvif Operation                 | Dart Method                     | Dart Return Type                       | Test |
 | ------------------------------- | ------------------------------- | -------------------------------------- | ---- |
 | GetAudioSources                 | getAudioSources                 | `Future<List<AudioSource>>`            | [x\] |
@@ -274,7 +289,12 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | StartMulticastStreaming            | startMulticastStreaming            | `Future<bool>`                            | [x\] |
 | StopMulticastStreaming             | stopMulticastStreaming             | `Future<bool>`                            | [x\] |
 
-### PTZ [wsdl](https://www.onvif.org/ver20/ptz/wsdl/ptz.wsdl) [Specification PDF](https://www.onvif.org/specs/srv/ptz/ONVIF-PTZ-Service-Spec.pdf)
+### PTZ 
+
+#### Additional Documentation
+
+  * [Specification PDF](https://www.onvif.org/specs/srv/ptz/ONVIF-PTZ-Service-Spec.pdf)
+  * [wsdl](https://www.onvif.org/ver20/ptz/wsdl/ptz.wsdl) 
 
 | Onvif Operation             | Dart Method                 | Dart Return Type                  | Test |
 | --------------------------- | --------------------------- | --------------------------------- | ---- |
@@ -310,7 +330,12 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | N/A             | zoomOut          | `Future<void>`    |
 | N/A             | getCurrentPreset | `Future<Preset?>` |
 
-### Recording [wsdl](https://www.onvif.org/ver10/recording.wsdl) [Specification PDF](https://www.onvif.org/specs/srv/rec/ONVIF-RecordingControl-Service-Spec.pdf)
+### Recording
+
+#### Additional Documentation
+
+  * [Specification PDF](https://www.onvif.org/specs/srv/rec/ONVIF-RecordingControl-Service-Spec.pdf)
+  * [wsdl](https://www.onvif.org/ver10/recording.wsdl) 
 
 | Onvif Operation             | Dart Method                 | Dart Return Type                             | Test |
 | --------------------------- | --------------------------- | -------------------------------------------- | ---- |
@@ -325,7 +350,12 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetServiceCapabilities      | getServiceCapabilities      | `Future<Capabilities>`                       | [ \] |
 | setRecordingJobMode         | setRecordingJobMode         | `Future<bool>`                               | [ \] |
 
-### Replay [wsdl](https://www.onvif.org/ver10/replay.wsdl) [Specification PDF](https://www.onvif.org/specs/srv/replay/ONVIF-ReplayControl-Service-Spec.pdf)
+### Replay 
+
+#### Additional Documentation
+
+  * [Specification PDF](https://www.onvif.org/specs/srv/replay/ONVIF-ReplayControl-Service-Spec.pdf)
+  * [wsdl](https://www.onvif.org/ver10/replay.wsdl)
 
 | Onvif Operation             | Dart Method                 | Dart Return Type                             | Test |
 | --------------------------- | --------------------------- | -------------------------------------------- | ---- |
@@ -334,7 +364,12 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetServiceCapabilities      | getServiceCapabilities      | `Future<Capabilities>`                       | [ \] |
 | SetReplayConfiguration      | setReplayConfiguration      | `Future<bool>`                               | [ \] |
 
-### Search [wsdl](https://www.onvif.org/ver10/search.wsdl) [Specification PDF](https://www.onvif.org/specs/srv/rsrch/ONVIF-RecordingSearch-Service-Spec.pdf)
+### Search
+
+#### Additional Documentation
+
+  * [Specification PDF](https://www.onvif.org/specs/srv/rsrch/ONVIF-RecordingSearch-Service-Spec.pdf)
+  * [wsdl](https://www.onvif.org/ver10/search.wsdl)
 
 | Onvif Operation           | Dart Method               | Dart Return Type                             | Test |
 | ------------------------- | --------------------------| -------------------------------------------- | ---- |

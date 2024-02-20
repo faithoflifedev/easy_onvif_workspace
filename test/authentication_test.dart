@@ -20,7 +20,7 @@ void main() {
     final authorization = Authorization(
       authInfo: authInfo,
       timeDelta: Duration(seconds: 0),
-      timestampOverride: DateTime(2024, 1, 20, 16, 10, 0).toUtc(),
+      timestampOverride: DateTime(2024, 1, 20, 16, 10, 0),
       nonceOverride: Nonce(
           bytesOverride: hex.decode(
         '0102030405060708090A0B0C0D0E0F10',
