@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope"
+	xmlns:e="http://www.w3.org/2003/05/soap-encoding"
+	xmlns:wsa="http://www.w3.org/2005/08/addressing"
+	xmlns:tns1="http://www.onvif.org/ver10/topics"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tt="http://www.onvif.org/ver10/schema"
+	xmlns:wsnt="http://docs.oasis-open.org/wsn/b-2"
+	xmlns:wstop="http://docs.oasis-open.org/wsn/t-1"
+	xmlns:tds="http://www.onvif.org/ver10/device/wsdl"
+	xmlns:tmd="http://www.onvif.org/ver10/deviceIO/wsdl"
+	xmlns:trt="http://www.onvif.org/ver10/media/wsdl"
+	xmlns:tr2="http://www.onvif.org/ver20/media/wsdl"
+	xmlns:tev="http://www.onvif.org/ver10/events/wsdl"
+	xmlns:tptz="http://www.onvif.org/ver20/ptz/wsdl"
+	xmlns:timg="http://www.onvif.org/ver20/imaging/wsdl"
+	xmlns:tnshik="http://www.hikvision.com/2011/event/topics"
+	xmlns:hikwsd="http://www.onvifext.com/onvif/ext/ver10/wsdl"
+	xmlns:hikxsd="http://www.onvifext.com/onvif/ext/ver10/schema"
+	xmlns:tan="http://www.onvif.org/ver20/analytics/wsdl"
+	xmlns:ter="http://www.onvif.org/ver10/error">
+	<s:Body>
+		<tptz:GetPresetsResponse>
+			<tptz:Preset token="z_ovf_ptz_01">
+				<tt:Name>z_ovf_ptz_01</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_02">
+				<tt:Name>z_ovf_ptz_02</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_03">
+				<tt:Name>z_ovf_ptz_03</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_04">
+				<tt:Name>z_ovf_ptz_04</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_05">
+				<tt:Name>z_ovf_ptz_05</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_06">
+				<tt:Name>z_ovf_ptz_06</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_07">
+				<tt:Name>z_ovf_ptz_07</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_08">
+				<tt:Name>z_ovf_ptz_08</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_09">
+				<tt:Name>z_ovf_ptz_09</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_10">
+				<tt:Name>z_ovf_ptz_10</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_11">
+				<tt:Name>z_ovf_ptz_11</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_12">
+				<tt:Name>z_ovf_ptz_12</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_13">
+				<tt:Name>z_ovf_ptz_13</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_14">
+				<tt:Name>z_ovf_ptz_14</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_15">
+				<tt:Name>z_ovf_ptz_15</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_16">
+				<tt:Name>z_ovf_ptz_16</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_17">
+				<tt:Name>z_ovf_ptz_17</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_18">
+				<tt:Name>z_ovf_ptz_18</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_19">
+				<tt:Name>z_ovf_ptz_19</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_20">
+				<tt:Name>z_ovf_ptz_20</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_21">
+				<tt:Name>z_ovf_ptz_21</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_22">
+				<tt:Name>z_ovf_ptz_22</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_23">
+				<tt:Name>z_ovf_ptz_23</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_24">
+				<tt:Name>z_ovf_ptz_24</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_25">
+				<tt:Name>z_ovf_ptz_25</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_26">
+				<tt:Name>z_ovf_ptz_26</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_27">
+				<tt:Name>z_ovf_ptz_27</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_28">
+				<tt:Name>z_ovf_ptz_28</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_29">
+				<tt:Name>z_ovf_ptz_29</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_30">
+				<tt:Name>z_ovf_ptz_30</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_31">
+				<tt:Name>z_ovf_ptz_31</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_32">
+				<tt:Name>z_ovf_ptz_32</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_33">
+				<tt:Name>z_ovf_ptz_33</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_34">
+				<tt:Name>z_ovf_ptz_34</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_35">
+				<tt:Name>z_ovf_ptz_35</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_36">
+				<tt:Name>z_ovf_ptz_36</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_37">
+				<tt:Name>z_ovf_ptz_37</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_38">
+				<tt:Name>z_ovf_ptz_38</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_39">
+				<tt:Name>z_ovf_ptz_39</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_40">
+				<tt:Name>z_ovf_ptz_40</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_41">
+				<tt:Name>z_ovf_ptz_41</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_42">
+				<tt:Name>z_ovf_ptz_42</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_43">
+				<tt:Name>z_ovf_ptz_43</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_44">
+				<tt:Name>z_ovf_ptz_44</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_45">
+				<tt:Name>z_ovf_ptz_45</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_46">
+				<tt:Name>z_ovf_ptz_46</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_47">
+				<tt:Name>z_ovf_ptz_47</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_48">
+				<tt:Name>z_ovf_ptz_48</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_49">
+				<tt:Name>z_ovf_ptz_49</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_50">
+				<tt:Name>z_ovf_ptz_50</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_51">
+				<tt:Name>z_ovf_ptz_51</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_52">
+				<tt:Name>z_ovf_ptz_52</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_53">
+				<tt:Name>z_ovf_ptz_53</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_54">
+				<tt:Name>z_ovf_ptz_54</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_55">
+				<tt:Name>z_ovf_ptz_55</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_56">
+				<tt:Name>z_ovf_ptz_56</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_57">
+				<tt:Name>z_ovf_ptz_57</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_58">
+				<tt:Name>z_ovf_ptz_58</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_59">
+				<tt:Name>z_ovf_ptz_59</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_60">
+				<tt:Name>z_ovf_ptz_60</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_61">
+				<tt:Name>z_ovf_ptz_61</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_62">
+				<tt:Name>z_ovf_ptz_62</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_63">
+				<tt:Name>z_ovf_ptz_63</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_64">
+				<tt:Name>z_ovf_ptz_64</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_65">
+				<tt:Name>z_ovf_ptz_65</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_66">
+				<tt:Name>z_ovf_ptz_66</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_67">
+				<tt:Name>z_ovf_ptz_67</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_68">
+				<tt:Name>z_ovf_ptz_68</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_69">
+				<tt:Name>z_ovf_ptz_69</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_70">
+				<tt:Name>z_ovf_ptz_70</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_71">
+				<tt:Name>z_ovf_ptz_71</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_72">
+				<tt:Name>z_ovf_ptz_72</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_73">
+				<tt:Name>z_ovf_ptz_73</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_74">
+				<tt:Name>z_ovf_ptz_74</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_75">
+				<tt:Name>z_ovf_ptz_75</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_76">
+				<tt:Name>z_ovf_ptz_76</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_77">
+				<tt:Name>z_ovf_ptz_77</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_78">
+				<tt:Name>z_ovf_ptz_78</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_79">
+				<tt:Name>z_ovf_ptz_79</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_80">
+				<tt:Name>z_ovf_ptz_80</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_81">
+				<tt:Name>z_ovf_ptz_81</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_82">
+				<tt:Name>z_ovf_ptz_82</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_83">
+				<tt:Name>z_ovf_ptz_83</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_84">
+				<tt:Name>z_ovf_ptz_84</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_85">
+				<tt:Name>z_ovf_ptz_85</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_86">
+				<tt:Name>z_ovf_ptz_86</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_87">
+				<tt:Name>z_ovf_ptz_87</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_88">
+				<tt:Name>z_ovf_ptz_88</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_89">
+				<tt:Name>z_ovf_ptz_89</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_90">
+				<tt:Name>z_ovf_ptz_90</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_91">
+				<tt:Name>z_ovf_ptz_91</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_92">
+				<tt:Name>z_ovf_ptz_92</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_93">
+				<tt:Name>z_ovf_ptz_93</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_94">
+				<tt:Name>z_ovf_ptz_94</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_95">
+				<tt:Name>z_ovf_ptz_95</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_96">
+				<tt:Name>z_ovf_ptz_96</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_97">
+				<tt:Name>z_ovf_ptz_97</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_98">
+				<tt:Name>z_ovf_ptz_98</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_99">
+				<tt:Name>z_ovf_ptz_99</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+			<tptz:Preset token="z_ovf_ptz_100">
+				<tt:Name>z_ovf_ptz_100</tt:Name>
+				<tt:PTZPosition>
+					<tt:PanTilt x="0.000000000" y="0.000000000" />
+					<tt:Zoom x="0.000000000" />
+				</tt:PTZPosition>
+			</tptz:Preset>
+		</tptz:GetPresetsResponse>
+	</s:Body>
+</s:Envelope>

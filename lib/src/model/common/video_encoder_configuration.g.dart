@@ -9,19 +9,21 @@ part of 'video_encoder_configuration.dart';
 VideoEncoderConfiguration _$VideoEncoderConfigurationFromJson(
         Map<String, dynamic> json) =>
     VideoEncoderConfiguration(
-      token: json['@token'] as String?,
+      token: json['@token'] as String,
       name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
       useCount: OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
       encoding: OnvifUtil.nullableMappedToString(
           json['Encoding'] as Map<String, dynamic>?),
       resolution: json['Resolution'] == null
           ? null
-          : Resolution.fromJson(json['Resolution'] as Map<String, dynamic>),
+          : VideoResolution.fromJson(
+              json['Resolution'] as Map<String, dynamic>),
       quality: OnvifUtil.nullableMappedToDouble(
           json['Quality'] as Map<String, dynamic>?),
       rateControl: json['RateControl'] == null
           ? null
-          : RateControl.fromJson(json['RateControl'] as Map<String, dynamic>),
+          : VideoRateControl.fromJson(
+              json['RateControl'] as Map<String, dynamic>),
       mpeg4: json['MPEG4'] == null
           ? null
           : Mpeg4.fromJson(json['MPEG4'] as Map<String, dynamic>),

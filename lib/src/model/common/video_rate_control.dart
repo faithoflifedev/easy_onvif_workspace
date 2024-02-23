@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'package:easy_onvif/src/util/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'rate_control.g.dart';
+part 'video_rate_control.g.dart';
 
 @JsonSerializable()
 
 /// Optional element to configure rate control related parameters.
-class RateControl {
-  ///Maximum output framerate in fps. If an EncodingInterval is provided the
+class VideoRateControl {
+  /// Maximum output framerate in fps. If an EncodingInterval is provided the
   /// resulting encoded framerate will be reduced by the given factor.
   @JsonKey(
     name: 'FrameRateLimit',
@@ -33,16 +33,16 @@ class RateControl {
   )
   final int bitrateLimit;
 
-  RateControl({
+  VideoRateControl({
     required this.frameRateLimit,
     required this.encodingInterval,
     required this.bitrateLimit,
   });
 
-  factory RateControl.fromJson(Map<String, dynamic> json) =>
-      _$RateControlFromJson(json);
+  factory VideoRateControl.fromJson(Map<String, dynamic> json) =>
+      _$VideoRateControlFromJson(json);
 
-  Map<String, dynamic> toJson() => _$RateControlToJson(this);
+  Map<String, dynamic> toJson() => _$VideoRateControlToJson(this);
 
   @override
   String toString() => json.encode(toJson());

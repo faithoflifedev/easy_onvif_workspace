@@ -242,6 +242,34 @@ class Media2 extends Operation {
     return GetStreamUriResponse.fromJson(responseEnvelope.body.response!).uri;
   }
 
+  /// By default this operation lists all existing video encoder configurations
+  /// for a device. Provide a profile token to list only configurations that are
+  /// compatible with the profile. If a configuration token is provided only a
+  /// single configuration will be returned.
+  Future<List<VideoEncoder2Configuration>> getVideoEncoderConfigurations({
+    String? configurationToken,
+    String? profileToken,
+  }) async {
+    loggy.debug('getVideoEncoderConfigurations');
+
+    final responseEnvelope = await transport.securedRequest(
+        uri,
+        soap.Body(
+          request: Media2Request.videoEncoderConfigurations(
+            configurationToken: configurationToken,
+            profileToken: profileToken,
+          ),
+        ));
+
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
+    }
+
+    return GetVideoEncoderConfigurationsResponse.fromJson(
+            responseEnvelope.body.response!)
+        .configurations;
+  }
+
   /// The GetVideoEncoderInstances command can be used to request the minimum
   /// number of guaranteed video encoder instances (applications) per Video
   /// Source Configuration.

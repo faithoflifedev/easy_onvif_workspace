@@ -19,7 +19,9 @@ class OnvifMedia2Command extends Command {
     addSubcommand(OnvifGetSnapshotUri2MediaCommand());
     addSubcommand(OnvifGetStreamUri2MediaCommand());
     addSubcommand(OnvifGetVideoEncoderInstancesMediaCommand());
+    addSubcommand(OnvifGetVideoEncoderConfigurationsMediaCommand());
     addSubcommand(OnvifGetVideoSourceConfigurationOptionsMediaCommand());
+    // addSubcommand(OnvifDeleteProfileMediaCommand());
     addSubcommand(OnvifStartMulticastStreaming2MediaCommand());
     addSubcommand(OnvifStopMulticastStreaming2MediaCommand());
   }
@@ -323,6 +325,51 @@ class OnvifGetVideoEncoderInstancesMediaCommand extends OnvifHelperCommand {
           .getVideoEncoderInstances(argResults!['configuration-token']);
 
       print(info);
+    } on DioException catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// By default this operation lists all existing video encoder configurations
+/// for a device. Provide a profile token to list only configurations that are
+/// compatible with the profile. If a configuration token is provided only a
+/// single configuration will be returned.
+class OnvifGetVideoEncoderConfigurationsMediaCommand
+    extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'By default this operation lists all existing video encoder configurations for a device.';
+
+  @override
+  String get name => 'get-video-encoder-configurations';
+
+  OnvifGetVideoEncoderConfigurationsMediaCommand() {
+    argParser
+      ..addOption('profile-token',
+          abbr: 't',
+          valueHelp: 'string',
+          help:
+              'Contains the token of an existing media profile the configurations shall be compatible with.')
+      ..addOption(
+        'configuration-token',
+        valueHelp: 'string',
+        help: 'Token of the requested configuration.',
+      );
+  }
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final videoEncoderConfigurations =
+          await media.media2.getVideoEncoderConfigurations(
+        configurationToken: argResults?['configuration-token'],
+        profileToken: argResults?['profile-token'],
+      );
+
+      print(videoEncoderConfigurations);
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

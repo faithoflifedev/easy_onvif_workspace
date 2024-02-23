@@ -1,5 +1,21 @@
 # Changelog
 
+## 3.0.0
+
+* Tests for IPG-8150PSS
+* README updates&#x2F;corrections
+* Media2
+  * GetVideoEncoderConfigurations
+* Media2 - cli
+  * get-video-encoder-configurations
+* Models - common
+  * Resolution =&gt; VideoResolution
+    * VideoResolution
+    * VideoResolution2
+  * RateControl =&gt; VideoRateControl
+    * VideoRateControl
+    * VideoRateControl2
+
 ## 3.0.0-dev.1
 
 * local test works, but github build fails the tests

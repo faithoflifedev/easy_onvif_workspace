@@ -1,23 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'rate_control.dart';
+part of 'video_rate_control2.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-RateControl _$RateControlFromJson(Map<String, dynamic> json) => RateControl(
-      frameRateLimit:
-          OnvifUtil.mappedToInt(json['FrameRateLimit'] as Map<String, dynamic>),
-      encodingInterval: OnvifUtil.mappedToInt(
-          json['EncodingInterval'] as Map<String, dynamic>),
+VideoRateControl2 _$VideoRateControl2FromJson(Map<String, dynamic> json) =>
+    VideoRateControl2(
+      constantBitRate: bool.parse(json['@ConstantBitRate'] as String),
+      frameRateLimit: OnvifUtil.mappedToDouble(
+          json['FrameRateLimit'] as Map<String, dynamic>),
       bitrateLimit:
           OnvifUtil.mappedToInt(json['BitrateLimit'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$RateControlToJson(RateControl instance) =>
+Map<String, dynamic> _$VideoRateControl2ToJson(VideoRateControl2 instance) =>
     <String, dynamic>{
+      '@ConstantBitRate': instance.constantBitRate,
       'FrameRateLimit': instance.frameRateLimit,
-      'EncodingInterval': instance.encodingInterval,
       'BitrateLimit': instance.bitrateLimit,
     };

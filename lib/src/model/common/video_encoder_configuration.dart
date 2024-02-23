@@ -13,7 +13,7 @@ part 'video_encoder_configuration.g.dart';
 class VideoEncoderConfiguration {
   /// Unique identifier of the profile.
   @JsonKey(name: '@token')
-  final String? token;
+  final String token;
 
   ///User readable name. Length up to 64 characters.
   @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
@@ -31,7 +31,7 @@ class VideoEncoderConfiguration {
 
   ///Configured video resolution
   @JsonKey(name: 'Resolution')
-  final Resolution? resolution;
+  final VideoResolution? resolution;
 
   ///Relative value for the video quantizers and the quality of the video. A
   ///high value within supported quality range means higher quality
@@ -40,7 +40,7 @@ class VideoEncoderConfiguration {
 
   ///Optional element to configure rate control related parameters.
   @JsonKey(name: 'RateControl')
-  final RateControl? rateControl;
+  final VideoRateControl? rateControl;
 
   ///Optional element to configure Mpeg4 related parameters.
   @JsonKey(name: 'MPEG4')
@@ -58,18 +58,19 @@ class VideoEncoderConfiguration {
   @JsonKey(name: 'SessionTimeout', fromJson: OnvifUtil.nullableMappedToString)
   final String? sessionTimeout;
 
-  VideoEncoderConfiguration(
-      {this.token,
-      required this.name,
-      required this.useCount,
-      this.encoding,
-      this.resolution,
-      this.quality,
-      this.rateControl,
-      this.mpeg4,
-      this.h264,
-      this.multiCast,
-      this.sessionTimeout});
+  VideoEncoderConfiguration({
+    required this.token,
+    required this.name,
+    required this.useCount,
+    this.encoding,
+    this.resolution,
+    this.quality,
+    this.rateControl,
+    this.mpeg4,
+    this.h264,
+    this.multiCast,
+    this.sessionTimeout,
+  });
 
   factory VideoEncoderConfiguration.fromJson(Map<String, dynamic> json) =>
       _$VideoEncoderConfigurationFromJson(json);

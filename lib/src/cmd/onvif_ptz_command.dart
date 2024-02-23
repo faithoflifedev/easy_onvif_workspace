@@ -116,7 +116,7 @@ class OnvifAbsoluteMovePtzCommand extends OnvifHelperCommand {
         zoom: zoom,
       );
 
-      await ptz.absoluteMove(argResults!['profile-token'], place);
+      await ptz.absoluteMove(argResults!['profile-token'], position: place);
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

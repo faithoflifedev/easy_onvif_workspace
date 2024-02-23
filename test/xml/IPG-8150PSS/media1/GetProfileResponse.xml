@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope"
+	xmlns:e="http://www.w3.org/2003/05/soap-encoding"
+	xmlns:wsa="http://www.w3.org/2005/08/addressing"
+	xmlns:tns1="http://www.onvif.org/ver10/topics"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tt="http://www.onvif.org/ver10/schema"
+	xmlns:wsnt="http://docs.oasis-open.org/wsn/b-2"
+	xmlns:wstop="http://docs.oasis-open.org/wsn/t-1"
+	xmlns:tds="http://www.onvif.org/ver10/device/wsdl"
+	xmlns:tmd="http://www.onvif.org/ver10/deviceIO/wsdl"
+	xmlns:trt="http://www.onvif.org/ver10/media/wsdl"
+	xmlns:tr2="http://www.onvif.org/ver20/media/wsdl"
+	xmlns:tev="http://www.onvif.org/ver10/events/wsdl"
+	xmlns:tptz="http://www.onvif.org/ver20/ptz/wsdl"
+	xmlns:timg="http://www.onvif.org/ver20/imaging/wsdl"
+	xmlns:tnshik="http://www.hikvision.com/2011/event/topics"
+	xmlns:hikwsd="http://www.onvifext.com/onvif/ext/ver10/wsdl"
+	xmlns:hikxsd="http://www.onvifext.com/onvif/ext/ver10/schema"
+	xmlns:tan="http://www.onvif.org/ver20/analytics/wsdl"
+	xmlns:ter="http://www.onvif.org/ver10/error">
+	<s:Body>
+		<trt:GetProfileResponse>
+			<trt:Profile token="PROFILE_000" fixed="true">
+				<tt:Name>PROFILE_000</tt:Name>
+				<tt:VideoSourceConfiguration token="V_SRC_000">
+					<tt:Name>V_SRC_000</tt:Name>
+					<tt:UseCount>2</tt:UseCount>
+					<tt:SourceToken>VideoSourceToken</tt:SourceToken>
+					<tt:Bounds x="0" y="0" width="2560" height="1920"></tt:Bounds>
+				</tt:VideoSourceConfiguration>
+				<tt:AudioSourceConfiguration token="A_SRC_CFG_000">
+					<tt:Name>A_SRC_CFG_000</tt:Name>
+					<tt:UseCount>2</tt:UseCount>
+					<tt:SourceToken>AudioSourceToken</tt:SourceToken>
+				</tt:AudioSourceConfiguration>
+				<tt:VideoEncoderConfiguration token="VEToken_1" GuaranteedFrameRate="false">
+					<tt:Name>VEConfig_1</tt:Name>
+					<tt:UseCount>1</tt:UseCount>
+					<tt:Encoding>H264</tt:Encoding>
+					<tt:Resolution>
+						<tt:Width>2560</tt:Width>
+						<tt:Height>1920</tt:Height>
+					</tt:Resolution>
+					<tt:Quality>4</tt:Quality>
+					<tt:RateControl>
+						<tt:FrameRateLimit>20</tt:FrameRateLimit>
+						<tt:EncodingInterval>1</tt:EncodingInterval>
+						<tt:BitrateLimit>2048</tt:BitrateLimit>
+					</tt:RateControl>
+					<tt:H264>
+						<tt:GovLength>100</tt:GovLength>
+						<tt:H264Profile>Main</tt:H264Profile>
+					</tt:H264>
+					<tt:Multicast>
+						<tt:Address>
+							<tt:Type>IPv4</tt:Type>
+							<tt:IPv4Address>239.0.1.0</tt:IPv4Address>
+						</tt:Address>
+						<tt:Port>4000</tt:Port>
+						<tt:TTL>64</tt:TTL>
+						<tt:AutoStart>false</tt:AutoStart>
+					</tt:Multicast>
+					<tt:SessionTimeout>PT3600000S</tt:SessionTimeout>
+				</tt:VideoEncoderConfiguration>
+				<tt:AudioEncoderConfiguration token="A_ENC_000">
+					<tt:Name>A_ENC_000</tt:Name>
+					<tt:UseCount>2</tt:UseCount>
+					<tt:Encoding>G711</tt:Encoding>
+					<tt:Bitrate>64</tt:Bitrate>
+					<tt:SampleRate>8</tt:SampleRate>
+					<tt:Multicast>
+						<tt:Address>
+							<tt:Type>IPv4</tt:Type>
+							<tt:IPv4Address>239.0.1.0</tt:IPv4Address>
+						</tt:Address>
+						<tt:Port>32002</tt:Port>
+						<tt:TTL>2</tt:TTL>
+						<tt:AutoStart>false</tt:AutoStart>
+					</tt:Multicast>
+					<tt:SessionTimeout>PT3600000S</tt:SessionTimeout>
+				</tt:AudioEncoderConfiguration>
+				<tt:VideoAnalyticsConfiguration token="VideoAnalyticsToken">
+					<tt:Name>VideoAnalytics</tt:Name>
+					<tt:UseCount>2</tt:UseCount>
+					<tt:AnalyticsEngineConfiguration>
+						<tt:AnalyticsModule Name="MyCellMotionModule" Type="tt:CellMotionEngine">
+							<tt:Parameters>
+								<tt:SimpleItem Name="Sensitivity" Value="0" />
+								<tt:ElementItem Name="Layout">
+									<tt:CellLayout Columns="16" Rows="12">
+										<tt:Transformation>
+											<tt:Translate x="-1.000000" y="-1.000000" />
+											<tt:Scale x="0.006250" y="0.008340" />
+										</tt:Transformation>
+									</tt:CellLayout>
+								</tt:ElementItem>
+							</tt:Parameters>
+						</tt:AnalyticsModule>
+					</tt:AnalyticsEngineConfiguration>
+					<tt:RuleEngineConfiguration>
+						<tt:Rule Name="MyMotionDetectorRule" Type="tt:CellMotionDetector">
+							<tt:Parameters>
+								<tt:SimpleItem Name="MinCount" Value="4" />
+								<tt:SimpleItem Name="AlarmOnDelay" Value="1000" />
+								<tt:SimpleItem Name="AlarmOffDelay" Value="1000" />
+								<tt:SimpleItem Name="ActiveCells" Value="6f8AAA==" />
+							</tt:Parameters>
+						</tt:Rule>
+					</tt:RuleEngineConfiguration>
+				</tt:VideoAnalyticsConfiguration>
+				<tt:PTZConfiguration token="PTZConfigurationToken">
+					<tt:Name>PTZConfiguration</tt:Name>
+					<tt:UseCount>2</tt:UseCount>
+					<tt:NodeToken>ptz0</tt:NodeToken>
+					<tt:DefaultAbsolutePantTiltPositionSpace>http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace</tt:DefaultAbsolutePantTiltPositionSpace>
+					<tt:DefaultAbsoluteZoomPositionSpace>http://www.onvif.org/ver10/tptz/ZoomSpaces/PositionGenericSpace</tt:DefaultAbsoluteZoomPositionSpace>
+					<tt:DefaultRelativePanTiltTranslationSpace>http://www.onvif.org/ver10/tptz/PanTiltSpaces/TranslationGenericSpace</tt:DefaultRelativePanTiltTranslationSpace>
+					<tt:DefaultRelativeZoomTranslationSpace>http://www.onvif.org/ver10/tptz/ZoomSpaces/TranslationGenericSpace</tt:DefaultRelativeZoomTranslationSpace>
+					<tt:DefaultContinuousPanTiltVelocitySpace>http://www.onvif.org/ver10/tptz/PanTiltSpaces/VelocityGenericSpace</tt:DefaultContinuousPanTiltVelocitySpace>
+					<tt:DefaultContinuousZoomVelocitySpace>http://www.onvif.org/ver10/tptz/ZoomSpaces/VelocityGenericSpace</tt:DefaultContinuousZoomVelocitySpace>
+					<tt:DefaultPTZTimeout>PT60S</tt:DefaultPTZTimeout>
+					<tt:PanTiltLimits>
+						<tt:Range>
+							<tt:URI>http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace</tt:URI>
+							<tt:XRange>
+								<tt:Min>-1.0</tt:Min>
+								<tt:Max>1.0</tt:Max>
+							</tt:XRange>
+							<tt:YRange>
+								<tt:Min>-1.0</tt:Min>
+								<tt:Max>1.0</tt:Max>
+							</tt:YRange>
+						</tt:Range>
+					</tt:PanTiltLimits>
+					<tt:ZoomLimits>
+						<tt:Range>
+							<tt:URI>http://www.onvif.org/ver10/tptz/ZoomSpaces/PositionGenericSpace</tt:URI>
+							<tt:XRange>
+								<tt:Min>-1.0</tt:Min>
+								<tt:Max>1.0</tt:Max>
+							</tt:XRange>
+						</tt:Range>
+					</tt:ZoomLimits>
+				</tt:PTZConfiguration>
+				<tt:Extension></tt:Extension>
+			</trt:Profile>
+		</trt:GetProfileResponse>
+	</s:Body>
+</s:Envelope>

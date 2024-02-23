@@ -8,6 +8,11 @@ part 'video_source_configuration.g.dart';
 ///Optional configuration of the Video input.
 @JsonSerializable()
 class VideoSourceConfiguration {
+  /// Token that uniquely references this configuration. Length up to 64
+  /// characters.
+  @JsonKey(name: '@token')
+  final String token;
+
   ///User readable name. Length up to 64 characters.
   @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
   final String name;
@@ -28,8 +33,14 @@ class VideoSourceConfiguration {
   @JsonKey(name: 'Extension')
   final dynamic extension;
 
-  VideoSourceConfiguration(
-      this.name, this.useCount, this.sourceToken, this.bounds, this.extension);
+  VideoSourceConfiguration({
+    required this.token,
+    required this.name,
+    required this.useCount,
+    required this.sourceToken,
+    required this.bounds,
+    required this.extension,
+  });
 
   factory VideoSourceConfiguration.fromJson(Map<String, dynamic> json) =>
       _$VideoSourceConfigurationFromJson(json);

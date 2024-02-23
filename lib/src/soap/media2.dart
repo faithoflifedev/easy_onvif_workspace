@@ -79,6 +79,32 @@ class Media2Request {
     return builder.buildFragment();
   }
 
+  /// XML for the [videoEncoderConfigurations]
+  static XmlDocumentFragment videoEncoderConfigurations({
+    String? configurationToken,
+    String? profileToken,
+  }) {
+    builder.element('GetVideoEncoderConfigurations', nest: () {
+      builder.namespace(Xmlns.tr2);
+
+      if (configurationToken != null) {
+        ReferenceToken(configurationToken).buildXml(
+          builder,
+          tag: 'ConfigurationToken',
+        );
+      }
+
+      if (profileToken != null) {
+        ReferenceToken(profileToken).buildXml(
+          builder,
+          tag: 'ProfileToken',
+        );
+      }
+    });
+
+    return builder.buildFragment();
+  }
+
   /// XML for the [getVideoEncoderInstances]
   static XmlDocumentFragment getVideoEncoderInstances(
       String configurationToken) {

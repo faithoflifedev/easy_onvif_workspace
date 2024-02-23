@@ -270,5 +270,157 @@ void main() {
         expect(envelope.body.response!.containsKey('StopResponse'), true);
       });
     });
+
+    group("IPG-8150PSS", () {
+      test('AbsoluteMoveResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/ptz/AbsoluteMoveResponse.xml');
+
+        expect(
+            envelope.body.response!.containsKey('AbsoluteMoveResponse'), true);
+      });
+
+      test('ContinuousMoveResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/ptz/ContinuousMoveResponse.xml');
+
+        expect(envelope.body.response!.containsKey('ContinuousMoveResponse'),
+            true);
+      });
+
+      test('GetCompatibleConfigurationsResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/ptz/GetCompatibleConfigurationsResponse.xml');
+
+        expect(
+            GetCompatibleConfigurationsResponse.fromJson(
+                    envelope.body.response!)
+                .ptzConfigurations
+                .isNotEmpty,
+            true);
+      });
+
+      test('GetConfigurationOptionsResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/ptz/GetConfigurationOptionsResponse.xml');
+
+        expect(
+            GetConfigurationOptionsResponse.fromJson(envelope.body.response!)
+                .ptzConfigurationOptions
+                .ptzTimeout
+                .min,
+            'PT1S');
+      });
+
+      test('GetConfigurationResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/ptz/GetConfigurationResponse.xml');
+
+        expect(
+            GetConfigurationResponse.fromJson(envelope.body.response!)
+                .ptzConfiguration
+                .token,
+            'PTZConfigurationToken');
+      });
+
+      test('GetConfigurationsResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/ptz/GetConfigurationsResponse.xml');
+
+        expect(
+            GetConfigurationsResponse.fromJson(envelope.body.response!)
+                .ptzConfigurations
+                .isNotEmpty,
+            true);
+      });
+
+      test('GetPresetsResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/ptz/GetPresetsResponse.xml');
+
+        expect(
+            GetPresetsResponse.fromJson(envelope.body.response!)
+                .presets
+                .isNotEmpty,
+            true);
+      });
+
+      test('GetServiceCapabilitiesResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/ptz/GetServiceCapabilitiesResponse.xml');
+
+        expect(
+            GetServiceCapabilitiesResponse.fromJson(envelope.body.response!)
+                .capabilities
+                .getCompatibleConfigurations,
+            false);
+      });
+
+      test('GetStatusResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/ptz/GetStatusResponse.xml');
+
+        expect(
+            GetStatusResponse.fromJson(envelope.body.response!)
+                .ptzStatus
+                .moveStatus
+                ?.panTilt,
+            'IDLE');
+      });
+
+      test('GotoHomePositionResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/ptz/GotoHomePositionResponse.xml');
+
+        expect(envelope.body.response!.containsKey('GotoHomePositionResponse'),
+            true);
+      });
+
+      test('GotoPresetResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/ptz/GotoPresetResponse.xml');
+
+        expect(envelope.body.response!.containsKey('GotoPresetResponse'), true);
+      });
+
+      test('RelativeMoveResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/ptz/RelativeMoveResponse.xml');
+
+        expect(
+            envelope.body.response!.containsKey('RelativeMoveResponse'), true);
+      });
+
+      test('RemovePresetResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/ptz/RemovePresetResponse.xml');
+
+        expect(
+            envelope.body.response!.containsKey('RemovePresetResponse'), true);
+      });
+
+      test('SetHomePositionResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/ptz/SetHomePositionResponse.xml');
+
+        expect(envelope.body.response!.containsKey('SetHomePositionResponse'),
+            true);
+      });
+
+      test('SetPresetResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/ptz/SetPresetResponse.xml');
+
+        expect(SetPresetResponse.fromJson(envelope.body.response!).presetToken,
+            'z_ovf_ptz_99');
+      });
+
+      test('StopResponse', () {
+        final envelope =
+            Envelope.fromXmlFile('test/xml/IPG-8150PSS/ptz/StopResponse.xml');
+
+        expect(envelope.body.response!.containsKey('StopResponse'), true);
+      });
+    });
   });
 }

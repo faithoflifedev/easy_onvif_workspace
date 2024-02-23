@@ -387,5 +387,122 @@ void main() {
             true);
       });
     });
+
+    group('IPG-8150PSS', () {
+      test('GetAudioSourcesResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/media1/GetAudioSourcesResponse.xml');
+
+        expect(
+            GetAudioSourcesResponse.fromJson(envelope.body.response!)
+                .audioSources
+                .isEmpty,
+            false);
+      });
+
+      test('GetMetadataConfigurationResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/media1/GetMetadataConfigurationResponse.xml');
+
+        expect(
+            GetMetadataConfigurationResponse.fromJson(envelope.body.response!)
+                .configuration
+                .name,
+            'MetadataConfiguration');
+      });
+
+      test('GetMetadataConfigurationsResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/media1/GetMetadataConfigurationsResponse.xml');
+
+        expect(
+            GetMetadataConfigurationsResponse.fromJson(envelope.body.response!)
+                .configurations
+                .isNotEmpty,
+            true);
+      });
+
+      test('GetProfileResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/media1/GetProfileResponse.xml');
+
+        expect(
+            GetProfileResponse.fromJson(envelope.body.response!).profile.name,
+            'PROFILE_000');
+      });
+
+      test('GetProfilesResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/media1/GetProfilesResponse.xml');
+
+        expect(
+            GetProfilesResponse.fromJson(envelope.body.response!)
+                .profiles
+                .isNotEmpty,
+            true);
+      });
+
+      test('GetServiceCapabilitiesResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/media1/GetServiceCapabilitiesResponse.xml');
+
+        expect(
+            GetServiceCapabilitiesResponse.fromJson(envelope.body.response!)
+                .capabilities
+                .snapshotUri,
+            true);
+      });
+
+      test('GetSnapshotUriResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/media1/GetSnapshotUriResponse.xml');
+
+        expect(
+            GetSnapshotUriResponse.fromJson(envelope.body.response!)
+                .mediaUri
+                .uri,
+            'http://10.200.1.2:80/SnapShot_Ch0.jpg');
+      });
+
+      test('GetStreamUriResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/media1/GetStreamUriResponse.xml');
+
+        expect(
+            GetStreamUriResponse.fromJson(envelope.body.response!).mediaUri.uri,
+            'rtsp://10.200.1.2/live/0/MAIN');
+      });
+
+      test('GetVideoSourcesResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/media1/GetVideoSourcesResponse.xml');
+
+        expect(
+            GetVideoSourcesResponse.fromJson(envelope.body.response!)
+                .videoSources
+                .isNotEmpty,
+            true);
+      });
+
+      test('StartMulticastStreamingResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/media1/StartMulticastStreamingResponse.xml');
+
+        expect(
+            envelope.body.response!
+                .containsKey('StartMulticastStreamingResponse'),
+            true);
+      });
+
+      test('StopMulticastStreamingResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/media1/StopMulticastStreamingResponse.xml');
+
+        expect(
+            envelope.body.response!
+                .containsKey('StopMulticastStreamingResponse'),
+            true);
+      });
+    });
   });
 }

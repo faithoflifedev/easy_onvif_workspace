@@ -284,7 +284,7 @@ class PtzRequest {
           .buildXml(builder, tag: 'PresetName', namespace: Xmlns.tptz);
 
       if (presetToken != null) {
-        ReferenceToken(profileToken).buildXml(
+        ReferenceToken(presetToken).buildXml(
           builder,
           tag: 'PresetToken',
           namespace: Xmlns.tptz,

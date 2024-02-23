@@ -164,6 +164,9 @@ class OnvifUtil {
 
   static String mappedToString(Map<String, dynamic> value) => value['\$'];
 
+  static ReferenceToken mappedToReferenceToken(Map<String, dynamic> value) =>
+      ReferenceToken(value['\$']);
+
   static Uri mappedToUri(Map<String, dynamic> value) =>
       Uri.parse(mappedToString(value));
 

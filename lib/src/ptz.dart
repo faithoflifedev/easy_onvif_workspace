@@ -41,8 +41,11 @@ class Ptz extends Operation {
   /// the default speed set by the [PtzConfiguration] will be used.
   ///
   /// ACCESS CLASS: ACTUATE
-  Future<bool> absoluteMove(String profileToken, PtzVector position,
-      [PtzSpeed? speed]) async {
+  Future<bool> absoluteMove(
+    String profileToken, {
+    required PtzVector position,
+    PtzSpeed? speed,
+  }) async {
     loggy.debug('absoluteMove');
 
     final responseEnvelope = await transport.securedRequest(
@@ -453,8 +456,8 @@ class Ptz extends Operation {
         zoomAdjust = Vector1D(x: ptzStatus.position.zoom!.x + zoomAdjust.x);
       }
 
-      await absoluteMove(
-          profileToken, PtzVector(panTilt: panTilt, zoom: zoomAdjust));
+      await absoluteMove(profileToken,
+          position: PtzVector(panTilt: panTilt, zoom: zoomAdjust));
     }
   }
 

@@ -19,7 +19,7 @@ class VideoSource {
 
   ///Horizontal and vertical resolution
   @JsonKey(name: 'Resolution')
-  final Resolution resolution;
+  final VideoResolution resolution;
 
   ///Optional configuration of the image sensor.
   @JsonKey(name: 'Imaging')
