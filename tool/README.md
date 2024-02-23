@@ -384,7 +384,7 @@ The values returned by the Onvif API `GetDeviceInformation` call.
 | D-Link Corporation | DCS-6511       |                     | commands not implemented&#x00B2; |
 | [empty\]           | GX728MF-IR28   |                     | commands not implemented&#x00B3; |
 | LOREX              | LNB4421SB      |                     | testing in progress              |
-| ONVIF_IPNC         | IPG-8150PSS    | 1.3.0-20210203CN-PT | commands not implemented&#x00B4; |
+| ONVIF_IPNC         | IPG-8150PSS    | 1.3.0-20210203CN-PT | commands not implemented&#x2074; |
 
 &#x00B9; The ENP1A14-IR/25X does not support the following commands:
 * Recordings
@@ -420,7 +420,7 @@ The values returned by the Onvif API `GetDeviceInformation` call.
 * PTZ:
   * not supported
 
-&#x00B4; The IPG-8150PSS does not support the following commands: 
+&#x2074; The IPG-8150PSS does not support the following commands: 
 * Device Management:
   * `GetStorageConfigurations`
   * `GetEndpointReference`

@@ -5,7 +5,7 @@ import 'resolution.dart';
 
 part 'video_resolution.g.dart';
 
-@JsonSerializable(ignoreUnannotated: true)
+@JsonSerializable(createToJson: false)
 class VideoResolution extends Resolution {
   VideoResolution({
     required super.width,

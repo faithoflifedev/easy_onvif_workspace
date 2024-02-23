@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0+1
+
+* analysis tweak
+
 ## 3.0.0
 
 * Tests for IPG-8150PSS
