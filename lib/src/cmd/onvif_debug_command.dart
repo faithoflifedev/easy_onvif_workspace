@@ -86,79 +86,92 @@ class OnvifDebugCommand extends Command with UiLoggy {
     try {
       await onvif.deviceManagement.getCapabilities();
     } catch (e) {
-      loggy.error('getCapabilities');
+      loggy.error('getCapabilities\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.deviceManagement.getDeviceInformation();
     } catch (e) {
-      loggy.error('getDeviceInformation');
+      loggy.error('getDeviceInformation\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.deviceManagement.getDiscoveryMode();
     } catch (e) {
-      loggy.error('getDiscoveryMode');
+      loggy.error('getDiscoveryMode\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.deviceManagement.getDns();
     } catch (e) {
-      loggy.error('getDns');
+      loggy.error('getDns\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.deviceManagement.getHostname();
     } catch (e) {
-      loggy.error('getHostname');
+      loggy.error('getHostname\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.deviceManagement.getNetworkProtocols();
     } catch (e) {
-      loggy.error('getNetworkProtocols');
+      loggy.error('getNetworkProtocols\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.deviceManagement.getNtp();
     } catch (e) {
-      loggy.error('getNtp');
+      loggy.error('getNtp\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.deviceManagement.getServiceCapabilities();
     } catch (e) {
-      loggy.error('getServiceCapabilities');
+      loggy.error('getServiceCapabilities\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.deviceManagement.getServices();
     } catch (e) {
-      loggy.error('getServices');
+      loggy.error('getServices\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.deviceManagement.getSystemDateAndTime();
     } catch (e) {
-      loggy.error('getSystemDateAndTime');
+      loggy.error('getSystemDateAndTime\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.deviceManagement.getSystemLog('System');
     } catch (e) {
-      loggy.error('getSystemDateAndTime');
+      loggy.error('getSystemLog\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.deviceManagement.getSystemUris();
     } catch (e) {
-      loggy.error('getSystemUris');
+      loggy.error('getSystemUris\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.deviceManagement.getUsers();
     } catch (e) {
-      loggy.error('getUsers');
+      loggy.error('getUsers\n');
+      loggy.error(e);
     }
 
     try {
@@ -169,13 +182,15 @@ class OnvifDebugCommand extends Command with UiLoggy {
             userLevel: UserLevel.user)
       ]);
     } catch (e) {
-      loggy.error('getUsers');
+      loggy.error('createUsers\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.deviceManagement.deleteUsers(['deleteMe_$random']);
     } catch (e) {
-      loggy.error('getUsers');
+      loggy.error('deleteUsers');
+      loggy.error(e);
     }
 
     //
@@ -185,7 +200,8 @@ class OnvifDebugCommand extends Command with UiLoggy {
     try {
       await onvif.media.media1.getAudioSources();
     } catch (e) {
-      loggy.error('getAudioSources');
+      loggy.error('getAudioSources\n');
+      loggy.error(e);
     }
 
     try {
@@ -196,7 +212,8 @@ class OnvifDebugCommand extends Command with UiLoggy {
           .getMetadataConfiguration(metadataConfigurations.first.token);
     } catch (e) {
       loggy.error('getMetadataConfigurations');
-      loggy.error('getMetadataConfiguration');
+      loggy.error('getMetadataConfiguration\n');
+      loggy.error(e);
     }
 
     try {
@@ -225,19 +242,22 @@ class OnvifDebugCommand extends Command with UiLoggy {
       loggy.error('getSnapshotUri');
       loggy.error('getStreamUri');
       loggy.error('startMulticastStreaming');
-      loggy.error('stopMulticastStreaming');
+      loggy.error('stopMulticastStreaming\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.media.media1.getServiceCapabilities();
     } catch (e) {
-      loggy.error('getServiceCapabilities');
+      loggy.error('getServiceCapabilities\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.media.media1.getVideoSources();
     } catch (e) {
-      loggy.error('getVideoSources');
+      loggy.error('getVideoSources\n');
+      loggy.error(e);
     }
 
     //
@@ -247,13 +267,15 @@ class OnvifDebugCommand extends Command with UiLoggy {
     try {
       await onvif.media.media2.getMetadataConfigurationOptions();
     } catch (e) {
-      loggy.error('getMetadataConfigurationOptions');
+      loggy.error('getMetadataConfigurationOptions\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.media.media2.getMetadataConfigurations();
     } catch (e) {
-      loggy.error('getMetadataConfigurations');
+      loggy.error('getMetadataConfigurations\n');
+      loggy.error(e);
     }
 
     try {
@@ -293,25 +315,29 @@ class OnvifDebugCommand extends Command with UiLoggy {
       loggy.error('startMulticastStreaming');
       loggy.error('stopMulticastStreaming');
       loggy.error('getVideoEncoderInstances');
-      loggy.error('getVideoSourceConfigurationOptions');
+      loggy.error('getVideoSourceConfigurationOptions\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.media.media2.getServiceCapabilities();
     } catch (e) {
-      loggy.error('getServiceCapabilities');
+      loggy.error('getServiceCapabilities\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.media.media2.getVideoEncoderConfigurations();
     } catch (e) {
-      loggy.error('getVideoEncoderConfigurations');
+      loggy.error('getVideoEncoderConfigurations\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.media.media2.getVideoSourceConfigurationOptions();
     } catch (e) {
-      loggy.error('getServiceCapabilities');
+      loggy.error('getServiceCapabilities\n');
+      loggy.error(e);
     }
 
     //
@@ -347,19 +373,22 @@ class OnvifDebugCommand extends Command with UiLoggy {
       loggy.error('absoluteMove');
       loggy.error('continuousMove');
       loggy.error('getCompatibleConfigurations');
-      loggy.error('getConfigurationOptions');
+      loggy.error('getConfigurationOptions\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.ptz.getServiceCapabilities();
     } catch (e) {
-      loggy.error('getServiceCapabilities');
+      loggy.error('getServiceCapabilities\n');
+      loggy.error(e);
     }
 
     try {
       await onvif.ptz.getConfigurations();
     } catch (e) {
-      loggy.error('getConfigurations');
+      loggy.error('getConfigurations\n');
+      loggy.error(e);
     }
 
     //

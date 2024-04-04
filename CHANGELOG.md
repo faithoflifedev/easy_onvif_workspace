@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.0+2
+
+  * better cli debug
+  * fixed security header, for devices that have more strict XML parsing
+  
 ## 3.0.0+1
 
 * analysis tweak

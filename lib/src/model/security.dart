@@ -35,12 +35,12 @@ class Security implements XmlSerializable {
   void buildXml(
     XmlBuilder builder, {
     String tag = 'Security',
-    String? namespace = Xmlns.s,
+    String? namespace,
   }) =>
       builder.element(
         'Security',
         namespace: namespace,
-        namespaces: {Xmlns.s: 's'},
+        // namespaces: {Xmlns.s: 's'},
         nest: () {
           builder.namespace(
               'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd');
