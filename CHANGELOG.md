@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0+3
+
+  * fix auth test
+
 ## 3.0.0+2
 
   * better cli debug

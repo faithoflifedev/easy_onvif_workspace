@@ -51,7 +51,7 @@ void main() {
       final xml = envelope.toXml(builder);
 
       jsonTransformer.parse(xml
-          .xpath('s:Envelope/s:Header/s:Security/UsernameToken')
+          .xpath('s:Envelope/s:Header/Security/UsernameToken')
           .last
           .toXmlString());
 
