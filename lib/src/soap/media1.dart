@@ -21,7 +21,7 @@ class MediaRequest {
   static XmlDocumentFragment getMetadataConfiguration(
       String configurationToken) {
     builder.element('GetMetadataConfiguration', nest: () {
-      builder.namespace(Xmlns.tds);
+      builder.namespace(Xmlns.trt);
 
       ReferenceToken(configurationToken).buildXml(
         builder,
@@ -58,7 +58,7 @@ class MediaRequest {
   /// XML for the [getProfile], requires a [profileToken]
   static XmlDocumentFragment getProfile(String profileToken) {
     builder.element('GetProfile', nest: () {
-      builder.namespace(Xmlns.tds);
+      builder.namespace(Xmlns.trt);
 
       ReferenceToken(profileToken).buildXml(builder);
     });

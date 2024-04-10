@@ -7,7 +7,7 @@ part of 'modal_options.dart';
 // **************************************************************************
 
 ModalOptions _$ModalOptionsFromJson(Map<String, dynamic> json) => ModalOptions(
-      mode: OnvifUtil.nullableMappedToStringList(json['Mode'] as List?),
+      mode: ModalOptions._oneOrMore(json['Mode']),
     );
 
 Map<String, dynamic> _$ModalOptionsToJson(ModalOptions instance) =>

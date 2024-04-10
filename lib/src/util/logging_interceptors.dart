@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:loggy/loggy.dart';
@@ -36,7 +37,11 @@ class LoggingInterceptors extends Interceptor with UiLoggy {
     Response response,
     ResponseInterceptorHandler handler,
   ) {
-    loggy.debug('\nRESPONSE:\n${response.data}');
+    if (response.data is! Uint8List) {
+      loggy.debug('\nRESPONSE:\n${response.data}');
+    } else {
+      loggy.debug('\nRESPONSE:\n<Uint8List>');
+    }
 
     super.onResponse(response, handler);
   }

@@ -1,5 +1,13 @@
+import 'dart:async';
+import 'dart:typed_data';
+
+import 'package:dio/dio.dart';
 import 'package:easy_onvif/device_management.dart';
 import 'package:easy_onvif/soap.dart' as soap;
+import 'package:easy_onvif/src/soap/mtom.dart';
+import 'package:easy_onvif/src/soap/transport.dart';
+import 'package:loggy/loggy.dart';
+import 'package:universal_io/io.dart';
 
 import 'operation.dart';
 
@@ -19,7 +27,7 @@ typedef DeviceManagementRequest = soap.DeviceManagementRequest;
 /// | UNRECOVERABLE | X | | | |
 /// | READ_MEDIA | X | X | X | |
 /// | ACTUATE | X | X | | |
-class DeviceManagement extends Operation {
+class DeviceManagement extends Operation with UiLoggy {
   DeviceManagement({
     required super.transport,
     required super.uri,
@@ -358,17 +366,34 @@ class DeviceManagement extends Operation {
   }
 
   /// This operation gets a system log from the device. The exact format of the
-  /// system logs is outside the scope of this standard.
+  /// system logs is outside the scope of this standard however a common format
+  /// for the system log response is [SOAP Message Transmission Optimization Mechanism (MTOM)](https://www.ibm.com/docs/en/integration-bus/10.0?topic=services-what-is-soap-mtom)
+  /// which is the use of MIME to optimize the bit stream transmission of SOAP
+  /// messages that contain significantly large base64Binary elements.
   ///
   /// Access Class: READ_SYSTEM_SECRET
-  Future<SystemInformation> getSystemLog(String logType) async {
+  Future<SystemInformation> getSystemLog(
+    String logType, {
+    Directory? writeLogToFolder,
+  }) async {
     loggy.debug('getSystemLog');
 
-    final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
+    final securedXml = transport
+        .getSecuredEnvelope(soap.Body(
           request: DeviceManagementRequest.getSystemLog(logType),
-        ));
+        ))
+        .toXml(Transport.builder);
+
+    final response = await transport.sendLogRequest(
+      uri,
+      securedXml,
+    );
+
+    String xmlString = _parseMtom(response, writeLogToFolder: writeLogToFolder);
+
+    loggy.debug('\ngetSystemLog - RESPONSE:\n$xmlString');
+
+    final responseEnvelope = soap.Envelope.fromXmlString(xmlString);
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -382,14 +407,27 @@ class DeviceManagement extends Operation {
   /// device.
   ///
   /// Access Class: READ_SYSTEM_SECRET
-  Future<SystemInformation> getSystemSupportInformation() async {
+  Future<SystemInformation> getSystemSupportInformation({
+    Directory? writeLogToFolder,
+  }) async {
     loggy.debug('getSystemSupportInformation');
 
-    final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
+    final securedXml = transport
+        .getSecuredEnvelope(soap.Body(
           request: DeviceManagementRequest.getSystemSupportInformation(),
-        ));
+        ))
+        .toXml(Transport.builder);
+
+    final response = await transport.sendLogRequest(
+      uri,
+      securedXml,
+    );
+
+    String xmlString = _parseMtom(response, writeLogToFolder: writeLogToFolder);
+
+    loggy.debug('\ngetSystemLog - RESPONSE:\n$xmlString');
+
+    final responseEnvelope = soap.Envelope.fromXmlString(xmlString);
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -517,6 +555,52 @@ class DeviceManagement extends Operation {
     }
 
     return responseEnvelope.body.response!;
+  }
+
+  String _parseMtom(
+    Response<Uint8List> response, {
+    Directory? writeLogToFolder,
+  }) {
+    final headerMap = response.headers.map;
+
+    String? xmlString;
+
+    if (headerMap.containsKey('content-type')) {
+      final contentType =
+          ContentType.parse(headerMap['content-type']!.first).parameters;
+
+      if (contentType['boundary'] == null) throw Exception('No boundary found');
+
+      final parts = Mtom.parse(
+        boundary: contentType['boundary']!,
+        response: response.data!,
+      );
+
+      for (var part in parts) {
+        if (part.contentType.mimeType == 'application/xop+xml' &&
+            part.contentType.parameters.containsValue('application/soap+xml')) {
+          xmlString = part.contentAsString;
+        }
+
+        if (part.contentType.mimeType == '/' && writeLogToFolder != null) {
+          final fileName = part.contentId.split('/').last.replaceAll('>', '');
+
+          var zipFile = File('${writeLogToFolder.path}/$fileName');
+
+          var counter = 0;
+
+          while (zipFile.existsSync()) {
+            counter++;
+
+            zipFile = File('${writeLogToFolder.path}/${counter}_$fileName');
+          }
+
+          zipFile.writeAsBytesSync(part.content);
+        }
+      }
+    }
+
+    return xmlString ??= String.fromCharCodes(response.data!);
   }
 
   // Future<void> getLogOutput() async {

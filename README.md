@@ -9,44 +9,45 @@ This package works with a variety of ONVIF compatible devices allowing for IP Ca
 [![pub package](https://img.shields.io/pub/v/easy_onvif.svg)](https://pub.dartlang.org/packages/easy_onvif)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![Buy me a coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/faithoflif2)
+[![Buy me a coffee](https://github.com/faithoflifedev/easy_onvif/blob/main/logo/buy_me_a_coffee.svg?raw=true)](https://www.buymeacoffee.com/faithoflif2)
 
 [![Build Status](https://github.com/faithoflifedev/easy_onvif/workflows/Dart/badge.svg)](https://github.com/faithoflifedev/easy_onvif/actions) [![github last commit](https://shields.io/github/last-commit/faithoflifedev/easy_onvif)](https://shields.io/github/last-commit/faithoflifedev/easy_onvif) [![github build](https://img.shields.io/github/actions/workflow/status/faithoflifedev/easy_onvif/dart.yml?branch=main)](https://shields.io/github/workflow/status/faithoflifedev/easy_onvif/Dart) [![github issues](https://shields.io/github/issues/faithoflifedev/easy_onvif)](https://shields.io/github/issues/faithoflifedev/easy_onvif)
 
 ## Table of contents
 
-- [Getting Started](#getting-started)
-  - [Dependency](#dependency)
-  - [Usage Example](#usage-example)
-  - [Interacting with a device through Onvif operations](#interacting-with-a-device-through-onvif-operations)
-- [Lower level requests](#lower-level-requests)
-- [Onvif cli (Onvif at the command prompt)](#onvif-cli-onvif-at-the-command-prompt)
-- [Supported Onvif Operations](#supported-onvif-operations)
-  - [Device Management](#device-management)
-  - [Imaging](#imaging)
-  - [Media 10](#media-10)
-  - [Media 20](#media-20)
-  - [PTZ](#ptz)
-  - [PTZ Helper Methods](#ptz-helper-methods)
-  - [Recording](#recording)
-  - [Replay](#replay)
-  - [Search](#search)
-- [Tested Onvif Devices](#tested-onvif-devices)
-- [New for version 3.0.0-dev.0](#new-for-version-300-dev0)
-- [New for version 2.2.x](#new-for-version-22x)
-- [New for version 2.1.x](#new-for-version-21x)
-- [New for version 2.0.x](#new-for-version-20x)
-- [Onvif specifications and documentation](#onvif-specifications-and-documentation)
-- [Features and bugs](#features-and-bugs)
-- [Known Issues](#known-issues)
-  - [Issue #45](#issue-45)
-  - [Issue #23](#issue-23)
-- [Breaking changes](#breaking-changes)
-  - [v3.0.0-dev.0](#v300-dev0)
-  - [v2.3.0](#v230)
-  - [v2.1.0](#v210)
-- [Contributors](#contributors)
-- [Contributing](#contributing)
+- [Dart Implementation of ONVIF IP Camera Client](#dart-implementation-of-onvif-ip-camera-client)
+  - [Table of contents](#table-of-contents)
+  - [Getting Started](#getting-started)
+    - [Dependency](#dependency)
+    - [Usage Example](#usage-example)
+    - [Interacting with a device through Onvif operations](#interacting-with-a-device-through-onvif-operations)
+  - [Lower level requests](#lower-level-requests)
+  - [Onvif cli (Onvif at the command prompt)](#onvif-cli-onvif-at-the-command-prompt)
+  - [Supported Onvif Operations](#supported-onvif-operations)
+    - [Device Management](#device-management)
+    - [Imaging](#imaging)
+    - [Media 10](#media-10)
+    - [Media 20](#media-20)
+    - [PTZ](#ptz)
+    - [PTZ Helper Methods](#ptz-helper-methods)
+    - [Recording](#recording)
+    - [Replay](#replay)
+    - [Search](#search)
+  - [Tested Onvif Devices](#tested-onvif-devices)
+  - [New for version 3.0.0-dev.0](#new-for-version-300-dev0)
+  - [New for version 2.2.x](#new-for-version-22x)
+  - [New for version 2.1.x](#new-for-version-21x)
+  - [Onvif specifications and documentation](#onvif-specifications-and-documentation)
+  - [Features and bugs](#features-and-bugs)
+  - [Possible unexpected behavior](#possible-unexpected-behavior)
+  - [Known Issues](#known-issues)
+    - [Issue #45](#issue-45)
+  - [Breaking changes](#breaking-changes)
+    - [v3.0.0-dev.0](#v300-dev0)
+    - [v2.3.0](#v230)
+    - [v2.1.0](#v210)
+  - [Contributors](#contributors)
+  - [Contributing](#contributing)
 
 ## Getting Started
 
@@ -57,7 +58,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^3.0.0+1
+  easy_onvif: ^3.0.1
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -279,18 +280,19 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
   * [Specification PDF](https://www.onvif.org/specs/srv/media/ONVIF-Media2-Service-Spec.pdf)
   * [wsdl](https://www.onvif.org/ver20/media/wsdl/media.wsdl)
 
-| Onvif Operation                    | Dart Method                        | Dart Return Type                          | Test |
-| ---------------------------------- | ---------------------------------- | ----------------------------------------- | ---- |
-| GetMetadataConfigurationOptions    | getMetadataConfigurationOptions    | `Future<MetadataConfigurationOptions>`    | [x\] |
-| GetMetadataConfigurations          | getMetadataConfigurations          | `Future<List<MetadataConfiguration>>`     | [x\] |
-| GetProfiles                        | getProfiles                        | `Future<List<MediaProfile>?>`             | [x\] |
-| GetServiceCapabilities             | getServiceCapabilities             | `Future<Capabilities2>`                   | [x\] |
-| GetSnapshotUri                     | getSnapshotUri                     | `Future<String>`                          | [x\] |
-| GetStreamUri                       | getStreamUri                       | `Future<String>`                          | [x\] |
-| GetVideoEncoderInstances           | getVideoEncoderInstances           | `Future<Info>`                            | [ \] |
-| GetVideoSourceConfigurationOptions | getVideoSourceConfigurationOptions | `Future<VideoSourceConfigurationOptions>` | [ \] |
-| StartMulticastStreaming            | startMulticastStreaming            | `Future<bool>`                            | [x\] |
-| StopMulticastStreaming             | stopMulticastStreaming             | `Future<bool>`                            | [x\] |
+| Onvif Operation                    | Dart Method                        | Dart Return Type                           | Test |
+| ---------------------------------- | ---------------------------------- | ------------------------------------------ | ---- |
+| GetMetadataConfigurationOptions    | getMetadataConfigurationOptions    | `Future<MetadataConfigurationOptions>`     | [x\] |
+| GetMetadataConfigurations          | getMetadataConfigurations          | `Future<List<MetadataConfiguration>>`      | [x\] |
+| GetProfiles                        | getProfiles                        | `Future<List<MediaProfile>?>`              | [x\] |
+| GetServiceCapabilities             | getServiceCapabilities             | `Future<Capabilities2>`                    | [x\] |
+| GetSnapshotUri                     | getSnapshotUri                     | `Future<String>`                           | [x\] |
+| GetStreamUri                       | getStreamUri                       | `Future<String>`                           | [x\] |
+| GetVideoEncoderInstances           | getVideoEncoderInstances           | `Future<Info>`                             | [ \] |
+| GetVideoSourceConfigurationOptions | getVideoSourceConfigurationOptions | `Future<VideoSourceConfigurationOptions>`  | [x\] |
+| GetVideoEncoderConfigurations      | getVideoEncoderConfigurations      | `Future<List<VideoEncoder2Configuration>>` | [ \] |
+| StartMulticastStreaming            | startMulticastStreaming            | `Future<bool>`                             | [x\] |
+| StopMulticastStreaming             | stopMulticastStreaming             | `Future<bool>`                             | [x\] |
 
 ### PTZ 
 
@@ -377,14 +379,15 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 
 The values returned by the Onvif API `GetDeviceInformation` call.
 
-| Manufacturer       | Model          | Firmware Version    | Known Issue                      |
-| ------------------ | -------------- | ------------------- | -------------------------------- |
-| Happytimesoft      | IPCamera       |                     | limited capabilities             |
-| ONVIF              | ENP1A14-IR/25X |                     | commands not implemented&#x00B9; |
-| D-Link Corporation | DCS-6511       |                     | commands not implemented&#x00B2; |
-| [empty\]           | GX728MF-IR28   |                     | commands not implemented&#x00B3; |
-| LOREX              | LNB4421SB      |                     | testing in progress              |
-| ONVIF_IPNC         | IPG-8150PSS    | 1.3.0-20210203CN-PT | commands not implemented&#x2074; |
+| Manufacturer       | Model              | Firmware Version                | Known Issue                      |
+| ------------------ | ------------------ | ------------------------------- | -------------------------------- |
+| Happytimesoft      | IPCamera           |                                 | limited capabilities             |
+| ONVIF              | ENP1A14-IR/25X     |                                 | commands not implemented&#x00B9; |
+| D-Link Corporation | DCS-6511           |                                 | commands not implemented&#x00B2; |
+| [empty\]           | GX728MF-IR28       |                                 | commands not implemented&#x00B3; |
+| LOREX              | LNB4421SB          |                                 | testing in progress              |
+| ONVIF_IPNC         | IPG-8150PSS        | 1.3.0-20210203CN-PT             | commands not implemented&#x2074; |
+| SUNBA              | Performance-Series | IPC-B2202.3.73.C06290.NB.230628 | commands not implemented&#x2075;|
 
 &#x00B9; The ENP1A14-IR/25X does not support the following commands:
 * Recordings
@@ -423,6 +426,7 @@ The values returned by the Onvif API `GetDeviceInformation` call.
 &#x2074; The IPG-8150PSS does not support the following commands: 
 * Device Management:
   * `GetStorageConfigurations`
+  * `GetStorageConfiguration`
   * `GetEndpointReference`
   * `GetSystemSupportInformation`
 * PTZ
@@ -431,9 +435,24 @@ The values returned by the Onvif API `GetDeviceInformation` call.
   * `GotoHomePosition` - supported but not functioning
   * `SetHomePosition` - supported but not functioning
 
+&#x2075; The SUNBA does not support the following commands: 
+* Device Management:
+  * `CreateUsers`
+  * `DeleteUsers`
+  * `GetStorageConfigurations`
+  * `GetStorageConfiguration`
+  * `GetSystemUris`
+* Media1:
+  * `GetStreamUri` - but it works in Media2
+* PTZ:
+  * `GotoHomePosition` - No Home Position
+  * `RelativeMove` - work-around available with the `move` helper
+  * `SetHomePosition`
+  
+
 ## New for version 3.0.0-dev.0
 
-Bug fixes for a number of small bugs that got introduced through adding some experimental features in some of the previous releases.  The main issues identified and resolved where in the areas of Authentication [Issue #58](https://github.com/faithoflifedev/easy_onvif/issues/58), PTZ [Issue #54](https://github.com/faithoflifedev/easy_onvif/issues/54) and the Media2 module (no issue reported).  In addition all currently supported SOAP requests now have unit tests to confirm that the package continues to create the requests properly as the code evolves.  Finally, there have been extensive code revisions to help with the long term maintenance of the package.  As part of this a number of method signatures have changed as well as some of the objects in the object model have been renamed.  For the most part these changes are in the lower level interfaces within the package and should not affect too many users.
+Bug fixes for a number of small bugs that got introduced through adding some experimental features in some of the previous releases.  The main issues identified and resolved where in the areas of Authentication [Issue #58](https://github.com/faithoflifedev/easy_onvif/issues/58), PTZ [Issue #54](https://github.com/faithoflifedev/easy_onvif/issues/54) and the Media2 module (no issue reported).  In addition all currently supported SOAP requests now have unit tests to confirm that the package continues to create the requests properly as the code evolves.  Finally, there have been extensive code revisions to help with the long term maintenance of the package.  As part of this a number of method signatures have changed as well as some of the objects in the object model have been renamed.  For the most part these changes are in the lower level interfaces within the package and should not affect many users.
 
 ## New for version 2.2.x
 
@@ -461,27 +480,6 @@ var profiles1 = await onvif.media.media1.getProfiles();
 var profiles2 = await onvif.media.media2.getProfiles();
 ```
 
-## New for version 2.0.x
-
-__Device discovery__ is finally here.  If you're using the [command line utility](https://github.com/faithoflifedev/easy_onvif/blob/main/bin/README.md) that became available from v1.0.0, you can discover Onvif devices on your network with the command:
-
-```sh
-onvif probe
-```
-
-Or, in dart code:
-
-```dart
-final multicastProbe = MulticastProbe();
-
-await multicastProbe.probe();
-
-for (var device in multicastProbe.onvifDevices) {
-  print(
-      '${device.name} ${device.location} ${device.hardware} ${device.xAddr}');
-}
-```
-
 ## Onvif specifications and documentation
 
 https://www.onvif.org/profiles/specifications/
@@ -489,6 +487,10 @@ https://www.onvif.org/profiles/specifications/
 ## Features and bugs
 
 Please file feature requests and bugs with [the issue tracker](https://github.com/faithoflifedev/easy_onvif/issues).
+
+## Possible unexpected behavior
+
+The helper method `move` in the PTZ module will fallback to `AbsoluteMove` if `RelativeMove` is not supported by the device.  The `move` command is not currently aware of the device bounds , so using the command to change the `x` position of the device hen the device has already at max `x` will have no affect.  The same would go for the `y` position and for `zoom`.
 
 ## Known Issues
 
@@ -512,24 +514,6 @@ dart run bin/onvif.dart probe list-devices
 ```
 
 The `discovery.dll` file can be found in the [bin](https://github.com/faithoflifedev/easy_onvif/tree/win-ffi/bin) folder of the project on GitHub.
-
-### Issue #23
-
-Github Issue [#23](https://github.com/faithoflifedev/easy_onvif/issues/23), in Flutter when using **v2.0.13+4** and above you may see the following message when performing a `dart pub get`: 
-
-```text
-Because every version of flutter from sdk depends on collection 1.16.0 and xml >=6.2.0 depends on collection ^1.17.0, flutter from sdk is incompatible with xml >=6.2.0.
-And because easy_onvif >=2.0.13+11 depends on xml ^6.2.2, flutter from sdk is incompatible with easy_onvif >=2.0.13+11.
-So, because cow depends on both flutter from sdk and easy_onvif ^2.0.13+13, version solving failed.
-pub get failed (1; So, because cow depends on both flutter from sdk and easy_onvif ^2.0.13+13, version solving failed.)
-```
-
-The fix for this is to add the following section to your `pubspec.yaml`:
-
-```yaml
-dependency_overrides:
-  collection: ^1.17.0
-```
 
 ## Breaking changes
 

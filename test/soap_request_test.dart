@@ -331,7 +331,7 @@ void main() {
 
       expect(
         builder.buildDocument().toXmlString(),
-        '<Test><GetMetadataConfiguration xmlns="http://www.onvif.org/ver10/device/wsdl"><ConfigurationToken>testToken</ConfigurationToken></GetMetadataConfiguration></Test>',
+        '<Test><GetMetadataConfiguration xmlns="http://www.onvif.org/ver10/media/wsdl"><ConfigurationToken>testToken</ConfigurationToken></GetMetadataConfiguration></Test>',
       );
     });
 
@@ -358,7 +358,7 @@ void main() {
 
       expect(
         builder.buildDocument().toXmlString(),
-        '<Test><GetProfile xmlns="http://www.onvif.org/ver10/device/wsdl"><ProfileToken>testToken</ProfileToken></GetProfile></Test>',
+        '<Test><GetProfile xmlns="http://www.onvif.org/ver10/media/wsdl"><ProfileToken>testToken</ProfileToken></GetProfile></Test>',
       );
     });
 
@@ -632,7 +632,7 @@ void main() {
 
       expect(
         builder.buildDocument().toXmlString(),
-        '<Test><ContinuousMove xmlns="http://www.onvif.org/ver20/ptz/wsdl"><ProfileToken>testToken</ProfileToken><Velocity xmlns="http://www.onvif.org/ver20/ptz/wsdl"><PanTilt xmlns="http://www.onvif.org/ver10/schema" x="0.0" y="0.0"/><Zoom xmlns="http://www.onvif.org/ver10/schema" x="0.0"/></Velocity><Timeout xmlns="http://www.onvif.org/ver20/ptz/wsdl">PTnullS</Timeout></ContinuousMove></Test>',
+        '<Test><ContinuousMove xmlns="http://www.onvif.org/ver20/ptz/wsdl"><ProfileToken>testToken</ProfileToken><Velocity xmlns="http://www.onvif.org/ver20/ptz/wsdl"><PanTilt xmlns="http://www.onvif.org/ver10/schema" x="0.0" y="0.0"/><Zoom xmlns="http://www.onvif.org/ver10/schema" x="0.0"/></Velocity></ContinuousMove></Test>',
       );
     });
 
@@ -787,7 +787,7 @@ void main() {
 
       expect(
         builder.buildDocument().toXmlString(),
-        '<Test><RelativeMove xmlns="http://www.onvif.org/ver20/ptz/wsdl"><ProfileToken>testToken</ProfileToken><Translation xmlns="http://www.onvif.org/ver20/ptz/wsdl"><PanTilt xmlns="http://www.onvif.org/ver10/schema" x="0.0" y="0.0"/></Translation></RelativeMove></Test>',
+        '<Test><RelativeMove xmlns="http://www.onvif.org/ver20/ptz/wsdl"><ProfileToken xmlns="http://www.onvif.org/ver20/ptz/wsdl">testToken</ProfileToken><Translation xmlns="http://www.onvif.org/ver20/ptz/wsdl"><PanTilt xmlns="http://www.onvif.org/ver10/schema" x="0.0" y="0.0"/></Translation></RelativeMove></Test>',
       );
     });
 

@@ -1,21 +1,24 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:ansi_escapes/ansi_escapes.dart';
+import 'package:ansicolor/ansicolor.dart';
 import 'package:archive/archive_io.dart';
 import 'package:args/command_runner.dart';
 import 'package:cli_spin/cli_spin.dart';
+import 'package:easy_onvif/device_management.dart';
+import 'package:easy_onvif/media1.dart';
+import 'package:easy_onvif/media2.dart';
+// import 'package:cli_spin/cli_spin.dart';
 import 'package:easy_onvif/onvif.dart';
 import 'package:easy_onvif/shared.dart';
-import 'package:easy_onvif/src/model/device_management/user.dart';
-import 'package:easy_onvif/src/model/media1/stream_setup.dart';
-import 'package:easy_onvif/src/model/media1/transport.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:loggy/loggy.dart';
 import 'package:path/path.dart' as p;
 import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart';
 
-///Generate a refresh token used to authenticate the command line API requests
+/// Generate a refresh token used to authenticate the command line API requests
 class OnvifDebugCommand extends Command with UiLoggy {
   @override
   String get description => 'Generate a debug bundle for an Onvif device.';
@@ -23,18 +26,74 @@ class OnvifDebugCommand extends Command with UiLoggy {
   @override
   String get name => 'debug';
 
+  final greenPen = AnsiPen()..green(bold: true);
+
+  final bluePen = AnsiPen()..blue(bold: true);
+
   OnvifDebugCommand() {
-    argParser.addOption(
-      'output-folder',
-      abbr: 'o',
-      valueHelp: 'file path',
-      help: 'destination folder for debug bundle',
-      defaultsTo: 'debug',
-    );
+    argParser
+      ..addOption(
+        'output-folder',
+        abbr: 'o',
+        valueHelp: 'file path',
+        help: 'destination folder for debug bundle',
+        defaultsTo: 'debug',
+      )
+      ..addOption(
+        'module',
+        abbr: 'm',
+        valueHelp: 'string',
+        allowed: ['all', 'device', 'media1', 'media2', 'ptz'],
+        defaultsTo: 'all',
+        help: 'Token of the requested metadata configuration.',
+      );
+  }
+
+  void _showAction(String command) {
+    stdout.write(ansiEscapes.cursorNextLine);
+    stdout.write('${greenPen('\u{2705}')} $command\n');
+  }
+
+  void _showError(String command) {
+    stdout.write(ansiEscapes.cursorNextLine);
+    stdout.write('${greenPen('\u{274C}')} $command\n');
+  }
+
+  void _showSkip(String command) {
+    stdout.write(ansiEscapes.cursorNextLine);
+    stdout.write('${greenPen('\u{21AA}')} $command\n');
+  }
+
+  Future<T?> test<T>(
+    String name,
+    Future<T> Function() fn, {
+    bool skipWhenNull = false,
+  }) async {
+    try {
+      if (skipWhenNull) {
+        _showSkip(name);
+        return null;
+      }
+
+      var value = await fn();
+
+      _showAction(name);
+
+      return value;
+    } catch (e) {
+      _showError(name);
+
+      loggy.error('$name\n');
+      loggy.error(e);
+    }
+
+    return null;
   }
 
   @override
   void run() async {
+    var module = argResults!['module'];
+
     // create temp folder named by device name
     // get responses into xml files named by response type
     // zip up folder and output to --output
@@ -64,336 +123,301 @@ class OnvifDebugCommand extends Command with UiLoggy {
           filePath: filePath,
         ));
 
-    final spinner = CliSpin(
-      text: 'Loading data...',
-      spinner: CliSpinners.line,
-    ).start(); // Chai
-
     final random = Random().nextInt(900000) + 100000;
 
-    Timer(Duration(milliseconds: 1000), () {
-      // Change spinner color
-      spinner.color = CliSpinnerColor.yellow;
-
-      // Change spinner text
-      spinner.text = 'Still loading, please wait...';
-    });
-
     //
-    // get device management information
+    // test Device Management information
     //
 
-    try {
-      await onvif.deviceManagement.getCapabilities();
-    } catch (e) {
-      loggy.error('getCapabilities\n');
-      loggy.error(e);
-    }
+    if (module == 'all' || module == 'device') {
+      stdout.write('\n\t${bluePen('Test Device Management module')}\n');
 
-    try {
-      await onvif.deviceManagement.getDeviceInformation();
-    } catch (e) {
-      loggy.error('getDeviceInformation\n');
-      loggy.error(e);
-    }
+      await test('GetCapabilities',
+          () async => await onvif.deviceManagement.getCapabilities());
 
-    try {
-      await onvif.deviceManagement.getDiscoveryMode();
-    } catch (e) {
-      loggy.error('getDiscoveryMode\n');
-      loggy.error(e);
-    }
+      await test('GetDeviceInformation',
+          () async => await onvif.deviceManagement.getDeviceInformation());
 
-    try {
-      await onvif.deviceManagement.getDns();
-    } catch (e) {
-      loggy.error('getDns\n');
-      loggy.error(e);
-    }
+      await test('GetDiscoveryMode',
+          () async => await onvif.deviceManagement.getDiscoveryMode());
 
-    try {
-      await onvif.deviceManagement.getHostname();
-    } catch (e) {
-      loggy.error('getHostname\n');
-      loggy.error(e);
-    }
+      await test('GetDns', () async => await onvif.deviceManagement.getDns());
 
-    try {
-      await onvif.deviceManagement.getNetworkProtocols();
-    } catch (e) {
-      loggy.error('getNetworkProtocols\n');
-      loggy.error(e);
-    }
+      await test('GetEndpointReference',
+          () async => await onvif.deviceManagement.getEndpointReference());
 
-    try {
-      await onvif.deviceManagement.getNtp();
-    } catch (e) {
-      loggy.error('getNtp\n');
-      loggy.error(e);
-    }
+      await test('GetHostname',
+          () async => await onvif.deviceManagement.getHostname());
 
-    try {
-      await onvif.deviceManagement.getServiceCapabilities();
-    } catch (e) {
-      loggy.error('getServiceCapabilities\n');
-      loggy.error(e);
-    }
+      await test('GetNetworkProtocols',
+          () async => await onvif.deviceManagement.getNetworkProtocols());
 
-    try {
-      await onvif.deviceManagement.getServices();
-    } catch (e) {
-      loggy.error('getServices\n');
-      loggy.error(e);
-    }
+      await test('GetNtp', () async => await onvif.deviceManagement.getNtp());
 
-    try {
-      await onvif.deviceManagement.getSystemDateAndTime();
-    } catch (e) {
-      loggy.error('getSystemDateAndTime\n');
-      loggy.error(e);
-    }
+      await test('GetServiceCapabilities',
+          () async => await onvif.deviceManagement.getServiceCapabilities());
 
-    try {
-      await onvif.deviceManagement.getSystemLog('System');
-    } catch (e) {
-      loggy.error('getSystemLog\n');
-      loggy.error(e);
-    }
+      await test('GetServices',
+          () async => await onvif.deviceManagement.getServices());
 
-    try {
-      await onvif.deviceManagement.getSystemUris();
-    } catch (e) {
-      loggy.error('getSystemUris\n');
-      loggy.error(e);
-    }
+      final storageConfigurations = await test<List<StorageConfiguration>>(
+          'GetStorageConfigurations',
+          () async => await onvif.deviceManagement.getStorageConfigurations());
 
-    try {
-      await onvif.deviceManagement.getUsers();
-    } catch (e) {
-      loggy.error('getUsers\n');
-      loggy.error(e);
-    }
+      final storageConfigurationToken = storageConfigurations?.first.token;
 
-    try {
-      await onvif.deviceManagement.createUsers([
-        User(
-            username: 'deleteMe_$random',
-            password: 'deleteMe',
-            userLevel: UserLevel.user)
-      ]);
-    } catch (e) {
-      loggy.error('createUsers\n');
-      loggy.error(e);
-    }
+      await test(
+        'GetStorageConfiguration',
+        () async => await onvif.deviceManagement
+            .getStorageConfiguration(storageConfigurationToken!),
+        skipWhenNull: storageConfigurationToken == null,
+      );
 
-    try {
-      await onvif.deviceManagement.deleteUsers(['deleteMe_$random']);
-    } catch (e) {
-      loggy.error('deleteUsers');
-      loggy.error(e);
+      await test('GetSystemDateAndTime',
+          () async => await onvif.deviceManagement.getSystemDateAndTime());
+
+      await test('GetSystemUris',
+          () async => await onvif.deviceManagement.getSystemUris());
+
+      await test('GetSystemLog',
+          () async => await onvif.deviceManagement.getSystemLog('System'));
+
+      await test(
+          'GetSystemSupportInformation',
+          () async =>
+              await onvif.deviceManagement.getSystemSupportInformation());
+
+      await test(
+          'GetUsers', () async => await onvif.deviceManagement.getUsers());
+
+      await test(
+          'CreateUsers',
+          () async => await onvif.deviceManagement.createUsers([
+                User(
+                    username: 'deleteMe_$random',
+                    password: 'deleteMe_${random}_',
+                    userLevel: UserLevel.user)
+              ]));
+
+      await test(
+          'DeleteUsers',
+          () async =>
+              await onvif.deviceManagement.deleteUsers(['deleteMe_$random']));
     }
 
     //
-    // get media1 information
+    // Test Media1 module
     //
 
-    try {
-      await onvif.media.media1.getAudioSources();
-    } catch (e) {
-      loggy.error('getAudioSources\n');
-      loggy.error(e);
-    }
+    stdout.write('\n\t${bluePen('Retrieving Media1 Token')}\n');
 
-    try {
-      var metadataConfigurations =
-          await onvif.media.media1.getMetadataConfigurations();
+    final media1profiles = await test<List<Profile>>('Media1 - GetProfiles',
+        () async => await onvif.media.media1.getProfiles());
 
-      await onvif.media.media1
-          .getMetadataConfiguration(metadataConfigurations.first.token);
-    } catch (e) {
-      loggy.error('getMetadataConfigurations');
-      loggy.error('getMetadataConfiguration\n');
-      loggy.error(e);
-    }
+    final media1profileToken = media1profiles?.first.token;
 
-    try {
-      var profiles = await onvif.media.media1.getProfiles();
+    if (module == 'all' || module == 'media1') {
+      stdout.write('\n\t${bluePen('Test Media1 module')}\n');
 
-      await onvif.media.media1.getProfile(profiles.first.token);
+      await test('GetAudioSources',
+          () async => await onvif.media.media1.getAudioSources());
 
-      await onvif.media.media1.getSnapshotUri(profiles.first.token);
+      final metadataConfigurations = await test<List<MetadataConfiguration>>(
+          'GetMetadataConfigurations',
+          () async => await onvif.media.media1.getMetadataConfigurations());
 
-      await onvif.media.media1.getStreamUri(
-        profiles.first.token,
-        streamSetup: StreamSetup(
-          stream: 'RTP-Unicast',
-          transport: Transport(
-            protocol: 'RTSP',
+      final metadataConfigurationToken = metadataConfigurations?.first.token;
+
+      await test(
+        'GetMetadataConfiguration',
+        () async => await onvif.media.media1
+            .getMetadataConfiguration(metadataConfigurationToken!),
+        skipWhenNull: metadataConfigurationToken == null,
+      );
+
+      await test(
+        'GetProfile',
+        () async => await onvif.media.media1.getProfile(media1profileToken!),
+        skipWhenNull: media1profileToken == null,
+      );
+
+      await test('GetServiceCapabilities',
+          () async => await onvif.media.media1.getServiceCapabilities());
+
+      await test(
+        'GetSnapshotUri',
+        () async => await onvif.media.media1.getProfile(media1profileToken!),
+        skipWhenNull: media1profileToken == null,
+      );
+
+      await test(
+        'GetStreamUri',
+        () async => await onvif.media.media1.getStreamUri(
+          media1profileToken!,
+          streamSetup: StreamSetup(
+            stream: 'RTP-Unicast',
+            transport: Transport(
+              protocol: 'RTSP',
+            ),
           ),
         ),
+        skipWhenNull: media1profileToken == null,
       );
 
-      await onvif.media.media1.startMulticastStreaming(profiles.first.token);
+      await test('GetVideoSources',
+          () async => await onvif.media.media1.getVideoSources());
 
-      await onvif.media.media1.stopMulticastStreaming(profiles.first.token);
-    } catch (e) {
-      loggy.error('getProfiles');
-      loggy.error('getProfile');
-      loggy.error('getSnapshotUri');
-      loggy.error('getStreamUri');
-      loggy.error('startMulticastStreaming');
-      loggy.error('stopMulticastStreaming\n');
-      loggy.error(e);
-    }
-
-    try {
-      await onvif.media.media1.getServiceCapabilities();
-    } catch (e) {
-      loggy.error('getServiceCapabilities\n');
-      loggy.error(e);
-    }
-
-    try {
-      await onvif.media.media1.getVideoSources();
-    } catch (e) {
-      loggy.error('getVideoSources\n');
-      loggy.error(e);
-    }
-
-    //
-    // get media2 information
-    //
-
-    try {
-      await onvif.media.media2.getMetadataConfigurationOptions();
-    } catch (e) {
-      loggy.error('getMetadataConfigurationOptions\n');
-      loggy.error(e);
-    }
-
-    try {
-      await onvif.media.media2.getMetadataConfigurations();
-    } catch (e) {
-      loggy.error('getMetadataConfigurations\n');
-      loggy.error(e);
-    }
-
-    try {
-      var profiles = await onvif.media.media2.getProfiles();
-
-      var videoEncoderConfiguration =
-          profiles.first.configurations?.videoEncoderConfiguration;
-
-      var videoSourceConfiguration =
-          profiles.first.configurations?.videoSourceConfiguration;
-
-      await onvif.media.media2.getSnapshotUri(profiles.first.token);
-
-      await onvif.media.media2.getStreamUri(
-        profiles.first.token,
-        protocol: 'RTSP',
-        streamType: 'RTP-Unicast',
+      await test(
+        'StartMulticastStreaming',
+        () async => await onvif.media.media1
+            .startMulticastStreaming(media1profileToken!),
+        skipWhenNull: media1profileToken == null,
       );
 
-      await onvif.media.media2.startMulticastStreaming(profiles.first.token);
-
-      await onvif.media.media2.stopMulticastStreaming(profiles.first.token);
-
-      if (videoEncoderConfiguration != null) {
-        await onvif.media.media2
-            .getVideoEncoderInstances(videoEncoderConfiguration.token);
-      }
-
-      if (videoSourceConfiguration != null) {
-        await onvif.media.media2.getVideoSourceConfigurationOptions(
-            configurationToken: videoSourceConfiguration.token);
-      }
-    } catch (e) {
-      loggy.error('getProfiles');
-      loggy.error('getSnapshotUri');
-      loggy.error('getStreamUri');
-      loggy.error('startMulticastStreaming');
-      loggy.error('stopMulticastStreaming');
-      loggy.error('getVideoEncoderInstances');
-      loggy.error('getVideoSourceConfigurationOptions\n');
-      loggy.error(e);
-    }
-
-    try {
-      await onvif.media.media2.getServiceCapabilities();
-    } catch (e) {
-      loggy.error('getServiceCapabilities\n');
-      loggy.error(e);
-    }
-
-    try {
-      await onvif.media.media2.getVideoEncoderConfigurations();
-    } catch (e) {
-      loggy.error('getVideoEncoderConfigurations\n');
-      loggy.error(e);
-    }
-
-    try {
-      await onvif.media.media2.getVideoSourceConfigurationOptions();
-    } catch (e) {
-      loggy.error('getServiceCapabilities\n');
-      loggy.error(e);
+      await test(
+        'StopMulticastStreaming',
+        () async => await onvif.media.media1
+            .stopMulticastStreaming(media1profileToken!),
+        skipWhenNull: media1profileToken == null,
+      );
     }
 
     //
-    // get ptz information
+    // Test Media2 module
     //
 
-    try {
-      var profiles = await onvif.media.media1.getProfiles();
+    stdout.write('\n\t${bluePen('Retrieving Media2 Token')}\n');
 
-      var profileToken = profiles.first.token;
+    final media2profiles = await test<List<MediaProfile>>(
+        'Media2 - GetProfiles',
+        () async => await onvif.media.media2.getProfiles());
 
-      await onvif.ptz.absoluteMove(
-        profileToken,
-        position: PtzVector(
-          panTilt: Vector2D(x: 0, y: 0),
-          zoom: Vector1D(x: 0),
+    final media2profileToken = media2profiles?.first.token;
+
+    if (module == 'all' || module == 'media2') {
+      stdout.write('\n\t${bluePen('Test Media2 module')}\n');
+
+      await test(
+          'GetMetadataConfigurationOptions',
+          () async =>
+              await onvif.media.media2.getMetadataConfigurationOptions());
+
+      await test('GetMetadataConfigurations',
+          () async => await onvif.media.media2.getMetadataConfigurations());
+
+      await test('GetServiceCapabilities',
+          () async => await onvif.media.media2.getServiceCapabilities());
+
+      await test(
+        'GetSnapshotUri',
+        () async =>
+            await onvif.media.media2.getSnapshotUri(media2profileToken!),
+        skipWhenNull: media2profileToken == null,
+      );
+
+      await test(
+        'GetStreamUri',
+        () async => await onvif.media.media2.getStreamUri(
+          media2profileToken!,
+          protocol: 'RTSP',
+          streamType: 'RTP-Unicast',
         ),
+        skipWhenNull: media2profileToken == null,
       );
 
-      await onvif.ptz.continuousMove(
-        profileToken,
-        velocity: PtzSpeed(
-          panTilt: Vector2D(x: 0.1, y: 0.1),
-          zoom: Vector1D(x: 0),
+      final videoEncoderConfigurationToken = media2profiles
+          ?.first.configurations?.videoEncoderConfiguration?.token;
+
+      await test(
+        'GetVideoEncoderInstances',
+        () async => await onvif.media.media2
+            .getVideoEncoderInstances(videoEncoderConfigurationToken!),
+        skipWhenNull: videoEncoderConfigurationToken == null,
+      );
+
+      final videoSourceConfigurationToken =
+          media2profiles?.first.configurations?.videoSourceConfiguration?.token;
+
+      await test(
+        'GetVideoSourceConfigurationOptions',
+        () async => await onvif.media.media2.getVideoSourceConfigurationOptions(
+            configurationToken: videoSourceConfigurationToken!),
+        skipWhenNull: videoSourceConfigurationToken == null,
+      );
+
+      await test('GetVideoEncoderConfigurations',
+          () async => await onvif.media.media2.getVideoEncoderConfigurations());
+
+      await test(
+        'StartMulticastStreaming',
+        () async => await onvif.media.media2
+            .startMulticastStreaming(media2profileToken!),
+        skipWhenNull: media2profileToken == null,
+      );
+
+      await test(
+        'StopMulticastStreaming',
+        () async => await onvif.media.media2
+            .stopMulticastStreaming(media2profileToken!),
+        skipWhenNull: media2profileToken == null,
+      );
+    }
+
+    //
+    // Test ptz module
+    //
+
+    final ptzProfileToken = media1profileToken ?? media2profileToken;
+
+    if (module == 'all' || module == 'ptz') {
+      stdout.write('\n\t${bluePen('Test PTZ module')}\n');
+
+      await test(
+          'AbsoluteMove',
+          () async => await onvif.ptz.absoluteMove(
+                ptzProfileToken!,
+                position: PtzVector(
+                  panTilt: Vector2D(x: 0, y: 0),
+                  zoom: Vector1D(x: 0),
+                ),
+              ),
+          skipWhenNull: ptzProfileToken == null);
+
+      await test(
+        'ContinuousMove',
+        () async => await onvif.ptz.continuousMove(
+          ptzProfileToken!,
+          velocity: PtzSpeed(
+            panTilt: Vector2D(x: 0.1, y: 0.1),
+            zoom: Vector1D(x: 0),
+          ),
         ),
+        skipWhenNull: ptzProfileToken == null,
       );
 
-      var configurations =
-          await onvif.ptz.getCompatibleConfigurations(profileToken);
+      final configurations = await test(
+        'GetCompatibleConfigurations',
+        () async =>
+            await onvif.ptz.getCompatibleConfigurations(ptzProfileToken!),
+        skipWhenNull: ptzProfileToken == null,
+      );
 
-      await onvif.ptz.getConfigurationOptions(configurations.first.token);
-    } catch (e) {
-      loggy.error('absoluteMove');
-      loggy.error('continuousMove');
-      loggy.error('getCompatibleConfigurations');
-      loggy.error('getConfigurationOptions\n');
-      loggy.error(e);
-    }
+      final configurationToken = configurations?.first.token;
 
-    try {
-      await onvif.ptz.getServiceCapabilities();
-    } catch (e) {
-      loggy.error('getServiceCapabilities\n');
-      loggy.error(e);
-    }
+      await onvif.ptz.getConfigurationOptions(configurationToken!);
 
-    try {
-      await onvif.ptz.getConfigurations();
-    } catch (e) {
-      loggy.error('getConfigurations\n');
-      loggy.error(e);
+      await test('GetServiceCapabilities',
+          () async => await onvif.ptz.getServiceCapabilities());
+
+      await test(
+          'GetConfigurations', () async => await onvif.ptz.getConfigurations());
     }
 
     //
-    // done with checks
+    // Archive results
     //
+
+    print('');
 
     final archive = Archive();
 
@@ -402,6 +426,19 @@ class OnvifDebugCommand extends Command with UiLoggy {
       File(filePath).lengthSync(),
       File(filePath).readAsBytesSync(),
     ));
+
+    final spinner = CliSpin(
+      text: 'Archiving results',
+      spinner: CliSpinners.line,
+    ).start(); // Chai
+
+    Timer(Duration(milliseconds: 1000), () {
+      // Change spinner color
+      spinner.color = CliSpinnerColor.yellow;
+
+      // Change spinner text
+      spinner.text = 'Still archiving results ...';
+    });
 
     final zipData = ZipEncoder().encode(archive);
 

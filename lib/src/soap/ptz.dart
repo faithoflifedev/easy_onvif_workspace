@@ -36,7 +36,7 @@ class PtzRequest {
   }
 
   /// XML for the [continuousMove], requires a [profileToken] and [PtzSpeed],
-  /// and optionally [timeout]
+  /// and optionally [timeout] in seconds
   static XmlDocumentFragment continuousMove(String profileToken,
       {required PtzSpeed velocity, int? timeout}) {
     builder.element('ContinuousMove', nest: () {
@@ -50,7 +50,10 @@ class PtzRequest {
         namespace: Xmlns.tptz,
       );
 
-      'PT${timeout}S'.buildXml(builder, tag: 'Timeout', namespace: Xmlns.tptz);
+      if (timeout != null) {
+        'PT${timeout}S'
+            .buildXml(builder, tag: 'Timeout', namespace: Xmlns.tptz);
+      }
     });
 
     return builder.buildFragment();
@@ -210,7 +213,10 @@ class PtzRequest {
     builder.element('RelativeMove', nest: () {
       builder.namespace(Xmlns.tptz); //tptz
 
-      ReferenceToken(profileToken).buildXml(builder);
+      ReferenceToken(profileToken).buildXml(
+        builder,
+        namespace: Xmlns.tptz,
+      );
 
       translation.buildXml(
         builder,
