@@ -14,6 +14,13 @@
 * general quality of life improvements
 * initil support for MTOM responses
 
+## 3.0.1
+
+* fancy ansi device debug tool
+* fixed security header, for devices that have more strict XML parsing
+* general quality of life improvements
+* initil support for MTOM responses
+
 ## 3.0.0+3
 
   * fix auth test
