@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:dio/dio.dart';
 import 'package:easy_onvif/onvif.dart';
 import 'package:easy_onvif/soap.dart';
@@ -21,8 +23,45 @@ class Transport with UiLoggy {
   });
 
   /// Send the SOAP [requestData] to the given [url] endpoint.
+  Future<Response<Uint8List>> sendLogRequest(
+      Uri uri, XmlDocument requestData) async {
+    Response<Uint8List> response;
+
+    try {
+      response = await dio.post<Uint8List>(uri.toString(),
+          data: requestData.toString(),
+          options: Options(
+            responseType: ResponseType.bytes,
+            headers: {
+              // Headers.contentTypeHeader: 'text/xml; charset=utf-8',
+              Headers.contentTypeHeader: 'application/soap+xml; charset=utf-8',
+            },
+          ));
+    } on DioException catch (error) {
+      switch (error.response?.statusCode) {
+        case 500:
+        case 400:
+          loggy.error('ERROR RESPONSE:\n${error.response?.data}');
+
+          final jsonMap = OnvifUtil.xmlToMap(error.response?.data);
+
+          final envelope = Envelope.fromJson(jsonMap);
+
+          if (envelope.body.hasFault) {
+            throw Exception('Error code: ${envelope.body.fault}');
+          }
+          break;
+      }
+
+      throw Exception(error);
+    }
+
+    return response;
+  }
+
+  /// Send the SOAP [requestData] to the given [url] endpoint.
   Future<Envelope> sendRequest(Uri uri, XmlDocument requestData) async {
-    Response? response;
+    Response response;
 
     try {
       response = await dio.post(uri.toString(),

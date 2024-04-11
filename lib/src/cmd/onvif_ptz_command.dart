@@ -157,7 +157,12 @@ class OnvifContinuousMovePtzCommand extends OnvifHelperCommand {
           mandatory: true,
           valueHelp: 'double',
           help:
-              'A Position vector specifying the absolute target position zoom.');
+              'A Position vector specifying the absolute target position zoom.')
+      ..addOption('timeout',
+          mandatory: false,
+          valueHelp: 'int',
+          help:
+              'The timeout parameter specifies how long the PTZ node continues to move.');
   }
 
   @override
@@ -165,13 +170,18 @@ class OnvifContinuousMovePtzCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
+      int? timeout = argResults?['timeout'];
+
       final velocity = PtzSpeed(
           panTilt: Vector2D.fromString(
               x: argResults!['pan-tilt-x'], y: argResults!['pan-tilt-y']),
           zoom: Vector1D.fromString(x: argResults!['pan-tilt-zoom']));
 
-      await ptz.continuousMove(argResults!['profile-token'],
-          velocity: velocity);
+      await ptz.continuousMove(
+        argResults!['profile-token'],
+        velocity: velocity,
+        timeout: timeout,
+      );
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

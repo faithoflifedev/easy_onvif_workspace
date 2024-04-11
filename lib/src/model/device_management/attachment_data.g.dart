@@ -10,11 +10,13 @@ AttachmentData _$AttachmentDataFromJson(Map<String, dynamic> json) =>
     AttachmentData(
       contentType: OnvifUtil.nullableMappedToString(
           json['contentType'] as Map<String, dynamic>?),
-      string: OnvifUtil.mappedToString(json['Include'] as Map<String, dynamic>),
+      include: json['Include'] == null
+          ? null
+          : Include.fromJson(json['Include'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$AttachmentDataToJson(AttachmentData instance) =>
     <String, dynamic>{
       'contentType': instance.contentType,
-      'Include': instance.string,
+      'Include': instance.include,
     };

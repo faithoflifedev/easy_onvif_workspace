@@ -341,5 +341,114 @@ void main() {
             true);
       });
     });
+
+    group('SUNBA', () {
+      test('GetMetadataConfigurationOptionsResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/SUNBA/media2/GetMetadataConfigurationOptionsResponse.xml');
+
+        expect(
+            GetMetadataConfigurationOptionsResponse.fromJson(
+                    envelope.body.response!)
+                .options
+                .ptzStatusFilterOptions
+                .zoomStatusSupported,
+            true);
+      });
+
+      test('GetMetadataConfigurationsResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/SUNBA/media2/GetMetadataConfigurationsResponse.xml');
+
+        expect(
+            GetMetadataConfigurationsResponse.fromJson(envelope.body.response!)
+                .configurations
+                .isNotEmpty,
+            true);
+      });
+
+      test('GetProfilesResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/SUNBA/media2/GetProfilesResponse.xml');
+
+        expect(
+            GetProfilesResponse.fromJson(envelope.body.response!)
+                .profiles
+                .isNotEmpty,
+            true);
+      });
+
+      test('GetServiceCapabilitiesResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/SUNBA/media2/GetServiceCapabilitiesResponse.xml');
+
+        expect(
+            GetServiceCapabilitiesResponse.fromJson(envelope.body.response!)
+                .capabilities
+                .snapshotUri,
+            true);
+      });
+
+      test('GetSnapshotUriResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/SUNBA/media2/GetSnapshotUriResponse.xml');
+
+        expect(GetSnapshotUriResponse.fromJson(envelope.body.response!).uri,
+            'http://162.191.54.181:80/LAPI/V1.0/Media/Video/Streams/0/Snapshot');
+      });
+
+      test('GetStreamUriResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/SUNBA/media2/GetStreamUriResponse.xml');
+
+        expect(GetStreamUriResponse.fromJson(envelope.body.response!).uri,
+            'rtsp://162.191.54.181/media/video1');
+      });
+
+      test('GetVideoEncoderConfigurationsResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/SUNBA/media2/GetVideoEncoderConfigurationsResponse.xml');
+
+        expect(
+            GetVideoEncoderConfigurationsResponse.fromJson(
+                    envelope.body.response!)
+                .configurations
+                .isNotEmpty,
+            true);
+      });
+
+      test('GetVideoSourceConfigurationOptionsResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/SUNBA/media2/GetVideoSourceConfigurationOptionsResponse.xml');
+
+        expect(
+            GetVideoSourceConfigurationOptionsResponse.fromJson(
+                    envelope.body.response!)
+                .options
+                .videoSourceTokensAvailable
+                .isNotEmpty,
+            true);
+      });
+
+      test('StartMulticastStreamingResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/media2/StartMulticastStreamingResponse.xml');
+
+        expect(
+            envelope.body.response!
+                .containsKey('StartMulticastStreamingResponse'),
+            true);
+      });
+
+      test('StopMulticastStreamingResponse', () {
+        final envelope = Envelope.fromXmlFile(
+            'test/xml/IPG-8150PSS/media2/StopMulticastStreamingResponse.xml');
+
+        expect(
+            envelope.body.response!
+                .containsKey('StopMulticastStreamingResponse'),
+            true);
+      });
+    });
   });
 }

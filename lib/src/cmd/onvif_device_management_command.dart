@@ -523,7 +523,9 @@ class OnvifGetSystemLogDeviceManagementCommand extends OnvifHelperCommand {
   String get name => 'get-system-log';
 
   OnvifGetSystemLogDeviceManagementCommand() {
-    argParser.addOption('type',
+    argParser
+      ..addOption(
+        'type',
         abbr: 't',
         defaultsTo: 'System',
         allowed: ['Access', 'System'],
@@ -531,16 +533,35 @@ class OnvifGetSystemLogDeviceManagementCommand extends OnvifHelperCommand {
           'Access': 'Indicates that a access log is requested.',
           'System': ' Indicates that a system log is requested.',
         },
-        help: 'Specifies the type of system log to get.');
+        help: 'Specifies the type of system log to get.',
+      )
+      ..addOption(
+        'log-folder',
+        abbr: 'f',
+        help: 'Specifies the folder to write the log to.',
+      );
   }
 
   @override
   void run() async {
     await initializeOnvif();
 
+    Directory? logFolder;
+
+    if (argResults?.options.contains('log-folder') ?? false) {
+      logFolder = Directory(argResults!['log-folder']);
+
+      if (!logFolder.existsSync()) {
+        throw UsageException(
+            '${argResults!['log-folder']} - folder not found', usage);
+      }
+    }
+
     try {
-      final systemLog =
-          await deviceManagement.getSystemLog(argResults!['type']);
+      final systemLog = await deviceManagement.getSystemLog(
+        argResults!['type'],
+        writeLogToFolder: logFolder,
+      );
 
       print(systemLog);
     } on DioException catch (err) {
@@ -560,13 +581,32 @@ class OnvifGetSystemSupportInformationDeviceManagementCommand
   @override
   String get name => 'get-system-support-information';
 
+  OnvifGetSystemSupportInformationDeviceManagementCommand() {
+    argParser.addOption(
+      'log-folder',
+      abbr: 'f',
+      help: 'Specifies the folder to write the log to.',
+    );
+  }
+
   @override
   void run() async {
     await initializeOnvif();
 
+    Directory? logFolder;
+
+    if (argResults?.options.contains('log-folder') ?? false) {
+      logFolder = Directory(argResults!['log-folder']);
+
+      if (!logFolder.existsSync()) {
+        throw UsageException(
+            '${argResults!['log-folder']} - folder not found', usage);
+      }
+    }
+
     try {
-      final systemInformation =
-          await deviceManagement.getSystemSupportInformation();
+      final systemInformation = await deviceManagement
+          .getSystemSupportInformation(writeLogToFolder: logFolder);
 
       print(systemInformation);
     } on DioException catch (err) {

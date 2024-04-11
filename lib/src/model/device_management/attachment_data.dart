@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'include.dart';
+
 part 'attachment_data.g.dart';
 
 /// The log information as attachment data.
@@ -12,12 +14,12 @@ class AttachmentData {
   final String? contentType;
 
   /// The log information as character data.
-  @JsonKey(name: 'Include', fromJson: OnvifUtil.mappedToString)
-  final String? string;
+  @JsonKey(name: 'Include')
+  final Include? include;
 
   AttachmentData({
     this.contentType,
-    required this.string,
+    this.include,
   });
 
   factory AttachmentData.fromJson(Map<String, dynamic> json) =>
