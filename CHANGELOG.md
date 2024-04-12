@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.1+1
+
+* advanced move
+
 ## 3.0.1
 
 * fancy ansi device debug tool

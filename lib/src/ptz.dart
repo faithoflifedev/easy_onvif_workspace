@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:easy_onvif/ptz.dart';
 import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/soap.dart' as soap;
@@ -443,23 +445,44 @@ class Ptz extends Operation {
       loggy.error('Attempting workaround with AbsoluteMove');
 
       final ptzStatus = await getStatus(profileToken);
-
       if (ptzStatus.position.panTilt != null) {
         panTilt = Vector2D(
-            x: ptzStatus.position.panTilt!.x + direction.x,
-            y: ptzStatus.position.panTilt!.y + direction.y);
+            x: _limitValue(
+              ptzStatus.position.panTilt!.x,
+              direction.x,
+              defaultPanTiltLimits?.range.xRange.min ?? -1,
+              defaultPanTiltLimits?.range.xRange.max ?? 1,
+            ),
+            y: _limitValue(
+              ptzStatus.position.panTilt!.y,
+              direction.y,
+              defaultPanTiltLimits?.range.yRange.min ?? -1,
+              defaultPanTiltLimits?.range.yRange.max ?? 1,
+            ));
       } else {
-        panTilt = Vector2D(x: 0, y: 0);
+        panTilt = Vector2D(
+          x: ptzStatus.position.panTilt!.x,
+          y: ptzStatus.position.panTilt!.y,
+        );
       }
 
       if (ptzStatus.position.zoom != null) {
-        zoomAdjust = Vector1D(x: ptzStatus.position.zoom!.x + zoomAdjust.x);
+        zoomAdjust = Vector1D(
+            x: _limitValue(
+          ptzStatus.position.zoom!.x,
+          zoomAdjust.x,
+          defaultZoomLimits?.range.xRange.min ?? 0,
+          defaultZoomLimits?.range.xRange.max ?? 1,
+        ));
       }
 
       await absoluteMove(profileToken,
           position: PtzVector(panTilt: panTilt, zoom: zoomAdjust));
     }
   }
+
+  double _limitValue(double start, double value, double min, double max) =>
+      value > 0 ? math.min(start + value, max) : math.max(start + value, min);
 
   /// A helper method to perform a single [step] of a [relativeMove] on the
   /// negative y axis (down)
