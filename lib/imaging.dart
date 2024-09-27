@@ -1,5 +1,5 @@
 /// imaging classes
-library imaging;
+library;
 
 export 'src/model/imaging/capabilities.dart';
 export 'src/model/imaging/focus_status_20.dart';

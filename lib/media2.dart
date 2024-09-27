@@ -1,5 +1,5 @@
 /// media 2 classes
-library media2;
+library;
 
 export 'src/model/media2/capabilities2.dart';
 export 'src/model/media2/codec.dart';

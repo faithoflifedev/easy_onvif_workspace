@@ -123,6 +123,12 @@ class DeviceManagementRequest {
         Xmlns.tds,
       );
 
+  /// XML for the [getIPAddressFilter]
+  static XmlDocumentFragment getIPAddressFilter() => Transport.quickTag(
+        'GetIPAddressFilter',
+        Xmlns.tds,
+      );
+
   /// XML for the [getServiceCapabilities]
   static XmlDocumentFragment getServiceCapabilities() => Transport.quickTag(
         'GetServiceCapabilities',
@@ -176,4 +182,21 @@ class DeviceManagementRequest {
         'GetGeoLocation',
         Xmlns.tds,
       );
+
+  /// XML for the [setIpAddressFilter]
+  static XmlDocumentFragment setIpAddressFilter({
+    required IpAddressFilter ipAddressFilter,
+  }) {
+    builder.element(
+      'SetIPAddressFilter',
+      namespace: Xmlns.trc,
+      nest: () => ipAddressFilter.buildXml(
+        builder,
+        tag: 'IPAddressFilter',
+        namespace: Xmlns.tds,
+      ),
+    );
+
+    return builder.buildFragment();
+  }
 }

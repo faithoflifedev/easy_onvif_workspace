@@ -1,5 +1,5 @@
 /// cli supporting classes
-library command;
+library;
 
 export 'src/cmd/onvif_authorize_command.dart';
 export 'src/cmd/onvif_debug_command.dart';

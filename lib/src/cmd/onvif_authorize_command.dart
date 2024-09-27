@@ -1,8 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:args/command_runner.dart';
 import 'package:easy_onvif/util.dart';
-import 'package:universal_io/io.dart';
 
 ///Generate a refresh token used to authenticate the command line API requests
 class OnvifAuthorizeCommand extends Command {

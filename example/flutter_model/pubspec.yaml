@@ -13,8 +13,8 @@ dependencies:
   collection: ^1.18.0
   easy_onvif:
     path: ../../
-  flutter_form_builder: ^9.1.1
-  form_builder_validators: ^9.1.0
+  flutter_form_builder: ^9.4.1
+  form_builder_validators: ^11.0.0
   flutter_loggy: ^2.0.2
   flutter_solidart: ^1.7.0
   getwidget: ^4.0.0
@@ -29,13 +29,12 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  flutter_lints: ^3.0.2
-  solidart_lint: ^1.1.0
+  flutter_lints: ^5.0.0
+  solidart_lint: ^1.1.2
 
 dependency_overrides:
-  intl: ^0.19.0
-# collection: ^1.16.0
-# meta: ^1.9.1
+  # intl: ^0.19.0
+  collection: ^1.19.0
 
 flutter:
   uses-material-design: true

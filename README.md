@@ -58,7 +58,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^3.0.1+1
+  easy_onvif: ^3.0.1+2
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -230,6 +230,7 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetDNS                      | getDNS                      | `Future<DnsInformation>`               | [x\] |
 | GetEndpointReference        | getEndpointReference        | `Future<Map<String, dynamic>>`         | [ \] |
 | GetHostname                 | getHostname                 | `Future<HostnameInformation>`          | [x\] |
+| GetIPAddressFilter          | getIPAddressFilter          | `Future<IpAddressFilter>`              | [ \] |
 | GetNetworkProtocols         | getNetworkProtocols         | `Future<List<NetworkProtocol>>`        | [x\] |
 | GetNTP                      | getNtp                      | `Future<NtpInformation>`               | [x\] |
 | GetServiceCapabilities      | getServiceCapabilities      | `Future<DeviceServiceCapabilities>`    | [x\] |

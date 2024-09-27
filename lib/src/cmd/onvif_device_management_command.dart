@@ -1,11 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:args/command_runner.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_onvif/command.dart';
 import 'package:easy_onvif/device_management.dart';
 import 'package:easy_onvif/util.dart';
-import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart';
 
 ///device management
@@ -24,6 +24,7 @@ class OnvifDeviceManagementCommand extends Command {
     addSubcommand(OnvifGetDeviceInformationResponseDeviceManagementCommand());
     addSubcommand(OnvifGetDnsDeviceManagementCommand());
     addSubcommand(OnvifGetHostnameDeviceManagementCommand());
+    addSubcommand(OnvifGetIPAddressFilterDeviceManagementCommand());
     addSubcommand(OnvifGetNetworkProtocolsDeviceManagementCommand());
     addSubcommand(OnvifGetNtpDeviceManagementCommand());
     addSubcommand(OnvifGetServiceCapabilitiesDeviceManagementCommand());
@@ -35,6 +36,7 @@ class OnvifDeviceManagementCommand extends Command {
     addSubcommand(OnvifGetSystemSupportInformationDeviceManagementCommand());
     addSubcommand(OnvifGetSystemUrisDeviceManagementCommand());
     addSubcommand(OnvifGetUsersDeviceManagementCommand());
+    addSubcommand(OnvifSetIPAddressFilterDeviceManagementCommand());
     addSubcommand(OnvifSystemRebootDeviceManagementCommand());
     // addSubcommand(OnvifGetGeoLocationDeviceManagementCommand());
     addSubcommand(OnvifGetEndpointReferenceDeviceManagementCommand());
@@ -311,6 +313,32 @@ class OnvifGetHostnameDeviceManagementCommand extends OnvifHelperCommand {
       final hostnameInformation = await deviceManagement.getHostname();
 
       print(hostnameInformation);
+    } on DioException catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// This operation gets the IP address filter settings from a device. If the
+/// device supports device access control based on IP filtering rules (denied or
+/// accepted ranges of IP addresses), the device shall support the GetIPAddressFilter command.
+class OnvifGetIPAddressFilterDeviceManagementCommand
+    extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'This operation gets the IP address filter settings from a device. If the device supports device access control based on IP filtering rules (denied or accepted ranges of IP addresses), the device shall support the GetIPAddressFilter command.';
+
+  @override
+  String get name => 'get-ipaddress-filter';
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final ipAddressFilter = await deviceManagement.getIPAddressFilter();
+
+      print(ipAddressFilter);
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -665,6 +693,62 @@ class OnvifGetUsersDeviceManagementCommand extends OnvifHelperCommand {
 
   @override
   String get name => 'get-users';
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final users = await deviceManagement.getUsers();
+
+      print(users);
+    } on DioException catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+/// This operation sets the IP address filter settings on a device. If the
+/// device supports device access control based on IP filtering rules (denied or
+/// accepted ranges of IP addresses), the device shall support configuration of
+/// IP filtering rules through the SetIPAddressFilter command.
+class OnvifSetIPAddressFilterDeviceManagementCommand
+    extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'This operation sets the IP address filter settings on a device. If the device supports device access control based on IP filtering rules (denied or accepted ranges of IP addresses), the device shall support configuration of IP filtering rules through the SetIPAddressFilter command.';
+
+  @override
+  String get name => 'set-ipaddress-filter';
+
+  OnvifSetIPAddressFilterDeviceManagementCommand() {
+    argParser
+      ..addOption(
+        'type',
+        abbr: 't',
+        defaultsTo: 'allow',
+        allowed: ['allow', 'deny'],
+        mandatory: true,
+      )
+      ..addOption(
+        'ipv4-address',
+        abbr: '4',
+        help: 'The IPv4 address to allow or deny',
+      )
+      ..addOption(
+        'ipv6-address',
+        abbr: '6',
+        help: 'The IPv6 address to allow or deny',
+      )
+      ..addOption(
+        'ipv4-prefix',
+        defaultsTo: '3',
+      )
+      ..addOption(
+        'ipv6-prefix',
+        defaultsTo: '3',
+      );
+  }
 
   @override
   void run() async {

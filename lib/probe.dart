@@ -1,5 +1,5 @@
 /// probe classes
-library probe;
+library;
 
 export 'src/model/probe/app_sequence.dart';
 export 'src/model/probe/endpoint_reference.dart';

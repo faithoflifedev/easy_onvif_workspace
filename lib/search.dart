@@ -1,5 +1,5 @@
 /// search classes
-library search;
+library;
 
 export 'src/model/search/find_recording_result.dart';
 export 'src/model/search/find_recordings_response.dart';

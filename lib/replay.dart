@@ -1,5 +1,5 @@
 /// replay classes
-library replay;
+library;
 
 export 'src/model/replay/capabilities.dart';
 export 'src/model/replay/get_replay_configuration_response.dart';

@@ -1,5 +1,5 @@
 /// classes shared by other libraries
-library shared;
+library;
 
 export 'src/model/common/audio_encoder_configuration.dart';
 export 'src/model/common/audio_source_configuration.dart';

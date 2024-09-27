@@ -1,9 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:args/command_runner.dart';
 import 'package:easy_onvif/onvif.dart';
 import 'package:easy_onvif/util.dart';
-import 'package:universal_io/io.dart';
 
 abstract class OnvifHelperCommand extends Command {
   Onvif? _onvif;

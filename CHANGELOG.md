@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.1+2
+
+* `Device Management`
+  * GetIPAddressFilter
+
 ## 3.0.1+1
 
 * advanced move

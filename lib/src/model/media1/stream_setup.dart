@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/soap.dart' show Xmlns;
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:xml/xml.dart';
 
@@ -44,9 +45,11 @@ class StreamSetup implements XmlSerializable {
       builder.element(tag, nest: () {
         builder.namespace(namespace!);
 
-        builder.element('Stream', nest: () {
-          builder.text(stream);
-        });
+        stream.buildXml(builder, tag: 'Stream');
+
+        // builder.element('Stream', nest: () {
+        //   builder.text(stream);
+        // });
 
         transport.buildXml(builder);
       });

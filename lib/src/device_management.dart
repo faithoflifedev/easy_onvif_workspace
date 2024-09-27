@@ -208,6 +208,27 @@ class DeviceManagement extends Operation with UiLoggy {
         .hostnameInformation;
   }
 
+  /// This operation gets the IP address filter settings from a device. If the
+  /// device supports device access control based on IP filtering rules (denied
+  /// or accepted ranges of IP addresses), the device shall support the
+  /// GetIPAddressFilter command.
+  Future<IpAddressFilter> getIPAddressFilter() async {
+    loggy.debug('GetIPAddressFilter');
+
+    final responseEnvelope = await transport.request(
+        uri,
+        soap.Body(
+          request: DeviceManagementRequest.getIPAddressFilter(),
+        ));
+
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
+    }
+
+    return GetIpAddressFilterResponse.fromJson(responseEnvelope.body.response!)
+        .ipAddressFilter;
+  }
+
   /// This operation gets defined network protocols from a device. The device
   /// shall support the [getNetworkProtocols] command returning configured
   /// network protocols.
@@ -556,6 +577,26 @@ class DeviceManagement extends Operation with UiLoggy {
 
     return responseEnvelope.body.response!;
   }
+
+  // Future<bool> setIpAddressFilter({
+  //   required IpAddressFilter ipAddressFilter,
+  // }) async {
+  //       loggy.debug('setIpAddressFilter');
+
+  //   final responseEnvelope = await transport.request(
+  //     uri,
+  //     soap.Body(
+  //       request: ipAddressFilter
+  //       ),
+  //     ),
+  //   );
+
+  //   if (responseEnvelope.body.hasFault) {
+  //     throw Exception(responseEnvelope.body.fault.toString());
+  //   }
+
+  //   return true;
+  // }
 
   String _parseMtom(
     Response<Uint8List> response, {

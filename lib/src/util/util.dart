@@ -83,33 +83,9 @@ class OnvifUtil {
     await fileStore.writeAsBytes(bytes);
   }
 
-  static LogOptions convertToLogOptions(String logLevel) {
-    var logOptions = const LogOptions(LogLevel.off);
-
-    switch (logLevel) {
-      case 'all':
-        logOptions = const LogOptions(LogLevel.all);
-        break;
-
-      case 'debug':
-        logOptions = const LogOptions(LogLevel.debug);
-        break;
-
-      case 'info':
-        logOptions = const LogOptions(LogLevel.info);
-        break;
-
-      case 'warning':
-        logOptions = const LogOptions(LogLevel.warning);
-        break;
-
-      case 'error':
-        logOptions = const LogOptions(LogLevel.error);
-        break;
-    }
-
-    return logOptions;
-  }
+  static LogOptions convertToLogOptions(String name) => LogOptions(
+      LogLevel.values.firstWhere((logLevel) => logLevel.name == name.trim(),
+          orElse: () => LogLevel.off));
 
   static String? get userHome =>
       Platform.environment['HOME'] ?? Platform.environment['USERPROFILE'];

@@ -1,5 +1,5 @@
 /// ptz classes
-library ptz;
+library;
 
 export 'src/model/ptz/capabilities.dart';
 export 'src/model/ptz/duration_range.dart';

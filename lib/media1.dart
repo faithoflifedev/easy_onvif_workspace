@@ -1,5 +1,5 @@
 /// media1 classes
-library media1;
+library;
 
 export 'src/model/media1/audio_source.dart';
 export 'src/model/media1/capabilities1.dart';

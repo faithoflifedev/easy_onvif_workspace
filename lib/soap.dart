@@ -1,5 +1,5 @@
 /// soap classes
-library soap;
+library;
 
 export 'src/soap/authorization.dart';
 export 'src/soap/device_management.dart';

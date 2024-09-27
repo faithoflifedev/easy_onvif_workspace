@@ -1,5 +1,5 @@
 /// utility classes
-library util;
+library;
 
 export 'src/util/extra.dart';
 export 'src/util/file_printer.dart';

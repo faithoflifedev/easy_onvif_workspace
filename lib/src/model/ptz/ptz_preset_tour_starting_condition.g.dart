@@ -11,7 +11,7 @@ PtzPresetTourStartingCondition _$PtzPresetTourStartingConditionFromJson(
     PtzPresetTourStartingCondition(
       randomPresetOrder: OnvifUtil.nullableMappedToBool(
           json['RandomPresetOrder'] as Map<String, dynamic>?),
-      recurringTime: json['RecurringTime'] as int?,
+      recurringTime: (json['RecurringTime'] as num?)?.toInt(),
       recurringDuration: json['RecurringDuration'] as String?,
       direction: PtzPresetTourStartingCondition._fix(
           json['Direction'] as Map<String, dynamic>?),

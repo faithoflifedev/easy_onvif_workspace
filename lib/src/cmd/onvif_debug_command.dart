@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:ansi_escapes/ansi_escapes.dart';
@@ -9,13 +10,11 @@ import 'package:cli_spin/cli_spin.dart';
 import 'package:easy_onvif/device_management.dart';
 import 'package:easy_onvif/media1.dart';
 import 'package:easy_onvif/media2.dart';
-// import 'package:cli_spin/cli_spin.dart';
 import 'package:easy_onvif/onvif.dart';
 import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:loggy/loggy.dart';
 import 'package:path/path.dart' as p;
-import 'package:universal_io/io.dart';
 import 'package:yaml/yaml.dart';
 
 /// Generate a refresh token used to authenticate the command line API requests

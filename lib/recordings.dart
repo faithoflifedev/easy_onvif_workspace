@@ -1,5 +1,5 @@
 /// recordings classes
-library recordings;
+library;
 
 export 'src/model/recordings/capabilities.dart';
 export 'src/model/recordings/create_recording_job_response.dart';
