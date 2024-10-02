@@ -1,14 +1,13 @@
-import 'package:args/command_runner.dart';
-import 'package:easy_onvif/command.dart';
-import 'package:easy_onvif/util.dart';
+import 'dart:io';
 
-import 'package:universal_io/io.dart';
+import 'package:args/command_runner.dart';
+
+import 'command.dart';
 
 void main(List<String> arguments) async {
   CommandRunner('onvif',
       'A command line interface for controlling Onvif compliant devices')
-    ..argParser
-        .addOption('config-file', defaultsTo: OnvifUtil.defaultConfigFile.path)
+    ..argParser.addOption('config-file', defaultsTo: defaultConfigFile.path)
     ..argParser.addOption('log-level',
         allowed: ['all', 'debug', 'info', 'warning', 'error', 'off'],
         defaultsTo: 'off')

@@ -1,9 +1,10 @@
 import 'package:args/command_runner.dart';
 import 'package:dio/dio.dart';
-import 'package:easy_onvif/command.dart';
 import 'package:easy_onvif/ptz.dart';
 import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/util.dart';
+
+import 'onvif_helper_command.dart';
 
 class OnvifPtzCommand extends Command {
   @override

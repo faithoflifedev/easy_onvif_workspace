@@ -1,5 +1,6 @@
+import 'dart:io';
+
 import 'package:loggy/loggy.dart';
-import 'package:universal_io/io.dart';
 
 class FilePrinter extends LoggyPrinter {
   final String filePath;

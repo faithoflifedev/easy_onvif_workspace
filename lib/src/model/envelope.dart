@@ -2,7 +2,6 @@ import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/soap.dart' show Xmlns;
 import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:universal_io/io.dart';
 import 'package:xml/xml.dart';
 
 import 'body.dart';
@@ -25,9 +24,6 @@ class Envelope implements XmlSerializable {
 
   factory Envelope.fromXmlString(String xml) =>
       Envelope.fromJson(OnvifUtil.xmlToMap(xml));
-
-  factory Envelope.fromXmlFile(String fileNameAndPath) =>
-      Envelope.fromXmlString(File(fileNameAndPath).readAsStringSync());
 
   @override
   void buildXml(

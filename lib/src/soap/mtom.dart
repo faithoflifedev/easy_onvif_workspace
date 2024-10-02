@@ -1,16 +1,16 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:universal_io/io.dart';
+import 'package:http_parser/http_parser.dart';
 
 class MtomPart {
-  final ContentType contentType;
+  final MediaType mediaType;
   final String contentTransferEncoding;
   final String contentId;
   final Uint8List content;
 
   MtomPart({
-    required this.contentType,
+    required this.mediaType,
     required this.contentTransferEncoding,
     required this.contentId,
     required this.content,
@@ -57,14 +57,14 @@ class Mtom {
   }
 
   static MtomPart _parsePart(Uint8List part) {
-    final contentType = ContentType.parse(_parseHeader('Content-Type', part));
+    final mediaType = MediaType.parse(_parseHeader('Content-Type', part));
     final contentTransferEncoding =
         _parseHeader('Content-Transfer-Encoding', part);
     final contentId = _parseHeader('Content-ID', part);
     final content = _parseContent(part);
 
     return MtomPart(
-      contentType: contentType,
+      mediaType: mediaType,
       contentTransferEncoding: contentTransferEncoding,
       contentId: contentId,
       content: content,

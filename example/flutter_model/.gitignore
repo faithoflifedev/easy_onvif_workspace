@@ -30,7 +30,7 @@
 .pub-cache/
 .pub/
 /build/
-/lib/src/
+# /lib/src/
 
 # Web related
 lib/generated_plugin_registrant.dart
@@ -48,3 +48,6 @@ app.*.map.json
 /android/app/release
 
 **/config.yaml
+
+web/
+windows/

@@ -1,4 +1,3 @@
-import 'package:easy_onvif/onvif.dart';
 import 'package:easy_onvif/probe.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

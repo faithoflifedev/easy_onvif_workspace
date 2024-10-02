@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:loggy/loggy.dart';
-import 'package:universal_io/io.dart';
 
 import 'endpoint_reference.dart';
 
@@ -44,7 +43,7 @@ class ProbeMatch with UiLoggy {
 
   String get hardware => _hardware ?? '';
 
-  InternetAddress get internetAddress => InternetAddress(Uri.parse(xAddr).host);
+  // InternetAddress get internetAddress => InternetAddress(Uri.parse(xAddr).host);
 
   List<String> get profiles => _profiles;
 

@@ -1,7 +1,8 @@
 import 'package:easy_onvif/media1.dart';
 import 'package:easy_onvif/shared.dart';
-import 'package:easy_onvif/src/model/envelope.dart';
 import 'package:test/test.dart';
+
+import 'envelope.dart';
 
 void main() {
   group('Media1', () {

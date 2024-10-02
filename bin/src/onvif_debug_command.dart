@@ -12,10 +12,12 @@ import 'package:easy_onvif/media1.dart';
 import 'package:easy_onvif/media2.dart';
 import 'package:easy_onvif/onvif.dart';
 import 'package:easy_onvif/shared.dart';
-import 'package:easy_onvif/util.dart';
 import 'package:loggy/loggy.dart';
 import 'package:path/path.dart' as p;
 import 'package:yaml/yaml.dart';
+
+import '../command.dart';
+import 'util/file_printer.dart';
 
 /// Generate a refresh token used to authenticate the command line API requests
 class OnvifDebugCommand extends Command with UiLoggy {
@@ -107,7 +109,7 @@ class OnvifDebugCommand extends Command with UiLoggy {
 
     final zipFile = File(p.join(folderName, 'debug.zip'));
 
-    final config = loadYaml(OnvifUtil.defaultConfigFile.readAsStringSync());
+    final config = loadYaml(defaultConfigFile.readAsStringSync());
 
     // configure device connection
     final onvif = await Onvif.connect(

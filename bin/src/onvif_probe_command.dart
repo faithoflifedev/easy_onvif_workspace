@@ -2,13 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
-import 'package:easy_onvif/command.dart';
-import 'package:easy_onvif/src/multicast_probe.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:loggy/loggy.dart';
+import 'package:easy_onvif/probe.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as io;
 import 'package:shelf_router/shelf_router.dart';
+
+import '../command.dart';
 
 class OnvifProbeCommand extends Command {
   @override

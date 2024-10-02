@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:args/command_runner.dart';
 import 'package:dio/dio.dart';
-import 'package:easy_onvif/command.dart';
 import 'package:easy_onvif/media1.dart';
 import 'package:easy_onvif/util.dart';
+
+import 'onvif_helper_command.dart';
 
 class OnvifMedia1Command extends Command {
   @override

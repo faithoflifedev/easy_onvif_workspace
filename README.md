@@ -4,50 +4,48 @@
 <img src="https://github.com/faithoflifedev/easy_onvif/blob/main/logo/easy_onvif_logo_640.png?raw=true" width="200" />
 </p>
 
+[![Pub Package](https://img.shields.io/pub/v/easy_onvif.svg)](https://pub.dev/packages/easy_onvif)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/faithoflifedev/easy_onvif/blob/main/LICENSE)
+
 This package works with a variety of ONVIF compatible devices allowing for IP Cameras and NVRs (network video recorders) to be integrated into Dart and Flutter applications.  The package includes the ability to control the PTZ (pan-tilt-zoom) movements of a device along with managing presets as well as controlling how video and audio is being streamed from the device.  Review the documentation below to get more details on available features.
 
-[![pub package](https://img.shields.io/pub/v/easy_onvif.svg)](https://pub.dartlang.org/packages/easy_onvif)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## Table of contents
+- [Getting Started](#getting-started)
+  - [Dependency](#dependency)
+  - [Usage Example](#usage-example)
+  - [Interacting with a device through Onvif operations](#interacting-with-a-device-through-onvif-operations)
+- [Lower level requests](#lower-level-requests)
+- [Onvif cli (Onvif at the command prompt)](#onvif-cli-onvif-at-the-command-prompt)
+- [Supported Onvif Operations](#supported-onvif-operations)
+  - [Device Management](#device-management)
+  - [Imaging](#imaging)
+  - [Media 10](#media-10)
+  - [Media 20](#media-20)
+  - [PTZ](#ptz)
+  - [PTZ Helper Methods](#ptz-helper-methods)
+  - [Recording](#recording)
+  - [Replay](#replay)
+  - [Search](#search)
+- [Tested Onvif Devices](#tested-onvif-devices)
+- [New for version 3.1.0](#new-for-version-310)
+- [New for version 3.0.0-dev.0](#new-for-version-300-dev0)
+- [New for version 2.2.x](#new-for-version-22x)
+- [Onvif specifications and documentation](#onvif-specifications-and-documentation)
+- [Features and bugs](#features-and-bugs)
+- [Possible unexpected behavior](#possible-unexpected-behavior)
+- [Known Issues](#known-issues)
+  - [Issue #45](#issue-45)
+- [Breaking changes](#breaking-changes)
+  - [v3.1.0](#v310)
+  - [v3.0.0-dev.0](#v300-dev0)
+  - [v2.3.0](#v230)
+- [Contributors](#contributors)
+- [Contributing](#contributing)
 
-[![Buy me a coffee](https://github.com/faithoflifedev/easy_onvif/blob/main/logo/buy_me_a_coffee.svg?raw=true)](https://www.buymeacoffee.com/faithoflif2)
 
 [![Build Status](https://github.com/faithoflifedev/easy_onvif/workflows/Dart/badge.svg)](https://github.com/faithoflifedev/easy_onvif/actions) [![github last commit](https://shields.io/github/last-commit/faithoflifedev/easy_onvif)](https://shields.io/github/last-commit/faithoflifedev/easy_onvif) [![github build](https://img.shields.io/github/actions/workflow/status/faithoflifedev/easy_onvif/dart.yml?branch=main)](https://shields.io/github/workflow/status/faithoflifedev/easy_onvif/Dart) [![github issues](https://shields.io/github/issues/faithoflifedev/easy_onvif)](https://shields.io/github/issues/faithoflifedev/easy_onvif)
 
-## Table of contents
-
-- [Dart Implementation of ONVIF IP Camera Client](#dart-implementation-of-onvif-ip-camera-client)
-  - [Table of contents](#table-of-contents)
-  - [Getting Started](#getting-started)
-    - [Dependency](#dependency)
-    - [Usage Example](#usage-example)
-    - [Interacting with a device through Onvif operations](#interacting-with-a-device-through-onvif-operations)
-  - [Lower level requests](#lower-level-requests)
-  - [Onvif cli (Onvif at the command prompt)](#onvif-cli-onvif-at-the-command-prompt)
-  - [Supported Onvif Operations](#supported-onvif-operations)
-    - [Device Management](#device-management)
-    - [Imaging](#imaging)
-    - [Media 10](#media-10)
-    - [Media 20](#media-20)
-    - [PTZ](#ptz)
-    - [PTZ Helper Methods](#ptz-helper-methods)
-    - [Recording](#recording)
-    - [Replay](#replay)
-    - [Search](#search)
-  - [Tested Onvif Devices](#tested-onvif-devices)
-  - [New for version 3.0.0-dev.0](#new-for-version-300-dev0)
-  - [New for version 2.2.x](#new-for-version-22x)
-  - [New for version 2.1.x](#new-for-version-21x)
-  - [Onvif specifications and documentation](#onvif-specifications-and-documentation)
-  - [Features and bugs](#features-and-bugs)
-  - [Possible unexpected behavior](#possible-unexpected-behavior)
-  - [Known Issues](#known-issues)
-    - [Issue #45](#issue-45)
-  - [Breaking changes](#breaking-changes)
-    - [v3.0.0-dev.0](#v300-dev0)
-    - [v2.3.0](#v230)
-    - [v2.1.0](#v210)
-  - [Contributors](#contributors)
-  - [Contributing](#contributing)
+[![Buy me a coffee](https://github.com/faithoflifedev/easy_onvif/blob/main/logo/buy_me_a_coffee.svg?raw=true)](https://www.buymeacoffee.com/faithoflif2)
 
 ## Getting Started
 
@@ -58,7 +56,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^3.0.1+2
+  easy_onvif: ^3.1.0
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -450,6 +448,9 @@ The values returned by the Onvif API `GetDeviceInformation` call.
   * `RelativeMove` - work-around available with the `move` helper
   * `SetHomePosition`
   
+## New for version 3.1.0
+
+See the [Breaking changes](#breaking-changes) section.
 
 ## New for version 3.0.0-dev.0
 
@@ -458,28 +459,6 @@ Bug fixes for a number of small bugs that got introduced through adding some exp
 ## New for version 2.2.x
 
 A new `cli` command has been added that will hopefully ease in debugging issues with this library when it comes to the vast variety of Onvif devices that are out in the wild.  Once the `cli` utility has been installed and authorized per the [quick start instructions](https://github.com/faithoflifedev/easy_onvif/blob/main/bin/README.md#quick-start), the command `onvif debug` will create a debug folder with a `debug.txt` and `debug.zip` that can be added to an [issue](https://github.com/faithoflifedev/easy_onvif/issues) to help to debug and resolve that issue.
-
-
-## New for version 2.1.x
-
-* Support for __Media2__ Onvif operations
-* Support for __Recording__ Onvif operations (experimental)
-* Support for __Replay__ Onvif operations (experimental)
-
-```dart
-// defaults to `MixedProfile` a special case object that has the fields for both 
-// a media1 `Profile` and a media2 `MediaProfile`.
-var profiles = await onvif.media.getProfiles();
-
-// determine the media level supported
-print(onvif.media.mediaSupportLevel.name);
-
-// alternatively, make an explicit call to the Media1 operation
-var profiles1 = await onvif.media.media1.getProfiles();
-
-// or, make an explicit call to the Media2 operation
-var profiles2 = await onvif.media.media2.getProfiles();
-```
 
 ## Onvif specifications and documentation
 
@@ -518,6 +497,19 @@ The `discovery.dll` file can be found in the [bin](https://github.com/faithoflif
 
 ## Breaking changes
 
+### v3.1.0
+
+This version adds `web` platform support to the package.  To accomplish this any dependencies on `dart:io` had to be removed from the main package.  In most cases this was appropriate since the file operations typically were used by the supplied `cli` utility, so the code was moved there.  However there are some cases like Onvif device system logs that work best with files so the API signatures for these have changed.
+
+In addition, it's important to keep in mind that when code operates within a browser there are typically security restrictions in place, so you've now been warned that your milage may vary when you attempt to use this package on the web platform.  To get the most out of the included sample app you can run it with the following command:
+
+```sh
+flutter run -d chrome --web-browser-flag "--disable-web-security" --web-renderer html
+```
+
+Which disables chrome's security and allows it to make the networking call necessary to connect with an Onvif device.  If anyone knows of a better method to achieve this, please open an [issue](https://github.com/faithoflifedev/easy_onvif/issues) and let me know.  Also keep in mind that the browser may limit access to things like snapshot images from the device due to security restrictions.
+
+
 ### v3.0.0-dev.0
 
 There have been extensive code revisions to help with the long term maintenance of the package.  As part of this a number of method signatures have changed as well as some of the objects in the object model have been renamed.  For the most part these changes are in the lower level interfaces within the package and should not affect too many users.
@@ -525,10 +517,6 @@ There have been extensive code revisions to help with the long term maintenance 
 ### v2.3.0
 
 For this release a number of `Common` classes where given name changes to better reflect the Onvif spec.  Since these classes are used fairly deep in the API it's unlikely that if will affect many users.  In addition in the current release these changes are limits to the `PTZ` module, so if the changes cause issue, it would only be in this section of the code.
-
-### v2.1.0
-
-There is probably a number of breaking changes in this version since some method signatures have changed.  Since a large portion of the code base was rebuilt from scratch tracking all the changes wasn't a priority.  Sorry for any inconvenience.
 
 ## Contributors
 

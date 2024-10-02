@@ -1,9 +1,11 @@
 import 'package:args/command_runner.dart';
 import 'package:dio/dio.dart' show DioException;
-import 'package:easy_onvif/command.dart';
+
 import 'package:easy_onvif/media1.dart' show StreamSetup, Transport;
 import 'package:easy_onvif/replay.dart';
 import 'package:easy_onvif/util.dart';
+
+import 'onvif_helper_command.dart';
 
 /// replay
 class OnvifReplayCommand extends Command {

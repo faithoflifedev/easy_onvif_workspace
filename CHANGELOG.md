@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.0
+
+* web platform compatibility
+
 ## 3.0.1+2
 
 * `Device Management`

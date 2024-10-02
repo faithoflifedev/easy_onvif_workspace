@@ -1,13 +1,9 @@
 import 'dart:async';
-import 'dart:typed_data';
 
-import 'package:dio/dio.dart';
 import 'package:easy_onvif/device_management.dart';
 import 'package:easy_onvif/soap.dart' as soap;
-import 'package:easy_onvif/src/soap/mtom.dart';
-import 'package:easy_onvif/src/soap/transport.dart';
 import 'package:loggy/loggy.dart';
-import 'package:universal_io/io.dart';
+// import 'package:universal_io/io.dart';
 
 import 'operation.dart';
 
@@ -395,7 +391,7 @@ class DeviceManagement extends Operation with UiLoggy {
   /// Access Class: READ_SYSTEM_SECRET
   Future<SystemInformation> getSystemLog(
     String logType, {
-    Directory? writeLogToFolder,
+    String? writeLogToFolder,
   }) async {
     loggy.debug('getSystemLog');
 
@@ -403,14 +399,14 @@ class DeviceManagement extends Operation with UiLoggy {
         .getSecuredEnvelope(soap.Body(
           request: DeviceManagementRequest.getSystemLog(logType),
         ))
-        .toXml(Transport.builder);
+        .toXml(soap.Transport.builder);
 
     final response = await transport.sendLogRequest(
       uri,
       securedXml,
     );
 
-    String xmlString = _parseMtom(response, writeLogToFolder: writeLogToFolder);
+    String xmlString = parseMtom(response, writeLogToFolder: writeLogToFolder);
 
     loggy.debug('\ngetSystemLog - RESPONSE:\n$xmlString');
 
@@ -429,7 +425,7 @@ class DeviceManagement extends Operation with UiLoggy {
   ///
   /// Access Class: READ_SYSTEM_SECRET
   Future<SystemInformation> getSystemSupportInformation({
-    Directory? writeLogToFolder,
+    String? writeLogToFolder,
   }) async {
     loggy.debug('getSystemSupportInformation');
 
@@ -437,14 +433,14 @@ class DeviceManagement extends Operation with UiLoggy {
         .getSecuredEnvelope(soap.Body(
           request: DeviceManagementRequest.getSystemSupportInformation(),
         ))
-        .toXml(Transport.builder);
+        .toXml(soap.Transport.builder);
 
     final response = await transport.sendLogRequest(
       uri,
       securedXml,
     );
 
-    String xmlString = _parseMtom(response, writeLogToFolder: writeLogToFolder);
+    String xmlString = parseMtom(response, writeLogToFolder: writeLogToFolder);
 
     loggy.debug('\ngetSystemLog - RESPONSE:\n$xmlString');
 
@@ -598,64 +594,18 @@ class DeviceManagement extends Operation with UiLoggy {
   //   return true;
   // }
 
-  String _parseMtom(
-    Response<Uint8List> response, {
-    Directory? writeLogToFolder,
-  }) {
-    final headerMap = response.headers.map;
-
-    String? xmlString;
-
-    if (headerMap.containsKey('content-type')) {
-      final contentType =
-          ContentType.parse(headerMap['content-type']!.first).parameters;
-
-      if (contentType['boundary'] == null) throw Exception('No boundary found');
-
-      final parts = Mtom.parse(
-        boundary: contentType['boundary']!,
-        response: response.data!,
-      );
-
-      for (var part in parts) {
-        if (part.contentType.mimeType == 'application/xop+xml' &&
-            part.contentType.parameters.containsValue('application/soap+xml')) {
-          xmlString = part.contentAsString;
-        }
-
-        if (part.contentType.mimeType == '/' && writeLogToFolder != null) {
-          final fileName = part.contentId.split('/').last.replaceAll('>', '');
-
-          var zipFile = File('${writeLogToFolder.path}/$fileName');
-
-          var counter = 0;
-
-          while (zipFile.existsSync()) {
-            counter++;
-
-            zipFile = File('${writeLogToFolder.path}/${counter}_$fileName');
-          }
-
-          zipFile.writeAsBytesSync(part.content);
-        }
-      }
-    }
-
-    return xmlString ??= String.fromCharCodes(response.data!);
-  }
-
   // Future<void> getLogOutput() async {
-  // //   // Future<GetEndpointReferenceResponse> getEndpointReference() async {
-  // //   final envelope = await Soap.retrieveEnvelope(
-  // //       uri, onvif.secureRequest(Transport.endpointReference()),
-  // //       postProcess: (String xmlBody, dynamic jsonMap, Envelope envelope) {
-  // //     print(xmlBody);
-  // //     print('\n\n');
-  // //     print(jsonMap);
-  // //   });
+  //  Future<GetEndpointReferenceResponse> getEndpointReference() async {
+  //   final envelope = await Soap.retrieveEnvelope(
+  //       uri, onvif.secureRequest(Transport.endpointReference()),
+  //       postProcess: (String xmlBody, dynamic jsonMap, Envelope envelope) {
+  //     print(xmlBody);
+  //     print('\n\n');
+  //     print(jsonMap);
+  //   });
 
-  // //   // if (envelope.body.endpointReferenceResponse == null) throw Exception();
+  //   if (envelope.body.endpointReferenceResponse == null) throw Exception();
 
-  // //   // return envelope.body.deviceInformationResponse!;
-  // // }
+  //   return envelope.body.deviceInformationResponse!;
+  // }
 }

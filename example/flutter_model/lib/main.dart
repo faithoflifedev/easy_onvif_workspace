@@ -171,10 +171,10 @@ class _MyHomePageState extends State<MyHomePage> with UiLoggy {
                       firmwareVersion,
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        'Snapshot:',
+                        'Snapshot: ${snapshotUri ?? 'Not available'}',
                       ),
                     ),
                     url != ''

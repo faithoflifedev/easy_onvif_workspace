@@ -3,10 +3,11 @@ import 'dart:io';
 
 import 'package:args/command_runner.dart';
 import 'package:dio/dio.dart';
-import 'package:easy_onvif/command.dart';
 import 'package:easy_onvif/device_management.dart';
 import 'package:easy_onvif/util.dart';
 import 'package:yaml/yaml.dart';
+
+import 'onvif_helper_command.dart';
 
 ///device management
 class OnvifDeviceManagementCommand extends Command {
@@ -588,7 +589,7 @@ class OnvifGetSystemLogDeviceManagementCommand extends OnvifHelperCommand {
     try {
       final systemLog = await deviceManagement.getSystemLog(
         argResults!['type'],
-        writeLogToFolder: logFolder,
+        writeLogToFolder: logFolder?.path,
       );
 
       print(systemLog);
@@ -621,12 +622,12 @@ class OnvifGetSystemSupportInformationDeviceManagementCommand
   void run() async {
     await initializeOnvif();
 
-    Directory? logFolder;
+    String? logFolder;
 
     if (argResults?.options.contains('log-folder') ?? false) {
-      logFolder = Directory(argResults!['log-folder']);
+      logFolder = argResults!['log-folder'];
 
-      if (!logFolder.existsSync()) {
+      if (!Directory(logFolder!).existsSync()) {
         throw UsageException(
             '${argResults!['log-folder']} - folder not found', usage);
       }
@@ -728,7 +729,6 @@ class OnvifSetIPAddressFilterDeviceManagementCommand
         abbr: 't',
         defaultsTo: 'allow',
         allowed: ['allow', 'deny'],
-        mandatory: true,
       )
       ..addOption(
         'ipv4-address',

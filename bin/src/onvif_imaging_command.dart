@@ -1,7 +1,8 @@
 import 'package:args/command_runner.dart';
 import 'package:dio/dio.dart';
-import 'package:easy_onvif/command.dart';
 import 'package:easy_onvif/util.dart';
+
+import 'onvif_helper_command.dart';
 
 class OnvifImagingCommand extends Command {
   @override

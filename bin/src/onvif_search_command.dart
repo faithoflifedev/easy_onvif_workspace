@@ -1,9 +1,10 @@
 import 'package:args/command_runner.dart';
 import 'package:dio/dio.dart' show DioException;
-import 'package:easy_onvif/command.dart';
 import 'package:easy_onvif/recordings.dart' show SourceToken;
 import 'package:easy_onvif/search.dart';
 import 'package:easy_onvif/util.dart';
+
+import 'onvif_helper_command.dart';
 
 class OnvifSearchCommand extends Command {
   @override

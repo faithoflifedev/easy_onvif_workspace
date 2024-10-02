@@ -56,3 +56,5 @@ export 'src/model/device_management/time_zone.dart';
 export 'src/model/device_management/time.dart';
 export 'src/model/device_management/user.dart';
 export 'src/model/device_management/version.dart';
+
+export 'src/platform/parse_mtom.dart';

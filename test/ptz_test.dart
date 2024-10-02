@@ -1,6 +1,7 @@
 import 'package:easy_onvif/ptz.dart';
-import 'package:easy_onvif/src/model/envelope.dart';
 import 'package:test/test.dart';
+
+import 'envelope.dart';
 
 void main() {
   group("PTZ", () {

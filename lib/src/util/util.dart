@@ -4,11 +4,10 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/src/model/media_uri.dart';
+import 'package:easy_onvif/util.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:intl/intl.dart';
 import 'package:loggy/loggy.dart';
-import 'package:path/path.dart' as p;
-import 'package:universal_io/io.dart';
 import 'package:xml/xml.dart';
 import 'package:xml2json/xml2json.dart';
 
@@ -75,24 +74,12 @@ class OnvifUtil {
     return base64.encode(bytes.toList());
   }
 
-  static Future<void> takeSnapshotFile(String username, String password,
-      {required MediaUri snapshotUri, required File fileStore}) async {
-    final bytes = await OnvifUtil.takeSnapshot(username, password,
-        snapshotUri: snapshotUri);
-
-    await fileStore.writeAsBytes(bytes);
-  }
-
   static LogOptions convertToLogOptions(String name) => LogOptions(
       LogLevel.values.firstWhere((logLevel) => logLevel.name == name.trim(),
           orElse: () => LogLevel.off));
 
   static String? get userHome =>
-      Platform.environment['HOME'] ?? Platform.environment['USERPROFILE'];
-
-  static File get defaultConfigFile => OnvifUtil.userHome != null
-      ? File(p.join(OnvifUtil.userHome!, '.onvif/credentials.json'))
-      : throw Exception('User home directory not found');
+      getEnvironmentVariable('HOME') ?? getEnvironmentVariable('USERPROFILE');
 
   static bool stringToBool(String value) => value.toLowerCase() == 'true';
 

@@ -1,7 +1,8 @@
 import 'package:easy_onvif/device_management.dart';
-import 'package:easy_onvif/src/model/envelope.dart';
 import 'package:easy_onvif/src/model/fault.dart';
 import 'package:test/test.dart';
+
+import 'envelope.dart';
 
 void main() {
   group('Device Management', () {
