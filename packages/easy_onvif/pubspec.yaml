@@ -1,7 +1,7 @@
 name: easy_onvif
 version: 3.1.0
 homepage: https://github.com/faithoflifedev/packacges/easy_onvif
-description: A pure Dart library designed primarily for command line automation of Onvif compatible devices, but can be used anywhere Dart is used.
+description: This package can work with a variety of ONVIF compatible devices allowing for IP Cameras and NVRs (network video recorders) to be integrated into Dart and Flutter applications.
 repository: https://github.com/faithoflifedev/easy_onvif_workspace
 
 funding:
