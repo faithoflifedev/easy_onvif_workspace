@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
-import 'package:onvif_cli/command.dart';
+import 'package:easy_onvif_cli/command.dart';
 
 void main(List<String> arguments) async {
   CommandRunner('onvif',

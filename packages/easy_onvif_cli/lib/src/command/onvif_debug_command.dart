@@ -13,7 +13,7 @@ import 'package:easy_onvif/media2.dart';
 import 'package:easy_onvif/onvif.dart';
 import 'package:easy_onvif/shared.dart';
 import 'package:loggy/loggy.dart';
-import 'package:onvif_cli/command.dart';
+import 'package:easy_onvif_cli/command.dart';
 import 'package:path/path.dart' as p;
 import 'package:yaml/yaml.dart';
 
