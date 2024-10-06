@@ -155,7 +155,7 @@ Available commands:
 | [media2](#media2) | Onvif media ver20 commands, [spec](https://www.onvif.org/ver20/media/wsdl/media.wsdl) |
 | probe | Probe/device discovery command | 
 | [ptz](#ptz)|Onvif PTZ commands, [spec](https://www.onvif.org/ver20/ptz/wsdl/ptz.wsdl) |
-| [recordings](#recordings) | Recordings commands, [spec]((https://www.onvif.org/ver10/recording.wsdl)) | 
+| [recordings](#recordings) | Recordings commands, [spec](https://www.onvif.org/ver10/recording.wsdl) | 
 | [replay](#replay) | Replay commands, [spec](https://www.onvif.org/ver10/replay.wsdl)| 
 |version|Display the package name and version. |
 
