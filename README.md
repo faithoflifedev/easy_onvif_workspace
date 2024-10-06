@@ -1,7 +1,7 @@
 # Dart Implementation of ONVIF IP Camera Client
 
 <p align="center" width="100%">
-<img src="https://github.com/faithoflifedev/easy_onvif/blob/main/logo/easy_onvif_logo_640.png?raw=true" width="200" />
+<img src="https://github.com/faithoflifedev/easy_onvif_workspace/blob/main/logo/easy_onvif_logo_640.png?raw=true" width="200" />
 </p>
 
 This is the repository for two related Dart packages:
