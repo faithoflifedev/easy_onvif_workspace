@@ -1,0 +1,13 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Space1D _$Space1DFromJson(Map<String, dynamic> json) => Space1D(
+      uri: OnvifUtil.mappedToString(json['URI'] as Map<String, dynamic>),
+      xRange: FloatRange.fromJson(json['XRange'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$Space1DToJson(Space1D instance) => <String, dynamic>{
+      'URI': instance.uri,
+      'XRange': instance.xRange,
+    };

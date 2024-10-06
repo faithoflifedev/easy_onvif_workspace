@@ -1,0 +1,13 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+PrefixedIpAddress _$PrefixedIpAddressFromJson(Map<String, dynamic> json) =>
+    PrefixedIpAddress(
+      prefixLength: (json['PrefixLength'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$PrefixedIpAddressToJson(PrefixedIpAddress instance) =>
+    <String, dynamic>{
+      'PrefixLength': instance.prefixLength,
+    };

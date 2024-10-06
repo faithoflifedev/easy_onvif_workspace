@@ -1,0 +1,19 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+GetVideoEncoderConfigurationsResponse
+    _$GetVideoEncoderConfigurationsResponseFromJson(
+            Map<String, dynamic> json) =>
+        GetVideoEncoderConfigurationsResponse(
+          configurations: (json['Configurations'] as List<dynamic>)
+              .map((e) => VideoEncoder2Configuration.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
+        );
+
+Map<String, dynamic> _$GetVideoEncoderConfigurationsResponseToJson(
+        GetVideoEncoderConfigurationsResponse instance) =>
+    <String, dynamic>{
+      'Configurations': instance.configurations,
+    };

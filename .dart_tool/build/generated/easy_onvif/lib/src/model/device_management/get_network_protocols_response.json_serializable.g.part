@@ -1,0 +1,15 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+GetNetworkProtocolsResponse _$GetNetworkProtocolsResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetNetworkProtocolsResponse(
+      GetNetworkProtocolsResponse._fromJson(json['NetworkProtocols']),
+    );
+
+Map<String, dynamic> _$GetNetworkProtocolsResponseToJson(
+        GetNetworkProtocolsResponse instance) =>
+    <String, dynamic>{
+      'NetworkProtocols': instance.networkProtocols,
+    };

@@ -1,0 +1,16 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+GetConfigurationsResponse _$GetConfigurationsResponseFromJson(
+        Map<String, dynamic> json) =>
+    GetConfigurationsResponse(
+      ptzConfigurations:
+          Ptz.ptzConfigurationConverter(json['PTZConfiguration']),
+    );
+
+Map<String, dynamic> _$GetConfigurationsResponseToJson(
+        GetConfigurationsResponse instance) =>
+    <String, dynamic>{
+      'PTZConfiguration': instance.ptzConfigurations,
+    };

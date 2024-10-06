@@ -1,0 +1,27 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+AudioEncoderConfiguration _$AudioEncoderConfigurationFromJson(
+        Map<String, dynamic> json) =>
+    AudioEncoderConfiguration(
+      OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
+      OnvifUtil.mappedToString(json['Encoding'] as Map<String, dynamic>),
+      OnvifUtil.mappedToInt(json['Bitrate'] as Map<String, dynamic>),
+      OnvifUtil.mappedToInt(json['SampleRate'] as Map<String, dynamic>),
+      OnvifUtil.emptyMapToNull(json['Multicast'] as Map<String, dynamic>?),
+      OnvifUtil.mappedToString(json['SessionTimeout'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$AudioEncoderConfigurationToJson(
+        AudioEncoderConfiguration instance) =>
+    <String, dynamic>{
+      'Name': instance.name,
+      'UseCount': instance.useCount,
+      'Encoding': instance.encodingType,
+      'Bitrate': instance.bitRate,
+      'SampleRate': instance.sampleRate,
+      'Multicast': instance.multiCast,
+      'SessionTimeout': instance.sessionTimeout,
+    };

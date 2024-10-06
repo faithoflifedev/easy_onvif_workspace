@@ -1,0 +1,20 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+RecordingJobStateSource _$RecordingJobStateSourceFromJson(
+        Map<String, dynamic> json) =>
+    RecordingJobStateSource(
+      sourceToken:
+          SourceToken.fromJson(json['SourceToken'] as Map<String, dynamic>),
+      state: OnvifUtil.mappedToString(json['State'] as Map<String, dynamic>),
+      tracks: Tracks.fromJson(json['Tracks'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$RecordingJobStateSourceToJson(
+        RecordingJobStateSource instance) =>
+    <String, dynamic>{
+      'SourceToken': instance.sourceToken,
+      'State': instance.state,
+      'Tracks': instance.tracks,
+    };
