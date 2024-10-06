@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+	xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+	xmlns:wsa5="http://www.w3.org/2005/08/addressing"
+	xmlns:xmime5="http://www.w3.org/2005/05/xmlmime"
+	xmlns:xop="http://www.w3.org/2004/08/xop/include"
+	xmlns:tt="http://www.onvif.org/ver10/schema"
+	xmlns:tds="http://www.onvif.org/ver10/device/wsdl"
+	xmlns:tptz="http://www.onvif.org/ver20/ptz/wsdl"
+	xmlns:tev="http://www.onvif.org/ver10/events/wsdl"
+	xmlns:wsnt="http://docs.oasis-open.org/wsn/b-2"
+	xmlns:trt="http://www.onvif.org/ver10/media/wsdl"
+	xmlns:timg="http://www.onvif.org/ver20/imaging/wsdl"
+	xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:ter="http://www.onvif.org/ver10/error"
+	xmlns:tns1="http://www.onvif.org/ver10/topics"
+	xmlns:wstop="http://docs.oasis-open.org/wsn/t-1">
+	<SOAP-ENV:Header></SOAP-ENV:Header>
+	<SOAP-ENV:Body>
+		<trt:GetMetadataConfigurationsResponse>
+			<trt:Configurations token="MDC0">
+				<tt:Name>user0</tt:Name>
+				<tt:UseCount>0</tt:UseCount>
+				<tt:PTZStatus>
+					<tt:Status>false</tt:Status>
+					<tt:Position>false</tt:Position>
+				</tt:PTZStatus>
+				<tt:Multicast>
+					<tt:Address>
+						<tt:Type>IPv4</tt:Type>
+						<tt:IPv4Address>0.0.0.0</tt:IPv4Address>
+					</tt:Address>
+					<tt:Port>0</tt:Port>
+					<tt:TTL>0</tt:TTL>
+					<tt:AutoStart>false</tt:AutoStart>
+				</tt:Multicast>
+				<tt:SessionTimeout>PT60S</tt:SessionTimeout>
+			</trt:Configurations>
+		</trt:GetMetadataConfigurationsResponse>
+	</SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

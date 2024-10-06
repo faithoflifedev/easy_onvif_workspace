@@ -1,0 +1,12 @@
+**/config.yaml
+
+build/
+ios/
+android/
+scratch/
+.pt-build/
+tool/
+test/
+logo/
+
+*.log
