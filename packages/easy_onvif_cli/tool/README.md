@@ -1,6 +1,16 @@
 # Easy Onvif Command Line Interface (CLI)
 
+![SDK version](https://flat.badgen.net/pub/sdk-version/easy_onvif_cli?style=for-the-badge)
+![Supported platforms](https://flat.badgen.net/pub/flutter-platform/easy_onvif_cli?style=for-the-badge)
+![Supported SDKs](https://flat.badgen.net/pub/dart-platform/easy_onvif_cli?style=for-the-badge)
+
 A command line interface application for controlling an Onvif device through terminal commands.  This tool allows you to use O/S features like `cron` to automate Onvif device functionality.
+
+<!-- [![Build Status](https://img.shields.io/github/actions/workflow/status/faithoflifedev/easy_onvif_cli/dart.yml?branch=main&logo=github-actions&logoColor=white&style=for-the-badge)](https://github.com/faithoflifedev/easy_onvif_cli/actions) -->
+[![Pull Requests](https://img.shields.io/github/issues-pr/faithoflifedev/easy_onvif_workspace?logo=github&logoColor=white&style=for-the-badge)](https://github.com/faithoflifedev/easy_onvif_workspace/pulls)
+[![Issues](https://img.shields.io/github/issues/faithoflifedev/easy_onvif_workspace?logo=github&logoColor=white&style=for-the-badge)](https://github.com/faithoflifedev/easy_onvif_workspace/issues)
+[![github last commit](https://shields.io/github/last-commit/faithoflifedev/easy_onvif_workspace?logo=github&logoColor=white&style=for-the-badge)](https://shields.io/github/last-commit/faithoflifedev/easy_onvif_workspace)
+[![Pub Score](https://img.shields.io/pub/points/easy_onvif_cli?logo=dart&logoColor=00b9fc&style=for-the-badge)](https://pub.dev/packages/easy_onvif_cli/score)
 
 ## Table of Contents
   - [Installation](#installation)
@@ -97,7 +107,11 @@ A command line interface application for controlling an Onvif device through ter
       - [replay set-replay-configuration](#replay-set-replay-configuration)
     - [version](#version)
 
+[![Buy me a coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-1.svg)](https://www.buymeacoffee.com/faithoflif2)
 
+[![Pub Package](https://img.shields.io/pub/v/easy_onvif_cli.svg?logo=dart&logoColor=00b9fc&color=blue&style=for-the-badge)](https://pub.dartlang.org/packages/easy_onvif_cli)
+[![Publisher](https://img.shields.io/pub/publisher/easy_onvif_cli?style=for-the-badge)](https://pub.dev/publishers/muayid.com)
+[![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 ## Installation
 
