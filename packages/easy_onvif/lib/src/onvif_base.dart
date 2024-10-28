@@ -56,21 +56,24 @@ class Onvif with UiLoggy {
   Onvif(
       {required this.authInfo,
       required LogOptions logOptions,
-      required LoggyPrinter printer})
+      required LoggyPrinter printer,
+      Dio? dio})
       : _hostUri = (authInfo.host.startsWith('http')
                 ? authInfo.host
                 : 'http://${authInfo.host}')
             .parseUri {
     Loggy.initLoggy(logPrinter: printer, logOptions: logOptions);
 
-    final dio = Dio(
-      BaseOptions(
-        connectTimeout: Duration(seconds: 20),
-        receiveTimeout: Duration(seconds: 10),
-      ),
-    )..interceptors.add(LoggingInterceptors());
+    final dioClient = dio ??
+        Dio(
+          BaseOptions(
+            connectTimeout: Duration(seconds: 20),
+            receiveTimeout: Duration(seconds: 10),
+          ),
+        )
+      ..interceptors.add(LoggingInterceptors());
 
-    _transport = soap.Transport(dio: dio, authInfo: authInfo);
+    _transport = soap.Transport(dio: dioClient, authInfo: authInfo);
 
     _deviceManagement = DeviceManagement(
         transport: transport,
@@ -87,7 +90,8 @@ class Onvif with UiLoggy {
       ),
       LoggyPrinter printer = const PrettyPrinter(
         showColors: false,
-      )}) async {
+      ),
+      Dio? dio}) async {
     final onvif = Onvif(
         authInfo: AuthInfo(
           host: host,
@@ -95,7 +99,8 @@ class Onvif with UiLoggy {
           password: password,
         ),
         logOptions: logOptions,
-        printer: printer);
+        printer: printer,
+        dio: dio);
 
     await onvif.initialize();
 
