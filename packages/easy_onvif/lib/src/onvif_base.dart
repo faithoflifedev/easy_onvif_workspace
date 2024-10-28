@@ -15,6 +15,8 @@ import 'search.dart';
 
 class Onvif with UiLoggy {
   final AuthInfo authInfo;
+
+  final Dio _dio;
   final Uri _hostUri;
 
   final serviceMap = <String, String>{};
@@ -53,27 +55,29 @@ class Onvif with UiLoggy {
   Search get search =>
       _search ?? (throw Exception('Search services not available'));
 
-  Onvif(
-      {required this.authInfo,
-      required LogOptions logOptions,
-      required LoggyPrinter printer,
-      Dio? dio})
-      : _hostUri = (authInfo.host.startsWith('http')
+  Onvif({
+    required this.authInfo,
+    required LogOptions logOptions,
+    required LoggyPrinter printer,
+    Dio? dio,
+  })  : _dio = dio ??
+            Dio(
+              BaseOptions(
+                connectTimeout: Duration(seconds: 20),
+                receiveTimeout: Duration(seconds: 10),
+              ),
+            )
+          ..interceptors.add(LoggingInterceptors()),
+        _hostUri = (authInfo.host.startsWith('http')
                 ? authInfo.host
                 : 'http://${authInfo.host}')
             .parseUri {
     Loggy.initLoggy(logPrinter: printer, logOptions: logOptions);
 
-    final dioClient = dio ??
-        Dio(
-          BaseOptions(
-            connectTimeout: Duration(seconds: 20),
-            receiveTimeout: Duration(seconds: 10),
-          ),
-        )
-      ..interceptors.add(LoggingInterceptors());
-
-    _transport = soap.Transport(dio: dioClient, authInfo: authInfo);
+    _transport = soap.Transport(
+      dio: _dio,
+      authInfo: authInfo,
+    );
 
     _deviceManagement = DeviceManagement(
         transport: transport,

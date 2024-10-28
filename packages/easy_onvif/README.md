@@ -56,7 +56,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^3.1.0
+  easy_onvif: ^3.1.1
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -159,20 +159,20 @@ print(responseEnvelope.body.response);
 
 ## Onvif cli (Onvif at the command prompt)
 
-A command line interface for controlling an Onvif device with cli commands
+A command line interface for controlling an Onvif device with cli commands is now available as a separate package.
 
 Install using `dart pub`:
 
 ```sh
-dart pub global activate easy_onvif
+dart pub global activate easy_onvif_cli
 ```
 
-Install using `brew`:
+<!-- Install using `brew`:
 
 ```sh
 brew tap faithoflifedev/easy_onvif
 brew install onvif
-```
+``` -->
 
 Run the following command to see help:
 
@@ -524,7 +524,8 @@ For this release a number of `Common` classes where given name changes to better
 - <img src="https://avatars.githubusercontent.com/u/38936462?v=4" width="25" height="25"> [LODYZ](https://github.com/LODYZ)
 - <img src="https://avatars.githubusercontent.com/u/60050879?v=4" width="25" height="25"> [Add00](https://github.com/Add00)
 - <img src="https://avatars.githubusercontent.com/u/24822764?v=4" width="25" height="25"> [Viper-Bit](https://github.com/Viper-Bit)
-
+- <img src="https://avatars.githubusercontent.com/u/53707700?v=4" width="25" height="25"> [Viper-Bit](https://github.com/itsparth)
+ 
 ## Contributing
 
 Any help from the open-source community is always welcome and needed:

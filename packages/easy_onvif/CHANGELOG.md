@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.1.1
+
+* Support for passing custom dio client
+
+## 3.1.1
+
+* Support for passing custom dio client
+
 ## 3.1.0
 
 * web platform compatibility
