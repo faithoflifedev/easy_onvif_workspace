@@ -23,7 +23,8 @@ scripts:
   #   description: Run publish for all packages.
 
   prep:
-    run: melos run build && melos run meta && melos run markdown && melos run format && melos run analyze
+    # run: melos run build && melos run meta && melos run markdown && melos run format && melos run analyze
+    run: melos run meta && melos run markdown && melos run format && melos run analyze
     description: Run prep steps for dart and flutter.
 
   # prep:flutter:
@@ -60,10 +61,10 @@ scripts:
     run: melos exec --ignore="easy_onvif" dart pub publish --dry-run
     description: Run `dart pub publish --dry-run` for cli package.
 
-  build:
-    run: melos exec --ignore="easy_onvif_cli" dart run build_runner build --delete-conflicting-outputs
-    select-package:
-      depends-on: build_runner
+  # build:
+  #   run: melos exec --ignore="packages/easy_onvif_cli" dart run build_runner build --delete-conflicting-outputs
+  #   select-package:
+  #     depends-on: build_runner
 
   analyze:
     exec: dart analyze .
