@@ -41,13 +41,13 @@ scripts:
     run: melos exec--ignore="easy_onvif" git add .; git commit -m "$(cat packages/easy_onvif_cli/tool/publish_tools.yaml | yq -r '.commit')"; git push origin main
     description: Commit changes for Flutter package.
 
-  publish:real:cli:
-    run: melos exec --ignore="easy_onvif" dart pub publish --force
-    description: Real publish for onvif cli Package.
-
   publish:real:lib:
     run: melos exec --ignore="onvif_cli" dart pub publish --force
     description: Real publish for easy_onvif library Package.
+
+  publish:real:cli:
+    run: melos exec --ignore="easy_onvif" dart pub publish --force
+    description: Real publish for onvif cli Package.
 
   # publish:cli:
   #   run: melos run meta && melos run analyze && melos run format && melos run markdown && melos run dryrun:flutter

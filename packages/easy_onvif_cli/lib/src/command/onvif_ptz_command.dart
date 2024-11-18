@@ -1170,7 +1170,7 @@ class OnvifZoomOutPtzCommand extends OnvifHelperCommand {
         argResults?['step'] != null ? double.parse(argResults!['step']) : 0.005;
 
     try {
-      await ptz.zoomOut(argResults!['profile-token'], step * -1.0);
+      await ptz.zoomOut(argResults!['profile-token'], step);
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
