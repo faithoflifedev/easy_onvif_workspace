@@ -35,4 +35,8 @@ const _$SpaceEnumMap = {
       'http://www.onvif.org/ver10/tptz/PanTiltSpaces/VelocityGenericSpace',
   Space.panTiltGenericSpeedSpace:
       'http://www.onvif.org/ver10/tptz/PanTiltSpaces/GenericSpeedSpace',
+  Space.panTiltDigitalPositionSpace:
+      'http://www.onvif.org/ver10/tptz/PanTiltSpaces/DigitalPositionSpace',
+  Space.panTiltDigitalTranslationSpace:
+      'http://www.onvif.org/ver10/tptz/PanTiltSpaces/DigitalTranslationSpace',
 };

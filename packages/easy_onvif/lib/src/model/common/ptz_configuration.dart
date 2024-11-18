@@ -128,24 +128,25 @@ class PtzConfiguration {
   @JsonKey(name: 'ZoomLimits')
   final ZoomLimits? zoomLimits;
 
-  PtzConfiguration(
-      {required this.token,
-      required this.name,
-      required this.useCount,
-      this.moveRamp,
-      this.presetRamp,
-      this.presetTourRamp,
-      required this.nodeToken,
-      this.defaultAbsolutePantTiltPositionSpace,
-      this.defaultAbsoluteZoomPositionSpace,
-      this.defaultRelativePanTiltTranslationSpace,
-      this.defaultRelativeZoomTranslationSpace,
-      this.defaultContinuousPanTiltVelocitySpace,
-      this.defaultContinuousZoomVelocitySpace,
-      this.defaultPtzSpeed,
-      this.defaultPtzTimeout,
-      this.panTiltLimits,
-      this.zoomLimits});
+  PtzConfiguration({
+    required this.token,
+    required this.name,
+    required this.useCount,
+    this.moveRamp,
+    this.presetRamp,
+    this.presetTourRamp,
+    required this.nodeToken,
+    this.defaultAbsolutePantTiltPositionSpace,
+    this.defaultAbsoluteZoomPositionSpace,
+    this.defaultRelativePanTiltTranslationSpace,
+    this.defaultRelativeZoomTranslationSpace,
+    this.defaultContinuousPanTiltVelocitySpace,
+    this.defaultContinuousZoomVelocitySpace,
+    this.defaultPtzSpeed,
+    this.defaultPtzTimeout,
+    this.panTiltLimits,
+    this.zoomLimits,
+  });
 
   factory PtzConfiguration.fromJson(Map<String, dynamic> json) =>
       _$PtzConfigurationFromJson(json);
@@ -158,3 +159,18 @@ class PtzConfiguration {
   static Space? _nullableMappedToSpace(Map<String, dynamic>? value) =>
       value != null ? $enumDecodeNullable(_$SpaceEnumMap, value['\$']) : null;
 }
+
+// enum SearchState {
+//   @JsonValue('Queued')
+//   queued('Queued'),
+//   @JsonValue('Searching')
+//   searching('Searching'),
+//   @JsonValue('Completed')
+//   completed('Completed'),
+//   @JsonValue('Unknown')
+//   unknown('Unknown');
+
+//   const SearchState(this.value);
+
+//   final String value;
+// }

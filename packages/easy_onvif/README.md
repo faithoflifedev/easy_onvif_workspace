@@ -56,7 +56,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^3.1.1
+  easy_onvif: ^3.1.1+1
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -524,7 +524,8 @@ For this release a number of `Common` classes where given name changes to better
 - <img src="https://avatars.githubusercontent.com/u/38936462?v=4" width="25" height="25"> [LODYZ](https://github.com/LODYZ)
 - <img src="https://avatars.githubusercontent.com/u/60050879?v=4" width="25" height="25"> [Add00](https://github.com/Add00)
 - <img src="https://avatars.githubusercontent.com/u/24822764?v=4" width="25" height="25"> [Viper-Bit](https://github.com/Viper-Bit)
-- <img src="https://avatars.githubusercontent.com/u/53707700?v=4" width="25" height="25"> [Viper-Bit](https://github.com/itsparth)
+- <img src="https://avatars.githubusercontent.com/u/53707700?v=4" width="25" height="25"> [itsparth](https://github.com/itsparth)
+- <img src="https://avatars.githubusercontent.com/u/26508767?v=4" width="25" height="25"> [momshaddinury](https://github.com/momshaddinury)
  
 ## Contributing
 

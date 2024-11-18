@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.1+1
+
+* Fix axis usage in zoomOut method #64
+
 ## 3.1.1
 
 * Support for passing custom dio client

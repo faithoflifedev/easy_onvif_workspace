@@ -64,7 +64,6 @@ enum Space {
       'http://www.onvif.org/ver10/tptz/ZoomSpaces/VelocityGenericSpace'),
   zoomGenericSpeedSpace(
       'http://www.onvif.org/ver10/tptz/ZoomSpaces/GenericSpeedSpace'),
-
   panTiltPositionGenericSpace(
       'http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace'),
   panTiltTranslationGenericSpace(
@@ -72,7 +71,11 @@ enum Space {
   panTiltVelocityGenericSpace(
       'http://www.onvif.org/ver10/tptz/PanTiltSpaces/VelocityGenericSpace'),
   panTiltGenericSpeedSpace(
-      'http://www.onvif.org/ver10/tptz/PanTiltSpaces/GenericSpeedSpace');
+      'http://www.onvif.org/ver10/tptz/PanTiltSpaces/GenericSpeedSpace'),
+  panTiltDigitalPositionSpace(
+      'http://www.onvif.org/ver10/tptz/PanTiltSpaces/DigitalPositionSpace'),
+  panTiltDigitalTranslationSpace(
+      'http://www.onvif.org/ver10/tptz/PanTiltSpaces/DigitalTranslationSpace');
 
   const Space(this.value);
 
