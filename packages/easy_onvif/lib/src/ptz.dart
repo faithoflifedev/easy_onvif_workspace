@@ -668,7 +668,7 @@ class Ptz extends Operation {
   Future<void> zoomOut(String profileToken, [double step = 0.025]) async {
     loggy.debug('zoomOut');
 
-    await zoom(profileToken, Vector1D(x: step));
+    await zoom(profileToken, Vector1D(x: -step));
   }
 
   void _clearDefaults() {
