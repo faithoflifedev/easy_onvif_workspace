@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.1+2
+
+* Fix axis usage in zoomOut method #64
+
 ## 3.1.1+1
 
 * Fix axis usage in zoomOut method #64
