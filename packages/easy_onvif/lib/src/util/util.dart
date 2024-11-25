@@ -75,8 +75,12 @@ class OnvifUtil {
   }
 
   static LogOptions convertToLogOptions(String name) => LogOptions(
-      LogLevel.values.firstWhere((logLevel) => logLevel.name == name.trim(),
-          orElse: () => LogLevel.off));
+        LogLevel.values.firstWhere(
+          (logLevel) =>
+              logLevel.name.toLowerCase() == name.trim().toLowerCase(),
+          orElse: () => LogLevel.off,
+        ),
+      );
 
   static String? get userHome =>
       getEnvironmentVariable('HOME') ?? getEnvironmentVariable('USERPROFILE');

@@ -91,8 +91,8 @@ class OnvifListDevicesProbeCommand extends OnvifHelperCommand {
   }
 }
 
-class OnvifProxyProbeCommand extends OnvifHelperCommand {
-  final _defaultIp = '0.0.0.0';
+class OnvifProxyProbeCommand extends OnvifHelperCommand with UiLoggy {
+  static final _defaultIp = '0.0.0.0';
 
   @override
   String get description =>
@@ -109,7 +109,7 @@ class OnvifProxyProbeCommand extends OnvifHelperCommand {
           defaultsTo: '8080',
           help: 'The HTTP port used to connect to this server.')
       ..addOption('bind-ip',
-          valueHelp: 'IP address ',
+          valueHelp: 'IP Address',
           defaultsTo: _defaultIp,
           help: 'The IP address the server will listen on.');
   }
@@ -117,25 +117,28 @@ class OnvifProxyProbeCommand extends OnvifHelperCommand {
   @override
   void run() async {
     Loggy.initLoggy(
-        logPrinter: const PrettyPrinter(
-          showColors: false,
-        ),
-        logOptions: OnvifUtil.convertToLogOptions(globalResults!['log-level']));
+      logPrinter: const PrettyPrinter(
+        showColors: false,
+      ),
+      logOptions: OnvifUtil.convertToLogOptions(globalResults!['log-level']),
+    );
 
-    var server = await serve(
+    final server = await serve(
       DevicesController().handler,
       argResults!['bind-ip'],
       int.parse(argResults!['port']),
     );
 
     if (argResults!['bind-ip'] == _defaultIp) {
-      for (var interface in await NetworkInterface.list()) {
+      final interfaces = await NetworkInterface.list();
+
+      for (var interface in interfaces) {
         for (var addr in interface.addresses) {
-          logInfo('Serving at http://${addr.address}:${server.port}');
+          loggy.info('Serving at http://${addr.address}:${server.port}');
         }
       }
     } else {
-      logInfo('Serving at http://${server.address.host}:${server.port}');
+      loggy.info('Serving at http://${server.address.host}:${server.port}');
     }
   }
 }
