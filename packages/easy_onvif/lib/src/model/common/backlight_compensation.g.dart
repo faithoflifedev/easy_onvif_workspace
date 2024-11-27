@@ -9,7 +9,7 @@ part of 'backlight_compensation.dart';
 BacklightCompensation _$BacklightCompensationFromJson(
         Map<String, dynamic> json) =>
     BacklightCompensation(
-      mode: OnvifUtil.mappedToString(json['Mode'] as Map<String, dynamic>),
+      mode: OnvifUtil.mappedToString(json['Mode']),
       level: OnvifUtil.nullableMappedToDouble(
           json['Level'] as Map<String, dynamic>?),
     );

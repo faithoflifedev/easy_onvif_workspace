@@ -7,10 +7,8 @@ part of 'track.dart';
 // **************************************************************************
 
 Track _$TrackFromJson(Map<String, dynamic> json) => Track(
-      sourceTag:
-          OnvifUtil.mappedToString(json['SourceTag'] as Map<String, dynamic>),
-      destination:
-          OnvifUtil.mappedToString(json['Destination'] as Map<String, dynamic>),
+      sourceTag: OnvifUtil.mappedToString(json['SourceTag']),
+      destination: OnvifUtil.mappedToString(json['Destination']),
       error: OnvifUtil.nullableMappedToString(
           json['Error'] as Map<String, dynamic>?),
       state: Track._nullableRecordingJobState(json['State']),

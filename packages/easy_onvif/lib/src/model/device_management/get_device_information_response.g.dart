@@ -12,9 +12,9 @@ GetDeviceInformationResponse _$GetDeviceInformationResponseFromJson(
       OnvifUtil.nullableMappedToString(
           json['Manufacturer'] as Map<String, dynamic>?),
       OnvifUtil.nullableMappedToString(json['Model'] as Map<String, dynamic>?),
-      OnvifUtil.mappedToString(json['FirmwareVersion'] as Map<String, dynamic>),
-      OnvifUtil.mappedToString(json['SerialNumber'] as Map<String, dynamic>),
-      OnvifUtil.mappedToString(json['HardwareId'] as Map<String, dynamic>),
+      OnvifUtil.mappedToString(json['FirmwareVersion']),
+      OnvifUtil.mappedToString(json['SerialNumber']),
+      OnvifUtil.mappedToString(json['HardwareId']),
     );
 
 Map<String, dynamic> _$GetDeviceInformationResponseToJson(

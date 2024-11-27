@@ -9,8 +9,7 @@ part of 'get_recordings_response_item.dart';
 GetRecordingsResponseItem _$GetRecordingsResponseItemFromJson(
         Map<String, dynamic> json) =>
     GetRecordingsResponseItem(
-      recordingToken: OnvifUtil.mappedToString(
-          json['RecordingToken'] as Map<String, dynamic>),
+      recordingToken: OnvifUtil.mappedToString(json['RecordingToken']),
       configuration: RecordingConfiguration.fromJson(
           json['Configuration'] as Map<String, dynamic>),
       tracks: GetTracksResponseList.fromJson(

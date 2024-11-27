@@ -7,9 +7,8 @@ part of 'exposure.dart';
 // **************************************************************************
 
 Exposure _$ExposureFromJson(Map<String, dynamic> json) => Exposure(
-      mode: OnvifUtil.mappedToString(json['Mode'] as Map<String, dynamic>),
-      priority:
-          OnvifUtil.mappedToString(json['Priority'] as Map<String, dynamic>),
+      mode: OnvifUtil.mappedToString(json['Mode']),
+      priority: OnvifUtil.mappedToString(json['Priority']),
       window: Window.fromJson(json['Window'] as Map<String, dynamic>),
       minExposureTime: OnvifUtil.nullableMappedToDouble(
           json['MinExposureTime'] as Map<String, dynamic>?),

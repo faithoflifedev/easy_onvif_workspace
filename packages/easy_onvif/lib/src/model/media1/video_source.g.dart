@@ -8,8 +8,7 @@ part of 'video_source.dart';
 
 VideoSource _$VideoSourceFromJson(Map<String, dynamic> json) => VideoSource(
       token: json['@token'] as String,
-      frameRate:
-          OnvifUtil.mappedToString(json['Framerate'] as Map<String, dynamic>),
+      frameRate: OnvifUtil.mappedToString(json['Framerate']),
       resolution:
           VideoResolution.fromJson(json['Resolution'] as Map<String, dynamic>),
       imaging: json['Imaging'] == null

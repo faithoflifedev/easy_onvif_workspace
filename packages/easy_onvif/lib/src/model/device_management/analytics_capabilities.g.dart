@@ -9,7 +9,7 @@ part of 'analytics_capabilities.dart';
 AnalyticsCapabilities _$AnalyticsCapabilitiesFromJson(
         Map<String, dynamic> json) =>
     AnalyticsCapabilities(
-      OnvifUtil.mappedToString(json['XAddr'] as Map<String, dynamic>),
+      OnvifUtil.mappedToString(json['XAddr']),
       OnvifUtil.mappedToBool(json['RuleSupport'] as Map<String, dynamic>),
       OnvifUtil.mappedToBool(
           json['AnalyticsModuleSupport'] as Map<String, dynamic>),

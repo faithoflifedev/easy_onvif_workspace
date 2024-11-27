@@ -7,7 +7,7 @@ part of 'dns_entry.dart';
 // **************************************************************************
 
 DnsEntry _$DnsEntryFromJson(Map<String, dynamic> json) => DnsEntry(
-      type: OnvifUtil.mappedToString(json['Type'] as Map<String, dynamic>),
+      type: OnvifUtil.mappedToString(json['Type']),
       ipv4Address: OnvifUtil.nullableMappedToString(
           json['IPv4Address'] as Map<String, dynamic>?),
       ipv6Address: OnvifUtil.nullableMappedToString(

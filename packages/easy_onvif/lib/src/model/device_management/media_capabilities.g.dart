@@ -8,7 +8,7 @@ part of 'media_capabilities.dart';
 
 MediaCapabilities _$MediaCapabilitiesFromJson(Map<String, dynamic> json) =>
     MediaCapabilities(
-      xAddr: OnvifUtil.mappedToString(json['XAddr'] as Map<String, dynamic>),
+      xAddr: OnvifUtil.mappedToString(json['XAddr']),
       streamingCapabilities: RealTimeStreamingCapabilities.fromJson(
           json['StreamingCapabilities'] as Map<String, dynamic>),
     );

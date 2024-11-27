@@ -7,13 +7,12 @@ part of 'media_uri.dart';
 // **************************************************************************
 
 MediaUri _$MediaUriFromJson(Map<String, dynamic> json) => MediaUri(
-      uri: OnvifUtil.mappedToString(json['Uri'] as Map<String, dynamic>),
+      uri: OnvifUtil.mappedToString(json['Uri']),
       invalidAfterConnect: OnvifUtil.mappedToBool(
           json['InvalidAfterConnect'] as Map<String, dynamic>),
       invalidAfterReboot: OnvifUtil.mappedToBool(
           json['InvalidAfterReboot'] as Map<String, dynamic>),
-      timeout:
-          OnvifUtil.mappedToString(json['Timeout'] as Map<String, dynamic>),
+      timeout: OnvifUtil.mappedToString(json['Timeout']),
     );
 
 Map<String, dynamic> _$MediaUriToJson(MediaUri instance) => <String, dynamic>{

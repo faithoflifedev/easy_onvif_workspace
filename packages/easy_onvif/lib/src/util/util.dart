@@ -129,7 +129,8 @@ class OnvifUtil {
   static double? nullableMappedToDouble(Map<String, dynamic>? value) =>
       value != null ? mappedToDouble(value) : null;
 
-  static String mappedToString(Map<String, dynamic> value) => value['\$'];
+  static String mappedToString(dynamic value) =>
+      value is String ? value : value['\$'];
 
   static ReferenceToken mappedToReferenceToken(Map<String, dynamic> value) =>
       ReferenceToken(value['\$']);

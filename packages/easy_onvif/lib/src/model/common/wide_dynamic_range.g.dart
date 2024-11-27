@@ -8,7 +8,7 @@ part of 'wide_dynamic_range.dart';
 
 WideDynamicRange _$WideDynamicRangeFromJson(Map<String, dynamic> json) =>
     WideDynamicRange(
-      mode: OnvifUtil.mappedToString(json['Mode'] as Map<String, dynamic>),
+      mode: OnvifUtil.mappedToString(json['Mode']),
       level: OnvifUtil.mappedToDouble(json['Level'] as Map<String, dynamic>),
     );
 

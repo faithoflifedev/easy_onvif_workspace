@@ -10,10 +10,9 @@ VideoSourceConfiguration _$VideoSourceConfigurationFromJson(
         Map<String, dynamic> json) =>
     VideoSourceConfiguration(
       token: json['@token'] as String,
-      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      name: OnvifUtil.mappedToString(json['Name']),
       useCount: OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
-      sourceToken:
-          OnvifUtil.mappedToString(json['SourceToken'] as Map<String, dynamic>),
+      sourceToken: OnvifUtil.mappedToString(json['SourceToken']),
       bounds: IntRectangle.fromJson(json['Bounds'] as Map<String, dynamic>),
       extension: json['Extension'],
     );

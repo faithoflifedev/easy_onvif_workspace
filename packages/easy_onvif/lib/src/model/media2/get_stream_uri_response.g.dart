@@ -9,7 +9,7 @@ part of 'get_stream_uri_response.dart';
 GetStreamUriResponse _$GetStreamUriResponseFromJson(
         Map<String, dynamic> json) =>
     GetStreamUriResponse(
-      uri: OnvifUtil.mappedToString(json['Uri'] as Map<String, dynamic>),
+      uri: OnvifUtil.mappedToString(json['Uri']),
     );
 
 Map<String, dynamic> _$GetStreamUriResponseToJson(

@@ -10,7 +10,7 @@ VideoEncoderConfiguration _$VideoEncoderConfigurationFromJson(
         Map<String, dynamic> json) =>
     VideoEncoderConfiguration(
       token: json['@token'] as String,
-      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      name: OnvifUtil.mappedToString(json['Name']),
       useCount: OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
       encoding: OnvifUtil.nullableMappedToString(
           json['Encoding'] as Map<String, dynamic>?),

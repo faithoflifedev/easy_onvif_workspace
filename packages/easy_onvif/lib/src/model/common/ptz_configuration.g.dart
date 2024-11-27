@@ -9,7 +9,7 @@ part of 'ptz_configuration.dart';
 PtzConfiguration _$PtzConfigurationFromJson(Map<String, dynamic> json) =>
     PtzConfiguration(
       token: json['@token'] as String,
-      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      name: OnvifUtil.mappedToString(json['Name']),
       useCount: OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
       moveRamp: OnvifUtil.nullableMappedToInt(
           json['MoveRamp'] as Map<String, dynamic>?),
@@ -17,8 +17,7 @@ PtzConfiguration _$PtzConfigurationFromJson(Map<String, dynamic> json) =>
           json['PresetRamp'] as Map<String, dynamic>?),
       presetTourRamp: OnvifUtil.nullableMappedToInt(
           json['PresetTourRamp'] as Map<String, dynamic>?),
-      nodeToken:
-          OnvifUtil.mappedToString(json['NodeToken'] as Map<String, dynamic>),
+      nodeToken: OnvifUtil.mappedToString(json['NodeToken']),
       defaultAbsolutePantTiltPositionSpace:
           PtzConfiguration._nullableMappedToSpace(
               json['DefaultAbsolutePantTiltPositionSpace']

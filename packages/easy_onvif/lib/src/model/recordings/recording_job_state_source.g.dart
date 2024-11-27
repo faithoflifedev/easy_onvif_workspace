@@ -11,7 +11,7 @@ RecordingJobStateSource _$RecordingJobStateSourceFromJson(
     RecordingJobStateSource(
       sourceToken:
           SourceToken.fromJson(json['SourceToken'] as Map<String, dynamic>),
-      state: OnvifUtil.mappedToString(json['State'] as Map<String, dynamic>),
+      state: OnvifUtil.mappedToString(json['State']),
       tracks: Tracks.fromJson(json['Tracks'] as Map<String, dynamic>),
     );
 

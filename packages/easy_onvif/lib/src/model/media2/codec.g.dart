@@ -7,8 +7,7 @@ part of 'codec.dart';
 // **************************************************************************
 
 Codec _$CodecFromJson(Map<String, dynamic> json) => Codec(
-      encoding:
-          OnvifUtil.mappedToString(json['Encoding'] as Map<String, dynamic>),
+      encoding: OnvifUtil.mappedToString(json['Encoding']),
       number: OnvifUtil.mappedToInt(json['Number'] as Map<String, dynamic>),
     );
 

@@ -9,11 +9,10 @@ part of 'capabilities.dart';
 Capabilities _$CapabilitiesFromJson(Map<String, dynamic> json) => Capabilities(
       reversePlayback:
           OnvifUtil.stringToBool(json['@ReversePlayback'] as String),
-      sessionTimeoutRange: OnvifUtil.mappedToString(
-          json['@SessionTimeoutRange'] as Map<String, dynamic>),
+      sessionTimeoutRange:
+          OnvifUtil.mappedToString(json['@SessionTimeoutRange']),
       rtpRtspTcp: OnvifUtil.stringToBool(json['@RTP_RTSP_TCP'] as String),
-      rtspWebSocketUri: OnvifUtil.mappedToString(
-          json['@RTSPWebSocketUri'] as Map<String, dynamic>),
+      rtspWebSocketUri: OnvifUtil.mappedToString(json['@RTSPWebSocketUri']),
     );
 
 Map<String, dynamic> _$CapabilitiesToJson(Capabilities instance) =>

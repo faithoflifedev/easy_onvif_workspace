@@ -9,13 +9,13 @@ part of 'audio_encoder_configuration.dart';
 AudioEncoderConfiguration _$AudioEncoderConfigurationFromJson(
         Map<String, dynamic> json) =>
     AudioEncoderConfiguration(
-      OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      OnvifUtil.mappedToString(json['Name']),
       OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
-      OnvifUtil.mappedToString(json['Encoding'] as Map<String, dynamic>),
+      OnvifUtil.mappedToString(json['Encoding']),
       OnvifUtil.mappedToInt(json['Bitrate'] as Map<String, dynamic>),
       OnvifUtil.mappedToInt(json['SampleRate'] as Map<String, dynamic>),
       OnvifUtil.emptyMapToNull(json['Multicast'] as Map<String, dynamic>?),
-      OnvifUtil.mappedToString(json['SessionTimeout'] as Map<String, dynamic>),
+      OnvifUtil.mappedToString(json['SessionTimeout']),
     );
 
 Map<String, dynamic> _$AudioEncoderConfigurationToJson(

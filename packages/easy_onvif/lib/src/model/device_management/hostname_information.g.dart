@@ -8,9 +8,8 @@ part of 'hostname_information.dart';
 
 HostnameInformation _$HostnameInformationFromJson(Map<String, dynamic> json) =>
     HostnameInformation(
-      fromDhcp:
-          OnvifUtil.mappedToString(json['FromDHCP'] as Map<String, dynamic>),
-      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      fromDhcp: OnvifUtil.mappedToString(json['FromDHCP']),
+      name: OnvifUtil.mappedToString(json['Name']),
     );
 
 Map<String, dynamic> _$HostnameInformationToJson(

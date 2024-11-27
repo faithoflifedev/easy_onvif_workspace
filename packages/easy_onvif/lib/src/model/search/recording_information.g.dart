@@ -9,16 +9,14 @@ part of 'recording_information.dart';
 RecordingInformation _$RecordingInformationFromJson(
         Map<String, dynamic> json) =>
     RecordingInformation(
-      recordingToken: OnvifUtil.mappedToString(
-          json['RecordingToken'] as Map<String, dynamic>),
+      recordingToken: OnvifUtil.mappedToString(json['RecordingToken']),
       source: RecordingSourceInformation.fromJson(
           json['Source'] as Map<String, dynamic>),
       earliestRecording: OnvifUtil.mappedToStdDateTime(
           json['EarliestRecording'] as Map<String, dynamic>),
       latestRecording: OnvifUtil.mappedToStdDateTime(
           json['LatestRecording'] as Map<String, dynamic>),
-      content:
-          OnvifUtil.mappedToString(json['Content'] as Map<String, dynamic>),
+      content: OnvifUtil.mappedToString(json['Content']),
       tracks: RecordingInformation._fromJson(json['Track']),
       recordingStatus:
           RecordingInformation._recordingStatus(json['RecordingStatus']),

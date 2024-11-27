@@ -10,7 +10,7 @@ MetadataConfiguration _$MetadataConfigurationFromJson(
         Map<String, dynamic> json) =>
     MetadataConfiguration(
       token: json['@token'] as String,
-      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      name: OnvifUtil.mappedToString(json['Name']),
       useCount: OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
       compressionType: json['CompressionType'] as String?,
       geoLocation: json['GeoLocation'] as bool?,
@@ -25,8 +25,7 @@ MetadataConfiguration _$MetadataConfigurationFromJson(
           json['Analytics'] as Map<String, dynamic>?),
       multicast:
           OnvifUtil.emptyMapToNull(json['Multicast'] as Map<String, dynamic>?),
-      sessionTimeout: OnvifUtil.mappedToString(
-          json['SessionTimeout'] as Map<String, dynamic>),
+      sessionTimeout: OnvifUtil.mappedToString(json['SessionTimeout']),
       analyticsEngineConfiguration:
           json['AnalyticsEngineConfiguration'] as Map<String, dynamic>?,
       extension: json['Extension'] as Map<String, dynamic>?,

@@ -9,7 +9,7 @@ part of 'get_discovery_mode_response.dart';
 GetDiscoveryModeResponse _$GetDiscoveryModeResponseFromJson(
         Map<String, dynamic> json) =>
     GetDiscoveryModeResponse(
-      OnvifUtil.mappedToString(json['DiscoveryMode'] as Map<String, dynamic>),
+      OnvifUtil.mappedToString(json['DiscoveryMode']),
     );
 
 Map<String, dynamic> _$GetDiscoveryModeResponseToJson(

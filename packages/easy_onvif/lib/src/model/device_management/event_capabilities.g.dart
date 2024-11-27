@@ -8,7 +8,7 @@ part of 'event_capabilities.dart';
 
 EventCapabilities _$EventCapabilitiesFromJson(Map<String, dynamic> json) =>
     EventCapabilities(
-      OnvifUtil.mappedToString(json['XAddr'] as Map<String, dynamic>),
+      OnvifUtil.mappedToString(json['XAddr']),
     );
 
 Map<String, dynamic> _$EventCapabilitiesToJson(EventCapabilities instance) =>

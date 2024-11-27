@@ -11,10 +11,9 @@ RecordingConfiguration _$RecordingConfigurationFromJson(
     RecordingConfiguration(
       source: RecordingSourceInformation.fromJson(
           json['Source'] as Map<String, dynamic>),
-      content:
-          OnvifUtil.mappedToString(json['Content'] as Map<String, dynamic>),
-      maximumRetentionTime: OnvifUtil.mappedToString(
-          json['MaximumRetentionTime'] as Map<String, dynamic>),
+      content: OnvifUtil.mappedToString(json['Content']),
+      maximumRetentionTime:
+          OnvifUtil.mappedToString(json['MaximumRetentionTime']),
     );
 
 Map<String, dynamic> _$RecordingConfigurationToJson(

@@ -11,8 +11,7 @@ RecordingJobConfiguration _$RecordingJobConfigurationFromJson(
     RecordingJobConfiguration(
       scheduleToken: OnvifUtil.nullableMappedToString(
           json['ScheduleToken'] as Map<String, dynamic>?),
-      recordingToken: OnvifUtil.mappedToString(
-          json['RecordingToken'] as Map<String, dynamic>),
+      recordingToken: OnvifUtil.mappedToString(json['RecordingToken']),
       mode: RecordingJobConfiguration._recordingJobConfiguration(json['Mode']),
       priority: OnvifUtil.mappedToInt(json['Priority'] as Map<String, dynamic>),
       source: json['Source'] == null

@@ -7,7 +7,7 @@ part of 'space_1d.dart';
 // **************************************************************************
 
 Space1D _$Space1DFromJson(Map<String, dynamic> json) => Space1D(
-      uri: OnvifUtil.mappedToString(json['URI'] as Map<String, dynamic>),
+      uri: OnvifUtil.mappedToString(json['URI']),
       xRange: FloatRange.fromJson(json['XRange'] as Map<String, dynamic>),
     );
 

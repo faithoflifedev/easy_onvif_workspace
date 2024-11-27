@@ -7,8 +7,7 @@ part of 'user.dart';
 // **************************************************************************
 
 User _$UserFromJson(Map<String, dynamic> json) => User(
-      username:
-          OnvifUtil.mappedToString(json['Username'] as Map<String, dynamic>),
+      username: OnvifUtil.mappedToString(json['Username']),
       password: OnvifUtil.nullableMappedToString(
           json['Password'] as Map<String, dynamic>?),
       userLevel:

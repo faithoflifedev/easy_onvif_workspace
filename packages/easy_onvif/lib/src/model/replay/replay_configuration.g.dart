@@ -8,8 +8,7 @@ part of 'replay_configuration.dart';
 
 ReplayConfiguration _$ReplayConfigurationFromJson(Map<String, dynamic> json) =>
     ReplayConfiguration(
-      sessionTimeout: OnvifUtil.mappedToString(
-          json['SessionTimeout'] as Map<String, dynamic>),
+      sessionTimeout: OnvifUtil.mappedToString(json['SessionTimeout']),
     );
 
 Map<String, dynamic> _$ReplayConfigurationToJson(

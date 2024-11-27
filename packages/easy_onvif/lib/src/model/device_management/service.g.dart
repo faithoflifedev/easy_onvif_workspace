@@ -7,9 +7,8 @@ part of 'service.dart';
 // **************************************************************************
 
 Service _$ServiceFromJson(Map<String, dynamic> json) => Service(
-      nameSpace:
-          OnvifUtil.mappedToString(json['Namespace'] as Map<String, dynamic>),
-      xAddr: OnvifUtil.mappedToString(json['XAddr'] as Map<String, dynamic>),
+      nameSpace: OnvifUtil.mappedToString(json['Namespace']),
+      xAddr: OnvifUtil.mappedToString(json['XAddr']),
       version: Version.fromJson(json['Version'] as Map<String, dynamic>),
       capabilities: json['Capabilities'] == null
           ? null

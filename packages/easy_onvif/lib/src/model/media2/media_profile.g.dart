@@ -9,7 +9,7 @@ part of 'media_profile.dart';
 MediaProfile _$MediaProfileFromJson(Map<String, dynamic> json) => MediaProfile(
       token: json['@token'] as String,
       fixed: OnvifUtil.nullableStringToBool(json['@fixed'] as String?),
-      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      name: OnvifUtil.mappedToString(json['Name']),
       configurations: json['Configurations'] == null
           ? null
           : ConfigurationSet.fromJson(

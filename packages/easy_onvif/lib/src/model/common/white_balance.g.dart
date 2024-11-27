@@ -7,7 +7,7 @@ part of 'white_balance.dart';
 // **************************************************************************
 
 WhiteBalance _$WhiteBalanceFromJson(Map<String, dynamic> json) => WhiteBalance(
-      mode: OnvifUtil.mappedToString(json['Mode'] as Map<String, dynamic>),
+      mode: OnvifUtil.mappedToString(json['Mode']),
       crGain: OnvifUtil.mappedToDouble(json['CrGain'] as Map<String, dynamic>),
       cbGain: OnvifUtil.mappedToDouble(json['CbGain'] as Map<String, dynamic>),
     );

@@ -10,8 +10,7 @@ FocusStatus20 _$FocusStatus20FromJson(Map<String, dynamic> json) =>
     FocusStatus20(
       position:
           OnvifUtil.mappedToDouble(json['Position'] as Map<String, dynamic>),
-      moveStatus:
-          OnvifUtil.mappedToString(json['MoveStatus'] as Map<String, dynamic>),
+      moveStatus: OnvifUtil.mappedToString(json['MoveStatus']),
       error: OnvifUtil.nullableMappedToString(
           json['Error'] as Map<String, dynamic>?),
       extension: json['Extension'] as Map<String, dynamic>?,

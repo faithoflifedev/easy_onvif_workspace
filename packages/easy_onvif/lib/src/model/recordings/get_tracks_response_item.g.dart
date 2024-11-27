@@ -9,8 +9,7 @@ part of 'get_tracks_response_item.dart';
 GetTracksResponseItem _$GetTracksResponseItemFromJson(
         Map<String, dynamic> json) =>
     GetTracksResponseItem(
-      trackToken:
-          OnvifUtil.mappedToString(json['TrackToken'] as Map<String, dynamic>),
+      trackToken: OnvifUtil.mappedToString(json['TrackToken']),
       configuration: TrackConfiguration.fromJson(
           json['Configuration'] as Map<String, dynamic>),
     );

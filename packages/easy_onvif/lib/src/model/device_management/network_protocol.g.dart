@@ -8,7 +8,7 @@ part of 'network_protocol.dart';
 
 NetworkProtocol _$NetworkProtocolFromJson(Map<String, dynamic> json) =>
     NetworkProtocol(
-      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      name: OnvifUtil.mappedToString(json['Name']),
       enabled: OnvifUtil.mappedToBool(json['Enabled'] as Map<String, dynamic>),
       port: OnvifUtil.mappedToInt(json['Port'] as Map<String, dynamic>),
     );

@@ -8,7 +8,7 @@ part of 'source_token.dart';
 
 SourceToken _$SourceTokenFromJson(Map<String, dynamic> json) => SourceToken(
       type: json['@Type'] as String?,
-      token: OnvifUtil.mappedToString(json['Token'] as Map<String, dynamic>),
+      token: OnvifUtil.mappedToString(json['Token']),
     );
 
 Map<String, dynamic> _$SourceTokenToJson(SourceToken instance) =>

@@ -10,7 +10,7 @@ VideoEncoder2Configuration _$VideoEncoder2ConfigurationFromJson(
         Map<String, dynamic> json) =>
     VideoEncoder2Configuration(
       token: json['@token'] as String,
-      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      name: OnvifUtil.mappedToString(json['Name']),
       useCount: OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
       govLength: int.parse(json['@GovLength'] as String),
       anchorFrameDistance: OnvifUtil.nullableMappedToInt(
@@ -18,8 +18,7 @@ VideoEncoder2Configuration _$VideoEncoder2ConfigurationFromJson(
       profile: json['@Profile'] as String,
       guaranteedFrameRate: OnvifUtil.nullableMappedToBool(
           json['GuaranteedFrameRate'] as Map<String, dynamic>?),
-      encoding:
-          OnvifUtil.mappedToString(json['Encoding'] as Map<String, dynamic>),
+      encoding: OnvifUtil.mappedToString(json['Encoding']),
       resolution:
           VideoResolution2.fromJson(json['Resolution'] as Map<String, dynamic>),
       rateControl: VideoRateControl2.fromJson(

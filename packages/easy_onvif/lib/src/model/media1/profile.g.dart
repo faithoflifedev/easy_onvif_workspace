@@ -9,7 +9,7 @@ part of 'profile.dart';
 Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       token: json['@token'] as String,
       fixed: OnvifUtil.stringToBool(json['@fixed'] as String),
-      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      name: OnvifUtil.mappedToString(json['Name']),
       videoSourceConfiguration: json['VideoSourceConfiguration'] == null
           ? null
           : VideoSourceConfiguration.fromJson(
