@@ -13,8 +13,8 @@ Vector2D _$Vector2DFromJson(Map<String, dynamic> json) => Vector2D(
     );
 
 Map<String, dynamic> _$Vector2DToJson(Vector2D instance) => <String, dynamic>{
-      '@x': instance.x,
-      '@y': instance.y,
+      '@x': OnvifUtil.asString(instance.x),
+      '@y': OnvifUtil.asString(instance.y),
       '@space': _$SpaceEnumMap[instance.space],
     };
 

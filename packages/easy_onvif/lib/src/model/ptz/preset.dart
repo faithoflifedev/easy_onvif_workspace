@@ -6,12 +6,15 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'preset.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Preset {
   @JsonKey(name: '@token')
   final String token;
 
-  @JsonKey(name: 'Name', fromJson: OnvifUtil.stringMappedFromXml)
+  @JsonKey(
+    name: 'Name',
+    fromJson: OnvifUtil.stringMappedFromXml,
+  )
   final String name;
 
   @JsonKey(name: 'PTZPosition')
@@ -36,5 +39,5 @@ class Preset {
       _$PresetToJson(this).convertFieldToXmlMap('Name');
 
   @override
-  String toString() => jsonEncode(toJson());
+  String toString() => json.encode(toJson());
 }

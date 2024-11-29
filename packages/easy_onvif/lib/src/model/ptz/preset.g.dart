@@ -17,5 +17,5 @@ Preset _$PresetFromJson(Map<String, dynamic> json) => Preset(
 Map<String, dynamic> _$PresetToJson(Preset instance) => <String, dynamic>{
       '@token': instance.token,
       'Name': instance.name,
-      'PTZPosition': instance.position,
+      'PTZPosition': instance.position?.toJson(),
     };

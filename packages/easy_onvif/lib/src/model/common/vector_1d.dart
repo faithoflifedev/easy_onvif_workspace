@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:easy_onvif/shared.dart';
 import 'package:easy_onvif/soap.dart' show Xmlns;
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:xml/xml.dart';
 
@@ -9,7 +10,11 @@ part 'vector_1d.g.dart';
 
 @JsonSerializable()
 class Vector1D implements XmlSerializable {
-  @JsonKey(name: '@x', fromJson: double.parse)
+  @JsonKey(
+    name: '@x',
+    fromJson: double.parse,
+    toJson: OnvifUtil.asString,
+  )
   final double x;
 
   @JsonKey(name: '@space')

@@ -196,6 +196,8 @@ class OnvifUtil {
 
   static String parseHtmlString(String htmlString) =>
       (HtmlUnescape()).convert(htmlString);
+
+  static String asString(dynamic value) => value.toString();
 }
 
 class NotSupportedException implements Exception {}

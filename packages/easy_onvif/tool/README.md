@@ -121,7 +121,7 @@ var preset = presets[11];
 
 //print the preset values
 print(
- 'preset: ${preset.position.panTilt?.x}  ${preset.position.panTilt?.y}  ${preset.position.zoom?.x}');
+ 'preset: ${preset.position?.panTilt?.x}  ${preset?.position.panTilt?.y}  ${preset?.position.zoom?.x}');
 
 //use the GotoPreset operation to point the camera to the given preset
 await onvif.ptz.gotoPreset(profileToken, preset); // ACCESS CLASS: ACTUATE

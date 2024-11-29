@@ -8,7 +8,10 @@ part 'get_presets_response.g.dart';
 
 @JsonSerializable()
 class GetPresetsResponse {
-  @JsonKey(name: 'Preset', fromJson: _listIfEmpty)
+  @JsonKey(
+    name: 'Preset',
+    fromJson: _listIfEmpty,
+  )
   final List<Preset> presets;
 
   GetPresetsResponse({required this.presets});

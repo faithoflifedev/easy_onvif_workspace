@@ -30,17 +30,11 @@ extension Helpers on String {
 
 extension MapExtension on Map<String, dynamic> {
   Map<String, dynamic> convertFieldsToXmlMap(List<String> fields) {
-    final Map<String, dynamic> map = {};
-
-    for (var field in fields) {
-      if (containsKey(field)) {
-        map[field] = {'\$': this[field]};
-      } else {
-        map[field] = this[field];
-      }
+    for (var key in keys) {
+      if (fields.contains(key)) this[key] = {'\$': this[key]};
     }
 
-    return map;
+    return this;
   }
 
   Map<String, dynamic> convertFieldToXmlMap(String field) =>

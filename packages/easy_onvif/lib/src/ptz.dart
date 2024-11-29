@@ -268,9 +268,7 @@ class Ptz extends Operation {
 
     limit = (limit! > presets.length) ? presets.length : limit;
 
-    return GetPresetsResponse.fromJson(responseEnvelope.body.response!)
-        .presets
-        .sublist(0, limit);
+    return presets.sublist(0, limit);
   }
 
   /// Operation to request a specific PTZ preset tour in the selected media

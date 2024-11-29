@@ -8,7 +8,7 @@ import 'package:xml/xml.dart';
 part 'ptz_vector.g.dart';
 
 /// A list of preset position.
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PtzVector implements XmlSerializable {
   @JsonKey(name: 'PanTilt')
   final Vector2D? panTilt;
@@ -16,7 +16,10 @@ class PtzVector implements XmlSerializable {
   @JsonKey(name: 'Zoom')
   final Vector1D? zoom;
 
-  PtzVector({this.panTilt, this.zoom});
+  PtzVector({
+    this.panTilt,
+    this.zoom,
+  });
 
   factory PtzVector.fromJson(Map<String, dynamic> json) =>
       _$PtzVectorFromJson(json);

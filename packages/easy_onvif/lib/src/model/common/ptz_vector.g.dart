@@ -16,6 +16,6 @@ PtzVector _$PtzVectorFromJson(Map<String, dynamic> json) => PtzVector(
     );
 
 Map<String, dynamic> _$PtzVectorToJson(PtzVector instance) => <String, dynamic>{
-      'PanTilt': instance.panTilt,
-      'Zoom': instance.zoom,
+      'PanTilt': instance.panTilt?.toJson(),
+      'Zoom': instance.zoom?.toJson(),
     };

@@ -12,7 +12,7 @@ Vector1D _$Vector1DFromJson(Map<String, dynamic> json) => Vector1D(
     );
 
 Map<String, dynamic> _$Vector1DToJson(Vector1D instance) => <String, dynamic>{
-      '@x': instance.x,
+      '@x': OnvifUtil.asString(instance.x),
       '@space': _$SpaceEnumMap[instance.space],
     };
 
