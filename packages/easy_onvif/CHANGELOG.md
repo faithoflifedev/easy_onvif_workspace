@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.1+4
+
+* more serialization&#x2F;deserialization
+
 ## 3.1.1+3
 
 * Inconsistent handling of name parameter during serialization&#x2F;deserialization in Preset class #68

@@ -56,7 +56,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^3.1.1+3
+  easy_onvif: ^3.1.1+4
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -121,7 +121,7 @@ var preset = presets[11];
 
 //print the preset values
 print(
- 'preset: ${preset.position.panTilt?.x}  ${preset.position.panTilt?.y}  ${preset.position.zoom?.x}');
+ 'preset: ${preset.position?.panTilt?.x}  ${preset?.position.panTilt?.y}  ${preset?.position.zoom?.x}');
 
 //use the GotoPreset operation to point the camera to the given preset
 await onvif.ptz.gotoPreset(profileToken, preset); // ACCESS CLASS: ACTUATE
