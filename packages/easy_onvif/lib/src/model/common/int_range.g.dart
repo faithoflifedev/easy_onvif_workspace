@@ -7,8 +7,8 @@ part of 'int_range.dart';
 // **************************************************************************
 
 IntRange _$IntRangeFromJson(Map<String, dynamic> json) => IntRange(
-      min: OnvifUtil.mappedToInt(json['Min'] as Map<String, dynamic>),
-      max: OnvifUtil.mappedToInt(json['Max'] as Map<String, dynamic>),
+      min: OnvifUtil.intMappedFromXml(json['Min'] as Map<String, dynamic>),
+      max: OnvifUtil.intMappedFromXml(json['Max'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$IntRangeToJson(IntRange instance) => <String, dynamic>{

@@ -9,7 +9,7 @@ part 'track_information.g.dart';
 /// contiguous time span or consist of multiple slices.
 @JsonSerializable()
 class TrackInformation {
-  @JsonKey(name: 'TrackToken', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'TrackToken', fromJson: OnvifUtil.stringMappedFromXml)
   final String trackToken;
 
   /// Type of the track: "Video", "Audio" or "Metadata". The track shall only be
@@ -19,7 +19,7 @@ class TrackInformation {
   final TrackType trackType;
 
   /// Informative description of the contents of the track.
-  @JsonKey(name: 'Description', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Description', fromJson: OnvifUtil.stringMappedFromXml)
   final String description;
 
   /// The start date and time of the oldest recorded data in the track.
@@ -47,7 +47,7 @@ class TrackInformation {
   String toString() => json.encode(toJson());
 
   static TrackType _trackType(dynamic json) =>
-      $enumDecode(_$TrackTypeEnumMap, OnvifUtil.mappedToString(json));
+      $enumDecode(_$TrackTypeEnumMap, OnvifUtil.stringMappedFromXml(json));
 }
 
 enum TrackType {

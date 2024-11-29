@@ -19,12 +19,12 @@ class RecordingEventFilter implements XmlSerializable {
 
   /// Optional time-span to record before the actual event condition became
   /// active.
-  @JsonKey(name: 'Before', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(name: 'Before', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? before;
 
   /// Optional time-span to record after the actual event condition becomes
   /// inactive.
-  @JsonKey(name: 'After', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(name: 'After', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? after;
 
   RecordingEventFilter({

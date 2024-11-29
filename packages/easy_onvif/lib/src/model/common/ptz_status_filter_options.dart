@@ -8,22 +8,24 @@ part 'ptz_status_filter_options.g.dart';
 @JsonSerializable()
 class PtzStatusFilterOptions {
   /// True if the device is able to stream pan or tilt status information.
-  @JsonKey(name: 'PanTiltStatusSupported', fromJson: OnvifUtil.mappedToBool)
+  @JsonKey(
+      name: 'PanTiltStatusSupported', fromJson: OnvifUtil.boolMappedFromXml)
   final bool panTiltStatusSupported;
 
   /// True if the device is able to stream zoom status information.
-  @JsonKey(name: 'ZoomStatusSupported', fromJson: OnvifUtil.mappedToBool)
+  @JsonKey(name: 'ZoomStatusSupported', fromJson: OnvifUtil.boolMappedFromXml)
   final bool zoomStatusSupported;
 
   /// True if the device is able to stream the pan or tilt position
   @JsonKey(
       name: 'PanTiltPositionSupported',
-      fromJson: OnvifUtil.nullableMappedToBool)
+      fromJson: OnvifUtil.nullableBoolMappedFromXml)
   final bool? panTiltPositionSupported;
 
   /// True if the device is able to stream zoom position information.
   @JsonKey(
-      name: 'ZoomPositionSupported', fromJson: OnvifUtil.nullableMappedToBool)
+      name: 'ZoomPositionSupported',
+      fromJson: OnvifUtil.nullableBoolMappedFromXml)
   final bool? zoomPositionSupported;
 
   @JsonKey(name: 'Extension')

@@ -9,7 +9,7 @@ part 'system_reboot_response.g.dart';
 @JsonSerializable()
 class SystemRebootResponse {
   ///Posix SystemRebootResponse string.
-  @JsonKey(name: 'Message', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Message', fromJson: OnvifUtil.stringMappedFromXml)
   final String message;
 
   SystemRebootResponse({required this.message});

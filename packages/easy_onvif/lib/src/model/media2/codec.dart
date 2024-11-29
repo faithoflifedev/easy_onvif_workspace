@@ -12,12 +12,12 @@ part 'codec.g.dart';
 class Codec {
   /// Video Media Subtype for the video format. For definitions see
   /// tt:VideoEncodingMimeNames and [IANA Media Types](https://www.iana.org/assignments/media-types/media-types.xhtml#video).
-  @JsonKey(name: 'Encoding', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Encoding', fromJson: OnvifUtil.stringMappedFromXml)
   final String encoding;
 
   /// The minimum guaranteed number of encoder instances (applications) for the
   /// VideoSourceConfiguration.
-  @JsonKey(name: 'Number', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Number', fromJson: OnvifUtil.intMappedFromXml)
   final int number;
 
   Codec({

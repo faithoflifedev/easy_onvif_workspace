@@ -10,7 +10,7 @@ part 'create_recording_job_response.g.dart';
 @JsonSerializable()
 class CreateRecordingJobResponse {
   /// The JobToken shall identify the created recording job.
-  @JsonKey(name: 'JobToken', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'JobToken', fromJson: OnvifUtil.stringMappedFromXml)
   final String token;
 
   /// The JobToken shall identify the created recording job.

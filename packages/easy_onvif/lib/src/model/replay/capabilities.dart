@@ -16,7 +16,8 @@ class Capabilities {
 
   /// The list contains two elements defining the minimum and maximum valid
   /// values supported as session timeout in seconds.
-  @JsonKey(name: '@SessionTimeoutRange', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(
+      name: '@SessionTimeoutRange', fromJson: OnvifUtil.stringMappedFromXml)
   final String sessionTimeoutRange;
 
   /// Indicates support for RTP/RTSP/TCP.
@@ -25,7 +26,7 @@ class Capabilities {
 
   /// If playback streaming over WebSocket is supported, this shall return the
   /// RTSP WebSocket URI as described in Streaming Specification Section 5.1.1.5.
-  @JsonKey(name: '@RTSPWebSocketUri', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: '@RTSPWebSocketUri', fromJson: OnvifUtil.stringMappedFromXml)
   final String rtspWebSocketUri;
 
   Capabilities({

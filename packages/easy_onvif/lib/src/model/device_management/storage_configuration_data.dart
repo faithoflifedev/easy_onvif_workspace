@@ -15,11 +15,11 @@ class StorageConfigurationData {
   final String type;
 
   /// local path
-  @JsonKey(name: 'LocalPath', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(name: 'LocalPath', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? localPath;
 
   /// Storage server address
-  @JsonKey(name: 'StorageUri', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(name: 'StorageUri', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? storageUri;
 
   /// User credential for the storage server

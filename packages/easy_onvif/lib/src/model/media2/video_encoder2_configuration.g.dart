@@ -10,24 +10,25 @@ VideoEncoder2Configuration _$VideoEncoder2ConfigurationFromJson(
         Map<String, dynamic> json) =>
     VideoEncoder2Configuration(
       token: json['@token'] as String,
-      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
-      useCount: OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
+      name: OnvifUtil.stringMappedFromXml(json['Name'] as Map<String, dynamic>),
+      useCount:
+          OnvifUtil.intMappedFromXml(json['UseCount'] as Map<String, dynamic>),
       govLength: int.parse(json['@GovLength'] as String),
-      anchorFrameDistance: OnvifUtil.nullableMappedToInt(
+      anchorFrameDistance: OnvifUtil.nullableIntMappedFromXml(
           json['AnchorFrameDistance'] as Map<String, dynamic>?),
       profile: json['@Profile'] as String,
-      guaranteedFrameRate: OnvifUtil.nullableMappedToBool(
+      guaranteedFrameRate: OnvifUtil.nullableBoolMappedFromXml(
           json['GuaranteedFrameRate'] as Map<String, dynamic>?),
-      encoding:
-          OnvifUtil.mappedToString(json['Encoding'] as Map<String, dynamic>),
+      encoding: OnvifUtil.stringMappedFromXml(
+          json['Encoding'] as Map<String, dynamic>),
       resolution:
           VideoResolution2.fromJson(json['Resolution'] as Map<String, dynamic>),
       rateControl: VideoRateControl2.fromJson(
           json['RateControl'] as Map<String, dynamic>),
       multicast: MulticastConfiguration.fromJson(
           json['Multicast'] as Map<String, dynamic>),
-      quality:
-          OnvifUtil.mappedToDouble(json['Quality'] as Map<String, dynamic>),
+      quality: OnvifUtil.doubleMappedFromXml(
+          json['Quality'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$VideoEncoder2ConfigurationToJson(

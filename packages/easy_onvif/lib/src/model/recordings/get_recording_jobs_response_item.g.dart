@@ -9,8 +9,8 @@ part of 'get_recording_jobs_response_item.dart';
 GetRecordingJobsResponseItem _$GetRecordingJobsResponseItemFromJson(
         Map<String, dynamic> json) =>
     GetRecordingJobsResponseItem(
-      jobToken:
-          OnvifUtil.mappedToString(json['JobToken'] as Map<String, dynamic>),
+      jobToken: OnvifUtil.stringMappedFromXml(
+          json['JobToken'] as Map<String, dynamic>),
       jobConfiguration: RecordingJobConfiguration.fromJson(
           json['JobConfiguration'] as Map<String, dynamic>),
     );

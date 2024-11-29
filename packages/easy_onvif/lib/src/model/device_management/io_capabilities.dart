@@ -8,11 +8,12 @@ part 'io_capabilities.g.dart';
 @JsonSerializable()
 class IoCapabilities {
   /// Number of input connectors.
-  @JsonKey(name: 'InputConnectors', fromJson: OnvifUtil.nullableMappedToInt)
+  @JsonKey(
+      name: 'InputConnectors', fromJson: OnvifUtil.nullableIntMappedFromXml)
   final int? inputConnectors;
 
   /// Number of relay outputs.
-  @JsonKey(name: 'RelayOutputs', fromJson: OnvifUtil.nullableMappedToInt)
+  @JsonKey(name: 'RelayOutputs', fromJson: OnvifUtil.nullableIntMappedFromXml)
   final int? relayOutputs;
 
   @JsonKey(name: 'Extension')

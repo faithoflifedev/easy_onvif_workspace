@@ -10,9 +10,9 @@ StorageConfigurationData _$StorageConfigurationDataFromJson(
         Map<String, dynamic> json) =>
     StorageConfigurationData(
       type: json['@type'] as String,
-      localPath: OnvifUtil.nullableMappedToString(
+      localPath: OnvifUtil.nullableStringMappedFromXml(
           json['LocalPath'] as Map<String, dynamic>?),
-      storageUri: OnvifUtil.nullableMappedToString(
+      storageUri: OnvifUtil.nullableStringMappedFromXml(
           json['StorageUri'] as Map<String, dynamic>?),
       user: json['User'] == null
           ? null

@@ -13,12 +13,12 @@ part 'filter.g.dart';
 @JsonSerializable()
 class Filter implements XmlSerializable {
   /// Topic filter as defined in section 9.6.3 of the ONVIF Core Specification.
-  @JsonKey(name: 'Topic', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Topic', fromJson: OnvifUtil.stringMappedFromXml)
   final String topic;
 
   /// Optional message source content filter as defined in section 9.4.4 of the
   /// ONVIF Core Specification.
-  @JsonKey(name: 'Source', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Source', fromJson: OnvifUtil.stringMappedFromXml)
   final String? source;
 
   Filter({

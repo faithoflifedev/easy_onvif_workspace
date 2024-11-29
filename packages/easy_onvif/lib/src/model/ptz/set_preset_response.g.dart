@@ -8,8 +8,8 @@ part of 'set_preset_response.dart';
 
 SetPresetResponse _$SetPresetResponseFromJson(Map<String, dynamic> json) =>
     SetPresetResponse(
-      presetToken:
-          OnvifUtil.mappedToString(json['PresetToken'] as Map<String, dynamic>),
+      presetToken: OnvifUtil.stringMappedFromXml(
+          json['PresetToken'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SetPresetResponseToJson(SetPresetResponse instance) =>

@@ -18,7 +18,8 @@ enum PtzPresetTourDirection {
 @JsonSerializable()
 class PtzPresetTourStartingCondition {
   /// Execute presets in random order. If set to true and Direction is also present, Direction will be ignored and presets of the Tour will be recalled randomly.
-  @JsonKey(name: 'RandomPresetOrder', fromJson: OnvifUtil.nullableMappedToBool)
+  @JsonKey(
+      name: 'RandomPresetOrder', fromJson: OnvifUtil.nullableBoolMappedFromXml)
   final bool? randomPresetOrder;
 
   /// Optional parameter to specify how many times the preset tour is recurred.
@@ -53,8 +54,8 @@ class PtzPresetTourStartingCondition {
   static PtzPresetTourDirection? _fix(Map<String, dynamic>? value) =>
       value == null
           ? null
-          : $enumDecode(
-              _$PtzPresetTourDirectionEnumMap, OnvifUtil.mappedToString(value));
+          : $enumDecode(_$PtzPresetTourDirectionEnumMap,
+              OnvifUtil.stringMappedFromXml(value));
 
   @override
   String toString() => jsonEncode(toJson());

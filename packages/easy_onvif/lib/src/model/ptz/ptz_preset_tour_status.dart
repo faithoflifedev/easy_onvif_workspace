@@ -46,8 +46,8 @@ class PtzPresetTourStatus {
 
   Map<String, dynamic> toJson() => _$PtzPresetTourStatusToJson(this);
 
-  static PtzPresetTourState _fix(Map<String, dynamic> value) =>
-      $enumDecode(_$PtzPresetTourStateEnumMap, OnvifUtil.mappedToString(value));
+  static PtzPresetTourState _fix(Map<String, dynamic> value) => $enumDecode(
+      _$PtzPresetTourStateEnumMap, OnvifUtil.stringMappedFromXml(value));
 
   @override
   String toString() => jsonEncode(toJson());

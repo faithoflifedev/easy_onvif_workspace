@@ -15,7 +15,7 @@ class TrackConfiguration {
   final TrackType trackType;
 
   /// Informative description of the track.
-  @JsonKey(name: 'Description', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Description', fromJson: OnvifUtil.stringMappedFromXml)
   final String description;
 
   TrackConfiguration({
@@ -32,7 +32,7 @@ class TrackConfiguration {
   String toString() => json.encode(toJson());
 
   static TrackType _trackType(dynamic json) =>
-      $enumDecode(_$TrackTypeEnumMap, OnvifUtil.mappedToString(json));
+      $enumDecode(_$TrackTypeEnumMap, OnvifUtil.stringMappedFromXml(json));
 }
 
 enum TrackType {

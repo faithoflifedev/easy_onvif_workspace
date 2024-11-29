@@ -11,11 +11,11 @@ Imaging _$ImagingFromJson(Map<String, dynamic> json) => Imaging(
           ? null
           : BacklightCompensation.fromJson(
               json['BacklightCompensation'] as Map<String, dynamic>),
-      brightness: OnvifUtil.nullableMappedToDouble(
+      brightness: OnvifUtil.nullableDoubleMappedFromXml(
           json['Brightness'] as Map<String, dynamic>?),
-      colorSaturation: OnvifUtil.nullableMappedToDouble(
+      colorSaturation: OnvifUtil.nullableDoubleMappedFromXml(
           json['ColorSaturation'] as Map<String, dynamic>?),
-      contrast: OnvifUtil.nullableMappedToDouble(
+      contrast: OnvifUtil.nullableDoubleMappedFromXml(
           json['Contrast'] as Map<String, dynamic>?),
       exposure: json['Exposure'] == null
           ? null
@@ -23,9 +23,9 @@ Imaging _$ImagingFromJson(Map<String, dynamic> json) => Imaging(
       focus: json['Focus'] == null
           ? null
           : Focus.fromJson(json['Focus'] as Map<String, dynamic>),
-      irCutFilter: OnvifUtil.nullableMappedToString(
+      irCutFilter: OnvifUtil.nullableStringMappedFromXml(
           json['IrCutFilter'] as Map<String, dynamic>?),
-      sharpness: OnvifUtil.nullableMappedToDouble(
+      sharpness: OnvifUtil.nullableDoubleMappedFromXml(
           json['Sharpness'] as Map<String, dynamic>?),
       wideDynamicRange: json['WideDynamicRange'] == null
           ? null

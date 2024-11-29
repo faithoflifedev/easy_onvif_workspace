@@ -12,7 +12,7 @@ part 'get_recording_jobs_response_item.g.dart';
 @JsonSerializable()
 class GetRecordingJobsResponseItem {
   /// List of recording jobs.
-  @JsonKey(name: 'JobToken', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'JobToken', fromJson: OnvifUtil.stringMappedFromXml)
   final String jobToken;
 
   /// List of recording jobs.

@@ -10,10 +10,10 @@ MulticastConfiguration _$MulticastConfigurationFromJson(
         Map<String, dynamic> json) =>
     MulticastConfiguration(
       ipAddress: IpAddress.fromJson(json['Address'] as Map<String, dynamic>),
-      port: OnvifUtil.mappedToInt(json['Port'] as Map<String, dynamic>),
-      ttl: OnvifUtil.mappedToInt(json['TTL'] as Map<String, dynamic>),
-      autoStart:
-          OnvifUtil.mappedToBool(json['AutoStart'] as Map<String, dynamic>),
+      port: OnvifUtil.intMappedFromXml(json['Port'] as Map<String, dynamic>),
+      ttl: OnvifUtil.intMappedFromXml(json['TTL'] as Map<String, dynamic>),
+      autoStart: OnvifUtil.boolMappedFromXml(
+          json['AutoStart'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$MulticastConfigurationToJson(

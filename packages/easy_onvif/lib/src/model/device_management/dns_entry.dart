@@ -9,15 +9,15 @@ part 'dns_entry.g.dart';
 @JsonSerializable()
 class DnsEntry {
   /// Indicates if the address is an IPv4 or IPv6 address.
-  @JsonKey(name: 'Type', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Type', fromJson: OnvifUtil.stringMappedFromXml)
   final String type;
 
   /// IPv4 address.
-  @JsonKey(name: 'IPv4Address', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(name: 'IPv4Address', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? ipv4Address;
 
   /// IPv6 address.
-  @JsonKey(name: 'IPv6Address', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(name: 'IPv6Address', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? ipv6Address;
 
   DnsEntry({

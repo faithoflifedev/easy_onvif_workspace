@@ -7,7 +7,7 @@ part 'event_capabilities.g.dart';
 @JsonSerializable()
 class EventCapabilities {
   ///Event service URI.
-  @JsonKey(name: 'XAddr', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'XAddr', fromJson: OnvifUtil.stringMappedFromXml)
   final dynamic xAddr;
 
   EventCapabilities(this.xAddr);

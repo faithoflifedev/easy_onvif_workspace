@@ -14,11 +14,11 @@ class ImagingPreset {
 
   /// Indicates Imaging Preset Type. Use timg:ImagingPresetType. Used for
   /// multi-language support and display.
-  @JsonKey(name: 'type', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'type', fromJson: OnvifUtil.stringMappedFromXml)
   final String type;
 
   /// Human readable name of the Imaging Preset.
-  @JsonKey(name: 'name', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'name', fromJson: OnvifUtil.stringMappedFromXml)
   final String name;
 
   ImagingPreset({

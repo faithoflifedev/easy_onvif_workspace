@@ -11,7 +11,7 @@ part 'get_tracks_response_item.g.dart';
 @JsonSerializable()
 class GetTracksResponseItem {
   /// Token of the track.
-  @JsonKey(name: 'TrackToken', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'TrackToken', fromJson: OnvifUtil.stringMappedFromXml)
   final String trackToken;
 
   /// Configuration of the recording.

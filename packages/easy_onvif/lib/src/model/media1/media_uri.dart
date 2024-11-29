@@ -7,16 +7,16 @@ part 'media_uri.g.dart';
 
 @JsonSerializable()
 class MediaUri {
-  @JsonKey(name: 'Uri', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Uri', fromJson: OnvifUtil.stringMappedFromXml)
   final String uri;
 
-  @JsonKey(name: 'InvalidAfterConnect', fromJson: OnvifUtil.mappedToBool)
+  @JsonKey(name: 'InvalidAfterConnect', fromJson: OnvifUtil.boolMappedFromXml)
   final bool invalidAfterConnect;
 
-  @JsonKey(name: 'InvalidAfterReboot', fromJson: OnvifUtil.mappedToBool)
+  @JsonKey(name: 'InvalidAfterReboot', fromJson: OnvifUtil.boolMappedFromXml)
   final bool invalidAfterReboot;
 
-  @JsonKey(name: 'Timeout', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Timeout', fromJson: OnvifUtil.stringMappedFromXml)
   final String timeout;
 
   MediaUri(

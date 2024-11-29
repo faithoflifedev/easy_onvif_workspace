@@ -27,3 +27,22 @@ extension Helpers on String {
         builder.text(this);
       });
 }
+
+extension MapExtension on Map<String, dynamic> {
+  Map<String, dynamic> convertFieldsToXmlMap(List<String> fields) {
+    final Map<String, dynamic> map = {};
+
+    for (var field in fields) {
+      if (containsKey(field)) {
+        map[field] = {'\$': this[field]};
+      } else {
+        map[field] = this[field];
+      }
+    }
+
+    return map;
+  }
+
+  Map<String, dynamic> convertFieldToXmlMap(String field) =>
+      convertFieldsToXmlMap([field]);
+}

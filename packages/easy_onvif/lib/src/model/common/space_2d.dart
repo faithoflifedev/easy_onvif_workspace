@@ -15,7 +15,7 @@ part 'space_2d.g.dart';
 @JsonSerializable()
 class Space2D {
   /// Capability information.
-  @JsonKey(name: 'URI', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'URI', fromJson: OnvifUtil.stringMappedFromXml)
   final String uri;
 
   @JsonKey(name: 'XRange')

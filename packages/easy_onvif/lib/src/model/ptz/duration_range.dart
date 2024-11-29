@@ -8,10 +8,21 @@ part 'duration_range.g.dart';
 /// A timeout Range within which Timeouts are accepted by the PTZ Node.
 @JsonSerializable()
 class DurationRange {
-  @JsonKey(name: 'Min', fromJson: OnvifUtil.mappedToString)
+  static final _xmlMappedFields = <String>[
+    'Min',
+    'Max',
+  ];
+
+  @JsonKey(
+    name: 'Min',
+    fromJson: OnvifUtil.stringMappedFromXml,
+  )
   final String min;
 
-  @JsonKey(name: 'Max', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(
+    name: 'Max',
+    fromJson: OnvifUtil.stringMappedFromXml,
+  )
   final String max;
 
   DurationRange({
@@ -22,7 +33,8 @@ class DurationRange {
   factory DurationRange.fromJson(Map<String, dynamic> json) =>
       _$DurationRangeFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DurationRangeToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$DurationRangeToJson(this).convertFieldsToXmlMap(_xmlMappedFields);
 
   @override
   String toString() => json.encode(toJson());

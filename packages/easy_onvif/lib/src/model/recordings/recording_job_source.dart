@@ -28,7 +28,8 @@ class RecordingJobSource implements XmlSerializable {
   /// ReceiverReference to the SourceToken field. When retrieving the
   /// RecordingJobConfiguration from the device, the AutoCreateReceiver field
   /// shall never be present.
-  @JsonKey(name: 'AutoCreateReceiver', fromJson: OnvifUtil.nullableMappedToBool)
+  @JsonKey(
+      name: 'AutoCreateReceiver', fromJson: OnvifUtil.nullableBoolMappedFromXml)
   final bool? autoCreateReceiver;
 
   @JsonKey(name: 'Tracks', fromJson: _fromJson)

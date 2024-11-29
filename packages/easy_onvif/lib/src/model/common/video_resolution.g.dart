@@ -8,6 +8,7 @@ part of 'video_resolution.dart';
 
 VideoResolution _$VideoResolutionFromJson(Map<String, dynamic> json) =>
     VideoResolution(
-      width: OnvifUtil.mappedToInt(json['Width'] as Map<String, dynamic>),
-      height: OnvifUtil.mappedToInt(json['Height'] as Map<String, dynamic>),
+      width: OnvifUtil.intMappedFromXml(json['Width'] as Map<String, dynamic>),
+      height:
+          OnvifUtil.intMappedFromXml(json['Height'] as Map<String, dynamic>),
     );

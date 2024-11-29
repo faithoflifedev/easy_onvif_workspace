@@ -12,13 +12,13 @@ class MulticastConfiguration {
   @JsonKey(name: 'Address')
   final IpAddress ipAddress;
 
-  @JsonKey(name: 'Port', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Port', fromJson: OnvifUtil.intMappedFromXml)
   final int port;
 
-  @JsonKey(name: 'TTL', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'TTL', fromJson: OnvifUtil.intMappedFromXml)
   final int ttl;
 
-  @JsonKey(name: 'AutoStart', fromJson: OnvifUtil.mappedToBool)
+  @JsonKey(name: 'AutoStart', fromJson: OnvifUtil.boolMappedFromXml)
   final bool autoStart;
 
   MulticastConfiguration({

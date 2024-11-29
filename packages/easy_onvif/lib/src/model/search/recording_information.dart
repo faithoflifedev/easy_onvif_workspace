@@ -12,7 +12,7 @@ part 'recording_information.g.dart';
 /// search.
 @JsonSerializable()
 class RecordingInformation {
-  @JsonKey(name: 'RecordingToken', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'RecordingToken', fromJson: OnvifUtil.stringMappedFromXml)
   final String recordingToken;
 
   /// Information about the source of the recording. This gives a description of
@@ -30,7 +30,7 @@ class RecordingInformation {
   @JsonKey(name: 'LatestRecording', fromJson: OnvifUtil.mappedToStdDateTime)
   final DateTime? latestRecording;
 
-  @JsonKey(name: 'Content', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Content', fromJson: OnvifUtil.stringMappedFromXml)
   final String content;
 
   /// Basic information about the track. Note that a track may represent a
@@ -63,8 +63,8 @@ class RecordingInformation {
       OnvifUtil.jsonList<TrackInformation>(json,
           (json) => TrackInformation.fromJson(json as Map<String, dynamic>));
 
-  static RecordingStatus _recordingStatus(dynamic json) =>
-      $enumDecode(_$RecordingStatusEnumMap, OnvifUtil.mappedToString(json));
+  static RecordingStatus _recordingStatus(dynamic json) => $enumDecode(
+      _$RecordingStatusEnumMap, OnvifUtil.stringMappedFromXml(json));
 }
 
 enum RecordingStatus {

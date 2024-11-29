@@ -9,7 +9,8 @@ part 'extension.g.dart';
 @JsonSerializable()
 class Extension {
   /// Indicates support for IP filtering.
-  @JsonKey(name: 'Dot11Configuration', fromJson: OnvifUtil.nullableMappedToBool)
+  @JsonKey(
+      name: 'Dot11Configuration', fromJson: OnvifUtil.nullableBoolMappedFromXml)
   final bool? dot11Configuration;
 
   @JsonKey(name: 'Extension')

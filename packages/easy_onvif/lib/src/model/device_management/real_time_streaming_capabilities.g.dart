@@ -9,11 +9,11 @@ part of 'real_time_streaming_capabilities.dart';
 RealTimeStreamingCapabilities _$RealTimeStreamingCapabilitiesFromJson(
         Map<String, dynamic> json) =>
     RealTimeStreamingCapabilities(
-      rtpMulticast: OnvifUtil.nullableMappedToBool(
+      rtpMulticast: OnvifUtil.nullableBoolMappedFromXml(
           json['RTPMulticast'] as Map<String, dynamic>?),
-      rtp_tcp: OnvifUtil.nullableMappedToBool(
+      rtp_tcp: OnvifUtil.nullableBoolMappedFromXml(
           json['RTP_TCP'] as Map<String, dynamic>?),
-      rtp_rtsp_tcp: OnvifUtil.nullableMappedToBool(
+      rtp_rtsp_tcp: OnvifUtil.nullableBoolMappedFromXml(
           json['RTP_RTSP_TCP'] as Map<String, dynamic>?),
       extension: json['extension'] == null
           ? null

@@ -16,7 +16,7 @@ class PtzStatus {
   @JsonKey(name: 'MoveStatus')
   final MoveStatus? moveStatus;
 
-  @JsonKey(name: 'Error', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(name: 'Error', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? error;
 
   @JsonKey(name: 'UtcTime', fromJson: OnvifUtil.nullableMappedToDateTime)

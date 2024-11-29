@@ -11,19 +11,20 @@ part 'network_capabilities.g.dart';
 @JsonSerializable()
 class NetworkCapabilities {
   /// Indicates support for IP filtering.
-  @JsonKey(name: 'IPFilter', fromJson: OnvifUtil.nullableMappedToBool)
+  @JsonKey(name: 'IPFilter', fromJson: OnvifUtil.nullableBoolMappedFromXml)
   final bool? ipFilter;
 
   /// Indicates support for zeroConf.
-  @JsonKey(name: 'ZeroConfiguration', fromJson: OnvifUtil.nullableMappedToBool)
+  @JsonKey(
+      name: 'ZeroConfiguration', fromJson: OnvifUtil.nullableBoolMappedFromXml)
   final bool? zeroConfiguration;
 
   /// Indicates support for IPv6.
-  @JsonKey(name: 'IPVersion6', fromJson: OnvifUtil.nullableMappedToBool)
+  @JsonKey(name: 'IPVersion6', fromJson: OnvifUtil.nullableBoolMappedFromXml)
   final bool? ipVersion6;
 
   /// Indicates support for dynamic DNS configuration.
-  @JsonKey(name: 'DynDNS', fromJson: OnvifUtil.nullableMappedToBool)
+  @JsonKey(name: 'DynDNS', fromJson: OnvifUtil.nullableBoolMappedFromXml)
   final bool? dynDNS;
 
   @JsonKey(name: 'Extension')

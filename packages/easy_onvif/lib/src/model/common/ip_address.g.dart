@@ -7,10 +7,10 @@ part of 'ip_address.dart';
 // **************************************************************************
 
 IpAddress _$IpAddressFromJson(Map<String, dynamic> json) => IpAddress(
-      type: OnvifUtil.mappedToString(json['Type'] as Map<String, dynamic>),
-      ipv4Address: OnvifUtil.nullableMappedToString(
+      type: OnvifUtil.stringMappedFromXml(json['Type'] as Map<String, dynamic>),
+      ipv4Address: OnvifUtil.nullableStringMappedFromXml(
           json['IPv4Address'] as Map<String, dynamic>?),
-      ipv6Address: OnvifUtil.nullableMappedToString(
+      ipv6Address: OnvifUtil.nullableStringMappedFromXml(
           json['IPv6Address'] as Map<String, dynamic>?),
     );
 

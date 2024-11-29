@@ -10,7 +10,7 @@ part 'attachment_data.g.dart';
 /// The log information as attachment data.
 @JsonSerializable()
 class AttachmentData {
-  @JsonKey(name: 'contentType', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(name: 'contentType', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? contentType;
 
   /// The log information as character data.

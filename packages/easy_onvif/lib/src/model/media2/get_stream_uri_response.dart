@@ -27,7 +27,7 @@ part 'get_stream_uri_response.g.dart';
 /// generate Uris longer than 128 octets.
 @JsonSerializable()
 class GetStreamUriResponse {
-  @JsonKey(name: 'Uri', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Uri', fromJson: OnvifUtil.stringMappedFromXml)
   final String uri;
 
   GetStreamUriResponse({required this.uri});

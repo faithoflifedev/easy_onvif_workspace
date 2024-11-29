@@ -29,7 +29,7 @@ class FindRecordingResult {
   String toString() => json.encode(toJson());
 
   static SearchState _searchState(dynamic json) =>
-      $enumDecode(_$SearchStateEnumMap, OnvifUtil.mappedToString(json));
+      $enumDecode(_$SearchStateEnumMap, OnvifUtil.stringMappedFromXml(json));
 
   static List<RecordingInformation> _fromJson(dynamic json) =>
       OnvifUtil.jsonList<RecordingInformation>(

@@ -15,7 +15,7 @@ class SystemInformation {
   final AttachmentData? binary;
 
   /// The log information as character data.
-  @JsonKey(name: 'String', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(name: 'String', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? string;
 
   SystemInformation({

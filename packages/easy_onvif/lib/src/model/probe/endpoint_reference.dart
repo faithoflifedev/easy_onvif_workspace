@@ -7,7 +7,10 @@ part 'endpoint_reference.g.dart';
 
 @JsonSerializable()
 class EndpointReference {
-  @JsonKey(name: 'Address', fromJson: _address) // OnvifUtil.mappedToString
+  @JsonKey(
+    name: 'Address',
+    fromJson: _address,
+  )
   final String address;
 
   EndpointReference({required this.address});
@@ -23,7 +26,7 @@ class EndpointReference {
   static String _address(dynamic json) {
     if (json is Map) {
       // json from XML
-      return OnvifUtil.mappedToString(json as Map<String, dynamic>);
+      return OnvifUtil.stringMappedFromXml(json as Map<String, dynamic>);
     } else {
       // json from serialized object
       return json;

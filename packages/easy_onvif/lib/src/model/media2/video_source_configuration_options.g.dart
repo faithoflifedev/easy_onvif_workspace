@@ -9,11 +9,11 @@ part of 'video_source_configuration_options.dart';
 VideoSourceConfigurationOptions _$VideoSourceConfigurationOptionsFromJson(
         Map<String, dynamic> json) =>
     VideoSourceConfigurationOptions(
-      maximumNumberOfProfiles: OnvifUtil.nullableMappedToInt(
+      maximumNumberOfProfiles: OnvifUtil.nullableIntMappedFromXml(
           json['MaximumNumberOfProfiles'] as Map<String, dynamic>?),
       boundsRange: IntRectangleRange.fromJson(
           json['BoundsRange'] as Map<String, dynamic>),
-      videoSourceTokensAvailable: OnvifUtil.mappedToStringList(
+      videoSourceTokensAvailable: OnvifUtil.stringMappedFromXmlList(
           json['VideoSourceTokensAvailable'] as Map<String, dynamic>),
       extension: json['Extension'] as Map<String, dynamic>?,
     );

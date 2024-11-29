@@ -32,30 +32,30 @@ class PtzConfiguration {
   final String token;
 
   ///User readable name. Length up to 64 characters.
-  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.stringMappedFromXml)
   final String name;
 
   ///Number of internal references currently using this configuration.
   ///This informational parameter is read-only. Deprecated for Media2 Service.
-  @JsonKey(name: 'UseCount', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'UseCount', fromJson: OnvifUtil.intMappedFromXml)
   final int useCount;
 
   ///The optional acceleration ramp used by the device when moving.
-  @JsonKey(name: 'MoveRamp', fromJson: OnvifUtil.nullableMappedToInt)
+  @JsonKey(name: 'MoveRamp', fromJson: OnvifUtil.nullableIntMappedFromXml)
   final int? moveRamp;
 
   ///The optional acceleration ramp used by the device when recalling presets.
-  @JsonKey(name: 'PresetRamp', fromJson: OnvifUtil.nullableMappedToInt)
+  @JsonKey(name: 'PresetRamp', fromJson: OnvifUtil.nullableIntMappedFromXml)
   final int? presetRamp;
 
   ///The optional acceleration ramp used by the device when executing
   ///PresetTours.
-  @JsonKey(name: 'PresetTourRamp', fromJson: OnvifUtil.nullableMappedToInt)
+  @JsonKey(name: 'PresetTourRamp', fromJson: OnvifUtil.nullableIntMappedFromXml)
   final int? presetTourRamp;
 
   ///A mandatory reference to the PTZ Node that the PTZ Configuration belongs
   ///to.
-  @JsonKey(name: 'NodeToken', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'NodeToken', fromJson: OnvifUtil.stringMappedFromXml)
   final String nodeToken;
 
   ///If the PTZ Node supports absolute Pan/Tilt movements, it shall specify one
@@ -109,7 +109,8 @@ class PtzConfiguration {
   ///If the PTZ Node supports continuous movements, it shall specify a default
   ///timeout, after which the movement stops.
   @JsonKey(
-      name: 'DefaultPTZTimeout', fromJson: OnvifUtil.nullableMappedToString)
+      name: 'DefaultPTZTimeout',
+      fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? defaultPtzTimeout;
 
   ///The Pan/Tilt limits element should be present for a PTZ Node that supports
@@ -157,7 +158,12 @@ class PtzConfiguration {
   String toString() => json.encode(toJson());
 
   static Space? _nullableMappedToSpace(Map<String, dynamic>? value) =>
-      value != null ? $enumDecodeNullable(_$SpaceEnumMap, value['\$']) : null;
+      value != null
+          ? $enumDecodeNullable(
+              _$SpaceEnumMap,
+              OnvifUtil.stringMappedFromXml(value),
+            )
+          : null;
 }
 
 // enum SearchState {

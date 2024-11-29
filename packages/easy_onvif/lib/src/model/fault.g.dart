@@ -13,17 +13,15 @@ Fault _$FaultFromJson(Map<String, dynamic> json) => Fault(
       reason: json['Reason'] == null
           ? null
           : Reason.fromJson(json['Reason'] as Map<String, dynamic>),
-      node: OnvifUtil.nullableMappedToString(
-          json['Node'] as Map<String, dynamic>?),
-      role: OnvifUtil.nullableMappedToString(
-          json['Role'] as Map<String, dynamic>?),
+      mappedNode: json['Node'] as Map<String, dynamic>?,
+      mappedRole: json['Role'] as Map<String, dynamic>?,
       detail: json['Detail'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$FaultToJson(Fault instance) => <String, dynamic>{
       'Code': instance.code,
       'Reason': instance.reason,
-      'Node': instance.node,
-      'Role': instance.role,
+      'Node': instance.mappedNode,
+      'Role': instance.mappedRole,
       'Detail': instance.detail,
     };

@@ -16,20 +16,24 @@ class Fault {
   @JsonKey(name: 'Reason')
   final Reason? reason;
 
-  @JsonKey(name: 'Node', fromJson: OnvifUtil.nullableMappedToString)
-  final String? node;
+  @JsonKey(name: 'Node')
+  final Map<String, dynamic>? mappedNode;
 
-  @JsonKey(name: 'Role', fromJson: OnvifUtil.nullableMappedToString)
-  final String? role;
+  @JsonKey(name: 'Role')
+  final Map<String, dynamic>? mappedRole;
 
   @JsonKey(name: 'Detail')
   final Map<String, dynamic>? detail;
 
+  String? get node => OnvifUtil.nullableStringMappedFromXml(mappedNode);
+
+  String? get role => OnvifUtil.nullableStringMappedFromXml(mappedRole);
+
   Fault({
     this.code,
     this.reason,
-    this.node,
-    this.role,
+    this.mappedNode,
+    this.mappedRole,
     this.detail,
   });
 

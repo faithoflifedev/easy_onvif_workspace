@@ -9,8 +9,8 @@ part of 'track_configuration.dart';
 TrackConfiguration _$TrackConfigurationFromJson(Map<String, dynamic> json) =>
     TrackConfiguration(
       trackType: TrackConfiguration._trackType(json['TrackType']),
-      description:
-          OnvifUtil.mappedToString(json['Description'] as Map<String, dynamic>),
+      description: OnvifUtil.stringMappedFromXml(
+          json['Description'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$TrackConfigurationToJson(TrackConfiguration instance) =>

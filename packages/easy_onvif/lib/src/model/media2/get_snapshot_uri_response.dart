@@ -16,7 +16,7 @@ part 'get_snapshot_uri_response.g.dart';
 /// be updated automatically and independent from calls to GetSnapshotUri.
 @JsonSerializable()
 class GetSnapshotUriResponse {
-  @JsonKey(name: 'Uri', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Uri', fromJson: OnvifUtil.stringMappedFromXml)
   final String uri;
 
   GetSnapshotUriResponse({required this.uri});

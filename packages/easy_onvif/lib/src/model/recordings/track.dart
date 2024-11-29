@@ -12,16 +12,16 @@ class Track {
   /// If the received RTSP stream contains multiple tracks of the same type, the
   /// SourceTag differentiates between those Tracks. This field can be ignored
   /// in case of recording a local source.
-  @JsonKey(name: 'SourceTag', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'SourceTag', fromJson: OnvifUtil.stringMappedFromXml)
   final String sourceTag;
 
   /// Indicates the destination track.
-  @JsonKey(name: 'Destination', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Destination', fromJson: OnvifUtil.stringMappedFromXml)
   final String destination;
 
   /// Optionally holds an implementation defined string value that describes the
   /// error. The string should be in the English language.
-  @JsonKey(name: 'Error', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(name: 'Error', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? error;
 
   /// Provides the job state of the track. The valid values of state shall be
@@ -44,10 +44,12 @@ class Track {
   @override
   String toString() => json.encode(toJson());
 
-  static RecordingJobState? _nullableRecordingJobState(dynamic json) => json !=
-          null
-      ? $enumDecode(_$RecordingJobStateEnumMap, OnvifUtil.mappedToString(json))
-      : null;
+  static RecordingJobState? _nullableRecordingJobState(
+          dynamic json) =>
+      json != null
+          ? $enumDecode(
+              _$RecordingJobStateEnumMap, OnvifUtil.stringMappedFromXml(json))
+          : null;
 
   void toXml() {
     Transport.builder.element('Track', nest: () {

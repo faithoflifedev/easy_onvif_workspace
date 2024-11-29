@@ -6,66 +6,92 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'imaging.g.dart';
 
-///Optional configuration of the image sensor.
+/// Optional configuration of the image sensor.
 @JsonSerializable()
 class Imaging {
-  ///Enabled/disabled BLC mode (on/off).
+  static final _xmlMappedFields = <String>[
+    'BacklightCompensation',
+    'Brightness',
+    'ColorSaturation',
+    'Contrast',
+    'IrCutFilter',
+    'Sharpness',
+  ];
+
+  /// Enabled/disabled BLC mode (on/off).
   @JsonKey(name: 'BacklightCompensation')
   final BacklightCompensation? backlightCompensation;
 
-  ///Image brightness (unit unspecified).
-  @JsonKey(name: 'Brightness', fromJson: OnvifUtil.nullableMappedToDouble)
+  /// Image brightness (unit unspecified).
+  @JsonKey(
+    name: 'Brightness',
+    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
+  )
   final double? brightness;
 
-  ///Color saturation of the image (unit unspecified).
-  @JsonKey(name: 'ColorSaturation', fromJson: OnvifUtil.nullableMappedToDouble)
+  /// Color saturation of the image (unit unspecified).
+  @JsonKey(
+    name: 'ColorSaturation',
+    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
+  )
   final double? colorSaturation;
 
-  ///Contrast of the image (unit unspecified).
-  @JsonKey(name: 'Contrast', fromJson: OnvifUtil.nullableMappedToDouble)
+  /// Contrast of the image (unit unspecified).
+  @JsonKey(
+    name: 'Contrast',
+    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
+  )
   final double? contrast;
 
-  ///Exposure mode of the device.
+  /// Exposure mode of the device.
   @JsonKey(name: 'Exposure')
   final Exposure? exposure;
 
-  ///Exposure mode of the device.
+  /// Exposure mode of the device.
   @JsonKey(name: 'Focus')
   final Focus? focus;
 
-  ///Infrared Cutoff Filter settings.
-  ///- enum { 'ON', 'OFF', 'AUTO' }
-  @JsonKey(name: 'IrCutFilter', fromJson: OnvifUtil.nullableMappedToString)
+  /// Infrared Cutoff Filter settings.
+  /// - enum { 'ON', 'OFF', 'AUTO' }
+  @JsonKey(
+    name: 'IrCutFilter',
+    fromJson: OnvifUtil.nullableStringMappedFromXml,
+  )
   final String? irCutFilter;
 
-  ///Sharpness of the Video image.
-  @JsonKey(name: 'Sharpness', fromJson: OnvifUtil.nullableMappedToDouble)
+  /// Sharpness of the Video image.
+  @JsonKey(
+    name: 'Sharpness',
+    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
+  )
   final double? sharpness;
 
-  ///Sharpness of the Video image.
+  /// Wide Dynamic Range settings.
   @JsonKey(name: 'WideDynamicRange')
   final WideDynamicRange? wideDynamicRange;
 
-  ///Sharpness of the Video image.
+  /// White balance settings.
   @JsonKey(name: 'WhiteBalance')
   final WhiteBalance? whiteBalance;
 
-  Imaging(
-      {this.backlightCompensation,
-      this.brightness,
-      this.colorSaturation,
-      this.contrast,
-      this.exposure,
-      this.focus,
-      this.irCutFilter,
-      this.sharpness,
-      this.wideDynamicRange,
-      this.whiteBalance});
+  Imaging({
+    this.backlightCompensation,
+    this.brightness,
+    this.colorSaturation,
+    this.contrast,
+    this.exposure,
+    this.focus,
+    this.irCutFilter,
+    this.sharpness,
+    this.wideDynamicRange,
+    this.whiteBalance,
+  });
 
   factory Imaging.fromJson(Map<String, dynamic> json) =>
       _$ImagingFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ImagingToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$ImagingToJson(this).convertFieldsToXmlMap(_xmlMappedFields);
 
   @override
   String toString() => json.encode(toJson());

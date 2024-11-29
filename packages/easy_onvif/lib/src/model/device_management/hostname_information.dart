@@ -7,10 +7,10 @@ part 'hostname_information.g.dart';
 
 @JsonSerializable()
 class HostnameInformation {
-  @JsonKey(name: 'FromDHCP', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'FromDHCP', fromJson: OnvifUtil.stringMappedFromXml)
   final String fromDhcp;
 
-  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.stringMappedFromXml)
   final String name;
 
   HostnameInformation({required this.fromDhcp, required this.name});

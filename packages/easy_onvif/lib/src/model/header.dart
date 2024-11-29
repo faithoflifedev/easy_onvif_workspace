@@ -20,25 +20,35 @@ class Header implements XmlSerializable {
   @JsonKey(name: 'AppSequence')
   final AppSequence? appSequence;
 
-  @JsonKey(name: 'MessageID', fromJson: OnvifUtil.nullableMappedToString)
-  final String? messageID;
+  @JsonKey(name: 'MessageID')
+  final Map<String, dynamic>? mappedMessageID;
 
-  @JsonKey(name: 'RelatesTo', fromJson: OnvifUtil.nullableMappedToString)
-  final String? relatesTo;
+  @JsonKey(name: 'RelatesTo')
+  final Map<String, dynamic>? mappedRelatesTo;
 
-  @JsonKey(name: 'To', fromJson: OnvifUtil.nullableMappedToString)
-  final String? to;
+  @JsonKey(name: 'To')
+  final Map<String, dynamic>? mappedTo;
 
-  @JsonKey(name: 'Action', fromJson: OnvifUtil.nullableMappedToString)
-  final String? action;
+  @JsonKey(name: 'Action')
+  final Map<String, dynamic>? mappedAction;
+
+  String? get messageID =>
+      OnvifUtil.nullableStringMappedFromXml(mappedMessageID);
+
+  String? get relatesTo =>
+      OnvifUtil.nullableStringMappedFromXml(mappedRelatesTo);
+
+  String? get to => OnvifUtil.nullableStringMappedFromXml(mappedTo);
+
+  String? get action => OnvifUtil.nullableStringMappedFromXml(mappedAction);
 
   Header({
     this.security,
     this.appSequence,
-    this.messageID,
-    this.relatesTo,
-    this.to,
-    this.action,
+    this.mappedMessageID,
+    this.mappedRelatesTo,
+    this.mappedTo,
+    this.mappedAction,
   });
 
   factory Header.fromJson(Map<String, dynamic> json) => _$HeaderFromJson(json);

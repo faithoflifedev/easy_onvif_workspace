@@ -20,7 +20,7 @@ class Info {
   /// The minimum guaranteed total number of encoder instances (applications)
   /// per VideoSourceConfiguration. The device is able to deliver the Total
   /// number of streams
-  @JsonKey(name: 'Total', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Total', fromJson: OnvifUtil.intMappedFromXml)
   final int total;
 
   Info({

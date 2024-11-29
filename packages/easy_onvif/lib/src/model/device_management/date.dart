@@ -7,13 +7,13 @@ part 'date.g.dart';
 
 @JsonSerializable()
 class Date {
-  @JsonKey(name: 'Year', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Year', fromJson: OnvifUtil.intMappedFromXml)
   final int year;
 
-  @JsonKey(name: 'Month', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Month', fromJson: OnvifUtil.intMappedFromXml)
   final int month;
 
-  @JsonKey(name: 'Day', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Day', fromJson: OnvifUtil.intMappedFromXml)
   final int day;
 
   Date(this.year, this.month, this.day);

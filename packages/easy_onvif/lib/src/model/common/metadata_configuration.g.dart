@@ -10,8 +10,9 @@ MetadataConfiguration _$MetadataConfigurationFromJson(
         Map<String, dynamic> json) =>
     MetadataConfiguration(
       token: json['@token'] as String,
-      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
-      useCount: OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
+      name: OnvifUtil.stringMappedFromXml(json['Name'] as Map<String, dynamic>),
+      useCount:
+          OnvifUtil.intMappedFromXml(json['UseCount'] as Map<String, dynamic>),
       compressionType: json['CompressionType'] as String?,
       geoLocation: json['GeoLocation'] as bool?,
       shapePolygon: json['ShapePolygon'] as bool?,
@@ -21,11 +22,11 @@ MetadataConfiguration _$MetadataConfigurationFromJson(
       events: (json['Events'] as List<dynamic>?)
           ?.map((e) => Event.fromJson(e as Map<String, dynamic>))
           .toList(),
-      analytics: OnvifUtil.nullableMappedToBool(
+      analytics: OnvifUtil.nullableBoolMappedFromXml(
           json['Analytics'] as Map<String, dynamic>?),
-      multicast:
-          OnvifUtil.emptyMapToNull(json['Multicast'] as Map<String, dynamic>?),
-      sessionTimeout: OnvifUtil.mappedToString(
+      multicast: OnvifUtil.emptyOrMulticastConfiguration(
+          json['Multicast'] as Map<String, dynamic>?),
+      sessionTimeout: OnvifUtil.stringMappedFromXml(
           json['SessionTimeout'] as Map<String, dynamic>),
       analyticsEngineConfiguration:
           json['AnalyticsEngineConfiguration'] as Map<String, dynamic>?,

@@ -8,13 +8,13 @@ part of 'network_capabilities.dart';
 
 NetworkCapabilities _$NetworkCapabilitiesFromJson(Map<String, dynamic> json) =>
     NetworkCapabilities(
-      ipFilter: OnvifUtil.nullableMappedToBool(
+      ipFilter: OnvifUtil.nullableBoolMappedFromXml(
           json['IPFilter'] as Map<String, dynamic>?),
-      zeroConfiguration: OnvifUtil.nullableMappedToBool(
+      zeroConfiguration: OnvifUtil.nullableBoolMappedFromXml(
           json['ZeroConfiguration'] as Map<String, dynamic>?),
-      ipVersion6: OnvifUtil.nullableMappedToBool(
+      ipVersion6: OnvifUtil.nullableBoolMappedFromXml(
           json['IPVersion6'] as Map<String, dynamic>?),
-      dynDNS: OnvifUtil.nullableMappedToBool(
+      dynDNS: OnvifUtil.nullableBoolMappedFromXml(
           json['DynDNS'] as Map<String, dynamic>?),
       extension: json['Extension'] == null
           ? null

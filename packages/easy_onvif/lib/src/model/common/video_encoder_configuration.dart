@@ -16,17 +16,17 @@ class VideoEncoderConfiguration {
   final String token;
 
   ///User readable name. Length up to 64 characters.
-  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.stringMappedFromXml)
   final String name;
 
   ///Number of internal references currently using this configuration.
   ///This informational parameter is read-only. Deprecated for Media2 Service.
-  @JsonKey(name: 'UseCount', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'UseCount', fromJson: OnvifUtil.intMappedFromXml)
   final int useCount;
 
   ///Used video codec, either Jpeg, H.264 or Mpeg4
   ///- enum { 'JPEG', 'MPEG4', 'H264' }
-  @JsonKey(name: 'Encoding', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(name: 'Encoding', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? encoding;
 
   ///Configured video resolution
@@ -35,7 +35,7 @@ class VideoEncoderConfiguration {
 
   ///Relative value for the video quantizers and the quality of the video. A
   ///high value within supported quality range means higher quality
-  @JsonKey(name: 'Quality', fromJson: OnvifUtil.nullableMappedToDouble)
+  @JsonKey(name: 'Quality', fromJson: OnvifUtil.nullableDoubleMappedFromXml)
   final double? quality;
 
   ///Optional element to configure rate control related parameters.
@@ -51,11 +51,15 @@ class VideoEncoderConfiguration {
   final H264? h264;
 
   ///Defines the multicast settings that could be used for video streaming.
-  @JsonKey(name: 'Multicast', fromJson: OnvifUtil.emptyMapToNull)
+  @JsonKey(
+    name: 'Multicast',
+    fromJson: OnvifUtil.emptyOrMulticastConfiguration,
+  )
   final MulticastConfiguration? multiCast;
 
   ///The rtsp session timeout for the related video stream
-  @JsonKey(name: 'SessionTimeout', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(
+      name: 'SessionTimeout', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? sessionTimeout;
 
   VideoEncoderConfiguration({

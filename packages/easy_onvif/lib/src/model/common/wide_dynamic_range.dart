@@ -10,11 +10,11 @@ part 'wide_dynamic_range.g.dart';
 class WideDynamicRange {
   ///White dynamic range (on/off)
   ///- enum { 'OFF', 'ON' }
-  @JsonKey(name: 'Mode', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Mode', fromJson: OnvifUtil.stringMappedFromXml)
   final String mode;
 
   ///Optional level parameter (unit-less)
-  @JsonKey(name: 'Level', fromJson: OnvifUtil.mappedToDouble)
+  @JsonKey(name: 'Level', fromJson: OnvifUtil.doubleMappedFromXml)
   final double? level;
 
   WideDynamicRange({required this.mode, required this.level});

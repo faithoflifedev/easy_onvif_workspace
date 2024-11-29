@@ -7,9 +7,9 @@ part of 'move_status.dart';
 // **************************************************************************
 
 MoveStatus _$MoveStatusFromJson(Map<String, dynamic> json) => MoveStatus(
-      panTilt: OnvifUtil.nullableMappedToString(
+      panTilt: OnvifUtil.nullableStringMappedFromXml(
           json['PanTilt'] as Map<String, dynamic>?),
-      zoom: OnvifUtil.nullableMappedToString(
+      zoom: OnvifUtil.nullableStringMappedFromXml(
           json['Zoom'] as Map<String, dynamic>?),
     );
 

@@ -15,7 +15,7 @@ class VideoSource {
   final String token;
 
   ///Frame rate in frames per second.
-  @JsonKey(name: 'Framerate', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Framerate', fromJson: OnvifUtil.stringMappedFromXml)
   final String frameRate;
 
   ///Horizontal and vertical resolution

@@ -9,7 +9,8 @@ part of 'ptz_configuration_options.dart';
 PtzConfigurationOptions _$PtzConfigurationOptionsFromJson(
         Map<String, dynamic> json) =>
     PtzConfigurationOptions(
-      ptzRamps: OnvifUtil.nullableMappedToIntList(json['PTZRamps'] as String?),
+      ptzRamps:
+          OnvifUtil.nullableIntMappedFromXmlList(json['PTZRamps'] as String?),
       spaces: PtzSpaces.fromJson(json['Spaces'] as Map<String, dynamic>),
       ptzTimeout:
           DurationRange.fromJson(json['PTZTimeout'] as Map<String, dynamic>),

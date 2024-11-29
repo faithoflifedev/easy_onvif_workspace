@@ -8,7 +8,7 @@ part of 'dns_information.dart';
 
 DnsInformation _$DnsInformationFromJson(Map<String, dynamic> json) =>
     DnsInformation(
-      fromDhcp: OnvifUtil.nullableMappedToBool(
+      fromDhcp: OnvifUtil.nullableBoolMappedFromXml(
           json['FromDHCP'] as Map<String, dynamic>?),
       searchDomain: DnsInformation._searchDomain(json['SearchDomain']),
       dnsFromDhcp: DnsInformation._fromJson(json['DNSFromDHCP']),

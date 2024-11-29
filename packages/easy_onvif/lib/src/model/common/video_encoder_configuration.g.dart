@@ -10,15 +10,16 @@ VideoEncoderConfiguration _$VideoEncoderConfigurationFromJson(
         Map<String, dynamic> json) =>
     VideoEncoderConfiguration(
       token: json['@token'] as String,
-      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
-      useCount: OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
-      encoding: OnvifUtil.nullableMappedToString(
+      name: OnvifUtil.stringMappedFromXml(json['Name'] as Map<String, dynamic>),
+      useCount:
+          OnvifUtil.intMappedFromXml(json['UseCount'] as Map<String, dynamic>),
+      encoding: OnvifUtil.nullableStringMappedFromXml(
           json['Encoding'] as Map<String, dynamic>?),
       resolution: json['Resolution'] == null
           ? null
           : VideoResolution.fromJson(
               json['Resolution'] as Map<String, dynamic>),
-      quality: OnvifUtil.nullableMappedToDouble(
+      quality: OnvifUtil.nullableDoubleMappedFromXml(
           json['Quality'] as Map<String, dynamic>?),
       rateControl: json['RateControl'] == null
           ? null
@@ -30,9 +31,9 @@ VideoEncoderConfiguration _$VideoEncoderConfigurationFromJson(
       h264: json['H264'] == null
           ? null
           : H264.fromJson(json['H264'] as Map<String, dynamic>),
-      multiCast:
-          OnvifUtil.emptyMapToNull(json['Multicast'] as Map<String, dynamic>?),
-      sessionTimeout: OnvifUtil.nullableMappedToString(
+      multiCast: OnvifUtil.emptyOrMulticastConfiguration(
+          json['Multicast'] as Map<String, dynamic>?),
+      sessionTimeout: OnvifUtil.nullableStringMappedFromXml(
           json['SessionTimeout'] as Map<String, dynamic>?),
     );
 

@@ -7,7 +7,7 @@ part 'ptz_capabilities.g.dart';
 @JsonSerializable()
 class PtzCapabilities {
   /// PTZ service URI.
-  @JsonKey(name: 'XAddr', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'XAddr', fromJson: OnvifUtil.stringMappedFromXml)
   final String xAddr;
 
   PtzCapabilities({required this.xAddr});

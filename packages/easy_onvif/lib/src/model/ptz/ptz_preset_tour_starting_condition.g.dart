@@ -9,7 +9,7 @@ part of 'ptz_preset_tour_starting_condition.dart';
 PtzPresetTourStartingCondition _$PtzPresetTourStartingConditionFromJson(
         Map<String, dynamic> json) =>
     PtzPresetTourStartingCondition(
-      randomPresetOrder: OnvifUtil.nullableMappedToBool(
+      randomPresetOrder: OnvifUtil.nullableBoolMappedFromXml(
           json['RandomPresetOrder'] as Map<String, dynamic>?),
       recurringTime: (json['RecurringTime'] as num?)?.toInt(),
       recurringDuration: json['RecurringDuration'] as String?,

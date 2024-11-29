@@ -8,9 +8,9 @@ part of 'io_capabilities.dart';
 
 IoCapabilities _$IoCapabilitiesFromJson(Map<String, dynamic> json) =>
     IoCapabilities(
-      inputConnectors: OnvifUtil.nullableMappedToInt(
+      inputConnectors: OnvifUtil.nullableIntMappedFromXml(
           json['InputConnectors'] as Map<String, dynamic>?),
-      relayOutputs: OnvifUtil.nullableMappedToInt(
+      relayOutputs: OnvifUtil.nullableIntMappedFromXml(
           json['RelayOutputs'] as Map<String, dynamic>?),
       extension: json['Extension'] as Map<String, dynamic>?,
     );

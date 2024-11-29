@@ -11,13 +11,13 @@ class Mpeg4 {
   ///indicates I-Frames are continuously generated. An entry of 2 indicates that
   ///every 2nd image is an I-Frame, and 3 only every 3rd frame, etc. The frames
   ///in between are coded as P or B Frames.
-  @JsonKey(name: 'GovLength', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'GovLength', fromJson: OnvifUtil.intMappedFromXml)
   final int govLength;
 
   ///the Mpeg4 profile, either simple profile (SP) or advanced simple profile
   ///(ASP)
   ///- enum { 'SP', 'ASP' }
-  @JsonKey(name: 'Mpeg4Profile', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Mpeg4Profile', fromJson: OnvifUtil.stringMappedFromXml)
   final String mpeg4Profile;
 
   Mpeg4({required this.govLength, required this.mpeg4Profile});

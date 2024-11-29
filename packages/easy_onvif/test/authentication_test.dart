@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:convert/convert.dart';
 import 'package:easy_onvif/onvif.dart';
 import 'package:easy_onvif/soap.dart';
+import 'package:easy_onvif/util.dart';
 
 import 'package:test/test.dart';
 import 'package:xml/xml.dart';
@@ -57,13 +58,24 @@ void main() {
 
       final usernameJson = json.decode(jsonTransformer.toBadgerfish());
 
-      expect(usernameJson['UsernameToken']['Username']['\$'], 'admin');
-      expect(usernameJson['UsernameToken']['Password']['\$'],
-          'iJSWNCOtYP5YI9F5j4z4/hkM/yo=');
-      expect(usernameJson['UsernameToken']['Nonce']['\$'],
-          'AQIDBAUGBwgJCgsMDQ4PEA==');
-      expect(usernameJson['UsernameToken']['Created']['\$'],
-          '2024-01-20T21:10:00.000Z');
+      expect(
+        OnvifUtil.stringMappedFromXml(
+            usernameJson['UsernameToken']['Username']),
+        'admin',
+      );
+      expect(
+        OnvifUtil.stringMappedFromXml(
+            usernameJson['UsernameToken']['Password']),
+        'iJSWNCOtYP5YI9F5j4z4/hkM/yo=',
+      );
+      expect(
+        OnvifUtil.stringMappedFromXml(usernameJson['UsernameToken']['Nonce']),
+        'AQIDBAUGBwgJCgsMDQ4PEA==',
+      );
+      expect(
+        OnvifUtil.stringMappedFromXml(usernameJson['UsernameToken']['Created']),
+        '2024-01-20T21:10:00.000Z',
+      );
     });
   });
 }

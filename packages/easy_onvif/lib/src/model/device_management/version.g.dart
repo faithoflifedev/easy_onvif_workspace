@@ -7,8 +7,8 @@ part of 'version.dart';
 // **************************************************************************
 
 Version _$VersionFromJson(Map<String, dynamic> json) => Version(
-      major: OnvifUtil.mappedToInt(json['Major'] as Map<String, dynamic>),
-      minor: OnvifUtil.mappedToInt(json['Minor'] as Map<String, dynamic>),
+      major: OnvifUtil.intMappedFromXml(json['Major'] as Map<String, dynamic>),
+      minor: OnvifUtil.intMappedFromXml(json['Minor'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$VersionToJson(Version instance) => <String, dynamic>{

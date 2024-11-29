@@ -12,7 +12,7 @@ part 'get_recordings_response_item.g.dart';
 @JsonSerializable()
 class GetRecordingsResponseItem {
   /// Token of the recording.
-  @JsonKey(name: 'RecordingToken', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'RecordingToken', fromJson: OnvifUtil.stringMappedFromXml)
   final String recordingToken;
 
   /// Configuration of the recording.

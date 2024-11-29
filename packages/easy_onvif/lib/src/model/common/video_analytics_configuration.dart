@@ -9,12 +9,12 @@ part 'video_analytics_configuration.g.dart';
 @JsonSerializable()
 class VideoAnalyticsConfiguration {
   /// User readable name. Length up to 64 characters.
-  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.stringMappedFromXml)
   final String name;
 
   /// Number of internal references currently using this configuration.
   /// This informational parameter is read-only. Deprecated for Media2 Service.
-  @JsonKey(name: 'UseCount', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'UseCount', fromJson: OnvifUtil.intMappedFromXml)
   final int useCount;
 
   VideoAnalyticsConfiguration({required this.name, required this.useCount});

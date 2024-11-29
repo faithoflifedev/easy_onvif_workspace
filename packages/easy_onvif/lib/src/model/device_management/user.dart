@@ -10,10 +10,10 @@ part 'user.g.dart';
 
 @JsonSerializable()
 class User implements XmlSerializable {
-  @JsonKey(name: 'Username', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Username', fromJson: OnvifUtil.stringMappedFromXml)
   final String username;
 
-  @JsonKey(name: 'Password', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(name: 'Password', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? password;
 
   @JsonKey(name: 'UserLevel', fromJson: _mappedToUserLevel)
@@ -45,7 +45,10 @@ class User implements XmlSerializable {
   String toString() => json.encode(toJson());
 
   static UserLevel _mappedToUserLevel(Map<String, dynamic> value) =>
-      $enumDecode(_$UserLevelEnumMap, value['\$']);
+      $enumDecode(
+        _$UserLevelEnumMap,
+        OnvifUtil.stringMappedFromXml(value),
+      );
 
   @override
   void buildXml(XmlBuilder builder, {String tag = 'User', String? namespace}) =>

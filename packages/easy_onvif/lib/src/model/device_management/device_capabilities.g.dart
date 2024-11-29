@@ -8,7 +8,8 @@ part of 'device_capabilities.dart';
 
 DeviceCapabilities _$DeviceCapabilitiesFromJson(Map<String, dynamic> json) =>
     DeviceCapabilities(
-      xAddr: OnvifUtil.mappedToString(json['XAddr'] as Map<String, dynamic>),
+      xAddr:
+          OnvifUtil.stringMappedFromXml(json['XAddr'] as Map<String, dynamic>),
       network: json['Network'] == null
           ? null
           : NetworkCapabilities.fromJson(

@@ -17,7 +17,7 @@ class RecordingJobStateSource {
 
   /// Holds the aggregated state over all substructures of
   /// RecordingJobStateSource.
-  @JsonKey(name: 'State', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'State', fromJson: OnvifUtil.stringMappedFromXml)
   final String state;
 
   /// Configuration of the recording.

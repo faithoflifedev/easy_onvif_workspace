@@ -7,13 +7,13 @@ part 'time.g.dart';
 
 @JsonSerializable()
 class Time {
-  @JsonKey(name: 'Hour', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Hour', fromJson: OnvifUtil.intMappedFromXml)
   final dynamic hour;
 
-  @JsonKey(name: 'Minute', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Minute', fromJson: OnvifUtil.intMappedFromXml)
   final dynamic minute;
 
-  @JsonKey(name: 'Second', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Second', fromJson: OnvifUtil.intMappedFromXml)
   final dynamic second;
 
   Time({required this.hour, required this.minute, required this.second});

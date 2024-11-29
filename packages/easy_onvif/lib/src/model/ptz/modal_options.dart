@@ -30,10 +30,10 @@ class ModalOptions {
 
     if (json is List) {
       // json from XML
-      return OnvifUtil.nullableMappedToStringList(json);
+      return OnvifUtil.nullableStringMappedFromXmlList(json);
     } else {
       // json from serialized object
-      return [OnvifUtil.mappedToString(json)];
+      return [OnvifUtil.stringMappedFromXml(json)];
     }
   }
 }

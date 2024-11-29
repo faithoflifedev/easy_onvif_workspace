@@ -9,7 +9,7 @@ part of 'get_snapshot_uri_response.dart';
 GetSnapshotUriResponse _$GetSnapshotUriResponseFromJson(
         Map<String, dynamic> json) =>
     GetSnapshotUriResponse(
-      uri: OnvifUtil.mappedToString(json['Uri'] as Map<String, dynamic>),
+      uri: OnvifUtil.stringMappedFromXml(json['Uri'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$GetSnapshotUriResponseToJson(

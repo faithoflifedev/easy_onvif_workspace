@@ -9,9 +9,10 @@ part of 'recording_job_state_information.dart';
 RecordingJobStateInformation _$RecordingJobStateInformationFromJson(
         Map<String, dynamic> json) =>
     RecordingJobStateInformation(
-      recordingToken: OnvifUtil.mappedToString(
+      recordingToken: OnvifUtil.stringMappedFromXml(
           json['RecordingToken'] as Map<String, dynamic>),
-      state: OnvifUtil.mappedToString(json['State'] as Map<String, dynamic>),
+      state:
+          OnvifUtil.stringMappedFromXml(json['State'] as Map<String, dynamic>),
       sources: RecordingJobStateInformation._fromJson(json['Sources']),
       tracks: json['Tracks'] == null
           ? null

@@ -12,7 +12,7 @@ class AudioSource {
   @JsonKey(name: '@token')
   final String token;
 
-  @JsonKey(name: 'Channels', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Channels', fromJson: OnvifUtil.intMappedFromXml)
   final int channels;
 
   AudioSource({required this.token, required this.channels});

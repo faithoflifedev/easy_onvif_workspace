@@ -9,7 +9,7 @@ part of 'mixed_profile.dart';
 MixedProfile _$MixedProfileFromJson(Map<String, dynamic> json) => MixedProfile(
       token: json['@token'] as String,
       fixed: OnvifUtil.nullableStringToBool(json['@fixed'] as String?),
-      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
+      name: OnvifUtil.stringMappedFromXml(json['Name'] as Map<String, dynamic>),
       configurations: json['Configurations'] == null
           ? null
           : ConfigurationSet.fromJson(

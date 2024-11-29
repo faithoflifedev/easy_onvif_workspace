@@ -7,8 +7,8 @@ part of 'system_log_uri.dart';
 // **************************************************************************
 
 SystemLogUri _$SystemLogUriFromJson(Map<String, dynamic> json) => SystemLogUri(
-      type: OnvifUtil.mappedToString(json['Type'] as Map<String, dynamic>),
-      uri: OnvifUtil.nullableMappedToString(
+      type: OnvifUtil.stringMappedFromXml(json['Type'] as Map<String, dynamic>),
+      uri: OnvifUtil.nullableStringMappedFromXml(
           json['Uri'] as Map<String, dynamic>?),
     );
 

@@ -16,11 +16,12 @@ class RecordingJobConfiguration implements XmlSerializable {
   /// This attribute adds an additional requirement for activating the recording
   /// job. If this optional field is provided the job shall only record if the
   /// schedule exists and is active.
-  @JsonKey(name: 'ScheduleToken', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(
+      name: 'ScheduleToken', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? scheduleToken;
 
   /// Identifies the recording to which this job shall store the received data.
-  @JsonKey(name: 'RecordingToken', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'RecordingToken', fromJson: OnvifUtil.stringMappedFromXml)
   final String recordingToken;
 
   /// Identifies the recording to which this job shall store the received data.
@@ -28,7 +29,7 @@ class RecordingJobConfiguration implements XmlSerializable {
   final RecordingJobConfigurationMode mode;
 
   /// List of recording jobs.
-  @JsonKey(name: 'Priority', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Priority', fromJson: OnvifUtil.intMappedFromXml)
   final int priority;
 
   /// Source of the recording.
@@ -63,7 +64,7 @@ class RecordingJobConfiguration implements XmlSerializable {
   static RecordingJobConfigurationMode _recordingJobConfiguration(
           dynamic json) =>
       $enumDecode(_$RecordingJobConfigurationModeEnumMap,
-          OnvifUtil.mappedToString(json));
+          OnvifUtil.stringMappedFromXml(json));
 
   @override
   void buildXml(

@@ -7,8 +7,8 @@ part of 'float_range.dart';
 // **************************************************************************
 
 FloatRange _$FloatRangeFromJson(Map<String, dynamic> json) => FloatRange(
-      min: OnvifUtil.mappedToDouble(json['Min'] as Map<String, dynamic>),
-      max: OnvifUtil.mappedToDouble(json['Max'] as Map<String, dynamic>),
+      min: OnvifUtil.doubleMappedFromXml(json['Min'] as Map<String, dynamic>),
+      max: OnvifUtil.doubleMappedFromXml(json['Max'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$FloatRangeToJson(FloatRange instance) =>

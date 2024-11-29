@@ -17,14 +17,14 @@ class VideoRateControl2 {
   /// performance limitations.
   @JsonKey(
     name: 'FrameRateLimit',
-    fromJson: OnvifUtil.mappedToDouble,
+    fromJson: OnvifUtil.doubleMappedFromXml,
   )
   final double frameRateLimit;
 
   /// the maximum output bitrate in kbps
   @JsonKey(
     name: 'BitrateLimit',
-    fromJson: OnvifUtil.mappedToInt,
+    fromJson: OnvifUtil.intMappedFromXml,
   )
   final int bitrateLimit;
 

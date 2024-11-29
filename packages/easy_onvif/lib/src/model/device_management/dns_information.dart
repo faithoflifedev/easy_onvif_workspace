@@ -11,7 +11,7 @@ part 'dns_information.g.dart';
 @JsonSerializable()
 class DnsInformation {
   /// Indicates whether or not DNS information is retrieved from DHCP.
-  @JsonKey(name: 'FromDHCP', fromJson: OnvifUtil.nullableMappedToBool)
+  @JsonKey(name: 'FromDHCP', fromJson: OnvifUtil.nullableBoolMappedFromXml)
   final bool? fromDhcp;
 
   /// Search domain.
@@ -51,11 +51,11 @@ class DnsInformation {
 
     if (json is List) {
       return json
-          .map((e) => OnvifUtil.mappedToString(e as Map<String, dynamic>))
+          .map((e) => OnvifUtil.stringMappedFromXml(e as Map<String, dynamic>))
           .toList();
     }
 
-    return [OnvifUtil.mappedToString(json as Map<String, dynamic>)];
+    return [OnvifUtil.stringMappedFromXml(json as Map<String, dynamic>)];
   }
 
   @override

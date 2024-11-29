@@ -12,7 +12,7 @@ RecordingSummary _$RecordingSummaryFromJson(Map<String, dynamic> json) =>
           json['DataFrom'] as Map<String, dynamic>?),
       dataUntil: OnvifUtil.nullableMappedStdToDateTime(
           json['DataUntil'] as Map<String, dynamic>?),
-      numberRecordings: OnvifUtil.mappedToInt(
+      numberRecordings: OnvifUtil.intMappedFromXml(
           json['NumberRecordings'] as Map<String, dynamic>),
     );
 

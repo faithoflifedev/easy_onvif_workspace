@@ -15,7 +15,8 @@ part 'video_source_configuration_options.g.dart';
 class VideoSourceConfigurationOptions {
   /// Maximum number of profiles.
   @JsonKey(
-      name: 'MaximumNumberOfProfiles', fromJson: OnvifUtil.nullableMappedToInt)
+      name: 'MaximumNumberOfProfiles',
+      fromJson: OnvifUtil.nullableIntMappedFromXml)
   final int? maximumNumberOfProfiles;
 
   /// Supported range for the capturing area. Device that does not support
@@ -28,7 +29,7 @@ class VideoSourceConfigurationOptions {
 
   @JsonKey(
     name: 'VideoSourceTokensAvailable',
-    fromJson: OnvifUtil.mappedToStringList,
+    fromJson: OnvifUtil.stringMappedFromXmlList,
   )
   final List<String> videoSourceTokensAvailable;
 

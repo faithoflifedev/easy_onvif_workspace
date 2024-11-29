@@ -7,10 +7,10 @@ part 'version.g.dart';
 
 @JsonSerializable()
 class Version {
-  @JsonKey(name: 'Major', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Major', fromJson: OnvifUtil.intMappedFromXml)
   final int major;
 
-  @JsonKey(name: 'Minor', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Minor', fromJson: OnvifUtil.intMappedFromXml)
   final int minor;
 
   Version({required this.major, required this.minor});

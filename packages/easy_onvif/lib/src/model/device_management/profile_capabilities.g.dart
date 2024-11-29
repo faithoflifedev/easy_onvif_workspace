@@ -8,7 +8,7 @@ part of 'profile_capabilities.dart';
 
 ProfileCapabilities _$ProfileCapabilitiesFromJson(Map<String, dynamic> json) =>
     ProfileCapabilities(
-      maximumNumberOfProfiles: OnvifUtil.mappedToInt(
+      maximumNumberOfProfiles: OnvifUtil.intMappedFromXml(
           json['MaximumNumberOfProfiles'] as Map<String, dynamic>),
     );
 

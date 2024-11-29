@@ -13,7 +13,7 @@ class VideoRateControl {
   /// resulting encoded framerate will be reduced by the given factor.
   @JsonKey(
     name: 'FrameRateLimit',
-    fromJson: OnvifUtil.mappedToInt,
+    fromJson: OnvifUtil.intMappedFromXml,
   )
   final int frameRateLimit;
 
@@ -22,14 +22,14 @@ class VideoRateControl {
   /// encoded ...)
   @JsonKey(
     name: 'EncodingInterval',
-    fromJson: OnvifUtil.mappedToInt,
+    fromJson: OnvifUtil.intMappedFromXml,
   )
   final int encodingInterval;
 
   /// the maximum output bitrate in kbps
   @JsonKey(
     name: 'BitrateLimit',
-    fromJson: OnvifUtil.mappedToInt,
+    fromJson: OnvifUtil.intMappedFromXml,
   )
   final int bitrateLimit;
 

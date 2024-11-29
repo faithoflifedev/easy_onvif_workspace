@@ -22,7 +22,7 @@ class MixedProfile {
   final bool? fixed;
 
   /// User readable name of the profile.
-  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.stringMappedFromXml)
   final String name;
 
   @JsonKey(name: 'Configurations')

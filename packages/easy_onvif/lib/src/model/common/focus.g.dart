@@ -9,12 +9,12 @@ part of 'focus.dart';
 Focus _$FocusFromJson(Map<String, dynamic> json) => Focus(
       autoFocusMode: Focus.mappedToAutoFocusMode(
           json['AutoFocusMode'] as Map<String, dynamic>),
-      defaultSpeed: OnvifUtil.mappedToDouble(
-          json['DefaultSpeed'] as Map<String, dynamic>),
-      nearLimit:
-          OnvifUtil.mappedToDouble(json['NearLimit'] as Map<String, dynamic>),
-      farLimit:
-          OnvifUtil.mappedToDouble(json['FarLimit'] as Map<String, dynamic>),
+      defaultSpeed: OnvifUtil.nullableDoubleMappedFromXml(
+          json['DefaultSpeed'] as Map<String, dynamic>?),
+      nearLimit: OnvifUtil.nullableDoubleMappedFromXml(
+          json['NearLimit'] as Map<String, dynamic>?),
+      farLimit: OnvifUtil.nullableDoubleMappedFromXml(
+          json['FarLimit'] as Map<String, dynamic>?),
     );
 
 Map<String, dynamic> _$FocusToJson(Focus instance) => <String, dynamic>{

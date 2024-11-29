@@ -14,15 +14,15 @@ class VideoSourceConfiguration {
   final String token;
 
   ///User readable name. Length up to 64 characters.
-  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.stringMappedFromXml)
   final String name;
 
   ///Number of internal references currently using this configuration.
-  @JsonKey(name: 'UseCount', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'UseCount', fromJson: OnvifUtil.intMappedFromXml)
   final int useCount;
 
   ///Reference to the physical input.
-  @JsonKey(name: 'SourceToken', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'SourceToken', fromJson: OnvifUtil.stringMappedFromXml)
   final String sourceToken;
 
   ///Rectangle specifying the Video capturing area. The capturing area shall not

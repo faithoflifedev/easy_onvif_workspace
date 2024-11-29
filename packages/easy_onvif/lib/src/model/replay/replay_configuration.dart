@@ -12,7 +12,7 @@ part 'replay_configuration.g.dart';
 @JsonSerializable()
 class ReplayConfiguration implements XmlSerializable {
   /// The RTSP session timeout.
-  @JsonKey(name: 'SessionTimeout', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'SessionTimeout', fromJson: OnvifUtil.stringMappedFromXml)
   final String sessionTimeout;
 
   ReplayConfiguration({required this.sessionTimeout});

@@ -9,13 +9,13 @@ part 'move_status.g.dart';
 class MoveStatus {
   @JsonKey(
     name: 'PanTilt',
-    fromJson: OnvifUtil.nullableMappedToString,
+    fromJson: OnvifUtil.nullableStringMappedFromXml,
   )
   final String? panTilt;
 
   @JsonKey(
     name: 'Zoom',
-    fromJson: OnvifUtil.nullableMappedToString,
+    fromJson: OnvifUtil.nullableStringMappedFromXml,
   )
   final String? zoom;
 

@@ -10,10 +10,10 @@ part 'service.g.dart';
 
 @JsonSerializable()
 class Service {
-  @JsonKey(name: 'Namespace', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Namespace', fromJson: OnvifUtil.stringMappedFromXml)
   final String nameSpace;
 
-  @JsonKey(name: 'XAddr', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'XAddr', fromJson: OnvifUtil.stringMappedFromXml)
   final String xAddr;
 
   @JsonKey(name: 'Version')

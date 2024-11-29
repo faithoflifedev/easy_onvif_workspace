@@ -10,9 +10,9 @@ RecordingEventFilter _$RecordingEventFilterFromJson(
         Map<String, dynamic> json) =>
     RecordingEventFilter(
       filters: RecordingEventFilter._fromJson(json['Filter']),
-      before: OnvifUtil.nullableMappedToString(
+      before: OnvifUtil.nullableStringMappedFromXml(
           json['Before'] as Map<String, dynamic>?),
-      after: OnvifUtil.nullableMappedToString(
+      after: OnvifUtil.nullableStringMappedFromXml(
           json['After'] as Map<String, dynamic>?),
     );
 

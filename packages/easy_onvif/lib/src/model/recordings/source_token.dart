@@ -20,7 +20,7 @@ class SourceToken implements XmlSerializable {
   @JsonKey(name: '@Type')
   final String? type;
 
-  @JsonKey(name: 'Token', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Token', fromJson: OnvifUtil.stringMappedFromXml)
   final String token;
 
   SourceToken({

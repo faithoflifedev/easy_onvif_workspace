@@ -7,9 +7,10 @@ part of 'ptz_filter.dart';
 // **************************************************************************
 
 PtzFilter _$PtzFilterFromJson(Map<String, dynamic> json) => PtzFilter(
-      status: OnvifUtil.mappedToBool(json['Status'] as Map<String, dynamic>),
+      status:
+          OnvifUtil.boolMappedFromXml(json['Status'] as Map<String, dynamic>),
       position:
-          OnvifUtil.mappedToBool(json['Position'] as Map<String, dynamic>),
+          OnvifUtil.boolMappedFromXml(json['Position'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$PtzFilterToJson(PtzFilter instance) => <String, dynamic>{

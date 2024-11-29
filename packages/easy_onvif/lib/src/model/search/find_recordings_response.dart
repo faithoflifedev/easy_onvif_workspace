@@ -10,7 +10,7 @@ part 'find_recordings_response.g.dart';
 /// recording search service.
 @JsonSerializable()
 class FindRecordingsResponse {
-  @JsonKey(name: 'SearchToken', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'SearchToken', fromJson: OnvifUtil.stringMappedFromXml)
   final String searchToken;
 
   FindRecordingsResponse({

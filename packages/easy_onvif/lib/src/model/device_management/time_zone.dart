@@ -9,7 +9,7 @@ part 'time_zone.g.dart';
 @JsonSerializable()
 class TimeZone {
   ///Posix timezone string.
-  @JsonKey(name: 'TZ', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(name: 'TZ', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? tz;
 
   TimeZone({required this.tz});

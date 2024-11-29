@@ -13,9 +13,9 @@ GetSystemUrisResponse _$GetSystemUrisResponseFromJson(
           ? null
           : SystemLogUriList.fromJson(
               json['SystemLogUris'] as Map<String, dynamic>),
-      supportInfoUri: OnvifUtil.nullableMappedToString(
+      supportInfoUri: OnvifUtil.nullableStringMappedFromXml(
           json['SupportInfoUri'] as Map<String, dynamic>?),
-      systemBackupUri: OnvifUtil.nullableMappedToString(
+      systemBackupUri: OnvifUtil.nullableStringMappedFromXml(
           json['SystemBackupUri'] as Map<String, dynamic>?),
     );
 

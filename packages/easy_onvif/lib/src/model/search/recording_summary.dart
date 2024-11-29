@@ -16,7 +16,7 @@ class RecordingSummary {
   final DateTime? dataUntil;
 
   /// The most recent point in time where there is recorded data on the device.
-  @JsonKey(name: 'NumberRecordings', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'NumberRecordings', fromJson: OnvifUtil.intMappedFromXml)
   final int numberRecordings;
 
   RecordingSummary({

@@ -9,7 +9,7 @@ part of 'create_recording_response.dart';
 CreateRecordingResponse _$CreateRecordingResponseFromJson(
         Map<String, dynamic> json) =>
     CreateRecordingResponse(
-      token: OnvifUtil.mappedToString(
+      token: OnvifUtil.stringMappedFromXml(
           json['RecordingToken'] as Map<String, dynamic>),
     );
 

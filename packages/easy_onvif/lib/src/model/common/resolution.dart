@@ -10,11 +10,11 @@ part 'resolution.g.dart';
 ///Configured video resolution
 class Resolution {
   ///Number of the columns of the Video image.
-  @JsonKey(name: 'Width', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Width', fromJson: OnvifUtil.intMappedFromXml)
   final int width;
 
   ///Number of the lines of the Video image.
-  @JsonKey(name: 'Height', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Height', fromJson: OnvifUtil.intMappedFromXml)
   final int height;
 
   Resolution({required this.width, required this.height});

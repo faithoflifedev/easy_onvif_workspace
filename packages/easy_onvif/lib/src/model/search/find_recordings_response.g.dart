@@ -9,8 +9,8 @@ part of 'find_recordings_response.dart';
 FindRecordingsResponse _$FindRecordingsResponseFromJson(
         Map<String, dynamic> json) =>
     FindRecordingsResponse(
-      searchToken:
-          OnvifUtil.mappedToString(json['SearchToken'] as Map<String, dynamic>),
+      searchToken: OnvifUtil.stringMappedFromXml(
+          json['SearchToken'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$FindRecordingsResponseToJson(

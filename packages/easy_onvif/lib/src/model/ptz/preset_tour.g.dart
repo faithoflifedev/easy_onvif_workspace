@@ -11,8 +11,8 @@ PresetTour _$PresetTourFromJson(Map<String, dynamic> json) => PresetTour(
       name: json['Name'] as String?,
       status:
           PtzPresetTourStatus.fromJson(json['Status'] as Map<String, dynamic>),
-      autoStart:
-          OnvifUtil.mappedToBool(json['AutoStart'] as Map<String, dynamic>),
+      autoStart: OnvifUtil.boolMappedFromXml(
+          json['AutoStart'] as Map<String, dynamic>),
       startingCondition: PtzPresetTourStartingCondition.fromJson(
           json['StartingCondition'] as Map<String, dynamic>),
       tourSpot: json['TourSpot'] == null

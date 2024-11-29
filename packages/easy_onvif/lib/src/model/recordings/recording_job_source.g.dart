@@ -11,7 +11,7 @@ RecordingJobSource _$RecordingJobSourceFromJson(Map<String, dynamic> json) =>
       sourceToken: json['SourceToken'] == null
           ? null
           : SourceToken.fromJson(json['SourceToken'] as Map<String, dynamic>),
-      autoCreateReceiver: OnvifUtil.nullableMappedToBool(
+      autoCreateReceiver: OnvifUtil.nullableBoolMappedFromXml(
           json['AutoCreateReceiver'] as Map<String, dynamic>?),
       tracks: RecordingJobSource._fromJson(json['Tracks']),
       extension: json['Extension'] as Map<String, dynamic>?,

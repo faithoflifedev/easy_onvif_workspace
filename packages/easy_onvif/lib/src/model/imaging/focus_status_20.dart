@@ -9,15 +9,15 @@ part 'focus_status_20.g.dart';
 @JsonSerializable()
 class FocusStatus20 {
   /// Status of focus position.
-  @JsonKey(name: 'Position', fromJson: OnvifUtil.mappedToDouble)
+  @JsonKey(name: 'Position', fromJson: OnvifUtil.doubleMappedFromXml)
   final double position;
 
   /// Status of focus MoveStatus.
-  @JsonKey(name: 'MoveStatus', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'MoveStatus', fromJson: OnvifUtil.stringMappedFromXml)
   final String moveStatus;
 
   /// Error status of focus.
-  @JsonKey(name: 'Error', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(name: 'Error', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? error;
 
   @JsonKey(name: 'Extension')

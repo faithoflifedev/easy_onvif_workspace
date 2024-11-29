@@ -10,15 +10,15 @@ part 'white_balance.g.dart';
 class WhiteBalance {
   ///Auto white-balancing mode (auto/manual).
   ///- enum { 'AUTO', 'MANUAL' }
-  @JsonKey(name: 'Mode', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Mode', fromJson: OnvifUtil.stringMappedFromXml)
   final String mode;
 
   /// Rgain (unit-less).
-  @JsonKey(name: 'CrGain', fromJson: OnvifUtil.mappedToDouble)
+  @JsonKey(name: 'CrGain', fromJson: OnvifUtil.doubleMappedFromXml)
   final double? crGain;
 
   /// Bgain (unit-less).
-  @JsonKey(name: 'CbGain', fromJson: OnvifUtil.mappedToDouble)
+  @JsonKey(name: 'CbGain', fromJson: OnvifUtil.doubleMappedFromXml)
   final double? cbGain;
 
   WhiteBalance(

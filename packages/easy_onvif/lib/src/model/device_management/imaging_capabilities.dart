@@ -9,7 +9,7 @@ part 'imaging_capabilities.g.dart';
 @JsonSerializable()
 class ImagingCapabilities {
   /// Imaging service URI.
-  @JsonKey(name: 'XAddr', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'XAddr', fromJson: OnvifUtil.stringMappedFromXml)
   final String xAddr;
 
   ImagingCapabilities({required this.xAddr});

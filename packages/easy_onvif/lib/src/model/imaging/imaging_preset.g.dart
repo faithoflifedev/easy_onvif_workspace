@@ -9,8 +9,8 @@ part of 'imaging_preset.dart';
 ImagingPreset _$ImagingPresetFromJson(Map<String, dynamic> json) =>
     ImagingPreset(
       token: json['@token'] as String,
-      type: OnvifUtil.mappedToString(json['type'] as Map<String, dynamic>),
-      name: OnvifUtil.mappedToString(json['name'] as Map<String, dynamic>),
+      type: OnvifUtil.stringMappedFromXml(json['type'] as Map<String, dynamic>),
+      name: OnvifUtil.stringMappedFromXml(json['name'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ImagingPresetToJson(ImagingPreset instance) =>

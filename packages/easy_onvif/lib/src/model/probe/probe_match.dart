@@ -13,17 +13,27 @@ class ProbeMatch with UiLoggy {
   @JsonKey(name: 'EndpointReference')
   final EndpointReference endpointReference;
 
-  @JsonKey(name: 'Types', fromJson: _listFromJson) // _toList
+  @JsonKey(
+    name: 'Types',
+    fromJson: _listFromJson,
+  ) // _toList
   final List<String> types;
 
-  @JsonKey(name: 'Scopes', fromJson: _listFromJson)
+  @JsonKey(
+    name: 'Scopes',
+    fromJson: _listFromJson,
+  )
   final List<String> scopes;
 
-  @JsonKey(name: 'XAddrs', fromJson: _listFromJson)
+  @JsonKey(
+    name: 'XAddrs',
+    fromJson: _listFromJson,
+  )
   final List<String> xAddrs;
 
   @JsonKey(
-      name: 'MetadataVersion', fromJson: _metadata) //OnvifUtil.mappedToString
+      name: 'MetadataVersion',
+      fromJson: _metadata) //OnvifUtil.stringMappedFromXml
   final String metadataVersion;
 
   final _profiles = <String>[];
@@ -110,7 +120,7 @@ class ProbeMatch with UiLoggy {
   }
 
   static List<String> _listFromXmlJson(Map<String, dynamic> value) =>
-      OnvifUtil.mappedToString(value)
+      OnvifUtil.stringMappedFromXml(value)
           .split(RegExp([' ', ',', r'\r\\n'].map(RegExp.escape).join('|')));
 
   static List<String> _listFromJson(dynamic json) {
@@ -130,7 +140,7 @@ class ProbeMatch with UiLoggy {
   static String _metadata(dynamic json) {
     if (json is Map) {
       // json from XML
-      return OnvifUtil.mappedToString(json as Map<String, dynamic>);
+      return OnvifUtil.stringMappedFromXml(json as Map<String, dynamic>);
     } else {
       // json from serialized object
       return json;

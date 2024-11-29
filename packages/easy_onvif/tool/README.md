@@ -137,10 +137,8 @@ In cases where there is no helper method for a specific Onvif operation, a low-l
 // code fragment for a sample low level request
 //
 // build a xml fragment for the specific Onvif operation
-Transport.builder.element('GetStatus', nest: () { // ACCESS CLASS: READ_MEDIA
-  Transport.builder.namespace(Xmlns.tptz);
-
-  ReferenceToken(profileToken).buildXml(builder);
+Transport.builder.element('GetAudioOutputs', nest: () { // ACCESS CLASS: READ_MEDIA
+  Transport.builder.namespace(Xmlns.trt);
 });
 
 // using the connected onvif object from the earlier example

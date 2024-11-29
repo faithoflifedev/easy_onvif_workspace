@@ -11,7 +11,7 @@ SystemInformation _$SystemInformationFromJson(Map<String, dynamic> json) =>
       binary: json['Binary'] == null
           ? null
           : AttachmentData.fromJson(json['Binary'] as Map<String, dynamic>),
-      string: OnvifUtil.nullableMappedToString(
+      string: OnvifUtil.nullableStringMappedFromXml(
           json['String'] as Map<String, dynamic>?),
     );
 

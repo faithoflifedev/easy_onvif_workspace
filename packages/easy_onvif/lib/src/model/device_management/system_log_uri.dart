@@ -7,10 +7,10 @@ part 'system_log_uri.g.dart';
 
 @JsonSerializable()
 class SystemLogUri {
-  @JsonKey(name: 'Type', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Type', fromJson: OnvifUtil.stringMappedFromXml)
   final String type;
 
-  @JsonKey(name: 'Uri', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(name: 'Uri', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? uri;
 
   SystemLogUri({required this.type, this.uri});

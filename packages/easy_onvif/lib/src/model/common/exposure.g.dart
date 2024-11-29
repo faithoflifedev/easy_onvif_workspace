@@ -7,27 +7,28 @@ part of 'exposure.dart';
 // **************************************************************************
 
 Exposure _$ExposureFromJson(Map<String, dynamic> json) => Exposure(
-      mode: OnvifUtil.mappedToString(json['Mode'] as Map<String, dynamic>),
-      priority:
-          OnvifUtil.mappedToString(json['Priority'] as Map<String, dynamic>),
+      mode: OnvifUtil.nullableStringMappedFromXml(
+          json['Mode'] as Map<String, dynamic>?),
+      priority: OnvifUtil.nullableStringMappedFromXml(
+          json['Priority'] as Map<String, dynamic>?),
       window: Window.fromJson(json['Window'] as Map<String, dynamic>),
-      minExposureTime: OnvifUtil.nullableMappedToDouble(
+      minExposureTime: OnvifUtil.nullableDoubleMappedFromXml(
           json['MinExposureTime'] as Map<String, dynamic>?),
-      maxExposureTime: OnvifUtil.nullableMappedToDouble(
+      maxExposureTime: OnvifUtil.nullableDoubleMappedFromXml(
           json['MaxExposureTime'] as Map<String, dynamic>?),
-      minGain: OnvifUtil.nullableMappedToDouble(
+      minGain: OnvifUtil.nullableDoubleMappedFromXml(
           json['MinGain'] as Map<String, dynamic>?),
-      maxGain: OnvifUtil.nullableMappedToDouble(
+      maxGain: OnvifUtil.nullableDoubleMappedFromXml(
           json['MaxGain'] as Map<String, dynamic>?),
-      minIris: OnvifUtil.nullableMappedToDouble(
+      minIris: OnvifUtil.nullableDoubleMappedFromXml(
           json['MinIris'] as Map<String, dynamic>?),
-      maxIris: OnvifUtil.nullableMappedToDouble(
+      maxIris: OnvifUtil.nullableDoubleMappedFromXml(
           json['MaxIris'] as Map<String, dynamic>?),
-      exposureTime: OnvifUtil.nullableMappedToDouble(
+      exposureTime: OnvifUtil.nullableDoubleMappedFromXml(
           json['ExposureTime'] as Map<String, dynamic>?),
-      gain: OnvifUtil.nullableMappedToDouble(
+      gain: OnvifUtil.nullableDoubleMappedFromXml(
           json['Gain'] as Map<String, dynamic>?),
-      iris: OnvifUtil.nullableMappedToDouble(
+      iris: OnvifUtil.nullableDoubleMappedFromXml(
           json['Iris'] as Map<String, dynamic>?),
     );
 

@@ -75,7 +75,7 @@ class IpAddressFilter implements XmlSerializable {
       });
 
   static Type _mappedToType(Map<String, dynamic> value) =>
-      Type.values.byName(value['\$'].toString().toLowerCase());
+      Type.values.byName(OnvifUtil.stringMappedFromXml(value).toLowerCase());
 
   static List<PrefixedIpv4Address> _parseUnboundIpv4(dynamic json) {
     if (json == null) return [];

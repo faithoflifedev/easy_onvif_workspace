@@ -7,7 +7,7 @@ part 'get_discovery_mode_response.g.dart';
 @JsonSerializable()
 class GetDiscoveryModeResponse {
   /// Capability information.
-  @JsonKey(name: 'DiscoveryMode', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'DiscoveryMode', fromJson: OnvifUtil.stringMappedFromXml)
   final String discoveryMode;
 
   GetDiscoveryModeResponse(this.discoveryMode);

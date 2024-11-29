@@ -7,7 +7,8 @@ part of 'time_zone.dart';
 // **************************************************************************
 
 TimeZone _$TimeZoneFromJson(Map<String, dynamic> json) => TimeZone(
-      tz: OnvifUtil.nullableMappedToString(json['TZ'] as Map<String, dynamic>?),
+      tz: OnvifUtil.nullableStringMappedFromXml(
+          json['TZ'] as Map<String, dynamic>?),
     );
 
 Map<String, dynamic> _$TimeZoneToJson(TimeZone instance) => <String, dynamic>{

@@ -9,8 +9,8 @@ part of 'system_reboot_response.dart';
 SystemRebootResponse _$SystemRebootResponseFromJson(
         Map<String, dynamic> json) =>
     SystemRebootResponse(
-      message:
-          OnvifUtil.mappedToString(json['Message'] as Map<String, dynamic>),
+      message: OnvifUtil.stringMappedFromXml(
+          json['Message'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SystemRebootResponseToJson(

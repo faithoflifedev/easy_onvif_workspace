@@ -7,13 +7,13 @@ part 'network_protocol.g.dart';
 
 @JsonSerializable()
 class NetworkProtocol {
-  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.stringMappedFromXml)
   final String name;
 
-  @JsonKey(name: 'Enabled', fromJson: OnvifUtil.mappedToBool)
+  @JsonKey(name: 'Enabled', fromJson: OnvifUtil.boolMappedFromXml)
   final bool enabled;
 
-  @JsonKey(name: 'Port', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Port', fromJson: OnvifUtil.intMappedFromXml)
   final int port;
 
   NetworkProtocol(

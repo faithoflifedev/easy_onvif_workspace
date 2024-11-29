@@ -8,11 +8,11 @@ part of 'track_information.dart';
 
 TrackInformation _$TrackInformationFromJson(Map<String, dynamic> json) =>
     TrackInformation(
-      trackToken:
-          OnvifUtil.mappedToString(json['TrackToken'] as Map<String, dynamic>),
+      trackToken: OnvifUtil.stringMappedFromXml(
+          json['TrackToken'] as Map<String, dynamic>),
       trackType: TrackInformation._trackType(json['TrackType']),
-      description:
-          OnvifUtil.mappedToString(json['Description'] as Map<String, dynamic>),
+      description: OnvifUtil.stringMappedFromXml(
+          json['Description'] as Map<String, dynamic>),
       dataFrom: OnvifUtil.mappedToStdDateTime(
           json['DataFrom'] as Map<String, dynamic>),
       dataTo:

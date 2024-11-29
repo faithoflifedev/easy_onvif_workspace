@@ -9,12 +9,15 @@ part of 'get_device_information_response.dart';
 GetDeviceInformationResponse _$GetDeviceInformationResponseFromJson(
         Map<String, dynamic> json) =>
     GetDeviceInformationResponse(
-      OnvifUtil.nullableMappedToString(
+      OnvifUtil.nullableStringMappedFromXml(
           json['Manufacturer'] as Map<String, dynamic>?),
-      OnvifUtil.nullableMappedToString(json['Model'] as Map<String, dynamic>?),
-      OnvifUtil.mappedToString(json['FirmwareVersion'] as Map<String, dynamic>),
-      OnvifUtil.mappedToString(json['SerialNumber'] as Map<String, dynamic>),
-      OnvifUtil.mappedToString(json['HardwareId'] as Map<String, dynamic>),
+      OnvifUtil.nullableStringMappedFromXml(
+          json['Model'] as Map<String, dynamic>?),
+      OnvifUtil.stringMappedFromXml(
+          json['FirmwareVersion'] as Map<String, dynamic>),
+      OnvifUtil.stringMappedFromXml(
+          json['SerialNumber'] as Map<String, dynamic>),
+      OnvifUtil.stringMappedFromXml(json['HardwareId'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$GetDeviceInformationResponseToJson(

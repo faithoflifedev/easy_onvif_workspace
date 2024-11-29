@@ -12,10 +12,12 @@ class GetSystemUrisResponse {
   @JsonKey(name: 'SystemLogUris')
   final SystemLogUriList? systemLogUris;
 
-  @JsonKey(name: 'SupportInfoUri', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(
+      name: 'SupportInfoUri', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? supportInfoUri;
 
-  @JsonKey(name: 'SystemBackupUri', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(
+      name: 'SystemBackupUri', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? systemBackupUri;
 
   GetSystemUrisResponse(

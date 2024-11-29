@@ -19,7 +19,7 @@ class Profile {
   final bool fixed;
 
   /// User readable name of the profile.
-  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.stringMappedFromXml)
   final String name;
 
   /// Optional configuration of the Video input.
@@ -46,16 +46,17 @@ class Profile {
   @JsonKey(name: 'PTZConfiguration')
   final PtzConfiguration? ptzConfiguration;
 
-  Profile(
-      {required this.token,
-      required this.fixed,
-      required this.name,
-      this.videoSourceConfiguration,
-      this.audioSourceConfiguration,
-      this.videoEncoderConfiguration,
-      this.audioEncoderConfiguration,
-      this.videoAnalyticsConfiguration,
-      this.ptzConfiguration});
+  Profile({
+    required this.token,
+    required this.fixed,
+    required this.name,
+    this.videoSourceConfiguration,
+    this.audioSourceConfiguration,
+    this.videoEncoderConfiguration,
+    this.audioEncoderConfiguration,
+    this.videoAnalyticsConfiguration,
+    this.ptzConfiguration,
+  });
 
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);

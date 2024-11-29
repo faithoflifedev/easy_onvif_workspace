@@ -9,12 +9,13 @@ part of 'recording_job_configuration.dart';
 RecordingJobConfiguration _$RecordingJobConfigurationFromJson(
         Map<String, dynamic> json) =>
     RecordingJobConfiguration(
-      scheduleToken: OnvifUtil.nullableMappedToString(
+      scheduleToken: OnvifUtil.nullableStringMappedFromXml(
           json['ScheduleToken'] as Map<String, dynamic>?),
-      recordingToken: OnvifUtil.mappedToString(
+      recordingToken: OnvifUtil.stringMappedFromXml(
           json['RecordingToken'] as Map<String, dynamic>),
       mode: RecordingJobConfiguration._recordingJobConfiguration(json['Mode']),
-      priority: OnvifUtil.mappedToInt(json['Priority'] as Map<String, dynamic>),
+      priority:
+          OnvifUtil.intMappedFromXml(json['Priority'] as Map<String, dynamic>),
       source: json['Source'] == null
           ? null
           : RecordingJobSource.fromJson(json['Source'] as Map<String, dynamic>),

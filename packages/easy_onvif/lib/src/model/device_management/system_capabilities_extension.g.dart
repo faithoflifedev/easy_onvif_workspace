@@ -9,13 +9,13 @@ part of 'system_capabilities_extension.dart';
 SystemCapabilitiesExtension _$SystemCapabilitiesExtensionFromJson(
         Map<String, dynamic> json) =>
     SystemCapabilitiesExtension(
-      httpFirmwareUpgrade: OnvifUtil.nullableMappedToBool(
+      httpFirmwareUpgrade: OnvifUtil.nullableBoolMappedFromXml(
           json['HttpFirmwareUpgrade'] as Map<String, dynamic>?),
-      httpSystemBackup: OnvifUtil.nullableMappedToBool(
+      httpSystemBackup: OnvifUtil.nullableBoolMappedFromXml(
           json['HttpSystemBackup'] as Map<String, dynamic>?),
-      httpSystemLogging: OnvifUtil.nullableMappedToBool(
+      httpSystemLogging: OnvifUtil.nullableBoolMappedFromXml(
           json['HttpSystemLogging'] as Map<String, dynamic>?),
-      httpSupportInformation: OnvifUtil.nullableMappedToBool(
+      httpSupportInformation: OnvifUtil.nullableBoolMappedFromXml(
           json['HttpSupportInformation'] as Map<String, dynamic>?),
       extension: json['Extension'] == null
           ? null

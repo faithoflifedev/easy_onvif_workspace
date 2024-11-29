@@ -15,12 +15,12 @@ class VideoEncoder2Configuration {
   final String token;
 
   /// User readable name. Length up to 64 characters.
-  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.stringMappedFromXml)
   final String name;
 
   /// Number of internal references currently using this configuration.  This
   /// informational parameter is read-only. Deprecated for Media2 Service.
-  @JsonKey(name: 'UseCount', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'UseCount', fromJson: OnvifUtil.intMappedFromXml)
   final int? useCount;
 
   /// Group of Video frames length. Determines typically the interval in which
@@ -34,7 +34,8 @@ class VideoEncoder2Configuration {
   /// Distance between anchor frames of type I-Frame and P-Frame. '1' indicates
   /// no B-Frames, '2' indicates that every 2nd frame is encoded as B-Frame, '3'
   /// indicates a structure like IBBPBBP..., etc.
-  @JsonKey(name: 'AnchorFrameDistance', fromJson: OnvifUtil.nullableMappedToInt)
+  @JsonKey(
+      name: 'AnchorFrameDistance', fromJson: OnvifUtil.nullableIntMappedFromXml)
   final int? anchorFrameDistance;
 
   /// The encoder profile as defined in tt:VideoEncodingProfiles.
@@ -46,12 +47,13 @@ class VideoEncoder2Configuration {
   ///  all other adaptable configuration values such as bitrate. Default is
   /// false.
   @JsonKey(
-      name: 'GuaranteedFrameRate', fromJson: OnvifUtil.nullableMappedToBool)
+      name: 'GuaranteedFrameRate',
+      fromJson: OnvifUtil.nullableBoolMappedFromXml)
   bool? guaranteedFrameRate = false;
 
   /// Video Media Subtype for the video format. For definitions see
   /// tt:VideoEncodingMimeNames and IANA Media Types.
-  @JsonKey(name: 'Encoding', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Encoding', fromJson: OnvifUtil.stringMappedFromXml)
   final String encoding;
 
   /// Configured video resolution
@@ -68,7 +70,7 @@ class VideoEncoder2Configuration {
 
   /// Relative value for the video quantizers and the quality of the video. A
   /// high value within supported quality range means higher quality
-  @JsonKey(name: 'Quality', fromJson: OnvifUtil.mappedToDouble)
+  @JsonKey(name: 'Quality', fromJson: OnvifUtil.doubleMappedFromXml)
   final double quality;
 
   VideoEncoder2Configuration({

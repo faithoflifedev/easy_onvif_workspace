@@ -15,21 +15,21 @@ class RealTimeStreamingCapabilities {
   /// Indicates support for RTP multicast.
   @JsonKey(
     name: 'RTPMulticast',
-    fromJson: OnvifUtil.nullableMappedToBool,
+    fromJson: OnvifUtil.nullableBoolMappedFromXml,
   )
   final bool? rtpMulticast;
 
   /// Indicates support for RTP over TCP.
   @JsonKey(
     name: 'RTP_TCP',
-    fromJson: OnvifUtil.nullableMappedToBool,
+    fromJson: OnvifUtil.nullableBoolMappedFromXml,
   )
   final bool? rtp_tcp;
 
   /// Indicates support for RTP/RTSP/TCP.
   @JsonKey(
     name: 'RTP_RTSP_TCP',
-    fromJson: OnvifUtil.nullableMappedToBool,
+    fromJson: OnvifUtil.nullableBoolMappedFromXml,
   )
   final bool? rtp_rtsp_tcp;
 

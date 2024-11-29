@@ -8,8 +8,8 @@ part of 'duration_range.dart';
 
 DurationRange _$DurationRangeFromJson(Map<String, dynamic> json) =>
     DurationRange(
-      min: OnvifUtil.mappedToString(json['Min'] as Map<String, dynamic>),
-      max: OnvifUtil.mappedToString(json['Max'] as Map<String, dynamic>),
+      min: OnvifUtil.stringMappedFromXml(json['Min'] as Map<String, dynamic>),
+      max: OnvifUtil.stringMappedFromXml(json['Max'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$DurationRangeToJson(DurationRange instance) =>

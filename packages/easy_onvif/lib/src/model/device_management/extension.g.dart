@@ -7,7 +7,7 @@ part of 'extension.dart';
 // **************************************************************************
 
 Extension _$ExtensionFromJson(Map<String, dynamic> json) => Extension(
-      dot11Configuration: OnvifUtil.nullableMappedToBool(
+      dot11Configuration: OnvifUtil.nullableBoolMappedFromXml(
           json['Dot11Configuration'] as Map<String, dynamic>?),
       extension: json['Extension'] == null
           ? null

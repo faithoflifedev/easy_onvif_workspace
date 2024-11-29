@@ -15,7 +15,7 @@ class PtzConfigurationOptions {
   /// The list of acceleration ramps supported by the device. The smallest
   /// acceleration value corresponds to the minimal index, the highest
   /// acceleration corresponds to the maximum index.
-  @JsonKey(name: 'PTZRamps', fromJson: OnvifUtil.nullableMappedToIntList)
+  @JsonKey(name: 'PTZRamps', fromJson: OnvifUtil.nullableIntMappedFromXmlList)
   final List<int>? ptzRamps;
 
   /// A list of supported coordinate systems including their range limitations.

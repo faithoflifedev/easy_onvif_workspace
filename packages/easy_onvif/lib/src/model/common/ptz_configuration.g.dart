@@ -9,16 +9,17 @@ part of 'ptz_configuration.dart';
 PtzConfiguration _$PtzConfigurationFromJson(Map<String, dynamic> json) =>
     PtzConfiguration(
       token: json['@token'] as String,
-      name: OnvifUtil.mappedToString(json['Name'] as Map<String, dynamic>),
-      useCount: OnvifUtil.mappedToInt(json['UseCount'] as Map<String, dynamic>),
-      moveRamp: OnvifUtil.nullableMappedToInt(
+      name: OnvifUtil.stringMappedFromXml(json['Name'] as Map<String, dynamic>),
+      useCount:
+          OnvifUtil.intMappedFromXml(json['UseCount'] as Map<String, dynamic>),
+      moveRamp: OnvifUtil.nullableIntMappedFromXml(
           json['MoveRamp'] as Map<String, dynamic>?),
-      presetRamp: OnvifUtil.nullableMappedToInt(
+      presetRamp: OnvifUtil.nullableIntMappedFromXml(
           json['PresetRamp'] as Map<String, dynamic>?),
-      presetTourRamp: OnvifUtil.nullableMappedToInt(
+      presetTourRamp: OnvifUtil.nullableIntMappedFromXml(
           json['PresetTourRamp'] as Map<String, dynamic>?),
-      nodeToken:
-          OnvifUtil.mappedToString(json['NodeToken'] as Map<String, dynamic>),
+      nodeToken: OnvifUtil.stringMappedFromXml(
+          json['NodeToken'] as Map<String, dynamic>),
       defaultAbsolutePantTiltPositionSpace:
           PtzConfiguration._nullableMappedToSpace(
               json['DefaultAbsolutePantTiltPositionSpace']
@@ -44,7 +45,7 @@ PtzConfiguration _$PtzConfigurationFromJson(Map<String, dynamic> json) =>
       defaultPtzSpeed: json['PtzSpeed'] == null
           ? null
           : PtzSpeed.fromJson(json['PtzSpeed'] as Map<String, dynamic>),
-      defaultPtzTimeout: OnvifUtil.nullableMappedToString(
+      defaultPtzTimeout: OnvifUtil.nullableStringMappedFromXml(
           json['DefaultPTZTimeout'] as Map<String, dynamic>?),
       panTiltLimits: json['PanTiltLimits'] == null
           ? null

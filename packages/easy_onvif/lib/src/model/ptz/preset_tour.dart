@@ -25,7 +25,7 @@ class PresetTour {
   final PtzPresetTourStatus status;
 
   /// Auto Start flag of the preset tour. True allows the preset tour to be activated always.
-  @JsonKey(name: 'AutoStart', fromJson: OnvifUtil.mappedToBool)
+  @JsonKey(name: 'AutoStart', fromJson: OnvifUtil.boolMappedFromXml)
   final bool autoStart;
 
   /// Parameters to specify the detail behavior of the preset tour.

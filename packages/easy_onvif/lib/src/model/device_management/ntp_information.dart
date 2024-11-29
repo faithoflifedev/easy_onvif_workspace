@@ -11,7 +11,7 @@ part 'ntp_information.g.dart';
 @JsonSerializable()
 class NtpInformation {
   ///Indicates if NTP information is to be retrieved by using DHCP.
-  @JsonKey(name: 'FromDHCP', fromJson: OnvifUtil.mappedToBool)
+  @JsonKey(name: 'FromDHCP', fromJson: OnvifUtil.boolMappedFromXml)
   final bool fromDhcp;
 
   ///List of manually entered NTP addresses.

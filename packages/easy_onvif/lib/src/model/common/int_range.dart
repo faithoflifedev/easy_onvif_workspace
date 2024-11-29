@@ -9,11 +9,11 @@ part 'int_range.g.dart';
 @JsonSerializable()
 class IntRange {
   /// Range of X-axis.
-  @JsonKey(name: 'Min', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Min', fromJson: OnvifUtil.intMappedFromXml)
   final int min;
 
   /// Range of Y-axis.
-  @JsonKey(name: 'Max', fromJson: OnvifUtil.mappedToInt)
+  @JsonKey(name: 'Max', fromJson: OnvifUtil.intMappedFromXml)
   final int max;
 
   IntRange({

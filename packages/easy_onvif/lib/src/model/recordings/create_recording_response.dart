@@ -8,7 +8,7 @@ part 'create_recording_response.g.dart';
 @JsonSerializable()
 class CreateRecordingResponse {
   /// The reference to the created recording.
-  @JsonKey(name: 'RecordingToken', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'RecordingToken', fromJson: OnvifUtil.stringMappedFromXml)
   final String token;
 
   CreateRecordingResponse({

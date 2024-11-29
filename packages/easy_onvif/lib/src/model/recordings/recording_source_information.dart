@@ -14,27 +14,27 @@ class RecordingSourceInformation implements XmlSerializable {
   /// Identifier for the source chosen by the client that creates the structure.
   /// This identifier is opaque to the device. Clients may use any type of URI
   /// for this field. A device shall support at least 128 characters.
-  @JsonKey(name: 'SourceId', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'SourceId', fromJson: OnvifUtil.stringMappedFromXml)
   final String sourceId;
 
   /// Informative user readable name of the source, e.g. "Camera23". A device
   /// shall support at least 20 characters.
-  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.stringMappedFromXml)
   final String name;
 
   /// Informative description of the physical location of the source, e.g. the
   /// coordinates on a map.
-  @JsonKey(name: 'Location', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Location', fromJson: OnvifUtil.stringMappedFromXml)
   final String location;
 
   /// URI provided by the service supplying data to be recorded. A device shall
   /// support at least 128 characters.
-  @JsonKey(name: 'Description', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Description', fromJson: OnvifUtil.stringMappedFromXml)
   final String description;
 
   /// Informative description of the physical location of the source, e.g. the
   /// coordinates on a map.
-  @JsonKey(name: 'Address', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Address', fromJson: OnvifUtil.stringMappedFromXml)
   final String address;
 
   RecordingSourceInformation({

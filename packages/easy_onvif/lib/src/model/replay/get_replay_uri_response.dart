@@ -13,7 +13,7 @@ part 'get_replay_uri_response.g.dart';
 class GetReplayUriResponse {
   /// The URI to which the client should connect in order to stream the
   /// recording.
-  @JsonKey(name: 'Uri', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Uri', fromJson: OnvifUtil.stringMappedFromXml)
   final String uri;
 
   GetReplayUriResponse({required this.uri});

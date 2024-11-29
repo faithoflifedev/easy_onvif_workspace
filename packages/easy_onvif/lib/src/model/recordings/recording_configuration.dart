@@ -18,7 +18,7 @@ class RecordingConfiguration implements XmlSerializable {
   final RecordingSourceInformation source;
 
   /// Informative description of the source.
-  @JsonKey(name: 'Content', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Content', fromJson: OnvifUtil.stringMappedFromXml)
   final String content;
 
   /// Specifies the maximum time that data in any track within the recording
@@ -28,7 +28,8 @@ class RecordingConfiguration implements XmlSerializable {
   /// retention time of stored data, except by resource constraints. Whatever
   /// the value of MaximumRetentionTime, the device may automatically delete
   /// recordings to free up storage space for new recordings.
-  @JsonKey(name: 'MaximumRetentionTime', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(
+      name: 'MaximumRetentionTime', fromJson: OnvifUtil.stringMappedFromXml)
   final String maximumRetentionTime;
 
   RecordingConfiguration({

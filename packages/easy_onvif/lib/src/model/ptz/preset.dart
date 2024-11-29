@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:easy_onvif/shared.dart';
-import 'package:easy_onvif/src/util/util.dart';
+import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'preset.g.dart';
@@ -11,7 +11,7 @@ class Preset {
   @JsonKey(name: '@token')
   final String token;
 
-  @JsonKey(name: 'Name', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.stringMappedFromXml)
   final String name;
 
   @JsonKey(name: 'PTZPosition')
@@ -32,7 +32,8 @@ class Preset {
         name: name ?? '',
       );
 
-  Map<String, dynamic> toJson() => _$PresetToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$PresetToJson(this).convertFieldToXmlMap('Name');
 
   @override
   String toString() => jsonEncode(toJson());

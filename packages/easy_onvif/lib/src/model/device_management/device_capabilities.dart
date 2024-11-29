@@ -15,7 +15,7 @@ part 'device_capabilities.g.dart';
 @JsonSerializable()
 class DeviceCapabilities extends DeviceServiceCapabilities {
   /// Device service URI.
-  @JsonKey(name: 'XAddr', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'XAddr', fromJson: OnvifUtil.stringMappedFromXml)
   final String xAddr;
 
   DeviceCapabilities({

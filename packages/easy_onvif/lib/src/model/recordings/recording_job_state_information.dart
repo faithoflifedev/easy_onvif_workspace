@@ -12,11 +12,11 @@ part 'recording_job_state_information.g.dart';
 @JsonSerializable()
 class RecordingJobStateInformation {
   /// Identification of the recording that the recording job records to.
-  @JsonKey(name: 'RecordingToken', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'RecordingToken', fromJson: OnvifUtil.stringMappedFromXml)
   final String recordingToken;
 
   /// Holds the aggregated state over the whole RecordingJobInformation structure.
-  @JsonKey(name: 'State', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'State', fromJson: OnvifUtil.stringMappedFromXml)
   final String state;
 
   /// Identifies the data source of the recording job.

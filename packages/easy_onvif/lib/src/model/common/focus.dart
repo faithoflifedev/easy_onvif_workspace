@@ -5,9 +5,16 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'focus.g.dart';
 
-///Focus configuration.
+/// Focus configuration.
 @JsonSerializable()
 class Focus {
+  static final _xmlMappedFields = <String>[
+    'AutoFocusMode',
+    'DefaultSpeed',
+    'NearLimit',
+    'FarLimit',
+  ];
+
   /// AutoFocusMode - enum { 'AUTO', 'MANUAL' }
   @JsonKey(
     name: 'AutoFocusMode',
@@ -16,38 +23,41 @@ class Focus {
   )
   final AutoFocusMode autoFocusMode;
 
-  ///Optional level parameter (unit unspecified).
+  /// Optional level parameter (unit unspecified).
   @JsonKey(
     name: 'DefaultSpeed',
-    fromJson: OnvifUtil.mappedToDouble,
+    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
   )
   final double? defaultSpeed;
 
-  ///Parameter to set auto-focus near limit (unit: meter).
+  /// Parameter to set auto-focus near limit (unit: meter).
   @JsonKey(
     name: 'NearLimit',
-    fromJson: OnvifUtil.mappedToDouble,
+    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
   )
   final double? nearLimit;
 
   @JsonKey(
     name: 'FarLimit',
-    fromJson: OnvifUtil.mappedToDouble,
+    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
   )
   final double? farLimit;
 
-  Focus(
-      {required this.autoFocusMode,
-      required this.defaultSpeed,
-      required this.nearLimit,
-      required this.farLimit});
+  Focus({
+    required this.autoFocusMode,
+    this.defaultSpeed,
+    this.nearLimit,
+    this.farLimit,
+  });
 
   factory Focus.fromJson(Map<String, dynamic> json) => _$FocusFromJson(json);
 
-  Map<String, dynamic> toJson() => _$FocusToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$FocusToJson(this).convertFieldsToXmlMap(_xmlMappedFields);
 
   static AutoFocusMode mappedToAutoFocusMode(Map<String, dynamic> value) =>
-      AutoFocusMode.values.byName(value['\$'].toString().toLowerCase());
+      AutoFocusMode.values
+          .byName(OnvifUtil.stringMappedFromXml(value).toLowerCase());
 
   @override
   String toString() => json.encode(toJson());
@@ -59,5 +69,6 @@ enum AutoFocusMode {
   manual('MANUAL');
 
   const AutoFocusMode(this.value);
+
   final String value;
 }

@@ -11,15 +11,15 @@ part 'ip_address.g.dart';
 class IpAddress {
   /// Indicates if the address is an IPv4 or IPv6 address.
   /// - enum { 'IPv4', 'IPv6' }
-  @JsonKey(name: 'Type', fromJson: OnvifUtil.mappedToString)
+  @JsonKey(name: 'Type', fromJson: OnvifUtil.stringMappedFromXml)
   final String type;
 
   /// IPv4 address.
-  @JsonKey(name: 'IPv4Address', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(name: 'IPv4Address', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? ipv4Address;
 
   /// IPv6 address
-  @JsonKey(name: 'IPv6Address', fromJson: OnvifUtil.nullableMappedToString)
+  @JsonKey(name: 'IPv6Address', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? ipv6Address;
 
   IpAddress({

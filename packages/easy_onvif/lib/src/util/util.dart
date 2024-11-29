@@ -89,16 +89,16 @@ class OnvifUtil {
 
   static bool stringOrMappedToBool(dynamic value) => value.runtimeType == String
       ? stringToBool(value as String)
-      : mappedToBool(value as Map<String, dynamic>);
+      : boolMappedFromXml(value as Map<String, dynamic>);
 
-  static List<int>? nullableMappedToIntList(String? value) =>
+  static List<int>? nullableIntMappedFromXmlList(String? value) =>
       value?.toString().split(',').map((item) => int.parse(item)).toList();
 
-  static List<String> mappedToStringList(Map<String, dynamic> value) =>
-      stringToList(mappedToString(value));
+  static List<String> stringMappedFromXmlList(Map<String, dynamic> value) =>
+      stringToList(stringMappedFromXml(value));
 
-  static List<String>? nullableMappedToStringList(List<dynamic>? value) =>
-      value?.map((element) => mappedToString(element)).toList();
+  static List<String>? nullableStringMappedFromXmlList(List<dynamic>? value) =>
+      value?.map((element) => stringMappedFromXml(element)).toList();
 
   static bool? nullableStringToBool(String? value) =>
       value != null ? stringToBool(value) : null;
@@ -112,35 +112,43 @@ class OnvifUtil {
   static double? optionalDouble(String? value) =>
       value != null ? double.parse(value) : null;
 
-  static bool mappedToBool(Map<String, dynamic> value) =>
-      value.containsKey('\$') ? stringToBool(value['\$']) : false;
+  static bool boolMappedFromXml(Map<String, dynamic> value) =>
+      value.containsKey('\$')
+          ? stringToBool(stringMappedFromXml(value))
+          : false;
 
-  static bool? nullableMappedToBool(Map<String, dynamic>? value) =>
-      value != null ? mappedToBool(value) : null;
+  static bool? nullableBoolMappedFromXml(Map<String, dynamic>? value) =>
+      value != null ? boolMappedFromXml(value) : null;
 
-  static int mappedToInt(Map<String, dynamic> value) => int.parse(value['\$']!);
+  static int intMappedFromXml(Map<String, dynamic> value) =>
+      int.parse(OnvifUtil.stringMappedFromXml(value));
 
-  static int? nullableMappedToInt(Map<String, dynamic>? value) =>
-      value != null ? mappedToInt(value) : null;
+  static int? nullableIntMappedFromXml(Map<String, dynamic>? value) =>
+      value != null ? intMappedFromXml(value) : null;
 
-  static double mappedToDouble(Map<String, dynamic> value) =>
-      double.parse(value['\$']);
+  static double doubleMappedFromXml(Map<String, dynamic> value) =>
+      double.parse(stringMappedFromXml(value));
 
-  static double? nullableMappedToDouble(Map<String, dynamic>? value) =>
-      value != null ? mappedToDouble(value) : null;
+  static double? nullableDoubleMappedFromXml(Map<String, dynamic>? value) =>
+      value != null ? doubleMappedFromXml(value) : null;
 
-  static String mappedToString(Map<String, dynamic> value) => value['\$'];
+  static String stringMappedFromXml(Map<String, dynamic> value) => value['\$'];
+
+  // static String mappedString(Map<String, dynamic> value) => value['\$'];
 
   static ReferenceToken mappedToReferenceToken(Map<String, dynamic> value) =>
-      ReferenceToken(value['\$']);
+      ReferenceToken(OnvifUtil.stringMappedFromXml(value));
 
   static Uri mappedToUri(Map<String, dynamic> value) =>
-      Uri.parse(mappedToString(value));
+      Uri.parse(stringMappedFromXml(value));
 
-  static String? nullableMappedToString(Map<String, dynamic>? value) =>
-      value != null && value.containsKey('\$') ? mappedToString(value) : null;
+  static String? nullableStringMappedFromXml(Map<String, dynamic>? value) =>
+      value != null && value.containsKey('\$')
+          ? stringMappedFromXml(value)
+          : null;
 
-  static MulticastConfiguration? emptyMapToNull(Map<String, dynamic>? json) =>
+  static MulticastConfiguration? emptyOrMulticastConfiguration(
+          Map<String, dynamic>? json) =>
       json != null && json.keys.isNotEmpty
           ? MulticastConfiguration.fromJson(json)
           : null;
@@ -159,7 +167,7 @@ class OnvifUtil {
   // The tryParse is used to work-around the non-compliant date returned by the
   // TL-IPC43AN-4 device
   static DateTime mappedToDateTime(Map<String, dynamic> value) {
-    final rawDt = value['\$'];
+    final rawDt = stringMappedFromXml(value);
 
     final formatter = DateFormat(r'E MMM  d HH:mm:ss yyyy');
 
@@ -170,7 +178,7 @@ class OnvifUtil {
       value != null ? mappedToDateTime(value) : null;
 
   static DateTime mappedToStdDateTime(Map<String, dynamic> value) {
-    final rawDt = value['\$'];
+    final rawDt = stringMappedFromXml(value);
 
     final formatter = DateFormat('YYYY-MM-dd\'T\'HH:mm:ss\'Z\'');
 

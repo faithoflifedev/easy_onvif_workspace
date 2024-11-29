@@ -8,7 +8,7 @@ part of 'attachment_data.dart';
 
 AttachmentData _$AttachmentDataFromJson(Map<String, dynamic> json) =>
     AttachmentData(
-      contentType: OnvifUtil.nullableMappedToString(
+      contentType: OnvifUtil.nullableStringMappedFromXml(
           json['contentType'] as Map<String, dynamic>?),
       include: json['Include'] == null
           ? null

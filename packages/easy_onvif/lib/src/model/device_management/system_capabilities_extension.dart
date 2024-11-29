@@ -8,17 +8,21 @@ part 'system_capabilities_extension.g.dart';
 @JsonSerializable()
 class SystemCapabilitiesExtension {
   @JsonKey(
-      name: 'HttpFirmwareUpgrade', fromJson: OnvifUtil.nullableMappedToBool)
+      name: 'HttpFirmwareUpgrade',
+      fromJson: OnvifUtil.nullableBoolMappedFromXml)
   final bool? httpFirmwareUpgrade;
 
-  @JsonKey(name: 'HttpSystemBackup', fromJson: OnvifUtil.nullableMappedToBool)
+  @JsonKey(
+      name: 'HttpSystemBackup', fromJson: OnvifUtil.nullableBoolMappedFromXml)
   final bool? httpSystemBackup;
 
-  @JsonKey(name: 'HttpSystemLogging', fromJson: OnvifUtil.nullableMappedToBool)
+  @JsonKey(
+      name: 'HttpSystemLogging', fromJson: OnvifUtil.nullableBoolMappedFromXml)
   final bool? httpSystemLogging;
 
   @JsonKey(
-      name: 'HttpSupportInformation', fromJson: OnvifUtil.nullableMappedToBool)
+      name: 'HttpSupportInformation',
+      fromJson: OnvifUtil.nullableBoolMappedFromXml)
   final bool? httpSupportInformation;
 
   @JsonKey(name: 'Extension')

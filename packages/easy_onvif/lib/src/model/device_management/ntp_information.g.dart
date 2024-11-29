@@ -9,7 +9,7 @@ part of 'ntp_information.dart';
 NtpInformation _$NtpInformationFromJson(Map<String, dynamic> json) =>
     NtpInformation(
       fromDhcp:
-          OnvifUtil.mappedToBool(json['FromDHCP'] as Map<String, dynamic>),
+          OnvifUtil.boolMappedFromXml(json['FromDHCP'] as Map<String, dynamic>),
       ntpManual: NtpInformation._nullableUnbound(json['NTPManual']),
       ntpFromDhcp: NtpInformation._nullableUnbound(json['NTPFromDHCP']),
     );
