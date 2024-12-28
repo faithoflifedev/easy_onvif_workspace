@@ -22,7 +22,7 @@ scripts:
   #   run: melos run publish:dart && melos run publish:flutter
   #   description: Run publish for all packages.
 
-  prep:
+  prep:lib:
     # run: melos run build && melos run meta && melos run markdown && melos run format && melos run analyze
     run: melos run meta && melos run markdown && melos run format && melos run analyze
     description: Run prep steps for dart and flutter.
@@ -38,7 +38,7 @@ scripts:
     description: Commit changes for lib package.
 
   commit:cli:
-    run: melos exec--ignore="easy_onvif" git add .; git commit -m "$(cat packages/easy_onvif_cli/tool/publish_tools.yaml | yq -r '.commit')"; git push origin main
+    run: melos exec --ignore="easy_onvif" git add .; git commit -m "$(cat packages/easy_onvif_cli/tool/publish_tools.yaml | yq -r '.commit')"; git push origin main
     description: Commit changes for Flutter package.
 
   # publish:real:lib:

@@ -445,7 +445,7 @@ class OnvifDebugCommand extends Command with UiLoggy {
       zipFile.deleteSync();
     }
 
-    zipFile.writeAsBytesSync(zipData!);
+    zipFile.writeAsBytesSync(zipData);
 
     spinner.success('Bundle created successfully.');
   }

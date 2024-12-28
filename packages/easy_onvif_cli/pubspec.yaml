@@ -1,5 +1,5 @@
 name: easy_onvif_cli
-version: 3.1.0+4
+version: 3.1.0+5
 homepage: https://github.com/faithoflifedev/easy_onvif_workspace/tree/main/packages/easy_onvif_cli
 description: A pure Dart library designed primarily for command line automation of Onvif compatible devices.
 repository: https://github.com/faithoflifedev/easy_onvif_workspace
@@ -14,12 +14,14 @@ executables:
   onvif:
 
 dependencies:
-  archive: ^3.6.1
+  archive: ^4.0.1
   args: ^2.4.2
   ansicolor: ^2.0.3
   ansi_escapes: ^1.1.0
   cli_spin: ^1.0.1
-  easy_onvif: ^3.1.0
+  easy_onvif: ^3.1.1+5
+  # easy_onvif:
+  #   path: ../easy_onvif
   dio: ^5.7.0
   loggy: ^2.0.3
   path: ^1.9.0
