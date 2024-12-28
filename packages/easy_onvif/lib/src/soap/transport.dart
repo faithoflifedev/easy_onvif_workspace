@@ -13,6 +13,8 @@ class Transport with UiLoggy {
 
   final AuthInfo authInfo;
 
+  final bool overrideSpecificationAuthentication;
+
   static Duration timeDelta = Duration.zero;
 
   static final builder = XmlBuilder();
@@ -20,6 +22,7 @@ class Transport with UiLoggy {
   Transport({
     required this.dio,
     required this.authInfo,
+    this.overrideSpecificationAuthentication = false,
   });
 
   /// Send the SOAP [requestData] to the given [url] endpoint.
@@ -115,9 +118,9 @@ class Transport with UiLoggy {
     Authorization? authorization,
   ]) =>
       Envelope(
-          body: body,
-          header: Header(
-              security: Security(
+        body: body,
+        header: Header(
+          security: Security(
             usernameToken: UsernameToken(
                 authorization: authorization ??
                     Authorization(
@@ -125,7 +128,9 @@ class Transport with UiLoggy {
                       timeDelta: timeDelta,
                     )),
             mustUnderstand: 1,
-          )));
+          ),
+        ),
+      );
 
   Future<Envelope> request(Uri uri, Body body) async => await sendRequest(
         uri,

@@ -118,9 +118,9 @@ class Media2 extends Operation {
   /// - Otherwise the requested list of configurations shall for each profile
   ///   include the configurations present as Type.
   ///
-  /// [referenceToken] - optional;\
+  /// [referenceToken] - optional;
   /// Optional token of the requested profile.
-  /// [type] - optional, unbounded; List<String>
+  /// [type] - optional, unbounded; List\<String>
   /// The types shall be provided as defined by tr2:ConfigurationEnumeration.
   ///
   /// ACCESS CLASS: READ_MEDIA

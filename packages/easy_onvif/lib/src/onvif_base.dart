@@ -14,11 +14,19 @@ import 'replay.dart';
 import 'search.dart';
 
 class Onvif with UiLoggy {
+  /// The connection authentication information for the Onvif device
   final AuthInfo authInfo;
 
+  /// Whether to override the authentication specified in the Onvif specification
+  final bool overrideSpecificationAuthentication;
+
+  /// The dio instance to use for making http requests
   final Dio _dio;
+
+  /// The host uri of the Onvif device
   final Uri _hostUri;
 
+  /// The map of service namespaces to service urls
   final serviceMap = <String, String>{};
 
   soap.Transport? _transport;
@@ -60,6 +68,7 @@ class Onvif with UiLoggy {
     required LogOptions logOptions,
     required LoggyPrinter printer,
     Dio? dio,
+    this.overrideSpecificationAuthentication = false,
   })  : _dio = dio ??
             Dio(
               BaseOptions(
@@ -77,6 +86,7 @@ class Onvif with UiLoggy {
     _transport = soap.Transport(
       dio: _dio,
       authInfo: authInfo,
+      overrideSpecificationAuthentication: overrideSpecificationAuthentication,
     );
 
     _deviceManagement = DeviceManagement(
@@ -84,27 +94,44 @@ class Onvif with UiLoggy {
         uri: '${_hostUri.origin}/onvif/device_service'.parseUri);
   }
 
-  static Future<Onvif> connect(
-      {required host,
-      required username,
-      required password,
-      LogOptions logOptions = const LogOptions(
-        LogLevel.error,
-        stackTraceLevel: LogLevel.off,
-      ),
-      LoggyPrinter printer = const PrettyPrinter(
-        showColors: false,
-      ),
-      Dio? dio}) async {
+  static Future<Onvif> connect({
+    /// The host name or IP address of the Onvif device
+    required host,
+
+    /// The username to use for authentication
+    required username,
+
+    /// The password to use for authentication
+    required password,
+
+    /// The log options to use for logging
+    LogOptions logOptions = const LogOptions(
+      LogLevel.error,
+      stackTraceLevel: LogLevel.off,
+    ),
+
+    /// The printer to use for logging formatting
+    LoggyPrinter printer = const PrettyPrinter(
+      showColors: false,
+    ),
+
+    /// The dio instance to use for making http requests
+    Dio? dio,
+
+    /// Whether to override the authentication specified in the Onvif specification
+    bool overrideSpecificationAuthentication = false,
+  }) async {
     final onvif = Onvif(
-        authInfo: AuthInfo(
-          host: host,
-          username: username,
-          password: password,
-        ),
-        logOptions: logOptions,
-        printer: printer,
-        dio: dio);
+      authInfo: AuthInfo(
+        host: host,
+        username: username,
+        password: password,
+      ),
+      logOptions: logOptions,
+      printer: printer,
+      dio: dio,
+      overrideSpecificationAuthentication: overrideSpecificationAuthentication,
+    );
 
     await onvif.initialize();
 
@@ -131,7 +158,9 @@ class Onvif with UiLoggy {
     soap.Transport.timeDelta = await getTimeDelta();
 
     try {
-      final serviceList = await deviceManagement.getServices(true);
+      final serviceList = await deviceManagement.getServices(
+        includeCapability: true,
+      );
 
       serviceMap.addAll(
           {for (var service in serviceList) service.nameSpace: service.xAddr});

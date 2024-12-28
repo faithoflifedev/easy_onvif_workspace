@@ -32,10 +32,11 @@ class DataClass extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: Colors.black),
                 dataRowColor: WidgetStateProperty.resolveWith<Color?>(
-                    (Set<WidgetState> states) => Theme.of(context)
-                        .colorScheme
-                        .primary
-                        .withOpacity(0.08)),
+                  (Set<WidgetState> states) => Theme.of(context)
+                      .colorScheme
+                      .primary
+                      .withValues(alpha: 0.08),
+                ),
                 headingRowColor: WidgetStateProperty.resolveWith(
                     (states) => Colors.grey.shade400),
                 // Data columns as required by APIs data.

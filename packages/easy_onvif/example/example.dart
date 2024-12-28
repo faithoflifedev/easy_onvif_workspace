@@ -9,16 +9,18 @@ void main(List<String> arguments) async {
 
   // configure device connection
   final onvif = await Onvif.connect(
-      host: config['host'],
-      username: config['username'],
-      password: config['password'],
-      logOptions: const LogOptions(
-        LogLevel.debug,
-        stackTraceLevel: LogLevel.error,
-      ),
-      printer: const PrettyPrinter(
-        showColors: true,
-      ));
+    host: config['host'],
+    username: config['username'],
+    password: config['password'],
+    logOptions: const LogOptions(
+      LogLevel.debug,
+      stackTraceLevel: LogLevel.error,
+    ),
+    printer: const PrettyPrinter(
+      showColors: true,
+    ),
+    overrideSpecificationAuthentication: true,
+  );
 
   // get service capabilities
   // var deviceServiceCapabilities =

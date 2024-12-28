@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:easy_onvif/device_management.dart';
 import 'package:easy_onvif/soap.dart' as soap;
 import 'package:loggy/loggy.dart';
-// import 'package:universal_io/io.dart';
 
 import 'operation.dart';
 
@@ -28,6 +27,10 @@ class DeviceManagement extends Operation with UiLoggy {
     required super.transport,
     required super.uri,
   });
+
+  Function get requestFunction => transport.overrideSpecificationAuthentication
+      ? transport.securedRequest
+      : transport.request;
 
   /// This operation creates new device users and corresponding credentials on a
   /// device for authentication purposes. The device shall support creation of
@@ -97,13 +100,12 @@ class DeviceManagement extends Operation with UiLoggy {
   ///  @Deprecated('Use [getServices]')
   ///
   /// Access Class: PRE_AUTH
-  Future<Capabilities> getCapabilities(
-      {CapabilityCategory? capabilityCategory}) async {
+  Future<Capabilities> getCapabilities({
+    CapabilityCategory capabilityCategory = CapabilityCategory.all,
+  }) async {
     loggy.debug('getCapabilities');
 
-    capabilityCategory ??= CapabilityCategory.all;
-
-    final responseEnvelope = await transport.request(
+    final responseEnvelope = await requestFunction(
         uri,
         soap.Body(
           request:
@@ -294,10 +296,12 @@ class DeviceManagement extends Operation with UiLoggy {
   /// Returns information about services on the device.
   ///
   /// Access Class: PRE_AUTH
-  Future<List<Service>> getServices([bool includeCapability = false]) async {
+  Future<List<Service>> getServices({
+    bool includeCapability = false,
+  }) async {
     loggy.debug('getServices');
 
-    final responseEnvelope = await transport.request(
+    final responseEnvelope = await requestFunction(
         uri,
         soap.Body(
           request: DeviceManagementRequest.getServices(includeCapability),

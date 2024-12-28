@@ -66,7 +66,10 @@ class Media2Request {
     builder.element('GetStreamUri', nest: () {
       builder.namespace(Xmlns.tr2);
 
-      protocol.buildXml(builder, tag: 'Protocol');
+      protocol.buildXml(
+        builder,
+        tag: 'Protocol',
+      );
 
       builder.element('Protocol', nest: () {
         builder.namespace(Xmlns.tt);

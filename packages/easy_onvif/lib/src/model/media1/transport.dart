@@ -37,6 +37,8 @@ class Transport implements XmlSerializable {
         builder.namespace(namespace!);
 
         builder.element('Protocol', nest: () {
+          builder.namespace(namespace);
+
           builder.text(protocol);
         });
       });
