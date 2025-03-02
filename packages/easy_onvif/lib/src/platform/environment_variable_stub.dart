@@ -1,5 +1,2 @@
-String? getEnvironmentVariable(
-  String variableName, {
-  String? defaultValue,
-}) =>
+String? getEnvironmentVariable(String variableName, {String? defaultValue}) =>
     throw UnsupportedError('Cannot get API key');

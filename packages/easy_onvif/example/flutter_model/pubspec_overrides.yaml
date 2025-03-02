@@ -2,4 +2,4 @@
 dependency_overrides:
   easy_onvif:
     path: ../..
-  collection: ^1.19.0
+  intl: any

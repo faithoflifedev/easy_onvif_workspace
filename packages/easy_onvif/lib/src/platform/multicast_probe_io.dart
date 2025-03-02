@@ -19,13 +19,11 @@ sealed class _OnvifDiscoveryData extends Struct {
 class MulticastProbeImpl extends BaseMulticastProbe {
   final MulticastProbeIo _multicastProbeIo;
 
-  MulticastProbeImpl({
-    int? timeout,
-    bool? releaseMode,
-  }) : _multicastProbeIo = MulticastProbeIo(
-          timeout: timeout,
-          releaseMode: releaseMode,
-        );
+  MulticastProbeImpl({int? timeout, bool? releaseMode})
+    : _multicastProbeIo = MulticastProbeIo(
+        timeout: timeout,
+        releaseMode: releaseMode,
+      );
 
   List<ProbeMatch> get onvifDevices => _multicastProbeIo.onvifDevices;
 
@@ -35,7 +33,7 @@ class MulticastProbeImpl extends BaseMulticastProbe {
 
 class MulticastProbeIo with UiLoggy {
   late final int Function(Pointer<NativeType>, Pointer<NativeType>, int)
-      _discovery;
+  _discovery;
 
   static final broadcastAddress = InternetAddress('239.255.255.250');
 
@@ -48,7 +46,9 @@ class MulticastProbeIo with UiLoggy {
   factory MulticastProbeIo({int? timeout, bool? releaseMode}) {
     if (Platform.isWindows) {
       return MulticastProbeIo.windows(
-          timeout: timeout, releaseMode: releaseMode);
+        timeout: timeout,
+        releaseMode: releaseMode,
+      );
     } else {
       return MulticastProbeIo.other(timeout: timeout);
     }
@@ -67,42 +67,49 @@ class MulticastProbeIo with UiLoggy {
   MulticastProbeIo.windows({int? timeout, bool? releaseMode}) {
     final env = Platform.environment;
 
-    var discoveryDllPath = env.containsKey('ONVIF_DISCOVERY_DLL')
-        ? env['ONVIF_DISCOVERY_DLL']!
-        : join(Directory.current.path, 'bin', 'discovery.dll');
+    var discoveryDllPath =
+        env.containsKey('ONVIF_DISCOVERY_DLL')
+            ? env['ONVIF_DISCOVERY_DLL']!
+            : join(Directory.current.path, 'bin', 'discovery.dll');
 
     if (releaseMode != null) {
-      discoveryDllPath =
-          join(Directory.current.path, 'assets', 'discovery.dll');
+      discoveryDllPath = join(
+        Directory.current.path,
+        'assets',
+        'discovery.dll',
+      );
 
       if (releaseMode) {
-        final String localLib =
-            join('data', 'flutter_assets', 'assets', 'discovery.dll');
+        final String localLib = join(
+          'data',
+          'flutter_assets',
+          'assets',
+          'discovery.dll',
+        );
 
-        discoveryDllPath =
-            join(Directory(Platform.resolvedExecutable).parent.path, localLib);
+        discoveryDllPath = join(
+          Directory(Platform.resolvedExecutable).parent.path,
+          localLib,
+        );
       }
     }
 
     final Pointer<T> Function<T extends NativeType>(String symbolName) lookup =
         () {
-      return DynamicLibrary.open(discoveryDllPath).lookup;
-    }();
+          return DynamicLibrary.open(discoveryDllPath).lookup;
+        }();
 
     final discoveryPtr = lookup<
-        NativeFunction<
-            Int32 Function(
-              Pointer<NativeType>,
-              Pointer<NativeType>,
-              Int32,
-            )>>('discovery');
+      NativeFunction<
+        Int32 Function(Pointer<NativeType>, Pointer<NativeType>, Int32)
+      >
+    >('discovery');
 
-    _discovery = discoveryPtr.asFunction<
-        int Function(
-          Pointer<NativeType>,
-          Pointer<NativeType>,
-          int,
-        )>();
+    _discovery =
+        discoveryPtr
+            .asFunction<
+              int Function(Pointer<NativeType>, Pointer<NativeType>, int)
+            >();
 
     probeTimeout = timeout ?? BaseMulticastProbe.defaultTimeout;
   }
@@ -119,8 +126,11 @@ class MulticastProbeIo with UiLoggy {
     await RawDatagramSocket.bind(broadcastAddress, broadcastPort);
 
     final rawDataGramSocket = await RawDatagramSocket.bind(
-        InternetAddress.anyIPv4, 0,
-        reuseAddress: false, reusePort: false);
+      InternetAddress.anyIPv4,
+      0,
+      reuseAddress: false,
+      reusePort: false,
+    );
 
     rawDataGramSocket.listen((RawSocketEvent rawSocketEvent) {
       var dataGram = rawDataGramSocket.receive();
@@ -137,8 +147,9 @@ class MulticastProbeIo with UiLoggy {
 
       if (envelope.body.response == null) throw Exception();
 
-      onvifDevices
-          .addAll(ProbeMatches.fromJson(envelope.body.response!).probeMatches);
+      onvifDevices.addAll(
+        ProbeMatches.fromJson(envelope.body.response!).probeMatches,
+      );
     });
 
     start(rawDataGramSocket);
@@ -151,20 +162,27 @@ class MulticastProbeIo with UiLoggy {
     loggy.debug('send');
 
     loggy.debug(
-        'BROADCAST ADDRESS: ${broadcastAddress.address}, PORT: $broadcastPort');
+      'BROADCAST ADDRESS: ${broadcastAddress.address}, PORT: $broadcastPort',
+    );
 
     final messageBodyXml = Transport.probe(Uuid().v4());
 
     loggy.debug('REQUEST:\n${messageBodyXml.toXmlString(pretty: true)}');
 
-    rawDataGramSocket.send(messageBodyXml.toXmlString(pretty: true).codeUnits,
-        broadcastAddress, broadcastPort);
+    rawDataGramSocket.send(
+      messageBodyXml.toXmlString(pretty: true).codeUnits,
+      broadcastAddress,
+      broadcastPort,
+    );
   }
 
-  Future<void> finish(RawDatagramSocket rawDataGramSocket,
-      [int? timeout]) async {
+  Future<void> finish(
+    RawDatagramSocket rawDataGramSocket, [
+    int? timeout,
+  ]) async {
     await Future.delayed(
-        Duration(seconds: timeout ?? BaseMulticastProbe.defaultTimeout));
+      Duration(seconds: timeout ?? BaseMulticastProbe.defaultTimeout),
+    );
 
     rawDataGramSocket.close();
   }
@@ -179,12 +197,14 @@ class MulticastProbeIo with UiLoggy {
 
     for (var index = 0; index < devices; index++) {
       var envelope = Envelope.fromXmlString(
-          Pointer.fromAddress(data.address + index * 8192)
-              .cast<Utf8>()
-              .toDartString());
+        Pointer.fromAddress(
+          data.address + index * 8192,
+        ).cast<Utf8>().toDartString(),
+      );
 
-      onvifDevices
-          .addAll(ProbeMatches.fromJson(envelope.body.response!).probeMatches);
+      onvifDevices.addAll(
+        ProbeMatches.fromJson(envelope.body.response!).probeMatches,
+      );
     }
 
     malloc.free(probeMessageData);
