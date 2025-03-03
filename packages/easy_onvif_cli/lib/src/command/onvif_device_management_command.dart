@@ -65,11 +65,13 @@ class OnvifCreateUsersDeviceManagementCommand extends OnvifHelperCommand {
 
   OnvifCreateUsersDeviceManagementCommand() {
     argParser
-      ..addOption('users-file',
-          abbr: 'f',
-          valueHelp: 'yaml or json file path',
-          help:
-              'The path to the file that lists users to be created, cannot be used with other options.')
+      ..addOption(
+        'users-file',
+        abbr: 'f',
+        valueHelp: 'yaml or json file path',
+        help:
+            'The path to the file that lists users to be created, cannot be used with other options.',
+      )
       ..addOption(
         'username',
         abbr: 'u',
@@ -99,7 +101,8 @@ class OnvifCreateUsersDeviceManagementCommand extends OnvifHelperCommand {
 
     final hasFile = argResults?.options.contains('users-file') ?? false;
 
-    final hasUser = (argResults?.options.contains('username') ?? false) &&
+    final hasUser =
+        (argResults?.options.contains('username') ?? false) &&
         (argResults?.options.contains('user-level') ?? false);
 
     if (hasFile) {
@@ -107,20 +110,26 @@ class OnvifCreateUsersDeviceManagementCommand extends OnvifHelperCommand {
 
       if (!userFile.existsSync()) {
         throw UsageException(
-            '${argResults!['users-file']} - file not found', usage);
+          '${argResults!['users-file']} - file not found',
+          usage,
+        );
       }
 
-      users.addAll((loadYaml(userFile.readAsStringSync()) as YamlList)
-          .map((userJson) => User.fromYamlMap(userJson))
-          .toList());
+      users.addAll(
+        (loadYaml(userFile.readAsStringSync()) as YamlList)
+            .map((userJson) => User.fromYamlMap(userJson))
+            .toList(),
+      );
     }
 
     if (hasUser) {
-      users.add(User(
-        username: argResults!['username'],
-        password: argResults?['password'],
-        userLevel: UserLevel.values.byName(argResults!['user-level']),
-      ));
+      users.add(
+        User(
+          username: argResults!['username'],
+          password: argResults?['password'],
+          userLevel: UserLevel.values.byName(argResults!['user-level']),
+        ),
+      );
     }
 
     try {
@@ -147,11 +156,13 @@ class OnvifDeleteUsersDeviceManagementCommand extends OnvifHelperCommand {
 
   OnvifDeleteUsersDeviceManagementCommand() {
     argParser
-      ..addOption('users-file',
-          abbr: 'f',
-          valueHelp: 'yaml or json file path',
-          help:
-              'The path to the file that lists users to be created, cannot be used with other options.')
+      ..addOption(
+        'users-file',
+        abbr: 'f',
+        valueHelp: 'yaml or json file path',
+        help:
+            'The path to the file that lists users to be created, cannot be used with other options.',
+      )
       ..addOption(
         'username',
         abbr: 'u',
@@ -175,12 +186,16 @@ class OnvifDeleteUsersDeviceManagementCommand extends OnvifHelperCommand {
 
       if (!userFile.existsSync()) {
         throw UsageException(
-            '${argResults!['users-file']} - file not found', usage);
+          '${argResults!['users-file']} - file not found',
+          usage,
+        );
       }
 
-      users.addAll((loadYaml(File(argResults!['users-file']).readAsStringSync())
-              as YamlList)
-          .map((userJson) => userJson.toString()));
+      users.addAll(
+        (loadYaml(File(argResults!['users-file']).readAsStringSync())
+                as YamlList)
+            .map((userJson) => userJson.toString()),
+      );
     }
 
     if (hasUser) {
@@ -456,11 +471,13 @@ class OnvifGetServicesDeviceManagementCommand extends OnvifHelperCommand {
   String get name => 'get-services';
 
   OnvifGetServicesDeviceManagementCommand() {
-    argParser.addFlag('include-capability',
-        abbr: 'i',
-        defaultsTo: false,
-        help:
-            'Indicates if the service capabilities (untyped) should be included in the response.');
+    argParser.addFlag(
+      'include-capability',
+      abbr: 'i',
+      defaultsTo: false,
+      help:
+          'Indicates if the service capabilities (untyped) should be included in the response.',
+    );
   }
 
   @override
@@ -491,10 +508,12 @@ class OnvifGetStorageConfigurationDeviceManagementCommand
   String get name => 'get-storage-configuration';
 
   OnvifGetStorageConfigurationDeviceManagementCommand() {
-    argParser.addOption('storage-token',
-        abbr: 't',
-        mandatory: true,
-        help: 'Unique identifier referencing the physical entity.');
+    argParser.addOption(
+      'storage-token',
+      abbr: 't',
+      mandatory: true,
+      help: 'Unique identifier referencing the physical entity.',
+    );
   }
 
   @override
@@ -502,8 +521,9 @@ class OnvifGetStorageConfigurationDeviceManagementCommand
     await initializeOnvif();
 
     try {
-      final systemDateAndTime = await deviceManagement
-          .getStorageConfiguration(argResults!['storage-token']);
+      final systemDateAndTime = await deviceManagement.getStorageConfiguration(
+        argResults!['storage-token'],
+      );
 
       print(systemDateAndTime);
     } on DioException catch (err) {
@@ -608,7 +628,9 @@ class OnvifGetSystemLogDeviceManagementCommand extends OnvifHelperCommand {
 
       if (!logFolder.existsSync()) {
         throw UsageException(
-            '${argResults!['log-folder']} - folder not found', usage);
+          '${argResults!['log-folder']} - folder not found',
+          usage,
+        );
       }
     }
 
@@ -655,7 +677,9 @@ class OnvifGetSystemSupportInformationDeviceManagementCommand
 
       if (!Directory(logFolder!).existsSync()) {
         throw UsageException(
-            '${argResults!['log-folder']} - folder not found', usage);
+          '${argResults!['log-folder']} - folder not found',
+          usage,
+        );
       }
     }
 
@@ -766,14 +790,8 @@ class OnvifSetIPAddressFilterDeviceManagementCommand
         abbr: '6',
         help: 'The IPv6 address to allow or deny',
       )
-      ..addOption(
-        'ipv4-prefix',
-        defaultsTo: '3',
-      )
-      ..addOption(
-        'ipv6-prefix',
-        defaultsTo: '3',
-      );
+      ..addOption('ipv4-prefix', defaultsTo: '3')
+      ..addOption('ipv6-prefix', defaultsTo: '3');
   }
 
   @override

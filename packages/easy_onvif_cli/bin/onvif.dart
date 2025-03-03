@@ -4,12 +4,16 @@ import 'package:args/command_runner.dart';
 import 'package:easy_onvif_cli/command.dart';
 
 void main(List<String> arguments) async {
-  CommandRunner('onvif',
-      'A command line interface for controlling Onvif compliant devices')
+  CommandRunner(
+      'onvif',
+      'A command line interface for controlling Onvif compliant devices',
+    )
     ..argParser.addOption('config-file', defaultsTo: defaultConfigFile.path)
-    ..argParser.addOption('log-level',
-        allowed: ['all', 'debug', 'info', 'warning', 'error', 'off'],
-        defaultsTo: 'off')
+    ..argParser.addOption(
+      'log-level',
+      allowed: ['all', 'debug', 'info', 'warning', 'error', 'off'],
+      defaultsTo: 'off',
+    )
     ..addCommand(OnvifAuthorizeCommand())
     ..addCommand(OnvifDebugCommand())
     ..addCommand(OnvifDeviceManagementCommand())

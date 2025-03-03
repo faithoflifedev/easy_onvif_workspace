@@ -44,20 +44,23 @@ class OnvifAuthorizeCommand extends Command {
 
     print('Host:');
 
-    credentials['host'] =
-        stdin.readLineSync(encoding: Encoding.getByName('utf-8')!);
+    credentials['host'] = stdin.readLineSync(
+      encoding: Encoding.getByName('utf-8')!,
+    );
 
     print('Username:');
 
-    credentials['username'] =
-        stdin.readLineSync(encoding: Encoding.getByName('utf-8')!);
+    credentials['username'] = stdin.readLineSync(
+      encoding: Encoding.getByName('utf-8')!,
+    );
 
     print('Password:');
 
     stdin.echoMode = false;
 
-    credentials['password'] =
-        stdin.readLineSync(encoding: Encoding.getByName('utf-8')!);
+    credentials['password'] = stdin.readLineSync(
+      encoding: Encoding.getByName('utf-8')!,
+    );
 
     if (credentials['host'] == null ||
         credentials['username'] == null ||

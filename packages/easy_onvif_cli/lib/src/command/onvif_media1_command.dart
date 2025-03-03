@@ -63,11 +63,13 @@ class OnvifGetMetadataConfiguration1MediaCommand extends OnvifHelperCommand {
   String get name => 'get-metadata-configuration';
 
   OnvifGetMetadataConfiguration1MediaCommand() {
-    argParser.addOption('configuration-token',
-        abbr: 't',
-        valueHelp: 'string',
-        mandatory: true,
-        help: 'Token of the requested metadata configuration.');
+    argParser.addOption(
+      'configuration-token',
+      abbr: 't',
+      valueHelp: 'string',
+      mandatory: true,
+      help: 'Token of the requested metadata configuration.',
+    );
   }
 
   @override
@@ -75,8 +77,9 @@ class OnvifGetMetadataConfiguration1MediaCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final metadataConfiguration = await media.media1
-          .getMetadataConfiguration(argResults!['configuration-token']);
+      final metadataConfiguration = await media.media1.getMetadataConfiguration(
+        argResults!['configuration-token'],
+      );
 
       print(json.encode(metadataConfiguration));
     } on DioException catch (err) {
@@ -98,25 +101,29 @@ class OnvifGetMetadataConfigurations1MediaCommand extends OnvifHelperCommand {
 
   OnvifGetMetadataConfigurations1MediaCommand() {
     argParser
-      ..addOption('configuration-token',
-          valueHelp: 'string',
-          help:
-              'Optional metadata configuration token that specifies an existing configuration that the options are intended for.')
-      ..addOption('profile-token',
-          valueHelp: 'string',
-          help:
-              'Optional ProfileToken that specifies an existing media profile that the options shall be compatible with.');
+      ..addOption(
+        'configuration-token',
+        valueHelp: 'string',
+        help:
+            'Optional metadata configuration token that specifies an existing configuration that the options are intended for.',
+      )
+      ..addOption(
+        'profile-token',
+        valueHelp: 'string',
+        help:
+            'Optional ProfileToken that specifies an existing media profile that the options shall be compatible with.',
+      );
   }
   @override
   void run() async {
     await initializeOnvif();
 
     try {
-      final metadataConfigurations =
-          await media.media1.getMetadataConfigurations(
-        configurationToken: argResults?['configuration-token'],
-        profileToken: argResults?['profile-token'],
-      );
+      final metadataConfigurations = await media.media1
+          .getMetadataConfigurations(
+            configurationToken: argResults?['configuration-token'],
+            profileToken: argResults?['profile-token'],
+          );
 
       print(metadataConfigurations);
     } on DioException catch (err) {
@@ -136,11 +143,13 @@ class OnvifGetProfileMediaCommand extends OnvifHelperCommand {
   String get name => 'get-profile';
 
   OnvifGetProfileMediaCommand() {
-    argParser.addOption('profile-token',
-        abbr: 't',
-        valueHelp: 'string',
-        mandatory: true,
-        help: 'Token of the requested media profile.');
+    argParser.addOption(
+      'profile-token',
+      abbr: 't',
+      valueHelp: 'string',
+      mandatory: true,
+      help: 'Token of the requested media profile.',
+    );
   }
 
   @override
@@ -148,8 +157,9 @@ class OnvifGetProfileMediaCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final profile =
-          await media.media1.getProfile(argResults!['profile-token']);
+      final profile = await media.media1.getProfile(
+        argResults!['profile-token'],
+      );
 
       print(profile);
     } on DioException catch (err) {
@@ -228,12 +238,14 @@ class OnvifGetSnapshotUri1MediaCommand extends OnvifHelperCommand {
   String get name => 'get-snapshot-uri';
 
   OnvifGetSnapshotUri1MediaCommand() {
-    argParser.addOption('profile-token',
-        abbr: 't',
-        valueHelp: 'token',
-        mandatory: true,
-        help:
-            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.');
+    argParser.addOption(
+      'profile-token',
+      abbr: 't',
+      valueHelp: 'token',
+      mandatory: true,
+      help:
+          'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+    );
   }
 
   @override
@@ -241,8 +253,9 @@ class OnvifGetSnapshotUri1MediaCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final mediaUri =
-          await media.media1.getSnapshotUri(argResults!['profile-token']);
+      final mediaUri = await media.media1.getSnapshotUri(
+        argResults!['profile-token'],
+      );
 
       print(mediaUri);
     } on DioException catch (err) {
@@ -282,26 +295,32 @@ class OnvifGetStreamUri1MediaCommand extends OnvifHelperCommand {
 
   OnvifGetStreamUri1MediaCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help:
-              'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.')
-      ..addOption('stream-setup-stream',
-          defaultsTo: 'RTP-Unicast',
-          valueHelp: 'stream type',
-          allowed: [
-            'RTP-Unicast',
-            'RTP-Multicast'
-          ], // ['UDP', 'TCP', 'RTSP', 'HTTP'],
-          help: 'Defines if a multicast or unicast stream is requested')
-      ..addOption('stream-setup-transport-protocol',
-          defaultsTo: 'RTSP',
-          valueHelp: 'transport protocol',
-          allowed: ['UDP', 'TCP', 'RTSP', 'HTTP'],
-          help:
-              'Defines the network protocol for streaming, either UDP=RTP/UDP, RTSP=RTP/RTSP/TCP or HTTP=RTP/RTSP/HTTP/TCP');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+      )
+      ..addOption(
+        'stream-setup-stream',
+        defaultsTo: 'RTP-Unicast',
+        valueHelp: 'stream type',
+        allowed: [
+          'RTP-Unicast',
+          'RTP-Multicast',
+        ], // ['UDP', 'TCP', 'RTSP', 'HTTP'],
+        help: 'Defines if a multicast or unicast stream is requested',
+      )
+      ..addOption(
+        'stream-setup-transport-protocol',
+        defaultsTo: 'RTSP',
+        valueHelp: 'transport protocol',
+        allowed: ['UDP', 'TCP', 'RTSP', 'HTTP'],
+        help:
+            'Defines the network protocol for streaming, either UDP=RTP/UDP, RTSP=RTP/RTSP/TCP or HTTP=RTP/RTSP/HTTP/TCP',
+      );
   }
 
   @override
@@ -312,9 +331,11 @@ class OnvifGetStreamUri1MediaCommand extends OnvifHelperCommand {
       final mediaUri = await media.media1.getStreamUri(
         argResults!['profile-token'],
         streamSetup: StreamSetup(
-            stream: argResults!['stream-setup-stream'],
-            transport: Transport(
-                protocol: argResults!['stream-setup-transport-protocol'])),
+          stream: argResults!['stream-setup-stream'],
+          transport: Transport(
+            protocol: argResults!['stream-setup-transport-protocol'],
+          ),
+        ),
       );
 
       print(mediaUri);
@@ -362,12 +383,14 @@ class OnvifStartMulticastStreaming1MediaCommand extends OnvifHelperCommand {
   String get name => 'start-multicast-streaming';
 
   OnvifStartMulticastStreaming1MediaCommand() {
-    argParser.addOption('profile-token',
-        abbr: 't',
-        valueHelp: 'token',
-        mandatory: true,
-        help:
-            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.');
+    argParser.addOption(
+      'profile-token',
+      abbr: 't',
+      valueHelp: 'token',
+      mandatory: true,
+      help:
+          'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+    );
   }
 
   @override
@@ -392,12 +415,14 @@ class OnvifStopMulticastStreaming1MediaCommand extends OnvifHelperCommand {
   String get name => 'stop-multicast-streaming';
 
   OnvifStopMulticastStreaming1MediaCommand() {
-    argParser.addOption('profile-token',
-        abbr: 't',
-        valueHelp: 'token',
-        mandatory: true,
-        help:
-            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.');
+    argParser.addOption(
+      'profile-token',
+      abbr: 't',
+      valueHelp: 'token',
+      mandatory: true,
+      help:
+          'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+    );
   }
 
   @override

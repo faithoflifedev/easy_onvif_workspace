@@ -51,39 +51,53 @@ class OnvifCreateRecordingRecordingsCommand extends OnvifHelperCommand {
 
   OnvifCreateRecordingRecordingsCommand() {
     argParser
-      ..addOption('source-source-id',
-          valueHelp: 'string',
-          mandatory: true,
-          help:
-              'Identifier for the source chosen by the client that creates the structure. This identifier is opaque to the device. Clients may use any type of URI for this field. A device shall support at least 128 characters.')
-      ..addOption('source-name',
-          valueHelp: 'string',
-          mandatory: true,
-          help:
-              'Informative user readable name of the source, e.g. "Camera23". A device shall support at least 20 characters.')
-      ..addOption('source-location',
-          valueHelp: 'string',
-          mandatory: true,
-          help:
-              'Informative description of the physical location of the source, e.g. the coordinates on a map.')
-      ..addOption('source-description',
-          valueHelp: 'string',
-          mandatory: true,
-          help: 'Informative description of the source.')
-      ..addOption('source-address',
-          valueHelp: 'string',
-          mandatory: true,
-          help:
-              'URI provided by the service supplying data to be recorded. A device shall support at least 128 characters.')
-      ..addOption('content',
-          valueHelp: 'string',
-          mandatory: true,
-          help: 'Informative description of the source.')
-      ..addOption('maximum-retention-time',
-          valueHelp: 'duration',
-          defaultsTo: 'PT0S',
-          help:
-              'Specifies the maximum time that data in any track within the recording shall be stored. The device shall delete any data older than the maximum retention time. Such data shall not be accessible anymore. If the MaximumRetentionPeriod is set to 0, the device shall not limit the retention time of stored data, except by resource constraints. Whatever the value of MaximumRetentionTime, the device may automatically delete recordings to free up storage space for new recordings.');
+      ..addOption(
+        'source-source-id',
+        valueHelp: 'string',
+        mandatory: true,
+        help:
+            'Identifier for the source chosen by the client that creates the structure. This identifier is opaque to the device. Clients may use any type of URI for this field. A device shall support at least 128 characters.',
+      )
+      ..addOption(
+        'source-name',
+        valueHelp: 'string',
+        mandatory: true,
+        help:
+            'Informative user readable name of the source, e.g. "Camera23". A device shall support at least 20 characters.',
+      )
+      ..addOption(
+        'source-location',
+        valueHelp: 'string',
+        mandatory: true,
+        help:
+            'Informative description of the physical location of the source, e.g. the coordinates on a map.',
+      )
+      ..addOption(
+        'source-description',
+        valueHelp: 'string',
+        mandatory: true,
+        help: 'Informative description of the source.',
+      )
+      ..addOption(
+        'source-address',
+        valueHelp: 'string',
+        mandatory: true,
+        help:
+            'URI provided by the service supplying data to be recorded. A device shall support at least 128 characters.',
+      )
+      ..addOption(
+        'content',
+        valueHelp: 'string',
+        mandatory: true,
+        help: 'Informative description of the source.',
+      )
+      ..addOption(
+        'maximum-retention-time',
+        valueHelp: 'duration',
+        defaultsTo: 'PT0S',
+        help:
+            'Specifies the maximum time that data in any track within the recording shall be stored. The device shall delete any data older than the maximum retention time. Such data shall not be accessible anymore. If the MaximumRetentionPeriod is set to 0, the device shall not limit the retention time of stored data, except by resource constraints. Whatever the value of MaximumRetentionTime, the device may automatically delete recordings to free up storage space for new recordings.',
+      );
   }
 
   @override
@@ -129,29 +143,38 @@ class OnvifCreateRecordingJobRecordingsCommand extends OnvifHelperCommand {
 
   OnvifCreateRecordingJobRecordingsCommand() {
     argParser
-      ..addOption('job-configuration-schedule-token',
-          valueHelp: 'string',
-          help:
-              'This attribute adds an additional requirement for activating the recording job. If this optional field is provided the job shall only record if the schedule exists and is active.')
-      ..addOption('job-configuration-recording-token',
-          valueHelp: 'string',
-          mandatory: true,
-          help:
-              'Identifies the recording to which this job shall store the received data.')
-      ..addOption('job-configuration-mode',
-          valueHelp: 'string',
-          allowed: RecordingJobConfigurationMode.values
-              .map((mode) => mode.value)
-              .toList(),
-          help:
-              '''The mode of the job. If it is idle, nothing shall happen. If it is active, the device shall try to obtain data from the receivers. A client shall use GetRecordingJobState to determine if data transfer is really taking place.
+      ..addOption(
+        'job-configuration-schedule-token',
+        valueHelp: 'string',
+        help:
+            'This attribute adds an additional requirement for activating the recording job. If this optional field is provided the job shall only record if the schedule exists and is active.',
+      )
+      ..addOption(
+        'job-configuration-recording-token',
+        valueHelp: 'string',
+        mandatory: true,
+        help:
+            'Identifies the recording to which this job shall store the received data.',
+      )
+      ..addOption(
+        'job-configuration-mode',
+        valueHelp: 'string',
+        allowed:
+            RecordingJobConfigurationMode.values
+                .map((mode) => mode.value)
+                .toList(),
+        help:
+            '''The mode of the job. If it is idle, nothing shall happen. If it is active, the device shall try to obtain data from the receivers. A client shall use GetRecordingJobState to determine if data transfer is really taking place.
 
-The only valid values for Mode shall be “Idle” and “Active”.''')
-      ..addOption('job-configuration-priority',
-          valueHelp: 'int',
-          mandatory: true,
-          help:
-              'This shall be a non-negative number. If there are multiple recording jobs that store data to the same track, the device will only store the data for the recording job with the highest priority. The priority is specified per recording job, but the device shall determine the priority of each track individually. If there are two recording jobs with the same priority, the device shall record the data corresponding to the recording job that was activated the latest.');
+The only valid values for Mode shall be “Idle” and “Active”.''',
+      )
+      ..addOption(
+        'job-configuration-priority',
+        valueHelp: 'int',
+        mandatory: true,
+        help:
+            'This shall be a non-negative number. If there are multiple recording jobs that store data to the same track, the device will only store the data for the recording job with the highest priority. The priority is specified per recording job, but the device shall determine the priority of each track individually. If there are two recording jobs with the same priority, the device shall record the data corresponding to the recording job that was activated the latest.',
+      );
   }
 
   @override
@@ -192,11 +215,13 @@ class OnvifDeleteRecordingRecordingsCommand extends OnvifHelperCommand {
   String get name => 'delete-recordings';
 
   OnvifDeleteRecordingRecordingsCommand() {
-    argParser.addOption('recording-token',
-        abbr: 't',
-        valueHelp: 'token',
-        mandatory: true,
-        help: 'The reference of the recording to be deleted.');
+    argParser.addOption(
+      'recording-token',
+      abbr: 't',
+      valueHelp: 'token',
+      mandatory: true,
+      help: 'The reference of the recording to be deleted.',
+    );
   }
 
   @override
@@ -223,11 +248,13 @@ class OnvifDeleteRecordingJobRecordingsCommand extends OnvifHelperCommand {
   String get name => 'delete-recording-job';
 
   OnvifDeleteRecordingJobRecordingsCommand() {
-    argParser.addOption('job-token',
-        abbr: 't',
-        valueHelp: 'token',
-        mandatory: true,
-        help: 'The token of the job to be deleted.');
+    argParser.addOption(
+      'job-token',
+      abbr: 't',
+      valueHelp: 'token',
+      mandatory: true,
+      help: 'The token of the job to be deleted.',
+    );
   }
 
   @override
@@ -254,11 +281,13 @@ class OnvifGetRecordingOptionsRecordingsCommand extends OnvifHelperCommand {
   String get name => 'get-recording-options';
 
   OnvifGetRecordingOptionsRecordingsCommand() {
-    argParser.addOption('recording-token',
-        abbr: 't',
-        valueHelp: 'token',
-        mandatory: true,
-        help: 'Token of the recording.');
+    argParser.addOption(
+      'recording-token',
+      abbr: 't',
+      valueHelp: 'token',
+      mandatory: true,
+      help: 'Token of the recording.',
+    );
   }
 
   @override
@@ -266,8 +295,9 @@ class OnvifGetRecordingOptionsRecordingsCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final recordingOptions =
-          await recordings.getRecordingOptions(argResults!['recording-token']);
+      final recordingOptions = await recordings.getRecordingOptions(
+        argResults!['recording-token'],
+      );
 
       print(recordingOptions);
     } on DioException catch (err) {
@@ -334,11 +364,13 @@ class OnvifGetRecordingJobStateRecordingsCommand extends OnvifHelperCommand {
   String get name => 'get-recording-job-state';
 
   OnvifGetRecordingJobStateRecordingsCommand() {
-    argParser.addOption('job-token',
-        abbr: 't',
-        valueHelp: 'token',
-        mandatory: true,
-        help: 'The token of the job to be deleted.');
+    argParser.addOption(
+      'job-token',
+      abbr: 't',
+      valueHelp: 'token',
+      mandatory: true,
+      help: 'The token of the job to be deleted.',
+    );
   }
 
   @override
@@ -346,8 +378,9 @@ class OnvifGetRecordingJobStateRecordingsCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final recordingJobState =
-          await recordings.getRecordingJobState(argResults!['job-token']);
+      final recordingJobState = await recordings.getRecordingJobState(
+        argResults!['job-token'],
+      );
 
       print(recordingJobState);
     } on DioException catch (err) {
@@ -390,18 +423,23 @@ class OnvifSetRecordingJobModeRecordingsCommand extends OnvifHelperCommand {
 
   OnvifSetRecordingJobModeRecordingsCommand() {
     argParser
-      ..addOption('job-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help: 'Token of the recording job.')
-      ..addOption('mode',
-          valueHelp: 'string',
-          mandatory: true,
-          allowed: RecordingJobConfigurationMode.values
-              .map((mode) => mode.value)
-              .toList(),
-          help: 'The new mode for the recording job.');
+      ..addOption(
+        'job-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help: 'Token of the recording job.',
+      )
+      ..addOption(
+        'mode',
+        valueHelp: 'string',
+        mandatory: true,
+        allowed:
+            RecordingJobConfigurationMode.values
+                .map((mode) => mode.value)
+                .toList(),
+        help: 'The new mode for the recording job.',
+      );
   }
 
   @override
@@ -410,9 +448,11 @@ class OnvifSetRecordingJobModeRecordingsCommand extends OnvifHelperCommand {
 
     try {
       await recordings.setRecordingJobMode(
-          jobToken: argResults!['job-token'],
-          mode: RecordingJobConfigurationMode.values
-              .firstWhere((mode) => mode.value == argResults!['mode']));
+        jobToken: argResults!['job-token'],
+        mode: RecordingJobConfigurationMode.values.firstWhere(
+          (mode) => mode.value == argResults!['mode'],
+        ),
+      );
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

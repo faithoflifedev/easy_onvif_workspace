@@ -33,12 +33,14 @@ class OnvifGetCurrentPresetImagingCommand extends OnvifHelperCommand {
   String get name => 'get-current-preset';
 
   OnvifGetCurrentPresetImagingCommand() {
-    argParser.addOption('video-source-token',
-        abbr: 't',
-        valueHelp: 'token',
-        mandatory: true,
-        help:
-            'A reference to the VideoSource where the operation should take place.');
+    argParser.addOption(
+      'video-source-token',
+      abbr: 't',
+      valueHelp: 'token',
+      mandatory: true,
+      help:
+          'A reference to the VideoSource where the operation should take place.',
+    );
   }
 
   @override
@@ -46,8 +48,9 @@ class OnvifGetCurrentPresetImagingCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final preset =
-          await imaging.getCurrentPreset(argResults!['video-source-token']);
+      final preset = await imaging.getCurrentPreset(
+        argResults!['video-source-token'],
+      );
 
       print(preset);
     } on DioException catch (err) {
@@ -67,16 +70,20 @@ class OnvifGetPresetsImagingCommand extends OnvifHelperCommand {
 
   OnvifGetPresetsImagingCommand() {
     argParser
-      ..addOption('video-source-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help:
-              'A reference to the VideoSource where the operation should take place.')
-      ..addOption('limit',
-          defaultsTo: '10',
-          valueHelp: 'int',
-          help: 'Limit the number of presets returned');
+      ..addOption(
+        'video-source-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'A reference to the VideoSource where the operation should take place.',
+      )
+      ..addOption(
+        'limit',
+        defaultsTo: '10',
+        valueHelp: 'int',
+        help: 'Limit the number of presets returned',
+      );
   }
 
   @override
@@ -131,12 +138,14 @@ class OnvifGetStatusImagingCommand extends OnvifHelperCommand {
   String get name => 'get-status';
 
   OnvifGetStatusImagingCommand() {
-    argParser.addOption('video-source-token',
-        abbr: 't',
-        valueHelp: 'token',
-        mandatory: true,
-        help:
-            'Reference token to the VideoSource where the imaging status should be requested.');
+    argParser.addOption(
+      'video-source-token',
+      abbr: 't',
+      valueHelp: 'token',
+      mandatory: true,
+      help:
+          'Reference token to the VideoSource where the imaging status should be requested.',
+    );
   }
 
   @override
@@ -144,8 +153,9 @@ class OnvifGetStatusImagingCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final imagingStatus =
-          await imaging.getStatus(argResults!['video-source-token']);
+      final imagingStatus = await imaging.getStatus(
+        argResults!['video-source-token'],
+      );
 
       print(imagingStatus);
     } on DioException catch (err) {
@@ -172,17 +182,21 @@ class OnvifSetCurrentPresetImagingCommand extends OnvifHelperCommand {
 
   OnvifSetCurrentPresetImagingCommand() {
     argParser
-      ..addOption('video-source-token',
-          abbr: 't',
-          valueHelp: 'string',
-          mandatory: true,
-          help:
-              'A reference to the MediaProfile where the operation should take place.')
-      ..addOption('preset-token',
-          valueHelp: 'string',
-          mandatory: true,
-          help:
-              'Reference token to the Imaging Preset to be applied to the specified Video Source.');
+      ..addOption(
+        'video-source-token',
+        abbr: 't',
+        valueHelp: 'string',
+        mandatory: true,
+        help:
+            'A reference to the MediaProfile where the operation should take place.',
+      )
+      ..addOption(
+        'preset-token',
+        valueHelp: 'string',
+        mandatory: true,
+        help:
+            'Reference token to the Imaging Preset to be applied to the specified Video Source.',
+      );
   }
 
   @override

@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.1+6
+
+* GetDynamicDnsDevice
+
 ## 3.1.0+4
 
 * probe proxy bug fix

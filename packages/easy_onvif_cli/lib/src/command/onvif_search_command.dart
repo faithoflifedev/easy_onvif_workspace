@@ -33,8 +33,12 @@ class OnvifGetRecordingInformationSearchCommand extends OnvifHelperCommand {
   String get name => 'get-recording-information';
 
   OnvifGetRecordingInformationSearchCommand() {
-    argParser.addOption('recording-token',
-        abbr: 't', valueHelp: 'token', mandatory: true);
+    argParser.addOption(
+      'recording-token',
+      abbr: 't',
+      valueHelp: 'token',
+      mandatory: true,
+    );
   }
 
   @override
@@ -42,8 +46,9 @@ class OnvifGetRecordingInformationSearchCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final recordingInformation =
-          await search.getRecordingInformation(argResults!['recording-token']);
+      final recordingInformation = await search.getRecordingInformation(
+        argResults!['recording-token'],
+      );
 
       print(recordingInformation);
     } on DioException catch (err) {
@@ -79,21 +84,29 @@ class OnvifGetRecordingSearchResultsSearchCommand extends OnvifHelperCommand {
 
   OnvifGetRecordingSearchResultsSearchCommand() {
     argParser
-      ..addOption('search-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help: 'The search session to get results from.')
-      ..addOption('min-results',
-          valueHelp: 'int',
-          help: 'The minimum number of results to return in one response.')
-      ..addOption('max-results',
-          valueHelp: 'int',
-          help: 'The maximum number of results to return in one response.')
-      ..addOption('wait-time',
-          valueHelp: 'duration',
-          help:
-              'The maximum time before responding to the request, even if the MinResults parameter is not fulfilled.');
+      ..addOption(
+        'search-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help: 'The search session to get results from.',
+      )
+      ..addOption(
+        'min-results',
+        valueHelp: 'int',
+        help: 'The minimum number of results to return in one response.',
+      )
+      ..addOption(
+        'max-results',
+        valueHelp: 'int',
+        help: 'The maximum number of results to return in one response.',
+      )
+      ..addOption(
+        'wait-time',
+        valueHelp: 'duration',
+        help:
+            'The maximum time before responding to the request, even if the MinResults parameter is not fulfilled.',
+      );
   }
 
   @override
@@ -166,61 +179,76 @@ class OnvifFindRecordingsSearchCommand extends OnvifHelperCommand {
     argParser
       ..addOption('scope-include-sources-type', valueHelp: 'string', help: '')
       ..addOption('scope-include-sources-token', valueHelp: 'string', help: '')
-      ..addOption('scope-include-recordings',
-          valueHelp: 'string',
-          help:
-              'A list of recordings that are included in the scope. If this list is included, only data from one of these recordings shall be searched.')
-      ..addOption('scope-recording-information-filter',
-          valueHelp: 'string',
-          help:
-              'An xpath expression used to specify what recordings to search. Only those recordings with an RecordingInformation structure that matches the filter shall be searched.')
-      ..addOption('max-matches',
-          valueHelp: 'int',
-          help:
-              'The search will be completed after this many matches. If not specified, the search will continue until reaching the endpoint or until the session expires.')
-      ..addOption('keep-alive-time',
-          valueHelp: 'duration',
-          defaultsTo: 'PT0S',
-          help:
-              'The time the search session will be kept alive after responding to this and subsequent requests. A device shall support at least values up to ten seconds.');
+      ..addOption(
+        'scope-include-recordings',
+        valueHelp: 'string',
+        help:
+            'A list of recordings that are included in the scope. If this list is included, only data from one of these recordings shall be searched.',
+      )
+      ..addOption(
+        'scope-recording-information-filter',
+        valueHelp: 'string',
+        help:
+            'An xpath expression used to specify what recordings to search. Only those recordings with an RecordingInformation structure that matches the filter shall be searched.',
+      )
+      ..addOption(
+        'max-matches',
+        valueHelp: 'int',
+        help:
+            'The search will be completed after this many matches. If not specified, the search will continue until reaching the endpoint or until the session expires.',
+      )
+      ..addOption(
+        'keep-alive-time',
+        valueHelp: 'duration',
+        defaultsTo: 'PT0S',
+        help:
+            'The time the search session will be kept alive after responding to this and subsequent requests. A device shall support at least values up to ten seconds.',
+      );
   }
 
   @override
   void run() async {
     await initializeOnvif();
 
-    final needsSourceToken = (argResults?['scope-include-sources-type'] ??
+    final needsSourceToken =
+        (argResults?['scope-include-sources-type'] ??
             argResults?['scope-include-sources-token']) !=
         null;
 
-    final sourceToken = needsSourceToken
-        ? [
-            SourceToken(
+    final sourceToken =
+        needsSourceToken
+            ? [
+              SourceToken(
                 type: argResults?['scope-include-sources-type'],
-                token: argResults?['scope-include-sources-token'])
-          ]
-        : null;
+                token: argResults?['scope-include-sources-token'],
+              ),
+            ]
+            : null;
 
-    final needsSearchScope = (sourceToken ??
+    final needsSearchScope =
+        (sourceToken ??
             argResults?['scope-include-recordings'] ??
             argResults?['scope-recording-information-filter']) !=
         null;
 
-    final searchScope = needsSearchScope
-        ? SearchScope(
-            includedSources: sourceToken,
-            includedRecordings:
-                argResults?['scope-include-recordings'].toString().split(','),
-            recordingInformationFilter:
-                argResults?['scope-recording-information-filter'],
-          )
-        : null;
+    final searchScope =
+        needsSearchScope
+            ? SearchScope(
+              includedSources: sourceToken,
+              includedRecordings: argResults?['scope-include-recordings']
+                  .toString()
+                  .split(','),
+              recordingInformationFilter:
+                  argResults?['scope-recording-information-filter'],
+            )
+            : null;
 
     try {
       final searchToken = await search.findRecordings(
-          searchScope: searchScope,
-          maxMatches: argResults?['max-matches'],
-          keepAliveTime: argResults!['keep-alive-time']);
+        searchScope: searchScope,
+        maxMatches: argResults?['max-matches'],
+        keepAliveTime: argResults!['keep-alive-time'],
+      );
 
       print(searchToken);
     } on DioException catch (err) {

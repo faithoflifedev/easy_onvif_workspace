@@ -41,18 +41,20 @@ class DevicesController {
     final router = Router();
 
     router.get(
-        '/list',
-        (shelf.Request request) => shelf.Response.ok(
-              json.encode(multicastProbe.onvifDevices),
-              headers: {'Content-type': 'application/json'},
-            ));
+      '/list',
+      (shelf.Request request) => shelf.Response.ok(
+        json.encode(multicastProbe.onvifDevices),
+        headers: {'Content-type': 'application/json'},
+      ),
+    );
 
     router.all(
-        '/refresh',
-        (shelf.Request request) => shelf.Response.ok(
-              {'success': 'true'},
-              headers: {'Content-type': 'application/json'},
-            ));
+      '/refresh',
+      (shelf.Request request) => shelf.Response.ok(
+        {'success': 'true'},
+        headers: {'Content-type': 'application/json'},
+      ),
+    );
 
     return router.call;
   }
@@ -66,12 +68,14 @@ class OnvifListDevicesProbeCommand extends OnvifHelperCommand {
   String get name => 'list-devices';
 
   OnvifListDevicesProbeCommand() {
-    argParser.addOption('timeout',
-        abbr: 't',
-        valueHelp: 'number',
-        defaultsTo: '${MulticastProbe.defaultTimeout}',
-        help:
-            'The number of seconds to accept probe responses from devices.  Ignored of --start-proxy-server is set.');
+    argParser.addOption(
+      'timeout',
+      abbr: 't',
+      valueHelp: 'number',
+      defaultsTo: '${MulticastProbe.defaultTimeout}',
+      help:
+          'The number of seconds to accept probe responses from devices.  Ignored of --start-proxy-server is set.',
+    );
   }
 
   @override
@@ -80,7 +84,9 @@ class OnvifListDevicesProbeCommand extends OnvifHelperCommand {
 
     if (timeout < 1) {
       throw UsageException(
-          'API usage error:', 'timeout must be greater than zero');
+        'API usage error:',
+        'timeout must be greater than zero',
+      );
     }
 
     final multicastProbe = MulticastProbe();
@@ -103,23 +109,25 @@ class OnvifProxyProbeCommand extends OnvifHelperCommand with UiLoggy {
 
   OnvifProxyProbeCommand() {
     argParser
-      ..addOption('port',
-          abbr: 'p',
-          valueHelp: 'number',
-          defaultsTo: '8080',
-          help: 'The HTTP port used to connect to this server.')
-      ..addOption('bind-ip',
-          valueHelp: 'IP Address',
-          defaultsTo: _defaultIp,
-          help: 'The IP address the server will listen on.');
+      ..addOption(
+        'port',
+        abbr: 'p',
+        valueHelp: 'number',
+        defaultsTo: '8080',
+        help: 'The HTTP port used to connect to this server.',
+      )
+      ..addOption(
+        'bind-ip',
+        valueHelp: 'IP Address',
+        defaultsTo: _defaultIp,
+        help: 'The IP address the server will listen on.',
+      );
   }
 
   @override
   void run() async {
     Loggy.initLoggy(
-      logPrinter: const PrettyPrinter(
-        showColors: false,
-      ),
+      logPrinter: const PrettyPrinter(showColors: false),
       logOptions: OnvifUtil.convertToLogOptions(globalResults!['log-level']),
     );
 

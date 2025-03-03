@@ -59,22 +59,28 @@ class OnvifGetReplayUriReplayCommand extends OnvifHelperCommand {
 
   OnvifGetReplayUriReplayCommand() {
     argParser
-      ..addOption('recording-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help: 'The identifier of the recording to be streamed.')
-      ..addOption('stream-setup-stream',
-          defaultsTo: 'RTP-Unicast',
-          valueHelp: 'stream type',
-          allowed: ['RTP-Unicast', 'RTP-Multicast'],
-          help: 'Defines if a multicast or unicast stream is requested')
-      ..addOption('stream-setup-transport-protocol',
-          defaultsTo: 'RTSP',
-          valueHelp: 'transport protocol',
-          allowed: ['UDP', 'TCP', 'RTSP', 'HTTP'],
-          help:
-              'Defines the network protocol for streaming, either UDP=RTP/UDP, RTSP=RTP/RTSP/TCP or HTTP=RTP/RTSP/HTTP/TCP');
+      ..addOption(
+        'recording-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help: 'The identifier of the recording to be streamed.',
+      )
+      ..addOption(
+        'stream-setup-stream',
+        defaultsTo: 'RTP-Unicast',
+        valueHelp: 'stream type',
+        allowed: ['RTP-Unicast', 'RTP-Multicast'],
+        help: 'Defines if a multicast or unicast stream is requested',
+      )
+      ..addOption(
+        'stream-setup-transport-protocol',
+        defaultsTo: 'RTSP',
+        valueHelp: 'transport protocol',
+        allowed: ['UDP', 'TCP', 'RTSP', 'HTTP'],
+        help:
+            'Defines the network protocol for streaming, either UDP=RTP/UDP, RTSP=RTP/RTSP/TCP or HTTP=RTP/RTSP/HTTP/TCP',
+      );
   }
 
   @override
@@ -85,9 +91,11 @@ class OnvifGetReplayUriReplayCommand extends OnvifHelperCommand {
       final uri = await replay.getReplayUri(
         argResults!['recording-token'],
         streamSetup: StreamSetup(
-            stream: argResults!['stream-setup-stream'],
-            transport: Transport(
-                protocol: argResults!['stream-setup-transport-protocol'])),
+          stream: argResults!['stream-setup-stream'],
+          transport: Transport(
+            protocol: argResults!['stream-setup-transport-protocol'],
+          ),
+        ),
       );
 
       print(uri);
@@ -131,11 +139,13 @@ class OnvifSetReplayConfigurationReplayCommand extends OnvifHelperCommand {
   String get name => 'set-replay-configuration';
 
   OnvifSetReplayConfigurationReplayCommand() {
-    argParser.addOption('session-timeout',
-        abbr: 't',
-        valueHelp: 'string',
-        defaultsTo: 'PT60S',
-        help: 'The RTSP session timeout.');
+    argParser.addOption(
+      'session-timeout',
+      abbr: 't',
+      valueHelp: 'string',
+      defaultsTo: 'PT60S',
+      help: 'The RTSP session timeout.',
+    );
   }
 
   @override
@@ -144,7 +154,8 @@ class OnvifSetReplayConfigurationReplayCommand extends OnvifHelperCommand {
 
     try {
       final capabilities = await replay.setReplayConfiguration(
-          ReplayConfiguration(sessionTimeout: argResults!['session-timeout']));
+        ReplayConfiguration(sessionTimeout: argResults!['session-timeout']),
+      );
 
       print(capabilities);
     } on DioException catch (err) {

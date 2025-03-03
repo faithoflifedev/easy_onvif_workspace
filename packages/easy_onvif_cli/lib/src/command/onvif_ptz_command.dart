@@ -60,24 +60,31 @@ class OnvifAbsoluteMovePtzCommand extends OnvifHelperCommand {
 
   OnvifAbsoluteMovePtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help:
-              'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.')
-      ..addOption('pan-tilt-x',
-          valueHelp: 'double',
-          help:
-              'A Position vector specifying the absolute target position x-axis.')
-      ..addOption('pan-tilt-y',
-          valueHelp: 'double',
-          help:
-              'A Position vector specifying the absolute target position y-axis.')
-      ..addOption('pan-tilt-zoom',
-          valueHelp: 'double',
-          help:
-              'A Position vector specifying the absolute target position zoom.');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+      )
+      ..addOption(
+        'pan-tilt-x',
+        valueHelp: 'double',
+        help:
+            'A Position vector specifying the absolute target position x-axis.',
+      )
+      ..addOption(
+        'pan-tilt-y',
+        valueHelp: 'double',
+        help:
+            'A Position vector specifying the absolute target position y-axis.',
+      )
+      ..addOption(
+        'pan-tilt-zoom',
+        valueHelp: 'double',
+        help: 'A Position vector specifying the absolute target position zoom.',
+      );
   }
 
   @override
@@ -85,14 +92,18 @@ class OnvifAbsoluteMovePtzCommand extends OnvifHelperCommand {
     if (argResults?['pan-tilt-x'] == null &&
         argResults?['pan-tilt-y'] == null &&
         argResults?['pan-tilt-zoom'] == null) {
-      throw UsageException('API usage error:',
-          'Either pan-tilt (both x and y values) or pan-tilt-zoom must be specified.');
+      throw UsageException(
+        'API usage error:',
+        'Either pan-tilt (both x and y values) or pan-tilt-zoom must be specified.',
+      );
     } else if ((argResults?['pan-tilt-x'] != null &&
             argResults?['pan-tilt-y'] == null) ||
         (argResults?['pan-tilt-x'] == null &&
             argResults?['pan-tilt-y'] != null)) {
-      throw UsageException('API usage error:',
-          'When using pan-tilt, both pan-tilt-x or pan-tilt-y must be specified.');
+      throw UsageException(
+        'API usage error:',
+        'When using pan-tilt, both pan-tilt-x or pan-tilt-y must be specified.',
+      );
     }
 
     Vector2D? panTilt;
@@ -102,7 +113,9 @@ class OnvifAbsoluteMovePtzCommand extends OnvifHelperCommand {
     if (argResults?['pan-tilt-x'] != null &&
         argResults?['pan-tilt-y'] != null) {
       panTilt = Vector2D.fromString(
-          x: argResults!['pan-tilt-x'], y: argResults!['pan-tilt-y']);
+        x: argResults!['pan-tilt-x'],
+        y: argResults!['pan-tilt-y'],
+      );
     }
 
     if (argResults?['pan-tilt-zoom'] != null) {
@@ -112,10 +125,7 @@ class OnvifAbsoluteMovePtzCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final place = PtzVector(
-        panTilt: panTilt,
-        zoom: zoom,
-      );
+      final place = PtzVector(panTilt: panTilt, zoom: zoom);
 
       await ptz.absoluteMove(argResults!['profile-token'], position: place);
     } on DioException catch (err) {
@@ -138,32 +148,41 @@ class OnvifContinuousMovePtzCommand extends OnvifHelperCommand {
 
   OnvifContinuousMovePtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help:
-              'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.')
-      ..addOption('pan-tilt-x',
-          mandatory: true,
-          valueHelp: 'double',
-          help:
-              'A Position vector specifying the absolute target position x-axis.')
-      ..addOption('pan-tilt-y',
-          mandatory: true,
-          valueHelp: 'double',
-          help:
-              'A Position vector specifying the absolute target position y-axis.')
-      ..addOption('pan-tilt-zoom',
-          mandatory: true,
-          valueHelp: 'double',
-          help:
-              'A Position vector specifying the absolute target position zoom.')
-      ..addOption('timeout',
-          mandatory: false,
-          valueHelp: 'int',
-          help:
-              'The timeout parameter specifies how long the PTZ node continues to move.');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+      )
+      ..addOption(
+        'pan-tilt-x',
+        mandatory: true,
+        valueHelp: 'double',
+        help:
+            'A Position vector specifying the absolute target position x-axis.',
+      )
+      ..addOption(
+        'pan-tilt-y',
+        mandatory: true,
+        valueHelp: 'double',
+        help:
+            'A Position vector specifying the absolute target position y-axis.',
+      )
+      ..addOption(
+        'pan-tilt-zoom',
+        mandatory: true,
+        valueHelp: 'double',
+        help: 'A Position vector specifying the absolute target position zoom.',
+      )
+      ..addOption(
+        'timeout',
+        mandatory: false,
+        valueHelp: 'int',
+        help:
+            'The timeout parameter specifies how long the PTZ node continues to move.',
+      );
   }
 
   @override
@@ -174,9 +193,12 @@ class OnvifContinuousMovePtzCommand extends OnvifHelperCommand {
       int? timeout = argResults?['timeout'];
 
       final velocity = PtzSpeed(
-          panTilt: Vector2D.fromString(
-              x: argResults!['pan-tilt-x'], y: argResults!['pan-tilt-y']),
-          zoom: Vector1D.fromString(x: argResults!['pan-tilt-zoom']));
+        panTilt: Vector2D.fromString(
+          x: argResults!['pan-tilt-x'],
+          y: argResults!['pan-tilt-y'],
+        ),
+        zoom: Vector1D.fromString(x: argResults!['pan-tilt-zoom']),
+      );
 
       await ptz.continuousMove(
         argResults!['profile-token'],
@@ -207,12 +229,14 @@ class OnvifGetCompatibleConfigurationsPtzCommand extends OnvifHelperCommand {
   String get name => 'get-compatible-configurations';
 
   OnvifGetCompatibleConfigurationsPtzCommand() {
-    argParser.addOption('profile-token',
-        abbr: 't',
-        valueHelp: 'token',
-        mandatory: true,
-        help:
-            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.');
+    argParser.addOption(
+      'profile-token',
+      abbr: 't',
+      valueHelp: 'token',
+      mandatory: true,
+      help:
+          'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+    );
   }
 
   @override
@@ -220,8 +244,9 @@ class OnvifGetCompatibleConfigurationsPtzCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final ptzConfigurations =
-          await ptz.getCompatibleConfigurations(argResults!['profile-token']);
+      final ptzConfigurations = await ptz.getCompatibleConfigurations(
+        argResults!['profile-token'],
+      );
 
       print(ptzConfigurations);
     } on DioException catch (err) {
@@ -259,11 +284,13 @@ class OnvifGetConfigurationPtzCommand extends OnvifHelperCommand {
   String get name => 'get-configuration';
 
   OnvifGetConfigurationPtzCommand() {
-    argParser.addOption('ptz-configuration-token',
-        abbr: 't',
-        valueHelp: 'token',
-        mandatory: true,
-        help: 'Token of the requested PTZConfiguration.');
+    argParser.addOption(
+      'ptz-configuration-token',
+      abbr: 't',
+      valueHelp: 'token',
+      mandatory: true,
+      help: 'Token of the requested PTZConfiguration.',
+    );
   }
 
   @override
@@ -271,8 +298,9 @@ class OnvifGetConfigurationPtzCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final ptzConfiguration =
-          await ptz.getConfiguration(argResults!['ptz-configuration-token']);
+      final ptzConfiguration = await ptz.getConfiguration(
+        argResults!['ptz-configuration-token'],
+      );
 
       print(ptzConfiguration);
     } on DioException catch (err) {
@@ -297,12 +325,14 @@ class OnvifGetConfigurationOptionsPtzCommand extends OnvifHelperCommand {
   String get name => 'get-configuration-options';
 
   OnvifGetConfigurationOptionsPtzCommand() {
-    argParser.addOption('configuration-token',
-        abbr: 't',
-        valueHelp: 'token',
-        mandatory: true,
-        help:
-            'Token of an existing configuration that the options are intended for.');
+    argParser.addOption(
+      'configuration-token',
+      abbr: 't',
+      valueHelp: 'token',
+      mandatory: true,
+      help:
+          'Token of an existing configuration that the options are intended for.',
+    );
   }
 
   @override
@@ -310,8 +340,9 @@ class OnvifGetConfigurationOptionsPtzCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final ptzConfigurationOptions =
-          await ptz.getConfigurationOptions(argResults!['configuration-token']);
+      final ptzConfigurationOptions = await ptz.getConfigurationOptions(
+        argResults!['configuration-token'],
+      );
 
       print(ptzConfigurationOptions);
     } on DioException catch (err) {
@@ -372,16 +403,20 @@ class OnvifGetPresetTourPtzCommand extends OnvifHelperCommand {
 
   OnvifGetPresetTourPtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help:
-              'A reference to the MediaProfile where the operation should take place.')
-      ..addOption('preset-tour-token',
-          valueHelp: 'token',
-          mandatory: true,
-          help: 'A requested preset tour token.');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'A reference to the MediaProfile where the operation should take place.',
+      )
+      ..addOption(
+        'preset-tour-token',
+        valueHelp: 'token',
+        mandatory: true,
+        help: 'A requested preset tour token.',
+      );
   }
 
   @override
@@ -411,12 +446,14 @@ class OnvifGetPresetToursPtzCommand extends OnvifHelperCommand {
   String get name => 'get-preset-tours';
 
   OnvifGetPresetToursPtzCommand() {
-    argParser.addOption('profile-token',
-        abbr: 't',
-        valueHelp: 'token',
-        mandatory: true,
-        help:
-            'A reference to the MediaProfile where the operation should take place.');
+    argParser.addOption(
+      'profile-token',
+      abbr: 't',
+      valueHelp: 'token',
+      mandatory: true,
+      help:
+          'A reference to the MediaProfile where the operation should take place.',
+    );
   }
 
   @override
@@ -424,8 +461,9 @@ class OnvifGetPresetToursPtzCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      final presetTours =
-          await ptz.getPresetTours(argResults!['profile-token']);
+      final presetTours = await ptz.getPresetTours(
+        argResults!['profile-token'],
+      );
 
       print(presetTours);
     } on DioException catch (err) {
@@ -447,16 +485,20 @@ class OnvifGetPresetsPtzCommand extends OnvifHelperCommand {
 
   OnvifGetPresetsPtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help:
-              'A reference to the MediaProfile where the operation should take place.')
-      ..addOption('limit',
-          defaultsTo: '10',
-          valueHelp: 'int',
-          help: 'Limit the number of presets returned');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'A reference to the MediaProfile where the operation should take place.',
+      )
+      ..addOption(
+        'limit',
+        defaultsTo: '10',
+        valueHelp: 'int',
+        help: 'Limit the number of presets returned',
+      );
   }
 
   @override
@@ -510,12 +552,14 @@ class OnvifGetStatusPtzCommand extends OnvifHelperCommand {
   String get name => 'get-status';
 
   OnvifGetStatusPtzCommand() {
-    argParser.addOption('profile-token',
-        abbr: 't',
-        valueHelp: 'token',
-        mandatory: true,
-        help:
-            'A reference to the MediaProfile where the PTZStatus should be requested.');
+    argParser.addOption(
+      'profile-token',
+      abbr: 't',
+      valueHelp: 'token',
+      mandatory: true,
+      help:
+          'A reference to the MediaProfile where the PTZStatus should be requested.',
+    );
   }
 
   @override
@@ -544,24 +588,32 @@ class OnvifGotoHomePositionPtzCommand extends OnvifHelperCommand {
 
   OnvifGotoHomePositionPtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'profile-token',
-          mandatory: true,
-          help:
-              'A reference to the MediaProfile where the operation should take place.')
-      ..addOption('pan-tilt-x',
-          valueHelp: 'double',
-          help:
-              'Pan and tilt speed. The x component corresponds to pan. If omitted in a request, the current (if any) Vector2D movement should not be affected.')
-      ..addOption('pan-tilt-y',
-          valueHelp: 'double',
-          help:
-              'Pan and tilt speed. The y component corresponds to tilt. If omitted in a request, the current (if any) Vector2D movement should not be affected.')
-      ..addOption('zoom',
-          valueHelp: 'double',
-          help:
-              'A zoom speed. If omitted in a request, the current (if any) Zoom movement should not be affected.');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'profile-token',
+        mandatory: true,
+        help:
+            'A reference to the MediaProfile where the operation should take place.',
+      )
+      ..addOption(
+        'pan-tilt-x',
+        valueHelp: 'double',
+        help:
+            'Pan and tilt speed. The x component corresponds to pan. If omitted in a request, the current (if any) Vector2D movement should not be affected.',
+      )
+      ..addOption(
+        'pan-tilt-y',
+        valueHelp: 'double',
+        help:
+            'Pan and tilt speed. The y component corresponds to tilt. If omitted in a request, the current (if any) Vector2D movement should not be affected.',
+      )
+      ..addOption(
+        'zoom',
+        valueHelp: 'double',
+        help:
+            'A zoom speed. If omitted in a request, the current (if any) Zoom movement should not be affected.',
+      );
   }
 
   @override
@@ -571,17 +623,23 @@ class OnvifGotoHomePositionPtzCommand extends OnvifHelperCommand {
     try {
       final profileToken = argResults!['profile-token'];
 
-      await ptz.gotoHomePosition(profileToken,
-          speed: argResults?['pan-tilt-x'] != null &&
-                  argResults?['pan-tilt-y'] != null
-              ? PtzSpeed(
+      await ptz.gotoHomePosition(
+        profileToken,
+        speed:
+            argResults?['pan-tilt-x'] != null &&
+                    argResults?['pan-tilt-y'] != null
+                ? PtzSpeed(
                   panTilt: Vector2D.fromString(
-                      x: argResults!['pan-tilt-x'],
-                      y: argResults!['pan-tilt-y']),
-                  zoom: argResults?['zoom'] != null
-                      ? Vector1D.fromString(x: argResults!['zoom'])
-                      : null)
-              : null);
+                    x: argResults!['pan-tilt-x'],
+                    y: argResults!['pan-tilt-y'],
+                  ),
+                  zoom:
+                      argResults?['zoom'] != null
+                          ? Vector1D.fromString(x: argResults!['zoom'])
+                          : null,
+                )
+                : null,
+      );
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -601,28 +659,38 @@ class OnvifGotoPresetPtzCommand extends OnvifHelperCommand {
 
   OnvifGotoPresetPtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'profile-token',
-          mandatory: true,
-          help:
-              'A reference to the MediaProfile where the operation should take place.')
-      ..addOption('preset-token',
-          valueHelp: 'preset-token',
-          mandatory: true,
-          help: 'A requested preset token.')
-      ..addOption('pan-tilt-x',
-          valueHelp: 'double',
-          help:
-              'Pan and tilt speed. The x component corresponds to pan. If omitted in a request, the current (if any) Vector2D movement should not be affected.')
-      ..addOption('pan-tilt-y',
-          valueHelp: 'double',
-          help:
-              'Pan and tilt speed. The y component corresponds to tilt. If omitted in a request, the current (if any) Vector2D movement should not be affected.')
-      ..addOption('zoom',
-          valueHelp: 'double',
-          help:
-              'A zoom speed. If omitted in a request, the current (if any) Zoom movement should not be affected.');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'profile-token',
+        mandatory: true,
+        help:
+            'A reference to the MediaProfile where the operation should take place.',
+      )
+      ..addOption(
+        'preset-token',
+        valueHelp: 'preset-token',
+        mandatory: true,
+        help: 'A requested preset token.',
+      )
+      ..addOption(
+        'pan-tilt-x',
+        valueHelp: 'double',
+        help:
+            'Pan and tilt speed. The x component corresponds to pan. If omitted in a request, the current (if any) Vector2D movement should not be affected.',
+      )
+      ..addOption(
+        'pan-tilt-y',
+        valueHelp: 'double',
+        help:
+            'Pan and tilt speed. The y component corresponds to tilt. If omitted in a request, the current (if any) Vector2D movement should not be affected.',
+      )
+      ..addOption(
+        'zoom',
+        valueHelp: 'double',
+        help:
+            'A zoom speed. If omitted in a request, the current (if any) Zoom movement should not be affected.',
+      );
   }
 
   @override
@@ -635,15 +703,20 @@ class OnvifGotoPresetPtzCommand extends OnvifHelperCommand {
       await ptz.gotoPreset(
         profileToken,
         presetToken: argResults!['preset-token'],
-        speed: argResults?['pan-tilt-x'] != null &&
-                argResults?['pan-tilt-y'] != null
-            ? PtzSpeed(
-                panTilt: Vector2D.fromString(
-                    x: argResults!['pan-tilt-x'], y: argResults!['pan-tilt-y']),
-                zoom: argResults?['zoom'] != null
-                    ? Vector1D.fromString(x: argResults!['zoom'])
-                    : null)
-            : null,
+        speed:
+            argResults?['pan-tilt-x'] != null &&
+                    argResults?['pan-tilt-y'] != null
+                ? PtzSpeed(
+                  panTilt: Vector2D.fromString(
+                    x: argResults!['pan-tilt-x'],
+                    y: argResults!['pan-tilt-y'],
+                  ),
+                  zoom:
+                      argResults?['zoom'] != null
+                          ? Vector1D.fromString(x: argResults!['zoom'])
+                          : null,
+                )
+                : null,
       );
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
@@ -667,27 +740,35 @@ class OnvifRelativeMovePtzCommand extends OnvifHelperCommand {
 
   OnvifRelativeMovePtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help:
-              'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.')
-      ..addOption('translation-x',
-          valueHelp: 'double',
-          mandatory: true,
-          help:
-              'Pan and tilt speed. The x component corresponds to pan. If omitted in a request, the current (if any) Vector2D movement should not be affected.')
-      ..addOption('translation-y',
-          valueHelp: 'double',
-          mandatory: true,
-          help:
-              'Pan and tilt speed. The y component corresponds to tilt. If omitted in a request, the current (if any) Vector2D movement should not be affected.')
-      ..addOption('translation-zoom',
-          valueHelp: 'double',
-          mandatory: true,
-          help:
-              'A zoom speed. If omitted in a request, the current (if any) Zoom movement should not be affected.');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+      )
+      ..addOption(
+        'translation-x',
+        valueHelp: 'double',
+        mandatory: true,
+        help:
+            'Pan and tilt speed. The x component corresponds to pan. If omitted in a request, the current (if any) Vector2D movement should not be affected.',
+      )
+      ..addOption(
+        'translation-y',
+        valueHelp: 'double',
+        mandatory: true,
+        help:
+            'Pan and tilt speed. The y component corresponds to tilt. If omitted in a request, the current (if any) Vector2D movement should not be affected.',
+      )
+      ..addOption(
+        'translation-zoom',
+        valueHelp: 'double',
+        mandatory: true,
+        help:
+            'A zoom speed. If omitted in a request, the current (if any) Zoom movement should not be affected.',
+      );
   }
 
   @override
@@ -696,9 +777,12 @@ class OnvifRelativeMovePtzCommand extends OnvifHelperCommand {
 
     try {
       var translation = PtzVector(
-          panTilt: Vector2D.fromString(
-              x: argResults!['translation-x'], y: argResults!['translation-y']),
-          zoom: Vector1D.fromString(x: argResults!['translation-zoom']));
+        panTilt: Vector2D.fromString(
+          x: argResults!['translation-x'],
+          y: argResults!['translation-y'],
+        ),
+        zoom: Vector1D.fromString(x: argResults!['translation-zoom']),
+      );
 
       await ptz.relativeMove(argResults!['profile-token'], translation, null);
     } on DioException catch (err) {
@@ -720,16 +804,20 @@ class OnvifRemovePresetPtzCommand extends OnvifHelperCommand {
 
   OnvifRemovePresetPtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'profile-token',
-          mandatory: true,
-          help:
-              'A reference to the MediaProfile where the operation should take place.')
-      ..addOption('preset-token',
-          valueHelp: 'preset-token',
-          mandatory: true,
-          help: 'A requested preset token.');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'profile-token',
+        mandatory: true,
+        help:
+            'A reference to the MediaProfile where the operation should take place.',
+      )
+      ..addOption(
+        'preset-token',
+        valueHelp: 'preset-token',
+        mandatory: true,
+        help: 'A requested preset token.',
+      );
   }
 
   @override
@@ -760,12 +848,14 @@ class OnvifSetHomePositionPtzCommand extends OnvifHelperCommand {
   String get name => 'set-home-position';
 
   OnvifSetHomePositionPtzCommand() {
-    argParser.addOption('profile-token',
-        abbr: 't',
-        valueHelp: 'profile-token',
-        mandatory: true,
-        help:
-            'A reference to the MediaProfile where the operation should be set.');
+    argParser.addOption(
+      'profile-token',
+      abbr: 't',
+      valueHelp: 'profile-token',
+      mandatory: true,
+      help:
+          'A reference to the MediaProfile where the operation should be set.',
+    );
   }
 
   @override
@@ -801,16 +891,24 @@ class OnvifSetPresetPtzCommand extends OnvifHelperCommand {
 
   OnvifSetPresetPtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'profile-token',
-          mandatory: true,
-          help:
-              'A reference to the MediaProfile where the operation should take place.')
-      ..addOption('preset-token',
-          valueHelp: 'preset-token', help: 'A requested preset token.')
-      ..addOption('preset-name',
-          valueHelp: 'name', help: 'The name of the new preset.');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'profile-token',
+        mandatory: true,
+        help:
+            'A reference to the MediaProfile where the operation should take place.',
+      )
+      ..addOption(
+        'preset-token',
+        valueHelp: 'preset-token',
+        help: 'A requested preset token.',
+      )
+      ..addOption(
+        'preset-name',
+        valueHelp: 'name',
+        help: 'The name of the new preset.',
+      );
   }
 
   @override
@@ -846,20 +944,26 @@ class OnvifStopPtzCommand extends OnvifHelperCommand {
 
   OnvifStopPtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help:
-              'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.')
-      ..addFlag('pan-tilt',
-          defaultsTo: true,
-          help:
-              'Set true when we want to stop ongoing pan and tilt movements.If Vector2D arguments are not present, this command stops these movements.')
-      ..addFlag('zoom',
-          defaultsTo: true,
-          help:
-              'Set true when we want to stop ongoing zoom movement.If Zoom arguments are not present, this command stops ongoing zoom movement.');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+      )
+      ..addFlag(
+        'pan-tilt',
+        defaultsTo: true,
+        help:
+            'Set true when we want to stop ongoing pan and tilt movements.If Vector2D arguments are not present, this command stops these movements.',
+      )
+      ..addFlag(
+        'zoom',
+        defaultsTo: true,
+        help:
+            'Set true when we want to stop ongoing zoom movement.If Zoom arguments are not present, this command stops ongoing zoom movement.',
+      );
   }
 
   @override
@@ -889,20 +993,26 @@ class OnvifMovePtzCommand extends OnvifHelperCommand {
 
   OnvifMovePtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help:
-              'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.')
-      ..addOption('x',
-          mandatory: true,
-          valueHelp: 'double',
-          help: 'The x component corresponds to pan.')
-      ..addOption('y',
-          mandatory: true,
-          valueHelp: 'double',
-          help: 'The y component corresponds to tilt.');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+      )
+      ..addOption(
+        'x',
+        mandatory: true,
+        valueHelp: 'double',
+        help: 'The x component corresponds to pan.',
+      )
+      ..addOption(
+        'y',
+        mandatory: true,
+        valueHelp: 'double',
+        help: 'The y component corresponds to tilt.',
+      );
   }
 
   @override
@@ -910,9 +1020,13 @@ class OnvifMovePtzCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      await ptz.move(argResults!['profile-token'],
-          direction:
-              Vector2D.fromString(x: argResults!['x'], y: argResults!['y']));
+      await ptz.move(
+        argResults!['profile-token'],
+        direction: Vector2D.fromString(
+          x: argResults!['x'],
+          y: argResults!['y'],
+        ),
+      );
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -929,16 +1043,20 @@ class OnvifMoveDownPtzCommand extends OnvifHelperCommand {
 
   OnvifMoveDownPtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help:
-              'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.')
-      ..addOption('step',
-          defaultsTo: '0.005',
-          valueHelp: 'double',
-          help: 'The amount of movement for the step.');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+      )
+      ..addOption(
+        'step',
+        defaultsTo: '0.005',
+        valueHelp: 'double',
+        help: 'The amount of movement for the step.',
+      );
   }
 
   @override
@@ -966,16 +1084,20 @@ class OnvifMoveLeftPtzCommand extends OnvifHelperCommand {
 
   OnvifMoveLeftPtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help:
-              'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.')
-      ..addOption('step',
-          defaultsTo: '0.005',
-          valueHelp: 'double',
-          help: 'The amount of movement for the step.');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+      )
+      ..addOption(
+        'step',
+        defaultsTo: '0.005',
+        valueHelp: 'double',
+        help: 'The amount of movement for the step.',
+      );
   }
 
   @override
@@ -1003,16 +1125,20 @@ class OnvifMoveRightPtzCommand extends OnvifHelperCommand {
 
   OnvifMoveRightPtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help:
-              'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.')
-      ..addOption('step',
-          defaultsTo: '0.005',
-          valueHelp: 'double',
-          help: 'The amount of movement for the step.');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+      )
+      ..addOption(
+        'step',
+        defaultsTo: '0.005',
+        valueHelp: 'double',
+        help: 'The amount of movement for the step.',
+      );
   }
 
   @override
@@ -1041,16 +1167,20 @@ class OnvifMoveUpPtzCommand extends OnvifHelperCommand {
 
   OnvifMoveUpPtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help:
-              'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.')
-      ..addOption('step',
-          defaultsTo: '0.005',
-          valueHelp: 'double',
-          help: 'The amount of movement for the step.');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+      )
+      ..addOption(
+        'step',
+        defaultsTo: '0.005',
+        valueHelp: 'double',
+        help: 'The amount of movement for the step.',
+      );
   }
 
   @override
@@ -1078,16 +1208,20 @@ class OnvifZoomPtzCommand extends OnvifHelperCommand {
 
   OnvifZoomPtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help:
-              'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.')
-      ..addOption('zoom',
-          mandatory: true,
-          valueHelp: 'double',
-          help: 'The speed for the zoom operation');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+      )
+      ..addOption(
+        'zoom',
+        mandatory: true,
+        valueHelp: 'double',
+        help: 'The speed for the zoom operation',
+      );
   }
 
   @override
@@ -1095,8 +1229,10 @@ class OnvifZoomPtzCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      await ptz.zoom(argResults!['profile-token'],
-          Vector1D.fromString(x: argResults!['zoom']));
+      await ptz.zoom(
+        argResults!['profile-token'],
+        Vector1D.fromString(x: argResults!['zoom']),
+      );
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }
@@ -1113,16 +1249,20 @@ class OnvifZoomInPtzCommand extends OnvifHelperCommand {
 
   OnvifZoomInPtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help:
-              'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.')
-      ..addOption('step',
-          defaultsTo: '0.025',
-          valueHelp: 'double',
-          help: 'The amount of movement for the step.');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+      )
+      ..addOption(
+        'step',
+        defaultsTo: '0.025',
+        valueHelp: 'double',
+        help: 'The amount of movement for the step.',
+      );
   }
 
   @override
@@ -1150,16 +1290,20 @@ class OnvifZoomOutPtzCommand extends OnvifHelperCommand {
 
   OnvifZoomOutPtzCommand() {
     argParser
-      ..addOption('profile-token',
-          abbr: 't',
-          valueHelp: 'token',
-          mandatory: true,
-          help:
-              'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.')
-      ..addOption('step',
-          defaultsTo: '0.025',
-          valueHelp: 'double',
-          help: 'The amount of movement for the step.');
+      ..addOption(
+        'profile-token',
+        abbr: 't',
+        valueHelp: 'token',
+        mandatory: true,
+        help:
+            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+      )
+      ..addOption(
+        'step',
+        defaultsTo: '0.025',
+        valueHelp: 'double',
+        help: 'The amount of movement for the step.',
+      );
   }
 
   @override
@@ -1186,12 +1330,14 @@ class OnvifGetCurrentPresetPtzCommand extends OnvifHelperCommand {
   String get name => 'get-current-preset';
 
   OnvifGetCurrentPresetPtzCommand() {
-    argParser.addOption('profile-token',
-        abbr: 't',
-        valueHelp: 'token',
-        mandatory: true,
-        help:
-            'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.');
+    argParser.addOption(
+      'profile-token',
+      abbr: 't',
+      valueHelp: 'token',
+      mandatory: true,
+      help:
+          'The ProfileToken element indicates the media profile to use and will define the source and dimensions of the snapshot.',
+    );
   }
 
   @override

@@ -19,9 +19,6 @@ class FilePrinter extends LoggyPrinter {
 
   @override
   void onLog(LogRecord record) {
-    _file.writeAsStringSync(
-      '\n${record.message}',
-      mode: FileMode.append,
-    );
+    _file.writeAsStringSync('\n${record.message}', mode: FileMode.append);
   }
 }
