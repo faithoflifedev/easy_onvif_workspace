@@ -7,14 +7,15 @@ part of 'media_capabilities_extension.dart';
 // **************************************************************************
 
 MediaCapabilitiesExtension _$MediaCapabilitiesExtensionFromJson(
-        Map<String, dynamic> json) =>
-    MediaCapabilitiesExtension(
-      mediaCapabilitiesExtension: MediaCapabilitiesExtension.fromJson(
-          json['MediaCapabilitiesExtension'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => MediaCapabilitiesExtension(
+  mediaCapabilitiesExtension: MediaCapabilitiesExtension.fromJson(
+    json['MediaCapabilitiesExtension'] as Map<String, dynamic>,
+  ),
+);
 
 Map<String, dynamic> _$MediaCapabilitiesExtensionToJson(
-        MediaCapabilitiesExtension instance) =>
-    <String, dynamic>{
-      'MediaCapabilitiesExtension': instance.mediaCapabilitiesExtension,
-    };
+  MediaCapabilitiesExtension instance,
+) => <String, dynamic>{
+  'MediaCapabilitiesExtension': instance.mediaCapabilitiesExtension,
+};

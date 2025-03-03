@@ -23,10 +23,7 @@ class Imaging {
   final BacklightCompensation? backlightCompensation;
 
   /// Image brightness (unit unspecified).
-  @JsonKey(
-    name: 'Brightness',
-    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
-  )
+  @JsonKey(name: 'Brightness', fromJson: OnvifUtil.nullableDoubleMappedFromXml)
   final double? brightness;
 
   /// Color saturation of the image (unit unspecified).
@@ -37,10 +34,7 @@ class Imaging {
   final double? colorSaturation;
 
   /// Contrast of the image (unit unspecified).
-  @JsonKey(
-    name: 'Contrast',
-    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
-  )
+  @JsonKey(name: 'Contrast', fromJson: OnvifUtil.nullableDoubleMappedFromXml)
   final double? contrast;
 
   /// Exposure mode of the device.
@@ -53,17 +47,11 @@ class Imaging {
 
   /// Infrared Cutoff Filter settings.
   /// - enum { 'ON', 'OFF', 'AUTO' }
-  @JsonKey(
-    name: 'IrCutFilter',
-    fromJson: OnvifUtil.nullableStringMappedFromXml,
-  )
+  @JsonKey(name: 'IrCutFilter', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? irCutFilter;
 
   /// Sharpness of the Video image.
-  @JsonKey(
-    name: 'Sharpness',
-    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
-  )
+  @JsonKey(name: 'Sharpness', fromJson: OnvifUtil.nullableDoubleMappedFromXml)
   final double? sharpness;
 
   /// Wide Dynamic Range settings.

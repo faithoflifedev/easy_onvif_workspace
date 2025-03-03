@@ -72,25 +72,13 @@ class Header implements XmlSerializable {
 
         appSequence?.buildXml(builder);
 
-        messageID?.buildXml(
-          builder,
-          tag: 'MessageID',
-        );
+        messageID?.buildXml(builder, tag: 'MessageID');
 
-        relatesTo?.buildXml(
-          builder,
-          tag: 'RelatesTo',
-        );
+        relatesTo?.buildXml(builder, tag: 'RelatesTo');
 
-        to?.buildXml(
-          builder,
-          tag: 'To',
-        );
+        to?.buildXml(builder, tag: 'To');
 
-        action?.buildXml(
-          builder,
-          tag: 'Action',
-        );
+        action?.buildXml(builder, tag: 'Action');
       },
     );
   }

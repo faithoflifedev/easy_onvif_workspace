@@ -26,16 +26,15 @@ class Media with UiLoggy {
 
   MediaSupportLevel get mediaSupportLevel => _mediaSupportLevel;
 
-  Media({
-    required this.transport,
-    Media1? media1,
-    Media2? media2,
-  })  : _media1 = media1,
-        _media2 = media2,
-        _mediaSupportLevel = Media.getMediaSupportLevel(media1, media2);
+  Media({required this.transport, Media1? media1, Media2? media2})
+    : _media1 = media1,
+      _media2 = media2,
+      _mediaSupportLevel = Media.getMediaSupportLevel(media1, media2);
 
   static MediaSupportLevel getMediaSupportLevel(
-      Media1? media1, Media2? media2) {
+    Media1? media1,
+    Media2? media2,
+  ) {
     if (media1 != null && media2 != null) return MediaSupportLevel.both;
 
     if (media1 == null && media2 != null) return MediaSupportLevel.two;
@@ -54,20 +53,24 @@ class Media with UiLoggy {
   /// The GetMetadataConfiguration command fetches the metadata configuration if
   /// the metadata token is known.
   Future<MetadataConfiguration> getMetadataConfiguration(
-          String configurationToken) async =>
+    String configurationToken,
+  ) async =>
       _mediaSupportLevel == MediaSupportLevel.two
           ? throw NotSupportedException()
           : media1.getMetadataConfiguration(configurationToken);
 
   /// This operation lists all existing metadata configurations. The client need
   /// not know anything apriori about the metadata in order to use the command.
-  Future<List<MetadataConfiguration>> getMetadataConfigurations(
-          {String? configurationToken, String? profileToken}) async =>
+  Future<List<MetadataConfiguration>> getMetadataConfigurations({
+    String? configurationToken,
+    String? profileToken,
+  }) async =>
       _mediaSupportLevel == MediaSupportLevel.one
           ? media1.getMetadataConfigurations()
           : media2.getMetadataConfigurations(
-              configurationToken: configurationToken,
-              profileToken: profileToken);
+            configurationToken: configurationToken,
+            profileToken: profileToken,
+          );
 
   /// If the profile token is already known, a profile can be fetched through
   /// the [getProfile] command.
@@ -124,8 +127,10 @@ class Media with UiLoggy {
         mixedProfiles.add(MixedProfile.fromProfile(profile));
       }
     } else {
-      mediaProfiles =
-          await media2.getProfiles(referenceToken: referenceToken, type: type);
+      mediaProfiles = await media2.getProfiles(
+        referenceToken: referenceToken,
+        type: type,
+      );
 
       for (var mediaProfile in mediaProfiles) {
         mixedProfiles.add(MixedProfile.fromMediaProfile(mediaProfile));
@@ -160,8 +165,10 @@ class Media with UiLoggy {
   /// A client uses the [getSnapshotUri] command to obtain a JPEG snapshot from
   /// the device. The returned URI shall remain valid indefinitely even if the
   /// profile is changed.
-  Future<m1.MediaUri> getSnapshotUri1(String profileToken,
-          {required StreamSetup streamSetup}) async =>
+  Future<m1.MediaUri> getSnapshotUri1(
+    String profileToken, {
+    required StreamSetup streamSetup,
+  }) async =>
       _mediaSupportLevel == MediaSupportLevel.one
           ? media1.getSnapshotUri(profileToken)
           : throw NotSupportedException();
@@ -182,9 +189,10 @@ class Media with UiLoggy {
   //     getSnapshotUri2(profileToken);
 
   Future<String> getSnapshotUri(String profileToken) async {
-    dynamic snapshotUri = _mediaSupportLevel == MediaSupportLevel.one
-        ? await media1.getSnapshotUri(profileToken)
-        : await media2.getSnapshotUri(profileToken);
+    dynamic snapshotUri =
+        _mediaSupportLevel == MediaSupportLevel.one
+            ? await media1.getSnapshotUri(profileToken)
+            : await media2.getSnapshotUri(profileToken);
 
     return (snapshotUri is String)
         ? snapshotUri
@@ -215,10 +223,7 @@ class Media with UiLoggy {
     required StreamSetup streamSetup,
   }) async =>
       _mediaSupportLevel == MediaSupportLevel.one
-          ? media1.getStreamUri(
-              profileToken,
-              streamSetup: streamSetup,
-            )
+          ? media1.getStreamUri(profileToken, streamSetup: streamSetup)
           : throw NotSupportedException();
 
   /// This operation requests a [Uri] that can be used to initiate a live media1
@@ -250,13 +255,16 @@ class Media with UiLoggy {
 
   /// Calls [getStreamUri2].
   Future<String> getStreamUri(String profileToken) async {
-    dynamic streamUri = _mediaSupportLevel == MediaSupportLevel.one
-        ? await media1.getStreamUri(profileToken,
-            streamSetup: StreamSetup(
-              stream: 'RTP-Unicast',
-              transport: Transport(protocol: 'RTSP'),
-            ))
-        : await media2.getStreamUri(profileToken);
+    dynamic streamUri =
+        _mediaSupportLevel == MediaSupportLevel.one
+            ? await media1.getStreamUri(
+              profileToken,
+              streamSetup: StreamSetup(
+                stream: 'RTP-Unicast',
+                transport: Transport(protocol: 'RTSP'),
+              ),
+            )
+            : await media2.getStreamUri(profileToken);
 
     return (streamUri is String) ? streamUri : (streamUri as m1.MediaUri).uri;
   }

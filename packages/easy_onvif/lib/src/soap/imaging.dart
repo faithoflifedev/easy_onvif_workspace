@@ -9,28 +9,32 @@ class ImagingRequest {
 
   /// XML for the [getCurrentPreset], requires a [videoSourceToken]
   static XmlDocumentFragment getCurrentPreset(String videoSourceToken) {
-    Transport.builder.element('GetCurrentPreset', nest: () {
-      Transport.builder.namespace(Xmlns.timg);
+    Transport.builder.element(
+      'GetCurrentPreset',
+      nest: () {
+        Transport.builder.namespace(Xmlns.timg);
 
-      ReferenceToken(videoSourceToken).buildXml(
-        builder,
-        tag: 'VideoSourceToken',
-      );
-    });
+        ReferenceToken(
+          videoSourceToken,
+        ).buildXml(builder, tag: 'VideoSourceToken');
+      },
+    );
 
     return Transport.builder.buildFragment();
   }
 
   /// XML for the [getPresets], requires a [videoSourceToken]
   static XmlDocumentFragment getPresets(String videoSourceToken) {
-    Transport.builder.element('GetPresets', nest: () {
-      Transport.builder.namespace(Xmlns.timg);
+    Transport.builder.element(
+      'GetPresets',
+      nest: () {
+        Transport.builder.namespace(Xmlns.timg);
 
-      ReferenceToken(videoSourceToken).buildXml(
-        builder,
-        tag: 'VideoSourceToken',
-      );
-    });
+        ReferenceToken(
+          videoSourceToken,
+        ).buildXml(builder, tag: 'VideoSourceToken');
+      },
+    );
 
     return Transport.builder.buildFragment();
   }
@@ -41,14 +45,16 @@ class ImagingRequest {
 
   /// XML for the [getStatus], requires a [videoSourceToken]
   static XmlDocumentFragment getStatus(String videoSourceToken) {
-    Transport.builder.element('GetStatus', nest: () {
-      Transport.builder.namespace(Xmlns.timg);
+    Transport.builder.element(
+      'GetStatus',
+      nest: () {
+        Transport.builder.namespace(Xmlns.timg);
 
-      ReferenceToken(videoSourceToken).buildXml(
-        builder,
-        tag: 'VideoSourceToken',
-      );
-    });
+        ReferenceToken(
+          videoSourceToken,
+        ).buildXml(builder, tag: 'VideoSourceToken');
+      },
+    );
 
     return Transport.builder.buildFragment();
   }
@@ -58,19 +64,18 @@ class ImagingRequest {
     required String videoSourceToken,
     required String presetToken,
   }) {
-    Transport.builder.element('SetPreset', nest: () {
-      Transport.builder.namespace(Xmlns.timg);
+    Transport.builder.element(
+      'SetPreset',
+      nest: () {
+        Transport.builder.namespace(Xmlns.timg);
 
-      ReferenceToken(videoSourceToken).buildXml(
-        builder,
-        tag: 'VideoSourceToken',
-      );
+        ReferenceToken(
+          videoSourceToken,
+        ).buildXml(builder, tag: 'VideoSourceToken');
 
-      ReferenceToken(videoSourceToken).buildXml(
-        builder,
-        tag: 'PresetToken',
-      );
-    });
+        ReferenceToken(videoSourceToken).buildXml(builder, tag: 'PresetToken');
+      },
+    );
 
     return Transport.builder.buildFragment();
   }

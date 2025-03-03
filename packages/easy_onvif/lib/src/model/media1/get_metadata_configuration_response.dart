@@ -16,8 +16,8 @@ class GetMetadataConfigurationResponse {
   GetMetadataConfigurationResponse({required this.configuration});
 
   factory GetMetadataConfigurationResponse.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetMetadataConfigurationResponseFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$GetMetadataConfigurationResponseFromJson(json);
 
   Map<String, dynamic> toJson() =>
       _$GetMetadataConfigurationResponseToJson(this);

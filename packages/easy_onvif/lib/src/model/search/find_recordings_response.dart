@@ -13,9 +13,7 @@ class FindRecordingsResponse {
   @JsonKey(name: 'SearchToken', fromJson: OnvifUtil.stringMappedFromXml)
   final String searchToken;
 
-  FindRecordingsResponse({
-    required this.searchToken,
-  });
+  FindRecordingsResponse({required this.searchToken});
 
   factory FindRecordingsResponse.fromJson(Map<String, dynamic> json) =>
       _$FindRecordingsResponseFromJson(json);

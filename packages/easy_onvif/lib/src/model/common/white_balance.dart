@@ -21,8 +21,11 @@ class WhiteBalance {
   @JsonKey(name: 'CbGain', fromJson: OnvifUtil.doubleMappedFromXml)
   final double? cbGain;
 
-  WhiteBalance(
-      {required this.mode, required this.crGain, required this.cbGain});
+  WhiteBalance({
+    required this.mode,
+    required this.crGain,
+    required this.cbGain,
+  });
 
   factory WhiteBalance.fromJson(Map<String, dynamic> json) =>
       _$WhiteBalanceFromJson(json);

@@ -13,7 +13,4 @@ DurationRange _$DurationRangeFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$DurationRangeToJson(DurationRange instance) =>
-    <String, dynamic>{
-      'Min': instance.min,
-      'Max': instance.max,
-    };
+    <String, dynamic>{'Min': instance.min, 'Max': instance.max};

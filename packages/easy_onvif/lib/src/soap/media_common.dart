@@ -12,20 +12,22 @@ class MediaCommon {
     String? profileToken,
     required String namespace,
   }) {
-    builder.element('GetMetadataConfigurationOptions', nest: () {
-      builder.namespace(namespace);
+    builder.element(
+      'GetMetadataConfigurationOptions',
+      nest: () {
+        builder.namespace(namespace);
 
-      if (configurationToken != null) {
-        ReferenceToken(configurationToken).buildXml(
-          builder,
-          tag: 'ConfigurationToken',
-        );
-      }
+        if (configurationToken != null) {
+          ReferenceToken(
+            configurationToken,
+          ).buildXml(builder, tag: 'ConfigurationToken');
+        }
 
-      if (profileToken != null) {
-        ReferenceToken(profileToken).buildXml(builder);
-      }
-    });
+        if (profileToken != null) {
+          ReferenceToken(profileToken).buildXml(builder);
+        }
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -36,20 +38,22 @@ class MediaCommon {
     String? profileToken,
     required String namespace,
   }) {
-    builder.element('GetMetadataConfigurations', nest: () {
-      builder.namespace(namespace);
+    builder.element(
+      'GetMetadataConfigurations',
+      nest: () {
+        builder.namespace(namespace);
 
-      if (configurationToken != null) {
-        ReferenceToken(configurationToken).buildXml(
-          builder,
-          tag: 'ConfigurationToken',
-        );
-      }
+        if (configurationToken != null) {
+          ReferenceToken(
+            configurationToken,
+          ).buildXml(builder, tag: 'ConfigurationToken');
+        }
 
-      if (profileToken != null) {
-        ReferenceToken(profileToken).buildXml(builder);
-      }
-    });
+        if (profileToken != null) {
+          ReferenceToken(profileToken).buildXml(builder);
+        }
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -59,11 +63,14 @@ class MediaCommon {
     required String profileToken,
     required String namespace,
   }) {
-    builder.element('StartMulticastStreaming', nest: () {
-      builder.namespace(namespace);
+    builder.element(
+      'StartMulticastStreaming',
+      nest: () {
+        builder.namespace(namespace);
 
-      ReferenceToken(profileToken).buildXml(builder);
-    });
+        ReferenceToken(profileToken).buildXml(builder);
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -73,11 +80,14 @@ class MediaCommon {
     required String profileToken,
     required String namespace,
   }) {
-    builder.element('StopMulticastStreaming', nest: () {
-      builder.namespace(namespace);
+    builder.element(
+      'StopMulticastStreaming',
+      nest: () {
+        builder.namespace(namespace);
 
-      ReferenceToken(profileToken).buildXml(builder);
-    });
+        ReferenceToken(profileToken).buildXml(builder);
+      },
+    );
 
     return builder.buildFragment();
   }

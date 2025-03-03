@@ -28,18 +28,12 @@ class Exposure {
   /// - Auto - Enabled the exposure algorithm on the NVT.
   /// - Manual - Disabled exposure algorithm on the NVT.
   /// - enum { 'AUTO', 'MANUAL' }
-  @JsonKey(
-    name: 'Mode',
-    fromJson: OnvifUtil.nullableStringMappedFromXml,
-  )
+  @JsonKey(name: 'Mode', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? mode;
 
   /// The exposure priority mode (low noise/framerate).
   /// - enum { 'LowNoise', 'FrameRate' }
-  @JsonKey(
-    name: 'Priority',
-    fromJson: OnvifUtil.nullableStringMappedFromXml,
-  )
+  @JsonKey(name: 'Priority', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? priority;
 
   ///Rectangular exposure mask.
@@ -62,32 +56,20 @@ class Exposure {
 
   ///Minimum value of the sensor gain range that is allowed to be used by the
   ///algorithm.
-  @JsonKey(
-    name: 'MinGain',
-    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
-  )
+  @JsonKey(name: 'MinGain', fromJson: OnvifUtil.nullableDoubleMappedFromXml)
   final double? minGain;
 
   ///Maximum value of the sensor gain range that is allowed to be used by the
   ///algorithm.
-  @JsonKey(
-    name: 'MaxGain',
-    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
-  )
+  @JsonKey(name: 'MaxGain', fromJson: OnvifUtil.nullableDoubleMappedFromXml)
   final double? maxGain;
 
   ///Minimum value of the iris range allowed to be used by the algorithm.
-  @JsonKey(
-    name: 'MinIris',
-    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
-  )
+  @JsonKey(name: 'MinIris', fromJson: OnvifUtil.nullableDoubleMappedFromXml)
   final double? minIris;
 
   ///Maximum value of the iris range allowed to be used by the algorithm.
-  @JsonKey(
-    name: 'MaxIris',
-    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
-  )
+  @JsonKey(name: 'MaxIris', fromJson: OnvifUtil.nullableDoubleMappedFromXml)
   final double? maxIris;
 
   ///The fixed exposure time used by the image sensor (μs).
@@ -98,18 +80,12 @@ class Exposure {
   final double? exposureTime;
 
   ///The fixed gain used by the image sensor (dB).
-  @JsonKey(
-    name: 'Gain',
-    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
-  )
+  @JsonKey(name: 'Gain', fromJson: OnvifUtil.nullableDoubleMappedFromXml)
   final double? gain;
 
   ///The fixed attenuation of input light affected by the iris (dB). 0dB maps to
   ///a fully opened iris.
-  @JsonKey(
-    name: 'Iris',
-    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
-  )
+  @JsonKey(name: 'Iris', fromJson: OnvifUtil.nullableDoubleMappedFromXml)
   final double? iris;
 
   Exposure({

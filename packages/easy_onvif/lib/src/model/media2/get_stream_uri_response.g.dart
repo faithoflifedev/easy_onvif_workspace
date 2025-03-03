@@ -7,13 +7,11 @@ part of 'get_stream_uri_response.dart';
 // **************************************************************************
 
 GetStreamUriResponse _$GetStreamUriResponseFromJson(
-        Map<String, dynamic> json) =>
-    GetStreamUriResponse(
-      uri: OnvifUtil.stringMappedFromXml(json['Uri'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => GetStreamUriResponse(
+  uri: OnvifUtil.stringMappedFromXml(json['Uri'] as Map<String, dynamic>),
+);
 
 Map<String, dynamic> _$GetStreamUriResponseToJson(
-        GetStreamUriResponse instance) =>
-    <String, dynamic>{
-      'Uri': instance.uri,
-    };
+  GetStreamUriResponse instance,
+) => <String, dynamic>{'Uri': instance.uri};

@@ -28,7 +28,7 @@ class GetTracksResponseList {
 
   static List<GetTracksResponseItem> _fromJson(dynamic json) =>
       OnvifUtil.jsonList<GetTracksResponseItem>(
-          json,
-          (json) =>
-              GetTracksResponseItem.fromJson(json as Map<String, dynamic>));
+        json,
+        (json) => GetTracksResponseItem.fromJson(json as Map<String, dynamic>),
+      );
 }

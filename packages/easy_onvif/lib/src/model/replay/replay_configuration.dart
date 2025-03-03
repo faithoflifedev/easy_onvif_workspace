@@ -30,9 +30,14 @@ class ReplayConfiguration implements XmlSerializable {
     XmlBuilder builder, {
     String tag = 'Configuration',
     String? namespace,
-  }) =>
-      builder.element(tag, nest: () {
-        sessionTimeout.buildXml(builder,
-            tag: 'SessionTimeout', namespace: Xmlns.tt);
-      });
+  }) => builder.element(
+    tag,
+    nest: () {
+      sessionTimeout.buildXml(
+        builder,
+        tag: 'SessionTimeout',
+        namespace: Xmlns.tt,
+      );
+    },
+  );
 }

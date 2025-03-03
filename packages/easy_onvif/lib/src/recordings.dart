@@ -21,10 +21,7 @@ typedef RecordingsRequest = soap.RecordingsRequest;
 /// | READ_MEDIA | X | X | X | |
 /// | ACTUATE | X | X | | |
 class Recordings extends Operation {
-  Recordings({
-    required super.transport,
-    required super.uri,
-  });
+  Recordings({required super.transport, required super.uri});
 
   /// CreateRecording shall create a new recording. The new recording shall be
   /// created with a track for each supported TrackType see Recording Control
@@ -44,21 +41,24 @@ class Recordings extends Operation {
   ///
   /// ACCESS CLASS: ACTUATE
   Future<String> createRecording(
-      RecordingConfiguration recordingConfiguration) async {
+    RecordingConfiguration recordingConfiguration,
+  ) async {
     loggy.debug('createRecording');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: RecordingsRequest.createRecording(recordingConfiguration),
-        ));
+      uri,
+      soap.Body(
+        request: RecordingsRequest.createRecording(recordingConfiguration),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return CreateRecordingResponse.fromJson(responseEnvelope.body.response!)
-        .token;
+    return CreateRecordingResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).token;
   }
 
   /// CreateRecordingJob shall create a new recording job.
@@ -71,15 +71,18 @@ class Recordings extends Operation {
   ///
   /// ACCESS CLASS: ACTUATE
   Future<CreateRecordingJobResponse> createRecordingJob(
-      RecordingJobConfiguration recordingJobConfiguration) async {
+    RecordingJobConfiguration recordingJobConfiguration,
+  ) async {
     loggy.debug('createRecording');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request:
-              RecordingsRequest.createRecordingJob(recordingJobConfiguration),
-        ));
+      uri,
+      soap.Body(
+        request: RecordingsRequest.createRecordingJob(
+          recordingJobConfiguration,
+        ),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -104,10 +107,9 @@ class Recordings extends Operation {
     loggy.debug('deleteRecording');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: RecordingsRequest.deleteRecording(recordingToken),
-        ));
+      uri,
+      soap.Body(request: RecordingsRequest.deleteRecording(recordingToken)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -126,10 +128,9 @@ class Recordings extends Operation {
     loggy.debug('deleteRecordingJob');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: RecordingsRequest.deleteRecording(jobToken),
-        ));
+      uri,
+      soap.Body(request: RecordingsRequest.deleteRecording(jobToken)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -150,7 +151,8 @@ class Recordings extends Operation {
       uri,
       soap.Body(
         request: RecordingsRequest.getRecordingOptions(
-            ReferenceToken(recordingToken)),
+          ReferenceToken(recordingToken),
+        ),
       ),
     );
 
@@ -158,8 +160,9 @@ class Recordings extends Operation {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetRecordingOptionsResponse.fromJson(responseEnvelope.body.response!)
-        .options;
+    return GetRecordingOptionsResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).options;
   }
 
   /// GetRecordings shall return a description of all the recordings in the
@@ -172,17 +175,16 @@ class Recordings extends Operation {
 
     final responseEnvelope = await transport.securedRequest(
       uri,
-      soap.Body(
-        request: RecordingsRequest.getRecordings(),
-      ),
+      soap.Body(request: RecordingsRequest.getRecordings()),
     );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetRecordingsResponse.fromJson(responseEnvelope.body.response!)
-        .recordingItems;
+    return GetRecordingsResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).recordingItems;
   }
 
   /// GetRecordingJobs shall return a list of all the recording jobs in the
@@ -194,17 +196,16 @@ class Recordings extends Operation {
 
     final responseEnvelope = await transport.securedRequest(
       uri,
-      soap.Body(
-        request: RecordingsRequest.getRecordingJobs(),
-      ),
+      soap.Body(request: RecordingsRequest.getRecordingJobs()),
     );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetRecordingJobsResponse.fromJson(responseEnvelope.body.response!)
-        .jobItems;
+    return GetRecordingJobsResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).jobItems;
   }
 
   /// GetRecordingJobState returns the state of a recording job. It includes an
@@ -212,7 +213,8 @@ class Recordings extends Operation {
   ///
   /// ACCESS CLASS: READ_MEDIA
   Future<RecordingJobStateInformation> getRecordingJobState(
-      String jobToken) async {
+    String jobToken,
+  ) async {
     loggy.debug('getRecordingJobState');
 
     final responseEnvelope = await transport.securedRequest(
@@ -225,8 +227,8 @@ class Recordings extends Operation {
     }
 
     return GetRecordingJobStateResponse.fromJson(
-            responseEnvelope.body.response!)
-        .state;
+      responseEnvelope.body.response!,
+    ).state;
   }
 
   /// Returns the capabilities of the recording service. The result is returned
@@ -238,9 +240,7 @@ class Recordings extends Operation {
 
     final responseEnvelope = await transport.request(
       uri,
-      soap.Body(
-        request: RecordingsRequest.getServiceCapabilities(),
-      ),
+      soap.Body(request: RecordingsRequest.getServiceCapabilities()),
     );
 
     if (responseEnvelope.body.hasFault) {
@@ -248,8 +248,8 @@ class Recordings extends Operation {
     }
 
     return GetServiceCapabilitiesResponse.fromJson(
-            responseEnvelope.body.response!)
-        .capabilities;
+      responseEnvelope.body.response!,
+    ).capabilities;
   }
 
   /// SetRecordingJobMode shall change the mode of the recording job. Using this

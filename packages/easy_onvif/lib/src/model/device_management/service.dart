@@ -22,11 +22,12 @@ class Service {
   @JsonKey(name: 'Capabilities')
   final Capabilities? capabilities;
 
-  Service(
-      {required this.nameSpace,
-      required this.xAddr,
-      required this.version,
-      this.capabilities});
+  Service({
+    required this.nameSpace,
+    required this.xAddr,
+    required this.version,
+    this.capabilities,
+  });
 
   factory Service.fromJson(Map<String, dynamic> json) =>
       _$ServiceFromJson(json);

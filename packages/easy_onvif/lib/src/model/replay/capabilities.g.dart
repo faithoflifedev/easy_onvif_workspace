@@ -7,14 +7,15 @@ part of 'capabilities.dart';
 // **************************************************************************
 
 Capabilities _$CapabilitiesFromJson(Map<String, dynamic> json) => Capabilities(
-      reversePlayback:
-          OnvifUtil.stringToBool(json['@ReversePlayback'] as String),
-      sessionTimeoutRange: OnvifUtil.stringMappedFromXml(
-          json['@SessionTimeoutRange'] as Map<String, dynamic>),
-      rtpRtspTcp: OnvifUtil.stringToBool(json['@RTP_RTSP_TCP'] as String),
-      rtspWebSocketUri: OnvifUtil.stringMappedFromXml(
-          json['@RTSPWebSocketUri'] as Map<String, dynamic>),
-    );
+  reversePlayback: OnvifUtil.stringToBool(json['@ReversePlayback'] as String),
+  sessionTimeoutRange: OnvifUtil.stringMappedFromXml(
+    json['@SessionTimeoutRange'] as Map<String, dynamic>,
+  ),
+  rtpRtspTcp: OnvifUtil.stringToBool(json['@RTP_RTSP_TCP'] as String),
+  rtspWebSocketUri: OnvifUtil.stringMappedFromXml(
+    json['@RTSPWebSocketUri'] as Map<String, dynamic>,
+  ),
+);
 
 Map<String, dynamic> _$CapabilitiesToJson(Capabilities instance) =>
     <String, dynamic>{

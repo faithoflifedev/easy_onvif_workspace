@@ -18,11 +18,12 @@ class Window {
   @JsonKey(name: '@left', fromJson: double.parse)
   final double left;
 
-  Window(
-      {required this.bottom,
-      required this.top,
-      required this.right,
-      required this.left});
+  Window({
+    required this.bottom,
+    required this.top,
+    required this.right,
+    required this.left,
+  });
 
   factory Window.fromJson(Map<String, dynamic> json) => _$WindowFromJson(json);
 

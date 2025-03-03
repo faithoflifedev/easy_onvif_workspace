@@ -102,8 +102,12 @@ class PtzSpaces {
   String toString() => jsonEncode(toJson());
 
   static List<Space1D> _fromJson1D(dynamic json) => OnvifUtil.jsonList<Space1D>(
-      json, (json) => Space1D.fromJson(json as Map<String, dynamic>));
+    json,
+    (json) => Space1D.fromJson(json as Map<String, dynamic>),
+  );
 
   static List<Space2D> _fromJson2D(dynamic json) => OnvifUtil.jsonList<Space2D>(
-      json, (json) => Space2D.fromJson(json as Map<String, dynamic>));
+    json,
+    (json) => Space2D.fromJson(json as Map<String, dynamic>),
+  );
 }

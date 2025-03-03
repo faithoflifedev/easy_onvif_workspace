@@ -7,14 +7,13 @@ part of 'get_service_capabilities_response.dart';
 // **************************************************************************
 
 GetServiceCapabilitiesResponse _$GetServiceCapabilitiesResponseFromJson(
-        Map<String, dynamic> json) =>
-    GetServiceCapabilitiesResponse(
-      capabilities:
-          Capabilities1.fromJson(json['Capabilities'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => GetServiceCapabilitiesResponse(
+  capabilities: Capabilities1.fromJson(
+    json['Capabilities'] as Map<String, dynamic>,
+  ),
+);
 
 Map<String, dynamic> _$GetServiceCapabilitiesResponseToJson(
-        GetServiceCapabilitiesResponse instance) =>
-    <String, dynamic>{
-      'Capabilities': instance.capabilities,
-    };
+  GetServiceCapabilitiesResponse instance,
+) => <String, dynamic>{'Capabilities': instance.capabilities};

@@ -35,7 +35,9 @@ class VideoEncoder2Configuration {
   /// no B-Frames, '2' indicates that every 2nd frame is encoded as B-Frame, '3'
   /// indicates a structure like IBBPBBP..., etc.
   @JsonKey(
-      name: 'AnchorFrameDistance', fromJson: OnvifUtil.nullableIntMappedFromXml)
+    name: 'AnchorFrameDistance',
+    fromJson: OnvifUtil.nullableIntMappedFromXml,
+  )
   final int? anchorFrameDistance;
 
   /// The encoder profile as defined in tt:VideoEncodingProfiles.
@@ -47,8 +49,9 @@ class VideoEncoder2Configuration {
   ///  all other adaptable configuration values such as bitrate. Default is
   /// false.
   @JsonKey(
-      name: 'GuaranteedFrameRate',
-      fromJson: OnvifUtil.nullableBoolMappedFromXml)
+    name: 'GuaranteedFrameRate',
+    fromJson: OnvifUtil.nullableBoolMappedFromXml,
+  )
   bool? guaranteedFrameRate = false;
 
   /// Video Media Subtype for the video format. For definitions see

@@ -47,25 +47,35 @@ class SearchScope implements XmlSerializable {
     XmlBuilder builder, {
     String tag = 'Scope',
     String? namespace = Xmlns.tse,
-  }) =>
-      builder.element(tag, nest: () {
-        builder.namespace(namespace!);
+  }) => builder.element(
+    tag,
+    nest: () {
+      builder.namespace(namespace!);
 
-        if (includedSources != null) {
-          builder.element('IncludedSources', nest: () {
+      if (includedSources != null) {
+        builder.element(
+          'IncludedSources',
+          nest: () {
             for (var sourceToken in includedSources!) {
               sourceToken.buildXml(builder);
             }
-          });
-        }
+          },
+        );
+      }
 
-        if (includedRecordings != null) {
-          builder.element('IncludedRecordings', nest: () {
+      if (includedRecordings != null) {
+        builder.element(
+          'IncludedRecordings',
+          nest: () {
             builder.text(includedRecordings!.join(','));
-          });
-        }
+          },
+        );
+      }
 
-        recordingInformationFilter?.buildXml(builder,
-            tag: 'RecordingInformationFilter');
-      });
+      recordingInformationFilter?.buildXml(
+        builder,
+        tag: 'RecordingInformationFilter',
+      );
+    },
+  );
 }

@@ -21,10 +21,7 @@ typedef ReplayRequest = soap.ReplayRequest;
 /// | READ_MEDIA | X | X | X | |
 /// | ACTUATE | X | X | | |
 class Replay extends Operation {
-  Replay({
-    required super.transport,
-    required super.uri,
-  });
+  Replay({required super.transport, required super.uri});
 
   /// Returns the current configuration of the replay service. This operation is
   /// mandatory.
@@ -34,18 +31,17 @@ class Replay extends Operation {
     loggy.debug('getReplayConfiguration');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: ReplayRequest.getReplayConfiguration(),
-        ));
+      uri,
+      soap.Body(request: ReplayRequest.getReplayConfiguration()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetReplayConfigurationResponse.fromJson(
-            responseEnvelope.body.response!)
-        .configuration;
+      responseEnvelope.body.response!,
+    ).configuration;
   }
 
   /// Requests a URI that can be used to initiate playback of a recorded stream
@@ -61,13 +57,14 @@ class Replay extends Operation {
     loggy.debug('getReplayUri');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: ReplayRequest.getReplayUri(
-            recordingToken,
-            streamSetup: streamSetup,
-          ),
-        ));
+      uri,
+      soap.Body(
+        request: ReplayRequest.getReplayUri(
+          recordingToken,
+          streamSetup: streamSetup,
+        ),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -84,15 +81,17 @@ class Replay extends Operation {
     loggy.debug('getServiceCapabilities');
 
     final responseEnvelope = await transport.request(
-        uri, soap.Body(request: ReplayRequest.getServiceCapabilities()));
+      uri,
+      soap.Body(request: ReplayRequest.getServiceCapabilities()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetServiceCapabilitiesResponse.fromJson(
-            responseEnvelope.body.response!)
-        .capabilities;
+      responseEnvelope.body.response!,
+    ).capabilities;
   }
 
   /// Changes the current configuration of the replay service. This operation is
@@ -103,10 +102,9 @@ class Replay extends Operation {
     loggy.debug('getReplayConfiguration');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: ReplayRequest.setReplayConfiguration(configuration),
-        ));
+      uri,
+      soap.Body(request: ReplayRequest.setReplayConfiguration(configuration)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());

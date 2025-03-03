@@ -27,11 +27,7 @@ class RecordingEventFilter implements XmlSerializable {
   @JsonKey(name: 'After', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? after;
 
-  RecordingEventFilter({
-    required this.filters,
-    this.before,
-    this.after,
-  });
+  RecordingEventFilter({required this.filters, this.before, this.after});
 
   factory RecordingEventFilter.fromJson(Map<String, dynamic> json) =>
       _$RecordingEventFilterFromJson(json);
@@ -42,21 +38,25 @@ class RecordingEventFilter implements XmlSerializable {
   String toString() => json.encode(toJson());
 
   static List<Filter> _fromJson(dynamic json) => OnvifUtil.jsonList<Filter>(
-      json, (json) => Filter.fromJson(json as Map<String, dynamic>));
+    json,
+    (json) => Filter.fromJson(json as Map<String, dynamic>),
+  );
 
   @override
   void buildXml(
     XmlBuilder builder, {
     String tag = 'EventFilter',
     String? namespace = Xmlns.trc,
-  }) =>
-      builder.element(tag, nest: () {
-        builder.namespace(namespace!);
+  }) => builder.element(
+    tag,
+    nest: () {
+      builder.namespace(namespace!);
 
-        if (filters.isNotEmpty) {
-          for (var filter in filters) {
-            filter.buildXml(builder);
-          }
+      if (filters.isNotEmpty) {
+        for (var filter in filters) {
+          filter.buildXml(builder);
         }
-      });
+      }
+    },
+  );
 }

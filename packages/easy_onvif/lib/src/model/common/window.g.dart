@@ -7,15 +7,15 @@ part of 'window.dart';
 // **************************************************************************
 
 Window _$WindowFromJson(Map<String, dynamic> json) => Window(
-      bottom: double.parse(json['@bottom'] as String),
-      top: double.parse(json['@top'] as String),
-      right: double.parse(json['@right'] as String),
-      left: double.parse(json['@left'] as String),
-    );
+  bottom: double.parse(json['@bottom'] as String),
+  top: double.parse(json['@top'] as String),
+  right: double.parse(json['@right'] as String),
+  left: double.parse(json['@left'] as String),
+);
 
 Map<String, dynamic> _$WindowToJson(Window instance) => <String, dynamic>{
-      '@bottom': instance.bottom,
-      '@top': instance.top,
-      '@right': instance.right,
-      '@left': instance.left,
-    };
+  '@bottom': instance.bottom,
+  '@top': instance.top,
+  '@right': instance.right,
+  '@left': instance.left,
+};

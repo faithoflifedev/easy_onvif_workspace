@@ -69,36 +69,41 @@ class PtzConfiguration {
   ///If the PTZ Node supports absolute zoom movements, it shall specify one
   ///Absolute Zoom Position Space as default.
   @JsonKey(
-      name: 'DefaultAbsoluteZoomPositionSpace',
-      fromJson: _nullableMappedToSpace)
+    name: 'DefaultAbsoluteZoomPositionSpace',
+    fromJson: _nullableMappedToSpace,
+  )
   final Space? defaultAbsoluteZoomPositionSpace;
 
   ///If the PTZ Node supports relative Pan/Tilt movements, it shall specify one
   ///RelativePan/Tilt Translation Space as default.
   @JsonKey(
-      name: 'DefaultRelativePanTiltTranslationSpace',
-      fromJson: _nullableMappedToSpace)
+    name: 'DefaultRelativePanTiltTranslationSpace',
+    fromJson: _nullableMappedToSpace,
+  )
   final Space? defaultRelativePanTiltTranslationSpace;
 
   ///If the PTZ Node supports relative zoom movements, it shall specify one
   ///Relative Zoom Translation Space as default.
   @JsonKey(
-      name: 'DefaultRelativeZoomTranslationSpace',
-      fromJson: _nullableMappedToSpace)
+    name: 'DefaultRelativeZoomTranslationSpace',
+    fromJson: _nullableMappedToSpace,
+  )
   final Space? defaultRelativeZoomTranslationSpace;
 
   ///If the PTZ Node supports continuous Pan/Tilt movements, it shall specify
   ///one Continuous Pan/Tilt Velocity Space as default.
   @JsonKey(
-      name: 'DefaultContinuousPanTiltVelocitySpace',
-      fromJson: _nullableMappedToSpace)
+    name: 'DefaultContinuousPanTiltVelocitySpace',
+    fromJson: _nullableMappedToSpace,
+  )
   final Space? defaultContinuousPanTiltVelocitySpace;
 
   ///If the PTZ Node supports continuous zoom movements, it shall specify one
   ///Continuous Zoom Velocity Space as default.
   @JsonKey(
-      name: 'DefaultContinuousZoomVelocitySpace',
-      fromJson: _nullableMappedToSpace)
+    name: 'DefaultContinuousZoomVelocitySpace',
+    fromJson: _nullableMappedToSpace,
+  )
   final Space? defaultContinuousZoomVelocitySpace;
 
   ///If the PTZ Node supports absolute or relative PTZ movements, it shall
@@ -109,8 +114,9 @@ class PtzConfiguration {
   ///If the PTZ Node supports continuous movements, it shall specify a default
   ///timeout, after which the movement stops.
   @JsonKey(
-      name: 'DefaultPTZTimeout',
-      fromJson: OnvifUtil.nullableStringMappedFromXml)
+    name: 'DefaultPTZTimeout',
+    fromJson: OnvifUtil.nullableStringMappedFromXml,
+  )
   final String? defaultPtzTimeout;
 
   ///The Pan/Tilt limits element should be present for a PTZ Node that supports
@@ -160,9 +166,9 @@ class PtzConfiguration {
   static Space? _nullableMappedToSpace(Map<String, dynamic>? value) =>
       value != null
           ? $enumDecodeNullable(
-              _$SpaceEnumMap,
-              OnvifUtil.stringMappedFromXml(value),
-            )
+            _$SpaceEnumMap,
+            OnvifUtil.stringMappedFromXml(value),
+          )
           : null;
 }
 

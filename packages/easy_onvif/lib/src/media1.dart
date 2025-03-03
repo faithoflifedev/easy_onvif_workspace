@@ -21,10 +21,7 @@ typedef MediaRequest = soap.MediaRequest;
 /// | READ_MEDIA | X | X | X | |
 /// | ACTUATE | X | X | | |
 class Media1 extends Operation {
-  Media1({
-    required super.transport,
-    required super.uri,
-  });
+  Media1({required super.transport, required super.uri});
 
   /// This command lists all available physical audio inputs of the device.
   ///
@@ -33,17 +30,17 @@ class Media1 extends Operation {
     loggy.debug('getAudioSources');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: MediaRequest.getAudioSources(),
-        ));
+      uri,
+      soap.Body(request: MediaRequest.getAudioSources()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetAudioSourcesResponse.fromJson(responseEnvelope.body.response!)
-        .audioSources;
+    return GetAudioSourcesResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).audioSources;
   }
 
   /// The GetMetadataConfiguration command fetches the metadata configuration if
@@ -51,22 +48,24 @@ class Media1 extends Operation {
   ///
   /// ACCESS CLASS: READ_MEDIA
   Future<MetadataConfiguration> getMetadataConfiguration(
-      String configurationToken) async {
+    String configurationToken,
+  ) async {
     loggy.debug('getMetadataConfiguration');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: MediaRequest.getMetadataConfiguration(configurationToken),
-        ));
+      uri,
+      soap.Body(
+        request: MediaRequest.getMetadataConfiguration(configurationToken),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetMetadataConfigurationResponse.fromJson(
-            responseEnvelope.body.response!)
-        .configuration;
+      responseEnvelope.body.response!,
+    ).configuration;
   }
 
   /// This operation lists all existing metadata configurations. The client need
@@ -80,21 +79,22 @@ class Media1 extends Operation {
     loggy.debug('getMetadataConfigurations');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: MediaRequest.getMetadataConfigurations(
-            configurationToken: configurationToken,
-            profileToken: profileToken,
-          ),
-        ));
+      uri,
+      soap.Body(
+        request: MediaRequest.getMetadataConfigurations(
+          configurationToken: configurationToken,
+          profileToken: profileToken,
+        ),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetMetadataConfigurationsResponse.fromJson(
-            responseEnvelope.body.response!)
-        .configurations;
+      responseEnvelope.body.response!,
+    ).configurations;
   }
 
   /// If the profile token is already known, a profile can be fetched through
@@ -105,10 +105,9 @@ class Media1 extends Operation {
     loggy.debug('getProfile');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: MediaRequest.getProfile(profileToken),
-        ));
+      uri,
+      soap.Body(request: MediaRequest.getProfile(profileToken)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -128,22 +127,24 @@ class Media1 extends Operation {
     loggy.debug('getProfiles');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: MediaRequest.getProfiles(),
-        ));
+      uri,
+      soap.Body(request: MediaRequest.getProfiles()),
+    );
 
     final success =
         responseEnvelope.body.response?.containsKey('Profiles') ?? false;
 
     if (!success) {
-      throw Exception(responseEnvelope.body.hasFault
-          ? responseEnvelope.body.fault.toString()
-          : null);
+      throw Exception(
+        responseEnvelope.body.hasFault
+            ? responseEnvelope.body.fault.toString()
+            : null,
+      );
     }
 
-    return GetProfilesResponse.fromJson(responseEnvelope.body.response!)
-        .profiles;
+    return GetProfilesResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).profiles;
   }
 
   /// Returns the capabilities of the media1 service. The result is returned in a
@@ -154,18 +155,17 @@ class Media1 extends Operation {
     loggy.debug('getServiceCapabilities');
 
     final responseEnvelope = await transport.request(
-        uri,
-        soap.Body(
-          request: MediaRequest.getServiceCapabilities(),
-        ));
+      uri,
+      soap.Body(request: MediaRequest.getServiceCapabilities()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetServiceCapabilitiesResponse.fromJson(
-            responseEnvelope.body.response!)
-        .capabilities;
+      responseEnvelope.body.response!,
+    ).capabilities;
   }
 
   /// A client uses the [getSnapshotUri] command to obtain a JPEG snapshot from
@@ -184,17 +184,17 @@ class Media1 extends Operation {
     loggy.debug('getSnapshotUri');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: MediaRequest.getSnapshotUri(profileToken),
-        ));
+      uri,
+      soap.Body(request: MediaRequest.getSnapshotUri(profileToken)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetSnapshotUriResponse.fromJson(responseEnvelope.body.response!)
-        .mediaUri;
+    return GetSnapshotUriResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).mediaUri;
   }
 
   /// This operation requests a [Uri] that can be used to initiate a live media1
@@ -228,18 +228,22 @@ class Media1 extends Operation {
     loggy.debug('getStreamUri');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request:
-              MediaRequest.getStreamUri(profileToken, streamSetup: streamSetup),
-        ));
+      uri,
+      soap.Body(
+        request: MediaRequest.getStreamUri(
+          profileToken,
+          streamSetup: streamSetup,
+        ),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetStreamUriResponse.fromJson(responseEnvelope.body.response!)
-        .mediaUri;
+    return GetStreamUriResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).mediaUri;
   }
 
   /// This command lists all available physical video inputs of the device.
@@ -249,17 +253,17 @@ class Media1 extends Operation {
     loggy.debug('getVideoSources');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: MediaRequest.getVideoSources(),
-        ));
+      uri,
+      soap.Body(request: MediaRequest.getVideoSources()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetVideoSourcesResponse.fromJson(responseEnvelope.body.response!)
-        .videoSources;
+    return GetVideoSourcesResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).videoSources;
   }
 
   /// This command starts multicast streaming using a specified media1 profile of
@@ -274,10 +278,9 @@ class Media1 extends Operation {
     loggy.debug('startMulticastStreaming');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: MediaRequest.startMulticastStreaming(profileToken),
-        ));
+      uri,
+      soap.Body(request: MediaRequest.startMulticastStreaming(profileToken)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -292,10 +295,9 @@ class Media1 extends Operation {
     loggy.debug('stopMulticastStreaming');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: MediaRequest.stopMulticastStreaming(profileToken),
-        ));
+      uri,
+      soap.Body(request: MediaRequest.stopMulticastStreaming(profileToken)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());

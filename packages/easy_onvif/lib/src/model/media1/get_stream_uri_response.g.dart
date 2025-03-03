@@ -7,13 +7,11 @@ part of 'get_stream_uri_response.dart';
 // **************************************************************************
 
 GetStreamUriResponse _$GetStreamUriResponseFromJson(
-        Map<String, dynamic> json) =>
-    GetStreamUriResponse(
-      mediaUri: MediaUri.fromJson(json['MediaUri'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => GetStreamUriResponse(
+  mediaUri: MediaUri.fromJson(json['MediaUri'] as Map<String, dynamic>),
+);
 
 Map<String, dynamic> _$GetStreamUriResponseToJson(
-        GetStreamUriResponse instance) =>
-    <String, dynamic>{
-      'MediaUri': instance.mediaUri,
-    };
+  GetStreamUriResponse instance,
+) => <String, dynamic>{'MediaUri': instance.mediaUri};

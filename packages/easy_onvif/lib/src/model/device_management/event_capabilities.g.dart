@@ -12,6 +12,4 @@ EventCapabilities _$EventCapabilitiesFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$EventCapabilitiesToJson(EventCapabilities instance) =>
-    <String, dynamic>{
-      'XAddr': instance.xAddr,
-    };
+    <String, dynamic>{'XAddr': instance.xAddr};

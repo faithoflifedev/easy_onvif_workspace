@@ -18,10 +18,7 @@ class RecordingOptions {
   @JsonKey(name: 'Track')
   final TrackOptions track;
 
-  RecordingOptions({
-    required this.job,
-    required this.track,
-  });
+  RecordingOptions({required this.job, required this.track});
 
   factory RecordingOptions.fromJson(Map<String, dynamic> json) =>
       _$RecordingOptionsFromJson(json);

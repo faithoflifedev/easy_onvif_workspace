@@ -18,10 +18,7 @@ class TrackConfiguration {
   @JsonKey(name: 'Description', fromJson: OnvifUtil.stringMappedFromXml)
   final String description;
 
-  TrackConfiguration({
-    required this.trackType,
-    required this.description,
-  });
+  TrackConfiguration({required this.trackType, required this.description});
 
   factory TrackConfiguration.fromJson(Map<String, dynamic> json) =>
       _$TrackConfigurationFromJson(json);

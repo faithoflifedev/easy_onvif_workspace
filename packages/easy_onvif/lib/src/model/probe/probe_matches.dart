@@ -24,5 +24,7 @@ class ProbeMatches {
 
   static List<ProbeMatch> _fromJson(dynamic json) =>
       OnvifUtil.jsonList<ProbeMatch>(
-          json, (json) => ProbeMatch.fromJson(json as Map<String, dynamic>));
+        json,
+        (json) => ProbeMatch.fromJson(json as Map<String, dynamic>),
+      );
 }

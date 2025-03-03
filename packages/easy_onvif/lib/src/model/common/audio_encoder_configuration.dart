@@ -20,46 +20,28 @@ class AudioEncoderConfiguration {
   ];
 
   ///User readable name. Length up to 64 characters.
-  @JsonKey(
-    name: 'Name',
-    fromJson: OnvifUtil.stringMappedFromXml,
-  )
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.stringMappedFromXml)
   final String name;
 
   /// Number of internal references currently using this configuration.
   /// This informational parameter is read-only. Deprecated for Media2 Service.
-  @JsonKey(
-    name: 'UseCount',
-    fromJson: OnvifUtil.intMappedFromXml,
-  )
+  @JsonKey(name: 'UseCount', fromJson: OnvifUtil.intMappedFromXml)
   final int useCount;
 
   /// Audio codec used for encoding the audio input (either G.711, G.726 or AAC)
   /// - enum { 'G711', 'G726', 'AAC' }
-  @JsonKey(
-    name: 'Encoding',
-    fromJson: mappedToAudioCodecEncoding,
-  )
+  @JsonKey(name: 'Encoding', fromJson: mappedToAudioCodecEncoding)
   final AudioCodecEncoding audioCodecEncoding;
 
   /// The output bitrate in kbps.
-  @JsonKey(
-    name: 'Bitrate',
-    fromJson: OnvifUtil.intMappedFromXml,
-  )
+  @JsonKey(name: 'Bitrate', fromJson: OnvifUtil.intMappedFromXml)
   final int bitRate;
 
   /// The output sample rate in kHz.
-  @JsonKey(
-    name: 'SampleRate',
-    fromJson: OnvifUtil.intMappedFromXml,
-  )
+  @JsonKey(name: 'SampleRate', fromJson: OnvifUtil.intMappedFromXml)
   final int sampleRate;
 
-  @JsonKey(
-    name: 'Multicast',
-    fromJson: OnvifUtil.emptyOrMulticastConfiguration,
-  )
+  @JsonKey(name: 'Multicast', fromJson: OnvifUtil.emptyOrMulticastConfiguration)
   final MulticastConfiguration? multiCast;
 
   /// The RTSP session timeout for the related audio stream
@@ -79,13 +61,15 @@ class AudioEncoderConfiguration {
   factory AudioEncoderConfiguration.fromJson(Map<String, dynamic> json) =>
       _$AudioEncoderConfigurationFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AudioEncoderConfigurationToJson(this)
-      .convertFieldsToXmlMap(_xmlMappedFields);
+  Map<String, dynamic> toJson() => _$AudioEncoderConfigurationToJson(
+    this,
+  ).convertFieldsToXmlMap(_xmlMappedFields);
 
   static AudioCodecEncoding mappedToAudioCodecEncoding(
-          Map<String, dynamic> value) =>
-      AudioCodecEncoding.values
-          .byName(OnvifUtil.stringMappedFromXml(value).toLowerCase());
+    Map<String, dynamic> value,
+  ) => AudioCodecEncoding.values.byName(
+    OnvifUtil.stringMappedFromXml(value).toLowerCase(),
+  );
 
   @override
   String toString() => json.encode(toJson());

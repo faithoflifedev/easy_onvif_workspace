@@ -8,11 +8,10 @@ part of 'get_status_response.dart';
 
 GetStatusResponse _$GetStatusResponseFromJson(Map<String, dynamic> json) =>
     GetStatusResponse(
-      imagingStatus20:
-          ImagingStatus20.fromJson(json['Status'] as Map<String, dynamic>),
+      imagingStatus20: ImagingStatus20.fromJson(
+        json['Status'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$GetStatusResponseToJson(GetStatusResponse instance) =>
-    <String, dynamic>{
-      'Status': instance.imagingStatus20,
-    };
+    <String, dynamic>{'Status': instance.imagingStatus20};

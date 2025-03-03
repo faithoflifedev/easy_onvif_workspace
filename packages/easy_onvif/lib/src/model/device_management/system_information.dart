@@ -18,10 +18,7 @@ class SystemInformation {
   @JsonKey(name: 'String', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? string;
 
-  SystemInformation({
-    required this.binary,
-    this.string,
-  });
+  SystemInformation({required this.binary, this.string});
 
   factory SystemInformation.fromJson(Map<String, dynamic> json) =>
       _$SystemInformationFromJson(json);

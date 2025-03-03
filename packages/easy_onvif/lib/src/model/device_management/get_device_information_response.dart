@@ -10,7 +10,9 @@ part 'get_device_information_response.g.dart';
 class GetDeviceInformationResponse {
   /// The manufacturer of the device.
   @JsonKey(
-      name: 'Manufacturer', fromJson: OnvifUtil.nullableStringMappedFromXml)
+    name: 'Manufacturer',
+    fromJson: OnvifUtil.nullableStringMappedFromXml,
+  )
   final String? manufacturer;
 
   /// The device model.
@@ -29,8 +31,13 @@ class GetDeviceInformationResponse {
   @JsonKey(name: 'HardwareId', fromJson: OnvifUtil.stringMappedFromXml)
   final dynamic hardwareId;
 
-  GetDeviceInformationResponse(this.manufacturer, this.model,
-      this.firmwareVersion, this.serialNumber, this.hardwareId);
+  GetDeviceInformationResponse(
+    this.manufacturer,
+    this.model,
+    this.firmwareVersion,
+    this.serialNumber,
+    this.hardwareId,
+  );
 
   factory GetDeviceInformationResponse.fromJson(Map<String, dynamic> json) =>
       _$GetDeviceInformationResponseFromJson(json);

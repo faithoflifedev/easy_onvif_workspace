@@ -20,11 +20,12 @@ class IntRectangle {
   @JsonKey(name: '@height', fromJson: int.parse)
   final int height;
 
-  IntRectangle(
-      {required this.x,
-      required this.y,
-      required this.width,
-      required this.height});
+  IntRectangle({
+    required this.x,
+    required this.y,
+    required this.width,
+    required this.height,
+  });
 
   factory IntRectangle.fromJson(Map<String, dynamic> json) =>
       _$IntRectangleFromJson(json);

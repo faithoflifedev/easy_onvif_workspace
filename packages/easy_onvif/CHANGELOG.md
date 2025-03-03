@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.1+6
+
+* Issue #72: Incorrect getStreamUri request for media1
+* Issue #73: Add authentication headers on onvif.connect request
+
 ## 3.1.1+5
 
 * Issue #72: Incorrect getStreamUri request for media1

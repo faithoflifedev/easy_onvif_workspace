@@ -13,9 +13,7 @@ class Tracks {
   @JsonKey(name: 'Track', fromJson: _fromJson)
   final List<Track> tracks;
 
-  Tracks({
-    required this.tracks,
-  });
+  Tracks({required this.tracks});
 
   factory Tracks.fromJson(Map<String, dynamic> json) => _$TracksFromJson(json);
 
@@ -25,5 +23,7 @@ class Tracks {
   String toString() => json.encode(toJson());
 
   static List<Track> _fromJson(dynamic json) => OnvifUtil.jsonList<Track>(
-      json, (json) => Track.fromJson(json as Map<String, dynamic>));
+    json,
+    (json) => Track.fromJson(json as Map<String, dynamic>),
+  );
 }

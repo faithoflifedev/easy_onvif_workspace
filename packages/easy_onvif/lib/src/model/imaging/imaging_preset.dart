@@ -21,11 +21,7 @@ class ImagingPreset {
   @JsonKey(name: 'name', fromJson: OnvifUtil.stringMappedFromXml)
   final String name;
 
-  ImagingPreset({
-    required this.token,
-    required this.type,
-    required this.name,
-  });
+  ImagingPreset({required this.token, required this.type, required this.name});
 
   factory ImagingPreset.fromJson(Map<String, dynamic> json) =>
       _$ImagingPresetFromJson(json);

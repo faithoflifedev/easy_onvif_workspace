@@ -7,13 +7,13 @@ part of 'space_2d.dart';
 // **************************************************************************
 
 Space2D _$Space2DFromJson(Map<String, dynamic> json) => Space2D(
-      uri: OnvifUtil.stringMappedFromXml(json['URI'] as Map<String, dynamic>),
-      xRange: FloatRange.fromJson(json['XRange'] as Map<String, dynamic>),
-      yRange: FloatRange.fromJson(json['YRange'] as Map<String, dynamic>),
-    );
+  uri: OnvifUtil.stringMappedFromXml(json['URI'] as Map<String, dynamic>),
+  xRange: FloatRange.fromJson(json['XRange'] as Map<String, dynamic>),
+  yRange: FloatRange.fromJson(json['YRange'] as Map<String, dynamic>),
+);
 
 Map<String, dynamic> _$Space2DToJson(Space2D instance) => <String, dynamic>{
-      'URI': instance.uri,
-      'XRange': instance.xRange,
-      'YRange': instance.yRange,
-    };
+  'URI': instance.uri,
+  'XRange': instance.xRange,
+  'YRange': instance.yRange,
+};

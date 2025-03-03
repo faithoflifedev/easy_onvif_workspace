@@ -16,10 +16,7 @@ class ImagingStatus20 {
   @JsonKey(name: 'Extension')
   final Map<String, dynamic>? extension;
 
-  ImagingStatus20({
-    required this.focusStatus20,
-    this.extension,
-  });
+  ImagingStatus20({required this.focusStatus20, this.extension});
 
   factory ImagingStatus20.fromJson(Map<String, dynamic> json) =>
       _$ImagingStatus20FromJson(json);

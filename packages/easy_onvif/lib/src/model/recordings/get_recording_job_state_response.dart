@@ -14,9 +14,7 @@ class GetRecordingJobStateResponse {
   @JsonKey(name: 'State')
   final RecordingJobStateInformation state;
 
-  GetRecordingJobStateResponse({
-    required this.state,
-  });
+  GetRecordingJobStateResponse({required this.state});
 
   factory GetRecordingJobStateResponse.fromJson(Map<String, dynamic> json) =>
       _$GetRecordingJobStateResponseFromJson(json);

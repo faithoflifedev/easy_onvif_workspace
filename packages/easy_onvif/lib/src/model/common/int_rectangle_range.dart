@@ -26,11 +26,12 @@ class IntRectangleRange {
   @JsonKey(name: 'HeightRange')
   final IntRange heightRange;
 
-  IntRectangleRange(
-      {required this.xRange,
-      required this.yRange,
-      required this.widthRange,
-      required this.heightRange});
+  IntRectangleRange({
+    required this.xRange,
+    required this.yRange,
+    required this.widthRange,
+    required this.heightRange,
+  });
 
   factory IntRectangleRange.fromJson(Map<String, dynamic> json) =>
       _$IntRectangleRangeFromJson(json);

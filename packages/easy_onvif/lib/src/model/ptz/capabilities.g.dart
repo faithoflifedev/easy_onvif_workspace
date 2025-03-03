@@ -7,15 +7,16 @@ part of 'capabilities.dart';
 // **************************************************************************
 
 Capabilities _$CapabilitiesFromJson(Map<String, dynamic> json) => Capabilities(
-      eFlip: OnvifUtil.nullableStringToBool(json['@EFlip'] as String?),
-      reverse: OnvifUtil.nullableStringToBool(json['@Reverse'] as String?),
-      getCompatibleConfigurations: OnvifUtil.nullableStringToBool(
-          json['@GetCompatibleConfigurations'] as String?),
-      moveStatus:
-          OnvifUtil.nullableStringToBool(json['@MoveStatus'] as String?),
-      moveAndTrack:
-          OnvifUtil.nullableStringToList(json['@MoveAndTrack'] as String?),
-    );
+  eFlip: OnvifUtil.nullableStringToBool(json['@EFlip'] as String?),
+  reverse: OnvifUtil.nullableStringToBool(json['@Reverse'] as String?),
+  getCompatibleConfigurations: OnvifUtil.nullableStringToBool(
+    json['@GetCompatibleConfigurations'] as String?,
+  ),
+  moveStatus: OnvifUtil.nullableStringToBool(json['@MoveStatus'] as String?),
+  moveAndTrack: OnvifUtil.nullableStringToList(
+    json['@MoveAndTrack'] as String?,
+  ),
+);
 
 Map<String, dynamic> _$CapabilitiesToJson(Capabilities instance) =>
     <String, dynamic>{

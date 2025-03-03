@@ -8,7 +8,8 @@ class Nonce {
   late final List<int> bytes;
 
   Nonce({this.bytesOverride}) {
-    bytes = bytesOverride ??
+    bytes =
+        bytesOverride ??
         List<int>.generate(
           16,
           (_) => Random.secure().nextInt(255),
@@ -19,8 +20,9 @@ class Nonce {
   String toBase64() => base64.encode(bytes);
 
   @override
-  String toString() => bytes
-      .map((element) => element.toRadixString(16).padLeft(2, '0'))
-      .toList()
-      .join();
+  String toString() =>
+      bytes
+          .map((element) => element.toRadixString(16).padLeft(2, '0'))
+          .toList()
+          .join();
 }

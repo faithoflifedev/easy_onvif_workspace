@@ -7,11 +7,11 @@ part of 'event.dart';
 // **************************************************************************
 
 Event _$EventFromJson(Map<String, dynamic> json) => Event(
-      filter: json['Filter'],
-      subscriptionPolicy: json['SubscriptionPolicy'],
-    );
+  filter: json['Filter'],
+  subscriptionPolicy: json['SubscriptionPolicy'],
+);
 
 Map<String, dynamic> _$EventToJson(Event instance) => <String, dynamic>{
-      'Filter': instance.filter,
-      'SubscriptionPolicy': instance.subscriptionPolicy,
-    };
+  'Filter': instance.filter,
+  'SubscriptionPolicy': instance.subscriptionPolicy,
+};

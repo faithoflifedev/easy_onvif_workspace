@@ -7,11 +7,11 @@ part of 'int_rectangle.dart';
 // **************************************************************************
 
 IntRectangle _$IntRectangleFromJson(Map<String, dynamic> json) => IntRectangle(
-      x: int.parse(json['@x'] as String),
-      y: int.parse(json['@y'] as String),
-      width: int.parse(json['@width'] as String),
-      height: int.parse(json['@height'] as String),
-    );
+  x: int.parse(json['@x'] as String),
+  y: int.parse(json['@y'] as String),
+  width: int.parse(json['@width'] as String),
+  height: int.parse(json['@height'] as String),
+);
 
 Map<String, dynamic> _$IntRectangleToJson(IntRectangle instance) =>
     <String, dynamic>{

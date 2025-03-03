@@ -30,5 +30,7 @@ class GetProfilesResponse {
 
   static List<MediaProfile> _fromJson(dynamic json) =>
       OnvifUtil.jsonList<MediaProfile>(
-          json, (json) => MediaProfile.fromJson(json as Map<String, dynamic>));
+        json,
+        (json) => MediaProfile.fromJson(json as Map<String, dynamic>),
+      );
 }

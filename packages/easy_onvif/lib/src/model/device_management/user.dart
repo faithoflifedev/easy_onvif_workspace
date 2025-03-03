@@ -32,12 +32,14 @@ class User implements XmlSerializable {
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
   factory User.fromYamlMap(YamlMap yamlMap) => User(
-      username: yamlMap['username'],
-      password: yamlMap['password'],
-      userLevel: UserLevel.values.contains(yamlMap['userLevel'])
-          ? UserLevel.values.byName(yamlMap['userLevel'].toString())
-          : UserLevel.user,
-      extension: yamlMap['extension']);
+    username: yamlMap['username'],
+    password: yamlMap['password'],
+    userLevel:
+        UserLevel.values.contains(yamlMap['userLevel'])
+            ? UserLevel.values.byName(yamlMap['userLevel'].toString())
+            : UserLevel.user,
+    extension: yamlMap['extension'],
+  );
 
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
@@ -45,10 +47,7 @@ class User implements XmlSerializable {
   String toString() => json.encode(toJson());
 
   static UserLevel _mappedToUserLevel(Map<String, dynamic> value) =>
-      $enumDecode(
-        _$UserLevelEnumMap,
-        OnvifUtil.stringMappedFromXml(value),
-      );
+      $enumDecode(_$UserLevelEnumMap, OnvifUtil.stringMappedFromXml(value));
 
   @override
   void buildXml(XmlBuilder builder, {String tag = 'User', String? namespace}) =>

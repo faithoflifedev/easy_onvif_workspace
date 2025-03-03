@@ -8,12 +8,11 @@ part of 'imaging_capabilities.dart';
 
 ImagingCapabilities _$ImagingCapabilitiesFromJson(Map<String, dynamic> json) =>
     ImagingCapabilities(
-      xAddr:
-          OnvifUtil.stringMappedFromXml(json['XAddr'] as Map<String, dynamic>),
+      xAddr: OnvifUtil.stringMappedFromXml(
+        json['XAddr'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$ImagingCapabilitiesToJson(
-        ImagingCapabilities instance) =>
-    <String, dynamic>{
-      'XAddr': instance.xAddr,
-    };
+  ImagingCapabilities instance,
+) => <String, dynamic>{'XAddr': instance.xAddr};

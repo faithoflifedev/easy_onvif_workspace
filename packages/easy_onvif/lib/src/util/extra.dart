@@ -14,18 +14,17 @@ extension Helpers on String {
     return Uri.parse(this);
   }
 
-  void buildXml(
-    XmlBuilder builder, {
-    required String tag,
-    String? namespace,
-  }) =>
-      builder.element(tag, nest: () {
-        if (namespace != null) {
-          builder.namespace(namespace);
-        }
+  void buildXml(XmlBuilder builder, {required String tag, String? namespace}) =>
+      builder.element(
+        tag,
+        nest: () {
+          if (namespace != null) {
+            builder.namespace(namespace);
+          }
 
-        builder.text(this);
-      });
+          builder.text(this);
+        },
+      );
 }
 
 extension MapExtension on Map<String, dynamic> {

@@ -24,8 +24,8 @@ class GetCompatibleConfigurationsResponse {
   GetCompatibleConfigurationsResponse({required this.ptzConfigurations});
 
   factory GetCompatibleConfigurationsResponse.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetCompatibleConfigurationsResponseFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$GetCompatibleConfigurationsResponseFromJson(json);
 
   Map<String, dynamic> toJson() =>
       _$GetCompatibleConfigurationsResponseToJson(this);

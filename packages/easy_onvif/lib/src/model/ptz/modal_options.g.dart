@@ -6,11 +6,8 @@ part of 'modal_options.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ModalOptions _$ModalOptionsFromJson(Map<String, dynamic> json) => ModalOptions(
-      mode: ModalOptions._oneOrMore(json['Mode']),
-    );
+ModalOptions _$ModalOptionsFromJson(Map<String, dynamic> json) =>
+    ModalOptions(mode: ModalOptions._oneOrMore(json['Mode']));
 
 Map<String, dynamic> _$ModalOptionsToJson(ModalOptions instance) =>
-    <String, dynamic>{
-      'Mode': instance.mode,
-    };
+    <String, dynamic>{'Mode': instance.mode};

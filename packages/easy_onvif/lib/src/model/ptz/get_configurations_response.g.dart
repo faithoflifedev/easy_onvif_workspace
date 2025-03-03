@@ -7,14 +7,11 @@ part of 'get_configurations_response.dart';
 // **************************************************************************
 
 GetConfigurationsResponse _$GetConfigurationsResponseFromJson(
-        Map<String, dynamic> json) =>
-    GetConfigurationsResponse(
-      ptzConfigurations:
-          Ptz.ptzConfigurationConverter(json['PTZConfiguration']),
-    );
+  Map<String, dynamic> json,
+) => GetConfigurationsResponse(
+  ptzConfigurations: Ptz.ptzConfigurationConverter(json['PTZConfiguration']),
+);
 
 Map<String, dynamic> _$GetConfigurationsResponseToJson(
-        GetConfigurationsResponse instance) =>
-    <String, dynamic>{
-      'PTZConfiguration': instance.ptzConfigurations,
-    };
+  GetConfigurationsResponse instance,
+) => <String, dynamic>{'PTZConfiguration': instance.ptzConfigurations};

@@ -7,19 +7,21 @@ part of 'audio_source_configuration.dart';
 // **************************************************************************
 
 AudioSourceConfiguration _$AudioSourceConfigurationFromJson(
-        Map<String, dynamic> json) =>
-    AudioSourceConfiguration(
-      name: OnvifUtil.stringMappedFromXml(json['Name'] as Map<String, dynamic>),
-      useCount:
-          OnvifUtil.intMappedFromXml(json['UseCount'] as Map<String, dynamic>),
-      sourceToken: OnvifUtil.stringMappedFromXml(
-          json['SourceToken'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => AudioSourceConfiguration(
+  name: OnvifUtil.stringMappedFromXml(json['Name'] as Map<String, dynamic>),
+  useCount: OnvifUtil.intMappedFromXml(
+    json['UseCount'] as Map<String, dynamic>,
+  ),
+  sourceToken: OnvifUtil.stringMappedFromXml(
+    json['SourceToken'] as Map<String, dynamic>,
+  ),
+);
 
 Map<String, dynamic> _$AudioSourceConfigurationToJson(
-        AudioSourceConfiguration instance) =>
-    <String, dynamic>{
-      'Name': instance.name,
-      'UseCount': instance.useCount,
-      'SourceToken': instance.sourceToken,
-    };
+  AudioSourceConfiguration instance,
+) => <String, dynamic>{
+  'Name': instance.name,
+  'UseCount': instance.useCount,
+  'SourceToken': instance.sourceToken,
+};

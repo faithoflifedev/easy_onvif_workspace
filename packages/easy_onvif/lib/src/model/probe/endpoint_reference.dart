@@ -7,10 +7,7 @@ part 'endpoint_reference.g.dart';
 
 @JsonSerializable()
 class EndpointReference {
-  @JsonKey(
-    name: 'Address',
-    fromJson: _address,
-  )
+  @JsonKey(name: 'Address', fromJson: _address)
   final String address;
 
   EndpointReference({required this.address});

@@ -7,14 +7,13 @@ part of 'create_recording_response.dart';
 // **************************************************************************
 
 CreateRecordingResponse _$CreateRecordingResponseFromJson(
-        Map<String, dynamic> json) =>
-    CreateRecordingResponse(
-      token: OnvifUtil.stringMappedFromXml(
-          json['RecordingToken'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => CreateRecordingResponse(
+  token: OnvifUtil.stringMappedFromXml(
+    json['RecordingToken'] as Map<String, dynamic>,
+  ),
+);
 
 Map<String, dynamic> _$CreateRecordingResponseToJson(
-        CreateRecordingResponse instance) =>
-    <String, dynamic>{
-      'RecordingToken': instance.token,
-    };
+  CreateRecordingResponse instance,
+) => <String, dynamic>{'RecordingToken': instance.token};

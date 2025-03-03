@@ -29,8 +29,8 @@ class GetRecordingSearchResultsResponse {
   GetRecordingSearchResultsResponse({required this.findRecordingResults});
 
   factory GetRecordingSearchResultsResponse.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetRecordingSearchResultsResponseFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$GetRecordingSearchResultsResponseFromJson(json);
 
   Map<String, dynamic> toJson() =>
       _$GetRecordingSearchResultsResponseToJson(this);
@@ -39,6 +39,8 @@ class GetRecordingSearchResultsResponse {
   String toString() => json.encode(toJson());
 
   static List<FindRecordingResult> _fromJson(dynamic json) =>
-      OnvifUtil.jsonList<FindRecordingResult>(json,
-          (json) => FindRecordingResult.fromJson(json as Map<String, dynamic>));
+      OnvifUtil.jsonList<FindRecordingResult>(
+        json,
+        (json) => FindRecordingResult.fromJson(json as Map<String, dynamic>),
+      );
 }

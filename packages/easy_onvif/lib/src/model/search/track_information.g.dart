@@ -9,14 +9,18 @@ part of 'track_information.dart';
 TrackInformation _$TrackInformationFromJson(Map<String, dynamic> json) =>
     TrackInformation(
       trackToken: OnvifUtil.stringMappedFromXml(
-          json['TrackToken'] as Map<String, dynamic>),
+        json['TrackToken'] as Map<String, dynamic>,
+      ),
       trackType: TrackInformation._trackType(json['TrackType']),
       description: OnvifUtil.stringMappedFromXml(
-          json['Description'] as Map<String, dynamic>),
+        json['Description'] as Map<String, dynamic>,
+      ),
       dataFrom: OnvifUtil.mappedToStdDateTime(
-          json['DataFrom'] as Map<String, dynamic>),
-      dataTo:
-          OnvifUtil.mappedToStdDateTime(json['DataTo'] as Map<String, dynamic>),
+        json['DataFrom'] as Map<String, dynamic>,
+      ),
+      dataTo: OnvifUtil.mappedToStdDateTime(
+        json['DataTo'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$TrackInformationToJson(TrackInformation instance) =>

@@ -7,11 +7,7 @@ part of 'users_response.dart';
 // **************************************************************************
 
 GetUsersResponse _$GetUsersResponseFromJson(Map<String, dynamic> json) =>
-    GetUsersResponse(
-      users: GetUsersResponse._fromJson(json['User']),
-    );
+    GetUsersResponse(users: GetUsersResponse._fromJson(json['User']));
 
 Map<String, dynamic> _$GetUsersResponseToJson(GetUsersResponse instance) =>
-    <String, dynamic>{
-      'User': instance.users,
-    };
+    <String, dynamic>{'User': instance.users};

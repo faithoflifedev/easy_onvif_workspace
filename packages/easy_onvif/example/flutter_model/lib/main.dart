@@ -22,9 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Onvif Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blueGrey),
       home: const MyHomePage(title: 'Onvif Flutter Demo'),
     );
   }
@@ -71,14 +69,15 @@ class _MyHomePageState extends State<MyHomePage> with UiLoggy {
 
     // configure device connection
     final onvif = await Onvif.connect(
-        host: config['host'],
-        username: config['username'],
-        password: config['password'],
-        logOptions: const LogOptions(
-          LogLevel.debug,
-          stackTraceLevel: LogLevel.off,
-        ),
-        printer: const PrettyDeveloperPrinter());
+      host: config['host'],
+      username: config['username'],
+      password: config['password'],
+      logOptions: const LogOptions(
+        LogLevel.debug,
+        stackTraceLevel: LogLevel.off,
+      ),
+      printer: const PrettyDeveloperPrinter(),
+    );
 
     setState(() {
       connecting = false;
@@ -107,7 +106,10 @@ class _MyHomePageState extends State<MyHomePage> with UiLoggy {
 
       if (snapshotUri != null) {
         url = OnvifUtil.authenticatingUri(
-            snapshotUri!, config['username']!, config['password']!);
+          snapshotUri!,
+          config['username']!,
+          config['password']!,
+        );
       }
     });
   }
@@ -120,79 +122,78 @@ class _MyHomePageState extends State<MyHomePage> with UiLoggy {
         actions: [
           IconButton(
             icon: const Icon(Icons.device_hub),
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(builder: (_) => DevicePage()),
-            ),
-          )
+            onPressed:
+                () => Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (_) => DevicePage())),
+          ),
         ],
       ),
       body: SafeArea(
         child: Center(
-          child: connecting
-              ? const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+          child:
+              connecting
+                  ? const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
                       Text('Connecting to camera'),
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: CircularProgressIndicator(),
-                      )
-                    ])
-              : Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'Device Manufacturer:',
                       ),
-                    ),
-                    Text(
-                      manufacturer,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'Model:',
+                    ],
+                  )
+                  : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('Device Manufacturer:'),
                       ),
-                    ),
-                    Text(
-                      model,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'Firmware Version:',
+                      Text(
+                        manufacturer,
+                        style: Theme.of(context).textTheme.headlineSmall,
                       ),
-                    ),
-                    Text(
-                      firmwareVersion,
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Snapshot: ${snapshotUri ?? 'Not available'}',
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('Model:'),
                       ),
-                    ),
-                    url != ''
-                        ? Padding(
+                      Text(
+                        model,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text('Firmware Version:'),
+                      ),
+                      Text(
+                        firmwareVersion,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Snapshot: ${snapshotUri ?? 'Not available'}',
+                        ),
+                      ),
+                      url != ''
+                          ? Padding(
                             padding: const EdgeInsets.fromLTRB(8.0, 0, 8.0, 0),
                             child: CachedNetworkImage(
                               imageUrl: url,
                               progressIndicatorBuilder:
                                   (context, url, downloadProgress) =>
                                       CircularProgressIndicator(
-                                          value: downloadProgress.progress),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
+                                        value: downloadProgress.progress,
+                                      ),
+                              errorWidget:
+                                  (context, url, error) =>
+                                      const Icon(Icons.error),
                             ),
                           )
-                        : Container(),
-                  ],
-                ),
+                          : Container(),
+                    ],
+                  ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

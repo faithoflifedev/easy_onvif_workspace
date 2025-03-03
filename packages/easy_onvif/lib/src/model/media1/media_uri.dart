@@ -19,11 +19,12 @@ class MediaUri {
   @JsonKey(name: 'Timeout', fromJson: OnvifUtil.stringMappedFromXml)
   final String timeout;
 
-  MediaUri(
-      {required this.uri,
-      required this.invalidAfterConnect,
-      required this.invalidAfterReboot,
-      required this.timeout});
+  MediaUri({
+    required this.uri,
+    required this.invalidAfterConnect,
+    required this.invalidAfterReboot,
+    required this.timeout,
+  });
 
   factory MediaUri.fromJson(Map<String, dynamic> json) =>
       _$MediaUriFromJson(json);

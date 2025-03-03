@@ -12,6 +12,4 @@ PanTiltLimits _$PanTiltLimitsFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$PanTiltLimitsToJson(PanTiltLimits instance) =>
-    <String, dynamic>{
-      'Range': instance.range,
-    };
+    <String, dynamic>{'Range': instance.range};

@@ -9,11 +9,14 @@ part of 'video_rate_control.dart';
 VideoRateControl _$VideoRateControlFromJson(Map<String, dynamic> json) =>
     VideoRateControl(
       frameRateLimit: OnvifUtil.intMappedFromXml(
-          json['FrameRateLimit'] as Map<String, dynamic>),
+        json['FrameRateLimit'] as Map<String, dynamic>,
+      ),
       encodingInterval: OnvifUtil.intMappedFromXml(
-          json['EncodingInterval'] as Map<String, dynamic>),
+        json['EncodingInterval'] as Map<String, dynamic>,
+      ),
       bitrateLimit: OnvifUtil.intMappedFromXml(
-          json['BitrateLimit'] as Map<String, dynamic>),
+        json['BitrateLimit'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$VideoRateControlToJson(VideoRateControl instance) =>

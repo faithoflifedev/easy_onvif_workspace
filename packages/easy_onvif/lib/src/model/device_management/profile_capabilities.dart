@@ -8,7 +8,9 @@ part 'profile_capabilities.g.dart';
 class ProfileCapabilities {
   /// Maximum number of profiles.
   @JsonKey(
-      name: 'MaximumNumberOfProfiles', fromJson: OnvifUtil.intMappedFromXml)
+    name: 'MaximumNumberOfProfiles',
+    fromJson: OnvifUtil.intMappedFromXml,
+  )
   final int maximumNumberOfProfiles;
 
   ProfileCapabilities({required this.maximumNumberOfProfiles});

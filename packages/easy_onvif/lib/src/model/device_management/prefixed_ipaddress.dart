@@ -9,9 +9,7 @@ class PrefixedIpAddress {
   @JsonKey(name: 'PrefixLength')
   final int prefixLength;
 
-  PrefixedIpAddress({
-    required this.prefixLength,
-  });
+  PrefixedIpAddress({required this.prefixLength});
 
   factory PrefixedIpAddress.fromJson(Map<String, dynamic> json) =>
       _$PrefixedIpAddressFromJson(json);

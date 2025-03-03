@@ -7,17 +7,18 @@ part of 'get_video_encoder_configurations_response.dart';
 // **************************************************************************
 
 GetVideoEncoderConfigurationsResponse
-    _$GetVideoEncoderConfigurationsResponseFromJson(
-            Map<String, dynamic> json) =>
-        GetVideoEncoderConfigurationsResponse(
-          configurations: (json['Configurations'] as List<dynamic>)
-              .map((e) => VideoEncoder2Configuration.fromJson(
-                  e as Map<String, dynamic>))
+_$GetVideoEncoderConfigurationsResponseFromJson(Map<String, dynamic> json) =>
+    GetVideoEncoderConfigurationsResponse(
+      configurations:
+          (json['Configurations'] as List<dynamic>)
+              .map(
+                (e) => VideoEncoder2Configuration.fromJson(
+                  e as Map<String, dynamic>,
+                ),
+              )
               .toList(),
-        );
+    );
 
 Map<String, dynamic> _$GetVideoEncoderConfigurationsResponseToJson(
-        GetVideoEncoderConfigurationsResponse instance) =>
-    <String, dynamic>{
-      'Configurations': instance.configurations,
-    };
+  GetVideoEncoderConfigurationsResponse instance,
+) => <String, dynamic>{'Configurations': instance.configurations};

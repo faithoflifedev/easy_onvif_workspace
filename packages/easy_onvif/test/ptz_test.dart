@@ -8,116 +8,139 @@ void main() {
     group("Happytimesoft", () {
       test('AbsoluteMoveResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/happytimesoft/ptz/AbsoluteMoveResponse.xml');
+          'test/xml/happytimesoft/ptz/AbsoluteMoveResponse.xml',
+        );
 
         expect(
-            envelope.body.response!.containsKey('AbsoluteMoveResponse'), true);
+          envelope.body.response!.containsKey('AbsoluteMoveResponse'),
+          true,
+        );
       });
 
       test('ContinuousMoveResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/happytimesoft/ptz/ContinuousMoveResponse.xml');
+          'test/xml/happytimesoft/ptz/ContinuousMoveResponse.xml',
+        );
 
-        expect(envelope.body.response!.containsKey('ContinuousMoveResponse'),
-            true);
+        expect(
+          envelope.body.response!.containsKey('ContinuousMoveResponse'),
+          true,
+        );
       });
 
       test('GetCompatibleConfigurationsResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/happytimesoft/ptz/GetCompatibleConfigurationsResponse.xml');
+          'test/xml/happytimesoft/ptz/GetCompatibleConfigurationsResponse.xml',
+        );
 
         expect(
-            GetCompatibleConfigurationsResponse.fromJson(
-                    envelope.body.response!)
-                .ptzConfigurations
-                .isNotEmpty,
-            true);
+          GetCompatibleConfigurationsResponse.fromJson(
+            envelope.body.response!,
+          ).ptzConfigurations.isNotEmpty,
+          true,
+        );
       });
 
       test('GetConfigurationResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/happytimesoft/ptz/GetConfigurationResponse.xml');
+          'test/xml/happytimesoft/ptz/GetConfigurationResponse.xml',
+        );
 
         expect(
-            GetConfigurationResponse.fromJson(envelope.body.response!)
-                .ptzConfiguration
-                .useCount,
-            2);
+          GetConfigurationResponse.fromJson(
+            envelope.body.response!,
+          ).ptzConfiguration.useCount,
+          2,
+        );
       });
 
       test('GetConfigurationOptionsResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/happytimesoft/ptz/GetConfigurationOptionsResponse.xml');
+          'test/xml/happytimesoft/ptz/GetConfigurationOptionsResponse.xml',
+        );
 
         expect(
-            GetConfigurationOptionsResponse.fromJson(envelope.body.response!)
-                .ptzConfigurationOptions
-                .ptzTimeout
-                .min,
-            'PT1S');
+          GetConfigurationOptionsResponse.fromJson(
+            envelope.body.response!,
+          ).ptzConfigurationOptions.ptzTimeout.min,
+          'PT1S',
+        );
       });
 
       test('GetConfigurationsResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/happytimesoft/ptz/GetConfigurationsResponse.xml');
+          'test/xml/happytimesoft/ptz/GetConfigurationsResponse.xml',
+        );
 
         expect(
-            GetConfigurationsResponse.fromJson(envelope.body.response!)
-                .ptzConfigurations
-                .isNotEmpty,
-            true);
+          GetConfigurationsResponse.fromJson(
+            envelope.body.response!,
+          ).ptzConfigurations.isNotEmpty,
+          true,
+        );
       });
 
       test('GetPresetsResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/happytimesoft/ptz/GetPresetsResponse.xml');
+          'test/xml/happytimesoft/ptz/GetPresetsResponse.xml',
+        );
 
         expect(
-            GetPresetsResponse.fromJson(envelope.body.response!)
-                .presets
-                .isEmpty,
-            true);
+          GetPresetsResponse.fromJson(envelope.body.response!).presets.isEmpty,
+          true,
+        );
       });
 
       test('GetServiceCapabilitiesResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/happytimesoft/ptz/GetServiceCapabilitiesResponse.xml');
+          'test/xml/happytimesoft/ptz/GetServiceCapabilitiesResponse.xml',
+        );
 
         expect(
-            GetServiceCapabilitiesResponse.fromJson(envelope.body.response!)
-                .capabilities
-                .eFlip,
-            true);
+          GetServiceCapabilitiesResponse.fromJson(
+            envelope.body.response!,
+          ).capabilities.eFlip,
+          true,
+        );
       });
 
       test('GetStatusResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/happytimesoft/ptz/GetStatusResponse.xml');
+          'test/xml/happytimesoft/ptz/GetStatusResponse.xml',
+        );
 
         expect(
-            GetStatusResponse.fromJson(envelope.body.response!).ptzStatus.error,
-            null);
+          GetStatusResponse.fromJson(envelope.body.response!).ptzStatus.error,
+          null,
+        );
       });
 
       test('GotoHomePositionResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/happytimesoft/ptz/GotoHomePositionResponse.xml');
+          'test/xml/happytimesoft/ptz/GotoHomePositionResponse.xml',
+        );
 
-        expect(envelope.body.response!.containsKey('GotoHomePositionResponse'),
-            true);
+        expect(
+          envelope.body.response!.containsKey('GotoHomePositionResponse'),
+          true,
+        );
       });
 
       test('RelativeMoveResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/happytimesoft/ptz/RelativeMoveResponse.xml');
+          'test/xml/happytimesoft/ptz/RelativeMoveResponse.xml',
+        );
 
         expect(
-            envelope.body.response!.containsKey('RelativeMoveResponse'), true);
+          envelope.body.response!.containsKey('RelativeMoveResponse'),
+          true,
+        );
       });
 
       test('StopResponse', () {
-        final envelope =
-            Envelope.fromXmlFile('test/xml/happytimesoft/ptz/StopResponse.xml');
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/happytimesoft/ptz/StopResponse.xml',
+        );
 
         expect(envelope.body.response!.containsKey('StopResponse'), true);
       });
@@ -126,147 +149,182 @@ void main() {
     group("ENP1A14-IR_25X", () {
       test('AbsoluteMoveResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/ENP1A14-IR_25X/ptz/AbsoluteMoveResponse.xml');
+          'test/xml/ENP1A14-IR_25X/ptz/AbsoluteMoveResponse.xml',
+        );
 
         expect(
-            envelope.body.response!.containsKey('AbsoluteMoveResponse'), true);
+          envelope.body.response!.containsKey('AbsoluteMoveResponse'),
+          true,
+        );
       });
 
       test('ContinuousMoveResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/ENP1A14-IR_25X/ptz/ContinuousMoveResponse.xml');
+          'test/xml/ENP1A14-IR_25X/ptz/ContinuousMoveResponse.xml',
+        );
 
-        expect(envelope.body.response!.containsKey('ContinuousMoveResponse'),
-            true);
+        expect(
+          envelope.body.response!.containsKey('ContinuousMoveResponse'),
+          true,
+        );
       });
 
       test('GetCompatibleConfigurationsResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/ENP1A14-IR_25X/ptz/GetCompatibleConfigurationsResponse.xml');
+          'test/xml/ENP1A14-IR_25X/ptz/GetCompatibleConfigurationsResponse.xml',
+        );
 
         expect(
-            GetCompatibleConfigurationsResponse.fromJson(
-                    envelope.body.response!)
-                .ptzConfigurations
-                .isNotEmpty,
-            true);
+          GetCompatibleConfigurationsResponse.fromJson(
+            envelope.body.response!,
+          ).ptzConfigurations.isNotEmpty,
+          true,
+        );
       });
 
       test('GetConfigurationResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/ENP1A14-IR_25X/ptz/GetConfigurationResponse.xml');
+          'test/xml/ENP1A14-IR_25X/ptz/GetConfigurationResponse.xml',
+        );
 
         expect(
-            GetConfigurationResponse.fromJson(envelope.body.response!)
-                .ptzConfiguration
-                .token,
-            'PTZToken');
+          GetConfigurationResponse.fromJson(
+            envelope.body.response!,
+          ).ptzConfiguration.token,
+          'PTZToken',
+        );
       });
 
       test('GetConfigurationOptionsResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/ENP1A14-IR_25X/ptz/GetConfigurationOptionsResponse.xml');
+          'test/xml/ENP1A14-IR_25X/ptz/GetConfigurationOptionsResponse.xml',
+        );
 
         expect(
-            GetConfigurationOptionsResponse.fromJson(envelope.body.response!)
-                .ptzConfigurationOptions
-                .ptzTimeout
-                .min,
-            'PT1S');
+          GetConfigurationOptionsResponse.fromJson(
+            envelope.body.response!,
+          ).ptzConfigurationOptions.ptzTimeout.min,
+          'PT1S',
+        );
       });
 
       test('GetConfigurationsResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/ENP1A14-IR_25X/ptz/GetConfigurationsResponse.xml');
+          'test/xml/ENP1A14-IR_25X/ptz/GetConfigurationsResponse.xml',
+        );
 
         expect(
-            GetConfigurationsResponse.fromJson(envelope.body.response!)
-                .ptzConfigurations
-                .isNotEmpty,
-            true);
+          GetConfigurationsResponse.fromJson(
+            envelope.body.response!,
+          ).ptzConfigurations.isNotEmpty,
+          true,
+        );
       });
 
       test('GetPresetsResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/ENP1A14-IR_25X/ptz/GetPresetsResponse.xml');
+          'test/xml/ENP1A14-IR_25X/ptz/GetPresetsResponse.xml',
+        );
 
         expect(
-            GetPresetsResponse.fromJson(envelope.body.response!)
-                .presets
-                .isNotEmpty,
-            true);
+          GetPresetsResponse.fromJson(
+            envelope.body.response!,
+          ).presets.isNotEmpty,
+          true,
+        );
       });
 
       test('GetServiceCapabilitiesResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/ENP1A14-IR_25X/ptz/GetServiceCapabilitiesResponse.xml');
+          'test/xml/ENP1A14-IR_25X/ptz/GetServiceCapabilitiesResponse.xml',
+        );
 
         expect(
-            GetServiceCapabilitiesResponse.fromJson(envelope.body.response!)
-                .capabilities
-                .getCompatibleConfigurations,
-            true);
+          GetServiceCapabilitiesResponse.fromJson(
+            envelope.body.response!,
+          ).capabilities.getCompatibleConfigurations,
+          true,
+        );
       });
 
       test('GetStatusResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/ENP1A14-IR_25X/ptz/GetStatusResponse.xml');
+          'test/xml/ENP1A14-IR_25X/ptz/GetStatusResponse.xml',
+        );
 
         expect(
-            GetStatusResponse.fromJson(envelope.body.response!).ptzStatus.error,
-            "NO error");
+          GetStatusResponse.fromJson(envelope.body.response!).ptzStatus.error,
+          "NO error",
+        );
       });
 
       test('GotoHomePositionResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/ENP1A14-IR_25X/ptz/GotoHomePositionResponse.xml');
+          'test/xml/ENP1A14-IR_25X/ptz/GotoHomePositionResponse.xml',
+        );
 
-        expect(envelope.body.response!.containsKey('GotoHomePositionResponse'),
-            true);
+        expect(
+          envelope.body.response!.containsKey('GotoHomePositionResponse'),
+          true,
+        );
       });
 
       test('GotoPresetResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/ENP1A14-IR_25X/ptz/GotoPresetResponse.xml');
+          'test/xml/ENP1A14-IR_25X/ptz/GotoPresetResponse.xml',
+        );
 
         expect(envelope.body.response!.containsKey('GotoPresetResponse'), true);
       });
 
       test('RelativeMoveResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/ENP1A14-IR_25X/ptz/RelativeMoveResponse.xml');
+          'test/xml/ENP1A14-IR_25X/ptz/RelativeMoveResponse.xml',
+        );
 
         expect(
-            envelope.body.response!.containsKey('RelativeMoveResponse'), true);
+          envelope.body.response!.containsKey('RelativeMoveResponse'),
+          true,
+        );
       });
 
       test('RemovePresetResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/ENP1A14-IR_25X/ptz/RemovePresetResponse.xml');
+          'test/xml/ENP1A14-IR_25X/ptz/RemovePresetResponse.xml',
+        );
 
         expect(
-            envelope.body.response!.containsKey('RemovePresetResponse'), true);
+          envelope.body.response!.containsKey('RemovePresetResponse'),
+          true,
+        );
       });
 
       test('SetHomePositionResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/ENP1A14-IR_25X/ptz/SetHomePositionResponse.xml');
+          'test/xml/ENP1A14-IR_25X/ptz/SetHomePositionResponse.xml',
+        );
 
-        expect(envelope.body.response!.containsKey('SetHomePositionResponse'),
-            true);
+        expect(
+          envelope.body.response!.containsKey('SetHomePositionResponse'),
+          true,
+        );
       });
 
       test('SetPresetResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/ENP1A14-IR_25X/ptz/SetPresetResponse.xml');
+          'test/xml/ENP1A14-IR_25X/ptz/SetPresetResponse.xml',
+        );
 
-        expect(SetPresetResponse.fromJson(envelope.body.response!).presetToken,
-            '21');
+        expect(
+          SetPresetResponse.fromJson(envelope.body.response!).presetToken,
+          '21',
+        );
       });
 
       test('StopResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/ENP1A14-IR_25X/ptz/StopResponse.xml');
+          'test/xml/ENP1A14-IR_25X/ptz/StopResponse.xml',
+        );
 
         expect(envelope.body.response!.containsKey('StopResponse'), true);
       });
@@ -275,150 +333,184 @@ void main() {
     group("IPG-8150PSS", () {
       test('AbsoluteMoveResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/IPG-8150PSS/ptz/AbsoluteMoveResponse.xml');
+          'test/xml/IPG-8150PSS/ptz/AbsoluteMoveResponse.xml',
+        );
 
         expect(
-            envelope.body.response!.containsKey('AbsoluteMoveResponse'), true);
+          envelope.body.response!.containsKey('AbsoluteMoveResponse'),
+          true,
+        );
       });
 
       test('ContinuousMoveResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/IPG-8150PSS/ptz/ContinuousMoveResponse.xml');
+          'test/xml/IPG-8150PSS/ptz/ContinuousMoveResponse.xml',
+        );
 
-        expect(envelope.body.response!.containsKey('ContinuousMoveResponse'),
-            true);
+        expect(
+          envelope.body.response!.containsKey('ContinuousMoveResponse'),
+          true,
+        );
       });
 
       test('GetCompatibleConfigurationsResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/IPG-8150PSS/ptz/GetCompatibleConfigurationsResponse.xml');
+          'test/xml/IPG-8150PSS/ptz/GetCompatibleConfigurationsResponse.xml',
+        );
 
         expect(
-            GetCompatibleConfigurationsResponse.fromJson(
-                    envelope.body.response!)
-                .ptzConfigurations
-                .isNotEmpty,
-            true);
+          GetCompatibleConfigurationsResponse.fromJson(
+            envelope.body.response!,
+          ).ptzConfigurations.isNotEmpty,
+          true,
+        );
       });
 
       test('GetConfigurationOptionsResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/IPG-8150PSS/ptz/GetConfigurationOptionsResponse.xml');
+          'test/xml/IPG-8150PSS/ptz/GetConfigurationOptionsResponse.xml',
+        );
 
         expect(
-            GetConfigurationOptionsResponse.fromJson(envelope.body.response!)
-                .ptzConfigurationOptions
-                .ptzTimeout
-                .min,
-            'PT1S');
+          GetConfigurationOptionsResponse.fromJson(
+            envelope.body.response!,
+          ).ptzConfigurationOptions.ptzTimeout.min,
+          'PT1S',
+        );
       });
 
       test('GetConfigurationResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/IPG-8150PSS/ptz/GetConfigurationResponse.xml');
+          'test/xml/IPG-8150PSS/ptz/GetConfigurationResponse.xml',
+        );
 
         expect(
-            GetConfigurationResponse.fromJson(envelope.body.response!)
-                .ptzConfiguration
-                .token,
-            'PTZConfigurationToken');
+          GetConfigurationResponse.fromJson(
+            envelope.body.response!,
+          ).ptzConfiguration.token,
+          'PTZConfigurationToken',
+        );
       });
 
       test('GetConfigurationsResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/IPG-8150PSS/ptz/GetConfigurationsResponse.xml');
+          'test/xml/IPG-8150PSS/ptz/GetConfigurationsResponse.xml',
+        );
 
         expect(
-            GetConfigurationsResponse.fromJson(envelope.body.response!)
-                .ptzConfigurations
-                .isNotEmpty,
-            true);
+          GetConfigurationsResponse.fromJson(
+            envelope.body.response!,
+          ).ptzConfigurations.isNotEmpty,
+          true,
+        );
       });
 
       test('GetPresetsResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/IPG-8150PSS/ptz/GetPresetsResponse.xml');
+          'test/xml/IPG-8150PSS/ptz/GetPresetsResponse.xml',
+        );
 
         expect(
-            GetPresetsResponse.fromJson(envelope.body.response!)
-                .presets
-                .isNotEmpty,
-            true);
+          GetPresetsResponse.fromJson(
+            envelope.body.response!,
+          ).presets.isNotEmpty,
+          true,
+        );
       });
 
       test('GetServiceCapabilitiesResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/IPG-8150PSS/ptz/GetServiceCapabilitiesResponse.xml');
+          'test/xml/IPG-8150PSS/ptz/GetServiceCapabilitiesResponse.xml',
+        );
 
         expect(
-            GetServiceCapabilitiesResponse.fromJson(envelope.body.response!)
-                .capabilities
-                .getCompatibleConfigurations,
-            false);
+          GetServiceCapabilitiesResponse.fromJson(
+            envelope.body.response!,
+          ).capabilities.getCompatibleConfigurations,
+          false,
+        );
       });
 
       test('GetStatusResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/IPG-8150PSS/ptz/GetStatusResponse.xml');
+          'test/xml/IPG-8150PSS/ptz/GetStatusResponse.xml',
+        );
 
         expect(
-            GetStatusResponse.fromJson(envelope.body.response!)
-                .ptzStatus
-                .moveStatus
-                ?.panTilt,
-            'IDLE');
+          GetStatusResponse.fromJson(
+            envelope.body.response!,
+          ).ptzStatus.moveStatus?.panTilt,
+          'IDLE',
+        );
       });
 
       test('GotoHomePositionResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/IPG-8150PSS/ptz/GotoHomePositionResponse.xml');
+          'test/xml/IPG-8150PSS/ptz/GotoHomePositionResponse.xml',
+        );
 
-        expect(envelope.body.response!.containsKey('GotoHomePositionResponse'),
-            true);
+        expect(
+          envelope.body.response!.containsKey('GotoHomePositionResponse'),
+          true,
+        );
       });
 
       test('GotoPresetResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/IPG-8150PSS/ptz/GotoPresetResponse.xml');
+          'test/xml/IPG-8150PSS/ptz/GotoPresetResponse.xml',
+        );
 
         expect(envelope.body.response!.containsKey('GotoPresetResponse'), true);
       });
 
       test('RelativeMoveResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/IPG-8150PSS/ptz/RelativeMoveResponse.xml');
+          'test/xml/IPG-8150PSS/ptz/RelativeMoveResponse.xml',
+        );
 
         expect(
-            envelope.body.response!.containsKey('RelativeMoveResponse'), true);
+          envelope.body.response!.containsKey('RelativeMoveResponse'),
+          true,
+        );
       });
 
       test('RemovePresetResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/IPG-8150PSS/ptz/RemovePresetResponse.xml');
+          'test/xml/IPG-8150PSS/ptz/RemovePresetResponse.xml',
+        );
 
         expect(
-            envelope.body.response!.containsKey('RemovePresetResponse'), true);
+          envelope.body.response!.containsKey('RemovePresetResponse'),
+          true,
+        );
       });
 
       test('SetHomePositionResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/IPG-8150PSS/ptz/SetHomePositionResponse.xml');
+          'test/xml/IPG-8150PSS/ptz/SetHomePositionResponse.xml',
+        );
 
-        expect(envelope.body.response!.containsKey('SetHomePositionResponse'),
-            true);
+        expect(
+          envelope.body.response!.containsKey('SetHomePositionResponse'),
+          true,
+        );
       });
 
       test('SetPresetResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/IPG-8150PSS/ptz/SetPresetResponse.xml');
+          'test/xml/IPG-8150PSS/ptz/SetPresetResponse.xml',
+        );
 
-        expect(SetPresetResponse.fromJson(envelope.body.response!).presetToken,
-            'z_ovf_ptz_99');
+        expect(
+          SetPresetResponse.fromJson(envelope.body.response!).presetToken,
+          'z_ovf_ptz_99',
+        );
       });
 
       test('StopResponse', () {
-        final envelope =
-            Envelope.fromXmlFile('test/xml/IPG-8150PSS/ptz/StopResponse.xml');
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPG-8150PSS/ptz/StopResponse.xml',
+        );
 
         expect(envelope.body.response!.containsKey('StopResponse'), true);
       });
@@ -426,99 +518,116 @@ void main() {
 
     group("SUNBA", () {
       test('AbsoluteMoveResponse', () {
-        final envelope =
-            Envelope.fromXmlFile('test/xml/SUNBA/ptz/AbsoluteMoveResponse.xml');
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/SUNBA/ptz/AbsoluteMoveResponse.xml',
+        );
 
         expect(
-            envelope.body.response!.containsKey('AbsoluteMoveResponse'), true);
+          envelope.body.response!.containsKey('AbsoluteMoveResponse'),
+          true,
+        );
       });
 
       test('ContinuousMoveResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/SUNBA/ptz/ContinuousMoveResponse.xml');
+          'test/xml/SUNBA/ptz/ContinuousMoveResponse.xml',
+        );
 
-        expect(envelope.body.response!.containsKey('ContinuousMoveResponse'),
-            true);
+        expect(
+          envelope.body.response!.containsKey('ContinuousMoveResponse'),
+          true,
+        );
       });
 
       test('GetCompatibleConfigurationsResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/SUNBA/ptz/GetCompatibleConfigurationsResponse.xml');
+          'test/xml/SUNBA/ptz/GetCompatibleConfigurationsResponse.xml',
+        );
 
         expect(
-            GetCompatibleConfigurationsResponse.fromJson(
-                    envelope.body.response!)
-                .ptzConfigurations
-                .isNotEmpty,
-            true);
+          GetCompatibleConfigurationsResponse.fromJson(
+            envelope.body.response!,
+          ).ptzConfigurations.isNotEmpty,
+          true,
+        );
       });
 
       test('GetConfigurationOptionsResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/SUNBA/ptz/GetConfigurationOptionsResponse.xml');
+          'test/xml/SUNBA/ptz/GetConfigurationOptionsResponse.xml',
+        );
 
         expect(
-            GetConfigurationOptionsResponse.fromJson(envelope.body.response!)
-                .ptzConfigurationOptions
-                .ptzTimeout
-                .min,
-            'PT1S');
+          GetConfigurationOptionsResponse.fromJson(
+            envelope.body.response!,
+          ).ptzConfigurationOptions.ptzTimeout.min,
+          'PT1S',
+        );
       });
 
       test('GetConfigurationResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/SUNBA/ptz/GetConfigurationResponse.xml');
+          'test/xml/SUNBA/ptz/GetConfigurationResponse.xml',
+        );
 
         expect(
-            GetConfigurationResponse.fromJson(envelope.body.response!)
-                .ptzConfiguration
-                .token,
-            'ptz_node_config1');
+          GetConfigurationResponse.fromJson(
+            envelope.body.response!,
+          ).ptzConfiguration.token,
+          'ptz_node_config1',
+        );
       });
 
       test('GetConfigurationsResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/SUNBA/ptz/GetConfigurationsResponse.xml');
+          'test/xml/SUNBA/ptz/GetConfigurationsResponse.xml',
+        );
 
         expect(
-            GetConfigurationsResponse.fromJson(envelope.body.response!)
-                .ptzConfigurations
-                .isNotEmpty,
-            true);
+          GetConfigurationsResponse.fromJson(
+            envelope.body.response!,
+          ).ptzConfigurations.isNotEmpty,
+          true,
+        );
       });
 
       test('GetPresetsResponse', () {
-        final envelope =
-            Envelope.fromXmlFile('test/xml/SUNBA/ptz/GetPresetsResponse.xml');
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/SUNBA/ptz/GetPresetsResponse.xml',
+        );
 
         expect(
-            GetPresetsResponse.fromJson(envelope.body.response!)
-                .presets
-                .isNotEmpty,
-            true);
+          GetPresetsResponse.fromJson(
+            envelope.body.response!,
+          ).presets.isNotEmpty,
+          true,
+        );
       });
 
       test('GetServiceCapabilitiesResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/SUNBA/ptz/GetServiceCapabilitiesResponse.xml');
+          'test/xml/SUNBA/ptz/GetServiceCapabilitiesResponse.xml',
+        );
 
         expect(
-            GetServiceCapabilitiesResponse.fromJson(envelope.body.response!)
-                .capabilities
-                .getCompatibleConfigurations,
-            true);
+          GetServiceCapabilitiesResponse.fromJson(
+            envelope.body.response!,
+          ).capabilities.getCompatibleConfigurations,
+          true,
+        );
       });
 
       test('GetStatusResponse', () {
-        final envelope =
-            Envelope.fromXmlFile('test/xml/SUNBA/ptz/GetStatusResponse.xml');
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/SUNBA/ptz/GetStatusResponse.xml',
+        );
 
         expect(
-            GetStatusResponse.fromJson(envelope.body.response!)
-                .ptzStatus
-                .moveStatus
-                ?.panTilt,
-            'IDLE');
+          GetStatusResponse.fromJson(
+            envelope.body.response!,
+          ).ptzStatus.moveStatus?.panTilt,
+          'IDLE',
+        );
       });
 
       // test('GotoHomePositionResponse', () {
@@ -530,26 +639,33 @@ void main() {
       // });
 
       test('GotoPresetResponse', () {
-        final envelope =
-            Envelope.fromXmlFile('test/xml/SUNBA/ptz/GotoPresetResponse.xml');
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/SUNBA/ptz/GotoPresetResponse.xml',
+        );
 
         expect(envelope.body.response!.containsKey('GotoPresetResponse'), true);
       });
 
       test('RelativeMoveResponse', () {
         final envelope = Envelope.fromXmlFile(
-            'test/xml/IPG-8150PSS/ptz/RelativeMoveResponse.xml');
+          'test/xml/IPG-8150PSS/ptz/RelativeMoveResponse.xml',
+        );
 
         expect(
-            envelope.body.response!.containsKey('RelativeMoveResponse'), true);
+          envelope.body.response!.containsKey('RelativeMoveResponse'),
+          true,
+        );
       });
 
       test('RemovePresetResponse', () {
-        final envelope =
-            Envelope.fromXmlFile('test/xml/SUNBA/ptz/RemovePresetResponse.xml');
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/SUNBA/ptz/RemovePresetResponse.xml',
+        );
 
         expect(
-            envelope.body.response!.containsKey('RemovePresetResponse'), true);
+          envelope.body.response!.containsKey('RemovePresetResponse'),
+          true,
+        );
       });
 
       // test('SetHomePositionResponse', () {
@@ -561,16 +677,20 @@ void main() {
       // });
 
       test('SetPresetResponse', () {
-        final envelope =
-            Envelope.fromXmlFile('test/xml/SUNBA/ptz/SetPresetResponse.xml');
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/SUNBA/ptz/SetPresetResponse.xml',
+        );
 
-        expect(SetPresetResponse.fromJson(envelope.body.response!).presetToken,
-            '1');
+        expect(
+          SetPresetResponse.fromJson(envelope.body.response!).presetToken,
+          '1',
+        );
       });
 
       test('StopResponse', () {
-        final envelope =
-            Envelope.fromXmlFile('test/xml/SUNBA/ptz/StopResponse.xml');
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/SUNBA/ptz/StopResponse.xml',
+        );
 
         expect(envelope.body.response!.containsKey('StopResponse'), true);
       });

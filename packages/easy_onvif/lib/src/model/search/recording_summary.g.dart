@@ -9,11 +9,14 @@ part of 'recording_summary.dart';
 RecordingSummary _$RecordingSummaryFromJson(Map<String, dynamic> json) =>
     RecordingSummary(
       dataFrom: OnvifUtil.nullableMappedStdToDateTime(
-          json['DataFrom'] as Map<String, dynamic>?),
+        json['DataFrom'] as Map<String, dynamic>?,
+      ),
       dataUntil: OnvifUtil.nullableMappedStdToDateTime(
-          json['DataUntil'] as Map<String, dynamic>?),
+        json['DataUntil'] as Map<String, dynamic>?,
+      ),
       numberRecordings: OnvifUtil.intMappedFromXml(
-          json['NumberRecordings'] as Map<String, dynamic>),
+        json['NumberRecordings'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$RecordingSummaryToJson(RecordingSummary instance) =>

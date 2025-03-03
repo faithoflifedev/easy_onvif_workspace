@@ -17,7 +17,9 @@ class Capabilities {
   /// The list contains two elements defining the minimum and maximum valid
   /// values supported as session timeout in seconds.
   @JsonKey(
-      name: '@SessionTimeoutRange', fromJson: OnvifUtil.stringMappedFromXml)
+    name: '@SessionTimeoutRange',
+    fromJson: OnvifUtil.stringMappedFromXml,
+  )
   final String sessionTimeoutRange;
 
   /// Indicates support for RTP/RTSP/TCP.

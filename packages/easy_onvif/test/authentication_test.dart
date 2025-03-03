@@ -23,9 +23,8 @@ void main() {
       timeDelta: Duration(seconds: 0),
       timestampOverride: DateTime(2024, 1, 20, 16, 10, 0),
       nonceOverride: Nonce(
-          bytesOverride: hex.decode(
-        '0102030405060708090A0B0C0D0E0F10',
-      )),
+        bytesOverride: hex.decode('0102030405060708090A0B0C0D0E0F10'),
+      ),
     );
 
     test('generate valid nonce and digest', () {
@@ -40,32 +39,35 @@ void main() {
       final jsonTransformer = Xml2Json();
 
       final securityHeader = Header(
-          security: Security(
-        usernameToken: UsernameToken(
-          authorization: authorization,
+        security: Security(
+          usernameToken: UsernameToken(authorization: authorization),
+          mustUnderstand: 1,
         ),
-        mustUnderstand: 1,
-      ));
+      );
 
       final envelope = Envelope(header: securityHeader, body: Body());
 
       final xml = envelope.toXml(builder);
 
-      jsonTransformer.parse(xml
-          .xpath('s:Envelope/s:Header/Security/UsernameToken')
-          .last
-          .toXmlString());
+      jsonTransformer.parse(
+        xml
+            .xpath('s:Envelope/s:Header/Security/UsernameToken')
+            .last
+            .toXmlString(),
+      );
 
       final usernameJson = json.decode(jsonTransformer.toBadgerfish());
 
       expect(
         OnvifUtil.stringMappedFromXml(
-            usernameJson['UsernameToken']['Username']),
+          usernameJson['UsernameToken']['Username'],
+        ),
         'admin',
       );
       expect(
         OnvifUtil.stringMappedFromXml(
-            usernameJson['UsernameToken']['Password']),
+          usernameJson['UsernameToken']['Password'],
+        ),
         'iJSWNCOtYP5YI9F5j4z4/hkM/yo=',
       );
       expect(

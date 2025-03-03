@@ -19,12 +19,14 @@ class ReferenceToken implements XmlSerializable {
     XmlBuilder builder, {
     String tag = 'ProfileToken',
     String? namespace,
-  }) =>
-      builder.element(tag, nest: () {
-        builder.text(token);
+  }) => builder.element(
+    tag,
+    nest: () {
+      builder.text(token);
 
-        if (namespace != null) {
-          builder.namespace(namespace);
-        }
-      });
+      if (namespace != null) {
+        builder.namespace(namespace);
+      }
+    },
+  );
 }

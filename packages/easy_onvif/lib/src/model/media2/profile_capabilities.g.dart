@@ -8,15 +8,17 @@ part of 'profile_capabilities.dart';
 
 ProfileCapabilities _$ProfileCapabilitiesFromJson(Map<String, dynamic> json) =>
     ProfileCapabilities(
-      maximumNumberOfProfiles:
-          int.parse(json['@MaximumNumberOfProfiles'] as String),
+      maximumNumberOfProfiles: int.parse(
+        json['@MaximumNumberOfProfiles'] as String,
+      ),
       configurationsSupported: OnvifUtil.nullableStringToList(
-          json['ConfigurationsSupported'] as String?),
+        json['ConfigurationsSupported'] as String?,
+      ),
     );
 
 Map<String, dynamic> _$ProfileCapabilitiesToJson(
-        ProfileCapabilities instance) =>
-    <String, dynamic>{
-      '@MaximumNumberOfProfiles': instance.maximumNumberOfProfiles,
-      'ConfigurationsSupported': instance.configurationsSupported,
-    };
+  ProfileCapabilities instance,
+) => <String, dynamic>{
+  '@MaximumNumberOfProfiles': instance.maximumNumberOfProfiles,
+  'ConfigurationsSupported': instance.configurationsSupported,
+};

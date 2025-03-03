@@ -17,10 +17,7 @@ class AttachmentData {
   @JsonKey(name: 'Include')
   final Include? include;
 
-  AttachmentData({
-    this.contentType,
-    this.include,
-  });
+  AttachmentData({this.contentType, this.include});
 
   factory AttachmentData.fromJson(Map<String, dynamic> json) =>
       _$AttachmentDataFromJson(json);

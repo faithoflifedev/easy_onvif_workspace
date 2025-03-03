@@ -14,12 +14,16 @@ class SystemDateAndTime {
   /// Indicates if the time is set manually or through NTP.
   /// - enum { 'Manual', 'NTP' }
   @JsonKey(
-      name: 'DateTimeType', fromJson: OnvifUtil.nullableStringMappedFromXml)
+    name: 'DateTimeType',
+    fromJson: OnvifUtil.nullableStringMappedFromXml,
+  )
   final String? dateTimeType;
 
   /// Informative indicator whether daylight savings is currently on/off.
   @JsonKey(
-      name: 'DaylightSavings', fromJson: OnvifUtil.nullableStringMappedFromXml)
+    name: 'DaylightSavings',
+    fromJson: OnvifUtil.nullableStringMappedFromXml,
+  )
   final String? daylightSavings;
 
   /// Timezone information in Posix format.

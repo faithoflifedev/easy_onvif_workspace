@@ -63,8 +63,10 @@ class Capabilities {
   String toString() => json.encode(toJson());
 
   static List<MediaCapabilities> _fromJson(dynamic json) =>
-      OnvifUtil.jsonList<MediaCapabilities>(json,
-          (json) => MediaCapabilities.fromJson(json as Map<String, dynamic>));
+      OnvifUtil.jsonList<MediaCapabilities>(
+        json,
+        (json) => MediaCapabilities.fromJson(json as Map<String, dynamic>),
+      );
 }
 
 @JsonEnum()

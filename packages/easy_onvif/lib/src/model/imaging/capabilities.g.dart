@@ -7,12 +7,12 @@ part of 'capabilities.dart';
 // **************************************************************************
 
 Capabilities _$CapabilitiesFromJson(Map<String, dynamic> json) => Capabilities(
-      imageStabilization:
-          OnvifUtil.stringToBool(json['@ImageStabilization'] as String),
-      presets: OnvifUtil.optionalBool(json['@Presets'] as String?),
-      adaptablePreset:
-          OnvifUtil.optionalBool(json['@AdaptablePreset'] as String?),
-    );
+  imageStabilization: OnvifUtil.stringToBool(
+    json['@ImageStabilization'] as String,
+  ),
+  presets: OnvifUtil.optionalBool(json['@Presets'] as String?),
+  adaptablePreset: OnvifUtil.optionalBool(json['@AdaptablePreset'] as String?),
+);
 
 Map<String, dynamic> _$CapabilitiesToJson(Capabilities instance) =>
     <String, dynamic>{

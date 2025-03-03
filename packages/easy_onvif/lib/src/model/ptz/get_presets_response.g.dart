@@ -12,6 +12,4 @@ GetPresetsResponse _$GetPresetsResponseFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$GetPresetsResponseToJson(GetPresetsResponse instance) =>
-    <String, dynamic>{
-      'Preset': instance.presets,
-    };
+    <String, dynamic>{'Preset': instance.presets};

@@ -7,14 +7,13 @@ part of 'get_storage_configurations_response.dart';
 // **************************************************************************
 
 GetStorageConfigurationsResponse _$GetStorageConfigurationsResponseFromJson(
-        Map<String, dynamic> json) =>
-    GetStorageConfigurationsResponse(
-      storageConfigurations: GetStorageConfigurationsResponse._fromJson(
-          json['StorageConfigurations']),
-    );
+  Map<String, dynamic> json,
+) => GetStorageConfigurationsResponse(
+  storageConfigurations: GetStorageConfigurationsResponse._fromJson(
+    json['StorageConfigurations'],
+  ),
+);
 
 Map<String, dynamic> _$GetStorageConfigurationsResponseToJson(
-        GetStorageConfigurationsResponse instance) =>
-    <String, dynamic>{
-      'StorageConfigurations': instance.storageConfigurations,
-    };
+  GetStorageConfigurationsResponse instance,
+) => <String, dynamic>{'StorageConfigurations': instance.storageConfigurations};

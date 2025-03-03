@@ -16,8 +16,11 @@ class NetworkProtocol {
   @JsonKey(name: 'Port', fromJson: OnvifUtil.intMappedFromXml)
   final int port;
 
-  NetworkProtocol(
-      {required this.name, required this.enabled, required this.port});
+  NetworkProtocol({
+    required this.name,
+    required this.enabled,
+    required this.port,
+  });
 
   factory NetworkProtocol.fromJson(Map<String, dynamic> json) =>
       _$NetworkProtocolFromJson(json);

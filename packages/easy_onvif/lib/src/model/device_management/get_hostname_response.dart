@@ -11,9 +11,7 @@ class GetHostnameResponse {
   @JsonKey(name: 'HostnameInformation')
   HostnameInformation hostnameInformation;
 
-  GetHostnameResponse({
-    required this.hostnameInformation,
-  });
+  GetHostnameResponse({required this.hostnameInformation});
 
   factory GetHostnameResponse.fromJson(Map<String, dynamic> json) =>
       _$GetHostnameResponseFromJson(json);

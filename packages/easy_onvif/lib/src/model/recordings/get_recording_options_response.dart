@@ -15,9 +15,7 @@ class GetRecordingOptionsResponse {
   @JsonKey(name: 'Options')
   final RecordingOptions options;
 
-  GetRecordingOptionsResponse({
-    required this.options,
-  });
+  GetRecordingOptionsResponse({required this.options});
 
   factory GetRecordingOptionsResponse.fromJson(Map<String, dynamic> json) =>
       _$GetRecordingOptionsResponseFromJson(json);

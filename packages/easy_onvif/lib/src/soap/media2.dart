@@ -11,35 +11,37 @@ class Media2Request {
 
   /// XML for the [deleteProfile]
   static XmlDocumentFragment deleteProfile(String referenceToken) {
-    builder.element('DeleteProfile', nest: () {
-      builder.namespace(Xmlns.tr2);
+    builder.element(
+      'DeleteProfile',
+      nest: () {
+        builder.namespace(Xmlns.tr2);
 
-      ReferenceToken(referenceToken).buildXml(
-        builder,
-        tag: 'Token',
-      );
-    });
+        ReferenceToken(referenceToken).buildXml(builder, tag: 'Token');
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [getMetadataConfigurationOptions]
-  static XmlDocumentFragment getMetadataConfigurationOptions(
-          {String? configurationToken, String? profileToken}) =>
-      MediaCommon.getMetadataConfigurationOptions(
-        configurationToken: configurationToken,
-        profileToken: profileToken,
-        namespace: Xmlns.tr2,
-      );
+  static XmlDocumentFragment getMetadataConfigurationOptions({
+    String? configurationToken,
+    String? profileToken,
+  }) => MediaCommon.getMetadataConfigurationOptions(
+    configurationToken: configurationToken,
+    profileToken: profileToken,
+    namespace: Xmlns.tr2,
+  );
 
   /// XML for the [getMetadataConfigurations]
-  static XmlDocumentFragment getMetadataConfigurations(
-          {String? configurationToken, String? profileToken}) =>
-      MediaCommon.getMetadataConfigurations(
-        configurationToken: configurationToken,
-        profileToken: profileToken,
-        namespace: Xmlns.tr2,
-      );
+  static XmlDocumentFragment getMetadataConfigurations({
+    String? configurationToken,
+    String? profileToken,
+  }) => MediaCommon.getMetadataConfigurations(
+    configurationToken: configurationToken,
+    profileToken: profileToken,
+    namespace: Xmlns.tr2,
+  );
 
   /// XML for the [getProfiles]
   static XmlDocumentFragment getProfiles() =>
@@ -51,33 +53,41 @@ class Media2Request {
 
   /// XML for the [getSnapshotUri], requires a [profileToken]
   static XmlDocumentFragment getSnapshotUri(String profileToken) {
-    builder.element('GetSnapshotUri', nest: () {
-      builder.namespace(Xmlns.tr2);
+    builder.element(
+      'GetSnapshotUri',
+      nest: () {
+        builder.namespace(Xmlns.tr2);
 
-      ReferenceToken(profileToken).buildXml(builder);
-    });
+        ReferenceToken(profileToken).buildXml(builder);
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [getStreamUri], requires a [profileToken]
-  static XmlDocumentFragment getStreamUri(String profileToken,
-      {String protocol = 'RTSP'}) {
-    builder.element('GetStreamUri', nest: () {
-      builder.namespace(Xmlns.tr2);
+  static XmlDocumentFragment getStreamUri(
+    String profileToken, {
+    String protocol = 'RTSP',
+  }) {
+    builder.element(
+      'GetStreamUri',
+      nest: () {
+        builder.namespace(Xmlns.tr2);
 
-      protocol.buildXml(
-        builder,
-        tag: 'Protocol',
-      );
+        protocol.buildXml(builder, tag: 'Protocol');
 
-      builder.element('Protocol', nest: () {
-        builder.namespace(Xmlns.tt);
-        builder.text(protocol);
-      });
+        builder.element(
+          'Protocol',
+          nest: () {
+            builder.namespace(Xmlns.tt);
+            builder.text(protocol);
+          },
+        );
 
-      ReferenceToken(profileToken).buildXml(builder);
-    });
+        ReferenceToken(profileToken).buildXml(builder);
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -87,38 +97,40 @@ class Media2Request {
     String? configurationToken,
     String? profileToken,
   }) {
-    builder.element('GetVideoEncoderConfigurations', nest: () {
-      builder.namespace(Xmlns.tr2);
+    builder.element(
+      'GetVideoEncoderConfigurations',
+      nest: () {
+        builder.namespace(Xmlns.tr2);
 
-      if (configurationToken != null) {
-        ReferenceToken(configurationToken).buildXml(
-          builder,
-          tag: 'ConfigurationToken',
-        );
-      }
+        if (configurationToken != null) {
+          ReferenceToken(
+            configurationToken,
+          ).buildXml(builder, tag: 'ConfigurationToken');
+        }
 
-      if (profileToken != null) {
-        ReferenceToken(profileToken).buildXml(
-          builder,
-          tag: 'ProfileToken',
-        );
-      }
-    });
+        if (profileToken != null) {
+          ReferenceToken(profileToken).buildXml(builder, tag: 'ProfileToken');
+        }
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [getVideoEncoderInstances]
   static XmlDocumentFragment getVideoEncoderInstances(
-      String configurationToken) {
-    builder.element('GetVideoEncoderInstances', nest: () {
-      builder.namespace(Xmlns.tr2);
+    String configurationToken,
+  ) {
+    builder.element(
+      'GetVideoEncoderInstances',
+      nest: () {
+        builder.namespace(Xmlns.tr2);
 
-      ReferenceToken(configurationToken).buildXml(
-        builder,
-        tag: 'ConfigurationToken',
-      );
-    });
+        ReferenceToken(
+          configurationToken,
+        ).buildXml(builder, tag: 'ConfigurationToken');
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -128,20 +140,22 @@ class Media2Request {
     String? configurationToken,
     String? profileToken,
   }) {
-    builder.element('GetVideoSourceConfigurationOptions', nest: () {
-      builder.namespace(Xmlns.tr2);
+    builder.element(
+      'GetVideoSourceConfigurationOptions',
+      nest: () {
+        builder.namespace(Xmlns.tr2);
 
-      if (configurationToken != null) {
-        ReferenceToken(configurationToken).buildXml(
-          builder,
-          tag: 'ConfigurationToken',
-        );
-      }
+        if (configurationToken != null) {
+          ReferenceToken(
+            configurationToken,
+          ).buildXml(builder, tag: 'ConfigurationToken');
+        }
 
-      if (profileToken != null) {
-        ReferenceToken(profileToken).buildXml(builder);
-      }
-    });
+        if (profileToken != null) {
+          ReferenceToken(profileToken).buildXml(builder);
+        }
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -149,10 +163,14 @@ class Media2Request {
   /// XML for the [startMulticastStreaming]
   static XmlDocumentFragment startMulticastStreaming(String profileToken) =>
       MediaCommon.startMulticastStreaming(
-          profileToken: profileToken, namespace: Xmlns.tr2);
+        profileToken: profileToken,
+        namespace: Xmlns.tr2,
+      );
 
   /// XML for the [stopMulticastStreaming]
   static XmlDocumentFragment stopMulticastStreaming(String profileToken) =>
       MediaCommon.stopMulticastStreaming(
-          profileToken: profileToken, namespace: Xmlns.tr2);
+        profileToken: profileToken,
+        namespace: Xmlns.tr2,
+      );
 }

@@ -13,27 +13,19 @@ class ProbeMatch with UiLoggy {
   @JsonKey(name: 'EndpointReference')
   final EndpointReference endpointReference;
 
-  @JsonKey(
-    name: 'Types',
-    fromJson: _listFromJson,
-  ) // _toList
+  @JsonKey(name: 'Types', fromJson: _listFromJson) // _toList
   final List<String> types;
 
-  @JsonKey(
-    name: 'Scopes',
-    fromJson: _listFromJson,
-  )
+  @JsonKey(name: 'Scopes', fromJson: _listFromJson)
   final List<String> scopes;
 
-  @JsonKey(
-    name: 'XAddrs',
-    fromJson: _listFromJson,
-  )
+  @JsonKey(name: 'XAddrs', fromJson: _listFromJson)
   final List<String> xAddrs;
 
   @JsonKey(
-      name: 'MetadataVersion',
-      fromJson: _metadata) //OnvifUtil.stringMappedFromXml
+    name: 'MetadataVersion',
+    fromJson: _metadata,
+  ) //OnvifUtil.stringMappedFromXml
   final String metadataVersion;
 
   final _profiles = <String>[];
@@ -57,12 +49,13 @@ class ProbeMatch with UiLoggy {
 
   List<String> get profiles => _profiles;
 
-  ProbeMatch(
-      {required this.endpointReference,
-      required this.types,
-      required this.scopes,
-      required this.xAddrs,
-      required this.metadataVersion}) {
+  ProbeMatch({
+    required this.endpointReference,
+    required this.types,
+    required this.scopes,
+    required this.xAddrs,
+    required this.metadataVersion,
+  }) {
     _setCommonScopes();
   }
 
@@ -120,8 +113,9 @@ class ProbeMatch with UiLoggy {
   }
 
   static List<String> _listFromXmlJson(Map<String, dynamic> value) =>
-      OnvifUtil.stringMappedFromXml(value)
-          .split(RegExp([' ', ',', r'\r\\n'].map(RegExp.escape).join('|')));
+      OnvifUtil.stringMappedFromXml(
+        value,
+      ).split(RegExp([' ', ',', r'\r\\n'].map(RegExp.escape).join('|')));
 
   static List<String> _listFromJson(dynamic json) {
     if (json == null) {

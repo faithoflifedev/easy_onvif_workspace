@@ -30,20 +30,13 @@ class AppSequence implements XmlSerializable {
     XmlBuilder builder, {
     String tag = 'AppSequence',
     String? namespace,
-  }) =>
-      builder.element(
-        tag,
-        namespaces: {Xmlns.ws: 'ws'},
-        nest: () {
-          builder.attribute(
-            'MessageNumber',
-            messageNumber,
-          );
+  }) => builder.element(
+    tag,
+    namespaces: {Xmlns.ws: 'ws'},
+    nest: () {
+      builder.attribute('MessageNumber', messageNumber);
 
-          builder.attribute(
-            'InstanceId',
-            instanceId,
-          );
-        },
-      );
+      builder.attribute('InstanceId', instanceId);
+    },
+  );
 }

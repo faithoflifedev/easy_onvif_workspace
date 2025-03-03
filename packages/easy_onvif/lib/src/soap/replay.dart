@@ -18,13 +18,16 @@ class ReplayRequest {
     String recordingToken, {
     required StreamSetup streamSetup,
   }) {
-    builder.element('GetReplayUri', nest: () {
-      builder.namespace(Xmlns.trp);
+    builder.element(
+      'GetReplayUri',
+      nest: () {
+        builder.namespace(Xmlns.trp);
 
-      streamSetup.buildXml(builder);
+        streamSetup.buildXml(builder);
 
-      ReferenceToken(recordingToken).buildXml(builder, tag: 'RecordingToken');
-    });
+        ReferenceToken(recordingToken).buildXml(builder, tag: 'RecordingToken');
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -35,12 +38,16 @@ class ReplayRequest {
 
   /// XML for the [setReplayConfiguration]
   static XmlDocumentFragment setReplayConfiguration(
-      ReplayConfiguration configuration) {
-    builder.element('SetReplayConfiguration', nest: () {
-      builder.namespace(Xmlns.trp);
+    ReplayConfiguration configuration,
+  ) {
+    builder.element(
+      'SetReplayConfiguration',
+      nest: () {
+        builder.namespace(Xmlns.trp);
 
-      configuration.buildXml(builder);
-    });
+        configuration.buildXml(builder);
+      },
+    );
 
     return builder.buildFragment();
   }

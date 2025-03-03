@@ -13,13 +13,11 @@ class MulticastProbe {
 
   List<ProbeMatch> get onvifDevices => _multicastProbeImpl.onvifDevices;
 
-  MulticastProbe({
-    int? timeout,
-    bool? releaseMode,
-  }) : _multicastProbeImpl = MulticastProbeImpl(
-          timeout: timeout,
-          releaseMode: releaseMode,
-        );
+  MulticastProbe({int? timeout, bool? releaseMode})
+    : _multicastProbeImpl = MulticastProbeImpl(
+        timeout: timeout,
+        releaseMode: releaseMode,
+      );
 
   Future<void> probe() => _multicastProbeImpl.probe();
 }

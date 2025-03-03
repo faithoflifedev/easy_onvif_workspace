@@ -10,7 +10,8 @@ TrackConfiguration _$TrackConfigurationFromJson(Map<String, dynamic> json) =>
     TrackConfiguration(
       trackType: TrackConfiguration._trackType(json['TrackType']),
       description: OnvifUtil.stringMappedFromXml(
-          json['Description'] as Map<String, dynamic>),
+        json['Description'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$TrackConfigurationToJson(TrackConfiguration instance) =>

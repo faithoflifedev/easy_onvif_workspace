@@ -16,8 +16,10 @@ class OnvifUtil {
   static Map<String, dynamic> xmlToMap(String soapResponse) {
     final transformer = Xml2Json();
 
-    final xmlEnvelope = XmlDocument.parse(soapResponse).getElement('Envelope',
-        namespace: 'http://www.w3.org/2003/05/soap-envelope');
+    final xmlEnvelope = XmlDocument.parse(soapResponse).getElement(
+      'Envelope',
+      namespace: 'http://www.w3.org/2003/05/soap-envelope',
+    );
 
     if (xmlEnvelope == null) throw Exception();
 
@@ -33,29 +35,39 @@ class OnvifUtil {
   }
 
   static String authenticatingUri(
-      String uri, String username, String password) {
+    String uri,
+    String username,
+    String password,
+  ) {
     final parsedUri = Uri.parse(uri);
 
     return Uri(
-            scheme: parsedUri.scheme,
-            userInfo: '$username:$password',
-            host: parsedUri.host,
-            port: parsedUri.port,
-            pathSegments: parsedUri.pathSegments,
-            queryParameters: parsedUri.queryParameters.isNotEmpty
-                ? parsedUri.queryParameters
-                : null)
-        .toString();
+      scheme: parsedUri.scheme,
+      userInfo: '$username:$password',
+      host: parsedUri.host,
+      port: parsedUri.port,
+      pathSegments: parsedUri.pathSegments,
+      queryParameters:
+          parsedUri.queryParameters.isNotEmpty
+              ? parsedUri.queryParameters
+              : null,
+    ).toString();
   }
 
-  static Future<Uint8List> takeSnapshot(String username, String password,
-      {required MediaUri snapshotUri}) async {
+  static Future<Uint8List> takeSnapshot(
+    String username,
+    String password, {
+    required MediaUri snapshotUri,
+  }) async {
     final auth = base64.encode(utf8.encode('$username:$password'));
 
-    final response = await Dio().get(snapshotUri.uri,
-        options: Options(
-            responseType: ResponseType.stream,
-            headers: {'Authorization': 'BASIC $auth'}));
+    final response = await Dio().get(
+      snapshotUri.uri,
+      options: Options(
+        responseType: ResponseType.stream,
+        headers: {'Authorization': 'BASIC $auth'},
+      ),
+    );
 
     final bytesBuilder = BytesBuilder();
 
@@ -66,30 +78,36 @@ class OnvifUtil {
     return bytesBuilder.takeBytes();
   }
 
-  static Future<String> takeSnapshotBase64(String username, String password,
-      {required MediaUri snapshotUri}) async {
-    final bytes = await OnvifUtil.takeSnapshot(username, password,
-        snapshotUri: snapshotUri);
+  static Future<String> takeSnapshotBase64(
+    String username,
+    String password, {
+    required MediaUri snapshotUri,
+  }) async {
+    final bytes = await OnvifUtil.takeSnapshot(
+      username,
+      password,
+      snapshotUri: snapshotUri,
+    );
 
     return base64.encode(bytes.toList());
   }
 
   static LogOptions convertToLogOptions(String name) => LogOptions(
-        LogLevel.values.firstWhere(
-          (logLevel) =>
-              logLevel.name.toLowerCase() == name.trim().toLowerCase(),
-          orElse: () => LogLevel.off,
-        ),
-      );
+    LogLevel.values.firstWhere(
+      (logLevel) => logLevel.name.toLowerCase() == name.trim().toLowerCase(),
+      orElse: () => LogLevel.off,
+    ),
+  );
 
   static String? get userHome =>
       getEnvironmentVariable('HOME') ?? getEnvironmentVariable('USERPROFILE');
 
   static bool stringToBool(String value) => value.toLowerCase() == 'true';
 
-  static bool stringOrMappedToBool(dynamic value) => value.runtimeType == String
-      ? stringToBool(value as String)
-      : boolMappedFromXml(value as Map<String, dynamic>);
+  static bool stringOrMappedToBool(dynamic value) =>
+      value.runtimeType == String
+          ? stringToBool(value as String)
+          : boolMappedFromXml(value as Map<String, dynamic>);
 
   static List<int>? nullableIntMappedFromXmlList(String? value) =>
       value?.toString().split(',').map((item) => int.parse(item)).toList();
@@ -148,14 +166,16 @@ class OnvifUtil {
           : null;
 
   static MulticastConfiguration? emptyOrMulticastConfiguration(
-          Map<String, dynamic>? json) =>
+    Map<String, dynamic>? json,
+  ) =>
       json != null && json.keys.isNotEmpty
           ? MulticastConfiguration.fromJson(json)
           : null;
 
   static List<T>? nullableJsonList<T>(
-          dynamic json, T Function(dynamic) fromJson) =>
-      json != null ? (json as List).map((e) => fromJson(e)).toList() : null;
+    dynamic json,
+    T Function(dynamic) fromJson,
+  ) => json != null ? (json as List).map((e) => fromJson(e)).toList() : null;
 
   static List<T> jsonList<T>(dynamic json, T Function(dynamic) fromJson) =>
       json != null

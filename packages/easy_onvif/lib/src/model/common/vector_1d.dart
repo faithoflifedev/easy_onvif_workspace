@@ -10,20 +10,13 @@ part 'vector_1d.g.dart';
 
 @JsonSerializable()
 class Vector1D implements XmlSerializable {
-  @JsonKey(
-    name: '@x',
-    fromJson: double.parse,
-    toJson: OnvifUtil.asString,
-  )
+  @JsonKey(name: '@x', fromJson: double.parse, toJson: OnvifUtil.asString)
   final double x;
 
   @JsonKey(name: '@space')
   final Space? space;
 
-  Vector1D({
-    required this.x,
-    this.space,
-  });
+  Vector1D({required this.x, this.space});
 
   factory Vector1D.fromString({required String x}) =>
       Vector1D(x: double.parse(x));
@@ -41,14 +34,16 @@ class Vector1D implements XmlSerializable {
     XmlBuilder builder, {
     String tag = 'Vector1D',
     String? namespace = Xmlns.tt,
-  }) =>
-      builder.element(tag, nest: () {
-        builder.namespace(namespace!);
+  }) => builder.element(
+    tag,
+    nest: () {
+      builder.namespace(namespace!);
 
-        builder.attribute('x', x);
+      builder.attribute('x', x);
 
-        if (space != null) {
-          builder.attribute('space', space!.value);
-        }
-      });
+      if (space != null) {
+        builder.attribute('space', space!.value);
+      }
+    },
+  );
 }

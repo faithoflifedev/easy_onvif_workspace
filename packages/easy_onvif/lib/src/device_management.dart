@@ -23,14 +23,12 @@ typedef DeviceManagementRequest = soap.DeviceManagementRequest;
 /// | READ_MEDIA | X | X | X | |
 /// | ACTUATE | X | X | | |
 class DeviceManagement extends Operation with UiLoggy {
-  DeviceManagement({
-    required super.transport,
-    required super.uri,
-  });
+  DeviceManagement({required super.transport, required super.uri});
 
-  Function get requestFunction => transport.overrideSpecificationAuthentication
-      ? transport.securedRequest
-      : transport.request;
+  Function get requestFunction =>
+      transport.overrideSpecificationAuthentication
+          ? transport.securedRequest
+          : transport.request;
 
   /// This operation creates new device users and corresponding credentials on a
   /// device for authentication purposes. The device shall support creation of
@@ -48,10 +46,9 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('createUsers');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: DeviceManagementRequest.createUsers(users),
-        ));
+      uri,
+      soap.Body(request: DeviceManagementRequest.createUsers(users)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -71,10 +68,9 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('deleteUsers');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: DeviceManagementRequest.deleteUsers(users),
-        ));
+      uri,
+      soap.Body(request: DeviceManagementRequest.deleteUsers(users)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -106,18 +102,42 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('getCapabilities');
 
     final responseEnvelope = await requestFunction(
-        uri,
-        soap.Body(
-          request:
-              DeviceManagementRequest.capabilities(capabilityCategory.value),
-        ));
+      uri,
+      soap.Body(
+        request: DeviceManagementRequest.capabilities(capabilityCategory.value),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetCapabilitiesResponse.fromJson(responseEnvelope.body.response!)
-        .capabilities;
+    return GetCapabilitiesResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).capabilities;
+  }
+
+  /// This operation gets the dynamic DNS settings from a device. If the device
+  /// supports dynamic DNS as specified in [RFC 2136] and [RFC 4702], it shall
+  /// be possible to get the type, name and TTL through the GetDynamicDNS
+  /// command.
+  ///
+  /// ACCESS CLASS: READ_SYSTEM
+  Future<DynamicDnsInformation> getDynamicDns() async {
+    loggy.debug('getDynamicDNS');
+
+    final responseEnvelope = await transport.securedRequest(
+      uri,
+      soap.Body(request: DeviceManagementRequest.getDynamicDns()),
+    );
+
+    if (responseEnvelope.body.hasFault) {
+      throw Exception(responseEnvelope.body.fault.toString());
+    }
+
+    return GetDynamicDnsResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).dynamicDnsInformation;
   }
 
   /// This operation gets basic device information from the device.
@@ -127,17 +147,17 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('getDeviceInformation');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: DeviceManagementRequest.getDeviceInformation(),
-        ));
+      uri,
+      soap.Body(request: DeviceManagementRequest.getDeviceInformation()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetDeviceInformationResponse.fromJson(
-        responseEnvelope.body.response!);
+      responseEnvelope.body.response!,
+    );
   }
 
   /// This operation gets the discovery mode of a device. See Section 7.2 for
@@ -150,17 +170,17 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('getDiscoveryMode');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: DeviceManagementRequest.getDiscoveryMode(),
-        ));
+      uri,
+      soap.Body(request: DeviceManagementRequest.getDiscoveryMode()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetDiscoveryModeResponse.fromJson(responseEnvelope.body.response!)
-        .discoveryMode;
+    return GetDiscoveryModeResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).discoveryMode;
   }
 
   /// This operation gets the DNS settings from a device. The device shall
@@ -171,17 +191,17 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('getDns');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: DeviceManagementRequest.getDns(),
-        ));
+      uri,
+      soap.Body(request: DeviceManagementRequest.getDns()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetDnsResponse.fromJson(responseEnvelope.body.response!)
-        .dnsInformation;
+    return GetDnsResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).dnsInformation;
   }
 
   /// This operation is used by an endpoint to get the hostname from a device.
@@ -193,17 +213,17 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('getHostname');
 
     final responseEnvelope = await transport.request(
-        uri,
-        soap.Body(
-          request: DeviceManagementRequest.getHostname(),
-        ));
+      uri,
+      soap.Body(request: DeviceManagementRequest.getHostname()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetHostnameResponse.fromJson(responseEnvelope.body.response!)
-        .hostnameInformation;
+    return GetHostnameResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).hostnameInformation;
   }
 
   /// This operation gets the IP address filter settings from a device. If the
@@ -214,17 +234,17 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('GetIPAddressFilter');
 
     final responseEnvelope = await transport.request(
-        uri,
-        soap.Body(
-          request: DeviceManagementRequest.getIPAddressFilter(),
-        ));
+      uri,
+      soap.Body(request: DeviceManagementRequest.getIPAddressFilter()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetIpAddressFilterResponse.fromJson(responseEnvelope.body.response!)
-        .ipAddressFilter;
+    return GetIpAddressFilterResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).ipAddressFilter;
   }
 
   /// This operation gets defined network protocols from a device. The device
@@ -236,17 +256,17 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('getNetworkProtocols');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: DeviceManagementRequest.getNetworkProtocols(),
-        ));
+      uri,
+      soap.Body(request: DeviceManagementRequest.getNetworkProtocols()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetNetworkProtocolsResponse.fromJson(responseEnvelope.body.response!)
-        .networkProtocols;
+    return GetNetworkProtocolsResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).networkProtocols;
   }
 
   /// This operation gets the NTP settings from a device. If the device supports
@@ -258,17 +278,17 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('getNtp');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: DeviceManagementRequest.getNtp(),
-        ));
+      uri,
+      soap.Body(request: DeviceManagementRequest.getNtp()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetNtpResponse.fromJson(responseEnvelope.body.response!)
-        .ntpInformation;
+    return GetNtpResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).ntpInformation;
   }
 
   /// Returns the capabilities of the device service. The result is returned in
@@ -279,40 +299,39 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('getServiceCapabilities');
 
     final responseEnvelope = await transport.request(
-        uri,
-        soap.Body(
-          request: DeviceManagementRequest.getServiceCapabilities(),
-        ));
+      uri,
+      soap.Body(request: DeviceManagementRequest.getServiceCapabilities()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetServiceCapabilitiesResponse.fromJson(
-            responseEnvelope.body.response!)
-        .capabilities;
+      responseEnvelope.body.response!,
+    ).capabilities;
   }
 
   /// Returns information about services on the device.
   ///
   /// Access Class: PRE_AUTH
-  Future<List<Service>> getServices({
-    bool includeCapability = false,
-  }) async {
+  Future<List<Service>> getServices({bool includeCapability = false}) async {
     loggy.debug('getServices');
 
     final responseEnvelope = await requestFunction(
-        uri,
-        soap.Body(
-          request: DeviceManagementRequest.getServices(includeCapability),
-        ));
+      uri,
+      soap.Body(
+        request: DeviceManagementRequest.getServices(includeCapability),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetServicesResponse.fromJson(responseEnvelope.body.response!)
-        .services;
+    return GetServicesResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).services;
   }
 
   /// This operation retrieves the Storage configuration associated with the
@@ -320,23 +339,26 @@ class DeviceManagement extends Operation with UiLoggy {
   ///
   /// Access Class: READ_MEDIA
   Future<StorageConfiguration> getStorageConfiguration(
-      String referenceToken) async {
+    String referenceToken,
+  ) async {
     loggy.debug('getStorageConfigurations');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request:
-              DeviceManagementRequest.getStorageConfiguration(referenceToken),
-        ));
+      uri,
+      soap.Body(
+        request: DeviceManagementRequest.getStorageConfiguration(
+          referenceToken,
+        ),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetStorageConfigurationResponse.fromJson(
-            responseEnvelope.body.response!)
-        .storageConfiguration;
+      responseEnvelope.body.response!,
+    ).storageConfiguration;
   }
 
   /// This operation lists all existing storage configurations for the device.
@@ -346,18 +368,17 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('getStorageConfigurations');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: DeviceManagementRequest.getStorageConfigurations(),
-        ));
+      uri,
+      soap.Body(request: DeviceManagementRequest.getStorageConfigurations()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetStorageConfigurationsResponse.fromJson(
-            responseEnvelope.body.response!)
-        .storageConfigurations;
+      responseEnvelope.body.response!,
+    ).storageConfigurations;
   }
 
   /// This operation gets the device system date and time. The device shall
@@ -372,18 +393,17 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('getSystemDateAndTime');
 
     final responseEnvelope = await transport.request(
-        uri,
-        soap.Body(
-          request: DeviceManagementRequest.getSystemDateAndTime(),
-        ));
+      uri,
+      soap.Body(request: DeviceManagementRequest.getSystemDateAndTime()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetSystemDateAndTimeResponse.fromJson(
-            responseEnvelope.body.response!)
-        .systemDateAndTime;
+      responseEnvelope.body.response!,
+    ).systemDateAndTime;
   }
 
   /// This operation gets a system log from the device. The exact format of the
@@ -400,15 +420,12 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('getSystemLog');
 
     final securedXml = transport
-        .getSecuredEnvelope(soap.Body(
-          request: DeviceManagementRequest.getSystemLog(logType),
-        ))
+        .getSecuredEnvelope(
+          soap.Body(request: DeviceManagementRequest.getSystemLog(logType)),
+        )
         .toXml(soap.Transport.builder);
 
-    final response = await transport.sendLogRequest(
-      uri,
-      securedXml,
-    );
+    final response = await transport.sendLogRequest(uri, securedXml);
 
     String xmlString = parseMtom(response, writeLogToFolder: writeLogToFolder);
 
@@ -420,8 +437,9 @@ class DeviceManagement extends Operation with UiLoggy {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetSystemLogResponse.fromJson(responseEnvelope.body.response!)
-        .systemLog;
+    return GetSystemLogResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).systemLog;
   }
 
   /// This operation gets arbitrary device diagnostics information from the
@@ -434,15 +452,14 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('getSystemSupportInformation');
 
     final securedXml = transport
-        .getSecuredEnvelope(soap.Body(
-          request: DeviceManagementRequest.getSystemSupportInformation(),
-        ))
+        .getSecuredEnvelope(
+          soap.Body(
+            request: DeviceManagementRequest.getSystemSupportInformation(),
+          ),
+        )
         .toXml(soap.Transport.builder);
 
-    final response = await transport.sendLogRequest(
-      uri,
-      securedXml,
-    );
+    final response = await transport.sendLogRequest(uri, securedXml);
 
     String xmlString = parseMtom(response, writeLogToFolder: writeLogToFolder);
 
@@ -455,8 +472,8 @@ class DeviceManagement extends Operation with UiLoggy {
     }
 
     return GetSystemSupportInformationResponse.fromJson(
-            responseEnvelope.body.response!)
-        .supportInformation;
+      responseEnvelope.body.response!,
+    ).supportInformation;
   }
 
   /// This operation is used to retrieve URIs from which system information may
@@ -485,10 +502,9 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('getSystemUris');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: DeviceManagementRequest.getSystemUris(),
-        ));
+      uri,
+      soap.Body(request: DeviceManagementRequest.getSystemUris()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -507,10 +523,9 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('getUsers');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: DeviceManagementRequest.getUsers(),
-        ));
+      uri,
+      soap.Body(request: DeviceManagementRequest.getUsers()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -526,17 +541,17 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('systemReboot');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: DeviceManagementRequest.systemReboot(),
-        ));
+      uri,
+      soap.Body(request: DeviceManagementRequest.systemReboot()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return SystemRebootResponse.fromJson(responseEnvelope.body.response!)
-        .message;
+    return SystemRebootResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).message;
   }
 
   /// Access Class: READ_SYSTEM
@@ -566,10 +581,9 @@ class DeviceManagement extends Operation with UiLoggy {
     loggy.debug('getEndpointReference');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: DeviceManagementRequest.getEndpointReference(),
-        ));
+      uri,
+      soap.Body(request: DeviceManagementRequest.getEndpointReference()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());

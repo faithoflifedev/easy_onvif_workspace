@@ -20,10 +20,7 @@ class Codec {
   @JsonKey(name: 'Number', fromJson: OnvifUtil.intMappedFromXml)
   final int number;
 
-  Codec({
-    required this.encoding,
-    required this.number,
-  });
+  Codec({required this.encoding, required this.number});
 
   factory Codec.fromJson(Map<String, dynamic> json) => _$CodecFromJson(json);
 

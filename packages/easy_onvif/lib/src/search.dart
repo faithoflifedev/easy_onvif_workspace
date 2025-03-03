@@ -22,10 +22,7 @@ typedef SearchRequest = soap.SearchRequest;
 /// | READ_MEDIA | X | X | X | |
 /// | ACTUATE | X | X | | |
 class Search extends Operation {
-  Search({
-    required super.transport,
-    required super.uri,
-  });
+  Search({required super.transport, required super.uri});
 
   /// FindRecordings starts a search session, looking for recordings that matches
   /// the scope (See 20.2.4) defined in the request. Results from the search are
@@ -52,21 +49,23 @@ class Search extends Operation {
     loggy.debug('findRecordings');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: SearchRequest.findRecordings(
-            searchScope: searchScope,
-            maxMatches: maxMatches,
-            keepAliveTime: keepAliveTime,
-          ),
-        ));
+      uri,
+      soap.Body(
+        request: SearchRequest.findRecordings(
+          searchScope: searchScope,
+          maxMatches: maxMatches,
+          keepAliveTime: keepAliveTime,
+        ),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return FindRecordingsResponse.fromJson(responseEnvelope.body.response!)
-        .searchToken;
+    return FindRecordingsResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).searchToken;
   }
 
   /// GetRecordingSearchResults acquires the results from a recording search
@@ -97,23 +96,24 @@ class Search extends Operation {
     loggy.debug('getRecordingSearchResults');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: SearchRequest.getRecordingSearchResults(
-            searchToken,
-            minResults: minResults,
-            maxResults: maxResults,
-            waitTime: waitTime,
-          ),
-        ));
+      uri,
+      soap.Body(
+        request: SearchRequest.getRecordingSearchResults(
+          searchToken,
+          minResults: minResults,
+          maxResults: maxResults,
+          waitTime: waitTime,
+        ),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetRecordingSearchResultsResponse.fromJson(
-            responseEnvelope.body.response!)
-        .findRecordingResults;
+      responseEnvelope.body.response!,
+    ).findRecordingResults;
   }
 
   /// Returns information about a single Recording specified by a
@@ -122,22 +122,22 @@ class Search extends Operation {
   ///
   /// ACCESS CLASS: READ_MEDIA
   Future<RecordingInformation> getRecordingInformation(
-      String recordingToken) async {
+    String recordingToken,
+  ) async {
     loggy.debug('getRecordingInformation');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: SearchRequest.getRecordingInformation(recordingToken),
-        ));
+      uri,
+      soap.Body(request: SearchRequest.getRecordingInformation(recordingToken)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetRecordingInformationResponse.fromJson(
-            responseEnvelope.body.response!)
-        .recordingInformation;
+      responseEnvelope.body.response!,
+    ).recordingInformation;
   }
 
   /// GetRecordingSummary is used to get a summary description of all recorded
@@ -149,16 +149,16 @@ class Search extends Operation {
     loggy.debug('getRecordingSummary');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: SearchRequest.getRecordingSummary(),
-        ));
+      uri,
+      soap.Body(request: SearchRequest.getRecordingSummary()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetRecordingSummaryResponse.fromJson(responseEnvelope.body.response!)
-        .summary;
+    return GetRecordingSummaryResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).summary;
   }
 }

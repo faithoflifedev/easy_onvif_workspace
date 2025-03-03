@@ -44,27 +44,37 @@ class Track {
   @override
   String toString() => json.encode(toJson());
 
-  static RecordingJobState? _nullableRecordingJobState(
-          dynamic json) =>
+  static RecordingJobState? _nullableRecordingJobState(dynamic json) =>
       json != null
           ? $enumDecode(
-              _$RecordingJobStateEnumMap, OnvifUtil.stringMappedFromXml(json))
+            _$RecordingJobStateEnumMap,
+            OnvifUtil.stringMappedFromXml(json),
+          )
           : null;
 
   void toXml() {
-    Transport.builder.element('Track', nest: () {
-      Transport.builder.namespace(Xmlns.tt);
-
-      Transport.builder.element('SourceTag', nest: () {
+    Transport.builder.element(
+      'Track',
+      nest: () {
         Transport.builder.namespace(Xmlns.tt);
-        Transport.builder.text(sourceTag);
-      });
 
-      Transport.builder.element('Destination', nest: () {
-        Transport.builder.namespace(Xmlns.tt);
-        Transport.builder.text(destination);
-      });
-    });
+        Transport.builder.element(
+          'SourceTag',
+          nest: () {
+            Transport.builder.namespace(Xmlns.tt);
+            Transport.builder.text(sourceTag);
+          },
+        );
+
+        Transport.builder.element(
+          'Destination',
+          nest: () {
+            Transport.builder.namespace(Xmlns.tt);
+            Transport.builder.text(destination);
+          },
+        );
+      },
+    );
   }
 }
 

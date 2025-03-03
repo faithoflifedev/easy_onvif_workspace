@@ -17,17 +17,17 @@ class GetMetadataConfigurationsResponse {
   GetMetadataConfigurationsResponse(this.configurations);
 
   factory GetMetadataConfigurationsResponse.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetMetadataConfigurationsResponseFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$GetMetadataConfigurationsResponseFromJson(json);
 
   Map<String, dynamic> toJson() =>
       _$GetMetadataConfigurationsResponseToJson(this);
 
   static List<MetadataConfiguration> _fromJson(dynamic json) =>
       OnvifUtil.jsonList<MetadataConfiguration>(
-          json,
-          (json) =>
-              MetadataConfiguration.fromJson(json as Map<String, dynamic>));
+        json,
+        (json) => MetadataConfiguration.fromJson(json as Map<String, dynamic>),
+      );
 
   @override
   String toString() => json.encode(toJson());

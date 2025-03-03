@@ -8,9 +8,7 @@ class GetStatusResponse {
   @JsonKey(name: 'PTZStatus')
   PtzStatus ptzStatus;
 
-  GetStatusResponse({
-    required this.ptzStatus,
-  });
+  GetStatusResponse({required this.ptzStatus});
 
   factory GetStatusResponse.fromJson(Map<String, dynamic> json) =>
       _$GetStatusResponseFromJson(json);

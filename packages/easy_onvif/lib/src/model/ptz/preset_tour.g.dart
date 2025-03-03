@@ -7,20 +7,23 @@ part of 'preset_tour.dart';
 // **************************************************************************
 
 PresetTour _$PresetTourFromJson(Map<String, dynamic> json) => PresetTour(
-      token: json['@token'] as String,
-      name: json['Name'] as String?,
-      status:
-          PtzPresetTourStatus.fromJson(json['Status'] as Map<String, dynamic>),
-      autoStart: OnvifUtil.boolMappedFromXml(
-          json['AutoStart'] as Map<String, dynamic>),
-      startingCondition: PtzPresetTourStartingCondition.fromJson(
-          json['StartingCondition'] as Map<String, dynamic>),
-      tourSpot: json['TourSpot'] == null
+  token: json['@token'] as String,
+  name: json['Name'] as String?,
+  status: PtzPresetTourStatus.fromJson(json['Status'] as Map<String, dynamic>),
+  autoStart: OnvifUtil.boolMappedFromXml(
+    json['AutoStart'] as Map<String, dynamic>,
+  ),
+  startingCondition: PtzPresetTourStartingCondition.fromJson(
+    json['StartingCondition'] as Map<String, dynamic>,
+  ),
+  tourSpot:
+      json['TourSpot'] == null
           ? null
           : PtzPresetTourSpot.fromJson(
-              json['TourSpot'] as Map<String, dynamic>),
-      extension: json['Extension'],
-    );
+            json['TourSpot'] as Map<String, dynamic>,
+          ),
+  extension: json['Extension'],
+);
 
 Map<String, dynamic> _$PresetTourToJson(PresetTour instance) =>
     <String, dynamic>{

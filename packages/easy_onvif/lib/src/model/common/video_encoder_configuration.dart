@@ -51,15 +51,14 @@ class VideoEncoderConfiguration {
   final H264? h264;
 
   ///Defines the multicast settings that could be used for video streaming.
-  @JsonKey(
-    name: 'Multicast',
-    fromJson: OnvifUtil.emptyOrMulticastConfiguration,
-  )
+  @JsonKey(name: 'Multicast', fromJson: OnvifUtil.emptyOrMulticastConfiguration)
   final MulticastConfiguration? multiCast;
 
   ///The rtsp session timeout for the related video stream
   @JsonKey(
-      name: 'SessionTimeout', fromJson: OnvifUtil.nullableStringMappedFromXml)
+    name: 'SessionTimeout',
+    fromJson: OnvifUtil.nullableStringMappedFromXml,
+  )
   final String? sessionTimeout;
 
   VideoEncoderConfiguration({

@@ -16,10 +16,7 @@ class IntRange {
   @JsonKey(name: 'Max', fromJson: OnvifUtil.intMappedFromXml)
   final int max;
 
-  IntRange({
-    required this.min,
-    required this.max,
-  });
+  IntRange({required this.min, required this.max});
 
   factory IntRange.fromJson(Map<String, dynamic> json) =>
       _$IntRangeFromJson(json);

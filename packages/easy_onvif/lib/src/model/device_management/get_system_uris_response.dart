@@ -13,15 +13,22 @@ class GetSystemUrisResponse {
   final SystemLogUriList? systemLogUris;
 
   @JsonKey(
-      name: 'SupportInfoUri', fromJson: OnvifUtil.nullableStringMappedFromXml)
+    name: 'SupportInfoUri',
+    fromJson: OnvifUtil.nullableStringMappedFromXml,
+  )
   final String? supportInfoUri;
 
   @JsonKey(
-      name: 'SystemBackupUri', fromJson: OnvifUtil.nullableStringMappedFromXml)
+    name: 'SystemBackupUri',
+    fromJson: OnvifUtil.nullableStringMappedFromXml,
+  )
   final String? systemBackupUri;
 
-  GetSystemUrisResponse(
-      {required this.systemLogUris, this.supportInfoUri, this.systemBackupUri});
+  GetSystemUrisResponse({
+    required this.systemLogUris,
+    this.supportInfoUri,
+    this.systemBackupUri,
+  });
 
   factory GetSystemUrisResponse.fromJson(Map<String, dynamic> json) =>
       _$GetSystemUrisResponseFromJson(json);

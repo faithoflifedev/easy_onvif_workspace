@@ -7,11 +7,7 @@ part of 'prefixed_ipaddress.dart';
 // **************************************************************************
 
 PrefixedIpAddress _$PrefixedIpAddressFromJson(Map<String, dynamic> json) =>
-    PrefixedIpAddress(
-      prefixLength: (json['PrefixLength'] as num).toInt(),
-    );
+    PrefixedIpAddress(prefixLength: (json['PrefixLength'] as num).toInt());
 
 Map<String, dynamic> _$PrefixedIpAddressToJson(PrefixedIpAddress instance) =>
-    <String, dynamic>{
-      'PrefixLength': instance.prefixLength,
-    };
+    <String, dynamic>{'PrefixLength': instance.prefixLength};

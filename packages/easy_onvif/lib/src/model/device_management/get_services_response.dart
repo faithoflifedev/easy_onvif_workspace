@@ -23,5 +23,7 @@ class GetServicesResponse {
   String toString() => json.encode(toJson());
 
   static List<Service> _fromJson(dynamic json) => OnvifUtil.jsonList<Service>(
-      json, (json) => Service.fromJson(json as Map<String, dynamic>));
+    json,
+    (json) => Service.fromJson(json as Map<String, dynamic>),
+  );
 }

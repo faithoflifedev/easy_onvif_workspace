@@ -26,11 +26,12 @@ class VideoSource {
   @JsonKey(name: 'Imaging')
   final Imaging? imaging;
 
-  VideoSource(
-      {required this.token,
-      required this.frameRate,
-      required this.resolution,
-      this.imaging});
+  VideoSource({
+    required this.token,
+    required this.frameRate,
+    required this.resolution,
+    this.imaging,
+  });
 
   factory VideoSource.fromJson(Map<String, dynamic> json) =>
       _$VideoSourceFromJson(json);

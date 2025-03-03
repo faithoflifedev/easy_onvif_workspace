@@ -6,7 +6,6 @@ import 'package:json_annotation/json_annotation.dart';
 part 'video_rate_control2.g.dart';
 
 @JsonSerializable()
-
 /// Optional element to configure rate control related parameters.
 class VideoRateControl2 {
   /// Enforce constant bitrate.
@@ -15,17 +14,11 @@ class VideoRateControl2 {
 
   /// Desired frame rate in fps. The actual rate may be lower due to e.g.
   /// performance limitations.
-  @JsonKey(
-    name: 'FrameRateLimit',
-    fromJson: OnvifUtil.doubleMappedFromXml,
-  )
+  @JsonKey(name: 'FrameRateLimit', fromJson: OnvifUtil.doubleMappedFromXml)
   final double frameRateLimit;
 
   /// the maximum output bitrate in kbps
-  @JsonKey(
-    name: 'BitrateLimit',
-    fromJson: OnvifUtil.intMappedFromXml,
-  )
+  @JsonKey(name: 'BitrateLimit', fromJson: OnvifUtil.intMappedFromXml)
   final int bitrateLimit;
 
   VideoRateControl2({

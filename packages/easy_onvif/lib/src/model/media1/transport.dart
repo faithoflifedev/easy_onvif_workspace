@@ -15,9 +15,7 @@ class Transport implements XmlSerializable {
   @JsonKey(name: 'Protocol')
   final String protocol;
 
-  Transport({
-    required this.protocol,
-  });
+  Transport({required this.protocol});
 
   factory Transport.fromJson(Map<String, dynamic> json) =>
       _$TransportFromJson(json);
@@ -32,14 +30,19 @@ class Transport implements XmlSerializable {
     XmlBuilder builder, {
     String tag = 'Transport',
     String? namespace = Xmlns.tt,
-  }) =>
-      builder.element('Transport', nest: () {
-        builder.namespace(namespace!);
+  }) => builder.element(
+    'Transport',
+    nest: () {
+      builder.namespace(namespace!);
 
-        builder.element('Protocol', nest: () {
+      builder.element(
+        'Protocol',
+        nest: () {
           builder.namespace(namespace);
 
           builder.text(protocol);
-        });
-      });
+        },
+      );
+    },
+  );
 }

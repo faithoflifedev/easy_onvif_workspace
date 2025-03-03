@@ -20,8 +20,8 @@ class GetVideoEncoderConfigurationsResponse {
   GetVideoEncoderConfigurationsResponse({required this.configurations});
 
   factory GetVideoEncoderConfigurationsResponse.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetVideoEncoderConfigurationsResponseFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$GetVideoEncoderConfigurationsResponseFromJson(json);
 
   Map<String, dynamic> toJson() =>
       _$GetVideoEncoderConfigurationsResponseToJson(this);

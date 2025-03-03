@@ -16,7 +16,9 @@ class NetworkCapabilities {
 
   /// Indicates support for zeroConf.
   @JsonKey(
-      name: 'ZeroConfiguration', fromJson: OnvifUtil.nullableBoolMappedFromXml)
+    name: 'ZeroConfiguration',
+    fromJson: OnvifUtil.nullableBoolMappedFromXml,
+  )
   final bool? zeroConfiguration;
 
   /// Indicates support for IPv6.

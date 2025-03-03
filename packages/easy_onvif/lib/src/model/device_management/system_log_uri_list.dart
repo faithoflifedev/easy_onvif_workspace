@@ -24,5 +24,7 @@ class SystemLogUriList {
 
   static List<SystemLogUri> _fromJson(dynamic json) =>
       OnvifUtil.jsonList<SystemLogUri>(
-          json, (json) => SystemLogUri.fromJson(json as Map<String, dynamic>));
+        json,
+        (json) => SystemLogUri.fromJson(json as Map<String, dynamic>),
+      );
 }

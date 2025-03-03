@@ -17,10 +17,7 @@ class PtControlDirectionOptions {
   @JsonKey(name: 'Reverse')
   final ModalOptions? reverse;
 
-  PtControlDirectionOptions({
-    this.eFlip,
-    this.reverse,
-  });
+  PtControlDirectionOptions({this.eFlip, this.reverse});
 
   factory PtControlDirectionOptions.fromJson(Map<String, dynamic> json) =>
       _$PtControlDirectionOptionsFromJson(json);

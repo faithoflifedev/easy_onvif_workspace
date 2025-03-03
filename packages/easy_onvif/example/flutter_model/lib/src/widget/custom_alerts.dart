@@ -13,10 +13,7 @@ class CustomAlerts {
   final Future<SharedPreferences> sharedPreferences =
       SharedPreferences.getInstance();
 
-  CustomAlerts({
-    required this.showAlert,
-    required this.formKey,
-  }) {
+  CustomAlerts({required this.showAlert, required this.formKey}) {
     init();
   }
 
@@ -39,13 +36,14 @@ class CustomAlerts {
   }
 
   GFAlert authentication(BuildContext context) => const GFAlert(
-        alignment: Alignment.center,
-        backgroundColor: Colors.white,
-        title: 'Authentication',
-        content: Text(
-            'Get Flutter is one of the largest Flutter open-source UI library for mobile or web apps with  1000+ pre-built reusable widgets.'),
-        type: GFAlertType.rounded,
-      );
+    alignment: Alignment.center,
+    backgroundColor: Colors.white,
+    title: 'Authentication',
+    content: Text(
+      'Get Flutter is one of the largest Flutter open-source UI library for mobile or web apps with  1000+ pre-built reusable widgets.',
+    ),
+    type: GFAlertType.rounded,
+  );
 
   GFAlert proxy(BuildContext context) {
     final showIpAddressField = Signal(false);
@@ -55,77 +53,81 @@ class CustomAlerts {
       backgroundColor: Colors.white,
       title: 'Proxy',
       content: SignalBuilder(
-          signal: showIpAddressField,
-          builder: (context, value, child) => FormBuilder(
-                key: formKey,
-                child: Column(
-                  children: [
-                    FormBuilderSwitch(
-                      name: 'wsProxy',
-                      title: const Text('ws Proxy'),
-                      onChanged: (value) => value != null
-                          ? showIpAddressField.value = value
-                          : null,
-                    ),
-                    Visibility(
-                      visible: showIpAddressField.value,
-                      child: FormBuilderTextField(
-                          name: 'ipAddress',
-                          decoration:
-                              const InputDecoration(labelText: 'IP Address'),
-                          validator: (value) {
-                            if (showIpAddressField.value) {
-                              return FormBuilderValidators.compose([
-                                FormBuilderValidators.required(),
-                                FormBuilderValidators.ip(),
-                              ]).call(value);
-                            }
-
-                            return null;
-                          }),
-                    ),
-                    Visibility(
-                      visible: showIpAddressField.value,
-                      child: FormBuilderTextField(
-                          name: 'port',
-                          decoration: const InputDecoration(labelText: 'Port'),
-                          validator: (value) {
-                            if (showIpAddressField.value) {
-                              return FormBuilderValidators.compose([
-                                FormBuilderValidators.required(),
-                                FormBuilderValidators.integer(),
-                              ]).call(value);
-                            }
-
-                            return null;
-                          }),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: ElevatedButton(
-                        child: const Text('Continue'),
-                        onPressed: () async {
-                          final SharedPreferences preferences =
-                              await sharedPreferences;
-
-                          final useProxy =
-                              formKey.currentState?.fields['wsProxy']?.value ??
-                                  false;
-
-                          preferences.setBool(
-                            'wsProxy',
-                            useProxy,
-                          );
-
-                          if (useProxy) {}
-
-                          showAlert.value = false;
-                        },
+        signal: showIpAddressField,
+        builder:
+            (context, value, child) => FormBuilder(
+              key: formKey,
+              child: Column(
+                children: [
+                  FormBuilderSwitch(
+                    name: 'wsProxy',
+                    title: const Text('ws Proxy'),
+                    onChanged:
+                        (value) =>
+                            value != null
+                                ? showIpAddressField.value = value
+                                : null,
+                  ),
+                  Visibility(
+                    visible: showIpAddressField.value,
+                    child: FormBuilderTextField(
+                      name: 'ipAddress',
+                      decoration: const InputDecoration(
+                        labelText: 'IP Address',
                       ),
+                      validator: (value) {
+                        if (showIpAddressField.value) {
+                          return FormBuilderValidators.compose([
+                            FormBuilderValidators.required(),
+                            FormBuilderValidators.ip(),
+                          ]).call(value);
+                        }
+
+                        return null;
+                      },
                     ),
-                  ],
-                ),
-              )),
+                  ),
+                  Visibility(
+                    visible: showIpAddressField.value,
+                    child: FormBuilderTextField(
+                      name: 'port',
+                      decoration: const InputDecoration(labelText: 'Port'),
+                      validator: (value) {
+                        if (showIpAddressField.value) {
+                          return FormBuilderValidators.compose([
+                            FormBuilderValidators.required(),
+                            FormBuilderValidators.integer(),
+                          ]).call(value);
+                        }
+
+                        return null;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: ElevatedButton(
+                      child: const Text('Continue'),
+                      onPressed: () async {
+                        final SharedPreferences preferences =
+                            await sharedPreferences;
+
+                        final useProxy =
+                            formKey.currentState?.fields['wsProxy']?.value ??
+                            false;
+
+                        preferences.setBool('wsProxy', useProxy);
+
+                        if (useProxy) {}
+
+                        showAlert.value = false;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+      ),
       type: GFAlertType.rounded,
     );
   }

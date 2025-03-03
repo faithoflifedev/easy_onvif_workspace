@@ -10,16 +10,15 @@ part 'extension.g.dart';
 class Extension {
   /// Indicates support for IP filtering.
   @JsonKey(
-      name: 'Dot11Configuration', fromJson: OnvifUtil.nullableBoolMappedFromXml)
+    name: 'Dot11Configuration',
+    fromJson: OnvifUtil.nullableBoolMappedFromXml,
+  )
   final bool? dot11Configuration;
 
   @JsonKey(name: 'Extension')
   final Extension? extension;
 
-  Extension({
-    this.dot11Configuration,
-    this.extension,
-  });
+  Extension({this.dot11Configuration, this.extension});
 
   factory Extension.fromJson(Map<String, dynamic> json) =>
       _$ExtensionFromJson(json);

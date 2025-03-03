@@ -7,9 +7,9 @@ part of 'app_sequence.dart';
 // **************************************************************************
 
 AppSequence _$AppSequenceFromJson(Map<String, dynamic> json) => AppSequence(
-      messageNumber: int.parse(json['@MessageNumber'] as String),
-      instanceId: int.parse(json['@InstanceId'] as String),
-    );
+  messageNumber: int.parse(json['@MessageNumber'] as String),
+  instanceId: int.parse(json['@InstanceId'] as String),
+);
 
 Map<String, dynamic> _$AppSequenceToJson(AppSequence instance) =>
     <String, dynamic>{

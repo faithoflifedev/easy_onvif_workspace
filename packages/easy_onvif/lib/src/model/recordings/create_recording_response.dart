@@ -11,9 +11,7 @@ class CreateRecordingResponse {
   @JsonKey(name: 'RecordingToken', fromJson: OnvifUtil.stringMappedFromXml)
   final String token;
 
-  CreateRecordingResponse({
-    required this.token,
-  });
+  CreateRecordingResponse({required this.token});
 
   factory CreateRecordingResponse.fromJson(Map<String, dynamic> json) =>
       _$CreateRecordingResponseFromJson(json);

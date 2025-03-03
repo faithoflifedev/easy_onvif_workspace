@@ -23,10 +23,7 @@ typedef Media2Request = soap.Media2Request;
 /// | READ_MEDIA | X | X | X | |
 /// | ACTUATE | X | X | | |
 class Media2 extends Operation {
-  Media2({
-    required super.transport,
-    required super.uri,
-  });
+  Media2({required super.transport, required super.uri});
 
   /// This operation deletes a profile. Deletion of a profile is only possible
   /// for non-fixed profiles
@@ -36,17 +33,17 @@ class Media2 extends Operation {
     loggy.debug('deleteProfile');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: Media2Request.deleteProfile(referenceToken),
-        ));
+      uri,
+      soap.Body(request: Media2Request.deleteProfile(referenceToken)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return responseEnvelope.body.response
-            ?.containsKey('DeleteProfileResponse') ??
+    return responseEnvelope.body.response?.containsKey(
+          'DeleteProfileResponse',
+        ) ??
         false;
   }
 
@@ -62,21 +59,22 @@ class Media2 extends Operation {
     loggy.debug('getMetadataConfigurationOptions');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: Media2Request.getMetadataConfigurationOptions(
-            configurationToken: configurationToken,
-            profileToken: profileToken,
-          ),
-        ));
+      uri,
+      soap.Body(
+        request: Media2Request.getMetadataConfigurationOptions(
+          configurationToken: configurationToken,
+          profileToken: profileToken,
+        ),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetMetadataConfigurationOptionsResponse.fromJson(
-            responseEnvelope.body.response!)
-        .options;
+      responseEnvelope.body.response!,
+    ).options;
   }
 
   /// By default this operation lists all existing metadata configurations for a
@@ -92,21 +90,22 @@ class Media2 extends Operation {
     loggy.debug('getMetadataConfigurations');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: Media2Request.getMetadataConfigurations(
-            configurationToken: configurationToken,
-            profileToken: profileToken,
-          ),
-        ));
+      uri,
+      soap.Body(
+        request: Media2Request.getMetadataConfigurations(
+          configurationToken: configurationToken,
+          profileToken: profileToken,
+        ),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetMetadataConfigurationsResponse.fromJson(
-            responseEnvelope.body.response!)
-        .configurations;
+      responseEnvelope.body.response!,
+    ).configurations;
   }
 
   /// Retrieve the profile with the specified token or all defined media
@@ -131,17 +130,17 @@ class Media2 extends Operation {
     loggy.debug('getProfiles');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: Media2Request.getProfiles(),
-        ));
+      uri,
+      soap.Body(request: Media2Request.getProfiles()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetProfilesResponse.fromJson(responseEnvelope.body.response!)
-        .profiles;
+    return GetProfilesResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).profiles;
   }
 
   /// Returns the capabilities of the media service. The result is returned in a
@@ -152,18 +151,17 @@ class Media2 extends Operation {
     loggy.debug('getServiceCapabilities');
 
     final responseEnvelope = await transport.request(
-        uri,
-        soap.Body(
-          request: Media2Request.getServiceCapabilities(),
-        ));
+      uri,
+      soap.Body(request: Media2Request.getServiceCapabilities()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetServiceCapabilitiesResponse.fromJson(
-            responseEnvelope.body.response!)
-        .capabilities;
+      responseEnvelope.body.response!,
+    ).capabilities;
   }
 
   /// A client uses the [getSnapshotUri] command to obtain a JPEG snapshot from
@@ -185,10 +183,9 @@ class Media2 extends Operation {
     loggy.debug('getSnapshotUri');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: Media2Request.getSnapshotUri(profileToken),
-        ));
+      uri,
+      soap.Body(request: Media2Request.getSnapshotUri(profileToken)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -227,13 +224,11 @@ class Media2 extends Operation {
     loggy.debug('getStreamUri');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: Media2Request.getStreamUri(
-            profileToken,
-            protocol: protocol,
-          ),
-        ));
+      uri,
+      soap.Body(
+        request: Media2Request.getStreamUri(profileToken, protocol: protocol),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -253,21 +248,22 @@ class Media2 extends Operation {
     loggy.debug('getVideoEncoderConfigurations');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: Media2Request.videoEncoderConfigurations(
-            configurationToken: configurationToken,
-            profileToken: profileToken,
-          ),
-        ));
+      uri,
+      soap.Body(
+        request: Media2Request.videoEncoderConfigurations(
+          configurationToken: configurationToken,
+          profileToken: profileToken,
+        ),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetVideoEncoderConfigurationsResponse.fromJson(
-            responseEnvelope.body.response!)
-        .configurations;
+      responseEnvelope.body.response!,
+    ).configurations;
   }
 
   /// The GetVideoEncoderInstances command can be used to request the minimum
@@ -279,18 +275,19 @@ class Media2 extends Operation {
     loggy.debug('getVideoEncoderInstances');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: Media2Request.getVideoEncoderInstances(configurationToken),
-        ));
+      uri,
+      soap.Body(
+        request: Media2Request.getVideoEncoderInstances(configurationToken),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetVideoEncoderInstancesResponse.fromJson(
-            responseEnvelope.body.response!)
-        .info;
+      responseEnvelope.body.response!,
+    ).info;
   }
 
   /// This operation returns the available options (supported values and ranges
@@ -308,21 +305,22 @@ class Media2 extends Operation {
     loggy.debug('getVideoSourceConfigurationOptionsResponse');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: Media2Request.getVideoSourceConfigurationOptions(
-            configurationToken: configurationToken,
-            profileToken: profileToken,
-          ),
-        ));
+      uri,
+      soap.Body(
+        request: Media2Request.getVideoSourceConfigurationOptions(
+          configurationToken: configurationToken,
+          profileToken: profileToken,
+        ),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetVideoSourceConfigurationOptionsResponse.fromJson(
-            responseEnvelope.body.response!)
-        .options;
+      responseEnvelope.body.response!,
+    ).options;
   }
 
   /// This command starts multicast streaming using a specified media profile of
@@ -337,9 +335,9 @@ class Media2 extends Operation {
     loggy.debug('startMulticastStreaming');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-            request: Media2Request.startMulticastStreaming(profileToken)));
+      uri,
+      soap.Body(request: Media2Request.startMulticastStreaming(profileToken)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -358,8 +356,10 @@ class Media2 extends Operation {
   Future<bool> stopMulticastStreaming(String profileToken) async {
     loggy.debug('stopMulticastStreaming');
 
-    final responseEnvelope = await transport.securedRequest(uri,
-        soap.Body(request: Media2Request.stopMulticastStreaming(profileToken)));
+    final responseEnvelope = await transport.securedRequest(
+      uri,
+      soap.Body(request: Media2Request.stopMulticastStreaming(profileToken)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());

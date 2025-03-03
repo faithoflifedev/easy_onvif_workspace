@@ -30,20 +30,16 @@ class Envelope implements XmlSerializable {
     XmlBuilder builder, {
     String tag = 'Envelope',
     String? namespace = Xmlns.s,
-  }) =>
-      builder.element(
-        'Envelope',
-        namespace: namespace,
-        namespaces: {
-          Xmlns.s: 's',
-          'http://www.w3.org/2005/08/addressing': 'a',
-        },
-        nest: () {
-          header?.buildXml(builder);
+  }) => builder.element(
+    'Envelope',
+    namespace: namespace,
+    namespaces: {Xmlns.s: 's', 'http://www.w3.org/2005/08/addressing': 'a'},
+    nest: () {
+      header?.buildXml(builder);
 
-          body.buildXml(builder);
-        },
-      );
+      body.buildXml(builder);
+    },
+  );
 
   XmlDocument toXml(XmlBuilder builder) {
     builder.declaration(encoding: 'UTF-8');

@@ -42,7 +42,9 @@ class DnsInformation {
   Map<String, dynamic> toJson() => _$DnsInformationToJson(this);
 
   static List<DnsEntry> _fromJson(dynamic json) => OnvifUtil.jsonList<DnsEntry>(
-      json, (json) => DnsEntry.fromJson(json as Map<String, dynamic>));
+    json,
+    (json) => DnsEntry.fromJson(json as Map<String, dynamic>),
+  );
 
   static List<String>? _searchDomain(dynamic json) {
     if (json == null) {

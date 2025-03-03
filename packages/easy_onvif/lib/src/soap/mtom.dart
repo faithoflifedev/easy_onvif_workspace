@@ -58,8 +58,10 @@ class Mtom {
 
   static MtomPart _parsePart(Uint8List part) {
     final mediaType = MediaType.parse(_parseHeader('Content-Type', part));
-    final contentTransferEncoding =
-        _parseHeader('Content-Transfer-Encoding', part);
+    final contentTransferEncoding = _parseHeader(
+      'Content-Transfer-Encoding',
+      part,
+    );
     final contentId = _parseHeader('Content-ID', part);
     final content = _parseContent(part);
 

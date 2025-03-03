@@ -12,14 +12,11 @@ class MetadataConfigurationOptionsExtension {
   @JsonKey(name: 'Extension')
   final Map<String, dynamic>? extension;
 
-  MetadataConfigurationOptionsExtension({
-    this.compressionType,
-    this.extension,
-  });
+  MetadataConfigurationOptionsExtension({this.compressionType, this.extension});
 
   factory MetadataConfigurationOptionsExtension.fromJson(
-          Map<String, dynamic> json) =>
-      _$MetadataConfigurationOptionsExtensionFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$MetadataConfigurationOptionsExtensionFromJson(json);
 
   Map<String, dynamic> toJson() =>
       _$MetadataConfigurationOptionsExtensionToJson(this);

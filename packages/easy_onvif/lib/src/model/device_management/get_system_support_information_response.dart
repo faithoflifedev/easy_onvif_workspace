@@ -16,8 +16,8 @@ class GetSystemSupportInformationResponse {
   GetSystemSupportInformationResponse({required this.supportInformation});
 
   factory GetSystemSupportInformationResponse.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetSystemSupportInformationResponseFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$GetSystemSupportInformationResponseFromJson(json);
 
   Map<String, dynamic> toJson() =>
       _$GetSystemSupportInformationResponseToJson(this);

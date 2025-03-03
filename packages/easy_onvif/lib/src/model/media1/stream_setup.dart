@@ -23,10 +23,7 @@ class StreamSetup implements XmlSerializable {
   @JsonKey(name: 'Transport')
   final Transport transport;
 
-  StreamSetup({
-    required this.stream,
-    required this.transport,
-  });
+  StreamSetup({required this.stream, required this.transport});
 
   factory StreamSetup.fromJson(Map<String, dynamic> json) =>
       _$StreamSetupFromJson(json);
@@ -41,16 +38,18 @@ class StreamSetup implements XmlSerializable {
     XmlBuilder builder, {
     String tag = 'StreamSetup',
     String? namespace = Xmlns.tt,
-  }) =>
-      builder.element(tag, nest: () {
-        builder.namespace(namespace!);
+  }) => builder.element(
+    tag,
+    nest: () {
+      builder.namespace(namespace!);
 
-        stream.buildXml(builder, tag: 'Stream');
+      stream.buildXml(builder, tag: 'Stream');
 
-        // builder.element('Stream', nest: () {
-        //   builder.text(stream);
-        // });
+      // builder.element('Stream', nest: () {
+      //   builder.text(stream);
+      // });
 
-        transport.buildXml(builder);
-      });
+      transport.buildXml(builder);
+    },
+  );
 }

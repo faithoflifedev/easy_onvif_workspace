@@ -48,7 +48,8 @@ class RecordingJobStateInformation {
 
   static List<RecordingJobStateSource> _fromJson(dynamic json) =>
       OnvifUtil.jsonList<RecordingJobStateSource>(
-          json,
-          (json) =>
-              RecordingJobStateSource.fromJson(json as Map<String, dynamic>));
+        json,
+        (json) =>
+            RecordingJobStateSource.fromJson(json as Map<String, dynamic>),
+      );
 }

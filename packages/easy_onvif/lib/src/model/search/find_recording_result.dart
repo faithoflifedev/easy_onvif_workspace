@@ -15,10 +15,7 @@ class FindRecordingResult {
   @JsonKey(name: 'RecordingInformation', fromJson: _fromJson)
   final List<RecordingInformation>? recordingInformation;
 
-  FindRecordingResult({
-    required this.searchState,
-    this.recordingInformation,
-  });
+  FindRecordingResult({required this.searchState, this.recordingInformation});
 
   factory FindRecordingResult.fromJson(Map<String, dynamic> json) =>
       _$FindRecordingResultFromJson(json);
@@ -33,9 +30,9 @@ class FindRecordingResult {
 
   static List<RecordingInformation> _fromJson(dynamic json) =>
       OnvifUtil.jsonList<RecordingInformation>(
-          json,
-          (json) =>
-              RecordingInformation.fromJson(json as Map<String, dynamic>));
+        json,
+        (json) => RecordingInformation.fromJson(json as Map<String, dynamic>),
+      );
 }
 
 enum SearchState {

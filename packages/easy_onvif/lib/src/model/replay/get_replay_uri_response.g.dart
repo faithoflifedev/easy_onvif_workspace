@@ -7,13 +7,11 @@ part of 'get_replay_uri_response.dart';
 // **************************************************************************
 
 GetReplayUriResponse _$GetReplayUriResponseFromJson(
-        Map<String, dynamic> json) =>
-    GetReplayUriResponse(
-      uri: OnvifUtil.stringMappedFromXml(json['Uri'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => GetReplayUriResponse(
+  uri: OnvifUtil.stringMappedFromXml(json['Uri'] as Map<String, dynamic>),
+);
 
 Map<String, dynamic> _$GetReplayUriResponseToJson(
-        GetReplayUriResponse instance) =>
-    <String, dynamic>{
-      'Uri': instance.uri,
-    };
+  GetReplayUriResponse instance,
+) => <String, dynamic>{'Uri': instance.uri};

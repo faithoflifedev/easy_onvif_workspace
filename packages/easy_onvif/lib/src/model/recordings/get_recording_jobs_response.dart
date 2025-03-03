@@ -15,9 +15,7 @@ class GetRecordingJobsResponse {
   @JsonKey(name: 'JobItem', fromJson: _fromJson)
   final List<GetRecordingJobsResponseItem> jobItems;
 
-  GetRecordingJobsResponse({
-    required this.jobItems,
-  });
+  GetRecordingJobsResponse({required this.jobItems});
 
   factory GetRecordingJobsResponse.fromJson(Map<String, dynamic> json) =>
       _$GetRecordingJobsResponseFromJson(json);
@@ -29,7 +27,8 @@ class GetRecordingJobsResponse {
 
   static List<GetRecordingJobsResponseItem> _fromJson(dynamic json) =>
       OnvifUtil.jsonList<GetRecordingJobsResponseItem>(
-          json,
-          (json) => GetRecordingJobsResponseItem.fromJson(
-              json as Map<String, dynamic>));
+        json,
+        (json) =>
+            GetRecordingJobsResponseItem.fromJson(json as Map<String, dynamic>),
+      );
 }

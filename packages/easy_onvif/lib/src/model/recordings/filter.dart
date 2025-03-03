@@ -21,10 +21,7 @@ class Filter implements XmlSerializable {
   @JsonKey(name: 'Source', fromJson: OnvifUtil.stringMappedFromXml)
   final String? source;
 
-  Filter({
-    required this.topic,
-    this.source,
-  });
+  Filter({required this.topic, this.source});
 
   factory Filter.fromJson(Map<String, dynamic> json) => _$FilterFromJson(json);
 
@@ -38,12 +35,14 @@ class Filter implements XmlSerializable {
     XmlBuilder builder, {
     String tag = 'Filter',
     String? namespace = Xmlns.tt,
-  }) =>
-      builder.element(tag, nest: () {
-        builder.namespace(namespace!);
+  }) => builder.element(
+    tag,
+    nest: () {
+      builder.namespace(namespace!);
 
-        topic.buildXml(builder, tag: 'Topic', namespace: Xmlns.tt);
+      topic.buildXml(builder, tag: 'Topic', namespace: Xmlns.tt);
 
-        source?.buildXml(builder, tag: 'Source', namespace: Xmlns.tt);
-      });
+      source?.buildXml(builder, tag: 'Source', namespace: Xmlns.tt);
+    },
+  );
 }

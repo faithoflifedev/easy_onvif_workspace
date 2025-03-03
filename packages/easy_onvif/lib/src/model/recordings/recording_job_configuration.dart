@@ -17,7 +17,9 @@ class RecordingJobConfiguration implements XmlSerializable {
   /// job. If this optional field is provided the job shall only record if the
   /// schedule exists and is active.
   @JsonKey(
-      name: 'ScheduleToken', fromJson: OnvifUtil.nullableStringMappedFromXml)
+    name: 'ScheduleToken',
+    fromJson: OnvifUtil.nullableStringMappedFromXml,
+  )
   final String? scheduleToken;
 
   /// Identifies the recording to which this job shall store the received data.
@@ -62,38 +64,49 @@ class RecordingJobConfiguration implements XmlSerializable {
   String toString() => json.encode(toJson());
 
   static RecordingJobConfigurationMode _recordingJobConfiguration(
-          dynamic json) =>
-      $enumDecode(_$RecordingJobConfigurationModeEnumMap,
-          OnvifUtil.stringMappedFromXml(json));
+    dynamic json,
+  ) => $enumDecode(
+    _$RecordingJobConfigurationModeEnumMap,
+    OnvifUtil.stringMappedFromXml(json),
+  );
 
   @override
   void buildXml(
     XmlBuilder builder, {
     String tag = 'JobConfiguration',
     String? namespace = Xmlns.trc,
-  }) =>
-      builder.element(tag, nest: () {
-        builder.namespace(namespace!);
+  }) => builder.element(
+    tag,
+    nest: () {
+      builder.namespace(namespace!);
 
-        if (scheduleToken != null) {
-          ReferenceToken(scheduleToken!)
-              .buildXml(builder, tag: 'ScheduleToken', namespace: Xmlns.trc);
-        }
+      if (scheduleToken != null) {
+        ReferenceToken(
+          scheduleToken!,
+        ).buildXml(builder, tag: 'ScheduleToken', namespace: Xmlns.trc);
+      }
 
-        ReferenceToken(recordingToken)
-            .buildXml(builder, tag: 'RecordingToken', namespace: Xmlns.trc);
+      ReferenceToken(
+        recordingToken,
+      ).buildXml(builder, tag: 'RecordingToken', namespace: Xmlns.trc);
 
-        _$RecordingJobConfigurationModeEnumMap[mode]!
-            .buildXml(builder, tag: 'Mode', namespace: Xmlns.trc);
+      _$RecordingJobConfigurationModeEnumMap[mode]!.buildXml(
+        builder,
+        tag: 'Mode',
+        namespace: Xmlns.trc,
+      );
 
-        priority
-            .toString()
-            .buildXml(builder, tag: 'Priority', namespace: Xmlns.trc);
+      priority.toString().buildXml(
+        builder,
+        tag: 'Priority',
+        namespace: Xmlns.trc,
+      );
 
-        source?.buildXml(builder);
+      source?.buildXml(builder);
 
-        eventFilter?.buildXml(builder);
-      });
+      eventFilter?.buildXml(builder);
+    },
+  );
 }
 
 enum RecordingJobConfigurationMode {

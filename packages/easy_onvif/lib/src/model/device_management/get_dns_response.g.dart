@@ -12,6 +12,4 @@ GetDnsResponse _$GetDnsResponseFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$GetDnsResponseToJson(GetDnsResponse instance) =>
-    <String, dynamic>{
-      'DNSInformation': instance.dnsInformation,
-    };
+    <String, dynamic>{'DNSInformation': instance.dnsInformation};

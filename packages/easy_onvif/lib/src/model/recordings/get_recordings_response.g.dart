@@ -7,13 +7,11 @@ part of 'get_recordings_response.dart';
 // **************************************************************************
 
 GetRecordingsResponse _$GetRecordingsResponseFromJson(
-        Map<String, dynamic> json) =>
-    GetRecordingsResponse(
-      recordingItems: GetRecordingsResponse._fromJson(json['RecordingItem']),
-    );
+  Map<String, dynamic> json,
+) => GetRecordingsResponse(
+  recordingItems: GetRecordingsResponse._fromJson(json['RecordingItem']),
+);
 
 Map<String, dynamic> _$GetRecordingsResponseToJson(
-        GetRecordingsResponse instance) =>
-    <String, dynamic>{
-      'RecordingItem': instance.recordingItems,
-    };
+  GetRecordingsResponse instance,
+) => <String, dynamic>{'RecordingItem': instance.recordingItems};

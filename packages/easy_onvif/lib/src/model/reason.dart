@@ -7,18 +7,17 @@ class Reason {
 
   final String? note;
 
-  Reason({
-    this.lang,
-    this.note,
-  });
+  Reason({this.lang, this.note});
 
   factory Reason.fromJson(Map<String, dynamic> json) => Reason(
-        lang: json['Text']['@xml:lang'],
-        note: OnvifUtil.stringMappedFromXml(json['Text']),
-      );
+    lang: json['Text']['@xml:lang'],
+    note: OnvifUtil.stringMappedFromXml(json['Text']),
+  );
 
-  Map<String, dynamic> toJson() =>
-      <String, dynamic>{'lang': lang, 'note': note};
+  Map<String, dynamic> toJson() => <String, dynamic>{
+    'lang': lang,
+    'note': note,
+  };
 
   @override
   String toString() => json.encode(toJson());

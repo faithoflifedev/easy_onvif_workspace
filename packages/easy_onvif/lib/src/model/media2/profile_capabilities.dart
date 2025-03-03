@@ -9,15 +9,14 @@ part 'profile_capabilities.g.dart';
 @JsonSerializable()
 class ProfileCapabilities {
   /// Indicates support for live media streaming via RTSP.
-  @JsonKey(
-    name: '@MaximumNumberOfProfiles',
-    fromJson: int.parse,
-  )
+  @JsonKey(name: '@MaximumNumberOfProfiles', fromJson: int.parse)
   final int maximumNumberOfProfiles;
 
   /// Indicates support for RTP multicast.
   @JsonKey(
-      name: 'ConfigurationsSupported', fromJson: OnvifUtil.nullableStringToList)
+    name: 'ConfigurationsSupported',
+    fromJson: OnvifUtil.nullableStringToList,
+  )
   final List<String>? configurationsSupported;
 
   ProfileCapabilities({

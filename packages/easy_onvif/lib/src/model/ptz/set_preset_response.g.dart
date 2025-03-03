@@ -9,10 +9,9 @@ part of 'set_preset_response.dart';
 SetPresetResponse _$SetPresetResponseFromJson(Map<String, dynamic> json) =>
     SetPresetResponse(
       presetToken: OnvifUtil.stringMappedFromXml(
-          json['PresetToken'] as Map<String, dynamic>),
+        json['PresetToken'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$SetPresetResponseToJson(SetPresetResponse instance) =>
-    <String, dynamic>{
-      'PresetToken': instance.presetToken,
-    };
+    <String, dynamic>{'PresetToken': instance.presetToken};

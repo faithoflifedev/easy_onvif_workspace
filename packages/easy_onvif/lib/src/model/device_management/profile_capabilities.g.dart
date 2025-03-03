@@ -9,11 +9,12 @@ part of 'profile_capabilities.dart';
 ProfileCapabilities _$ProfileCapabilitiesFromJson(Map<String, dynamic> json) =>
     ProfileCapabilities(
       maximumNumberOfProfiles: OnvifUtil.intMappedFromXml(
-          json['MaximumNumberOfProfiles'] as Map<String, dynamic>),
+        json['MaximumNumberOfProfiles'] as Map<String, dynamic>,
+      ),
     );
 
 Map<String, dynamic> _$ProfileCapabilitiesToJson(
-        ProfileCapabilities instance) =>
-    <String, dynamic>{
-      'MaximumNumberOfProfiles': instance.maximumNumberOfProfiles,
-    };
+  ProfileCapabilities instance,
+) => <String, dynamic>{
+  'MaximumNumberOfProfiles': instance.maximumNumberOfProfiles,
+};

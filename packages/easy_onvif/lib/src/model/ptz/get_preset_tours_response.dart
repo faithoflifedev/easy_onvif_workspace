@@ -25,5 +25,7 @@ class GetPresetToursResponse {
 
   static List<PresetTour> _fromJson(dynamic json) =>
       OnvifUtil.jsonList<PresetTour>(
-          json, (json) => PresetTour.fromJson(json as Map<String, dynamic>));
+        json,
+        (json) => PresetTour.fromJson(json as Map<String, dynamic>),
+      );
 }

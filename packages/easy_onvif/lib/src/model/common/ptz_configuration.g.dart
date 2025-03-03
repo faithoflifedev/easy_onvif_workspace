@@ -6,55 +6,64 @@ part of 'ptz_configuration.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PtzConfiguration _$PtzConfigurationFromJson(Map<String, dynamic> json) =>
-    PtzConfiguration(
-      token: json['@token'] as String,
-      name: OnvifUtil.stringMappedFromXml(json['Name'] as Map<String, dynamic>),
-      useCount:
-          OnvifUtil.intMappedFromXml(json['UseCount'] as Map<String, dynamic>),
-      moveRamp: OnvifUtil.nullableIntMappedFromXml(
-          json['MoveRamp'] as Map<String, dynamic>?),
-      presetRamp: OnvifUtil.nullableIntMappedFromXml(
-          json['PresetRamp'] as Map<String, dynamic>?),
-      presetTourRamp: OnvifUtil.nullableIntMappedFromXml(
-          json['PresetTourRamp'] as Map<String, dynamic>?),
-      nodeToken: OnvifUtil.stringMappedFromXml(
-          json['NodeToken'] as Map<String, dynamic>),
-      defaultAbsolutePantTiltPositionSpace:
-          PtzConfiguration._nullableMappedToSpace(
-              json['DefaultAbsolutePantTiltPositionSpace']
-                  as Map<String, dynamic>?),
-      defaultAbsoluteZoomPositionSpace: PtzConfiguration._nullableMappedToSpace(
-          json['DefaultAbsoluteZoomPositionSpace'] as Map<String, dynamic>?),
-      defaultRelativePanTiltTranslationSpace:
-          PtzConfiguration._nullableMappedToSpace(
-              json['DefaultRelativePanTiltTranslationSpace']
-                  as Map<String, dynamic>?),
-      defaultRelativeZoomTranslationSpace:
-          PtzConfiguration._nullableMappedToSpace(
-              json['DefaultRelativeZoomTranslationSpace']
-                  as Map<String, dynamic>?),
-      defaultContinuousPanTiltVelocitySpace:
-          PtzConfiguration._nullableMappedToSpace(
-              json['DefaultContinuousPanTiltVelocitySpace']
-                  as Map<String, dynamic>?),
-      defaultContinuousZoomVelocitySpace:
-          PtzConfiguration._nullableMappedToSpace(
-              json['DefaultContinuousZoomVelocitySpace']
-                  as Map<String, dynamic>?),
-      defaultPtzSpeed: json['PtzSpeed'] == null
+PtzConfiguration _$PtzConfigurationFromJson(
+  Map<String, dynamic> json,
+) => PtzConfiguration(
+  token: json['@token'] as String,
+  name: OnvifUtil.stringMappedFromXml(json['Name'] as Map<String, dynamic>),
+  useCount: OnvifUtil.intMappedFromXml(
+    json['UseCount'] as Map<String, dynamic>,
+  ),
+  moveRamp: OnvifUtil.nullableIntMappedFromXml(
+    json['MoveRamp'] as Map<String, dynamic>?,
+  ),
+  presetRamp: OnvifUtil.nullableIntMappedFromXml(
+    json['PresetRamp'] as Map<String, dynamic>?,
+  ),
+  presetTourRamp: OnvifUtil.nullableIntMappedFromXml(
+    json['PresetTourRamp'] as Map<String, dynamic>?,
+  ),
+  nodeToken: OnvifUtil.stringMappedFromXml(
+    json['NodeToken'] as Map<String, dynamic>,
+  ),
+  defaultAbsolutePantTiltPositionSpace: PtzConfiguration._nullableMappedToSpace(
+    json['DefaultAbsolutePantTiltPositionSpace'] as Map<String, dynamic>?,
+  ),
+  defaultAbsoluteZoomPositionSpace: PtzConfiguration._nullableMappedToSpace(
+    json['DefaultAbsoluteZoomPositionSpace'] as Map<String, dynamic>?,
+  ),
+  defaultRelativePanTiltTranslationSpace:
+      PtzConfiguration._nullableMappedToSpace(
+        json['DefaultRelativePanTiltTranslationSpace'] as Map<String, dynamic>?,
+      ),
+  defaultRelativeZoomTranslationSpace: PtzConfiguration._nullableMappedToSpace(
+    json['DefaultRelativeZoomTranslationSpace'] as Map<String, dynamic>?,
+  ),
+  defaultContinuousPanTiltVelocitySpace:
+      PtzConfiguration._nullableMappedToSpace(
+        json['DefaultContinuousPanTiltVelocitySpace'] as Map<String, dynamic>?,
+      ),
+  defaultContinuousZoomVelocitySpace: PtzConfiguration._nullableMappedToSpace(
+    json['DefaultContinuousZoomVelocitySpace'] as Map<String, dynamic>?,
+  ),
+  defaultPtzSpeed:
+      json['PtzSpeed'] == null
           ? null
           : PtzSpeed.fromJson(json['PtzSpeed'] as Map<String, dynamic>),
-      defaultPtzTimeout: OnvifUtil.nullableStringMappedFromXml(
-          json['DefaultPTZTimeout'] as Map<String, dynamic>?),
-      panTiltLimits: json['PanTiltLimits'] == null
+  defaultPtzTimeout: OnvifUtil.nullableStringMappedFromXml(
+    json['DefaultPTZTimeout'] as Map<String, dynamic>?,
+  ),
+  panTiltLimits:
+      json['PanTiltLimits'] == null
           ? null
           : PanTiltLimits.fromJson(
-              json['PanTiltLimits'] as Map<String, dynamic>),
-      zoomLimits: json['ZoomLimits'] == null
+            json['PanTiltLimits'] as Map<String, dynamic>,
+          ),
+  zoomLimits:
+      json['ZoomLimits'] == null
           ? null
           : ZoomLimits.fromJson(json['ZoomLimits'] as Map<String, dynamic>),
-    );
+);
 
 Map<String, dynamic> _$PtzConfigurationToJson(PtzConfiguration instance) =>
     <String, dynamic>{

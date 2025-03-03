@@ -31,12 +31,14 @@ class PtzSpeed implements XmlSerializable {
     XmlBuilder builder, {
     String tag = 'PtzSpeed',
     String? namespace = Xmlns.tt,
-  }) =>
-      builder.element(tag, nest: () {
-        builder.namespace(namespace!);
+  }) => builder.element(
+    tag,
+    nest: () {
+      builder.namespace(namespace!);
 
-        panTilt?.buildXml(builder, tag: 'PanTilt');
+      panTilt?.buildXml(builder, tag: 'PanTilt');
 
-        zoom?.buildXml(builder, tag: 'Zoom');
-      });
+      zoom?.buildXml(builder, tag: 'Zoom');
+    },
+  );
 }

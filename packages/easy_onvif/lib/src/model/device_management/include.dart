@@ -9,9 +9,7 @@ class Include {
   @JsonKey(name: '@href')
   final String href;
 
-  Include({
-    required this.href,
-  });
+  Include({required this.href});
 
   factory Include.fromJson(Map<String, dynamic> json) =>
       _$IncludeFromJson(json);

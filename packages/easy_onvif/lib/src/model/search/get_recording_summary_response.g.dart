@@ -7,14 +7,11 @@ part of 'get_recording_summary_response.dart';
 // **************************************************************************
 
 GetRecordingSummaryResponse _$GetRecordingSummaryResponseFromJson(
-        Map<String, dynamic> json) =>
-    GetRecordingSummaryResponse(
-      summary:
-          RecordingSummary.fromJson(json['Summary'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => GetRecordingSummaryResponse(
+  summary: RecordingSummary.fromJson(json['Summary'] as Map<String, dynamic>),
+);
 
 Map<String, dynamic> _$GetRecordingSummaryResponseToJson(
-        GetRecordingSummaryResponse instance) =>
-    <String, dynamic>{
-      'Summary': instance.summary,
-    };
+  GetRecordingSummaryResponse instance,
+) => <String, dynamic>{'Summary': instance.summary};

@@ -14,10 +14,7 @@ class StorageConfiguration {
   @JsonKey(name: 'Data')
   final StorageConfigurationData data;
 
-  StorageConfiguration({
-    required this.token,
-    required this.data,
-  });
+  StorageConfiguration({required this.token, required this.data});
 
   factory StorageConfiguration.fromJson(Map<String, dynamic> json) =>
       _$StorageConfigurationFromJson(json);

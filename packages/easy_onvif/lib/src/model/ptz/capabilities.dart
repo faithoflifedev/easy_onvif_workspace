@@ -17,8 +17,9 @@ class Capabilities {
 
   /// Indicates support for the GetCompatibleConfigurations command.
   @JsonKey(
-      name: '@GetCompatibleConfigurations',
-      fromJson: OnvifUtil.nullableStringToBool)
+    name: '@GetCompatibleConfigurations',
+    fromJson: OnvifUtil.nullableStringToBool,
+  )
   final bool? getCompatibleConfigurations;
 
   /// Indicates that the PTZStatus includes Position information.

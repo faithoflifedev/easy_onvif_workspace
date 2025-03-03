@@ -24,8 +24,8 @@ class GetVideoSourceConfigurationOptionsResponse {
   GetVideoSourceConfigurationOptionsResponse({required this.options});
 
   factory GetVideoSourceConfigurationOptionsResponse.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetVideoSourceConfigurationOptionsResponseFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$GetVideoSourceConfigurationOptionsResponseFromJson(json);
 
   Map<String, dynamic> toJson() =>
       _$GetVideoSourceConfigurationOptionsResponseToJson(this);

@@ -7,13 +7,11 @@ part of 'get_video_encoder_instances_response.dart';
 // **************************************************************************
 
 GetVideoEncoderInstancesResponse _$GetVideoEncoderInstancesResponseFromJson(
-        Map<String, dynamic> json) =>
-    GetVideoEncoderInstancesResponse(
-      info: Info.fromJson(json['Info'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => GetVideoEncoderInstancesResponse(
+  info: Info.fromJson(json['Info'] as Map<String, dynamic>),
+);
 
 Map<String, dynamic> _$GetVideoEncoderInstancesResponseToJson(
-        GetVideoEncoderInstancesResponse instance) =>
-    <String, dynamic>{
-      'Info': instance.info,
-    };
+  GetVideoEncoderInstancesResponse instance,
+) => <String, dynamic>{'Info': instance.info};

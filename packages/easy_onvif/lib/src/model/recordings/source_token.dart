@@ -23,10 +23,7 @@ class SourceToken implements XmlSerializable {
   @JsonKey(name: 'Token', fromJson: OnvifUtil.stringMappedFromXml)
   final String token;
 
-  SourceToken({
-    this.type,
-    required this.token,
-  });
+  SourceToken({this.type, required this.token});
 
   factory SourceToken.fromJson(Map<String, dynamic> json) =>
       _$SourceTokenFromJson(json);
@@ -41,13 +38,16 @@ class SourceToken implements XmlSerializable {
     XmlBuilder builder, {
     String tag = 'SourceToken',
     String? namespace = Xmlns.tt,
-  }) =>
-      builder.element(tag, nest: () {
-        builder.namespace(namespace!);
+  }) => builder.element(
+    tag,
+    nest: () {
+      builder.namespace(namespace!);
 
-        type?.buildXml(builder, tag: 'Type', namespace: Xmlns.tt);
+      type?.buildXml(builder, tag: 'Type', namespace: Xmlns.tt);
 
-        ReferenceToken(token)
-            .buildXml(builder, tag: 'Token', namespace: Xmlns.tt);
-      });
+      ReferenceToken(
+        token,
+      ).buildXml(builder, tag: 'Token', namespace: Xmlns.tt);
+    },
+  );
 }

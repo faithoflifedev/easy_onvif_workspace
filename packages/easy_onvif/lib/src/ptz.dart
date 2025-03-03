@@ -30,10 +30,7 @@ class Ptz extends Operation {
   PtzSpeed? defaultSpeed;
   ZoomLimits? defaultZoomLimits;
 
-  Ptz({
-    required super.transport,
-    required super.uri,
-  });
+  Ptz({required super.transport, required super.uri});
 
   /// Operation to move pan,tilt or zoom to a absolute destination.
   ///
@@ -51,14 +48,15 @@ class Ptz extends Operation {
     loggy.debug('absoluteMove');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: PtzRequest.absoluteMove(
-            profileToken,
-            position: position,
-            speed: speed,
-          ),
-        ));
+      uri,
+      soap.Body(
+        request: PtzRequest.absoluteMove(
+          profileToken,
+          position: position,
+          speed: speed,
+        ),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -81,14 +79,15 @@ class Ptz extends Operation {
     loggy.debug('continuousMove');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: PtzRequest.continuousMove(
-            profileToken,
-            velocity: velocity,
-            timeout: timeout,
-          ),
-        ));
+      uri,
+      soap.Body(
+        request: PtzRequest.continuousMove(
+          profileToken,
+          velocity: velocity,
+          timeout: timeout,
+        ),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -108,22 +107,22 @@ class Ptz extends Operation {
   ///
   /// ACCESS CLASS: READ_MEDIA
   Future<List<PtzConfiguration>> getCompatibleConfigurations(
-      String profileToken) async {
+    String profileToken,
+  ) async {
     loggy.debug('getCompatibleConfigurations');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: PtzRequest.getCompatibleConfigurations(profileToken),
-        ));
+      uri,
+      soap.Body(request: PtzRequest.getCompatibleConfigurations(profileToken)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetCompatibleConfigurationsResponse.fromJson(
-            responseEnvelope.body.response!)
-        .ptzConfigurations;
+      responseEnvelope.body.response!,
+    ).ptzConfigurations;
   }
 
   /// Get a specific PTZconfiguration from the device, identified by its reference token or name.
@@ -152,17 +151,17 @@ class Ptz extends Operation {
     loggy.debug('getConfiguration');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: PtzRequest.getConfiguration(referenceToken),
-        ));
+      uri,
+      soap.Body(request: PtzRequest.getConfiguration(referenceToken)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetConfigurationResponse.fromJson(responseEnvelope.body.response!)
-        .ptzConfiguration;
+    return GetConfigurationResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).ptzConfiguration;
   }
 
   /// List supported coordinate systems including their range limitations.
@@ -176,22 +175,24 @@ class Ptz extends Operation {
   ///
   /// ACCESS CLASS: READ_MEDIA
   Future<PtzConfigurationOptions> getConfigurationOptions(
-      String configurationToken) async {
+    String configurationToken,
+  ) async {
     loggy.debug('getConfigurationOptions');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: PtzRequest.getConfigurationOptions(configurationToken),
-        ));
+      uri,
+      soap.Body(
+        request: PtzRequest.getConfigurationOptions(configurationToken),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetConfigurationOptionsResponse.fromJson(
-            responseEnvelope.body.response!)
-        .ptzConfigurationOptions;
+      responseEnvelope.body.response!,
+    ).ptzConfigurationOptions;
   }
 
   /// Get all the existing PTZConfigurations from the device.
@@ -220,16 +221,16 @@ class Ptz extends Operation {
     loggy.debug('getConfigurations');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: PtzRequest.getConfigurations(),
-        ));
+      uri,
+      soap.Body(request: PtzRequest.getConfigurations()),
+    );
 
     if (responseEnvelope.body.response == null) throw Exception();
 
     final ptzConfigurations =
-        GetConfigurationsResponse.fromJson(responseEnvelope.body.response!)
-            .ptzConfigurations;
+        GetConfigurationsResponse.fromJson(
+          responseEnvelope.body.response!,
+        ).ptzConfigurations;
 
     _clearDefaults();
 
@@ -251,15 +252,16 @@ class Ptz extends Operation {
   /// PTZ preset by the [Preset].
   ///
   /// ACCESS CLASS: READ_MEDIA
-  Future<List<Preset>> getPresets(String profileToken,
-      {int? limit = 100}) async {
+  Future<List<Preset>> getPresets(
+    String profileToken, {
+    int? limit = 100,
+  }) async {
     loggy.debug('getPresets');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: PtzRequest.getPresets(profileToken),
-        ));
+      uri,
+      soap.Body(request: PtzRequest.getPresets(profileToken)),
+    );
 
     if (responseEnvelope.body.response == null) throw Exception();
 
@@ -282,18 +284,20 @@ class Ptz extends Operation {
     loggy.debug('getPresetTour');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: PtzRequest.getPresetTour(
-            profileToken,
-            presetTourToken: presetTourToken,
-          ),
-        ));
+      uri,
+      soap.Body(
+        request: PtzRequest.getPresetTour(
+          profileToken,
+          presetTourToken: presetTourToken,
+        ),
+      ),
+    );
 
     if (responseEnvelope.body.response == null) throw Exception();
 
-    return GetPresetTourResponse.fromJson(responseEnvelope.body.response!)
-        .presetTour;
+    return GetPresetTourResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).presetTour;
   }
 
   /// Operation to request PTZ preset tours in the selected media profiles.
@@ -303,15 +307,15 @@ class Ptz extends Operation {
     loggy.debug('getPresetTours');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: PtzRequest.getPresetTours(profileToken),
-        ));
+      uri,
+      soap.Body(request: PtzRequest.getPresetTours(profileToken)),
+    );
 
     if (responseEnvelope.body.response == null) throw Exception();
 
-    return GetPresetToursResponse.fromJson(responseEnvelope.body.response!)
-        .presetTours;
+    return GetPresetToursResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).presetTours;
   }
 
   /// Helper method
@@ -319,7 +323,7 @@ class Ptz extends Operation {
     loggy.debug('getPresetsMap');
 
     return {
-      for (var preset in await getPresets(profileToken)) preset.token: preset
+      for (var preset in await getPresets(profileToken)) preset.token: preset,
     };
   }
 
@@ -331,18 +335,17 @@ class Ptz extends Operation {
     loggy.debug('getServiceCapabilities');
 
     final responseEnvelope = await transport.request(
-        uri,
-        soap.Body(
-          request: PtzRequest.getServiceCapabilities(),
-        ));
+      uri,
+      soap.Body(request: PtzRequest.getServiceCapabilities()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetServiceCapabilitiesResponse.fromJson(
-            responseEnvelope.body.response!)
-        .capabilities;
+      responseEnvelope.body.response!,
+    ).capabilities;
   }
 
   /// Operation to request PTZ status for the Node in the selected profile.
@@ -352,17 +355,17 @@ class Ptz extends Operation {
     loggy.debug('getStatus');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: PtzRequest.getStatus(profileToken),
-        ));
+      uri,
+      soap.Body(request: PtzRequest.getStatus(profileToken)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetStatusResponse.fromJson(responseEnvelope.body.response!)
-        .ptzStatus;
+    return GetStatusResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).ptzStatus;
   }
 
   /// Operation to move the PTZ device to it's "home" position. The operation is
@@ -373,13 +376,11 @@ class Ptz extends Operation {
     loggy.debug('gotoHomePosition');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: PtzRequest.gotoHomePosition(
-            profileToken,
-            speed: speed,
-          ),
-        ));
+      uri,
+      soap.Body(
+        request: PtzRequest.gotoHomePosition(profileToken, speed: speed),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -401,14 +402,15 @@ class Ptz extends Operation {
     loggy.debug('gotoPreset');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: PtzRequest.gotoPreset(
-            profileToken,
-            presetToken: presetToken,
-            speed: speed,
-          ),
-        ));
+      uri,
+      soap.Body(
+        request: PtzRequest.gotoPreset(
+          profileToken,
+          presetToken: presetToken,
+          speed: speed,
+        ),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -445,18 +447,19 @@ class Ptz extends Operation {
       final ptzStatus = await getStatus(profileToken);
       if (ptzStatus.position.panTilt != null) {
         panTilt = Vector2D(
-            x: _limitValue(
-              ptzStatus.position.panTilt!.x,
-              direction.x,
-              defaultPanTiltLimits?.range.xRange.min ?? -1,
-              defaultPanTiltLimits?.range.xRange.max ?? 1,
-            ),
-            y: _limitValue(
-              ptzStatus.position.panTilt!.y,
-              direction.y,
-              defaultPanTiltLimits?.range.yRange.min ?? -1,
-              defaultPanTiltLimits?.range.yRange.max ?? 1,
-            ));
+          x: _limitValue(
+            ptzStatus.position.panTilt!.x,
+            direction.x,
+            defaultPanTiltLimits?.range.xRange.min ?? -1,
+            defaultPanTiltLimits?.range.xRange.max ?? 1,
+          ),
+          y: _limitValue(
+            ptzStatus.position.panTilt!.y,
+            direction.y,
+            defaultPanTiltLimits?.range.yRange.min ?? -1,
+            defaultPanTiltLimits?.range.yRange.max ?? 1,
+          ),
+        );
       } else {
         panTilt = Vector2D(
           x: ptzStatus.position.panTilt!.x,
@@ -466,16 +469,19 @@ class Ptz extends Operation {
 
       if (ptzStatus.position.zoom != null) {
         zoomAdjust = Vector1D(
-            x: _limitValue(
-          ptzStatus.position.zoom!.x,
-          zoomAdjust.x,
-          defaultZoomLimits?.range.xRange.min ?? 0,
-          defaultZoomLimits?.range.xRange.max ?? 1,
-        ));
+          x: _limitValue(
+            ptzStatus.position.zoom!.x,
+            zoomAdjust.x,
+            defaultZoomLimits?.range.xRange.min ?? 0,
+            defaultZoomLimits?.range.xRange.max ?? 1,
+          ),
+        );
       }
 
-      await absoluteMove(profileToken,
-          position: PtzVector(panTilt: panTilt, zoom: zoomAdjust));
+      await absoluteMove(
+        profileToken,
+        position: PtzVector(panTilt: panTilt, zoom: zoomAdjust),
+      );
     }
   }
 
@@ -524,21 +530,26 @@ class Ptz extends Operation {
   ///
   /// ACCESS CLASS: ACTUATE
   Future<bool> relativeMove(
-      String profileToken, PtzVector translation, PtzSpeed? speed) async {
+    String profileToken,
+    PtzVector translation,
+    PtzSpeed? speed,
+  ) async {
     loggy.debug('relativeMove');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: PtzRequest.relativeMove(
-            profileToken,
-            translation: translation,
-            speed: speed,
-          ),
-        ));
+      uri,
+      soap.Body(
+        request: PtzRequest.relativeMove(
+          profileToken,
+          translation: translation,
+          speed: speed,
+        ),
+      ),
+    );
 
-    return responseEnvelope.body.response
-            ?.containsKey('RelativeMoveResponse') ??
+    return responseEnvelope.body.response?.containsKey(
+          'RelativeMoveResponse',
+        ) ??
         false;
   }
 
@@ -547,18 +558,20 @@ class Ptz extends Operation {
   /// in the selected profile.
   ///
   /// ACCESS CLASS: ACTUATE
-  Future<bool> removePreset(String profileToken,
-      {required Preset preset}) async {
+  Future<bool> removePreset(
+    String profileToken, {
+    required Preset preset,
+  }) async {
     loggy.debug('removePreset');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: PtzRequest.removePreset(profileToken, preset: preset),
-        ));
+      uri,
+      soap.Body(request: PtzRequest.removePreset(profileToken, preset: preset)),
+    );
 
-    return responseEnvelope.body.response
-            ?.containsKey('RemovePresetResponse') ??
+    return responseEnvelope.body.response?.containsKey(
+          'RemovePresetResponse',
+        ) ??
         false;
   }
 
@@ -572,13 +585,13 @@ class Ptz extends Operation {
     loggy.debug('setHomePosition');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: PtzRequest.setHomePosition(profileToken),
-        ));
+      uri,
+      soap.Body(request: PtzRequest.setHomePosition(profileToken)),
+    );
 
-    return responseEnvelope.body.response
-            ?.containsKey('SetHomePositionResponse') ??
+    return responseEnvelope.body.response?.containsKey(
+          'SetHomePositionResponse',
+        ) ??
         false;
   }
 
@@ -603,21 +616,23 @@ class Ptz extends Operation {
     loggy.debug('setPreset');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: PtzRequest.setPreset(
-            profileToken,
-            presetName: presetName,
-            presetToken: presetToken,
-          ),
-        ));
+      uri,
+      soap.Body(
+        request: PtzRequest.setPreset(
+          profileToken,
+          presetName: presetName,
+          presetToken: presetToken,
+        ),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return SetPresetResponse.fromJson(responseEnvelope.body.response!)
-        .presetToken;
+    return SetPresetResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).presetToken;
   }
 
   /// Operation to stop ongoing pan, tilt and zoom movements of absolute
@@ -625,15 +640,19 @@ class Ptz extends Operation {
   /// set, the device will stop all ongoing pan, tilt and zoom movements.
   ///
   /// ACCESS CLASS: ACTUATE
-  Future<bool> stop(String profileToken,
-      {bool panTilt = true, bool zoom = true}) async {
+  Future<bool> stop(
+    String profileToken, {
+    bool panTilt = true,
+    bool zoom = true,
+  }) async {
     loggy.debug('stop');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: PtzRequest.stop(profileToken, panTilt: panTilt, zoom: zoom),
-        ));
+      uri,
+      soap.Body(
+        request: PtzRequest.stop(profileToken, panTilt: panTilt, zoom: zoom),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
@@ -646,11 +665,7 @@ class Ptz extends Operation {
   Future<void> zoom(String profileToken, Vector1D zoom) async {
     loggy.debug('zoom');
 
-    await move(
-      profileToken,
-      direction: Vector2D(y: 0, x: 0),
-      zoom: zoom,
-    );
+    await move(profileToken, direction: Vector2D(y: 0, x: 0), zoom: zoom);
   }
 
   /// A helper method to perform a single [step] of a [relativeMove] on the
@@ -686,7 +701,8 @@ class Ptz extends Operation {
 
     if (presets.first.position == null) {
       throw Exception(
-          'Preset position is not available, the getCurrentPreset method can not be used on this device.');
+        'Preset position is not available, the getCurrentPreset method can not be used on this device.',
+      );
     }
 
     final ptzStatus = await getStatus(profileToken);
@@ -708,14 +724,20 @@ class Ptz extends Operation {
   }
 
   bool _matchPositionSettings(Preset preset, PtzStatus ptzStatus) {
-    bool matchX =
-        _matchValue(preset.position!.panTilt!.x, ptzStatus.position.panTilt!.x);
+    bool matchX = _matchValue(
+      preset.position!.panTilt!.x,
+      ptzStatus.position.panTilt!.x,
+    );
 
-    bool matchY =
-        _matchValue(preset.position!.panTilt!.y, ptzStatus.position.panTilt!.y);
+    bool matchY = _matchValue(
+      preset.position!.panTilt!.y,
+      ptzStatus.position.panTilt!.y,
+    );
 
-    bool matchZ =
-        _matchValue(preset.position!.zoom!.x, ptzStatus.position.zoom!.x);
+    bool matchZ = _matchValue(
+      preset.position!.zoom!.x,
+      ptzStatus.position.zoom!.x,
+    );
 
     return matchX && matchY && matchZ;
   }

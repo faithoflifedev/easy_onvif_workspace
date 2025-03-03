@@ -13,7 +13,4 @@ RecordingOptions _$RecordingOptionsFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$RecordingOptionsToJson(RecordingOptions instance) =>
-    <String, dynamic>{
-      'Job': instance.job,
-      'Track': instance.track,
-    };
+    <String, dynamic>{'Job': instance.job, 'Track': instance.track};

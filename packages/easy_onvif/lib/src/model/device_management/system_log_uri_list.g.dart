@@ -7,11 +7,7 @@ part of 'system_log_uri_list.dart';
 // **************************************************************************
 
 SystemLogUriList _$SystemLogUriListFromJson(Map<String, dynamic> json) =>
-    SystemLogUriList(
-      systemLogs: SystemLogUriList._fromJson(json['SystemLog']),
-    );
+    SystemLogUriList(systemLogs: SystemLogUriList._fromJson(json['SystemLog']));
 
 Map<String, dynamic> _$SystemLogUriListToJson(SystemLogUriList instance) =>
-    <String, dynamic>{
-      'SystemLog': instance.systemLogs,
-    };
+    <String, dynamic>{'SystemLog': instance.systemLogs};

@@ -7,13 +7,11 @@ part of 'filter.dart';
 // **************************************************************************
 
 Filter _$FilterFromJson(Map<String, dynamic> json) => Filter(
-      topic:
-          OnvifUtil.stringMappedFromXml(json['Topic'] as Map<String, dynamic>),
-      source:
-          OnvifUtil.stringMappedFromXml(json['Source'] as Map<String, dynamic>),
-    );
+  topic: OnvifUtil.stringMappedFromXml(json['Topic'] as Map<String, dynamic>),
+  source: OnvifUtil.stringMappedFromXml(json['Source'] as Map<String, dynamic>),
+);
 
 Map<String, dynamic> _$FilterToJson(Filter instance) => <String, dynamic>{
-      'Topic': instance.topic,
-      'Source': instance.source,
-    };
+  'Topic': instance.topic,
+  'Source': instance.source,
+};

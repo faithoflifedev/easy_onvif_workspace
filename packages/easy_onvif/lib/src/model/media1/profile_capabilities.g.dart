@@ -8,8 +8,9 @@ part of 'profile_capabilities.dart';
 
 ProfileCapabilities _$ProfileCapabilitiesFromJson(Map<String, dynamic> json) =>
     ProfileCapabilities(
-      maximumNumberOfProfiles:
-          int.parse(json['@MaximumNumberOfProfiles'] as String),
+      maximumNumberOfProfiles: int.parse(
+        json['@MaximumNumberOfProfiles'] as String,
+      ),
       configurationEnumeration:
           (json['ConfigurationsSupported'] as List<dynamic>?)
               ?.map((e) => $enumDecode(_$ConfigurationEnumerationEnumMap, e))
@@ -17,13 +18,14 @@ ProfileCapabilities _$ProfileCapabilitiesFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$ProfileCapabilitiesToJson(
-        ProfileCapabilities instance) =>
-    <String, dynamic>{
-      '@MaximumNumberOfProfiles': instance.maximumNumberOfProfiles,
-      'ConfigurationsSupported': instance.configurationEnumeration
+  ProfileCapabilities instance,
+) => <String, dynamic>{
+  '@MaximumNumberOfProfiles': instance.maximumNumberOfProfiles,
+  'ConfigurationsSupported':
+      instance.configurationEnumeration
           ?.map((e) => _$ConfigurationEnumerationEnumMap[e]!)
           .toList(),
-    };
+};
 
 const _$ConfigurationEnumerationEnumMap = {
   ConfigurationEnumeration.all: 'All',

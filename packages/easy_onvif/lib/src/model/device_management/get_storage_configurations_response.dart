@@ -16,8 +16,8 @@ class GetStorageConfigurationsResponse {
   GetStorageConfigurationsResponse({required this.storageConfigurations});
 
   factory GetStorageConfigurationsResponse.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetStorageConfigurationsResponseFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$GetStorageConfigurationsResponseFromJson(json);
 
   Map<String, dynamic> toJson() =>
       _$GetStorageConfigurationsResponseToJson(this);
@@ -27,7 +27,7 @@ class GetStorageConfigurationsResponse {
 
   static List<StorageConfiguration> _fromJson(dynamic json) =>
       OnvifUtil.jsonList<StorageConfiguration>(
-          json,
-          (json) =>
-              StorageConfiguration.fromJson(json as Map<String, dynamic>));
+        json,
+        (json) => StorageConfiguration.fromJson(json as Map<String, dynamic>),
+      );
 }

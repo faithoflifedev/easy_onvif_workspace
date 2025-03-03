@@ -15,10 +15,7 @@ class PrefixedIpv6Address extends PrefixedIpAddress implements XmlSerializable {
   @JsonKey(name: 'Address')
   final String address;
 
-  PrefixedIpv6Address({
-    required this.address,
-    required super.prefixLength,
-  });
+  PrefixedIpv6Address({required this.address, required super.prefixLength});
 
   factory PrefixedIpv6Address.fromJson(Map<String, dynamic> json) =>
       _$PrefixedIpv6AddressFromJson(json);
@@ -34,12 +31,14 @@ class PrefixedIpv6Address extends PrefixedIpAddress implements XmlSerializable {
     XmlBuilder builder, {
     String tag = 'IPv4Address',
     String? namespace = Xmlns.tds,
-  }) =>
-      builder.element(tag, nest: () {
-        builder.namespace(namespace!);
+  }) => builder.element(
+    tag,
+    nest: () {
+      builder.namespace(namespace!);
 
-        address.buildXml(builder, tag: 'Address');
+      address.buildXml(builder, tag: 'Address');
 
-        prefixLength.toString().buildXml(builder, tag: 'PrefixLength');
-      });
+      prefixLength.toString().buildXml(builder, tag: 'PrefixLength');
+    },
+  );
 }

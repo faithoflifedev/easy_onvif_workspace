@@ -7,13 +7,11 @@ part of 'get_recording_jobs_response.dart';
 // **************************************************************************
 
 GetRecordingJobsResponse _$GetRecordingJobsResponseFromJson(
-        Map<String, dynamic> json) =>
-    GetRecordingJobsResponse(
-      jobItems: GetRecordingJobsResponse._fromJson(json['JobItem']),
-    );
+  Map<String, dynamic> json,
+) => GetRecordingJobsResponse(
+  jobItems: GetRecordingJobsResponse._fromJson(json['JobItem']),
+);
 
 Map<String, dynamic> _$GetRecordingJobsResponseToJson(
-        GetRecordingJobsResponse instance) =>
-    <String, dynamic>{
-      'JobItem': instance.jobItems,
-    };
+  GetRecordingJobsResponse instance,
+) => <String, dynamic>{'JobItem': instance.jobItems};

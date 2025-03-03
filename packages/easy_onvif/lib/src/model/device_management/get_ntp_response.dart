@@ -11,9 +11,7 @@ class GetNtpResponse {
   @JsonKey(name: 'NTPInformation')
   NtpInformation ntpInformation;
 
-  GetNtpResponse({
-    required this.ntpInformation,
-  });
+  GetNtpResponse({required this.ntpInformation});
 
   factory GetNtpResponse.fromJson(Map<String, dynamic> json) =>
       _$GetNtpResponseFromJson(json);

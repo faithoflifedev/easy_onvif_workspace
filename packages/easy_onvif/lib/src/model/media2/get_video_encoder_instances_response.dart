@@ -19,8 +19,8 @@ class GetVideoEncoderInstancesResponse {
   GetVideoEncoderInstancesResponse({required this.info});
 
   factory GetVideoEncoderInstancesResponse.fromJson(
-          Map<String, dynamic> json) =>
-      _$GetVideoEncoderInstancesResponseFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$GetVideoEncoderInstancesResponseFromJson(json);
 
   Map<String, dynamic> toJson() =>
       _$GetVideoEncoderInstancesResponseToJson(this);

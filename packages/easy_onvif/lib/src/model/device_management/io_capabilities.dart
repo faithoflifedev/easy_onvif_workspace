@@ -9,7 +9,9 @@ part 'io_capabilities.g.dart';
 class IoCapabilities {
   /// Number of input connectors.
   @JsonKey(
-      name: 'InputConnectors', fromJson: OnvifUtil.nullableIntMappedFromXml)
+    name: 'InputConnectors',
+    fromJson: OnvifUtil.nullableIntMappedFromXml,
+  )
   final int? inputConnectors;
 
   /// Number of relay outputs.
@@ -19,11 +21,7 @@ class IoCapabilities {
   @JsonKey(name: 'Extension')
   Map<String, dynamic>? extension;
 
-  IoCapabilities({
-    this.inputConnectors,
-    this.relayOutputs,
-    this.extension,
-  });
+  IoCapabilities({this.inputConnectors, this.relayOutputs, this.extension});
 
   factory IoCapabilities.fromJson(Map<String, dynamic> json) =>
       _$IoCapabilitiesFromJson(json);

@@ -60,11 +60,15 @@ class RecordingInformation {
   String toString() => json.encode(toJson());
 
   static List<TrackInformation> _fromJson(dynamic json) =>
-      OnvifUtil.jsonList<TrackInformation>(json,
-          (json) => TrackInformation.fromJson(json as Map<String, dynamic>));
+      OnvifUtil.jsonList<TrackInformation>(
+        json,
+        (json) => TrackInformation.fromJson(json as Map<String, dynamic>),
+      );
 
   static RecordingStatus _recordingStatus(dynamic json) => $enumDecode(
-      _$RecordingStatusEnumMap, OnvifUtil.stringMappedFromXml(json));
+    _$RecordingStatusEnumMap,
+    OnvifUtil.stringMappedFromXml(json),
+  );
 }
 
 enum RecordingStatus {

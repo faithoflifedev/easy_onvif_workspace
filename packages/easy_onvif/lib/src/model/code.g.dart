@@ -7,12 +7,13 @@ part of 'code.dart';
 // **************************************************************************
 
 Code _$CodeFromJson(Map<String, dynamic> json) => Code(
-      value: OnvifUtil.nullableStringMappedFromXml(
-          json['Value'] as Map<String, dynamic>?),
-      subCode: json['Subcode'] as Map<String, dynamic>?,
-    );
+  value: OnvifUtil.nullableStringMappedFromXml(
+    json['Value'] as Map<String, dynamic>?,
+  ),
+  subCode: json['Subcode'] as Map<String, dynamic>?,
+);
 
 Map<String, dynamic> _$CodeToJson(Code instance) => <String, dynamic>{
-      'Value': instance.value,
-      'Subcode': instance.subCode,
-    };
+  'Value': instance.value,
+  'Subcode': instance.subCode,
+};

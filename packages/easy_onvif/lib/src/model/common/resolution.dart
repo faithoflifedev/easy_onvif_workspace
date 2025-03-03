@@ -6,7 +6,6 @@ import 'package:json_annotation/json_annotation.dart';
 part 'resolution.g.dart';
 
 @JsonSerializable()
-
 ///Configured video resolution
 class Resolution {
   ///Number of the columns of the Video image.

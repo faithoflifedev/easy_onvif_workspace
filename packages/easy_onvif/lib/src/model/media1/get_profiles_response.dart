@@ -29,5 +29,7 @@ class GetProfilesResponse {
   String toString() => json.encode(toJson());
 
   static List<Profile> _fromJson(dynamic json) => OnvifUtil.jsonList<Profile>(
-      json, (json) => Profile.fromJson(json as Map<String, dynamic>));
+    json,
+    (json) => Profile.fromJson(json as Map<String, dynamic>),
+  );
 }

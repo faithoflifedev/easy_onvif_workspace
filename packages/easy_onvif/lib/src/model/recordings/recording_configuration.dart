@@ -29,7 +29,9 @@ class RecordingConfiguration implements XmlSerializable {
   /// the value of MaximumRetentionTime, the device may automatically delete
   /// recordings to free up storage space for new recordings.
   @JsonKey(
-      name: 'MaximumRetentionTime', fromJson: OnvifUtil.stringMappedFromXml)
+    name: 'MaximumRetentionTime',
+    fromJson: OnvifUtil.stringMappedFromXml,
+  )
   final String maximumRetentionTime;
 
   RecordingConfiguration({
@@ -51,14 +53,16 @@ class RecordingConfiguration implements XmlSerializable {
     XmlBuilder builder, {
     String tag = 'RecordingConfiguration',
     String? namespace = Xmlns.tt,
-  }) =>
-      builder.element(tag, nest: () {
-        builder.namespace(namespace!);
+  }) => builder.element(
+    tag,
+    nest: () {
+      builder.namespace(namespace!);
 
-        source.buildXml(builder);
+      source.buildXml(builder);
 
-        content.buildXml(builder, tag: 'Content');
+      content.buildXml(builder, tag: 'Content');
 
-        maximumRetentionTime.buildXml(builder, tag: 'MaximumRetentionTime');
-      });
+      maximumRetentionTime.buildXml(builder, tag: 'MaximumRetentionTime');
+    },
+  );
 }

@@ -9,11 +9,14 @@ part of 'focus_status_20.dart';
 FocusStatus20 _$FocusStatus20FromJson(Map<String, dynamic> json) =>
     FocusStatus20(
       position: OnvifUtil.doubleMappedFromXml(
-          json['Position'] as Map<String, dynamic>),
+        json['Position'] as Map<String, dynamic>,
+      ),
       moveStatus: OnvifUtil.stringMappedFromXml(
-          json['MoveStatus'] as Map<String, dynamic>),
+        json['MoveStatus'] as Map<String, dynamic>,
+      ),
       error: OnvifUtil.nullableStringMappedFromXml(
-          json['Error'] as Map<String, dynamic>?),
+        json['Error'] as Map<String, dynamic>?,
+      ),
       extension: json['Extension'] as Map<String, dynamic>?,
     );
 

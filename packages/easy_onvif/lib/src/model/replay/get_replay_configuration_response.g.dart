@@ -7,14 +7,13 @@ part of 'get_replay_configuration_response.dart';
 // **************************************************************************
 
 GetReplayConfigurationResponse _$GetReplayConfigurationResponseFromJson(
-        Map<String, dynamic> json) =>
-    GetReplayConfigurationResponse(
-      configuration: ReplayConfiguration.fromJson(
-          json['Configuration'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => GetReplayConfigurationResponse(
+  configuration: ReplayConfiguration.fromJson(
+    json['Configuration'] as Map<String, dynamic>,
+  ),
+);
 
 Map<String, dynamic> _$GetReplayConfigurationResponseToJson(
-        GetReplayConfigurationResponse instance) =>
-    <String, dynamic>{
-      'Configuration': instance.configuration,
-    };
+  GetReplayConfigurationResponse instance,
+) => <String, dynamic>{'Configuration': instance.configuration};

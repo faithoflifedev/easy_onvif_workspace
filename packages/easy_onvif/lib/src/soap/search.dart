@@ -15,15 +15,18 @@ class SearchRequest {
     int? maxMatches,
     required int keepAliveTime,
   }) {
-    builder.element('FindRecordings', nest: () {
-      builder.namespace(Xmlns.tse);
+    builder.element(
+      'FindRecordings',
+      nest: () {
+        builder.namespace(Xmlns.tse);
 
-      searchScope?.buildXml(builder);
+        searchScope?.buildXml(builder);
 
-      maxMatches?.toString().buildXml(builder, tag: 'MaxMatches');
+        maxMatches?.toString().buildXml(builder, tag: 'MaxMatches');
 
-      keepAliveTime.toString().buildXml(builder, tag: 'KeepAliveTime');
-    });
+        keepAliveTime.toString().buildXml(builder, tag: 'KeepAliveTime');
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -34,11 +37,14 @@ class SearchRequest {
 
   /// XML for the [getRecordingInformation]
   static XmlDocumentFragment getRecordingInformation(String recordingToken) {
-    builder.element('GetRecordingInformation', nest: () {
-      builder.namespace(Xmlns.tse);
+    builder.element(
+      'GetRecordingInformation',
+      nest: () {
+        builder.namespace(Xmlns.tse);
 
-      ReferenceToken(recordingToken).buildXml(builder, tag: 'RecordingToken');
-    });
+        ReferenceToken(recordingToken).buildXml(builder, tag: 'RecordingToken');
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -50,17 +56,20 @@ class SearchRequest {
     int? maxResults,
     String? waitTime,
   }) {
-    builder.element('GetRecordingSearchResults', nest: () {
-      builder.namespace(Xmlns.tse);
+    builder.element(
+      'GetRecordingSearchResults',
+      nest: () {
+        builder.namespace(Xmlns.tse);
 
-      ReferenceToken(searchToken).buildXml(builder, tag: 'SearchToken');
+        ReferenceToken(searchToken).buildXml(builder, tag: 'SearchToken');
 
-      minResults?.toString().buildXml(builder, tag: 'MinResults');
+        minResults?.toString().buildXml(builder, tag: 'MinResults');
 
-      maxResults?.toString().buildXml(builder, tag: 'MaxResults');
+        maxResults?.toString().buildXml(builder, tag: 'MaxResults');
 
-      waitTime?.buildXml(builder, tag: 'WaitTime');
-    });
+        waitTime?.buildXml(builder, tag: 'WaitTime');
+      },
+    );
 
     return builder.buildFragment();
   }

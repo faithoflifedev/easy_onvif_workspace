@@ -69,18 +69,20 @@ class Onvif with UiLoggy {
     required LoggyPrinter printer,
     Dio? dio,
     this.overrideSpecificationAuthentication = false,
-  })  : _dio = dio ??
-            Dio(
-              BaseOptions(
-                connectTimeout: Duration(seconds: 20),
-                receiveTimeout: Duration(seconds: 10),
-              ),
-            )
-          ..interceptors.add(LoggingInterceptors()),
-        _hostUri = (authInfo.host.startsWith('http')
-                ? authInfo.host
-                : 'http://${authInfo.host}')
-            .parseUri {
+  }) : _dio =
+           dio ??
+                 Dio(
+                   BaseOptions(
+                     connectTimeout: Duration(seconds: 20),
+                     receiveTimeout: Duration(seconds: 10),
+                   ),
+                 )
+             ..interceptors.add(LoggingInterceptors()),
+       _hostUri =
+           (authInfo.host.startsWith('http')
+                   ? authInfo.host
+                   : 'http://${authInfo.host}')
+               .parseUri {
     Loggy.initLoggy(logPrinter: printer, logOptions: logOptions);
 
     _transport = soap.Transport(
@@ -90,8 +92,9 @@ class Onvif with UiLoggy {
     );
 
     _deviceManagement = DeviceManagement(
-        transport: transport,
-        uri: '${_hostUri.origin}/onvif/device_service'.parseUri);
+      transport: transport,
+      uri: '${_hostUri.origin}/onvif/device_service'.parseUri,
+    );
   }
 
   static Future<Onvif> connect({
@@ -111,9 +114,7 @@ class Onvif with UiLoggy {
     ),
 
     /// The printer to use for logging formatting
-    LoggyPrinter printer = const PrettyPrinter(
-      showColors: false,
-    ),
+    LoggyPrinter printer = const PrettyPrinter(showColors: false),
 
     /// The dio instance to use for making http requests
     Dio? dio,
@@ -122,11 +123,7 @@ class Onvif with UiLoggy {
     bool overrideSpecificationAuthentication = false,
   }) async {
     final onvif = Onvif(
-      authInfo: AuthInfo(
-        host: host,
-        username: username,
-        password: password,
-      ),
+      authInfo: AuthInfo(host: host, username: username, password: password),
       logOptions: logOptions,
       printer: printer,
       dio: dio,
@@ -162,57 +159,61 @@ class Onvif with UiLoggy {
         includeCapability: true,
       );
 
-      serviceMap.addAll(
-          {for (var service in serviceList) service.nameSpace: service.xAddr});
+      serviceMap.addAll({
+        for (var service in serviceList) service.nameSpace: service.xAddr,
+      });
 
       if (serviceMap.containsKey(soap.Xmlns.timg)) {
         _imaging = Imaging(
-            transport: transport,
-            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.timg]!));
+          transport: transport,
+          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.timg]!),
+        );
       }
 
       if (serviceMap.containsKey(soap.Xmlns.trt)) {
         media1 = Media1(
-            transport: transport,
-            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trt]!));
+          transport: transport,
+          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trt]!),
+        );
       }
 
       if (serviceMap.containsKey(soap.Xmlns.tr2)) {
         media2 = Media2(
-            transport: transport,
-            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.tr2]!));
+          transport: transport,
+          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.tr2]!),
+        );
       }
 
       if (serviceMap.containsKey(soap.Xmlns.tptz)) {
         _ptz = Ptz(
-            transport: transport,
-            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.tptz]!));
+          transport: transport,
+          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.tptz]!),
+        );
       }
 
       if (serviceMap.containsKey(soap.Xmlns.trc)) {
         _recordings = Recordings(
-            transport: transport,
-            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trc]!));
+          transport: transport,
+          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trc]!),
+        );
       }
 
       if (serviceMap.containsKey(soap.Xmlns.trp)) {
         _replay = Replay(
-            transport: transport,
-            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trp]!));
+          transport: transport,
+          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.trp]!),
+        );
       }
 
       if (serviceMap.containsKey(soap.Xmlns.tse)) {
         _search = Search(
-            transport: transport,
-            uri: _serviceUriOfHost(serviceMap[soap.Xmlns.tse]!));
+          transport: transport,
+          uri: _serviceUriOfHost(serviceMap[soap.Xmlns.tse]!),
+        );
       }
 
       if (media1 != null || media2 != null) {
-        _media = Media(
-          transport: transport,
-          media1: media1,
-          media2: media2,
-        );
+        _media = Media(transport: transport, media1: media1, media2: media2);
       }
     } catch (e) {
       loggy.warning('GetServices command not supported');
@@ -222,23 +223,26 @@ class Onvif with UiLoggy {
 
         if (_imaging == null && capabilities.imaging?.xAddr != null) {
           _imaging = Imaging(
-              transport: transport,
-              uri: _serviceUriOfHost(capabilities.imaging!.xAddr));
+            transport: transport,
+            uri: _serviceUriOfHost(capabilities.imaging!.xAddr),
+          );
         }
 
         if (_media == null && capabilities.media?.xAddr != null) {
           _media = Media(
             transport: transport,
             media1: Media1(
-                transport: transport,
-                uri: _serviceUriOfHost(capabilities.media!.xAddr)),
+              transport: transport,
+              uri: _serviceUriOfHost(capabilities.media!.xAddr),
+            ),
           );
         }
 
         if (_ptz == null && capabilities.ptz?.xAddr != null) {
           _ptz = Ptz(
-              transport: transport,
-              uri: _serviceUriOfHost(capabilities.ptz!.xAddr));
+            transport: transport,
+            uri: _serviceUriOfHost(capabilities.ptz!.xAddr),
+          );
         }
       }
     }

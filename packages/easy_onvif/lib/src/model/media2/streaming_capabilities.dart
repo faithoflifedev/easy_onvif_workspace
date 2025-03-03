@@ -9,24 +9,15 @@ part 'streaming_capabilities.g.dart';
 @JsonSerializable()
 class StreamingCapabilities {
   /// Indicates support for live media streaming via RTSP.
-  @JsonKey(
-    name: '@RTPStreaming',
-    fromJson: OnvifUtil.nullableStringToBool,
-  )
+  @JsonKey(name: '@RTPStreaming', fromJson: OnvifUtil.nullableStringToBool)
   final bool? rtpStreaming;
 
   /// Indicates support for RTP multicast.
-  @JsonKey(
-    name: '@RTPMulticast',
-    fromJson: OnvifUtil.nullableStringToBool,
-  )
+  @JsonKey(name: '@RTPMulticast', fromJson: OnvifUtil.nullableStringToBool)
   final bool? rtpMulticast;
 
   /// Indicates support for RTP/RTSP/TCP.
-  @JsonKey(
-    name: '@RTP_RTSP_TCP',
-    fromJson: OnvifUtil.nullableStringToBool,
-  )
+  @JsonKey(name: '@RTP_RTSP_TCP', fromJson: OnvifUtil.nullableStringToBool)
   final bool? rtpRtspTcp;
 
   /// Indicates support for non aggregate RTSP control.
@@ -36,17 +27,12 @@ class StreamingCapabilities {
   )
   final bool? nonAggregateControl;
 
-  @JsonKey(
-    name: '@NoRTSPStreaming',
-    fromJson: OnvifUtil.nullableStringToBool,
-  )
+  @JsonKey(name: '@NoRTSPStreaming', fromJson: OnvifUtil.nullableStringToBool)
   final bool? noRtspStreaming;
 
   /// If streaming over WebSocket is supported, this shall return the RTSP
   /// WebSocket URI as described in Streaming Specification Section 5.1.1.5.
-  @JsonKey(
-    name: '@RTSPWebSocketUri',
-  )
+  @JsonKey(name: '@RTSPWebSocketUri')
   final String? rtspWebSocketUri;
 
   /// Indicates support for non-RTSP controlled multicast streaming.

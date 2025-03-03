@@ -23,5 +23,7 @@ class GetUsersResponse {
   String toString() => json.encode(toJson());
 
   static List<User> _fromJson(dynamic json) => OnvifUtil.jsonList<User>(
-      json, (json) => User.fromJson(json as Map<String, dynamic>));
+    json,
+    (json) => User.fromJson(json as Map<String, dynamic>),
+  );
 }

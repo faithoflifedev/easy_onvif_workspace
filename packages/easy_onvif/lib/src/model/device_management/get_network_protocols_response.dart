@@ -23,6 +23,8 @@ class GetNetworkProtocolsResponse {
   String toString() => json.encode(toJson());
 
   static List<NetworkProtocol> _fromJson(dynamic json) =>
-      OnvifUtil.jsonList<NetworkProtocol>(json,
-          (json) => NetworkProtocol.fromJson(json as Map<String, dynamic>));
+      OnvifUtil.jsonList<NetworkProtocol>(
+        json,
+        (json) => NetworkProtocol.fromJson(json as Map<String, dynamic>),
+      );
 }

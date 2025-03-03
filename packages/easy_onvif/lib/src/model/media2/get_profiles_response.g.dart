@@ -12,7 +12,5 @@ GetProfilesResponse _$GetProfilesResponseFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$GetProfilesResponseToJson(
-        GetProfilesResponse instance) =>
-    <String, dynamic>{
-      'Profiles': instance.profiles,
-    };
+  GetProfilesResponse instance,
+) => <String, dynamic>{'Profiles': instance.profiles};

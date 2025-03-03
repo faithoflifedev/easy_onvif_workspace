@@ -13,7 +13,4 @@ OnvifDateTime _$OnvifDateTimeFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$OnvifDateTimeToJson(OnvifDateTime instance) =>
-    <String, dynamic>{
-      'Time': instance.time,
-      'Date': instance.date,
-    };
+    <String, dynamic>{'Time': instance.time, 'Date': instance.date};

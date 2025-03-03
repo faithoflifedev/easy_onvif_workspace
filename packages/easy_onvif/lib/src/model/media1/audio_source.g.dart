@@ -7,13 +7,11 @@ part of 'audio_source.dart';
 // **************************************************************************
 
 AudioSource _$AudioSourceFromJson(Map<String, dynamic> json) => AudioSource(
-      token: json['@token'] as String,
-      channels:
-          OnvifUtil.intMappedFromXml(json['Channels'] as Map<String, dynamic>),
-    );
+  token: json['@token'] as String,
+  channels: OnvifUtil.intMappedFromXml(
+    json['Channels'] as Map<String, dynamic>,
+  ),
+);
 
 Map<String, dynamic> _$AudioSourceToJson(AudioSource instance) =>
-    <String, dynamic>{
-      '@token': instance.token,
-      'Channels': instance.channels,
-    };
+    <String, dynamic>{'@token': instance.token, 'Channels': instance.channels};

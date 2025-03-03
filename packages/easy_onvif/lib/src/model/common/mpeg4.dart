@@ -4,7 +4,6 @@ import 'package:json_annotation/json_annotation.dart';
 part 'mpeg4.g.dart';
 
 @JsonSerializable()
-
 ///Optional element to configure Mpeg4 related parameters.
 class Mpeg4 {
   ///Determines the interval in which the I-Frames will be coded. An entry of 1

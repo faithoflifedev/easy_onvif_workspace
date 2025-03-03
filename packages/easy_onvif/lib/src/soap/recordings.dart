@@ -11,47 +11,64 @@ class RecordingsRequest {
 
   /// XML for the [createRecording]
   static XmlDocumentFragment createRecording(
-      RecordingConfiguration recordingConfiguration) {
-    builder.element('CreateRecording', nest: () {
-      builder.namespace(Xmlns.trc);
+    RecordingConfiguration recordingConfiguration,
+  ) {
+    builder.element(
+      'CreateRecording',
+      nest: () {
+        builder.namespace(Xmlns.trc);
 
-      recordingConfiguration.buildXml(builder);
-    });
+        recordingConfiguration.buildXml(builder);
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [createRecordingJob]
   static XmlDocumentFragment createRecordingJob(
-      RecordingJobConfiguration recordingJobConfiguration) {
-    builder.element('CreateRecordingJob', nest: () {
-      builder.namespace(Xmlns.trc);
+    RecordingJobConfiguration recordingJobConfiguration,
+  ) {
+    builder.element(
+      'CreateRecordingJob',
+      nest: () {
+        builder.namespace(Xmlns.trc);
 
-      recordingJobConfiguration.buildXml(builder);
-    });
+        recordingJobConfiguration.buildXml(builder);
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [deleteRecording]
   static XmlDocumentFragment deleteRecording(String recordingToken) {
-    builder.element('DeleteRecordingJob', nest: () {
-      builder.namespace(Xmlns.trc);
+    builder.element(
+      'DeleteRecordingJob',
+      nest: () {
+        builder.namespace(Xmlns.trc);
 
-      recordingToken.buildXml(builder,
-          tag: 'RecordingToken', namespace: Xmlns.tt);
-    });
+        recordingToken.buildXml(
+          builder,
+          tag: 'RecordingToken',
+          namespace: Xmlns.tt,
+        );
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [deleteRecordingJob]
   static XmlDocumentFragment deleteRecordingJob(String jobToken) {
-    builder.element('DeleteRecordingJob', nest: () {
-      builder.namespace(Xmlns.trc);
+    builder.element(
+      'DeleteRecordingJob',
+      nest: () {
+        builder.namespace(Xmlns.trc);
 
-      jobToken.buildXml(builder, tag: 'JobToken', namespace: Xmlns.tt);
-    });
+        jobToken.buildXml(builder, tag: 'JobToken', namespace: Xmlns.tt);
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -62,24 +79,34 @@ class RecordingsRequest {
 
   /// XML for the [getRecordingJobState]
   static XmlDocumentFragment getRecordingJobState(String jobToken) {
-    builder.element('GetRecordingJobState', nest: () {
-      builder.namespace(Xmlns.trc);
+    builder.element(
+      'GetRecordingJobState',
+      nest: () {
+        builder.namespace(Xmlns.trc);
 
-      jobToken.buildXml(builder, tag: 'JobToken', namespace: Xmlns.tt);
-    });
+        jobToken.buildXml(builder, tag: 'JobToken', namespace: Xmlns.tt);
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [getRecordingOptions]
   static XmlDocumentFragment getRecordingOptions(
-      ReferenceToken recordingToken) {
-    builder.element('GetRecordingOptions', nest: () {
-      builder.namespace(Xmlns.trc);
+    ReferenceToken recordingToken,
+  ) {
+    builder.element(
+      'GetRecordingOptions',
+      nest: () {
+        builder.namespace(Xmlns.trc);
 
-      recordingToken.buildXml(builder,
-          tag: 'RecordingToken', namespace: Xmlns.tt);
-    });
+        recordingToken.buildXml(
+          builder,
+          tag: 'RecordingToken',
+          namespace: Xmlns.tt,
+        );
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -97,13 +124,16 @@ class RecordingsRequest {
     required String jobToken,
     required RecordingJobConfigurationMode mode,
   }) {
-    builder.element('SetRecordingJobMode', nest: () {
-      builder.namespace(Xmlns.trc);
+    builder.element(
+      'SetRecordingJobMode',
+      nest: () {
+        builder.namespace(Xmlns.trc);
 
-      jobToken.buildXml(builder, tag: 'JobToken', namespace: Xmlns.tt);
+        jobToken.buildXml(builder, tag: 'JobToken', namespace: Xmlns.tt);
 
-      mode.value.buildXml(builder, tag: 'Mode', namespace: Xmlns.tt);
-    });
+        mode.value.buildXml(builder, tag: 'Mode', namespace: Xmlns.tt);
+      },
+    );
 
     return builder.buildFragment();
   }

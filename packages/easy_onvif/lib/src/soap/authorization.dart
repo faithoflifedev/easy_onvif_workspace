@@ -23,11 +23,15 @@ class Authorization {
   String get utcTimestamp =>
       _timestamp.toUtc().add(timeDelta).toIso8601String();
 
-  String get digest => base64.encode(sha1
-      .convert(nonce.bytes +
-          utf8.encode(utcTimestamp) +
-          utf8.encode(authInfo.password))
-      .bytes);
+  String get digest => base64.encode(
+    sha1
+        .convert(
+          nonce.bytes +
+              utf8.encode(utcTimestamp) +
+              utf8.encode(authInfo.password),
+        )
+        .bytes,
+  );
 
   Authorization({
     required this.authInfo,

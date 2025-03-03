@@ -7,12 +7,8 @@ part of 'get_profiles_response.dart';
 // **************************************************************************
 
 GetProfilesResponse _$GetProfilesResponseFromJson(Map<String, dynamic> json) =>
-    GetProfilesResponse(
-      GetProfilesResponse._fromJson(json['Profiles']),
-    );
+    GetProfilesResponse(GetProfilesResponse._fromJson(json['Profiles']));
 
 Map<String, dynamic> _$GetProfilesResponseToJson(
-        GetProfilesResponse instance) =>
-    <String, dynamic>{
-      'Profiles': instance.profiles,
-    };
+  GetProfilesResponse instance,
+) => <String, dynamic>{'Profiles': instance.profiles};

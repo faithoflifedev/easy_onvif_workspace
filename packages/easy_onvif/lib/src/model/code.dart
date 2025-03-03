@@ -7,19 +7,13 @@ part 'code.g.dart';
 
 @JsonSerializable()
 class Code {
-  @JsonKey(
-    name: 'Value',
-    fromJson: OnvifUtil.nullableStringMappedFromXml,
-  )
+  @JsonKey(name: 'Value', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? value;
 
   @JsonKey(name: 'Subcode')
   final Map<String, dynamic>? subCode;
 
-  Code({
-    this.value,
-    this.subCode,
-  });
+  Code({this.value, this.subCode});
 
   factory Code.fromJson(Map<String, dynamic> json) => _$CodeFromJson(json);
 

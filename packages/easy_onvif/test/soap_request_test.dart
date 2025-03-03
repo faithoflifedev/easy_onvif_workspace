@@ -30,7 +30,7 @@ void main() {
       builder.element(
         'Test',
         nest: DeviceManagementRequest.createUsers([
-          User(username: 'test', userLevel: UserLevel.user, password: 'test')
+          User(username: 'test', userLevel: UserLevel.user, password: 'test'),
         ]),
       );
 
@@ -65,10 +65,7 @@ void main() {
     });
 
     test('getServices', () {
-      builder.element(
-        'Test',
-        nest: DeviceManagementRequest.getServices(),
-      );
+      builder.element('Test', nest: DeviceManagementRequest.getServices());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -113,10 +110,7 @@ void main() {
     });
 
     test('getHostname', () {
-      builder.element(
-        'Test',
-        nest: DeviceManagementRequest.getHostname(),
-      );
+      builder.element('Test', nest: DeviceManagementRequest.getHostname());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -161,10 +155,7 @@ void main() {
     });
 
     test('systemReboot', () {
-      builder.element(
-        'Test',
-        nest: DeviceManagementRequest.systemReboot(),
-      );
+      builder.element('Test', nest: DeviceManagementRequest.systemReboot());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -173,10 +164,7 @@ void main() {
     });
 
     test('getSystemUris', () {
-      builder.element(
-        'Test',
-        nest: DeviceManagementRequest.getSystemUris(),
-      );
+      builder.element('Test', nest: DeviceManagementRequest.getSystemUris());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -185,10 +173,7 @@ void main() {
     });
 
     test('getUsers', () {
-      builder.element(
-        'Test',
-        nest: DeviceManagementRequest.getUsers(),
-      );
+      builder.element('Test', nest: DeviceManagementRequest.getUsers());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -197,10 +182,7 @@ void main() {
     });
 
     test('getDiscoveryMode', () {
-      builder.element(
-        'Test',
-        nest: DeviceManagementRequest.getDiscoveryMode(),
-      );
+      builder.element('Test', nest: DeviceManagementRequest.getDiscoveryMode());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -209,10 +191,7 @@ void main() {
     });
 
     test('getDns', () {
-      builder.element(
-        'Test',
-        nest: DeviceManagementRequest.getDns(),
-      );
+      builder.element('Test', nest: DeviceManagementRequest.getDns());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -221,10 +200,7 @@ void main() {
     });
 
     test('getNtp', () {
-      builder.element(
-        'Test',
-        nest: DeviceManagementRequest.getNtp(),
-      );
+      builder.element('Test', nest: DeviceManagementRequest.getNtp());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -233,10 +209,7 @@ void main() {
     });
 
     test('getGeoLocation', () {
-      builder.element(
-        'Test',
-        nest: DeviceManagementRequest.getGeoLocation(),
-      );
+      builder.element('Test', nest: DeviceManagementRequest.getGeoLocation());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -259,10 +232,7 @@ void main() {
     });
 
     test('getPresets', () {
-      builder.element(
-        'Test',
-        nest: ImagingRequest.getPresets('testToken'),
-      );
+      builder.element('Test', nest: ImagingRequest.getPresets('testToken'));
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -271,10 +241,7 @@ void main() {
     });
 
     test('getServiceCapabilities', () {
-      builder.element(
-        'Test',
-        nest: ImagingRequest.getServiceCapabilities(),
-      );
+      builder.element('Test', nest: ImagingRequest.getServiceCapabilities());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -283,10 +250,7 @@ void main() {
     });
 
     test('getStatus', () {
-      builder.element(
-        'Test',
-        nest: ImagingRequest.getStatus('testToken'),
-      );
+      builder.element('Test', nest: ImagingRequest.getStatus('testToken'));
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -312,10 +276,7 @@ void main() {
 
   group('Media1 SOAP Requests', () {
     test('getAudioSources', () {
-      builder.element(
-        'Test',
-        nest: MediaRequest.getAudioSources(),
-      );
+      builder.element('Test', nest: MediaRequest.getAudioSources());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -351,10 +312,7 @@ void main() {
     });
 
     test('getProfile', () {
-      builder.element(
-        'Test',
-        nest: MediaRequest.getProfile('testToken'),
-      );
+      builder.element('Test', nest: MediaRequest.getProfile('testToken'));
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -363,10 +321,7 @@ void main() {
     });
 
     test('getProfiles', () {
-      builder.element(
-        'Test',
-        nest: MediaRequest.getProfiles(),
-      );
+      builder.element('Test', nest: MediaRequest.getProfiles());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -375,10 +330,7 @@ void main() {
     });
 
     test('getServiceCapabilities', () {
-      builder.element(
-        'Test',
-        nest: MediaRequest.getServiceCapabilities(),
-      );
+      builder.element('Test', nest: MediaRequest.getServiceCapabilities());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -387,10 +339,7 @@ void main() {
     });
 
     test('getSnapshotUri', () {
-      builder.element(
-        'Test',
-        nest: MediaRequest.getSnapshotUri('testToken'),
-      );
+      builder.element('Test', nest: MediaRequest.getSnapshotUri('testToken'));
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -401,13 +350,13 @@ void main() {
     test('getStreamUri', () {
       builder.element(
         'Test',
-        nest: MediaRequest.getStreamUri('testToken',
-            streamSetup: StreamSetup(
-              stream: 'RTP-Multicast',
-              transport: Transport(
-                protocol: 'HTTP',
-              ),
-            )),
+        nest: MediaRequest.getStreamUri(
+          'testToken',
+          streamSetup: StreamSetup(
+            stream: 'RTP-Multicast',
+            transport: Transport(protocol: 'HTTP'),
+          ),
+        ),
       );
 
       expect(
@@ -417,10 +366,7 @@ void main() {
     });
 
     test('getVideoSources', () {
-      builder.element(
-        'Test',
-        nest: MediaRequest.getVideoSources(),
-      );
+      builder.element('Test', nest: MediaRequest.getVideoSources());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -455,10 +401,7 @@ void main() {
 
   group('Media2 SOAP Requests', () {
     test('deleteProfile', () {
-      builder.element(
-        'Test',
-        nest: Media2Request.deleteProfile('testToken'),
-      );
+      builder.element('Test', nest: Media2Request.deleteProfile('testToken'));
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -497,10 +440,7 @@ void main() {
     });
 
     test('getProfiles', () {
-      builder.element(
-        'Test',
-        nest: Media2Request.getProfiles(),
-      );
+      builder.element('Test', nest: Media2Request.getProfiles());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -509,10 +449,7 @@ void main() {
     });
 
     test('getServiceCapabilities', () {
-      builder.element(
-        'Test',
-        nest: Media2Request.getServiceCapabilities(),
-      );
+      builder.element('Test', nest: Media2Request.getServiceCapabilities());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -521,10 +458,7 @@ void main() {
     });
 
     test('getSnapshotUri', () {
-      builder.element(
-        'Test',
-        nest: Media2Request.getSnapshotUri('testToken'),
-      );
+      builder.element('Test', nest: Media2Request.getSnapshotUri('testToken'));
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -535,10 +469,7 @@ void main() {
     test('getStreamUri', () {
       builder.element(
         'Test',
-        nest: Media2Request.getStreamUri(
-          'testToken',
-          protocol: 'HTTP',
-        ),
+        nest: Media2Request.getStreamUri('testToken', protocol: 'HTTP'),
       );
 
       expect(
@@ -649,10 +580,7 @@ void main() {
     });
 
     test('getConfiguration', () {
-      builder.element(
-        'Test',
-        nest: PtzRequest.getConfiguration('testToken'),
-      );
+      builder.element('Test', nest: PtzRequest.getConfiguration('testToken'));
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -673,10 +601,7 @@ void main() {
     });
 
     test('getConfigurations', () {
-      builder.element(
-        'Test',
-        nest: PtzRequest.getConfigurations(),
-      );
+      builder.element('Test', nest: PtzRequest.getConfigurations());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -685,10 +610,7 @@ void main() {
     });
 
     test('getPresets', () {
-      builder.element(
-        'Test',
-        nest: PtzRequest.getPresets('testToken'),
-      );
+      builder.element('Test', nest: PtzRequest.getPresets('testToken'));
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -712,10 +634,7 @@ void main() {
     });
 
     test('getPresetTours', () {
-      builder.element(
-        'Test',
-        nest: PtzRequest.getPresetTours('testToken'),
-      );
+      builder.element('Test', nest: PtzRequest.getPresetTours('testToken'));
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -724,10 +643,7 @@ void main() {
     });
 
     test('getServiceCapabilities', () {
-      builder.element(
-        'Test',
-        nest: PtzRequest.getServiceCapabilities(),
-      );
+      builder.element('Test', nest: PtzRequest.getServiceCapabilities());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -736,10 +652,7 @@ void main() {
     });
 
     test('getStatus', () {
-      builder.element(
-        'Test',
-        nest: PtzRequest.getStatus('testToken'),
-      );
+      builder.element('Test', nest: PtzRequest.getStatus('testToken'));
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -748,10 +661,7 @@ void main() {
     });
 
     test('gotoHomePosition', () {
-      builder.element(
-        'Test',
-        nest: PtzRequest.gotoHomePosition('testToken'),
-      );
+      builder.element('Test', nest: PtzRequest.gotoHomePosition('testToken'));
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -762,10 +672,7 @@ void main() {
     test('gotoPreset', () {
       builder.element(
         'Test',
-        nest: PtzRequest.gotoPreset(
-          'testToken',
-          presetToken: 'testToken',
-        ),
+        nest: PtzRequest.gotoPreset('testToken', presetToken: 'testToken'),
       );
 
       expect(
@@ -779,9 +686,7 @@ void main() {
         'Test',
         nest: PtzRequest.relativeMove(
           'testToken',
-          translation: PtzVector(
-            panTilt: Vector2D(x: 0, y: 0),
-          ),
+          translation: PtzVector(panTilt: Vector2D(x: 0, y: 0)),
         ),
       );
 
@@ -812,12 +717,11 @@ void main() {
         nest: PtzRequest.removePresetTour(
           'testToken',
           presetTour: PresetTour(
-              token: 'testToken',
-              status: PtzPresetTourStatus(
-                state: PtzPresetTourState.idle,
-              ),
-              autoStart: true,
-              startingCondition: PtzPresetTourStartingCondition()),
+            token: 'testToken',
+            status: PtzPresetTourStatus(state: PtzPresetTourState.idle),
+            autoStart: true,
+            startingCondition: PtzPresetTourStartingCondition(),
+          ),
         ),
       );
 
@@ -855,11 +759,7 @@ void main() {
     test('stop', () {
       builder.element(
         'Test',
-        nest: PtzRequest.stop(
-          'testToken',
-          panTilt: true,
-          zoom: true,
-        ),
+        nest: PtzRequest.stop('testToken', panTilt: true, zoom: true),
       );
 
       expect(
@@ -939,8 +839,9 @@ void main() {
     test('getRecordingOptions', () {
       builder.element(
         'Test',
-        nest:
-            RecordingsRequest.getRecordingOptions(ReferenceToken('testToken')),
+        nest: RecordingsRequest.getRecordingOptions(
+          ReferenceToken('testToken'),
+        ),
       );
 
       expect(
@@ -950,10 +851,7 @@ void main() {
     });
 
     test('getRecordings', () {
-      builder.element(
-        'Test',
-        nest: RecordingsRequest.getRecordings(),
-      );
+      builder.element('Test', nest: RecordingsRequest.getRecordings());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -962,10 +860,7 @@ void main() {
     });
 
     test('getRecordingJobs', () {
-      builder.element(
-        'Test',
-        nest: RecordingsRequest.getRecordingJobs(),
-      );
+      builder.element('Test', nest: RecordingsRequest.getRecordingJobs());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -986,10 +881,7 @@ void main() {
     });
 
     test('getServiceCapabilities', () {
-      builder.element(
-        'Test',
-        nest: RecordingsRequest.getServiceCapabilities(),
-      );
+      builder.element('Test', nest: RecordingsRequest.getServiceCapabilities());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -1001,7 +893,9 @@ void main() {
       builder.element(
         'Test',
         nest: RecordingsRequest.setRecordingJobMode(
-            jobToken: 'testToken', mode: RecordingJobConfigurationMode.idle),
+          jobToken: 'testToken',
+          mode: RecordingJobConfigurationMode.idle,
+        ),
       );
 
       expect(
@@ -1013,10 +907,7 @@ void main() {
 
   group('Replay SOAP Requests', () {
     test('getReplayConfiguration', () {
-      builder.element(
-        'Test',
-        nest: ReplayRequest.getReplayConfiguration(),
-      );
+      builder.element('Test', nest: ReplayRequest.getReplayConfiguration());
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -1052,9 +943,12 @@ void main() {
     });
 
     test('setReplayConfiguration', () {
-      builder.element('Test',
-          nest: ReplayRequest.setReplayConfiguration(
-              ReplayConfiguration(sessionTimeout: 'PT0S')));
+      builder.element(
+        'Test',
+        nest: ReplayRequest.setReplayConfiguration(
+          ReplayConfiguration(sessionTimeout: 'PT0S'),
+        ),
+      );
 
       expect(
         builder.buildDocument().toXmlString(),
@@ -1091,13 +985,15 @@ void main() {
     });
 
     test('getRecordingSearchResults', () {
-      builder.element('Test',
-          nest: SearchRequest.getRecordingSearchResults(
-            'testToken',
-            maxResults: 5,
-            minResults: 1,
-            waitTime: 'PT0S',
-          ));
+      builder.element(
+        'Test',
+        nest: SearchRequest.getRecordingSearchResults(
+          'testToken',
+          maxResults: 5,
+          minResults: 1,
+          waitTime: 'PT0S',
+        ),
+      );
 
       expect(
         builder.buildDocument().toXmlString(),

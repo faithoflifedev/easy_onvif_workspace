@@ -24,6 +24,7 @@ class OnvifDeviceManagementCommand extends Command {
     addSubcommand(OnvifGetDiscoveryModeDeviceManagementCommand());
     addSubcommand(OnvifGetDeviceInformationResponseDeviceManagementCommand());
     addSubcommand(OnvifGetDnsDeviceManagementCommand());
+    addSubcommand(OnvifGetDynamicDnsDeviceManagementCommand());
     addSubcommand(OnvifGetHostnameDeviceManagementCommand());
     addSubcommand(OnvifGetIPAddressFilterDeviceManagementCommand());
     addSubcommand(OnvifGetNetworkProtocolsDeviceManagementCommand());
@@ -289,6 +290,30 @@ class OnvifGetDnsDeviceManagementCommand extends OnvifHelperCommand {
       final dns = await deviceManagement.getDns();
 
       print(dns);
+    } on DioException catch (err) {
+      throw UsageException('API usage error:', err.usage);
+    }
+  }
+}
+
+//
+
+class OnvifGetDynamicDnsDeviceManagementCommand extends OnvifHelperCommand {
+  @override
+  String get description =>
+      'This operation gets the dynamic DNS settings from a device. If the device supports dynamic DNS as specified in [RFC 2136] and [RFC 4702], it shall be possible to get the type, name and TTL through the GetDynamicDNS command.';
+
+  @override
+  String get name => 'get-dynamic-dns';
+
+  @override
+  void run() async {
+    await initializeOnvif();
+
+    try {
+      final dynamicDnsInformation = await deviceManagement.getDynamicDns();
+
+      print(dynamicDnsInformation);
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

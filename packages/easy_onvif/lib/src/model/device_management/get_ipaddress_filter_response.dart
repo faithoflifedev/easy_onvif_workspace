@@ -11,9 +11,7 @@ class GetIpAddressFilterResponse {
   @JsonKey(name: 'IPAddressFilter')
   IpAddressFilter ipAddressFilter;
 
-  GetIpAddressFilterResponse({
-    required this.ipAddressFilter,
-  });
+  GetIpAddressFilterResponse({required this.ipAddressFilter});
 
   factory GetIpAddressFilterResponse.fromJson(Map<String, dynamic> json) =>
       _$GetIpAddressFilterResponseFromJson(json);

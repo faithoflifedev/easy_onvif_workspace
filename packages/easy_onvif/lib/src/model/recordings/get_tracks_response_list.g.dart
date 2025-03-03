@@ -7,13 +7,11 @@ part of 'get_tracks_response_list.dart';
 // **************************************************************************
 
 GetTracksResponseList _$GetTracksResponseListFromJson(
-        Map<String, dynamic> json) =>
-    GetTracksResponseList(
-      recordingItems: GetTracksResponseList._fromJson(json['Track']),
-    );
+  Map<String, dynamic> json,
+) => GetTracksResponseList(
+  recordingItems: GetTracksResponseList._fromJson(json['Track']),
+);
 
 Map<String, dynamic> _$GetTracksResponseListToJson(
-        GetTracksResponseList instance) =>
-    <String, dynamic>{
-      'Track': instance.recordingItems,
-    };
+  GetTracksResponseList instance,
+) => <String, dynamic>{'Track': instance.recordingItems};

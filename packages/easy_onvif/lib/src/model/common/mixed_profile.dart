@@ -52,17 +52,18 @@ class MixedProfile {
   @JsonKey(name: 'PTZConfiguration')
   final PtzConfiguration? ptzConfiguration;
 
-  MixedProfile(
-      {required this.token,
-      required this.fixed,
-      required this.name,
-      this.configurations,
-      this.videoSourceConfiguration,
-      this.audioSourceConfiguration,
-      this.videoEncoderConfiguration,
-      this.audioEncoderConfiguration,
-      this.videoAnalyticsConfiguration,
-      this.ptzConfiguration});
+  MixedProfile({
+    required this.token,
+    required this.fixed,
+    required this.name,
+    this.configurations,
+    this.videoSourceConfiguration,
+    this.audioSourceConfiguration,
+    this.videoEncoderConfiguration,
+    this.audioEncoderConfiguration,
+    this.videoAnalyticsConfiguration,
+    this.ptzConfiguration,
+  });
 
   factory MixedProfile.fromJson(Map<String, dynamic> json) =>
       _$MixedProfileFromJson(json);
@@ -80,15 +81,16 @@ class MixedProfile {
       );
 
   factory MixedProfile.fromProfile(Profile profile) => MixedProfile(
-      token: profile.token,
-      fixed: profile.fixed,
-      name: profile.name,
-      videoSourceConfiguration: profile.videoSourceConfiguration,
-      audioSourceConfiguration: profile.audioSourceConfiguration,
-      videoEncoderConfiguration: profile.videoEncoderConfiguration,
-      audioEncoderConfiguration: profile.audioEncoderConfiguration,
-      videoAnalyticsConfiguration: profile.videoAnalyticsConfiguration,
-      ptzConfiguration: profile.ptzConfiguration);
+    token: profile.token,
+    fixed: profile.fixed,
+    name: profile.name,
+    videoSourceConfiguration: profile.videoSourceConfiguration,
+    audioSourceConfiguration: profile.audioSourceConfiguration,
+    videoEncoderConfiguration: profile.videoEncoderConfiguration,
+    audioEncoderConfiguration: profile.audioEncoderConfiguration,
+    videoAnalyticsConfiguration: profile.videoAnalyticsConfiguration,
+    ptzConfiguration: profile.ptzConfiguration,
+  );
 
   @override
   String toString() => json.encode(toJson());

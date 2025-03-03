@@ -7,16 +7,14 @@ part of 'video_analytics_configuration.dart';
 // **************************************************************************
 
 VideoAnalyticsConfiguration _$VideoAnalyticsConfigurationFromJson(
-        Map<String, dynamic> json) =>
-    VideoAnalyticsConfiguration(
-      name: OnvifUtil.stringMappedFromXml(json['Name'] as Map<String, dynamic>),
-      useCount:
-          OnvifUtil.intMappedFromXml(json['UseCount'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => VideoAnalyticsConfiguration(
+  name: OnvifUtil.stringMappedFromXml(json['Name'] as Map<String, dynamic>),
+  useCount: OnvifUtil.intMappedFromXml(
+    json['UseCount'] as Map<String, dynamic>,
+  ),
+);
 
 Map<String, dynamic> _$VideoAnalyticsConfigurationToJson(
-        VideoAnalyticsConfiguration instance) =>
-    <String, dynamic>{
-      'Name': instance.name,
-      'UseCount': instance.useCount,
-    };
+  VideoAnalyticsConfiguration instance,
+) => <String, dynamic>{'Name': instance.name, 'UseCount': instance.useCount};

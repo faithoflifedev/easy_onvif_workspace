@@ -7,17 +7,19 @@ part of 'get_tracks_response_item.dart';
 // **************************************************************************
 
 GetTracksResponseItem _$GetTracksResponseItemFromJson(
-        Map<String, dynamic> json) =>
-    GetTracksResponseItem(
-      trackToken: OnvifUtil.stringMappedFromXml(
-          json['TrackToken'] as Map<String, dynamic>),
-      configuration: TrackConfiguration.fromJson(
-          json['Configuration'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => GetTracksResponseItem(
+  trackToken: OnvifUtil.stringMappedFromXml(
+    json['TrackToken'] as Map<String, dynamic>,
+  ),
+  configuration: TrackConfiguration.fromJson(
+    json['Configuration'] as Map<String, dynamic>,
+  ),
+);
 
 Map<String, dynamic> _$GetTracksResponseItemToJson(
-        GetTracksResponseItem instance) =>
-    <String, dynamic>{
-      'TrackToken': instance.trackToken,
-      'Configuration': instance.configuration,
-    };
+  GetTracksResponseItem instance,
+) => <String, dynamic>{
+  'TrackToken': instance.trackToken,
+  'Configuration': instance.configuration,
+};

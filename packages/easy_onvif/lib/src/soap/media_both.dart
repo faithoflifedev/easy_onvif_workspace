@@ -10,28 +10,26 @@ class MediaBoth {
 
   /// XML for the [metadataConfiguration]
   static XmlDocumentFragment getMetadataConfiguration(
-          String configurationToken) =>
-      MediaRequest.getMetadataConfiguration(configurationToken);
+    String configurationToken,
+  ) => MediaRequest.getMetadataConfiguration(configurationToken);
 
   /// XML for the [getMetadataConfigurationOptions]
   static XmlDocumentFragment getMetadataConfigurationOptions({
     String? configurationToken,
     String? profileToken,
-  }) =>
-      Media2Request.getMetadataConfigurationOptions(
-        configurationToken: configurationToken,
-        profileToken: profileToken,
-      );
+  }) => Media2Request.getMetadataConfigurationOptions(
+    configurationToken: configurationToken,
+    profileToken: profileToken,
+  );
 
   /// XML for the [getMetadataConfigurations]
   static XmlDocumentFragment getMetadataConfigurations({
     String? configurationToken,
     String? profileToken,
-  }) =>
-      Media2Request.getMetadataConfigurations(
-        configurationToken: configurationToken,
-        profileToken: profileToken,
-      );
+  }) => Media2Request.getMetadataConfigurations(
+    configurationToken: configurationToken,
+    profileToken: profileToken,
+  );
 
   /// XML for the [getProfiles]
   static XmlDocumentFragment getProfiles() => Media2Request.getProfiles();

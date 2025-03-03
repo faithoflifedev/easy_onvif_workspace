@@ -28,7 +28,8 @@ class GetRecordingsResponse {
 
   static List<GetRecordingsResponseItem> _fromJson(dynamic json) =>
       OnvifUtil.jsonList<GetRecordingsResponseItem>(
-          json,
-          (json) =>
-              GetRecordingsResponseItem.fromJson(json as Map<String, dynamic>));
+        json,
+        (json) =>
+            GetRecordingsResponseItem.fromJson(json as Map<String, dynamic>),
+      );
 }

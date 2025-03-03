@@ -19,10 +19,7 @@ typedef ImagingRequest = soap.ImagingRequest;
 /// | READ_MEDIA | X | X | X | |
 /// | ACTUATE | X | X | | |
 class Imaging extends Operation {
-  Imaging({
-    required super.transport,
-    required super.uri,
-  });
+  Imaging({required super.transport, required super.uri});
 
   /// Via this command the last Imaging Preset applied can be requested. If the
   /// camera configuration does not match any of the existing Imaging Presets,
@@ -30,36 +27,39 @@ class Imaging extends Operation {
   /// return 0 if Imaging Presets are not supported by the Video Source.
   ///
   /// ACCESS CLASS: READ_MEDIA
-  Future<ImagingPreset> getCurrentPreset(String videoSourceToken,
-      {int? limit = 100}) async {
+  Future<ImagingPreset> getCurrentPreset(
+    String videoSourceToken, {
+    int? limit = 100,
+  }) async {
     loggy.debug('getCurrentPreset');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: ImagingRequest.getCurrentPreset(videoSourceToken),
-        ));
+      uri,
+      soap.Body(request: ImagingRequest.getCurrentPreset(videoSourceToken)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetCurrentPresetResponse.fromJson(responseEnvelope.body.response!)
-        .preset;
+    return GetCurrentPresetResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).preset;
   }
 
   /// Via this command the list of available Imaging Presets can be requested.
   ///
   /// ACCESS CLASS: READ_MEDIA
-  Future<List<ImagingPreset>> getPresets(String videoSourceToken,
-      {int? limit = 100}) async {
+  Future<List<ImagingPreset>> getPresets(
+    String videoSourceToken, {
+    int? limit = 100,
+  }) async {
     loggy.debug('getPresets');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: ImagingRequest.getPresets(videoSourceToken),
-        ));
+      uri,
+      soap.Body(request: ImagingRequest.getPresets(videoSourceToken)),
+    );
 
     if (responseEnvelope.body.response == null) throw Exception();
 
@@ -68,9 +68,9 @@ class Imaging extends Operation {
 
     limit = (limit! > presets.length) ? presets.length : limit;
 
-    return GetPresetsResponse.fromJson(responseEnvelope.body.response!)
-        .presets
-        .sublist(0, limit);
+    return GetPresetsResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).presets.sublist(0, limit);
   }
 
   /// Returns the capabilities of the imaging service. The result is returned in
@@ -81,18 +81,17 @@ class Imaging extends Operation {
     loggy.debug('getServiceCapabilities');
 
     final responseEnvelope = await transport.request(
-        uri,
-        soap.Body(
-          request: ImagingRequest.getServiceCapabilities(),
-        ));
+      uri,
+      soap.Body(request: ImagingRequest.getServiceCapabilities()),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
     return GetServiceCapabilitiesResponse.fromJson(
-            responseEnvelope.body.response!)
-        .capabilities;
+      responseEnvelope.body.response!,
+    ).capabilities;
   }
 
   /// Via this command the current status of the Move operation can be requested.
@@ -104,17 +103,17 @@ class Imaging extends Operation {
     loggy.debug('getStatus');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: ImagingRequest.getStatus(videoSourceToken),
-        ));
+      uri,
+      soap.Body(request: ImagingRequest.getStatus(videoSourceToken)),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());
     }
 
-    return GetStatusResponse.fromJson(responseEnvelope.body.response!)
-        .imagingStatus20;
+    return GetStatusResponse.fromJson(
+      responseEnvelope.body.response!,
+    ).imagingStatus20;
   }
 
   /// The [setCurrentPreset] command shall request a given Imaging Preset to be
@@ -134,13 +133,14 @@ class Imaging extends Operation {
     loggy.debug('setCurrentPreset');
 
     final responseEnvelope = await transport.securedRequest(
-        uri,
-        soap.Body(
-          request: ImagingRequest.setCurrentPreset(
-            videoSourceToken: videoSourceToken,
-            presetToken: presetToken,
-          ),
-        ));
+      uri,
+      soap.Body(
+        request: ImagingRequest.setCurrentPreset(
+          videoSourceToken: videoSourceToken,
+          presetToken: presetToken,
+        ),
+      ),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());

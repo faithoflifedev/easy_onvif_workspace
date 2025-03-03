@@ -7,13 +7,9 @@ part of 'get_endpoint_reference_response.dart';
 // **************************************************************************
 
 GetEndpointReferenceResponse _$GetEndpointReferenceResponseFromJson(
-        Map<String, dynamic> json) =>
-    GetEndpointReferenceResponse(
-      guid: json['GUID'] as Map<String, dynamic>,
-    );
+  Map<String, dynamic> json,
+) => GetEndpointReferenceResponse(guid: json['GUID'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$GetEndpointReferenceResponseToJson(
-        GetEndpointReferenceResponse instance) =>
-    <String, dynamic>{
-      'GUID': instance.guid,
-    };
+  GetEndpointReferenceResponse instance,
+) => <String, dynamic>{'GUID': instance.guid};

@@ -17,10 +17,7 @@ class JobOptions {
   @JsonKey(name: '@CompatibleSources', fromJson: OnvifUtil.stringToList)
   final List<String> compatibleSources;
 
-  JobOptions({
-    required this.spare,
-    required this.compatibleSources,
-  });
+  JobOptions({required this.spare, required this.compatibleSources});
 
   factory JobOptions.fromJson(Map<String, dynamic> json) =>
       _$JobOptionsFromJson(json);

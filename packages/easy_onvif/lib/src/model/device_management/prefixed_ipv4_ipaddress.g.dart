@@ -13,8 +13,8 @@ PrefixedIpv4Address _$PrefixedIpv4AddressFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$PrefixedIpv4AddressToJson(
-        PrefixedIpv4Address instance) =>
-    <String, dynamic>{
-      'PrefixLength': instance.prefixLength,
-      'Address': instance.address,
-    };
+  PrefixedIpv4Address instance,
+) => <String, dynamic>{
+  'PrefixLength': instance.prefixLength,
+  'Address': instance.address,
+};

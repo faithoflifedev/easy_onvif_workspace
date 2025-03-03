@@ -15,11 +15,7 @@ class Body implements XmlSerializable {
 
   bool get success => fault == null;
 
-  Body({
-    this.fault,
-    this.request,
-    this.response,
-  });
+  Body({this.fault, this.request, this.response});
 
   factory Body.fromJson(Map<String, dynamic> json) {
     final responseType = json.keys.firstWhere((key) => key != 'fault');
@@ -43,7 +39,7 @@ class Body implements XmlSerializable {
       namespace: namespace,
       namespaces: {
         'http://www.w3.org/2001/XMLSchema-instance': 'xsi',
-        Xmlns.xsd: 'xsd'
+        Xmlns.xsd: 'xsd',
       },
       nest: request,
     );

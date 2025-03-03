@@ -19,15 +19,18 @@ class MediaRequest {
 
   /// XML for the [getMetadataConfiguration]
   static XmlDocumentFragment getMetadataConfiguration(
-      String configurationToken) {
-    builder.element('GetMetadataConfiguration', nest: () {
-      builder.namespace(Xmlns.trt);
+    String configurationToken,
+  ) {
+    builder.element(
+      'GetMetadataConfiguration',
+      nest: () {
+        builder.namespace(Xmlns.trt);
 
-      ReferenceToken(configurationToken).buildXml(
-        builder,
-        tag: 'ConfigurationToken',
-      );
-    });
+        ReferenceToken(
+          configurationToken,
+        ).buildXml(builder, tag: 'ConfigurationToken');
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -37,31 +40,32 @@ class MediaRequest {
     String? configurationToken,
     String? profileToken,
     required String namespace,
-  }) =>
-      MediaCommon.getMetadataConfigurationOptions(
-        configurationToken: configurationToken,
-        profileToken: profileToken,
-        namespace: Xmlns.trt,
-      );
+  }) => MediaCommon.getMetadataConfigurationOptions(
+    configurationToken: configurationToken,
+    profileToken: profileToken,
+    namespace: Xmlns.trt,
+  );
 
   /// XML for the [getMetadataConfigurations]
   static XmlDocumentFragment getMetadataConfigurations({
     String? configurationToken,
     String? profileToken,
-  }) =>
-      MediaCommon.getMetadataConfigurations(
-        configurationToken: configurationToken,
-        profileToken: profileToken,
-        namespace: Xmlns.trt,
-      );
+  }) => MediaCommon.getMetadataConfigurations(
+    configurationToken: configurationToken,
+    profileToken: profileToken,
+    namespace: Xmlns.trt,
+  );
 
   /// XML for the [getProfile], requires a [profileToken]
   static XmlDocumentFragment getProfile(String profileToken) {
-    builder.element('GetProfile', nest: () {
-      builder.namespace(Xmlns.trt);
+    builder.element(
+      'GetProfile',
+      nest: () {
+        builder.namespace(Xmlns.trt);
 
-      ReferenceToken(profileToken).buildXml(builder);
-    });
+        ReferenceToken(profileToken).buildXml(builder);
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -75,27 +79,37 @@ class MediaRequest {
       Transport.quickTag('GetServiceCapabilities', Xmlns.trt);
 
   /// XML for the [getSnapshotUri], requires a [profileToken]
-  static XmlDocumentFragment getSnapshotUri(String profileToken,
-      {StreamSetup? streamSetup}) {
-    builder.element('GetSnapshotUri', nest: () {
-      builder.namespace(Xmlns.trt);
+  static XmlDocumentFragment getSnapshotUri(
+    String profileToken, {
+    StreamSetup? streamSetup,
+  }) {
+    builder.element(
+      'GetSnapshotUri',
+      nest: () {
+        builder.namespace(Xmlns.trt);
 
-      ReferenceToken(profileToken).buildXml(builder);
-    });
+        ReferenceToken(profileToken).buildXml(builder);
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [getStreamUri], requires a [profileToken]
-  static XmlDocumentFragment getStreamUri(String profileToken,
-      {required StreamSetup streamSetup}) {
-    builder.element('GetStreamUri', nest: () {
-      builder.namespace(Xmlns.trt);
+  static XmlDocumentFragment getStreamUri(
+    String profileToken, {
+    required StreamSetup streamSetup,
+  }) {
+    builder.element(
+      'GetStreamUri',
+      nest: () {
+        builder.namespace(Xmlns.trt);
 
-      streamSetup.buildXml(builder);
+        streamSetup.buildXml(builder);
 
-      ReferenceToken(profileToken).buildXml(builder);
-    });
+        ReferenceToken(profileToken).buildXml(builder);
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -107,10 +121,14 @@ class MediaRequest {
   /// XML for the [startMulticastStreaming]
   static XmlDocumentFragment startMulticastStreaming(String profileToken) =>
       MediaCommon.startMulticastStreaming(
-          profileToken: profileToken, namespace: Xmlns.trt);
+        profileToken: profileToken,
+        namespace: Xmlns.trt,
+      );
 
   /// XML for the [stopMulticastStreaming]
   static XmlDocumentFragment stopMulticastStreaming(String profileToken) =>
       MediaCommon.stopMulticastStreaming(
-          profileToken: profileToken, namespace: Xmlns.trt);
+        profileToken: profileToken,
+        namespace: Xmlns.trt,
+      );
 }

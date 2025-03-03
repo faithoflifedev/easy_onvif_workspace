@@ -56,8 +56,9 @@ class Capabilities {
   /// format value. The value of 'ONVIF' refers to ONVIF Export File Format
   /// specification.
   @JsonKey(
-      name: '@SupportedExportFileFormats',
-      fromJson: OnvifUtil.nullableStringToBool)
+    name: '@SupportedExportFileFormats',
+    fromJson: OnvifUtil.nullableStringToBool,
+  )
   final bool? supportedExportFileFormats;
 
   /// Indication that the device supports event triggered recording.

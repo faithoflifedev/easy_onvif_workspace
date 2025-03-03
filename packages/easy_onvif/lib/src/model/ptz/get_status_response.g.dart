@@ -12,6 +12,4 @@ GetStatusResponse _$GetStatusResponseFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$GetStatusResponseToJson(GetStatusResponse instance) =>
-    <String, dynamic>{
-      'PTZStatus': instance.ptzStatus,
-    };
+    <String, dynamic>{'PTZStatus': instance.ptzStatus};

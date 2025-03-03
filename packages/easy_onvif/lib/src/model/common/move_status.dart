@@ -7,16 +7,10 @@ part 'move_status.g.dart';
 
 @JsonSerializable()
 class MoveStatus {
-  @JsonKey(
-    name: 'PanTilt',
-    fromJson: OnvifUtil.nullableStringMappedFromXml,
-  )
+  @JsonKey(name: 'PanTilt', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? panTilt;
 
-  @JsonKey(
-    name: 'Zoom',
-    fromJson: OnvifUtil.nullableStringMappedFromXml,
-  )
+  @JsonKey(name: 'Zoom', fromJson: OnvifUtil.nullableStringMappedFromXml)
   final String? zoom;
 
   MoveStatus({this.panTilt, this.zoom});

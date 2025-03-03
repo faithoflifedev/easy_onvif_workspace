@@ -31,16 +31,10 @@ class Focus {
   final double? defaultSpeed;
 
   /// Parameter to set auto-focus near limit (unit: meter).
-  @JsonKey(
-    name: 'NearLimit',
-    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
-  )
+  @JsonKey(name: 'NearLimit', fromJson: OnvifUtil.nullableDoubleMappedFromXml)
   final double? nearLimit;
 
-  @JsonKey(
-    name: 'FarLimit',
-    fromJson: OnvifUtil.nullableDoubleMappedFromXml,
-  )
+  @JsonKey(name: 'FarLimit', fromJson: OnvifUtil.nullableDoubleMappedFromXml)
   final double? farLimit;
 
   Focus({
@@ -56,8 +50,9 @@ class Focus {
       _$FocusToJson(this).convertFieldsToXmlMap(_xmlMappedFields);
 
   static AutoFocusMode mappedToAutoFocusMode(Map<String, dynamic> value) =>
-      AutoFocusMode.values
-          .byName(OnvifUtil.stringMappedFromXml(value).toLowerCase());
+      AutoFocusMode.values.byName(
+        OnvifUtil.stringMappedFromXml(value).toLowerCase(),
+      );
 
   @override
   String toString() => json.encode(toJson());

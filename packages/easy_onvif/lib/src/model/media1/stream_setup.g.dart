@@ -7,9 +7,9 @@ part of 'stream_setup.dart';
 // **************************************************************************
 
 StreamSetup _$StreamSetupFromJson(Map<String, dynamic> json) => StreamSetup(
-      stream: json['Stream'] as String,
-      transport: Transport.fromJson(json['Transport'] as Map<String, dynamic>),
-    );
+  stream: json['Stream'] as String,
+  transport: Transport.fromJson(json['Transport'] as Map<String, dynamic>),
+);
 
 Map<String, dynamic> _$StreamSetupToJson(StreamSetup instance) =>
     <String, dynamic>{

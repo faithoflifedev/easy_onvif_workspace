@@ -15,17 +15,11 @@ class AnalyticsCapabilities {
   ];
 
   /// Analytics service URI.
-  @JsonKey(
-    name: 'XAddr',
-    fromJson: OnvifUtil.stringMappedFromXml,
-  )
+  @JsonKey(name: 'XAddr', fromJson: OnvifUtil.stringMappedFromXml)
   final String xAddr;
 
   /// Indicates whether or not rules are supported.
-  @JsonKey(
-    name: 'RuleSupport',
-    fromJson: OnvifUtil.boolMappedFromXml,
-  )
+  @JsonKey(name: 'RuleSupport', fromJson: OnvifUtil.boolMappedFromXml)
   final bool ruleSupport;
 
   /// Indicates whether or not modules are supported.
@@ -44,8 +38,9 @@ class AnalyticsCapabilities {
   factory AnalyticsCapabilities.fromJson(Map<String, dynamic> json) =>
       _$AnalyticsCapabilitiesFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AnalyticsCapabilitiesToJson(this)
-      .convertFieldsToXmlMap(_xmlMappedFields);
+  Map<String, dynamic> toJson() => _$AnalyticsCapabilitiesToJson(
+    this,
+  ).convertFieldsToXmlMap(_xmlMappedFields);
 
   @override
   String toString() => json.encode(toJson());

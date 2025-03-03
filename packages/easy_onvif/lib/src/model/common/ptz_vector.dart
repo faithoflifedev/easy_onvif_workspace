@@ -16,10 +16,7 @@ class PtzVector implements XmlSerializable {
   @JsonKey(name: 'Zoom')
   final Vector1D? zoom;
 
-  PtzVector({
-    this.panTilt,
-    this.zoom,
-  });
+  PtzVector({this.panTilt, this.zoom});
 
   factory PtzVector.fromJson(Map<String, dynamic> json) =>
       _$PtzVectorFromJson(json);
@@ -34,12 +31,14 @@ class PtzVector implements XmlSerializable {
     XmlBuilder builder, {
     String tag = 'PtzVector',
     String? namespace = Xmlns.tt,
-  }) =>
-      builder.element(tag, nest: () {
-        builder.namespace(namespace!);
+  }) => builder.element(
+    tag,
+    nest: () {
+      builder.namespace(namespace!);
 
-        panTilt?.buildXml(builder, tag: 'PanTilt');
+      panTilt?.buildXml(builder, tag: 'PanTilt');
 
-        zoom?.buildXml(builder, tag: 'Zoom');
-      });
+      zoom?.buildXml(builder, tag: 'Zoom');
+    },
+  );
 }

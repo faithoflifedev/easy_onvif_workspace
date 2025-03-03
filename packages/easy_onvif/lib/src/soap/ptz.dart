@@ -14,86 +14,93 @@ class PtzRequest {
     required PtzVector position,
     PtzSpeed? speed,
   }) {
-    builder.element('AbsoluteMove', nest: () {
-      builder.namespace(Xmlns.tptz); //tptz
+    builder.element(
+      'AbsoluteMove',
+      nest: () {
+        builder.namespace(Xmlns.tptz); //tptz
 
-      ReferenceToken(profileToken).buildXml(builder);
+        ReferenceToken(profileToken).buildXml(builder);
 
-      position.buildXml(
-        builder,
-        tag: 'Position',
-        namespace: Xmlns.tptz,
-      );
+        position.buildXml(builder, tag: 'Position', namespace: Xmlns.tptz);
 
-      speed?.buildXml(
-        builder,
-        tag: 'Speed',
-        namespace: Xmlns.tptz,
-      );
-    });
+        speed?.buildXml(builder, tag: 'Speed', namespace: Xmlns.tptz);
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [continuousMove], requires a [profileToken] and [PtzSpeed],
   /// and optionally [timeout] in seconds
-  static XmlDocumentFragment continuousMove(String profileToken,
-      {required PtzSpeed velocity, int? timeout}) {
-    builder.element('ContinuousMove', nest: () {
-      builder.namespace(Xmlns.tptz); //tptz
+  static XmlDocumentFragment continuousMove(
+    String profileToken, {
+    required PtzSpeed velocity,
+    int? timeout,
+  }) {
+    builder.element(
+      'ContinuousMove',
+      nest: () {
+        builder.namespace(Xmlns.tptz); //tptz
 
-      ReferenceToken(profileToken).buildXml(builder);
+        ReferenceToken(profileToken).buildXml(builder);
 
-      velocity.buildXml(
-        builder,
-        tag: 'Velocity',
-        namespace: Xmlns.tptz,
-      );
+        velocity.buildXml(builder, tag: 'Velocity', namespace: Xmlns.tptz);
 
-      if (timeout != null) {
-        'PT${timeout}S'
-            .buildXml(builder, tag: 'Timeout', namespace: Xmlns.tptz);
-      }
-    });
+        if (timeout != null) {
+          'PT${timeout}S'.buildXml(
+            builder,
+            tag: 'Timeout',
+            namespace: Xmlns.tptz,
+          );
+        }
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [getCompatibleConfigurations], requires a [profileToken]
   static XmlDocumentFragment getCompatibleConfigurations(String profileToken) {
-    builder.element('GetCompatibleConfigurations', nest: () {
-      builder.namespace(Xmlns.tptz);
+    builder.element(
+      'GetCompatibleConfigurations',
+      nest: () {
+        builder.namespace(Xmlns.tptz);
 
-      ReferenceToken(profileToken).buildXml(builder);
-    });
+        ReferenceToken(profileToken).buildXml(builder);
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [getConfiguration], requires a [profileToken]
   static XmlDocumentFragment getConfiguration(String profileToken) {
-    builder.element('GetConfiguration', nest: () {
-      builder.namespace(Xmlns.tptz);
+    builder.element(
+      'GetConfiguration',
+      nest: () {
+        builder.namespace(Xmlns.tptz);
 
-      ReferenceToken(profileToken).buildXml(
-        builder,
-        tag: 'PTZConfigurationToken',
-      );
-    });
+        ReferenceToken(
+          profileToken,
+        ).buildXml(builder, tag: 'PTZConfigurationToken');
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [getConfigurationOptions], requires a [profileToken]
   static XmlDocumentFragment getConfigurationOptions(String profileToken) {
-    builder.element('GetConfigurationOptions', nest: () {
-      builder.namespace(Xmlns.tptz);
+    builder.element(
+      'GetConfigurationOptions',
+      nest: () {
+        builder.namespace(Xmlns.tptz);
 
-      ReferenceToken(profileToken).buildXml(
-        builder,
-        tag: 'ConfigurationToken',
-      );
-    });
+        ReferenceToken(
+          profileToken,
+        ).buildXml(builder, tag: 'ConfigurationToken');
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -104,11 +111,14 @@ class PtzRequest {
 
   /// XML for the [getPresets], requires a [profileToken]
   static XmlDocumentFragment getPresets(String profileToken) {
-    builder.element('GetPresets', nest: () {
-      builder.namespace(Xmlns.tptz);
+    builder.element(
+      'GetPresets',
+      nest: () {
+        builder.namespace(Xmlns.tptz);
 
-      ReferenceToken(profileToken).buildXml(builder);
-    });
+        ReferenceToken(profileToken).buildXml(builder);
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -118,27 +128,32 @@ class PtzRequest {
     String profileToken, {
     required String presetTourToken,
   }) {
-    builder.element('GetPresetTour', nest: () {
-      builder.namespace(Xmlns.tptz);
+    builder.element(
+      'GetPresetTour',
+      nest: () {
+        builder.namespace(Xmlns.tptz);
 
-      ReferenceToken(profileToken).buildXml(builder);
+        ReferenceToken(profileToken).buildXml(builder);
 
-      ReferenceToken(presetTourToken).buildXml(
-        builder,
-        tag: 'PresetTourToken',
-      );
-    });
+        ReferenceToken(
+          presetTourToken,
+        ).buildXml(builder, tag: 'PresetTourToken');
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [getPresetTours], requires a [profileToken]
   static XmlDocumentFragment getPresetTours(String profileToken) {
-    builder.element('GetPresetTours', nest: () {
-      builder.namespace(Xmlns.tptz);
+    builder.element(
+      'GetPresetTours',
+      nest: () {
+        builder.namespace(Xmlns.tptz);
 
-      ReferenceToken(profileToken).buildXml(builder);
-    });
+        ReferenceToken(profileToken).buildXml(builder);
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -149,11 +164,14 @@ class PtzRequest {
 
   /// XML for the [getStatus], requires a [profileToken]
   static XmlDocumentFragment getStatus(String profileToken) {
-    builder.element('GetStatus', nest: () {
-      builder.namespace(Xmlns.tptz);
+    builder.element(
+      'GetStatus',
+      nest: () {
+        builder.namespace(Xmlns.tptz);
 
-      ReferenceToken(profileToken).buildXml(builder);
-    });
+        ReferenceToken(profileToken).buildXml(builder);
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -163,17 +181,16 @@ class PtzRequest {
     String profileToken, {
     PtzSpeed? speed,
   }) {
-    builder.element('GotoHomePosition', nest: () {
-      builder.namespace(Xmlns.tptz);
+    builder.element(
+      'GotoHomePosition',
+      nest: () {
+        builder.namespace(Xmlns.tptz);
 
-      ReferenceToken(profileToken).buildXml(builder);
+        ReferenceToken(profileToken).buildXml(builder);
 
-      speed?.buildXml(
-        builder,
-        tag: 'Speed',
-        namespace: Xmlns.tptz,
-      );
-    });
+        speed?.buildXml(builder, tag: 'Speed', namespace: Xmlns.tptz);
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -184,22 +201,18 @@ class PtzRequest {
     required String presetToken,
     PtzSpeed? speed,
   }) {
-    builder.element('GotoPreset', nest: () {
-      builder.namespace(Xmlns.tptz);
+    builder.element(
+      'GotoPreset',
+      nest: () {
+        builder.namespace(Xmlns.tptz);
 
-      ReferenceToken(profileToken).buildXml(builder);
+        ReferenceToken(profileToken).buildXml(builder);
 
-      ReferenceToken(presetToken).buildXml(
-        builder,
-        tag: 'PresetToken',
-      );
+        ReferenceToken(presetToken).buildXml(builder, tag: 'PresetToken');
 
-      speed?.buildXml(
-        builder,
-        tag: 'Speed',
-        namespace: Xmlns.tptz,
-      );
-    });
+        speed?.buildXml(builder, tag: 'Speed', namespace: Xmlns.tptz);
+      },
+    );
 
     return builder.buildFragment();
   }
@@ -210,110 +223,132 @@ class PtzRequest {
     required PtzVector translation,
     PtzSpeed? speed,
   }) {
-    builder.element('RelativeMove', nest: () {
-      builder.namespace(Xmlns.tptz); //tptz
+    builder.element(
+      'RelativeMove',
+      nest: () {
+        builder.namespace(Xmlns.tptz); //tptz
 
-      ReferenceToken(profileToken).buildXml(
-        builder,
-        namespace: Xmlns.tptz,
-      );
+        ReferenceToken(profileToken).buildXml(builder, namespace: Xmlns.tptz);
 
-      translation.buildXml(
-        builder,
-        tag: 'Translation',
-        namespace: Xmlns.tptz,
-      );
+        translation.buildXml(
+          builder,
+          tag: 'Translation',
+          namespace: Xmlns.tptz,
+        );
 
-      speed?.buildXml(
-        builder,
-        tag: 'Speed',
-        namespace: Xmlns.tptz,
-      );
-    });
+        speed?.buildXml(builder, tag: 'Speed', namespace: Xmlns.tptz);
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [removePreset], requires a [profileToken] and [Preset]
-  static XmlDocumentFragment removePreset(String profileToken,
-      {required Preset preset}) {
-    builder.element('RemovePreset', nest: () {
-      builder.namespace(Xmlns.tptz);
+  static XmlDocumentFragment removePreset(
+    String profileToken, {
+    required Preset preset,
+  }) {
+    builder.element(
+      'RemovePreset',
+      nest: () {
+        builder.namespace(Xmlns.tptz);
 
-      ReferenceToken(profileToken).buildXml(builder);
+        ReferenceToken(profileToken).buildXml(builder);
 
-      preset.referenceToken.buildXml(builder, tag: 'PresetToken');
-    });
+        preset.referenceToken.buildXml(builder, tag: 'PresetToken');
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [removePresetTour], requires a [profileToken] and [presetTour]
-  static XmlDocumentFragment removePresetTour(String profileToken,
-      {required PresetTour presetTour}) {
-    builder.element('RemovePresetTour', nest: () {
-      builder.namespace(Xmlns.tptz);
+  static XmlDocumentFragment removePresetTour(
+    String profileToken, {
+    required PresetTour presetTour,
+  }) {
+    builder.element(
+      'RemovePresetTour',
+      nest: () {
+        builder.namespace(Xmlns.tptz);
 
-      ReferenceToken(profileToken).buildXml(builder);
+        ReferenceToken(profileToken).buildXml(builder);
 
-      presetTour.referenceToken.buildXml(
-        builder,
-        tag: 'PresetTourToken',
-      );
-    });
+        presetTour.referenceToken.buildXml(builder, tag: 'PresetTourToken');
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [setHomePosition], requires a [profileToken]
   static XmlDocumentFragment setHomePosition(String profileToken) {
-    builder.element('SetHomePosition', nest: () {
-      builder.namespace(Xmlns.tptz);
+    builder.element(
+      'SetHomePosition',
+      nest: () {
+        builder.namespace(Xmlns.tptz);
 
-      ReferenceToken(profileToken).buildXml(builder);
-    });
+        ReferenceToken(profileToken).buildXml(builder);
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [setPreset], requires a [profileToken] and optionally
   /// [presetName] and/or [presetToken]
-  static XmlDocumentFragment setPreset(String profileToken,
-      {String? presetName, String? presetToken}) {
-    builder.element('SetPreset', nest: () {
-      builder.namespace(Xmlns.tptz);
+  static XmlDocumentFragment setPreset(
+    String profileToken, {
+    String? presetName,
+    String? presetToken,
+  }) {
+    builder.element(
+      'SetPreset',
+      nest: () {
+        builder.namespace(Xmlns.tptz);
 
-      ReferenceToken(profileToken).buildXml(builder);
+        ReferenceToken(profileToken).buildXml(builder);
 
-      presetName
-          ?.toString()
-          .buildXml(builder, tag: 'PresetName', namespace: Xmlns.tptz);
-
-      if (presetToken != null) {
-        ReferenceToken(presetToken).buildXml(
+        presetName?.toString().buildXml(
           builder,
-          tag: 'PresetToken',
+          tag: 'PresetName',
           namespace: Xmlns.tptz,
         );
-      }
-    });
+
+        if (presetToken != null) {
+          ReferenceToken(
+            presetToken,
+          ).buildXml(builder, tag: 'PresetToken', namespace: Xmlns.tptz);
+        }
+      },
+    );
 
     return builder.buildFragment();
   }
 
   /// XML for the [stop], requires a [profileToken] and optionally [panTilt]
   /// and/or [zoom]
-  static XmlDocumentFragment stop(String profileToken,
-      {bool panTilt = false, bool zoom = false}) {
-    builder.element('Stop', nest: () {
-      builder.namespace(Xmlns.tptz); //tptz
+  static XmlDocumentFragment stop(
+    String profileToken, {
+    bool panTilt = false,
+    bool zoom = false,
+  }) {
+    builder.element(
+      'Stop',
+      nest: () {
+        builder.namespace(Xmlns.tptz); //tptz
 
-      ReferenceToken(profileToken).buildXml(builder);
+        ReferenceToken(profileToken).buildXml(builder);
 
-      panTilt.toString().buildXml(builder, tag: 'PanTilt', namespace: Xmlns.tt);
+        panTilt.toString().buildXml(
+          builder,
+          tag: 'PanTilt',
+          namespace: Xmlns.tt,
+        );
 
-      zoom.toString().buildXml(builder, tag: 'Zoom', namespace: Xmlns.tt);
-    });
+        zoom.toString().buildXml(builder, tag: 'Zoom', namespace: Xmlns.tt);
+      },
+    );
 
     return builder.buildFragment();
   }

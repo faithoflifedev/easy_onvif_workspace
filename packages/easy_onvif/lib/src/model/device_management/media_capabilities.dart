@@ -16,10 +16,7 @@ class MediaCapabilities {
   @JsonKey(name: 'StreamingCapabilities')
   final RealTimeStreamingCapabilities streamingCapabilities;
 
-  MediaCapabilities({
-    required this.xAddr,
-    required this.streamingCapabilities,
-  });
+  MediaCapabilities({required this.xAddr, required this.streamingCapabilities});
 
   factory MediaCapabilities.fromJson(Map<String, dynamic> json) =>
       _$MediaCapabilitiesFromJson(json);

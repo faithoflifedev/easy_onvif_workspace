@@ -7,14 +7,13 @@ part of 'get_recording_information_response.dart';
 // **************************************************************************
 
 GetRecordingInformationResponse _$GetRecordingInformationResponseFromJson(
-        Map<String, dynamic> json) =>
-    GetRecordingInformationResponse(
-      recordingInformation: RecordingInformation.fromJson(
-          json['RecordingInformation'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => GetRecordingInformationResponse(
+  recordingInformation: RecordingInformation.fromJson(
+    json['RecordingInformation'] as Map<String, dynamic>,
+  ),
+);
 
 Map<String, dynamic> _$GetRecordingInformationResponseToJson(
-        GetRecordingInformationResponse instance) =>
-    <String, dynamic>{
-      'RecordingInformation': instance.recordingInformation,
-    };
+  GetRecordingInformationResponse instance,
+) => <String, dynamic>{'RecordingInformation': instance.recordingInformation};

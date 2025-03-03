@@ -27,18 +27,12 @@ class MetadataConfiguration {
   final String token;
 
   /// User readable name. Length up to 64 characters.
-  @JsonKey(
-    name: 'Name',
-    fromJson: OnvifUtil.stringMappedFromXml,
-  )
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.stringMappedFromXml)
   final String name;
 
   /// Number of internal references currently using this configuration.
   /// This informational parameter is read-only. Deprecated for Media2 Service.
-  @JsonKey(
-    name: 'UseCount',
-    fromJson: OnvifUtil.intMappedFromXml,
-  )
+  @JsonKey(name: 'UseCount', fromJson: OnvifUtil.intMappedFromXml)
   final int? useCount;
 
   /// Optional parameter to configure compression type of Metadata payload. Use
@@ -74,25 +68,16 @@ class MetadataConfiguration {
 
   /// Defines whether the streamed metadata will include metadata from the
   /// analytics engines (video, cell motion, audio etc.)
-  @JsonKey(
-    name: 'Analytics',
-    fromJson: OnvifUtil.nullableBoolMappedFromXml,
-  )
+  @JsonKey(name: 'Analytics', fromJson: OnvifUtil.nullableBoolMappedFromXml)
   final bool? analytics;
 
   /// Defines the multicast settings that could be used for video streaming.
-  @JsonKey(
-    name: 'Multicast',
-    fromJson: OnvifUtil.emptyOrMulticastConfiguration,
-  )
+  @JsonKey(name: 'Multicast', fromJson: OnvifUtil.emptyOrMulticastConfiguration)
   final MulticastConfiguration? multicast;
 
   /// The rtsp session timeout for the related audio stream (when using Media2
   /// Service, this value is deprecated and ignored)
-  @JsonKey(
-    name: 'SessionTimeout',
-    fromJson: OnvifUtil.stringMappedFromXml,
-  )
+  @JsonKey(name: 'SessionTimeout', fromJson: OnvifUtil.stringMappedFromXml)
   final String? sessionTimeout;
 
   /// Indication which AnalyticsModules shall output metadata. Note that the
@@ -123,8 +108,9 @@ class MetadataConfiguration {
   factory MetadataConfiguration.fromJson(Map<String, dynamic> json) =>
       _$MetadataConfigurationFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MetadataConfigurationToJson(this)
-      .convertFieldsToXmlMap(_xmlMappedFields);
+  Map<String, dynamic> toJson() => _$MetadataConfigurationToJson(
+    this,
+  ).convertFieldsToXmlMap(_xmlMappedFields);
 
   @override
   String toString() => json.encode(toJson());

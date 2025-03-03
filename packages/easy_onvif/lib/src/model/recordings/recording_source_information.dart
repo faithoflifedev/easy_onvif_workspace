@@ -58,18 +58,20 @@ class RecordingSourceInformation implements XmlSerializable {
     XmlBuilder builder, {
     String tag = 'Source',
     String? namespace = Xmlns.tt,
-  }) =>
-      Transport.builder.element(tag, nest: () {
-        Transport.builder.namespace(namespace!);
+  }) => Transport.builder.element(
+    tag,
+    nest: () {
+      Transport.builder.namespace(namespace!);
 
-        sourceId.buildXml(Transport.builder, tag: 'SourceId');
+      sourceId.buildXml(Transport.builder, tag: 'SourceId');
 
-        name.buildXml(Transport.builder, tag: 'Name');
+      name.buildXml(Transport.builder, tag: 'Name');
 
-        location.buildXml(Transport.builder, tag: 'Location');
+      location.buildXml(Transport.builder, tag: 'Location');
 
-        description.buildXml(Transport.builder, tag: 'Description');
+      description.buildXml(Transport.builder, tag: 'Description');
 
-        address.buildXml(Transport.builder, tag: 'Address');
-      });
+      address.buildXml(Transport.builder, tag: 'Address');
+    },
+  );
 }

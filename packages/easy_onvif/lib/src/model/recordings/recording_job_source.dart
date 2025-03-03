@@ -29,7 +29,9 @@ class RecordingJobSource implements XmlSerializable {
   /// RecordingJobConfiguration from the device, the AutoCreateReceiver field
   /// shall never be present.
   @JsonKey(
-      name: 'AutoCreateReceiver', fromJson: OnvifUtil.nullableBoolMappedFromXml)
+    name: 'AutoCreateReceiver',
+    fromJson: OnvifUtil.nullableBoolMappedFromXml,
+  )
   final bool? autoCreateReceiver;
 
   @JsonKey(name: 'Tracks', fromJson: _fromJson)
@@ -54,24 +56,31 @@ class RecordingJobSource implements XmlSerializable {
   String toString() => json.encode(toJson());
 
   static List<Track> _fromJson(dynamic json) => OnvifUtil.jsonList<Track>(
-      json, (json) => Track.fromJson(json as Map<String, dynamic>));
+    json,
+    (json) => Track.fromJson(json as Map<String, dynamic>),
+  );
 
   @override
   void buildXml(
     XmlBuilder builder, {
     String tag = 'Source',
     String? namespace = Xmlns.trc,
-  }) =>
-      builder.element(tag, nest: () {
-        builder.namespace(namespace!);
+  }) => builder.element(
+    tag,
+    nest: () {
+      builder.namespace(namespace!);
 
-        sourceToken?.buildXml(builder);
+      sourceToken?.buildXml(builder);
 
-        if (autoCreateReceiver != null) {
-          builder.element('AutoCreateReceiver', nest: () {
+      if (autoCreateReceiver != null) {
+        builder.element(
+          'AutoCreateReceiver',
+          nest: () {
             builder.namespace(Xmlns.trc);
             builder.text(autoCreateReceiver! ? 'true' : 'false');
-          });
-        }
-      });
+          },
+        );
+      }
+    },
+  );
 }

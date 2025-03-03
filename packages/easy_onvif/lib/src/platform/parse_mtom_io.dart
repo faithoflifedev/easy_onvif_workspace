@@ -4,10 +4,7 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:easy_onvif/soap.dart';
 
-String parseMtom(
-  Response<Uint8List> response, {
-  String? writeLogToFolder,
-}) {
+String parseMtom(Response<Uint8List> response, {String? writeLogToFolder}) {
   final headerMap = response.headers.map;
 
   String? xmlString;

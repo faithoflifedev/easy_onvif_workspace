@@ -7,12 +7,8 @@ part of 'get_services_response.dart';
 // **************************************************************************
 
 GetServicesResponse _$GetServicesResponseFromJson(Map<String, dynamic> json) =>
-    GetServicesResponse(
-      GetServicesResponse._fromJson(json['Service']),
-    );
+    GetServicesResponse(GetServicesResponse._fromJson(json['Service']));
 
 Map<String, dynamic> _$GetServicesResponseToJson(
-        GetServicesResponse instance) =>
-    <String, dynamic>{
-      'Service': instance.services,
-    };
+  GetServicesResponse instance,
+) => <String, dynamic>{'Service': instance.services};

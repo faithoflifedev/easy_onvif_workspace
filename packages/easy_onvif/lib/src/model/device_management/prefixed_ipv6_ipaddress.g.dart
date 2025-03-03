@@ -13,8 +13,8 @@ PrefixedIpv6Address _$PrefixedIpv6AddressFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$PrefixedIpv6AddressToJson(
-        PrefixedIpv6Address instance) =>
-    <String, dynamic>{
-      'PrefixLength': instance.prefixLength,
-      'Address': instance.address,
-    };
+  PrefixedIpv6Address instance,
+) => <String, dynamic>{
+  'PrefixLength': instance.prefixLength,
+  'Address': instance.address,
+};

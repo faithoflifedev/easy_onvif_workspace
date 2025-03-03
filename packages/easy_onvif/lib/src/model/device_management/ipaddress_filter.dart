@@ -20,10 +20,7 @@ enum Type {
 
 @JsonSerializable()
 class IpAddressFilter implements XmlSerializable {
-  @JsonKey(
-    name: 'Type',
-    fromJson: _mappedToType,
-  )
+  @JsonKey(name: 'Type', fromJson: _mappedToType)
   Type type;
 
   @JsonKey(name: 'IPv4Address', fromJson: _parseUnboundIpv4)
@@ -55,24 +52,26 @@ class IpAddressFilter implements XmlSerializable {
     XmlBuilder builder, {
     String tag = 'SetIPAddressFilter',
     String? namespace = Xmlns.tds,
-  }) =>
-      builder.element(tag, nest: () {
-        builder.namespace(namespace!);
+  }) => builder.element(
+    tag,
+    nest: () {
+      builder.namespace(namespace!);
 
-        type.name.buildXml(builder, tag: 'Type');
+      type.name.buildXml(builder, tag: 'Type');
 
-        if (prefixedIpv4Addresses.isNotEmpty) {
-          for (var address in prefixedIpv4Addresses) {
-            address.buildXml(builder, tag: 'IPv4Address');
-          }
+      if (prefixedIpv4Addresses.isNotEmpty) {
+        for (var address in prefixedIpv4Addresses) {
+          address.buildXml(builder, tag: 'IPv4Address');
         }
+      }
 
-        if (prefixedIpv6Addresses.isNotEmpty) {
-          for (var address in prefixedIpv6Addresses) {
-            address.buildXml(builder, tag: 'IPv6Address');
-          }
+      if (prefixedIpv6Addresses.isNotEmpty) {
+        for (var address in prefixedIpv6Addresses) {
+          address.buildXml(builder, tag: 'IPv6Address');
         }
-      });
+      }
+    },
+  );
 
   static Type _mappedToType(Map<String, dynamic> value) =>
       Type.values.byName(OnvifUtil.stringMappedFromXml(value).toLowerCase());

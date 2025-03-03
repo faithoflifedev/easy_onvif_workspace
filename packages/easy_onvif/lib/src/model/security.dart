@@ -12,21 +12,18 @@ class Security implements XmlSerializable {
 
   final int mustUnderstand;
 
-  Security({
-    required this.usernameToken,
-    required this.mustUnderstand,
-  });
+  Security({required this.usernameToken, required this.mustUnderstand});
 
   Map<String, dynamic> toJson() => {
-        'UsernameToken': {
-          'Authorization': {
-            'Username': usernameToken.authorization.authInfo.username,
-            'Password': usernameToken.authorization.digest,
-            'Nonce': usernameToken.authorization.nonce.toBase64(),
-            'Created': usernameToken.authorization.utcTimestamp,
-          },
-        },
-      };
+    'UsernameToken': {
+      'Authorization': {
+        'Username': usernameToken.authorization.authInfo.username,
+        'Password': usernameToken.authorization.digest,
+        'Nonce': usernameToken.authorization.nonce.toBase64(),
+        'Created': usernameToken.authorization.utcTimestamp,
+      },
+    },
+  };
 
   @override
   String toString() => json.encode(toJson());
@@ -36,22 +33,18 @@ class Security implements XmlSerializable {
     XmlBuilder builder, {
     String tag = 'Security',
     String? namespace,
-  }) =>
-      builder.element(
-        'Security',
-        namespace: namespace,
-        // namespaces: {Xmlns.s: 's'},
-        nest: () {
-          builder.namespace(
-              'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd');
-
-          builder.attribute(
-            'mustUnderstand',
-            mustUnderstand,
-            namespace: Xmlns.s,
-          );
-
-          usernameToken.buildXml(builder);
-        },
+  }) => builder.element(
+    'Security',
+    namespace: namespace,
+    // namespaces: {Xmlns.s: 's'},
+    nest: () {
+      builder.namespace(
+        'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd',
       );
+
+      builder.attribute('mustUnderstand', mustUnderstand, namespace: Xmlns.s);
+
+      usernameToken.buildXml(builder);
+    },
+  );
 }

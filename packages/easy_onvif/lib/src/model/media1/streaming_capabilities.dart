@@ -11,24 +11,15 @@ part 'streaming_capabilities.g.dart';
 @JsonSerializable()
 class StreamingCapabilities {
   /// Indicates support for RTP multicast.
-  @JsonKey(
-    name: '@RTPMulticast',
-    fromJson: OnvifUtil.stringToBool,
-  )
+  @JsonKey(name: '@RTPMulticast', fromJson: OnvifUtil.stringToBool)
   final bool rtpMulticast;
 
   /// Indicates support for RTP over TCP.
-  @JsonKey(
-    name: '@RTP_TCP',
-    fromJson: OnvifUtil.stringToBool,
-  )
+  @JsonKey(name: '@RTP_TCP', fromJson: OnvifUtil.stringToBool)
   final bool rtp_tcp;
 
   /// Indicates support for RTP/RTSP/TCP.
-  @JsonKey(
-    name: '@RTP_RTSP_TCP',
-    fromJson: OnvifUtil.stringToBool,
-  )
+  @JsonKey(name: '@RTP_RTSP_TCP', fromJson: OnvifUtil.stringToBool)
   final bool rtp_rtsp_tcp;
 
   /// Indicates support for non aggregate RTSP control.
@@ -39,10 +30,7 @@ class StreamingCapabilities {
   final bool? nonAggregateControl;
 
   /// Indicates the device does not support live media streaming via RTSP.
-  @JsonKey(
-    name: '@NoRTSPStreaming',
-    fromJson: OnvifUtil.nullableStringToBool,
-  )
+  @JsonKey(name: '@NoRTSPStreaming', fromJson: OnvifUtil.nullableStringToBool)
   final bool? noRtspStreaming;
 
   StreamingCapabilities({

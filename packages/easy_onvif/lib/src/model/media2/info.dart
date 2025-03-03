@@ -23,10 +23,7 @@ class Info {
   @JsonKey(name: 'Total', fromJson: OnvifUtil.intMappedFromXml)
   final int total;
 
-  Info({
-    this.codec,
-    required this.total,
-  });
+  Info({this.codec, required this.total});
 
   factory Info.fromJson(Map<String, dynamic> json) => _$InfoFromJson(json);
 
@@ -36,5 +33,7 @@ class Info {
   String toString() => json.encode(toJson());
 
   static List<Codec> _fromJson(dynamic json) => OnvifUtil.jsonList<Codec>(
-      json, (json) => Codec.fromJson(json as Map<String, dynamic>));
+    json,
+    (json) => Codec.fromJson(json as Map<String, dynamic>),
+  );
 }
