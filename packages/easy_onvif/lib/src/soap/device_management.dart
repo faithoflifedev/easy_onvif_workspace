@@ -40,7 +40,7 @@ class DeviceManagementRequest {
     return builder.buildFragment();
   }
 
-  /// XML for the [getDynamicDNS]
+  /// XML for the [getDynamicDns]
   static XmlDocumentFragment getDynamicDns() =>
       Transport.quickTag('GetDynamicDNS', Xmlns.tds);
 

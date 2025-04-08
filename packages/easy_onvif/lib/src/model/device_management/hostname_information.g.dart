@@ -11,7 +11,9 @@ HostnameInformation _$HostnameInformationFromJson(Map<String, dynamic> json) =>
       fromDhcp: OnvifUtil.stringMappedFromXml(
         json['FromDHCP'] as Map<String, dynamic>,
       ),
-      name: OnvifUtil.stringMappedFromXml(json['Name'] as Map<String, dynamic>),
+      name: OnvifUtil.nullableStringMappedFromXml(
+        json['Name'] as Map<String, dynamic>?,
+      ),
     );
 
 Map<String, dynamic> _$HostnameInformationToJson(

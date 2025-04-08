@@ -10,37 +10,39 @@
 This package works with a variety of ONVIF compatible devices allowing for IP Cameras and NVRs (network video recorders) to be integrated into Dart and Flutter applications.  The package includes the ability to control the PTZ (pan-tilt-zoom) movements of a device along with managing presets as well as controlling how video and audio is being streamed from the device.  Review the documentation below to get more details on available features.
 
 ## Table of contents
-- [Getting Started](#getting-started)
-  - [Dependency](#dependency)
-  - [Usage Example](#usage-example)
-  - [Interacting with a device through Onvif operations](#interacting-with-a-device-through-onvif-operations)
-- [Lower level requests](#lower-level-requests)
-- [Onvif cli (Onvif at the command prompt)](#onvif-cli-onvif-at-the-command-prompt)
-- [Supported Onvif Operations](#supported-onvif-operations)
-  - [Device Management](#device-management)
-  - [Imaging](#imaging)
-  - [Media 10](#media-10)
-  - [Media 20](#media-20)
-  - [PTZ](#ptz)
-  - [PTZ Helper Methods](#ptz-helper-methods)
-  - [Recording](#recording)
-  - [Replay](#replay)
-  - [Search](#search)
-- [Tested Onvif Devices](#tested-onvif-devices)
-- [New for version 3.1.0](#new-for-version-310)
-- [New for version 3.0.0-dev.0](#new-for-version-300-dev0)
-- [New for version 2.2.x](#new-for-version-22x)
-- [Onvif specifications and documentation](#onvif-specifications-and-documentation)
-- [Features and bugs](#features-and-bugs)
-- [Possible unexpected behavior](#possible-unexpected-behavior)
-- [Known Issues](#known-issues)
-  - [Issue #45](#issue-45)
-- [Breaking changes](#breaking-changes)
-  - [v3.1.0](#v310)
-  - [v3.0.0-dev.0](#v300-dev0)
-  - [v2.3.0](#v230)
-- [Contributors](#contributors)
-- [Contributing](#contributing)
+- [Dart Implementation of ONVIF IP Camera Client](#dart-implementation-of-onvif-ip-camera-client)
+  - [Table of contents](#table-of-contents)
+  - [Getting Started](#getting-started)
+    - [Dependency](#dependency)
+    - [Usage Example](#usage-example)
+    - [Interacting with a device through Onvif operations](#interacting-with-a-device-through-onvif-operations)
+  - [Lower level requests](#lower-level-requests)
+  - [Onvif cli (Onvif at the command prompt)](#onvif-cli-onvif-at-the-command-prompt)
+  - [Supported Onvif Operations](#supported-onvif-operations)
+    - [Device Management](#device-management)
+    - [Imaging](#imaging)
+    - [Media 10](#media-10)
+    - [Media 20](#media-20)
+    - [PTZ](#ptz)
+    - [PTZ Helper Methods](#ptz-helper-methods)
+    - [Recording](#recording)
+    - [Replay](#replay)
+    - [Search](#search)
+  - [Tested Onvif Devices](#tested-onvif-devices)
+  - [New for version 3.1.0](#new-for-version-310)
+  - [New for version 3.0.0-dev.0](#new-for-version-300-dev0)
+  - [New for version 2.2.x](#new-for-version-22x)
+  - [Onvif specifications and documentation](#onvif-specifications-and-documentation)
+  - [Features and bugs](#features-and-bugs)
+  - [Possible unexpected behavior](#possible-unexpected-behavior)
+  - [Known Issues](#known-issues)
+    - [Issue #45](#issue-45)
+  - [Breaking changes](#breaking-changes)
+    - [v3.1.0](#v310)
+    - [v3.0.0-dev.0](#v300-dev0)
+    - [v2.3.0](#v230)
+  - [Contributors](#contributors)
+  - [Contributing](#contributing)
 
 
 [![Build Status](https://github.com/faithoflifedev/easy_onvif/workflows/Dart/badge.svg)](https://github.com/faithoflifedev/easy_onvif/actions) [![github last commit](https://shields.io/github/last-commit/faithoflifedev/easy_onvif)](https://shields.io/github/last-commit/faithoflifedev/easy_onvif) [![github build](https://img.shields.io/github/actions/workflow/status/faithoflifedev/easy_onvif/dart.yml?branch=main)](https://shields.io/github/workflow/status/faithoflifedev/easy_onvif/Dart) [![github issues](https://shields.io/github/issues/faithoflifedev/easy_onvif)](https://shields.io/github/issues/faithoflifedev/easy_onvif)
@@ -56,7 +58,7 @@ To use this package in your code, first add the dependency to your project:
 ```yml
 dependencies:
   ...
-  easy_onvif: ^3.1.1+6
+  easy_onvif: ^3.1.2
 ```
 
 If you need additional help getting started with dart, check out these [guides](https://dart.dev/guides).
@@ -384,7 +386,8 @@ The values returned by the Onvif API `GetDeviceInformation` call.
 | [empty\]           | GX728MF-IR28       |                                 | commands not implemented&#x00B3; |
 | LOREX              | LNB4421SB          |                                 | testing in progress              |
 | ONVIF_IPNC         | IPG-8150PSS        | 1.3.0-20210203CN-PT             | commands not implemented&#x2074; |
-| SUNBA              | Performance-Series | IPC-B2202.3.73.C06290.NB.230628 | commands not implemented&#x2075;|
+| SUNBA              | Performance-Series | IPC-B2202.3.73.C06290.NB.230628 | commands not implemented&#x2075; |
+| [empty\]           | IPD-H4K8M05-BS     | V1.04.10-190309                 | commands not implemented&#x2076; |
 
 &#x00B9; The ENP1A14-IR/25X does not support the following commands:
 * Recordings
@@ -445,6 +448,27 @@ The values returned by the Onvif API `GetDeviceInformation` call.
   * `GotoHomePosition` - No Home Position
   * `RelativeMove` - work-around available with the `move` helper
   * `SetHomePosition`
+
+&#x2076; IPD-H4K8M05-BS does not support the following commands: 
+* Device Management:
+  * `CreateUsers`
+  * `DeleteUsers` - supported but not functional
+  * `GetStorageConfigurations`
+  * `GetStorageConfiguration`
+* Media1:
+  * `GetAudioSourcesResponse` - device has no audio support 
+  * `StartMulticastStreamingResponse`
+  * `StopMulticastStreamingResponse` - supported but not functional
+* Media2:
+  * is not supported by this device
+* PTZ:
+  * `AbsoluteMove` - supported but not functional
+  * `GetStatus` - supported but not functional
+  * `GotoHomePosition` - supported but not functional
+  * `GotoPreset` - supported but not functional
+  * `RelativeMove` - work-around available with the `move` helper
+  * `RemovePreset` - supported but not functional
+  * `SetHomePosition` - supported but not functional
   
 ## New for version 3.1.0
 

@@ -361,7 +361,7 @@ void main() {
 
       expect(
         builder.buildDocument().toXmlString(),
-        '<Test><GetStreamUri xmlns="http://www.onvif.org/ver10/media/wsdl"><StreamSetup xmlns="http://www.onvif.org/ver10/schema"><Stream>RTP-Multicast</Stream><Transport xmlns="http://www.onvif.org/ver10/schema"><Protocol xmlns="http://www.onvif.org/ver10/schema">HTTP</Protocol></Transport></StreamSetup><ProfileToken>testToken</ProfileToken></GetStreamUri></Test>',
+        '<Test><GetStreamUri xmlns="http://www.onvif.org/ver10/media/wsdl"><StreamSetup xmlns="http://www.onvif.org/ver10/media/wsdl"><Stream xmlns="http://www.onvif.org/ver10/schema">RTP-Multicast</Stream><Transport xmlns="http://www.onvif.org/ver10/schema"><Protocol xmlns="http://www.onvif.org/ver10/schema">HTTP</Protocol></Transport></StreamSetup><ProfileToken>testToken</ProfileToken></GetStreamUri></Test>',
       );
     });
 
@@ -929,7 +929,7 @@ void main() {
 
       expect(
         builder.buildDocument().toXmlString(),
-        '<Test><GetReplayUri xmlns="http://www.onvif.org/ver10/replay/wsdl"><StreamSetup xmlns="http://www.onvif.org/ver10/schema"><Stream>RTP-Multicast</Stream><Transport xmlns="http://www.onvif.org/ver10/schema"><Protocol xmlns="http://www.onvif.org/ver10/schema">HTTP</Protocol></Transport></StreamSetup><RecordingToken>testToken</RecordingToken></GetReplayUri></Test>',
+        '<Test><GetReplayUri xmlns="http://www.onvif.org/ver10/replay/wsdl"><StreamSetup xmlns="http://www.onvif.org/ver10/media/wsdl"><Stream xmlns="http://www.onvif.org/ver10/schema">RTP-Multicast</Stream><Transport xmlns="http://www.onvif.org/ver10/schema"><Protocol xmlns="http://www.onvif.org/ver10/schema">HTTP</Protocol></Transport></StreamSetup><RecordingToken>testToken</RecordingToken></GetReplayUri></Test>',
       );
     });
 

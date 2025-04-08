@@ -640,7 +640,7 @@ void main() {
 
       test('GetProfilesResponse', () {
         final envelope = Envelope.fromXmlFile(
-          'test/xml/IPG-8150PSS/media1/GetProfilesResponse.xml',
+          'test/xml/SUNBA/media1/GetProfilesResponse.xml',
         );
 
         expect(
@@ -697,9 +697,133 @@ void main() {
         );
       });
 
+      // test('StopMulticastStreamingResponse', () {
+      //   final envelope = Envelope.fromXmlFile(
+      //     'test/xml/SUNBA/media1/StopMulticastStreamingResponse.xml',
+      //   );
+
+      //   expect(
+      //     envelope.body.response!.containsKey('StopMulticastStreamingResponse'),
+      //     true,
+      //   );
+      // });
+    });
+
+    group('IPD-H4K8M05-BS', () {
+      // test('GetAudioSourcesResponse', () {
+      //   final envelope = Envelope.fromXmlFile(
+      //     'test/xml/IPD-H4K8M05-BS/media1/GetAudioSourcesResponse.xml',
+      //   );
+
+      //   expect(
+      //     GetAudioSourcesResponse.fromJson(
+      //       envelope.body.response!,
+      //     ).audioSources.isEmpty,
+      //     false,
+      //   );
+      // });
+
+      test('GetMetadataConfigurationResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/media1/GetMetadataConfigurationResponse.xml',
+        );
+
+        expect(
+          GetMetadataConfigurationResponse.fromJson(
+            envelope.body.response!,
+          ).configuration.name,
+          'METADATA_CH0',
+        );
+      });
+
+      test('GetMetadataConfigurationsResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/media1/GetMetadataConfigurationsResponse.xml',
+        );
+
+        expect(
+          GetMetadataConfigurationsResponse.fromJson(
+            envelope.body.response!,
+          ).configurations.isNotEmpty,
+          true,
+        );
+      });
+
+      test('GetProfileResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/media1/GetProfileResponse.xml',
+        );
+
+        expect(
+          GetProfileResponse.fromJson(envelope.body.response!).profile.name,
+          'MainStream',
+        );
+      });
+
+      test('GetProfilesResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/media1/GetProfilesResponse.xml',
+        );
+
+        expect(
+          GetProfilesResponse.fromJson(
+            envelope.body.response!,
+          ).profiles.isNotEmpty,
+          true,
+        );
+      });
+
+      test('GetServiceCapabilitiesResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/media1/GetServiceCapabilitiesResponse.xml',
+        );
+
+        expect(
+          GetServiceCapabilitiesResponse.fromJson(
+            envelope.body.response!,
+          ).capabilities.streamingCapabilities.rtp_tcp,
+          true,
+        );
+      });
+
+      test('GetSnapshotUriResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/media1/GetSnapshotUriResponse.xml',
+        );
+
+        expect(
+          GetSnapshotUriResponse.fromJson(envelope.body.response!).mediaUri.uri,
+          'http://192.168.15.40/jpgimage/1/image.jpg',
+        );
+      });
+
+      test('GetStreamUriResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/media1/GetStreamUriResponse.xml',
+        );
+
+        expect(
+          GetStreamUriResponse.fromJson(envelope.body.response!).mediaUri.uri,
+          'rtsp://192.168.15.40:554/1/h264major',
+        );
+      });
+
+      test('GetVideoSourcesResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/media1/GetVideoSourcesResponse.xml',
+        );
+
+        expect(
+          GetVideoSourcesResponse.fromJson(
+            envelope.body.response!,
+          ).videoSources.isNotEmpty,
+          true,
+        );
+      });
+
       test('StopMulticastStreamingResponse', () {
         final envelope = Envelope.fromXmlFile(
-          'test/xml/IPG-8150PSS/media1/StopMulticastStreamingResponse.xml',
+          'test/xml/IPD-H4K8M05-BS/media1/StopMulticastStreamingResponse.xml',
         );
 
         expect(

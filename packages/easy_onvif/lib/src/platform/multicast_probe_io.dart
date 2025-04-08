@@ -41,21 +41,33 @@ class MulticastProbeIo with UiLoggy {
 
   final onvifDevices = <ProbeMatch>[];
 
-  int? probeTimeout = 2;
+  int? probeTimeout;
 
-  factory MulticastProbeIo({int? timeout, bool? releaseMode}) {
+  int? announceInterval;
+
+  factory MulticastProbeIo({
+    int? timeout,
+    int? announceInterval,
+    bool? releaseMode,
+  }) {
     if (Platform.isWindows) {
       return MulticastProbeIo.windows(
         timeout: timeout,
         releaseMode: releaseMode,
       );
     } else {
-      return MulticastProbeIo.other(timeout: timeout);
+      return MulticastProbeIo.other(
+        timeout: timeout,
+        announceInterval: announceInterval,
+      );
     }
   }
 
-  MulticastProbeIo.other({int? timeout}) {
+  MulticastProbeIo.other({int? timeout, int? announceInterval}) {
     probeTimeout = timeout ?? BaseMulticastProbe.defaultTimeout;
+
+    announceInterval =
+        announceInterval ?? BaseMulticastProbe.defaultAnnounceInterval;
   }
 
   /// Constructor for Windows OS builds, we need the `kReleaseMode` flag from
@@ -152,36 +164,66 @@ class MulticastProbeIo with UiLoggy {
       );
     });
 
-    start(rawDataGramSocket);
+    _start(rawDataGramSocket);
 
-    await finish(rawDataGramSocket, probeTimeout);
+    await _finish(rawDataGramSocket, probeTimeout);
   }
 
-  /// timeout of 0 or less means no timeout
-  void start(RawDatagramSocket rawDataGramSocket) {
-    loggy.debug('send');
+  Future<void> sendHello() async {}
+
+  Future<void> sendBye() async {}
+
+  void _start(RawDatagramSocket rawDataGramSocket) {
+    loggy.debug('hello');
+
+    final helloMessageBodyXml = WsDiscovery.hello(
+      messageNumber: 1,
+      xAddrs: ['http://${rawDataGramSocket.address}/onvif/device_service'],
+    );
+
+    rawDataGramSocket.send(
+      helloMessageBodyXml.toXmlString().codeUnits,
+      broadcastAddress,
+      broadcastPort,
+    );
+
+    loggy.debug('probe');
 
     loggy.debug(
       'BROADCAST ADDRESS: ${broadcastAddress.address}, PORT: $broadcastPort',
     );
 
-    final messageBodyXml = Transport.probe(Uuid().v4());
+    final probeMessageBodyXml = WsDiscovery.probe();
 
-    loggy.debug('REQUEST:\n${messageBodyXml.toXmlString(pretty: true)}');
+    loggy.debug('REQUEST:\n${probeMessageBodyXml.toXmlString(pretty: true)}');
 
     rawDataGramSocket.send(
-      messageBodyXml.toXmlString(pretty: true).codeUnits,
+      probeMessageBodyXml.toXmlString().codeUnits,
       broadcastAddress,
       broadcastPort,
     );
   }
 
-  Future<void> finish(
+  /// timeout of 0 or less means no timeout
+  Future<void> _finish(
     RawDatagramSocket rawDataGramSocket, [
     int? timeout,
   ]) async {
     await Future.delayed(
       Duration(seconds: timeout ?? BaseMulticastProbe.defaultTimeout),
+    );
+
+    loggy.debug('bye');
+
+    final byeMessageBodyXml = WsDiscovery.bye(
+      messageId: Uuid().v4(),
+      address: Uuid().v4(),
+    );
+
+    rawDataGramSocket.send(
+      byeMessageBodyXml.toXmlString().codeUnits,
+      broadcastAddress,
+      broadcastPort,
     );
 
     rawDataGramSocket.close();
@@ -190,8 +232,7 @@ class MulticastProbeIo with UiLoggy {
   Future<void> windowsDiscovery(Duration duration) async {
     final data = calloc<_OnvifDiscoveryData>();
 
-    final probeMessageData =
-        Transport.probe(Uuid().v4()).toXmlString().toNativeUtf8();
+    final probeMessageData = WsDiscovery.probe().toXmlString().toNativeUtf8();
 
     final devices = _discovery(data, probeMessageData, duration.inMilliseconds);
 

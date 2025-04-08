@@ -22,9 +22,9 @@ MetadataConfiguration _$MetadataConfigurationFromJson(
           ? null
           : PtzFilter.fromJson(json['PTZStatus'] as Map<String, dynamic>),
   events:
-      (json['Events'] as List<dynamic>?)
-          ?.map((e) => Event.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      json['Events'] == null
+          ? null
+          : Events.fromJson(json['Events'] as Map<String, dynamic>),
   analytics: OnvifUtil.nullableBoolMappedFromXml(
     json['Analytics'] as Map<String, dynamic>?,
   ),

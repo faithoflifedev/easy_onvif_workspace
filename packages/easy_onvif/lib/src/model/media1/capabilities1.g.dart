@@ -8,12 +8,14 @@ part of 'capabilities1.dart';
 
 Capabilities1 _$Capabilities1FromJson(Map<String, dynamic> json) =>
     Capabilities1(
-      snapshotUri: OnvifUtil.stringToBool(json['@SnapshotUri'] as String),
-      rotation: OnvifUtil.stringToBool(json['@Rotation'] as String),
-      videoSourceMode: OnvifUtil.stringToBool(
-        json['@VideoSourceMode'] as String,
+      snapshotUri: OnvifUtil.nullableStringToBool(
+        json['@SnapshotUri'] as String?,
       ),
-      osd: OnvifUtil.stringToBool(json['@OSD'] as String),
+      rotation: OnvifUtil.nullableStringToBool(json['@Rotation'] as String?),
+      videoSourceMode: OnvifUtil.nullableStringToBool(
+        json['@VideoSourceMode'] as String?,
+      ),
+      osd: OnvifUtil.nullableStringToBool(json['@OSD'] as String?),
       temporaryOSDText: OnvifUtil.nullableStringToBool(
         json['@TemporaryOSDText'] as String?,
       ),

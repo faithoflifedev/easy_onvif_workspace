@@ -12,9 +12,9 @@ part 'get_service_capabilities_response.g.dart';
 class GetServiceCapabilitiesResponse {
   /// The capabilities for the PTZ service is returned in the Capabilities element.
   @JsonKey(name: 'Capabilities')
-  final Capabilities capabilities;
+  final Capabilities? capabilities;
 
-  GetServiceCapabilitiesResponse({required this.capabilities});
+  GetServiceCapabilitiesResponse({this.capabilities});
 
   factory GetServiceCapabilitiesResponse.fromJson(Map<String, dynamic> json) =>
       _$GetServiceCapabilitiesResponseFromJson(json);

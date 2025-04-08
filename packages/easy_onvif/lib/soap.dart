@@ -13,6 +13,7 @@ export 'src/soap/recordings.dart';
 export 'src/soap/replay.dart';
 export 'src/soap/search.dart';
 export 'src/soap/transport.dart';
+export 'src/soap/ws_discovery.dart';
 export 'src/soap/xmlns.dart';
 
 export 'src/model/body.dart';

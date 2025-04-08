@@ -10,10 +10,10 @@ class HostnameInformation {
   @JsonKey(name: 'FromDHCP', fromJson: OnvifUtil.stringMappedFromXml)
   final String fromDhcp;
 
-  @JsonKey(name: 'Name', fromJson: OnvifUtil.stringMappedFromXml)
-  final String name;
+  @JsonKey(name: 'Name', fromJson: OnvifUtil.nullableStringMappedFromXml)
+  final String? name;
 
-  HostnameInformation({required this.fromDhcp, required this.name});
+  HostnameInformation({required this.fromDhcp, this.name});
 
   factory HostnameInformation.fromJson(Map<String, dynamic> json) =>
       _$HostnameInformationFromJson(json);

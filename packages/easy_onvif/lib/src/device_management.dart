@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:easy_onvif/device_management.dart';
 import 'package:easy_onvif/soap.dart' as soap;
@@ -118,7 +119,7 @@ class DeviceManagement extends Operation with UiLoggy {
   }
 
   /// This operation gets the dynamic DNS settings from a device. If the device
-  /// supports dynamic DNS as specified in [RFC 2136] and [RFC 4702], it shall
+  /// supports dynamic DNS as specified in [RFC 2136\] and [RFC 4702\], it shall
   /// be possible to get the type, name and TTL through the GetDynamicDNS
   /// command.
   ///
@@ -446,10 +447,12 @@ class DeviceManagement extends Operation with UiLoggy {
   /// device.
   ///
   /// Access Class: READ_SYSTEM_SECRET
-  Future<SystemInformation> getSystemSupportInformation({
+  Future<SystemInformation?> getSystemSupportInformation({
     String? writeLogToFolder,
   }) async {
     loggy.debug('getSystemSupportInformation');
+
+    String? xmlString;
 
     final securedXml = transport
         .getSecuredEnvelope(
@@ -461,11 +464,17 @@ class DeviceManagement extends Operation with UiLoggy {
 
     final response = await transport.sendLogRequest(uri, securedXml);
 
-    String xmlString = parseMtom(response, writeLogToFolder: writeLogToFolder);
+    try {
+      xmlString = parseMtom(response, writeLogToFolder: writeLogToFolder);
 
-    loggy.debug('\ngetSystemLog - RESPONSE:\n$xmlString');
+      loggy.debug('\ngetSystemSupportInformation - RESPONSE:\n$xmlString');
+    } catch (e) {
+      loggy.debug('Error parsing MTOM: $e');
+    }
 
-    final responseEnvelope = soap.Envelope.fromXmlString(xmlString);
+    final responseEnvelope = soap.Envelope.fromXmlString(
+      utf8.decode(response.data!, allowMalformed: true),
+    );
 
     if (responseEnvelope.body.hasFault) {
       throw Exception(responseEnvelope.body.fault.toString());

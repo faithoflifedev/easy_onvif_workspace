@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+    xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:wsa5="http://www.w3.org/2005/08/addressing"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:c14n="http://www.w3.org/2001/10/xml-exc-c14n#"
+    xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+    xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+    xmlns:xmime5="http://www.w3.org/2005/05/xmlmime"
+    xmlns:xop="http://www.w3.org/2004/08/xop/include"
+    xmlns:d="http://schemas.xmlsoap.org/ws/2005/04/discovery"
+    xmlns:tt="http://www.onvif.org/ver10/schema"
+    xmlns:wstop="http://docs.oasis-open.org/wsn/t-1"
+    xmlns:wsrf-bf="http://docs.oasis-open.org/wsrf/bf-2"
+    xmlns:wsrf="http://docs.oasis-open.org/wsrf/r-2"
+    xmlns:cpp="http://www.onvif.org/ver10/events/wsdl/CreatePullPointBinding"
+    xmlns:dl="http://www.onvif.org/ver10/network/wsdl/DiscoveryLookupBinding"
+    xmlns:eve="http://www.onvif.org/ver10/events/wsdl/EventBinding"
+    xmlns:nc="http://www.onvif.org/ver10/events/wsdl/NotificationConsumerBinding"
+    xmlns:np="http://www.onvif.org/ver10/events/wsdl/NotificationProducerBinding"
+    xmlns:pp="http://www.onvif.org/ver10/events/wsdl/PullPointBinding"
+    xmlns:pps="http://www.onvif.org/ver10/events/wsdl/PullPointSubscriptionBinding"
+    xmlns:tev="http://www.onvif.org/ver10/events/wsdl"
+    xmlns:psm="http://www.onvif.org/ver10/events/wsdl/PausableSubscriptionManagerBinding"
+    xmlns:wsnt="http://docs.oasis-open.org/wsn/b-2"
+    xmlns:rd="http://www.onvif.org/ver10/network/wsdl/RemoteDiscoveryBinding"
+    xmlns:dn="http://www.onvif.org/ver10/network/wsdl"
+    xmlns:sm="http://www.onvif.org/ver10/events/wsdl/SubscriptionManagerBinding"
+    xmlns:tds="http://www.onvif.org/ver10/device/wsdl"
+    xmlns:timg="http://www.onvif.org/ver20/imaging/wsdl"
+    xmlns:tmd="http://www.onvif.org/ver10/deviceIO/wsdl"
+    xmlns:tptz="http://www.onvif.org/ver20/ptz/wsdl"
+    xmlns:trt="http://www.onvif.org/ver10/media/wsdl"
+    xmlns:tns1="http://www.onvif.org/ver10/topics"
+    xmlns:bf2="http://docs.oasis-open.org/wsrf/bf-2"
+    xmlns:ter="http://www.onvif.org/ver10/error"
+    xmlns:tan="http://www.onvif.org/ver20/analytics/wsdl">
+    <SOAP-ENV:Header></SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <trt:GetProfileResponse>
+            <trt:Profile fixed="true" token="MainStream">
+                <tt:Name>MainStream</tt:Name>
+                <tt:VideoSourceConfiguration token="VIDEO_CH0">
+                    <tt:Name>VIDEO_CH0</tt:Name>
+                    <tt:UseCount>2</tt:UseCount>
+                    <tt:SourceToken>VI_CH0</tt:SourceToken>
+                    <tt:Bounds height="576" width="720" y="0" x="0"></tt:Bounds>
+                </tt:VideoSourceConfiguration>
+                <tt:VideoEncoderConfiguration token="H264_MAJOR_CH0">
+                    <tt:Name>H264_MAJOR_CH0</tt:Name>
+                    <tt:UseCount>1</tt:UseCount>
+                    <tt:Encoding>H264</tt:Encoding>
+                    <tt:Resolution>
+                        <tt:Width>2592</tt:Width>
+                        <tt:Height>1944</tt:Height>
+                    </tt:Resolution>
+                    <tt:Quality>2</tt:Quality>
+                    <tt:RateControl>
+                        <tt:FrameRateLimit>25</tt:FrameRateLimit>
+                        <tt:EncodingInterval>1</tt:EncodingInterval>
+                        <tt:BitrateLimit>5120</tt:BitrateLimit>
+                    </tt:RateControl>
+                    <tt:H264>
+                        <tt:GovLength>50</tt:GovLength>
+                        <tt:H264Profile>High</tt:H264Profile>
+                    </tt:H264>
+                    <tt:Multicast>
+                        <tt:Address>
+                            <tt:Type>IPv4</tt:Type>
+                            <tt:IPv4Address>224.0.0.88</tt:IPv4Address>
+                        </tt:Address>
+                        <tt:Port>8888</tt:Port>
+                        <tt:TTL>255</tt:TTL>
+                        <tt:AutoStart>false</tt:AutoStart>
+                    </tt:Multicast>
+                    <tt:SessionTimeout>PT300S</tt:SessionTimeout>
+                </tt:VideoEncoderConfiguration>
+                <tt:VideoAnalyticsConfiguration token="VideoAnalyticsToken">
+                    <tt:Name>VideoAnalyticsName</tt:Name>
+                    <tt:UseCount>2</tt:UseCount>
+                    <tt:AnalyticsEngineConfiguration>
+                        <tt:AnalyticsModule Name="MyCellMotionModule" Type="tt:CellMotionEngine">
+                            <tt:Parameters>
+                                <tt:SimpleItem Value="0" Name="Sensitivity"></tt:SimpleItem>
+                                <tt:ElementItem Name="Layout">
+                                    <tt:CellLayout Columns="22" Rows="18">
+                                        <tt:Transformation>
+                                            <tt:Translate x="-1.000000" y="-1.000000"/>
+                                            <tt:Scale x="0.090909" y="0.111111"/>
+                                        </tt:Transformation>
+                                    </tt:CellLayout>
+                                </tt:ElementItem>
+                            </tt:Parameters>
+                        </tt:AnalyticsModule>
+                    </tt:AnalyticsEngineConfiguration>
+                    <tt:RuleEngineConfiguration>
+                        <tt:Rule Name="MyMotionDetectorRule" Type="tt:CellMotionDetector">
+                            <tt:Parameters>
+                                <tt:SimpleItem Value="1" Name="MinCount"></tt:SimpleItem>
+                                <tt:SimpleItem Value="1000" Name="AlarmOnDelay"></tt:SimpleItem>
+                                <tt:SimpleItem Value="1000" Name="AlarmOffDelay"></tt:SimpleItem>
+                                <tt:SimpleItem Value="0P8A8A==" Name="ActiveCells"></tt:SimpleItem>
+                            </tt:Parameters>
+                        </tt:Rule>
+                    </tt:RuleEngineConfiguration>
+                </tt:VideoAnalyticsConfiguration>
+                <tt:PTZConfiguration token="PTZCFG_CH0">
+                    <tt:Name>PTZCFG_CH0</tt:Name>
+                    <tt:UseCount>2</tt:UseCount>
+                    <tt:NodeToken>PTZNODE_CH0</tt:NodeToken>
+                    <tt:DefaultAbsolutePantTiltPositionSpace>http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace</tt:DefaultAbsolutePantTiltPositionSpace>
+                    <tt:DefaultAbsoluteZoomPositionSpace>http://www.onvif.org/ver10/tptz/ZoomSpaces/PositionGenericSpace</tt:DefaultAbsoluteZoomPositionSpace>
+                    <tt:DefaultRelativePanTiltTranslationSpace>http://www.onvif.org/ver10/tptz/PanTiltSpaces/TranslationGenericSpace</tt:DefaultRelativePanTiltTranslationSpace>
+                    <tt:DefaultRelativeZoomTranslationSpace>http://www.onvif.org/ver10/tptz/ZoomSpaces/TranslationGenericSpace</tt:DefaultRelativeZoomTranslationSpace>
+                    <tt:DefaultContinuousPanTiltVelocitySpace>http://www.onvif.org/ver10/tptz/PanTiltSpaces/VelocityGenericSpace</tt:DefaultContinuousPanTiltVelocitySpace>
+                    <tt:DefaultContinuousZoomVelocitySpace>http://www.onvif.org/ver10/tptz/ZoomSpaces/VelocityGenericSpace</tt:DefaultContinuousZoomVelocitySpace>
+                    <tt:DefaultPTZTimeout>PT1M</tt:DefaultPTZTimeout>
+                    <tt:PanTiltLimits>
+                        <tt:Range>
+                            <tt:URI>http://www.onvif.org/ver10/tptz/PanTiltSpaces/PositionGenericSpace</tt:URI>
+                            <tt:XRange>
+                                <tt:Min>-1</tt:Min>
+                                <tt:Max>1</tt:Max>
+                            </tt:XRange>
+                            <tt:YRange>
+                                <tt:Min>-1</tt:Min>
+                                <tt:Max>1</tt:Max>
+                            </tt:YRange>
+                        </tt:Range>
+                    </tt:PanTiltLimits>
+                    <tt:ZoomLimits>
+                        <tt:Range>
+                            <tt:URI>http://www.onvif.org/ver10/tptz/ZoomSpaces/PositionGenericSpace</tt:URI>
+                            <tt:XRange>
+                                <tt:Min>0</tt:Min>
+                                <tt:Max>1</tt:Max>
+                            </tt:XRange>
+                        </tt:Range>
+                    </tt:ZoomLimits>
+                </tt:PTZConfiguration>
+                <tt:MetadataConfiguration token="METADATA_CH0">
+                    <tt:Name>METADATA_CH0</tt:Name>
+                    <tt:UseCount>2</tt:UseCount>
+                    <tt:Events>
+                        <tt:Filter>
+                            <wsnt:TopicExpression Dialect="http://www.onvif.org/ver10/tev/topicExpression/ConcreteSet"></wsnt:TopicExpression>
+                            <wsnt:MessageContent Dialect="http://www.onvif.org/ver10/tev/messageContentFilter/ItemFilter"></wsnt:MessageContent>
+                        </tt:Filter>
+                    </tt:Events>
+                    <tt:Analytics>false</tt:Analytics>
+                    <tt:Multicast>
+                        <tt:Address>
+                            <tt:Type>IPv4</tt:Type>
+                            <tt:IPv4Address>239.255.255.250</tt:IPv4Address>
+                        </tt:Address>
+                        <tt:Port>3702</tt:Port>
+                        <tt:TTL>60</tt:TTL>
+                        <tt:AutoStart>false</tt:AutoStart>
+                    </tt:Multicast>
+                    <tt:SessionTimeout>PT60S</tt:SessionTimeout>
+                </tt:MetadataConfiguration>
+            </trt:Profile>
+        </trt:GetProfileResponse>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

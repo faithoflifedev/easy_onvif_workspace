@@ -40,7 +40,7 @@ class PtzRequest {
     builder.element(
       'ContinuousMove',
       nest: () {
-        builder.namespace(Xmlns.tptz); //tptz
+        builder.namespace(Xmlns.tptz);
 
         ReferenceToken(profileToken).buildXml(builder);
 

@@ -9,9 +9,12 @@ part of 'get_system_support_information_response.dart';
 GetSystemSupportInformationResponse
 _$GetSystemSupportInformationResponseFromJson(Map<String, dynamic> json) =>
     GetSystemSupportInformationResponse(
-      supportInformation: SystemInformation.fromJson(
-        json['SupportInformation'] as Map<String, dynamic>,
-      ),
+      supportInformation:
+          json['SupportInformation'] == null
+              ? null
+              : SystemInformation.fromJson(
+                json['SupportInformation'] as Map<String, dynamic>,
+              ),
     );
 
 Map<String, dynamic> _$GetSystemSupportInformationResponseToJson(

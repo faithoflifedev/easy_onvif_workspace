@@ -12,20 +12,20 @@ part 'capabilities1.g.dart';
 @JsonSerializable()
 class Capabilities1 {
   /// Indicates if GetSnapshotUri is supported.
-  @JsonKey(name: '@SnapshotUri', fromJson: OnvifUtil.stringToBool)
-  final bool snapshotUri;
+  @JsonKey(name: '@SnapshotUri', fromJson: OnvifUtil.nullableStringToBool)
+  final bool? snapshotUri;
 
   /// Indicates whether or not Rotation feature is supported.
-  @JsonKey(name: '@Rotation', fromJson: OnvifUtil.stringToBool)
-  final bool rotation;
+  @JsonKey(name: '@Rotation', fromJson: OnvifUtil.nullableStringToBool)
+  final bool? rotation;
 
   /// Indicates the support for changing video source mode.
-  @JsonKey(name: '@VideoSourceMode', fromJson: OnvifUtil.stringToBool)
-  final bool videoSourceMode;
+  @JsonKey(name: '@VideoSourceMode', fromJson: OnvifUtil.nullableStringToBool)
+  final bool? videoSourceMode;
 
   /// Indicates if OSD is supported.
-  @JsonKey(name: '@OSD', fromJson: OnvifUtil.stringToBool)
-  final bool osd;
+  @JsonKey(name: '@OSD', fromJson: OnvifUtil.nullableStringToBool)
+  final bool? osd;
 
   /// Indicates the support for temporary osd text configuration.
   @JsonKey(name: '@TemporaryOSDText', fromJson: OnvifUtil.nullableStringToBool)
@@ -44,12 +44,12 @@ class Capabilities1 {
   final StreamingCapabilities streamingCapabilities;
 
   Capabilities1({
-    required this.snapshotUri,
-    required this.rotation,
-    required this.videoSourceMode,
-    required this.osd,
-    required this.temporaryOSDText,
-    required this.exiCompression,
+    this.snapshotUri,
+    this.rotation,
+    this.videoSourceMode,
+    this.osd,
+    this.temporaryOSDText,
+    this.exiCompression,
     required this.profileCapabilities,
     required this.streamingCapabilities,
   });

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:easy_onvif/util.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'event.dart';
+import 'events.dart';
 import 'ptz_filter.dart';
 import 'multicast_configuration.dart';
 
@@ -64,7 +64,7 @@ class MetadataConfiguration {
   /// - To get only some events: Include the Events element and include a filter
   /// in the element.
   @JsonKey(name: 'Events')
-  final List<Event>? events;
+  final Events? events;
 
   /// Defines whether the streamed metadata will include metadata from the
   /// analytics engines (video, cell motion, audio etc.)

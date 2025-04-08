@@ -37,13 +37,13 @@ class StreamSetup implements XmlSerializable {
   void buildXml(
     XmlBuilder builder, {
     String tag = 'StreamSetup',
-    String? namespace = Xmlns.tt,
+    String? namespace = Xmlns.trt,
   }) => builder.element(
     tag,
     nest: () {
       builder.namespace(namespace!);
 
-      stream.buildXml(builder, tag: 'Stream');
+      stream.buildXml(builder, tag: 'Stream', namespace: Xmlns.tt);
 
       // builder.element('Stream', nest: () {
       //   builder.text(stream);

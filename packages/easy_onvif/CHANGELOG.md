@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.1.2
+
+* device_management - HostnameInformation, fixed when null
+* media1 - GetStreamUri, fixed namespace
+* media1 - GetMetadataConfigurationResponse - Events, is a list of Filters
+* ptz - GetServiceCapabilities, can be empty
+
 ## 3.1.1+6
 
 * Issue #72: Incorrect getStreamUri request for media1

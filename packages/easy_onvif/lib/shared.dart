@@ -4,7 +4,7 @@ library;
 export 'src/model/common/audio_encoder_configuration.dart';
 export 'src/model/common/audio_source_configuration.dart';
 export 'src/model/common/backlight_compensation.dart';
-export 'src/model/common/event.dart';
+export 'src/model/common/events.dart';
 export 'src/model/common/exposure.dart';
 export 'src/model/common/float_range.dart';
 export 'src/model/common/focus.dart';

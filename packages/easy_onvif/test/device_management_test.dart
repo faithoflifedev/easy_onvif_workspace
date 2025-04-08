@@ -1064,7 +1064,7 @@ void main() {
         expect(
           GetSystemSupportInformationResponse.fromJson(
             envelope.body.response!,
-          ).supportInformation.binary?.include?.href,
+          ).supportInformation?.binary?.include?.href,
           '<http://tempuri.org/0/log.tgz>',
         );
       });
@@ -1077,6 +1077,194 @@ void main() {
         expect(
           SystemRebootResponse.fromJson(envelope.body.response!).message,
           'Rebooting in 2 seconds',
+        );
+      });
+    });
+
+    group('IPD-H4K8M05-BS', () {
+      test('Fault', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/device_management/Fault.xml',
+        );
+
+        expect(
+          Fault.fromJson(envelope.body.response!).reason?.note,
+          'Method \'GetStorageConfigurations\' not implemented: method name or namespace not recognized',
+        );
+      });
+
+      test('GetCapabilitiesResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/device_management/GetCapabilitiesResponse.xml',
+        );
+
+        expect(
+          GetCapabilitiesResponse.fromJson(
+            envelope.body.response!,
+          ).capabilities.device?.xAddr,
+          'http://192.168.15.40:8999/onvif/device_service',
+        );
+      });
+
+      test('GetDeviceInformationResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/device_management/GetDeviceInformationResponse.xml',
+        );
+        expect(
+          GetDeviceInformationResponse.fromJson(envelope.body.response!).model,
+          'IPD-H4K8M05-BS',
+        );
+      });
+
+      test('GetDiscoveryModeResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/device_management/GetDiscoveryModeResponse.xml',
+        );
+
+        expect(
+          GetDiscoveryModeResponse.fromJson(
+            envelope.body.response!,
+          ).discoveryMode,
+          'Discoverable',
+        );
+      });
+
+      test('GetDNSResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/device_management/GetDNSResponse.xml',
+        );
+
+        expect(
+          GetDnsResponse.fromJson(
+            envelope.body.response!,
+          ).dnsInformation.fromDhcp,
+          false,
+        );
+      });
+
+      test('GetHostnameResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/device_management/GetHostnameResponse.xml',
+        );
+
+        expect(
+          GetHostnameResponse.fromJson(
+            envelope.body.response!,
+          ).hostnameInformation.name,
+          null,
+        );
+      });
+
+      test('GetNetworkProtocolsResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/device_management/GetNetworkProtocolsResponse.xml',
+        );
+
+        expect(
+          GetNetworkProtocolsResponse.fromJson(
+            envelope.body.response!,
+          ).networkProtocols.isNotEmpty,
+          true,
+        );
+      });
+
+      test('GetNTPResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/device_management/GetNTPResponse.xml',
+        );
+
+        expect(
+          GetNtpResponse.fromJson(
+            envelope.body.response!,
+          ).ntpInformation.fromDhcp,
+          false,
+        );
+      });
+
+      test('GetServiceCapabilitiesResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/device_management/GetServiceCapabilitiesResponse.xml',
+        );
+
+        expect(
+          GetServiceCapabilitiesResponse.fromJson(
+            envelope.body.response!,
+          ).capabilities.system!.discoveryBye,
+          true,
+        );
+      });
+
+      test('GetServicesResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/device_management/GetServicesResponse.xml',
+        );
+
+        expect(
+          GetServicesResponse.fromJson(
+            envelope.body.response!,
+          ).services.isNotEmpty,
+          true,
+        );
+      });
+
+      test('GetSystemDateAndTimeResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/device_management/GetSystemDateAndTimeResponse.xml',
+        );
+
+        expect(
+          GetSystemDateAndTimeResponse.fromJson(
+            envelope.body.response!,
+          ).systemDateAndTime.dateTimeType,
+          'Manual',
+        );
+      });
+
+      // test('GetSystemLogResponse', () {
+      //   final envelope = Envelope.fromXmlFile(
+      //     'test/xml/IPD-H4K8M05-BS/device_management/GetSystemLogResponse.xml',
+      //   );
+
+      //   expect(
+      //     GetSystemLogResponse.fromJson(
+      //       envelope.body.response!,
+      //     ).systemLog.binary?.include,
+      //     isNotNull,
+      //   );
+      // });
+
+      test('GetUsersResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/device_management/GetUsersResponse.xml',
+        );
+
+        expect(
+          GetUsersResponse.fromJson(envelope.body.response!).users.isNotEmpty,
+          true,
+        );
+      });
+
+      test('SystemSupportInformation', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/device_management/GetSystemSupportInformationResponse.xml',
+        );
+
+        expect(
+          GetSystemSupportInformationResponse.fromJson(
+            envelope.body.response!,
+          ).supportInformation,
+          null,
+        );
+      });
+
+      test('SystemRebootResponse', () {
+        final envelope = Envelope.fromXmlFile(
+          'test/xml/IPD-H4K8M05-BS/device_management/SystemRebootResponse.xml',
+        );
+
+        expect(
+          SystemRebootResponse.fromJson(envelope.body.response!).message,
+          'Rebooting in 120 seconds.',
         );
       });
     });

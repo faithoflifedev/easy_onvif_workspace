@@ -11,9 +11,9 @@ part 'get_system_support_information_response.g.dart';
 class GetSystemSupportInformationResponse {
   /// Contains the arbitrary device diagnostics information.
   @JsonKey(name: 'SupportInformation')
-  final SystemInformation supportInformation;
+  final SystemInformation? supportInformation;
 
-  GetSystemSupportInformationResponse({required this.supportInformation});
+  GetSystemSupportInformationResponse({this.supportInformation});
 
   factory GetSystemSupportInformationResponse.fromJson(
     Map<String, dynamic> json,

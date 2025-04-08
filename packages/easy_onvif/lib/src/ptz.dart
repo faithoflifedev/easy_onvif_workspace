@@ -8,6 +8,8 @@ import 'operation.dart';
 
 typedef PtzRequest = soap.PtzRequest;
 
+enum BackupMove { absolute, continuous }
+
 /// The PTZ model groups the possible movements of the PTZ unit into a pan/tilt
 /// component and into a Zoom component.  To steer the PTZ unit, the service
 /// provides absolute move, relative move and continuous move operations.
@@ -331,7 +333,7 @@ class Ptz extends Operation {
   /// typed answer.
   ///
   /// ACCESS CLASS: PRE_AUTH
-  Future<Capabilities> getServiceCapabilities() async {
+  Future<Capabilities?> getServiceCapabilities() async {
     loggy.debug('getServiceCapabilities');
 
     final responseEnvelope = await transport.request(
@@ -424,65 +426,101 @@ class Ptz extends Operation {
     String profileToken, {
     required Vector2D direction,
     Vector1D? zoom,
+    BackupMove backupMove = BackupMove.continuous,
   }) async {
     loggy.debug('move');
 
-    Vector1D zoomAdjust = zoom ?? Vector1D(x: 0);
+    var zoomAdjust = zoom ?? Vector1D(x: 0);
 
     try {
       await relativeMove(
         profileToken,
         PtzVector(panTilt: direction, zoom: zoomAdjust),
-        null,
+        configurationCache[configurationCache.keys.first]?.defaultPtzSpeed,
       );
     } catch (err) {
-      Vector2D? panTilt;
-
       loggy.error('Relative move failed');
 
       loggy.error(err);
 
-      loggy.error('Attempting workaround with AbsoluteMove');
+      loggy.error('Attempting workaround with $backupMove move');
 
-      final ptzStatus = await getStatus(profileToken);
-      if (ptzStatus.position.panTilt != null) {
-        panTilt = Vector2D(
-          x: _limitValue(
-            ptzStatus.position.panTilt!.x,
-            direction.x,
-            defaultPanTiltLimits?.range.xRange.min ?? -1,
-            defaultPanTiltLimits?.range.xRange.max ?? 1,
-          ),
-          y: _limitValue(
-            ptzStatus.position.panTilt!.y,
-            direction.y,
-            defaultPanTiltLimits?.range.yRange.min ?? -1,
-            defaultPanTiltLimits?.range.yRange.max ?? 1,
-          ),
-        );
-      } else {
-        panTilt = Vector2D(
-          x: ptzStatus.position.panTilt!.x,
-          y: ptzStatus.position.panTilt!.y,
-        );
+      switch (backupMove) {
+        case BackupMove.absolute:
+          _simulateMoveWithAbsolute(profileToken, direction, zoom);
+
+        case BackupMove.continuous:
+          _simulateMoveWithContinuous(profileToken, direction, zoom);
       }
+    }
+  }
 
-      if (ptzStatus.position.zoom != null) {
-        zoomAdjust = Vector1D(
-          x: _limitValue(
-            ptzStatus.position.zoom!.x,
-            zoomAdjust.x,
-            defaultZoomLimits?.range.xRange.min ?? 0,
-            defaultZoomLimits?.range.xRange.max ?? 1,
-          ),
-        );
-      }
+  Future<void> _simulateMoveWithContinuous(
+    String profileToken,
+    Vector2D direction,
+    Vector1D? zoom,
+  ) async {
+    await continuousMove(
+      profileToken,
+      velocity: PtzSpeed(panTilt: direction, zoom: zoom ?? Vector1D(x: 0)),
+    );
 
-      await absoluteMove(
-        profileToken,
-        position: PtzVector(panTilt: panTilt, zoom: zoomAdjust),
+    Future.delayed(const Duration(milliseconds: 100), () async {
+      await stop(profileToken);
+    });
+  }
+
+  Future<void> _simulateMoveWithAbsolute(
+    String profileToken,
+    Vector2D direction,
+    Vector1D? zoom,
+  ) async {
+    loggy.debug('Simulate Move - Absolute');
+
+    Vector1D zoomAdjust = zoom ?? Vector1D(x: 0);
+
+    Vector2D? panTilt;
+
+    final ptzStatus = await getStatus(profileToken);
+
+    if (ptzStatus.position.panTilt != null) {
+      panTilt = Vector2D(
+        x: _limitValue(
+          ptzStatus.position.panTilt!.x,
+          direction.x,
+          defaultPanTiltLimits?.range.xRange.min ?? -1,
+          defaultPanTiltLimits?.range.xRange.max ?? 1,
+        ),
+        y: _limitValue(
+          ptzStatus.position.panTilt!.y,
+          direction.y,
+          defaultPanTiltLimits?.range.yRange.min ?? -1,
+          defaultPanTiltLimits?.range.yRange.max ?? 1,
+        ),
+      );
+    } else {
+      panTilt = Vector2D(
+        x: ptzStatus.position.panTilt!.x,
+        y: ptzStatus.position.panTilt!.y,
       );
     }
+
+    if (ptzStatus.position.zoom != null) {
+      zoomAdjust = Vector1D(
+        x: _limitValue(
+          ptzStatus.position.zoom!.x,
+          zoomAdjust.x,
+          defaultZoomLimits?.range.xRange.min ?? 0,
+          defaultZoomLimits?.range.xRange.max ?? 1,
+        ),
+      );
+    }
+
+    await absoluteMove(
+      profileToken,
+      position: PtzVector(panTilt: panTilt, zoom: zoomAdjust),
+      speed: defaultSpeed,
+    );
   }
 
   double _limitValue(double start, double value, double min, double max) =>
