@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.1.2
+
+* GetDynamicDnsDevice
+
 ## 3.1.1+6
 
 * GetDynamicDnsDevice

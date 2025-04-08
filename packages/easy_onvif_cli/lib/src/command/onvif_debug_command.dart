@@ -281,7 +281,8 @@ class OnvifDebugCommand extends Command with UiLoggy {
 
       await test(
         'GetSnapshotUri',
-        () async => await onvif.media.media1.getProfile(media1profileToken!),
+        () async =>
+            await onvif.media.media1.getSnapshotUri(media1profileToken!),
         skipWhenNull: media1profileToken == null,
       );
 
@@ -455,9 +456,13 @@ class OnvifDebugCommand extends Command with UiLoggy {
         skipWhenNull: ptzProfileToken == null,
       );
 
-      final configurationToken = configurations?.first.token;
-
-      await onvif.ptz.getConfigurationOptions(configurationToken!);
+      await test(
+        'GetConfigurationOptions',
+        () async => await onvif.ptz.getConfigurationOptions(
+          configurations != null ? configurations.first.token : '',
+        ),
+        skipWhenNull: configurations == null,
+      );
 
       await test(
         'GetServiceCapabilities',

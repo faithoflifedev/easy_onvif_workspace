@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
+import 'package:dio/dio.dart';
 import 'package:easy_onvif/onvif.dart';
 import 'package:easy_onvif/util.dart';
 
@@ -25,6 +26,8 @@ abstract class OnvifHelperCommand extends Command {
   Search get search => onvif.search;
 
   Future<void> initializeOnvif() async {
+    final timeout = int.parse(globalResults!['network-timeout']);
+
     final authFile = File(globalResults!['config-file']);
 
     if (!authFile.existsSync()) {
@@ -39,6 +42,12 @@ abstract class OnvifHelperCommand extends Command {
       username: auth['username'],
       password: auth['password'],
       logOptions: OnvifUtil.convertToLogOptions(globalResults!['log-level']),
+      dio: Dio(
+        BaseOptions(
+          connectTimeout: Duration(seconds: timeout),
+          receiveTimeout: Duration(seconds: timeout),
+        ),
+      ),
     );
   }
 }

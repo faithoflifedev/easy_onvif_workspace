@@ -190,7 +190,10 @@ class OnvifContinuousMovePtzCommand extends OnvifHelperCommand {
     await initializeOnvif();
 
     try {
-      int? timeout = argResults?['timeout'];
+      int? timeout =
+          argResults?['timeout'] != null
+              ? int.parse(argResults?['timeout'])
+              : null;
 
       final velocity = PtzSpeed(
         panTilt: Vector2D.fromString(
@@ -784,7 +787,11 @@ class OnvifRelativeMovePtzCommand extends OnvifHelperCommand {
         zoom: Vector1D.fromString(x: argResults!['translation-zoom']),
       );
 
-      await ptz.relativeMove(argResults!['profile-token'], translation, null);
+      await ptz.relativeMove(
+        argResults!['profile-token'],
+        translation,
+        PtzSpeed(),
+      );
     } on DioException catch (err) {
       throw UsageException('API usage error:', err.usage);
     }

@@ -137,6 +137,20 @@ class OnvifProxyProbeCommand extends OnvifHelperCommand with UiLoggy {
       int.parse(argResults!['port']),
     );
 
+    // TODO: send `hello` to all devices
+    // loggy.info('Sending WS-Discovery HELLO message...');
+    // await multicastProbe.sendHello();
+
+    ProcessSignal.sigint.watch().listen((_) async {
+      print('Shutting down...');
+
+      // TODO: send `bye` to all devices
+
+      await server.close();
+
+      exit(0);
+    });
+
     if (argResults!['bind-ip'] == _defaultIp) {
       final interfaces = await NetworkInterface.list();
 

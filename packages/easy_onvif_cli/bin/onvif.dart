@@ -14,6 +14,11 @@ void main(List<String> arguments) async {
       allowed: ['all', 'debug', 'info', 'warning', 'error', 'off'],
       defaultsTo: 'off',
     )
+    ..argParser.addOption(
+      'network-timeout',
+      defaultsTo: '20',
+      help: 'Timeout in seconds for the request',
+    )
     ..addCommand(OnvifAuthorizeCommand())
     ..addCommand(OnvifDebugCommand())
     ..addCommand(OnvifDeviceManagementCommand())

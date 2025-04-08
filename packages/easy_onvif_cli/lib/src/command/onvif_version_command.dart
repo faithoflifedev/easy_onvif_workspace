@@ -1,5 +1,5 @@
 import 'package:args/command_runner.dart';
-import 'package:easy_onvif/meta.dart';
+import 'package:easy_onvif_cli/meta.dart';
 
 class OnvifVersionCommand extends Command {
   @override
