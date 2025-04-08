@@ -5,4 +5,4 @@ environment:
 
 dev_dependencies:
   melos: ^6.3.2
-  publish_tools: ^1.0.0+10
+  publish_tools: ^1.0.0+11

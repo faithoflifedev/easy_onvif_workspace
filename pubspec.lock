@@ -261,10 +261,10 @@ packages:
     dependency: "direct dev"
     description:
       name: publish_tools
-      sha256: "6370b4db66a162a46861f5d7e40e15c9369c7893dd85526cb4d95e668ce5476a"
+      sha256: d3ebb6f7a2f7941c0107615c939b3e33d149df5bce092a424c924d690c95cf53
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.0+10"
+    version: "1.0.0+11"
   pubspec_parse:
     dependency: transitive
     description:

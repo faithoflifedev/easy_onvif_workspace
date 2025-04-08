@@ -9,7 +9,94 @@
             "request": "launch",
             "type": "dart",
             "program": "packages/easy_onvif_cli/bin/onvif.dart",
-            "args": ["probe", "list-devices", "--log-level", "all"],
+            "args": [
+                "probe",
+                "list-devices",
+                "--log-level",
+                "all"
+            ],
         },
+        {
+            "name": "onvif version",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/easy_onvif_cli/bin/onvif.dart",
+            "args": [
+                "version"
+            ],
+        },
+        {
+            "name": "onvif device-management get-device-information",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/easy_onvif_cli/bin/onvif.dart",
+            "args": [
+                "device-management",
+                "get-device-information"
+            ],
+        },
+        {
+            "name": "onvif device-management get-system-support-information",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/easy_onvif_cli/bin/onvif.dart",
+            "args": [
+                "device-management",
+                "get-system-support-information",
+                "--network-timeout",
+                "15",
+                "--log-level",
+                "all"
+            ],
+        },
+        {
+            "name": "onvif debug",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/easy_onvif_cli/bin/onvif.dart",
+            "args": [
+                "debug"
+            ],
+        },
+        {
+            "name": "onvif move",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/easy_onvif_cli/bin/onvif.dart",
+            "args": [
+                "ptz",
+                "move",
+                "--x",
+                "0.8",
+                "--y",
+                "0.8",
+                "--profile-token",
+                "MainStream",
+                "--network-timeout",
+                "30"
+            ],
+        },
+        {
+            "name": "onvif continuous-move",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/easy_onvif_cli/bin/onvif.dart",
+            "args": [
+                "ptz",
+                "continuous-move",
+                "--pan-tilt-x",
+                "0.1",
+                "--pan-tilt-y",
+                "0",
+                "--pan-tilt-zoom",
+                "0",
+                "--timeout",
+                "1",
+                "--profile-token",
+                "MainStream",
+                "--network-timeout",
+                "30"
+            ],
+        }
     ]
 }
