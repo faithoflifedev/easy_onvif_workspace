@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://www.w3.org/2003/05/soap-envelope"
+    xmlns:SOAP-ENC="http://www.w3.org/2003/05/soap-encoding"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xs="http://www.w3.org/2000/10/XMLSchema"
+    xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"
+    xmlns:wsa5="http://www.w3.org/2005/08/addressing"
+    xmlns:xop="http://www.w3.org/2004/08/xop/include"
+    xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+    xmlns:tt="http://www.onvif.org/ver10/schema"
+    xmlns:ns1="http://www.w3.org/2005/05/xmlmime"
+    xmlns:wstop="http://docs.oasis-open.org/wsn/t-1"
+    xmlns:ns7="http://docs.oasis-open.org/wsrf/r-2"
+    xmlns:ns2="http://docs.oasis-open.org/wsrf/bf-2"
+    xmlns:dndl="http://www.onvif.org/ver10/network/wsdl/DiscoveryLookupBinding"
+    xmlns:dnrd="http://www.onvif.org/ver10/network/wsdl/RemoteDiscoveryBinding"
+    xmlns:d="http://schemas.xmlsoap.org/ws/2005/04/discovery"
+    xmlns:dn="http://www.onvif.org/ver10/network/wsdl"
+    xmlns:ns10="http://www.onvif.org/ver10/replay/wsdl"
+    xmlns:ns11="http://www.onvif.org/ver10/search/wsdl"
+    xmlns:ns13="http://www.onvif.org/ver20/analytics/wsdl/RuleEngineBinding"
+    xmlns:ns14="http://www.onvif.org/ver20/analytics/wsdl/AnalyticsEngineBinding"
+    xmlns:tan="http://www.onvif.org/ver20/analytics/wsdl"
+    xmlns:ns15="http://www.onvif.org/ver10/events/wsdl/PullPointSubscriptionBinding"
+    xmlns:ns16="http://www.onvif.org/ver10/events/wsdl/EventBinding"
+    xmlns:tev="http://www.onvif.org/ver10/events/wsdl"
+    xmlns:ns17="http://www.onvif.org/ver10/events/wsdl/SubscriptionManagerBinding"
+    xmlns:ns18="http://www.onvif.org/ver10/events/wsdl/NotificationProducerBinding"
+    xmlns:ns19="http://www.onvif.org/ver10/events/wsdl/NotificationConsumerBinding"
+    xmlns:ns20="http://www.onvif.org/ver10/events/wsdl/PullPointBinding"
+    xmlns:ns21="http://www.onvif.org/ver10/events/wsdl/CreatePullPointBinding"
+    xmlns:ns22="http://www.onvif.org/ver10/events/wsdl/PausableSubscriptionManagerBinding"
+    xmlns:wsnt="http://docs.oasis-open.org/wsn/b-2"
+    xmlns:ns3="http://www.onvif.org/ver10/analyticsdevice/wsdl"
+    xmlns:ns4="http://www.onvif.org/ver10/deviceIO/wsdl"
+    xmlns:ns5="http://www.onvif.org/ver10/display/wsdl"
+    xmlns:ns8="http://www.onvif.org/ver10/receiver/wsdl"
+    xmlns:ns9="http://www.onvif.org/ver10/recording/wsdl"
+    xmlns:tds="http://www.onvif.org/ver10/device/wsdl"
+    xmlns:timg="http://www.onvif.org/ver20/imaging/wsdl"
+    xmlns:tptz="http://www.onvif.org/ver20/ptz/wsdl"
+    xmlns:trt="http://www.onvif.org/ver10/media/wsdl"
+    xmlns:trt2="http://www.onvif.org/ver20/media/wsdl"
+    xmlns:ter="http://www.onvif.org/ver10/error"
+    xmlns:tns1="http://www.onvif.org/ver10/topics"
+    xmlns:tnsn="http://www.eventextension.com/2011/event/topics">
+    <SOAP-ENV:Header>
+        <wsse:Security></SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <tptz:GetPresetsResponse>
+            <tptz:Preset token="1">
+                <tt:Name>1</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="2">
+                <tt:Name>2</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="3">
+                <tt:Name>3</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="4">
+                <tt:Name>4</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="5">
+                <tt:Name>5</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="6">
+                <tt:Name>6</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="7">
+                <tt:Name>7</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="8">
+                <tt:Name>8</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="9">
+                <tt:Name>9</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="10">
+                <tt:Name>10</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="11">
+                <tt:Name>11</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="12">
+                <tt:Name>12</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="13">
+                <tt:Name>13</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="14">
+                <tt:Name>14</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="15">
+                <tt:Name>15</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="16">
+                <tt:Name>16</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="17">
+                <tt:Name>17</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="18">
+                <tt:Name>18</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="19">
+                <tt:Name>19</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="20">
+                <tt:Name>20</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="21">
+                <tt:Name>21</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="22">
+                <tt:Name>22</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="23">
+                <tt:Name>23</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="24">
+                <tt:Name>24</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="25">
+                <tt:Name>25</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="26">
+                <tt:Name>26</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="27">
+                <tt:Name>27</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="28">
+                <tt:Name>28</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="29">
+                <tt:Name>29</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="30">
+                <tt:Name>30</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="31">
+                <tt:Name>31</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="32">
+                <tt:Name>32</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="33">
+                <tt:Name>33</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="34">
+                <tt:Name>34</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="35">
+                <tt:Name>35</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="36">
+                <tt:Name>36</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="37">
+                <tt:Name>37</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="38">
+                <tt:Name>38</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="39">
+                <tt:Name>39</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="40">
+                <tt:Name>40</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="41">
+                <tt:Name>41</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="42">
+                <tt:Name>42</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="43">
+                <tt:Name>43</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="44">
+                <tt:Name>44</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="45">
+                <tt:Name>45</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="46">
+                <tt:Name>46</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="47">
+                <tt:Name>47</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="48">
+                <tt:Name>48</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="49">
+                <tt:Name>49</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="50">
+                <tt:Name>50</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="51">
+                <tt:Name>51</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="52">
+                <tt:Name>52</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="53">
+                <tt:Name>53</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="54">
+                <tt:Name>54</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="55">
+                <tt:Name>55</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="56">
+                <tt:Name>56</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="57">
+                <tt:Name>57</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="58">
+                <tt:Name>58</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="59">
+                <tt:Name>59</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="60">
+                <tt:Name>60</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="61">
+                <tt:Name>61</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="62">
+                <tt:Name>62</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="63">
+                <tt:Name>63</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="64">
+                <tt:Name>64</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="65">
+                <tt:Name>65</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="66">
+                <tt:Name>66</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="67">
+                <tt:Name>67</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="68">
+                <tt:Name>68</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="69">
+                <tt:Name>69</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="70">
+                <tt:Name>70</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="71">
+                <tt:Name>71</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="72">
+                <tt:Name>72</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="73">
+                <tt:Name>73</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="74">
+                <tt:Name>74</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="75">
+                <tt:Name>75</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="76">
+                <tt:Name>76</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="77">
+                <tt:Name>77</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="78">
+                <tt:Name>78</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="79">
+                <tt:Name>79</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="80">
+                <tt:Name>80</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="81">
+                <tt:Name>81</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="82">
+                <tt:Name>82</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="83">
+                <tt:Name>83</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="84">
+                <tt:Name>84</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="85">
+                <tt:Name>85</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="86">
+                <tt:Name>86</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="87">
+                <tt:Name>87</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="88">
+                <tt:Name>88</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="89">
+                <tt:Name>89</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="90">
+                <tt:Name>90</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="91">
+                <tt:Name>91</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="92">
+                <tt:Name>92</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="93">
+                <tt:Name>93</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="94">
+                <tt:Name>94</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="95">
+                <tt:Name>95</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="96">
+                <tt:Name>96</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="97">
+                <tt:Name>97</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="98">
+                <tt:Name>98</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="99">
+                <tt:Name>99</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="100">
+                <tt:Name>100</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="101">
+                <tt:Name>101</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="102">
+                <tt:Name>102</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="103">
+                <tt:Name>103</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="104">
+                <tt:Name>104</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="105">
+                <tt:Name>105</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="106">
+                <tt:Name>106</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="107">
+                <tt:Name>107</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="108">
+                <tt:Name>108</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="109">
+                <tt:Name>109</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="110">
+                <tt:Name>110</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="111">
+                <tt:Name>111</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="112">
+                <tt:Name>112</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="113">
+                <tt:Name>113</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="114">
+                <tt:Name>114</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="115">
+                <tt:Name>115</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="116">
+                <tt:Name>116</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="117">
+                <tt:Name>117</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="118">
+                <tt:Name>118</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="119">
+                <tt:Name>119</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="120">
+                <tt:Name>120</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="121">
+                <tt:Name>121</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="122">
+                <tt:Name>122</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="123">
+                <tt:Name>123</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="124">
+                <tt:Name>124</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="125">
+                <tt:Name>125</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="126">
+                <tt:Name>126</tt:Name>
+            </tptz:Preset>
+            <tptz:Preset token="127">
+                <tt:Name>127</tt:Name>
+            </tptz:Preset>
+        </tptz:GetPresetsResponse>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

@@ -28,7 +28,7 @@ void main() {
         expect(
           GetMetadataConfigurationResponse.fromJson(
             envelope.body.response!,
-          ).configuration.name,
+          ).configuration?.name,
           'MetadataConfigurationName_1',
         );
       });
@@ -168,7 +168,7 @@ void main() {
         expect(
           GetMetadataConfigurationResponse.fromJson(
             envelope.body.response!,
-          ).configuration.name,
+          ).configuration?.name,
           'metaData',
         );
       });
@@ -472,7 +472,7 @@ void main() {
         expect(
           GetMetadataConfigurationResponse.fromJson(
             envelope.body.response!,
-          ).configuration.name,
+          ).configuration?.name,
           'MetadataConfiguration',
         );
       });
@@ -609,7 +609,7 @@ void main() {
         expect(
           GetMetadataConfigurationResponse.fromJson(
             envelope.body.response!,
-          ).configuration.name,
+          ).configuration?.name,
           'metadata_config',
         );
       });
@@ -731,7 +731,7 @@ void main() {
         expect(
           GetMetadataConfigurationResponse.fromJson(
             envelope.body.response!,
-          ).configuration.name,
+          ).configuration?.name,
           'METADATA_CH0',
         );
       });

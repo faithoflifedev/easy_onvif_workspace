@@ -25,6 +25,9 @@ class Vector2D implements XmlSerializable {
   factory Vector2D.fromString({required String x, required String y}) =>
       Vector2D(x: double.parse(x), y: double.parse(y));
 
+  factory Vector2D.fromDouble({required double x, required double y}) =>
+      Vector2D(x: x, y: y);
+
   factory Vector2D.fromJson(Map<String, dynamic> json) =>
       _$Vector2DFromJson(json);
 

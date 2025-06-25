@@ -21,6 +21,8 @@ class Vector1D implements XmlSerializable {
   factory Vector1D.fromString({required String x}) =>
       Vector1D(x: double.parse(x));
 
+  factory Vector1D.fromDouble(double x) => Vector1D(x: x);
+
   factory Vector1D.fromJson(Map<String, dynamic> json) =>
       _$Vector1DFromJson(json);
 

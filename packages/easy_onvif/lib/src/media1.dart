@@ -47,7 +47,7 @@ class Media1 extends Operation {
   /// the metadata token is known.
   ///
   /// ACCESS CLASS: READ_MEDIA
-  Future<MetadataConfiguration> getMetadataConfiguration(
+  Future<MetadataConfiguration?> getMetadataConfiguration(
     String configurationToken,
   ) async {
     loggy.debug('getMetadataConfiguration');

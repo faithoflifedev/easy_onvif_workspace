@@ -28,7 +28,9 @@ This package works with a variety of ONVIF compatible devices allowing for IP Ca
     - [Recording](#recording)
     - [Replay](#replay)
     - [Search](#search)
+  - [Onvif Probe](#onvif-probe)
   - [Tested Onvif Devices](#tested-onvif-devices)
+  - [New for version 3.1.3](#new-for-version-313)
   - [New for version 3.1.0](#new-for-version-310)
   - [New for version 3.0.0-dev.0](#new-for-version-300-dev0)
   - [New for version 2.2.x](#new-for-version-22x)
@@ -43,7 +45,6 @@ This package works with a variety of ONVIF compatible devices allowing for IP Ca
     - [v2.3.0](#v230)
   - [Contributors](#contributors)
   - [Contributing](#contributing)
-
 
 [![Build Status](https://github.com/faithoflifedev/easy_onvif/workflows/Dart/badge.svg)](https://github.com/faithoflifedev/easy_onvif/actions) [![github last commit](https://shields.io/github/last-commit/faithoflifedev/easy_onvif)](https://shields.io/github/last-commit/faithoflifedev/easy_onvif) [![github build](https://img.shields.io/github/actions/workflow/status/faithoflifedev/easy_onvif/dart.yml?branch=main)](https://shields.io/github/workflow/status/faithoflifedev/easy_onvif/Dart) [![github issues](https://shields.io/github/issues/faithoflifedev/easy_onvif)](https://shields.io/github/issues/faithoflifedev/easy_onvif)
 
@@ -374,20 +375,33 @@ Please see the cli documentation [README.md](https://github.com/faithoflifedev/e
 | GetRecordingInformation   | getRecordingInformation   | `Future<RecordingInformation>`               | [ \] |
 | GetRecordingSummary       | getRecordingSummary       | `Future<RecordingSummary>`                   | [ \] |
 
+## Onvif Probe
+
+Uses Web Services Dynamic Discovery (WSDiscovery) Version 1.1 - https://docs.oasis-open.org/ws-dd/discovery/1.1/os/wsdd-discovery-1.1-spec-os.pdf - probes are sent to a multicast group, and target services that match return a response directly to the requester. To scale to a large number of endpoints and to extend the reach of the protocol, this protocol defines a managed mode of operation and a multicast suppression behavior if a discovery proxy is available on the network. To minimize the need for polling, target services that wish to be discovered send an announcement when they join and leave the network.
+
+```dart
+final multicastProbe = MulticastProbe();
+
+await multicastProbe.probe();
+
+print(multicastProbe.onvifDevices);
+```
+
 ## Tested Onvif Devices
 
 The values returned by the Onvif API `GetDeviceInformation` call.
 
-| Manufacturer       | Model              | Firmware Version                | Known Issue                      |
-| ------------------ | ------------------ | ------------------------------- | -------------------------------- |
-| Happytimesoft      | IPCamera           |                                 | limited capabilities             |
-| ONVIF              | ENP1A14-IR/25X     |                                 | commands not implemented&#x00B9; |
-| D-Link Corporation | DCS-6511           |                                 | commands not implemented&#x00B2; |
-| [empty\]           | GX728MF-IR28       |                                 | commands not implemented&#x00B3; |
-| LOREX              | LNB4421SB          |                                 | testing in progress              |
-| ONVIF_IPNC         | IPG-8150PSS        | 1.3.0-20210203CN-PT             | commands not implemented&#x2074; |
-| SUNBA              | Performance-Series | IPC-B2202.3.73.C06290.NB.230628 | commands not implemented&#x2075; |
-| [empty\]           | IPD-H4K8M05-BS     | V1.04.10-190309                 | commands not implemented&#x2076; |
+| Manufacturer       | Model              | Firmware Version                             | Known Issue                      |
+| ------------------ | ------------------ | -------------------------------------------- | -------------------------------- |
+| Happytimesoft      | IPCamera           |                                              | limited capabilities             |
+| ONVIF              | ENP1A14-IR/25X     |                                              | commands not implemented&#x00B9; |
+| D-Link Corporation | DCS-6511           |                                              | commands not implemented&#x00B2; |
+| [empty\]           | GX728MF-IR28       |                                              | commands not implemented&#x00B3; |
+| LOREX              | LNB4421SB          |                                              | testing in progress              |
+| ONVIF_IPNC         | IPG-8150PSS        | 1.3.0-20210203CN-PT                          | commands not implemented&#x2074; |
+| SUNBA              | Performance-Series | IPC-B2202.3.73.C06290.NB.230628              | commands not implemented&#x2075; |
+| SUNBA              | XM530_50X50-WG_8M  | V5.00.R02.L5330747.10010.349917..ONVIF 16.12 | commands not implemented&#x2076; |
+| [empty\]           | IPD-H4K8M05-BS     | V1.04.10-190309                              | commands not implemented&#x2077; |
 
 &#x00B9; The ENP1A14-IR/25X does not support the following commands:
 * Recordings
@@ -449,7 +463,29 @@ The values returned by the Onvif API `GetDeviceInformation` call.
   * `RelativeMove` - work-around available with the `move` helper
   * `SetHomePosition`
 
-&#x2076; IPD-H4K8M05-BS does not support the following commands: 
+&#x2076; The SUNBA-405 does not support the following commands: 
+* Device Management:
+  * `CreateUsers`
+  * `DeleteUsers`
+  * `GetStorageConfigurations`
+  * `GetStorageConfiguration`
+  * `GetSystemUris`
+* Media1: 
+  * `GetSnapshotUri` - device provides an incorrect value, see [What is the HTTP Snapshot URL for Sunba IP cameras?](https://www.sunbatech.com/faq/what-is-the-http-snapshot-url-for-sunba-ip-cameras/)
+  * `GetStreamUri` - device provides an incorrect value, see [What is the RTSP stream URL for Sunba IP cameras?](https://www.sunbatech.com/faq/what-is-the-rtsp-stream-url-for-sunba-ip-cameras/)
+* Media2:
+  * `GetSnapshotUri` - device provides an incorrect value, see [What is the HTTP Snapshot URL for Sunba IP cameras?](https://www.sunbatech.com/faq/what-is-the-http-snapshot-url-for-sunba-ip-cameras/)
+  * `GetStreamUri` - device provides an incorrect value, see [What is the RTSP stream URL for Sunba IP cameras?](https://www.sunbatech.com/faq/what-is-the-rtsp-stream-url-for-sunba-ip-cameras/)
+* PTZ:
+  * `GetCompatibleConfigurations`
+  * `GetCurrentPreset`
+  * `GetPresetTours`
+  * `GotoHomePosition` - supported but not functional
+  * `RelativeMove` - work-around available with the `move` helper
+  * `SetHomePosition` - supported but not functional
+  * `Stop` - package v3.1.3 uses `ContinuousMove` with velocity set to 0 as an alternative to the Stop command.
+
+&#x2077; IPD-H4K8M05-BS does not support the following commands: 
 * Device Management:
   * `CreateUsers`
   * `DeleteUsers` - supported but not functional
@@ -470,6 +506,9 @@ The values returned by the Onvif API `GetDeviceInformation` call.
   * `RemovePreset` - supported but not functional
   * `SetHomePosition` - supported but not functional
   
+## New for version 3.1.3
+The Onvif spec supports an alternative to the `Stop` command that instead uses the `ContinuousMove` command with velocity settings to zero.  This alternative appears to be compatible with more devices.  As such, the `Stop` API call has been replaces with a zero velocity `ContinuousMove` command as of the v3.1.3 release.
+
 ## New for version 3.1.0
 
 See the [Breaking changes](#breaking-changes) section.

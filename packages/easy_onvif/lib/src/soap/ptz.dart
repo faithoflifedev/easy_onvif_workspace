@@ -330,25 +330,43 @@ class PtzRequest {
   /// and/or [zoom]
   static XmlDocumentFragment stop(
     String profileToken, {
-    bool panTilt = false,
-    bool zoom = false,
+    bool panTilt = true,
+    bool zoom = true,
   }) {
+    // the Onvif spec says that a continuous move with Velocity of 0 is the
+    // same as a stop
+    final velocity = PtzSpeed(
+      panTilt: panTilt ? Vector2D.fromDouble(x: 0, y: 0) : null,
+      zoom: zoom ? Vector1D.fromDouble(0) : null,
+    );
+
     builder.element(
-      'Stop',
+      'ContinuousMove',
       nest: () {
-        builder.namespace(Xmlns.tptz); //tptz
+        builder.namespace(Xmlns.tptz);
 
         ReferenceToken(profileToken).buildXml(builder);
 
-        panTilt.toString().buildXml(
-          builder,
-          tag: 'PanTilt',
-          namespace: Xmlns.tt,
-        );
-
-        zoom.toString().buildXml(builder, tag: 'Zoom', namespace: Xmlns.tt);
+        velocity.buildXml(builder, tag: 'Velocity', namespace: Xmlns.tptz);
       },
     );
+
+    // builder.element(
+    //   'Stop',
+    //   nest: () {
+    //     builder.namespace(Xmlns.tptz); //tptz
+
+    //     ReferenceToken(profileToken).buildXml(builder);
+
+    //     panTilt.toString().buildXml(
+    //       builder,
+    //       tag: 'PanTilt',
+    //       namespace: Xmlns.tt,
+    //     );
+
+    //     zoom.toString().buildXml(builder, tag: 'Zoom', namespace: Xmlns.tt);
+    //   },
+    // );
 
     return builder.buildFragment();
   }

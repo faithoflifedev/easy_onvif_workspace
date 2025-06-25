@@ -99,13 +99,13 @@ class Onvif with UiLoggy {
 
   static Future<Onvif> connect({
     /// The host name or IP address of the Onvif device
-    required host,
+    required String host,
 
     /// The username to use for authentication
-    required username,
+    required String username,
 
     /// The password to use for authentication
-    required password,
+    required String password,
 
     /// The log options to use for logging
     LogOptions logOptions = const LogOptions(

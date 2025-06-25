@@ -26,7 +26,7 @@ class MetadataConfigurationOptions {
   final int? maxContentFilterSize;
 
   @JsonKey(name: 'PTZStatusFilterOptions')
-  final PtzStatusFilterOptions ptzStatusFilterOptions;
+  final PtzStatusFilterOptions? ptzStatusFilterOptions;
 
   @JsonKey(name: 'Extension')
   final MetadataConfigurationOptionsExtension? extension;
@@ -34,7 +34,7 @@ class MetadataConfigurationOptions {
   MetadataConfigurationOptions({
     this.geoLocation,
     this.maxContentFilterSize,
-    required this.ptzStatusFilterOptions,
+    this.ptzStatusFilterOptions,
     this.extension,
   });
 

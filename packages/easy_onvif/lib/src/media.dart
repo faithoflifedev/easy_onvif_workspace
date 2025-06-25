@@ -52,7 +52,7 @@ class Media with UiLoggy {
 
   /// The GetMetadataConfiguration command fetches the metadata configuration if
   /// the metadata token is known.
-  Future<MetadataConfiguration> getMetadataConfiguration(
+  Future<MetadataConfiguration?> getMetadataConfiguration(
     String configurationToken,
   ) async =>
       _mediaSupportLevel == MediaSupportLevel.two

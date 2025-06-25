@@ -15,7 +15,7 @@ void main() {
         expect(
           GetMetadataConfigurationOptionsResponse.fromJson(
             envelope.body.response!,
-          ).options.ptzStatusFilterOptions.zoomStatusSupported,
+          ).options.ptzStatusFilterOptions?.zoomStatusSupported,
           true,
         );
       });
@@ -116,7 +116,7 @@ void main() {
         expect(
           GetMetadataConfigurationOptionsResponse.fromJson(
             envelope.body.response!,
-          ).options.ptzStatusFilterOptions.zoomStatusSupported,
+          ).options.ptzStatusFilterOptions?.zoomStatusSupported,
           false,
         );
       });
@@ -217,7 +217,7 @@ void main() {
         expect(
           GetMetadataConfigurationOptionsResponse.fromJson(
             envelope.body.response!,
-          ).options.ptzStatusFilterOptions.zoomStatusSupported,
+          ).options.ptzStatusFilterOptions?.zoomStatusSupported,
           false,
         );
       });
@@ -282,7 +282,7 @@ void main() {
         expect(
           GetMetadataConfigurationOptionsResponse.fromJson(
             envelope.body.response!,
-          ).options.ptzStatusFilterOptions.zoomStatusSupported,
+          ).options.ptzStatusFilterOptions?.zoomStatusSupported,
           true,
         );
       });
@@ -408,7 +408,7 @@ void main() {
         expect(
           GetMetadataConfigurationOptionsResponse.fromJson(
             envelope.body.response!,
-          ).options.ptzStatusFilterOptions.zoomStatusSupported,
+          ).options.ptzStatusFilterOptions?.zoomStatusSupported,
           true,
         );
       });

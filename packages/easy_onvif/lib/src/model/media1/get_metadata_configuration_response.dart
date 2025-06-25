@@ -11,9 +11,9 @@ part 'get_metadata_configuration_response.g.dart';
 class GetMetadataConfigurationResponse {
   /// The requested metadata configuration.
   @JsonKey(name: 'Configuration')
-  final MetadataConfiguration configuration;
+  final MetadataConfiguration? configuration;
 
-  GetMetadataConfigurationResponse({required this.configuration});
+  GetMetadataConfigurationResponse({this.configuration});
 
   factory GetMetadataConfigurationResponse.fromJson(
     Map<String, dynamic> json,
