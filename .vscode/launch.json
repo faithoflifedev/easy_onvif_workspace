@@ -67,13 +67,15 @@
                 "ptz",
                 "move",
                 "--x",
-                "0.8",
+                "0",
                 "--y",
-                "0.8",
+                "-0.5",
                 "--profile-token",
-                "MainStream",
+                "Profile_1",
                 "--network-timeout",
-                "30"
+                "30",
+                "--log-level",
+                "all"
             ],
         },
         {
@@ -85,17 +87,67 @@
                 "ptz",
                 "continuous-move",
                 "--pan-tilt-x",
-                "0.1",
+                "-0.01",
                 "--pan-tilt-y",
                 "0",
                 "--pan-tilt-zoom",
                 "0",
-                "--timeout",
-                "1",
                 "--profile-token",
-                "MainStream",
+                "000",
                 "--network-timeout",
-                "30"
+                "10",
+                "--log-level", 
+                "all"
+            ],
+        },
+        {
+            "name": "onvif stop",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/easy_onvif_cli/bin/onvif.dart",
+            "args": [
+                "ptz",
+                "stop",
+                "--profile-token",
+                "Profile_1",
+                "--network-timeout",
+                "10",
+                "--log-level", 
+                "all"
+            ],
+        },
+        {
+            "name": "onvif media1 get-metadata-configuration",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/easy_onvif_cli/bin/onvif.dart",
+            "args": [
+                "media1",
+                "get-metadata-configuration",
+                "--configuration-token",
+                "MetaDataToken",
+                "--network-timeout",
+                "10",
+                "--log-level", 
+                "all"
+            ],
+        },
+        {
+            "name": "onvif media2 get-metadata-configuration-options",
+            "request": "launch",
+            "type": "dart",
+            "program": "packages/easy_onvif_cli/bin/onvif.dart",
+            "args": [
+                "media2",
+                "get-metadata-configuration-options",
+                "--configuration-token",
+                "MetaDataToken",
+                "--profile-token",
+                "000",
+                "--network-timeout",
+                "10",
+                "--log-level", 
+                "all"
             ],
         }
     ]
